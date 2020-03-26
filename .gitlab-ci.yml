@@ -1,0 +1,34 @@
+stages:
+    - test
+    - deploy
+
+tests:
+    stage: test
+    before_script:
+    - /bin/bash $CACHE_DIR/bundlerScript.bash
+    script:
+        - bundle exec fastlane tests
+    tags:
+        - xcode-11.3
+
+deploy_development:
+    stage: deploy
+    before_script:
+    - /bin/bash $CACHE_DIR/bundlerScript.bash
+    script:
+        - bundle exec fastlane deployDev
+    tags:
+        - xcode-11.3
+    only:
+        - tags
+
+deploy_staging:
+    stage: deploy
+    before_script:
+    - /bin/bash $CACHE_DIR/bundlerScript.bash
+    script:
+        - bundle exec fastlane deployStg
+    tags:
+        - xcode-11.3
+    only:
+        - tags

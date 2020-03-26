@@ -1,0 +1,36 @@
+## Build generated
+build/
+DerivedData/
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+## Other
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+xcuserdata
+.idea
+.DS_Store
+
+## Obj-C/Swift specific
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Carthage
+Carthage/Checkouts
+!Carthage/Build/
+!Carthage/Build/iOS/*.dSYM
+Carthage/Build/iOS/*.bcsymbolmap
+Carthage/Build/tvOS/*.bcsymbolmap
+Carthage/Build/*version
