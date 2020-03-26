@@ -19,6 +19,21 @@
 		0E5C2079242B63460038EF8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C2078242B63460038EF8B /* Assets.xcassets */; };
 		0E5C207C242B63460038EF8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C207A242B63460038EF8B /* LaunchScreen.storyboard */; };
 		0E5C2087242B63460038EF8B /* AnnaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C2086242B63460038EF8B /* AnnaTests.swift */; };
+		83C8287D242CCBD8001B3185 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C8287C242CCBD8001B3185 /* CustomView.swift */; };
+		83C8287F242CCC11001B3185 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C8287E242CCC11001B3185 /* RootView.swift */; };
+		83C82881242CCC1A001B3185 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82880242CCC1A001B3185 /* RootViewController.swift */; };
+		83C82883242CCC25001B3185 /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82882242CCC25001B3185 /* RootViewModel.swift */; };
+		83C82885242CCC2D001B3185 /* RootModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82884242CCC2D001B3185 /* RootModel.swift */; };
+		83C82887242CCDDC001B3185 /* RootViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82886242CCDDC001B3185 /* RootViewModelType.swift */; };
+		83C82889242CCE02001B3185 /* RootModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82888242CCE02001B3185 /* RootModelType.swift */; };
+		83C8288F242CDB98001B3185 /* PermissionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C8288E242CDB98001B3185 /* PermissionsManager.swift */; };
+		83C82891242CDBBD001B3185 /* PermissionsManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82890242CDBBD001B3185 /* PermissionsManagerType.swift */; };
+		83C82893242CE0F7001B3185 /* LocationTrackingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82892242CE0F7001B3185 /* LocationTrackingManager.swift */; };
+		83C82895242CE154001B3185 /* LocationTrackingManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82894242CE154001B3185 /* LocationTrackingManagerType.swift */; };
+		83C82899242CF131001B3185 /* Bundle+DisplayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C82898242CF131001B3185 /* Bundle+DisplayName.swift */; };
+		83C8289B242CF601001B3185 /* RootViewControllerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C8289A242CF601001B3185 /* RootViewControllerAssembly.swift */; };
+		83C8289D242CF639001B3185 /* LocationTrackingAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C8289C242CF639001B3185 /* LocationTrackingAssembly.swift */; };
+		83C828A0242CFAC4001B3185 /* Resolver+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C8289F242CFAC4001B3185 /* Resolver+Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +65,21 @@
 		0E5C2082242B63460038EF8B /* AnnaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnnaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E5C2086242B63460038EF8B /* AnnaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnaTests.swift; sourceTree = "<group>"; };
 		0E5C2088242B63460038EF8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83C8287C242CCBD8001B3185 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		83C8287E242CCC11001B3185 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		83C82880242CCC1A001B3185 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		83C82882242CCC25001B3185 /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
+		83C82884242CCC2D001B3185 /* RootModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootModel.swift; sourceTree = "<group>"; };
+		83C82886242CCDDC001B3185 /* RootViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModelType.swift; sourceTree = "<group>"; };
+		83C82888242CCE02001B3185 /* RootModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootModelType.swift; sourceTree = "<group>"; };
+		83C8288E242CDB98001B3185 /* PermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsManager.swift; sourceTree = "<group>"; };
+		83C82890242CDBBD001B3185 /* PermissionsManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsManagerType.swift; sourceTree = "<group>"; };
+		83C82892242CE0F7001B3185 /* LocationTrackingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTrackingManager.swift; sourceTree = "<group>"; };
+		83C82894242CE154001B3185 /* LocationTrackingManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTrackingManagerType.swift; sourceTree = "<group>"; };
+		83C82898242CF131001B3185 /* Bundle+DisplayName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+DisplayName.swift"; sourceTree = "<group>"; };
+		83C8289A242CF601001B3185 /* RootViewControllerAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewControllerAssembly.swift; sourceTree = "<group>"; };
+		83C8289C242CF639001B3185 /* LocationTrackingAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTrackingAssembly.swift; sourceTree = "<group>"; };
+		83C8289F242CFAC4001B3185 /* Resolver+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Resolver+Utils.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,8 +147,8 @@
 		0E5C206E242B63440038EF8B /* Anna */ = {
 			isa = PBXGroup;
 			children = (
-				0E5C206F242B63440038EF8B /* AppDelegate.swift */,
-				0E5C2078242B63460038EF8B /* Assets.xcassets */,
+				83C82870242CC793001B3185 /* Sources */,
+				83C8288A242CD953001B3185 /* Resources */,
 				0E5C207A242B63460038EF8B /* LaunchScreen.storyboard */,
 				0E5C207D242B63460038EF8B /* Info.plist */,
 			);
@@ -132,6 +162,157 @@
 				0E5C2088242B63460038EF8B /* Info.plist */,
 			);
 			path = AnnaTests;
+			sourceTree = "<group>";
+		};
+		83C82870242CC793001B3185 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				83C82872242CC7E4001B3185 /* Common */,
+				83C82871242CC7E0001B3185 /* UI */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		83C82871242CC7E0001B3185 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				83C82876242CC91B001B3185 /* RootViewController */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		83C82872242CC7E4001B3185 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				83C82896242CF0F8001B3185 /* Extensions */,
+				83C82874242CC813001B3185 /* Application */,
+				83C8287B242CCBBA001B3185 /* CustomView */,
+				83C82875242CC86B001B3185 /* DI */,
+				83C8288D242CDA40001B3185 /* LocationTrackingManager */,
+				83C8288B242CD9FD001B3185 /* PermissionsManager */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		83C82874242CC813001B3185 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				0E5C206F242B63440038EF8B /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		83C82875242CC86B001B3185 /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				83C8289A242CF601001B3185 /* RootViewControllerAssembly.swift */,
+				83C8289C242CF639001B3185 /* LocationTrackingAssembly.swift */,
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
+		83C82876242CC91B001B3185 /* RootViewController */ = {
+			isa = PBXGroup;
+			children = (
+				83C8287A242CCB6E001B3185 /* View */,
+				83C82879242CCB69001B3185 /* ViewController */,
+				83C82878242CCB65001B3185 /* ViewModel */,
+				83C82877242CCB61001B3185 /* Model */,
+			);
+			path = RootViewController;
+			sourceTree = "<group>";
+		};
+		83C82877242CCB61001B3185 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				83C82888242CCE02001B3185 /* RootModelType.swift */,
+				83C82884242CCC2D001B3185 /* RootModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		83C82878242CCB65001B3185 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				83C82886242CCDDC001B3185 /* RootViewModelType.swift */,
+				83C82882242CCC25001B3185 /* RootViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		83C82879242CCB69001B3185 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				83C82880242CCC1A001B3185 /* RootViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		83C8287A242CCB6E001B3185 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				83C8287E242CCC11001B3185 /* RootView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		83C8287B242CCBBA001B3185 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				83C8287C242CCBD8001B3185 /* CustomView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		83C8288A242CD953001B3185 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0E5C2078242B63460038EF8B /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		83C8288B242CD9FD001B3185 /* PermissionsManager */ = {
+			isa = PBXGroup;
+			children = (
+				83C8288E242CDB98001B3185 /* PermissionsManager.swift */,
+				83C82890242CDBBD001B3185 /* PermissionsManagerType.swift */,
+			);
+			path = PermissionsManager;
+			sourceTree = "<group>";
+		};
+		83C8288D242CDA40001B3185 /* LocationTrackingManager */ = {
+			isa = PBXGroup;
+			children = (
+				83C82892242CE0F7001B3185 /* LocationTrackingManager.swift */,
+				83C82894242CE154001B3185 /* LocationTrackingManagerType.swift */,
+			);
+			path = LocationTrackingManager;
+			sourceTree = "<group>";
+		};
+		83C82896242CF0F8001B3185 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				83C8289E242CFAB7001B3185 /* Resolver */,
+				83C82897242CF105001B3185 /* Bundle */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		83C82897242CF105001B3185 /* Bundle */ = {
+			isa = PBXGroup;
+			children = (
+				83C82898242CF131001B3185 /* Bundle+DisplayName.swift */,
+			);
+			path = Bundle;
+			sourceTree = "<group>";
+		};
+		83C8289E242CFAB7001B3185 /* Resolver */ = {
+			isa = PBXGroup;
+			children = (
+				83C8289F242CFAC4001B3185 /* Resolver+Utils.swift */,
+			);
+			path = Resolver;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,7 +439,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83C82891242CDBBD001B3185 /* PermissionsManagerType.swift in Sources */,
+				83C8289B242CF601001B3185 /* RootViewControllerAssembly.swift in Sources */,
+				83C82899242CF131001B3185 /* Bundle+DisplayName.swift in Sources */,
+				83C82887242CCDDC001B3185 /* RootViewModelType.swift in Sources */,
+				83C82883242CCC25001B3185 /* RootViewModel.swift in Sources */,
+				83C82895242CE154001B3185 /* LocationTrackingManagerType.swift in Sources */,
 				0E5C2070242B63440038EF8B /* AppDelegate.swift in Sources */,
+				83C8287D242CCBD8001B3185 /* CustomView.swift in Sources */,
+				83C82885242CCC2D001B3185 /* RootModel.swift in Sources */,
+				83C82889242CCE02001B3185 /* RootModelType.swift in Sources */,
+				83C82893242CE0F7001B3185 /* LocationTrackingManager.swift in Sources */,
+				83C8289D242CF639001B3185 /* LocationTrackingAssembly.swift in Sources */,
+				83C82881242CCC1A001B3185 /* RootViewController.swift in Sources */,
+				83C828A0242CFAC4001B3185 /* Resolver+Utils.swift in Sources */,
+				83C8287F242CCC11001B3185 /* RootView.swift in Sources */,
+				83C8288F242CDB98001B3185 /* PermissionsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
