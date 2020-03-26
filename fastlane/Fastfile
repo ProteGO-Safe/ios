@@ -26,6 +26,7 @@ platform :ios do
     release_notes
     fota_s3
     shuttle
+    fota_mail(to: 'anna-releases@polidea.com')
   end
 
   def deploy_shuttle_adhoc(scheme, app_identifier)
