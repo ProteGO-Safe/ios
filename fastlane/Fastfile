@@ -1,0 +1,60 @@
+fastlane_version '2.144.0'
+
+default_platform :ios
+
+platform :ios do
+  def sign(type, app_identifier)
+    match(type: type, app_identifier: app_identifier, readonly: true, verbose: true)
+  end
+
+  def deploy_shuttle(scheme, app_identifier, team_identifier, sign_type)
+    add_badge(shield: "Ver.-#{ENV["CI_COMMIT_TAG"]}-orange", no_badge: true)
+
+    team_id team_identifier
+    sign(sign_type, app_identifier)
+
+    add_prefix_schema
+    gym(
+      scheme: scheme,
+      include_symbols: true,
+      include_bitcode: true,
+      output_name: scheme,
+      buildlog_path: "./build/build_log",
+      xcargs: "DEBUG_INFORMATION_FORMAT=dwarf-with-dsym CI_JOB_ID=#{ENV["CI_JOB_ID"]} CI_COMMIT_TAG=#{ENV["CI_COMMIT_TAG"]}"
+    )
+    extract_app_info
+    release_notes
+    fota_s3
+    shuttle
+  end
+
+  def deploy_shuttle_adhoc(scheme, app_identifier)
+    deploy_shuttle(scheme, app_identifier, "MT2B94Q7N6", 'adhoc')
+  end
+
+  desc 'Deploy Development to Shuttle'
+  lane :deployDev do
+    deploy_shuttle_adhoc 'Anna_dev', 'pl.gov.anna.dev'
+  end
+
+  desc 'Deploy Staging to Shuttle'
+  lane :deployStg do
+    deploy_shuttle_adhoc 'Anna_stg', 'pl.gov.anna.stg'
+  end
+
+  desc 'Runs all the tests'
+  lane :tests do
+    ENV["FASTLANE_XCODEBUILD_SETTINGS_RETRIES"] = "10" 
+    scan(
+      project: "Anna.xcodeproj",
+      scheme: 'Anna_dev',
+      devices: [ "iPhone 11" ],
+      derived_data_path: "./fastlane/DerivedData",
+      build_for_testing: true,
+      code_coverage: true,
+      buildlog_path: "./build/build_log",
+      output_types: ""
+    )
+  end
+
+end

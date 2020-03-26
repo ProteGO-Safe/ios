@@ -1,0 +1,2 @@
+gem 'fastlane-plugin-polidea', '2.1.0'
+gem 'fastlane-plugin-badge'

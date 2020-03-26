@@ -1,0 +1,10 @@
+{
+  "commitish" : "v4.0.3",
+  "iOS" : [
+    {
+      "name" : "SwiftTweaks",
+      "hash" : "4162aa49f8f401caac88cd1dbd8c9f93a12c86ab217f892ab962ef7426662d02",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+    }
+  ]
+}
