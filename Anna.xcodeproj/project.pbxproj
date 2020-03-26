@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E153F39242D43D100340838 /* RxSwiftExt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5B4242B764100C092E7 /* RxSwiftExt.framework */; };
 		0E3DD5BD242B764100C092E7 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5B3242B764100C092E7 /* Realm.framework */; };
 		0E3DD5BF242B764100C092E7 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5B5242B764100C092E7 /* RxSwift.framework */; };
 		0E3DD5C0242B764100C092E7 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5B6242B764100C092E7 /* RxCocoa.framework */; };
@@ -57,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E153F39242D43D100340838 /* RxSwiftExt.framework in Frameworks */,
 				0E3DD5BD242B764100C092E7 /* Realm.framework in Frameworks */,
 				0E3DD5BF242B764100C092E7 /* RxSwift.framework in Frameworks */,
 				0E3DD5C0242B764100C092E7 /* RxCocoa.framework in Frameworks */,
