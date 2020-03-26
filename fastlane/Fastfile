@@ -47,7 +47,7 @@ platform :ios do
   lane :tests do
     ENV["FASTLANE_XCODEBUILD_SETTINGS_RETRIES"] = "10" 
     scan(
-      project: "Anna.xcodeproj",
+      workspace: "Anna.xcworkspace",
       scheme: 'Anna_dev',
       devices: [ "iPhone 11" ],
       derived_data_path: "./fastlane/DerivedData",
