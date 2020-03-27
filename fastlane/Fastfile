@@ -7,11 +7,11 @@ platform :ios do
     match(type: type, app_identifier: app_identifier, readonly: true, verbose: true)
   end
 
-  def deploy_shuttle(scheme, app_identifier, team_identifier, sign_type)
+  def deploy_shuttle(scheme, app_identifier, team_identifier)
     add_badge(shield: "Ver.-#{ENV["CI_COMMIT_TAG"]}-orange", no_badge: true)
 
     team_id team_identifier
-    sign(sign_type, app_identifier)
+    sign('adhoc', app_identifier)
 
     add_prefix_schema
     gym(
@@ -28,19 +28,43 @@ platform :ios do
     shuttle
     fota_mail(to: 'anna-releases@polidea.com')
   end
+  
+  def deploy_testflight(scheme, app_identifier, team_identifier)
+    team_id team_identifier
+    sign('appstore', app_identifier)
 
-  def deploy_shuttle_adhoc(scheme, app_identifier)
-    deploy_shuttle(scheme, app_identifier, "MT2B94Q7N6", 'adhoc')
-  end
+    gym(
+      scheme: scheme,
+      include_symbols: true,
+      include_bitcode: true,
+      export_method: 'app-store',
+      xcargs: "DEBUG_INFORMATION_FORMAT=dwarf-with-dsym CI_JOB_ID=#{ENV["CI_BUILD_ID"]} CI_COMMIT_TAG=#{ENV["CI_BUILD_TAG"]}"
+    )
+    extract_app_info
+    release_notes
+    fota_s3
+    fota_mail(to: 'anna-releases@polidea.com')
+    deliver(
+      skip_screenshots: true,
+      skip_metadata: true,
+      force: true,
+      skip_app_version_update: true,
+    )
+  end  
 
   desc 'Deploy Development to Shuttle'
   lane :deployDev do
-    deploy_shuttle_adhoc 'Anna_dev', 'pl.gov.anna.dev'
+    deploy_shuttle('Anna_dev', 'pl.gov.anna.dev', "MT2B94Q7N6")
   end
 
   desc 'Deploy Staging to Shuttle'
   lane :deployStg do
-    deploy_shuttle_adhoc 'Anna_stg', 'pl.gov.anna.stg'
+    deploy_testflight('Anna_stg', 'pl.gov.anna.stg', "MT2B94Q7N6")
+  end
+
+  desc 'Deploy Staging to Shuttle'
+  lane :deployProd do
+    deploy_testflight('Anna_prod', 'pl.gov.anna.prod', "MT2B94Q7N6")
   end
 
   desc 'Runs all the tests'

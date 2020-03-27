@@ -498,12 +498,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C8E4564A545D17C206EEC75E /* Pods-Anna.debug_dev.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon.${ENVIRONMENT}";
 				CI_COMMIT_TAG = 1.0;
 				CI_JOB_ID = 1;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = MT2B94Q7N6;
+				ENVIRONMENT = development;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -518,7 +519,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match Development pl.gov.anna.dev";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug_dev;
 		};
@@ -526,12 +527,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 482FB5D89F5573E25359B6EB /* Pods-Anna.release_dev.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon.${ENVIRONMENT}";
 				CI_COMMIT_TAG = 1.0;
 				CI_JOB_ID = 1;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = MT2B94Q7N6;
+				ENVIRONMENT = development;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -546,7 +548,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc pl.gov.anna.dev";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release_dev;
 		};
@@ -667,12 +669,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 95EEA776F9CF0007EA77CC71 /* Pods-Anna.debug_stg.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon.${ENVIRONMENT}";
 				CI_COMMIT_TAG = 1.0;
 				CI_JOB_ID = 1;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = MT2B94Q7N6;
+				ENVIRONMENT = staging;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -687,7 +690,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match Development pl.gov.anna.stg";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug_stg;
 		};
@@ -782,12 +785,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BEC33F61CC8746F654E7BDEC /* Pods-Anna.debug_prod.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon.${ENVIRONMENT}";
 				CI_COMMIT_TAG = 1.0;
 				CI_JOB_ID = 1;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = MT2B94Q7N6;
+				ENVIRONMENT = production;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -802,7 +806,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match Development pl.gov.anna.prod";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug_prod;
 		};
@@ -891,12 +895,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 542070CF410D378EE5435A96 /* Pods-Anna.release_stg.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon.${ENVIRONMENT}";
 				CI_COMMIT_TAG = 1.0;
 				CI_JOB_ID = 1;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = MT2B94Q7N6;
+				ENVIRONMENT = staging;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -908,10 +913,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.anna.stg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc pl.gov.anna.stg";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore pl.gov.anna.stg";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release_stg;
 		};
@@ -1000,12 +1005,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9700318292BE5F27EB17208D /* Pods-Anna.release_prod.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon.${ENVIRONMENT}";
 				CI_COMMIT_TAG = 1.0;
 				CI_JOB_ID = 1;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = MT2B94Q7N6;
+				ENVIRONMENT = production;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1020,7 +1026,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore pl.gov.anna.prod";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release_prod;
 		};
