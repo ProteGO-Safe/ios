@@ -1,0 +1,18 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-module-flags: -target x86_64-apple-ios8.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name BugfenderSDK
+@_exported import BugfenderSDK
+import Foundation
+import Swift
+extension Bugfender {
+  public class func print(_ items: Any..., separator: Swift.String = " ", terminator: Swift.String = "\n", tag: Swift.String? = nil, level: BugfenderSDK.BFLogLevel = .default, filename: Swift.String = #file, line: Swift.Int = #line, funcname: Swift.String = #function)
+  public class func error(_ items: Any..., separator: Swift.String = " ", terminator: Swift.String = "\n", tag: Swift.String? = nil, filename: Swift.String = #file, line: Swift.Int = #line, funcname: Swift.String = #function)
+  public class func warning(_ items: Any..., separator: Swift.String = " ", terminator: Swift.String = "\n", tag: Swift.String? = nil, filename: Swift.String = #file, line: Swift.Int = #line, funcname: Swift.String = #function)
+}
+public func BFLog(_ format: Swift.String, _ args: Swift.CVarArg..., tag: Swift.String? = nil, level: BugfenderSDK.BFLogLevel = .default, filename: Swift.String = #file, line: Swift.Int = #line, funcname: Swift.String = #function)
+public func BFLogWarn(_ format: Swift.String, _ args: Swift.CVarArg..., tag: Swift.String? = nil, filename: Swift.String = #file, line: Swift.Int = #line, funcname: Swift.String = #function)
+public func BFLogErr(_ format: Swift.String, _ args: Swift.CVarArg..., tag: Swift.String? = nil, filename: Swift.String = #file, line: Swift.Int = #line, funcname: Swift.String = #function)
+public func BFLogTrace(_ format: Swift.String, _ args: Swift.CVarArg..., tag: Swift.String? = nil, filename: Swift.String = #file, line: Swift.Int = #line, funcname: Swift.String = #function)
+public func BFLogInfo(_ format: Swift.String, _ args: Swift.CVarArg..., tag: Swift.String? = nil, filename: Swift.String = #file, line: Swift.Int = #line, funcname: Swift.String = #function)
+public func BFLogFatal(_ format: Swift.String, _ args: Swift.CVarArg..., tag: Swift.String? = nil, filename: Swift.String = #file, line: Swift.Int = #line, funcname: Swift.String = #function)
+public func bfprint(_ items: Any..., separator: Swift.String = " ", terminator: Swift.String = "", tag: Swift.String? = nil, level: BugfenderSDK.BFLogLevel = .default, filename: Swift.String = #file, line: Swift.Int = #line, funcname: Swift.String = #function)
