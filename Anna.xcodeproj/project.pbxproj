@@ -157,7 +157,6 @@
 				542070CF410D378EE5435A96 /* Pods-Anna.release_stg.xcconfig */,
 				9700318292BE5F27EB17208D /* Pods-Anna.release_prod.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -886,7 +885,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.anna.stg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc pl.gov.anna.stg";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore pl.gov.anna.stg";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
