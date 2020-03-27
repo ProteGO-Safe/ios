@@ -2,7 +2,7 @@ stages:
     - test
     - deploy
 
-defualt:
+default:
     before_script:
         - /bin/bash $CACHE_DIR/bundlerScript.bash
     retry: 2
