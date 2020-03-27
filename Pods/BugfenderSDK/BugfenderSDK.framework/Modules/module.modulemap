@@ -1,0 +1,11 @@
+framework module BugfenderSDK {
+  umbrella header "BugfenderSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module BugfenderSDK.Swift {
+    header "BugfenderSDK-Swift.h"
+    requires objc
+}

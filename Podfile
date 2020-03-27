@@ -6,4 +6,5 @@ target 'Anna' do
 
   pod 'Firebase/Crashlytics', '6.21.0'
   pod 'SwiftLint', '0.39.1'
+  pod 'BugfenderSDK', '1.8'
 end

@@ -16,6 +16,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.window = window
 
+        logger.debug("test debug")
+        logger.error("test error")
+        logger.warning("test warning")
+        logger.info("test info")
+
         return true
     }
 
