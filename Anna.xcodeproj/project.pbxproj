@@ -20,6 +20,11 @@
 		0E5C2079242B63460038EF8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C2078242B63460038EF8B /* Assets.xcassets */; };
 		0E5C207C242B63460038EF8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C207A242B63460038EF8B /* LaunchScreen.storyboard */; };
 		0E5C2087242B63460038EF8B /* AnnaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C2086242B63460038EF8B /* AnnaTests.swift */; };
+		0E6D260A242E8B540037A80C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D2607242E8B540037A80C /* Constants.swift */; };
+		0E6D260B242E8B540037A80C /* Constants+InfoKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D2608242E8B540037A80C /* Constants+InfoKeys.swift */; };
+		0E6D260E242E8E940037A80C /* InfoKeys+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D260D242E8E940037A80C /* InfoKeys+Value.swift */; };
+		0E6D2610242E956F0037A80C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D260F242E956F0037A80C /* Logger.swift */; };
+		0E965328242EB25C00ADD300 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E965327242EB25C00ADD300 /* GoogleService-Info.plist */; };
 		D1A56621AC9D3FBB9C1C4116 /* Pods_Anna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCC515393CD75CAEE598A033 /* Pods_Anna.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +57,11 @@
 		0E5C2082242B63460038EF8B /* AnnaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnnaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E5C2086242B63460038EF8B /* AnnaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnaTests.swift; sourceTree = "<group>"; };
 		0E5C2088242B63460038EF8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E6D2607242E8B540037A80C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0E6D2608242E8B540037A80C /* Constants+InfoKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Constants+InfoKeys.swift"; sourceTree = "<group>"; };
+		0E6D260D242E8E940037A80C /* InfoKeys+Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InfoKeys+Value.swift"; sourceTree = "<group>"; };
+		0E6D260F242E956F0037A80C /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		0E965327242EB25C00ADD300 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		482FB5D89F5573E25359B6EB /* Pods-Anna.release_dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.release_dev.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.release_dev.xcconfig"; sourceTree = "<group>"; };
 		542070CF410D378EE5435A96 /* Pods-Anna.release_stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.release_stg.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.release_stg.xcconfig"; sourceTree = "<group>"; };
 		95EEA776F9CF0007EA77CC71 /* Pods-Anna.debug_stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.debug_stg.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.debug_stg.xcconfig"; sourceTree = "<group>"; };
@@ -130,6 +140,8 @@
 		0E5C206E242B63440038EF8B /* Anna */ = {
 			isa = PBXGroup;
 			children = (
+				0E965329242EB30C00ADD300 /* Resources */,
+				0E6D2603242E8B540037A80C /* Common */,
 				0E5C206F242B63440038EF8B /* AppDelegate.swift */,
 				0E5C2078242B63460038EF8B /* Assets.xcassets */,
 				0E5C207A242B63460038EF8B /* LaunchScreen.storyboard */,
@@ -145,6 +157,49 @@
 				0E5C2088242B63460038EF8B /* Info.plist */,
 			);
 			path = AnnaTests;
+			sourceTree = "<group>";
+		};
+		0E6D2603242E8B540037A80C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				0E6D260C242E8E940037A80C /* Extensions */,
+				0E6D2604242E8B540037A80C /* Logger */,
+				0E6D2606242E8B540037A80C /* Constants */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		0E6D2604242E8B540037A80C /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				0E6D260F242E956F0037A80C /* Logger.swift */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
+		0E6D2606242E8B540037A80C /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				0E6D2607242E8B540037A80C /* Constants.swift */,
+				0E6D2608242E8B540037A80C /* Constants+InfoKeys.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		0E6D260C242E8E940037A80C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0E6D260D242E8E940037A80C /* InfoKeys+Value.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0E965329242EB30C00ADD300 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0E965327242EB25C00ADD300 /* GoogleService-Info.plist */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		B553474AE7B40F4DF5FB85D0 /* Pods */ = {
@@ -174,6 +229,7 @@
 				0E5C206A242B63440038EF8B /* Resources */,
 				0E3DD5B1242B731000C092E7 /* Carthage */,
 				4A7031FB60C748D6578BD669 /* [CP] Embed Pods Frameworks */,
+				0E6D2614242EA4170037A80C /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -247,6 +303,7 @@
 			files = (
 				0E5C207C242B63460038EF8B /* LaunchScreen.storyboard in Resources */,
 				0E5C2079242B63460038EF8B /* Assets.xcassets in Resources */,
+				0E965328242EB25C00ADD300 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +355,26 @@
 			shellPath = /bin/sh;
 			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint lint --strict\nexit $?\n";
 		};
+		0E6D2614242EA4170037A80C /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = Crashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"$CRASHLYTICS_ENABLED\" == \"true\" ]; then\n${PODS_ROOT}/FirebaseCrashlytics/run\nfi\n\n";
+		};
 		4A7031FB60C748D6578BD669 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -344,7 +421,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E6D2610242E956F0037A80C /* Logger.swift in Sources */,
+				0E6D260B242E8B540037A80C /* Constants+InfoKeys.swift in Sources */,
 				0E5C2070242B63440038EF8B /* AppDelegate.swift in Sources */,
+				0E6D260A242E8B540037A80C /* Constants.swift in Sources */,
+				0E6D260E242E8E940037A80C /* InfoKeys+Value.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,12 +580,18 @@
 			baseConfigurationReference = C8E4564A545D17C206EEC75E /* Pods-Anna.debug_dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon.${ENVIRONMENT}";
+				BUGFENDER_ENABLED = true;
+				BUGFENDER_KEY = ve7NBPWjgH9U7LLnZSY0B0HIFkxEoFI4;
 				CI_COMMIT_TAG = 1.0;
 				CI_JOB_ID = 1;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CONSOLE_LOGGING_ENABLED = true;
+				CRASHLYTICS_ENABLED = true;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MT2B94Q7N6;
 				ENVIRONMENT = development;
+				EXCLUDED_SOURCE_FILE_NAMES = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -528,12 +615,18 @@
 			baseConfigurationReference = 482FB5D89F5573E25359B6EB /* Pods-Anna.release_dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon.${ENVIRONMENT}";
+				BUGFENDER_ENABLED = true;
+				BUGFENDER_KEY = ve7NBPWjgH9U7LLnZSY0B0HIFkxEoFI4;
 				CI_COMMIT_TAG = 1.0;
 				CI_JOB_ID = 1;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
+				CONSOLE_LOGGING_ENABLED = false;
+				CRASHLYTICS_ENABLED = true;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MT2B94Q7N6;
 				ENVIRONMENT = development;
+				EXCLUDED_SOURCE_FILE_NAMES = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -670,12 +763,18 @@
 			baseConfigurationReference = 95EEA776F9CF0007EA77CC71 /* Pods-Anna.debug_stg.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon.${ENVIRONMENT}";
+				BUGFENDER_ENABLED = false;
+				BUGFENDER_KEY = "";
 				CI_COMMIT_TAG = 1.0;
 				CI_JOB_ID = 1;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CONSOLE_LOGGING_ENABLED = true;
+				CRASHLYTICS_ENABLED = false;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MT2B94Q7N6;
 				ENVIRONMENT = staging;
+				EXCLUDED_SOURCE_FILE_NAMES = "GoogleService-Info.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -786,12 +885,18 @@
 			baseConfigurationReference = BEC33F61CC8746F654E7BDEC /* Pods-Anna.debug_prod.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon.${ENVIRONMENT}";
+				BUGFENDER_ENABLED = false;
+				BUGFENDER_KEY = "";
 				CI_COMMIT_TAG = 1.0;
 				CI_JOB_ID = 1;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CONSOLE_LOGGING_ENABLED = true;
+				CRASHLYTICS_ENABLED = false;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MT2B94Q7N6;
 				ENVIRONMENT = production;
+				EXCLUDED_SOURCE_FILE_NAMES = "GoogleService-Info.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -896,12 +1001,18 @@
 			baseConfigurationReference = 542070CF410D378EE5435A96 /* Pods-Anna.release_stg.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon.${ENVIRONMENT}";
+				BUGFENDER_ENABLED = false;
+				BUGFENDER_KEY = "";
 				CI_COMMIT_TAG = 1.0;
 				CI_JOB_ID = 1;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
+				CONSOLE_LOGGING_ENABLED = false;
+				CRASHLYTICS_ENABLED = false;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MT2B94Q7N6;
 				ENVIRONMENT = staging;
+				EXCLUDED_SOURCE_FILE_NAMES = "GoogleService-Info.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1006,12 +1117,18 @@
 			baseConfigurationReference = 9700318292BE5F27EB17208D /* Pods-Anna.release_prod.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon.${ENVIRONMENT}";
+				BUGFENDER_ENABLED = false;
+				BUGFENDER_KEY = "";
 				CI_COMMIT_TAG = 1.0;
 				CI_JOB_ID = 1;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
+				CONSOLE_LOGGING_ENABLED = false;
+				CRASHLYTICS_ENABLED = false;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MT2B94Q7N6;
 				ENVIRONMENT = production;
+				EXCLUDED_SOURCE_FILE_NAMES = "GoogleService-Info.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

@@ -1,6 +1,10 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
+## BugfenderSDK
+
+See https://bugfender.com/terms-of-service/
+
 ## Firebase
 
 
