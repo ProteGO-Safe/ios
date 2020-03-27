@@ -31,11 +31,11 @@ case $lastArg in
 		bundle exec fastlane match development -a $stg_app_id --team_id $stg_team_id --readonly true --git_url $certs_repo_url
 		;;
     "new_devices" )
-	  	# bundle exec fastlane match adhoc -a $dev_app_id --team_id $dev_team_id --force_for_new_devices --git_url $certs_repo_url
-		# bundle exec fastlane match adhoc -a $stg_app_id --team_id $stg_team_id --force_for_new_devices --git_url $certs_repo_url
-		# bundle exec fastlane match appstore -a $prod_app_id --team_id $prod_team_id --force_for_new_devices --git_url $certs_repo_url
-		# bundle exec fastlane match development -a $dev_app_id --team_id $dev_team_id --force_for_new_devices --git_url $certs_repo_url
-		# bundle exec fastlane match development -a $dev_app_id --team_id $dev_team_id --force_for_new_devices --git_url $certs_repo_url
+	  	bundle exec fastlane match adhoc -a $dev_app_id --team_id $dev_team_id --force_for_new_devices --git_url $certs_repo_url
+		bundle exec fastlane match adhoc -a $stg_app_id --team_id $stg_team_id --force_for_new_devices --git_url $certs_repo_url
+		bundle exec fastlane match appstore -a $prod_app_id --team_id $prod_team_id --force_for_new_devices --git_url $certs_repo_url
+		bundle exec fastlane match development -a $dev_app_id --team_id $dev_team_id --force_for_new_devices --git_url $certs_repo_url
+		bundle exec fastlane match development -a $dev_app_id --team_id $dev_team_id --force_for_new_devices --git_url $certs_repo_url
 		bundle exec fastlane match development -a $prod_app_id --team_id $prod_team_id --force_for_new_devices --git_url $certs_repo_url
 		;;
     "nuke" )

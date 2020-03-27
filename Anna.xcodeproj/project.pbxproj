@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E153F39242D43D100340838 /* RxSwiftExt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5B4242B764100C092E7 /* RxSwiftExt.framework */; };
 		0E3DD5BD242B764100C092E7 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5B3242B764100C092E7 /* Realm.framework */; };
 		0E3DD5BF242B764100C092E7 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5B5242B764100C092E7 /* RxSwift.framework */; };
 		0E3DD5C0242B764100C092E7 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5B6242B764100C092E7 /* RxCocoa.framework */; };
@@ -19,6 +20,7 @@
 		0E5C2079242B63460038EF8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C2078242B63460038EF8B /* Assets.xcassets */; };
 		0E5C207C242B63460038EF8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C207A242B63460038EF8B /* LaunchScreen.storyboard */; };
 		0E5C2087242B63460038EF8B /* AnnaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C2086242B63460038EF8B /* AnnaTests.swift */; };
+		D1A56621AC9D3FBB9C1C4116 /* Pods_Anna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCC515393CD75CAEE598A033 /* Pods_Anna.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,13 @@
 		0E5C2082242B63460038EF8B /* AnnaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnnaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E5C2086242B63460038EF8B /* AnnaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnaTests.swift; sourceTree = "<group>"; };
 		0E5C2088242B63460038EF8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		482FB5D89F5573E25359B6EB /* Pods-Anna.release_dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.release_dev.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.release_dev.xcconfig"; sourceTree = "<group>"; };
+		542070CF410D378EE5435A96 /* Pods-Anna.release_stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.release_stg.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.release_stg.xcconfig"; sourceTree = "<group>"; };
+		95EEA776F9CF0007EA77CC71 /* Pods-Anna.debug_stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.debug_stg.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.debug_stg.xcconfig"; sourceTree = "<group>"; };
+		9700318292BE5F27EB17208D /* Pods-Anna.release_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.release_prod.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.release_prod.xcconfig"; sourceTree = "<group>"; };
+		BEC33F61CC8746F654E7BDEC /* Pods-Anna.debug_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.debug_prod.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.debug_prod.xcconfig"; sourceTree = "<group>"; };
+		C8E4564A545D17C206EEC75E /* Pods-Anna.debug_dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.debug_dev.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.debug_dev.xcconfig"; sourceTree = "<group>"; };
+		CCC515393CD75CAEE598A033 /* Pods_Anna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Anna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E153F39242D43D100340838 /* RxSwiftExt.framework in Frameworks */,
 				0E3DD5BD242B764100C092E7 /* Realm.framework in Frameworks */,
 				0E3DD5BF242B764100C092E7 /* RxSwift.framework in Frameworks */,
 				0E3DD5C0242B764100C092E7 /* RxCocoa.framework in Frameworks */,
@@ -65,6 +75,7 @@
 				0E3DD5C4242B764100C092E7 /* SnapKit.framework in Frameworks */,
 				0E3DD5C5242B764100C092E7 /* RxRelay.framework in Frameworks */,
 				0E3DD5C6242B764100C092E7 /* RealmSwift.framework in Frameworks */,
+				D1A56621AC9D3FBB9C1C4116 /* Pods_Anna.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +102,7 @@
 				0E3DD5BA242B764100C092E7 /* SnapKit.framework */,
 				0E3DD5B7242B764100C092E7 /* SwiftTweaks.framework */,
 				0E3DD5B8242B764100C092E7 /* Swinject.framework */,
+				CCC515393CD75CAEE598A033 /* Pods_Anna.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -102,6 +114,7 @@
 				0E5C2085242B63460038EF8B /* AnnaTests */,
 				0E5C206D242B63440038EF8B /* Products */,
 				0E3DD5B2242B764100C092E7 /* Frameworks */,
+				B553474AE7B40F4DF5FB85D0 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,6 +147,20 @@
 			path = AnnaTests;
 			sourceTree = "<group>";
 		};
+		B553474AE7B40F4DF5FB85D0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C8E4564A545D17C206EEC75E /* Pods-Anna.debug_dev.xcconfig */,
+				95EEA776F9CF0007EA77CC71 /* Pods-Anna.debug_stg.xcconfig */,
+				BEC33F61CC8746F654E7BDEC /* Pods-Anna.debug_prod.xcconfig */,
+				482FB5D89F5573E25359B6EB /* Pods-Anna.release_dev.xcconfig */,
+				542070CF410D378EE5435A96 /* Pods-Anna.release_stg.xcconfig */,
+				9700318292BE5F27EB17208D /* Pods-Anna.release_prod.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -141,10 +168,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0E5C208B242B63460038EF8B /* Build configuration list for PBXNativeTarget "Anna" */;
 			buildPhases = (
+				AAC247C1D2196326580AE38F /* [CP] Check Pods Manifest.lock */,
 				0E5C2068242B63440038EF8B /* Sources */,
 				0E5C2069242B63440038EF8B /* Frameworks */,
 				0E5C206A242B63440038EF8B /* Resources */,
 				0E3DD5B1242B731000C092E7 /* Carthage */,
+				4A7031FB60C748D6578BD669 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -250,6 +279,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		4A7031FB60C748D6578BD669 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Anna/Pods-Anna-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Anna/Pods-Anna-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Anna/Pods-Anna-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AAC247C1D2196326580AE38F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Anna-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -410,6 +478,7 @@
 		};
 		0E5C208C242B63460038EF8B /* Debug_dev */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8E4564A545D17C206EEC75E /* Pods-Anna.debug_dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CI_COMMIT_TAG = 1.0;
@@ -436,6 +505,7 @@
 		};
 		0E5C208D242B63460038EF8B /* Release_dev */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 482FB5D89F5573E25359B6EB /* Pods-Anna.release_dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CI_COMMIT_TAG = 1.0;
@@ -575,6 +645,7 @@
 		};
 		0E5C2092242B660C0038EF8B /* Debug_stg */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 95EEA776F9CF0007EA77CC71 /* Pods-Anna.debug_stg.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CI_COMMIT_TAG = 1.0;
@@ -688,6 +759,7 @@
 		};
 		0E5C2095242B66140038EF8B /* Debug_prod */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BEC33F61CC8746F654E7BDEC /* Pods-Anna.debug_prod.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CI_COMMIT_TAG = 1.0;
@@ -795,6 +867,7 @@
 		};
 		0E5C2098242B661B0038EF8B /* Release_stg */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 542070CF410D378EE5435A96 /* Pods-Anna.release_stg.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CI_COMMIT_TAG = 1.0;
@@ -902,6 +975,7 @@
 		};
 		0E5C209B242B662A0038EF8B /* Release_prod */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9700318292BE5F27EB17208D /* Pods-Anna.release_prod.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CI_COMMIT_TAG = 1.0;
