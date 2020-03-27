@@ -32,3 +32,14 @@ deploy_staging:
         - xcode-11.3
     only:
         - tags
+
+deploy_production:
+    stage: deploy
+    before_script:
+    - /bin/bash $CACHE_DIR/bundlerScript.bash
+    script:
+        - bundle exec fastlane deployProd
+    tags:
+        - xcode-11.3
+    only:
+        - tags        
