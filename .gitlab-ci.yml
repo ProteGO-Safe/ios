@@ -5,10 +5,10 @@ stages:
 default:
     before_script:
         - /bin/bash $CACHE_DIR/bundlerScript.bash
-    retry: 2
 
 tests:
     stage: test
+    retry: 2
     script:
         - bundle exec fastlane tests
     tags:
@@ -16,6 +16,7 @@ tests:
 
 deploy_development:
     stage: deploy
+    retry: 2
     script:
         - bundle exec fastlane deployDev
     tags:
@@ -25,6 +26,7 @@ deploy_development:
 
 deploy_staging:
     stage: deploy
+    retry: 2
     script:
         - bundle exec fastlane deployStg
     tags:
@@ -34,6 +36,7 @@ deploy_staging:
 
 deploy_production:
     stage: deploy
+    retry: 2
     script:
         - bundle exec fastlane deployProd
     tags:
