@@ -1,6 +1,7 @@
 import UIKit
+#if canImport(Firebase)
 import Firebase
-import FirebaseCrashlytics
+#endif
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -10,7 +11,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-         self.setupCrashlytics()
+        self.setupCrashlytics()
 
         let rootViewController = UIViewController()
         let window = UIWindow(frame: UIScreen.main.bounds)
@@ -24,10 +25,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func setupCrashlytics() {
+        #if canImport(Firebase)
         if let crashlyticsEnabled = Constants.InfoKeys.crashlyticsEnabled.value,
             crashlyticsEnabled == "true" {
             FirebaseApp.configure()
         }
+        #endif
+
     }
 
 }

@@ -25,6 +25,7 @@
 		0E6D260E242E8E940037A80C /* InfoKeys+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D260D242E8E940037A80C /* InfoKeys+Value.swift */; };
 		0E6D2610242E956F0037A80C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D260F242E956F0037A80C /* Logger.swift */; };
 		0E965328242EB25C00ADD300 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E965327242EB25C00ADD300 /* GoogleService-Info.plist */; };
+		0E96532B242F436B00ADD300 /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96532A242F436B00ADD300 /* LogLevel.swift */; };
 		D1A56621AC9D3FBB9C1C4116 /* Pods_Anna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCC515393CD75CAEE598A033 /* Pods_Anna.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		0E6D260D242E8E940037A80C /* InfoKeys+Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InfoKeys+Value.swift"; sourceTree = "<group>"; };
 		0E6D260F242E956F0037A80C /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		0E965327242EB25C00ADD300 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0E96532A242F436B00ADD300 /* LogLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLevel.swift; sourceTree = "<group>"; };
 		482FB5D89F5573E25359B6EB /* Pods-Anna.release_dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.release_dev.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.release_dev.xcconfig"; sourceTree = "<group>"; };
 		542070CF410D378EE5435A96 /* Pods-Anna.release_stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.release_stg.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.release_stg.xcconfig"; sourceTree = "<group>"; };
 		95EEA776F9CF0007EA77CC71 /* Pods-Anna.debug_stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.debug_stg.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.debug_stg.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				0E6D260F242E956F0037A80C /* Logger.swift */,
+				0E96532A242F436B00ADD300 /* LogLevel.swift */,
 			);
 			path = Logger;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				0E3DD5B1242B731000C092E7 /* Carthage */,
 				4A7031FB60C748D6578BD669 /* [CP] Embed Pods Frameworks */,
 				0E6D2614242EA4170037A80C /* Crashlytics */,
+				0E96532C242F52C700ADD300 /* Remove Firebase from non dev builds */,
 			);
 			buildRules = (
 			);
@@ -375,6 +379,24 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ \"$CRASHLYTICS_ENABLED\" == \"true\" ]; then\n${PODS_ROOT}/FirebaseCrashlytics/run\nfi\n\n";
 		};
+		0E96532C242F52C700ADD300 /* Remove Firebase from non dev builds */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Remove Firebase from non dev builds";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"$CRASHLYTICS_ENABLED\" != \"true\" ]; then\nrm -rf \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Frameworks/GoogleUtilities.framework\"\nrm -rf \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Frameworks/nanopb.framework\"\nrm -rf \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Frameworks/FBLPromises.framework\"\nfi\n";
+		};
 		4A7031FB60C748D6578BD669 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -422,6 +444,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E6D2610242E956F0037A80C /* Logger.swift in Sources */,
+				0E96532B242F436B00ADD300 /* LogLevel.swift in Sources */,
 				0E6D260B242E8B540037A80C /* Constants+InfoKeys.swift in Sources */,
 				0E5C2070242B63440038EF8B /* AppDelegate.swift in Sources */,
 				0E6D260A242E8B540037A80C /* Constants.swift in Sources */,
@@ -1024,8 +1047,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.anna.stg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore pl.gov.anna.stg";
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
