@@ -52,7 +52,7 @@
 		0E3DD5BA242B764100C092E7 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		0E3DD5BB242B764100C092E7 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
 		0E3DD5BC242B764100C092E7 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
-		0E5C206C242B63440038EF8B /* Anna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Anna.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E5C206C242B63440038EF8B /* Anna Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Anna Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E5C206F242B63440038EF8B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E5C2078242B63460038EF8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E5C207B242B63460038EF8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -143,7 +143,7 @@
 		0E5C206D242B63440038EF8B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0E5C206C242B63440038EF8B /* Anna.app */,
+				0E5C206C242B63440038EF8B /* Anna Dev.app */,
 				0E5C2082242B63460038EF8B /* AnnaTests.xctest */,
 			);
 			name = Products;
@@ -256,7 +256,7 @@
 			);
 			name = Anna;
 			productName = Anna;
-			productReference = 0E5C206C242B63440038EF8B /* Anna.app */;
+			productReference = 0E5C206C242B63440038EF8B /* Anna Dev.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0E5C2081242B63460038EF8B /* AnnaTests */ = {
@@ -645,7 +645,8 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.anna.dev;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = Anna;
+				PRODUCT_NAME = "$(TARGET_NAME) Dev";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development pl.gov.anna.dev";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
@@ -680,7 +681,8 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.anna.dev;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = Anna;
+				PRODUCT_NAME = "$(TARGET_NAME) Dev";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc pl.gov.anna.dev";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
@@ -711,7 +713,7 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Anna.app/Anna";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Anna Dev.app/Anna Dev";
 			};
 			name = Debug_dev;
 		};
@@ -738,7 +740,7 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Anna.app/Anna";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Anna Dev.app/Anna Dev";
 			};
 			name = Release_dev;
 		};
@@ -830,7 +832,8 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.anna.stg;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = Anna;
+				PRODUCT_NAME = "$(TARGET_NAME) Stg";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development pl.gov.anna.stg";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
@@ -861,7 +864,7 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Anna.app/Anna";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Anna Stg.app/Anna Stg";
 			};
 			name = Debug_stg;
 		};
@@ -953,6 +956,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.anna.prod;
+				PRODUCT_MODULE_NAME = Anna;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development pl.gov.anna.prod";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -1070,7 +1074,8 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.anna.stg;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = Anna;
+				PRODUCT_NAME = "$(TARGET_NAME) Stg";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore pl.gov.anna.stg";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1101,7 +1106,7 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Anna.app/Anna";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Anna Stg.app/Anna Stg";
 			};
 			name = Release_stg;
 		};
@@ -1187,6 +1192,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.anna.prod;
+				PRODUCT_MODULE_NAME = Anna;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore pl.gov.anna.prod";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
