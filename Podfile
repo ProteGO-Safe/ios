@@ -1,6 +1,6 @@
 platform :ios, '12.0'
 inhibit_all_warnings!
-use_modular_headers!
+use_frameworks!
 
 def shared
   # Tests are failing then it's not linked, maybe some issue with canImport() 
@@ -16,12 +16,4 @@ end
 
 target 'AnnaTests' do
   shared
-end
-
-post_install do |pi|
-  pi.pods_project.targets.each do |t|
-    t.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
-    end
-  end
 end
