@@ -26,7 +26,8 @@
 		0E6D2610242E956F0037A80C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D260F242E956F0037A80C /* Logger.swift */; };
 		0E965328242EB25C00ADD300 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E965327242EB25C00ADD300 /* GoogleService-Info.plist */; };
 		0E96532B242F436B00ADD300 /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96532A242F436B00ADD300 /* LogLevel.swift */; };
-		D1A56621AC9D3FBB9C1C4116 /* Pods_Anna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCC515393CD75CAEE598A033 /* Pods_Anna.framework */; };
+		5EAB35313BF4B370C62CF3AA /* libPods-Anna.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB929A197F03448E06069E0 /* libPods-Anna.a */; };
+		AA335B82AA36ECDBF975EBEE /* libPods-AnnaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 72E5407FAB628C42B18F9628 /* libPods-AnnaTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01D8F6CEA947903B8972BB1F /* Pods-AnnaTests.debug_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnnaTests.debug_prod.xcconfig"; path = "Target Support Files/Pods-AnnaTests/Pods-AnnaTests.debug_prod.xcconfig"; sourceTree = "<group>"; };
 		0E3DD5B3242B764100C092E7 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		0E3DD5B4242B764100C092E7 /* RxSwiftExt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwiftExt.framework; path = Carthage/Build/iOS/RxSwiftExt.framework; sourceTree = "<group>"; };
 		0E3DD5B5242B764100C092E7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
@@ -64,13 +66,19 @@
 		0E6D260F242E956F0037A80C /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		0E965327242EB25C00ADD300 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0E96532A242F436B00ADD300 /* LogLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLevel.swift; sourceTree = "<group>"; };
+		224859AED1D43B79EDE86275 /* Pods-AnnaTests.release_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnnaTests.release_prod.xcconfig"; path = "Target Support Files/Pods-AnnaTests/Pods-AnnaTests.release_prod.xcconfig"; sourceTree = "<group>"; };
 		482FB5D89F5573E25359B6EB /* Pods-Anna.release_dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.release_dev.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.release_dev.xcconfig"; sourceTree = "<group>"; };
 		542070CF410D378EE5435A96 /* Pods-Anna.release_stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.release_stg.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.release_stg.xcconfig"; sourceTree = "<group>"; };
+		561630EF9025943748EE2B0F /* Pods-AnnaTests.release_dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnnaTests.release_dev.xcconfig"; path = "Target Support Files/Pods-AnnaTests/Pods-AnnaTests.release_dev.xcconfig"; sourceTree = "<group>"; };
+		629C5CDB70E5FFFB2E1902F9 /* Pods-AnnaTests.debug_stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnnaTests.debug_stg.xcconfig"; path = "Target Support Files/Pods-AnnaTests/Pods-AnnaTests.debug_stg.xcconfig"; sourceTree = "<group>"; };
+		72E5407FAB628C42B18F9628 /* libPods-AnnaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AnnaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EB929A197F03448E06069E0 /* libPods-Anna.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Anna.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FF92F7BC5F1F6B6F1CDF1E8 /* Pods-AnnaTests.release_stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnnaTests.release_stg.xcconfig"; path = "Target Support Files/Pods-AnnaTests/Pods-AnnaTests.release_stg.xcconfig"; sourceTree = "<group>"; };
 		95EEA776F9CF0007EA77CC71 /* Pods-Anna.debug_stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.debug_stg.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.debug_stg.xcconfig"; sourceTree = "<group>"; };
 		9700318292BE5F27EB17208D /* Pods-Anna.release_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.release_prod.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.release_prod.xcconfig"; sourceTree = "<group>"; };
 		BEC33F61CC8746F654E7BDEC /* Pods-Anna.debug_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.debug_prod.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.debug_prod.xcconfig"; sourceTree = "<group>"; };
 		C8E4564A545D17C206EEC75E /* Pods-Anna.debug_dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.debug_dev.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.debug_dev.xcconfig"; sourceTree = "<group>"; };
-		CCC515393CD75CAEE598A033 /* Pods_Anna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Anna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F967271215DF31CF5FA2F3F1 /* Pods-AnnaTests.debug_dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnnaTests.debug_dev.xcconfig"; path = "Target Support Files/Pods-AnnaTests/Pods-AnnaTests.debug_dev.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +95,7 @@
 				0E3DD5C4242B764100C092E7 /* SnapKit.framework in Frameworks */,
 				0E3DD5C5242B764100C092E7 /* RxRelay.framework in Frameworks */,
 				0E3DD5C6242B764100C092E7 /* RealmSwift.framework in Frameworks */,
-				D1A56621AC9D3FBB9C1C4116 /* Pods_Anna.framework in Frameworks */,
+				5EAB35313BF4B370C62CF3AA /* libPods-Anna.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA335B82AA36ECDBF975EBEE /* libPods-AnnaTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +123,8 @@
 				0E3DD5BA242B764100C092E7 /* SnapKit.framework */,
 				0E3DD5B7242B764100C092E7 /* SwiftTweaks.framework */,
 				0E3DD5B8242B764100C092E7 /* Swinject.framework */,
-				CCC515393CD75CAEE598A033 /* Pods_Anna.framework */,
+				7EB929A197F03448E06069E0 /* libPods-Anna.a */,
+				72E5407FAB628C42B18F9628 /* libPods-AnnaTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -214,6 +224,12 @@
 				482FB5D89F5573E25359B6EB /* Pods-Anna.release_dev.xcconfig */,
 				542070CF410D378EE5435A96 /* Pods-Anna.release_stg.xcconfig */,
 				9700318292BE5F27EB17208D /* Pods-Anna.release_prod.xcconfig */,
+				F967271215DF31CF5FA2F3F1 /* Pods-AnnaTests.debug_dev.xcconfig */,
+				629C5CDB70E5FFFB2E1902F9 /* Pods-AnnaTests.debug_stg.xcconfig */,
+				01D8F6CEA947903B8972BB1F /* Pods-AnnaTests.debug_prod.xcconfig */,
+				561630EF9025943748EE2B0F /* Pods-AnnaTests.release_dev.xcconfig */,
+				7FF92F7BC5F1F6B6F1CDF1E8 /* Pods-AnnaTests.release_stg.xcconfig */,
+				224859AED1D43B79EDE86275 /* Pods-AnnaTests.release_prod.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -233,7 +249,6 @@
 				0E3DD5B1242B731000C092E7 /* Carthage */,
 				4A7031FB60C748D6578BD669 /* [CP] Embed Pods Frameworks */,
 				0E6D2614242EA4170037A80C /* Crashlytics */,
-				0E96532C242F52C700ADD300 /* Remove Firebase from non dev builds */,
 			);
 			buildRules = (
 			);
@@ -248,6 +263,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0E5C208E242B63460038EF8B /* Build configuration list for PBXNativeTarget "AnnaTests" */;
 			buildPhases = (
+				B2005125E06D38BD26363C57 /* [CP] Check Pods Manifest.lock */,
 				0E5C207E242B63460038EF8B /* Sources */,
 				0E5C207F242B63460038EF8B /* Frameworks */,
 				0E5C2080242B63460038EF8B /* Resources */,
@@ -379,24 +395,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ \"$CRASHLYTICS_ENABLED\" == \"true\" ]; then\n${PODS_ROOT}/FirebaseCrashlytics/run\nfi\n\n";
 		};
-		0E96532C242F52C700ADD300 /* Remove Firebase from non dev builds */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Remove Firebase from non dev builds";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$CRASHLYTICS_ENABLED\" != \"true\" ]; then\nrm -rf \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Frameworks/GoogleUtilities.framework\"\nrm -rf \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Frameworks/nanopb.framework\"\nrm -rf \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Frameworks/FBLPromises.framework\"\nfi\n";
-		};
 		4A7031FB60C748D6578BD669 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -430,6 +428,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Anna-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2005125E06D38BD26363C57 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AnnaTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -670,6 +690,7 @@
 		};
 		0E5C208F242B63460038EF8B /* Debug_dev */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F967271215DF31CF5FA2F3F1 /* Pods-AnnaTests.debug_dev.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -696,6 +717,7 @@
 		};
 		0E5C2090242B63460038EF8B /* Release_dev */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 561630EF9025943748EE2B0F /* Pods-AnnaTests.release_dev.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -818,6 +840,7 @@
 		};
 		0E5C2093242B660C0038EF8B /* Debug_stg */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 629C5CDB70E5FFFB2E1902F9 /* Pods-AnnaTests.debug_stg.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -940,6 +963,7 @@
 		};
 		0E5C2096242B66140038EF8B /* Debug_prod */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01D8F6CEA947903B8972BB1F /* Pods-AnnaTests.debug_prod.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1056,6 +1080,7 @@
 		};
 		0E5C2099242B661B0038EF8B /* Release_stg */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7FF92F7BC5F1F6B6F1CDF1E8 /* Pods-AnnaTests.release_stg.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1172,6 +1197,7 @@
 		};
 		0E5C209C242B662A0038EF8B /* Release_prod */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 224859AED1D43B79EDE86275 /* Pods-AnnaTests.release_prod.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
