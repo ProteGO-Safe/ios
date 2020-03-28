@@ -7,3 +7,4 @@ $(SRCROOT)/Carthage/Build/iOS/SwiftTweaks.framework
 $(SRCROOT)/Carthage/Build/iOS/Swinject.framework
 $(SRCROOT)/Carthage/Build/iOS/SnapKit.framework
 $(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework
+$(SRCROOT)/Carthage/Build/iOS/Reachability.framework
