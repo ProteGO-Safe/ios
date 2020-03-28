@@ -1,6 +1,10 @@
 import Foundation
+#if canImport(BugfenderSDK)
 import BugfenderSDK
+#endif
+#if canImport(FirebaseCrashlytics)
 import FirebaseCrashlytics
+#endif
 
 public let logger = Logger.shared
 
@@ -9,14 +13,18 @@ public class Logger {
     static let shared = Logger()
 
     static let loggingPrefixes = [
-        BFLogLevel.trace: "💙 Debug",
-        BFLogLevel.info: "💚 Info",
-        BFLogLevel.warning: "💛 Warn",
-        BFLogLevel.error: "❤️ Error"
+        LogLevel.debug: "💙 Debug",
+        LogLevel.info: "💚 Info",
+        LogLevel.warning: "💛 Warn",
+        LogLevel.error: "❤️ Error"
     ]
 
     public var bugfenderSessionIdentifier: String {
+        #if canImport(BugfenderSDK)
         return Bugfender.sessionIdentifierUrl()?.absoluteString ?? "n/a \(UUID().uuidString)"
+        #else
+        return ""
+        #endif
     }
 
     private var isCrashlyticsEnabled = false
@@ -38,7 +46,7 @@ public class Logger {
             let bugfenderEnabled = Constants.InfoKeys.bugfenderEnabled.value,
             let bugfenderKey = Constants.InfoKeys.bugfenderKey.value,
             bugfenderEnabled == "true" {
-                self.activateBugfender(appKey: bugfenderKey)
+            self.activateBugfender(appKey: bugfenderKey)
         }
 
         if let consoleEnabled = Constants.InfoKeys.consoleLoggingEnabled.value,
@@ -53,7 +61,7 @@ public class Logger {
     }
 
     public func debug(_ message: String, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
-        log(.trace, message, file, function, line)
+        log(.debug, message, file, function, line)
     }
 
     public func info(_ message: String, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
@@ -69,32 +77,39 @@ public class Logger {
         log(.error, message, file, function, line)
     }
 
-    private func log(_ level: BFLogLevel, _ message: String, _ file: String = #file,
+    private func log(_ level: LogLevel, _ message: String, _ file: String = #file,
                      _ function: String = #function, _ line: Int = #line) {
+        #if canImport(BugfenderSDK)
         if self.isBugFenderEnabled {
             Bugfender.log(lineNumber: line,
-                    method: function,
-                    file: file,
-                    level: level,
-                    tag: self.bugfenderSessionIdentifier,
-                    message: message)
+                          method: function,
+                          file: file,
+                          level: level.bugfenderLevel,
+                          tag: self.bugfenderSessionIdentifier,
+                          message: message)
+
         }
+        #endif
+
+        #if canImport(FirebaseCrashlytics)
+        if self.isCrashlyticsEnabled {
+            Crashlytics.crashlytics().log(message)
+        }
+        #endif
 
         if self.isConsoleLoggingEnabled {
             NSLog("\(Logger.loggingPrefixes[level] ?? ""): \(message)")
         }
-
-        if self.isCrashlyticsEnabled {
-            Crashlytics.crashlytics().log(message)
-        }
     }
 
     private func activateBugfender(appKey: String) {
+        #if canImport(BugfenderSDK)
         Bugfender.activateLogger(appKey)
         Bugfender.enableUIEventLogging()
         Bugfender.enableCrashReporting()
         Bugfender.setPrintToConsole(false)
 
         self.isBugFenderEnabled = true
+        #endif
     }
 }
