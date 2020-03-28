@@ -1,4 +1,5 @@
 import UIKit
+import SwiftTweaks
 #if canImport(Firebase)
 import Firebase
 #endif
@@ -14,7 +15,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         self.setupCrashlytics()
 
         let rootViewController = UIViewController()
-        let window = UIWindow(frame: UIScreen.main.bounds)
+        let window = self.generateWindow()
 
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
@@ -22,6 +23,17 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
 
         return true
+    }
+
+    private func generateWindow() -> UIWindow {
+        if let tweaksEnabled = Constants.InfoKeys.tweaksEnabled.value,
+            tweaksEnabled == "true" {
+            return TweakWindow(frame: UIScreen.main.bounds,
+                               gestureType: .shake,
+                               tweakStore: DebugMenu.defaultStore)
+        } else {
+            return UIWindow(frame: UIScreen.main.bounds)
+        }
     }
 
     private func setupCrashlytics() {
