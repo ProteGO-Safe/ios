@@ -6,7 +6,8 @@ class MockAdvertiser: Advertiser {
 
     init(delegate: AdvertiserDelegate) {
         self.delegate = delegate
-        let timer = Timer.init(timeInterval: 30, repeats: true) { [weak self] _ in
+        let timer = Timer.init(timeInterval:
+        TimeInterval(DebugMenu.assign(DebugMenu.mockBluetoothAdvertiserInterval)), repeats: true) { [weak self] _ in
             if let tokenData = self?.previousTokenData {
                 if tokenData.1 < Date() {
                     self?.delegate?.tokenDataExpired(previousTokenData: self?.previousTokenData)

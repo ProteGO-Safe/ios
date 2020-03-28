@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Constants {
+extension Constants {
     enum InfoKeys: String {
         case bugfenderEnabled = "BUGFENDER_ENABLED"
         case bugfenderKey = "BUGFENDER_KEY"
