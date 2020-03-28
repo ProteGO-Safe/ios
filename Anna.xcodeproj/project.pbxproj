@@ -22,10 +22,13 @@
 		0E5C2087242B63460038EF8B /* AnnaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C2086242B63460038EF8B /* AnnaTests.swift */; };
 		0E6D260A242E8B540037A80C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D2607242E8B540037A80C /* Constants.swift */; };
 		0E6D260B242E8B540037A80C /* Constants+InfoKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D2608242E8B540037A80C /* Constants+InfoKeys.swift */; };
-		0E6D260E242E8E940037A80C /* InfoKeys+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D260D242E8E940037A80C /* InfoKeys+Value.swift */; };
 		0E6D2610242E956F0037A80C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D260F242E956F0037A80C /* Logger.swift */; };
 		0E965328242EB25C00ADD300 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E965327242EB25C00ADD300 /* GoogleService-Info.plist */; };
 		0E96532B242F436B00ADD300 /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96532A242F436B00ADD300 /* LogLevel.swift */; };
+		0E965352242F81D400ADD300 /* DebugMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96533F242F81D400ADD300 /* DebugMenu.swift */; };
+		0E965355242F82B900ADD300 /* GeneralDebugItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E965354242F82B900ADD300 /* GeneralDebugItems.swift */; };
+		0EE60BD0242F8A3C00D29048 /* InfoKeys+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE60BCD242F8A3C00D29048 /* InfoKeys+Value.swift */; };
+		0EE60BD3242F8A5F00D29048 /* SwiftTweaks+Anna.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE60BD2242F8A5F00D29048 /* SwiftTweaks+Anna.swift */; };
 		A63BFB76240CADB609E72685 /* Pods_Anna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3458DDABC1020B1EB7984F /* Pods_Anna.framework */; };
 		E6FC73238FEB0689D7FCA95C /* Pods_AnnaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 110266AD057C4616D8381F24 /* Pods_AnnaTests.framework */; };
 /* End PBXBuildFile section */
@@ -62,10 +65,13 @@
 		0E5C2088242B63460038EF8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E6D2607242E8B540037A80C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0E6D2608242E8B540037A80C /* Constants+InfoKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Constants+InfoKeys.swift"; sourceTree = "<group>"; };
-		0E6D260D242E8E940037A80C /* InfoKeys+Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InfoKeys+Value.swift"; sourceTree = "<group>"; };
 		0E6D260F242E956F0037A80C /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		0E965327242EB25C00ADD300 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0E96532A242F436B00ADD300 /* LogLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLevel.swift; sourceTree = "<group>"; };
+		0E96533F242F81D400ADD300 /* DebugMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugMenu.swift; sourceTree = "<group>"; };
+		0E965354242F82B900ADD300 /* GeneralDebugItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralDebugItems.swift; sourceTree = "<group>"; };
+		0EE60BCD242F8A3C00D29048 /* InfoKeys+Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InfoKeys+Value.swift"; sourceTree = "<group>"; };
+		0EE60BD2242F8A5F00D29048 /* SwiftTweaks+Anna.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftTweaks+Anna.swift"; sourceTree = "<group>"; };
 		110266AD057C4616D8381F24 /* Pods_AnnaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnnaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		224859AED1D43B79EDE86275 /* Pods-AnnaTests.release_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnnaTests.release_prod.xcconfig"; path = "Target Support Files/Pods-AnnaTests/Pods-AnnaTests.release_prod.xcconfig"; sourceTree = "<group>"; };
 		482FB5D89F5573E25359B6EB /* Pods-Anna.release_dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.release_dev.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.release_dev.xcconfig"; sourceTree = "<group>"; };
@@ -174,6 +180,7 @@
 		0E6D2603242E8B540037A80C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0E96532D242F819D00ADD300 /* DebugMenu */,
 				0E6D260C242E8E940037A80C /* Extensions */,
 				0E6D2604242E8B540037A80C /* Logger */,
 				0E6D2606242E8B540037A80C /* Constants */,
@@ -202,7 +209,8 @@
 		0E6D260C242E8E940037A80C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0E6D260D242E8E940037A80C /* InfoKeys+Value.swift */,
+				0EE60BCC242F8A3C00D29048 /* Constants */,
+				0EE60BCE242F8A3C00D29048 /* SwiftTweaks */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -213,6 +221,39 @@
 				0E965327242EB25C00ADD300 /* GoogleService-Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		0E96532D242F819D00ADD300 /* DebugMenu */ = {
+			isa = PBXGroup;
+			children = (
+				0E96533F242F81D400ADD300 /* DebugMenu.swift */,
+				0E96532E242F81D400ADD300 /* MenuItems */,
+			);
+			path = DebugMenu;
+			sourceTree = "<group>";
+		};
+		0E96532E242F81D400ADD300 /* MenuItems */ = {
+			isa = PBXGroup;
+			children = (
+				0E965354242F82B900ADD300 /* GeneralDebugItems.swift */,
+			);
+			path = MenuItems;
+			sourceTree = "<group>";
+		};
+		0EE60BCC242F8A3C00D29048 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				0EE60BCD242F8A3C00D29048 /* InfoKeys+Value.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		0EE60BCE242F8A3C00D29048 /* SwiftTweaks */ = {
+			isa = PBXGroup;
+			children = (
+				0EE60BD2242F8A5F00D29048 /* SwiftTweaks+Anna.swift */,
+			);
+			path = SwiftTweaks;
 			sourceTree = "<group>";
 		};
 		B553474AE7B40F4DF5FB85D0 /* Pods */ = {
@@ -485,8 +526,11 @@
 				0E96532B242F436B00ADD300 /* LogLevel.swift in Sources */,
 				0E6D260B242E8B540037A80C /* Constants+InfoKeys.swift in Sources */,
 				0E5C2070242B63440038EF8B /* AppDelegate.swift in Sources */,
+				0EE60BD3242F8A5F00D29048 /* SwiftTweaks+Anna.swift in Sources */,
 				0E6D260A242E8B540037A80C /* Constants.swift in Sources */,
-				0E6D260E242E8E940037A80C /* InfoKeys+Value.swift in Sources */,
+				0E965352242F81D400ADD300 /* DebugMenu.swift in Sources */,
+				0E965355242F82B900ADD300 /* GeneralDebugItems.swift in Sources */,
+				0EE60BD0242F8A3C00D29048 /* InfoKeys+Value.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,6 +713,7 @@
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				TWEAKS_ENABLED = true;
 			};
 			name = Debug_dev;
 		};
@@ -705,6 +750,7 @@
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				TWEAKS_ENABLED = true;
 			};
 			name = Release_dev;
 		};
@@ -856,6 +902,7 @@
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				TWEAKS_ENABLED = false;
 			};
 			name = Debug_stg;
 		};
@@ -980,6 +1027,7 @@
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				TWEAKS_ENABLED = false;
 			};
 			name = Debug_prod;
 		};
@@ -1098,6 +1146,7 @@
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				TWEAKS_ENABLED = false;
 			};
 			name = Release_stg;
 		};
@@ -1216,6 +1265,7 @@
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				TWEAKS_ENABLED = false;
 			};
 			name = Release_prod;
 		};
