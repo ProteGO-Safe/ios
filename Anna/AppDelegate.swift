@@ -1,11 +1,20 @@
 import UIKit
 import SwiftTweaks
+import Swinject
 #if canImport(Firebase)
 import Firebase
 #endif
 
 @UIApplicationMain
-final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate, ScannerDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate, ScannerDelegate  {
+    lazy var resolver: Resolver = {
+        guard let resolver = (assembler?.resolver as? Container)?.synchronize() else {
+            fatalError("Assembler not configured")
+        }
+        return resolver
+    }()
+
+    var assembler: Assembler?
     var window: UIWindow?
     var advertiser: Advertiser!
     var scanner: Scanner!
@@ -13,7 +22,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate,
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+        self.setupDependencyInjection()
         self.setupCrashlytics()
 
         let rootViewController = UIViewController()
@@ -55,5 +64,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate,
             FirebaseApp.configure()
         }
         #endif
+    }
+
+    private func setupDependencyInjection() {
+        assembler = Assembler([
+            GeneralAssembly(),
+            DebugAssembly()
+        ])
     }
 }
