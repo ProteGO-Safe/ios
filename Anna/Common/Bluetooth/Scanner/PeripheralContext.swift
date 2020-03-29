@@ -32,8 +32,8 @@ class PeripheralContext {
         // time when we can connect.
         if let lastConnectionDate = self.lastConnectionDate, self.connectionRetries != 0 {
             let nextReconnectionTime = lastConnectionDate.addingTimeInterval(
-                PeripheralSynchronizationTimeoutInSec +
-                PeripheralReconnectionTimeoutPerAttemptInSec * Double(self.connectionRetries)
+                Constants.Bluetooth.PeripheralSynchronizationTimeoutInSec +
+                Constants.Bluetooth.PeripheralReconnectionTimeoutPerAttemptInSec * Double(self.connectionRetries)
             )
             if nextReconnectionTime > Date() {
                 return false
@@ -46,7 +46,7 @@ class PeripheralContext {
         }
 
         // Check if we are ready for the next connection attempt.
-        return lastSyncDate.addingTimeInterval(PeripheralIgnoredTimeoutInSec) < Date()
+        return lastSyncDate.addingTimeInterval(Constants.Bluetooth.PeripheralIgnoredTimeoutInSec) < Date()
     }
 
     /// Function specifies if this peripheral has higher priority in the next connection attempt.

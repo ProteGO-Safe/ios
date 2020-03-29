@@ -16,7 +16,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
         super.init()
         self.delegate = delegate
         self.peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: [
-            CBPeripheralManagerOptionRestoreIdentifierKey: AnnaServiceUUID
+            CBPeripheralManagerOptionRestoreIdentifierKey: Constants.Bluetooth.AnnaServiceUUID
         ])
     }
 
@@ -36,7 +36,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     /// is present characteristic returns zero length byte slice.
     private func createLocalDatabase() -> CBMutableService {
         // Define Anna characteristic
-        let characteristicUUID = AnnaCharacteristicUUID
+        let characteristicUUID = Constants.Bluetooth.AnnaCharacteristicUUID
         let characteristicProps = CBCharacteristicProperties.read
         let characteristicPerm = CBAttributePermissions.readable
         let characteristic = CBMutableCharacteristic(
@@ -47,7 +47,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
         )
 
         // Define Anna service
-        let serviceUUID = AnnaServiceUUID
+        let serviceUUID = Constants.Bluetooth.AnnaServiceUUID
         let service = CBMutableService(
           type: serviceUUID,
           primary: true
@@ -62,7 +62,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     private func startAdvertisementIfNeeded() {
         if peripheralManager.state == .poweredOn && !peripheralManager.isAdvertising {
             peripheralManager.startAdvertising([
-                CBAdvertisementDataServiceUUIDsKey: [AnnaServiceUUID]
+                CBAdvertisementDataServiceUUIDsKey: [Constants.Bluetooth.AnnaServiceUUID]
             ])
         }
     }
@@ -90,7 +90,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
         logger.debug("Peripheral manager will restore state")
         // We don't need to add services as they should be already there.
         let services: [CBMutableService]? = dict[CBPeripheralManagerRestoredStateServicesKey] as? [CBMutableService]
-        self.service = services?.first { $0.uuid == AnnaServiceUUID }
+        self.service = services?.first { $0.uuid == Constants.Bluetooth.AnnaServiceUUID }
     }
 
     func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {

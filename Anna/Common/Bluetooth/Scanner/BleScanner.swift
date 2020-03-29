@@ -16,13 +16,14 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         self.peripherals = [:]
         super.init()
         self.delegate = delegate
-        self.centralManager = CBCentralManager(delegate: self, queue: nil,
-                                               options: [CBCentralManagerOptionRestoreIdentifierKey: AnnaServiceUUID])
+
+        let options = [CBCentralManagerOptionRestoreIdentifierKey: Constants.Bluetooth.AnnaServiceUUID]
+        self.centralManager = CBCentralManager(delegate: self, queue: nil, options: options)
 
         /// This timer won't run in the background by itself. When we got time slice for
         /// execution make sure that synchronization checks are rare.
         let syncCheckTimer = Timer.init(
-            timeInterval: PeripheralSynchronizationCheckInSec,
+            timeInterval: Constants.Bluetooth.PeripheralSynchronizationCheckInSec,
             repeats: true) { [weak self] _ in
             self?.checkSynchronizationStatus()
         }
@@ -45,8 +46,10 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         // Gather info about the peripheral
         let peripheral = peripheralContext.peripheral
         let connected = peripheralContext.peripheral.state == .connected
-        let discoveredService = peripheral.services?.first { $0.uuid == AnnaServiceUUID }
-        let discoveredCharacteristic = discoveredService?.characteristics?.first { $0.uuid == AnnaCharacteristicUUID }
+        let discoveredService = peripheral.services?.first { $0.uuid == Constants.Bluetooth.AnnaServiceUUID }
+        let discoveredCharacteristic = discoveredService?.characteristics?.first {
+            $0.uuid == Constants.Bluetooth.AnnaCharacteristicUUID
+        }
 
         // Handle each state properly. We don't use switch statement as it's not posssible
         // to fallthrough with bind variables?
@@ -80,7 +83,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
                 peripheralContext.state = .DiscoveredService(service)
             } else {
                 // We need to discover service
-                peripheral.discoverServices([AnnaServiceUUID])
+                peripheral.discoverServices([Constants.Bluetooth.AnnaServiceUUID])
                 peripheralContext.state = .DiscoveringService
                 return
             }
@@ -102,7 +105,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
                 peripheralContext.state = .DiscoveredCharacteristic(characteristic)
             } else {
                 // Let's discover characteristic
-                peripheral.discoverCharacteristics([AnnaCharacteristicUUID], for: service)
+                peripheral.discoverCharacteristics([Constants.Bluetooth.AnnaCharacteristicUUID], for: service)
                 peripheralContext.state = .DiscoveringCharacteristic
                 return
             }
@@ -168,7 +171,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
             centralManager.cancelPeripheralConnection(peripheralContext.peripheral)
         }
 
-        if peripheralContext.connectionRetries >= PeripheralMaxConnectionRetries {
+        if peripheralContext.connectionRetries >= Constants.Bluetooth.PeripheralMaxConnectionRetries {
             // Remove peripheral until discovered once again.
             self.peripherals.removeValue(forKey: peripheralContext.peripheral)
             peripheralContext.peripheral.delegate = nil
@@ -199,7 +202,8 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         for peripheral in self.peripherals {
             var cancel = !peripheral.value.state.isIdle()
             if let lastConnectionDate = peripheral.value.lastConnectionDate, cancel && onlyOnTimeout {
-                cancel = lastConnectionDate.addingTimeInterval(PeripheralSynchronizationTimeoutInSec) < Date()
+                let timeout = Constants.Bluetooth.PeripheralSynchronizationTimeoutInSec
+                cancel = lastConnectionDate.addingTimeInterval(timeout) < Date()
             }
 
             if cancel {
@@ -233,7 +237,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         }
 
         // Check number of pending connections
-        var freeSlots = PeripheralMaxConcurrentConnections
+        var freeSlots = Constants.Bluetooth.PeripheralMaxConcurrentConnections
         sortedPeripherals.forEach { peripheral in
             // Get debug info
             logger.debug("[id: \(peripheral.peripheral.identifier), " +
@@ -279,7 +283,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
             logger.debug("PoweredOn isScanning: \(central.isScanning)")
             // We can now use central manager functionality.
             if !central.isScanning {
-                central.scanForPeripherals(withServices: [AnnaServiceUUID], options: nil)
+                central.scanForPeripherals(withServices: [Constants.Bluetooth.AnnaServiceUUID], options: nil)
             }
         } else {
             logger.debug("PoweredOff: \(central.state.rawValue)")
@@ -342,11 +346,18 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         }
     }
 
+    func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
+        logger.debug("Peripheral did modify services: \(peripheral.identifier)")
+        if let peripheralContext = self.peripherals[peripheral], !peripheralContext.state.isIdle() {
+            proceedWithPeripheralSynchronization(peripheralContext: peripheralContext)
+        }
+    }
+
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         logger.debug("Peripheral did discover characteristics: " +
                      "\(peripheral.identifier), error: \(String(describing: error))")
 
-        if let peripheralContext = self.peripherals[peripheral], service.uuid == AnnaServiceUUID {
+        if let peripheralContext = self.peripherals[peripheral], service.uuid == Constants.Bluetooth.AnnaServiceUUID {
             if error == nil {
                 proceedWithPeripheralSynchronization(peripheralContext: peripheralContext)
             } else {
@@ -367,7 +378,8 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         logger.debug("Peripheral did read value: \(peripheral.identifier), error: \(String(describing: error))")
-        if let peripheralContext = self.peripherals[peripheral], characteristic.uuid == AnnaCharacteristicUUID {
+        if let peripheralContext = self.peripherals[peripheral],
+           characteristic.uuid == Constants.Bluetooth.AnnaCharacteristicUUID {
             if let data = characteristic.value, error == nil {
                 peripheralSynchronized(peripheralContext: peripheralContext, data: data)
             } else {
