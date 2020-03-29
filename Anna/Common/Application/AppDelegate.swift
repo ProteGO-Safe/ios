@@ -71,7 +71,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate 
         assembler = Assembler([
             GeneralAssembly(),
             DebugAssembly(),
-            BluetoothAssembly()
+            BluetoothAssembly(),
+            NetworkingAssembly()
         ])
     }
 }

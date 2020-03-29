@@ -73,6 +73,15 @@
 		83252A16242F6EEA001E6D63 /* UrlRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A15242F6EEA001E6D63 /* UrlRequestBuilder.swift */; };
 		83252A18242F9C11001E6D63 /* UrlRequestBuilderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A17242F9C11001E6D63 /* UrlRequestBuilderType.swift */; };
 		83252A22242FC728001E6D63 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83252A21242FC728001E6D63 /* Reachability.framework */; };
+		83252A6024314B59001E6D63 /* GcpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A5F24314B59001E6D63 /* GcpClient.swift */; };
+		83252A6324314B9A001E6D63 /* GcpClientType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A6224314B99001E6D63 /* GcpClientType.swift */; };
+		83252A6524314BD7001E6D63 /* GcpEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A6424314BD7001E6D63 /* GcpEndpoint.swift */; };
+		83252A6A24314C74001E6D63 /* RegisterDeviceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A6924314C74001E6D63 /* RegisterDeviceRequest.swift */; };
+		83252A6C24314C99001E6D63 /* RegisterDeviceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A6B24314C99001E6D63 /* RegisterDeviceResult.swift */; };
+		83252A6E24314CFE001E6D63 /* ConfirmRegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A6D24314CFE001E6D63 /* ConfirmRegistrationRequest.swift */; };
+		83252A7024314D17001E6D63 /* ConfirmRegistrationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A6F24314D16001E6D63 /* ConfirmRegistrationResult.swift */; };
+		83252A7624314EFF001E6D63 /* DefaultRequestParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A7524314EFF001E6D63 /* DefaultRequestParameters.swift */; };
+		83252A782431519F001E6D63 /* NetworkingAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A772431519F001E6D63 /* NetworkingAssembly.swift */; };
 		87074B78242F57770029AD4B /* AdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B77242F57770029AD4B /* AdvertiserDelegate.swift */; };
 		87074B79242F57770029AD4B /* AdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B77242F57770029AD4B /* AdvertiserDelegate.swift */; };
 		87074B7C242F6A5F0029AD4B /* BleScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7B242F6A5F0029AD4B /* BleScanner.swift */; };
@@ -182,6 +191,15 @@
 		83252A15242F6EEA001E6D63 /* UrlRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlRequestBuilder.swift; sourceTree = "<group>"; };
 		83252A17242F9C11001E6D63 /* UrlRequestBuilderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlRequestBuilderType.swift; sourceTree = "<group>"; };
 		83252A21242FC728001E6D63 /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
+		83252A5F24314B59001E6D63 /* GcpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GcpClient.swift; sourceTree = "<group>"; };
+		83252A6224314B99001E6D63 /* GcpClientType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GcpClientType.swift; sourceTree = "<group>"; };
+		83252A6424314BD7001E6D63 /* GcpEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GcpEndpoint.swift; sourceTree = "<group>"; };
+		83252A6924314C74001E6D63 /* RegisterDeviceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDeviceRequest.swift; sourceTree = "<group>"; };
+		83252A6B24314C99001E6D63 /* RegisterDeviceResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDeviceResult.swift; sourceTree = "<group>"; };
+		83252A6D24314CFE001E6D63 /* ConfirmRegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationRequest.swift; sourceTree = "<group>"; };
+		83252A6F24314D16001E6D63 /* ConfirmRegistrationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationResult.swift; sourceTree = "<group>"; };
+		83252A7524314EFF001E6D63 /* DefaultRequestParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequestParameters.swift; sourceTree = "<group>"; };
+		83252A772431519F001E6D63 /* NetworkingAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingAssembly.swift; sourceTree = "<group>"; };
 		87074B77242F57770029AD4B /* AdvertiserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertiserDelegate.swift; sourceTree = "<group>"; };
 		87074B7B242F6A5F0029AD4B /* BleScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleScanner.swift; sourceTree = "<group>"; };
 		87074B7E242F6D700029AD4B /* PeripheralContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralContext.swift; sourceTree = "<group>"; };
@@ -305,6 +323,7 @@
 			children = (
 				0E9DDA782430E347002D879F /* Application */,
 				87C985FA242E0A6400335502 /* Bluetooth */,
+				83252A6624314C18001E6D63 /* DataModel */,
 				83252A0A242F6043001E6D63 /* Networking */,
 				0E9DCC902430982700C2670D /* EncountersManager */,
 				0EE60C5B2430012E00D29048 /* SecretsGenerator */,
@@ -551,6 +570,7 @@
 				0EE60C4A242FF2C200D29048 /* GeneralAssembly.swift */,
 				0E9DDA6D2430D2D9002D879F /* DebugAssembly.swift */,
 				0ECE7A1E2430E3EE00EED942 /* BluetoothAssembly.swift */,
+				83252A772431519F001E6D63 /* NetworkingAssembly.swift */,
 			);
 			path = DI;
 			sourceTree = "<group>";
@@ -577,6 +597,7 @@
 		83252A0A242F6043001E6D63 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				83252A5E24314B45001E6D63 /* GcpClient */,
 				83252A1D242FB957001E6D63 /* NetworkClient */,
 			);
 			path = Networking;
@@ -591,6 +612,52 @@
 				83252A17242F9C11001E6D63 /* UrlRequestBuilderType.swift */,
 			);
 			path = NetworkClient;
+			sourceTree = "<group>";
+		};
+		83252A5E24314B45001E6D63 /* GcpClient */ = {
+			isa = PBXGroup;
+			children = (
+				83252A5F24314B59001E6D63 /* GcpClient.swift */,
+				83252A6224314B99001E6D63 /* GcpClientType.swift */,
+				83252A6424314BD7001E6D63 /* GcpEndpoint.swift */,
+			);
+			path = GcpClient;
+			sourceTree = "<group>";
+		};
+		83252A6624314C18001E6D63 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				83252A7424314EE2001E6D63 /* DefaultRequestParameters */,
+				83252A6824314C37001E6D63 /* RegisterDevice */,
+				83252A6724314C2A001E6D63 /* ConfirmRegistration */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		83252A6724314C2A001E6D63 /* ConfirmRegistration */ = {
+			isa = PBXGroup;
+			children = (
+				83252A6D24314CFE001E6D63 /* ConfirmRegistrationRequest.swift */,
+				83252A6F24314D16001E6D63 /* ConfirmRegistrationResult.swift */,
+			);
+			path = ConfirmRegistration;
+			sourceTree = "<group>";
+		};
+		83252A6824314C37001E6D63 /* RegisterDevice */ = {
+			isa = PBXGroup;
+			children = (
+				83252A6924314C74001E6D63 /* RegisterDeviceRequest.swift */,
+				83252A6B24314C99001E6D63 /* RegisterDeviceResult.swift */,
+			);
+			path = RegisterDevice;
+			sourceTree = "<group>";
+		};
+		83252A7424314EE2001E6D63 /* DefaultRequestParameters */ = {
+			isa = PBXGroup;
+			children = (
+				83252A7524314EFF001E6D63 /* DefaultRequestParameters.swift */,
+			);
+			path = DefaultRequestParameters;
 			sourceTree = "<group>";
 		};
 		87074B7A242F6A4E0029AD4B /* Scanner */ = {
@@ -930,16 +997,21 @@
 				87F259E92430A3E2009BF612 /* MockScanner.swift in Sources */,
 				83252A16242F6EEA001E6D63 /* UrlRequestBuilder.swift in Sources */,
 				0E9DDA772430E12C002D879F /* AppDelegate.swift in Sources */,
+				83252A6524314BD7001E6D63 /* GcpEndpoint.swift in Sources */,
 				0EE60C30242FDB2D00D29048 /* RealmManagerType.swift in Sources */,
+				83252A6A24314C74001E6D63 /* RegisterDeviceRequest.swift in Sources */,
 				0E9DCCA52430C9CE00C2670D /* RegisteredEncountersDebugViewModel.swift in Sources */,
 				0E9DCC8824300CC600C2670D /* Constants+KeychainKeys.swift in Sources */,
 				0E9DDA6E2430D2D9002D879F /* DebugAssembly.swift in Sources */,
+				83252A6C24314C99001E6D63 /* RegisterDeviceResult.swift in Sources */,
 				0E9DDA702430D464002D879F /* EncountersDebugItems.swift in Sources */,
 				0E6D2610242E956F0037A80C /* Logger.swift in Sources */,
 				871208D62430C6A600DA0A4D /* Constants+Bluetooth.swift in Sources */,
 				0E9DCC942430984A00C2670D /* EncountersManager.swift in Sources */,
 				0E96532B242F436B00ADD300 /* LogLevel.swift in Sources */,
+				83252A7624314EFF001E6D63 /* DefaultRequestParameters.swift in Sources */,
 				0E6D260B242E8B540037A80C /* Constants+InfoKeys.swift in Sources */,
+				83252A782431519F001E6D63 /* NetworkingAssembly.swift in Sources */,
 				0E9DDA752430DB46002D879F /* String+Random.swift in Sources */,
 				83252A12242F63B1001E6D63 /* NetworkClient.swift in Sources */,
 				83252A14242F6C22001E6D63 /* NetworkRequest.swift in Sources */,
@@ -958,6 +1030,7 @@
 				0ECE7A1F2430E3EE00EED942 /* BluetoothAssembly.swift in Sources */,
 				0E965355242F82B900ADD300 /* GeneralDebugItems.swift in Sources */,
 				0ECE7A222430F91F00EED942 /* MockAdvertiser.swift in Sources */,
+				83252A7024314D17001E6D63 /* ConfirmRegistrationResult.swift in Sources */,
 				0E9DCC922430983A00C2670D /* EncountersManagerType.swift in Sources */,
 				0EE60C41242FF14100D29048 /* Resolver+Utils.swift in Sources */,
 				0E9DCCA72430C9E200C2670D /* RegisteredEncountersDebugModel.swift in Sources */,
@@ -965,11 +1038,14 @@
 				0E9DCC9D2430C7F100C2670D /* RegisteredEncountersDebugScreenView.swift in Sources */,
 				0EE60C5F2430015E00D29048 /* SecretsGenerator.swift in Sources */,
 				0E9DCCA12430C8C200C2670D /* CustomView.swift in Sources */,
+				83252A6E24314CFE001E6D63 /* ConfirmRegistrationRequest.swift in Sources */,
+				83252A6324314B9A001E6D63 /* GcpClientType.swift in Sources */,
 				0EE60C23242FDAA400D29048 /* Encounter.swift in Sources */,
 				0EE60C4B242FF2C200D29048 /* GeneralAssembly.swift in Sources */,
 				0EE60BD0242F8A3C00D29048 /* InfoKeys+Value.swift in Sources */,
 				0EE60C52242FF40500D29048 /* FilesCoordinatorType.swift in Sources */,
 				0E9DDA722430D82E002D879F /* Constants+Encounters.swift in Sources */,
+				83252A6024314B59001E6D63 /* GcpClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
