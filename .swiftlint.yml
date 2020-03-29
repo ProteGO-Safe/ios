@@ -4,6 +4,7 @@ disabled_rules:
     - cyclomatic_complexity
     - closure_parameter_position
     - orphaned_doc_comment
+    - todo
 opt_in_rules:
     - force_unwrapping
 excluded:

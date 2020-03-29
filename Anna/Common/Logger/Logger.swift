@@ -6,9 +6,9 @@ import BugfenderSDK
 import FirebaseCrashlytics
 #endif
 
-public let logger = Logger.shared
+let logger = Logger.shared
 
-public class Logger {
+final class Logger {
 
     static let shared = Logger()
 
@@ -19,7 +19,7 @@ public class Logger {
         LogLevel.error: "❤️ Error"
     ]
 
-    public var bugfenderSessionIdentifier: String {
+    var bugfenderSessionIdentifier: String {
         #if canImport(BugfenderSDK)
         return Bugfender.sessionIdentifierUrl()?.absoluteString ?? "n/a \(UUID().uuidString)"
         #else
@@ -60,20 +60,20 @@ public class Logger {
         }
     }
 
-    public func debug(_ message: String, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+    func debug(_ message: String, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
         log(.debug, message, file, function, line)
     }
 
-    public func info(_ message: String, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+    func info(_ message: String, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
         log(.info, message, file, function, line)
     }
 
-    public func warning(_ message: String, _ file: String = #file,
-                        _ function: String = #function, _ line: Int = #line) {
+    func warning(_ message: String, _ file: String = #file,
+                 _ function: String = #function, _ line: Int = #line) {
         log(.warning, message, file, function, line)
     }
 
-    public func error(_ message: String, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+    func error(_ message: String, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
         log(.error, message, file, function, line)
     }
 
@@ -104,10 +104,10 @@ public class Logger {
 
     private func activateBugfender(appKey: String) {
         #if canImport(BugfenderSDK)
+        Bugfender.setPrintToConsole(false)
         Bugfender.activateLogger(appKey)
         Bugfender.enableUIEventLogging()
         Bugfender.enableCrashReporting()
-        Bugfender.setPrintToConsole(false)
 
         self.isBugFenderEnabled = true
         #endif

@@ -1,7 +1,7 @@
 import Foundation
 import CoreBluetooth
 
-public extension Constants {
+extension Constants {
     class Bluetooth {
         /// Anna Service contained in GATT
         static let AnnaServiceUUIDString = "89a60000-4f57-4c1b-9042-7ed87d723b4e"

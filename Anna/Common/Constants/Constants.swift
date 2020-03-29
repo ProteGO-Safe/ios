@@ -1,3 +1,3 @@
 import Foundation
 
-public enum Constants {}
+enum Constants {}

@@ -4,7 +4,7 @@ import SwiftTweaks
 
 extension DebugMenu {
 
-    public static var actionShowBugfenderSessionId: Tweak<TweakAction> = {
+    static var actionShowBugfenderSessionId: Tweak<TweakAction> = {
         let description = DebugItemDescription(.general, group: .bugfender, name: "Pokaż identyfikator sesji")
         let tweak = Tweak<TweakAction>.build(with: description)
         tweak.addClosure {
@@ -33,7 +33,7 @@ extension DebugMenu {
         return tweak
     }()
 
-    public static var performCrash: Tweak<TweakAction> = {
+    static var performCrash: Tweak<TweakAction> = {
         let description = DebugItemDescription(.general, group: .crashlytics, name: "Wykonaj test crashlytics")
         let tweak = Tweak<TweakAction>.build(with: description)
         tweak.addClosure {
@@ -42,7 +42,7 @@ extension DebugMenu {
         return tweak
     }()
 
-    public static var generalItems: [TweakClusterType] = [
+    static var generalItems: [TweakClusterType] = [
         actionShowBugfenderSessionId,
         performCrash
     ]
