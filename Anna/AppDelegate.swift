@@ -1,4 +1,8 @@
 import UIKit
+import SwiftTweaks
+#if canImport(Firebase)
+import Firebase
+#endif
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate, ScannerDelegate {
@@ -10,8 +14,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate,
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        self.setupCrashlytics()
+
         let rootViewController = UIViewController()
-        let window = UIWindow(frame: UIScreen.main.bounds)
+        let window = self.generateWindow()
 
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
@@ -21,7 +27,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate,
         self.window = window
         return true
     }
-    
+
     func tokenDataExpired(previousTokenData: (Data, Date)?) {
         NSLog("Token data expired \(String(describing: previousTokenData))")
         byte += 1
@@ -29,9 +35,28 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate,
             self.advertiser.updateTokenData(data: Data([0xFF, byte]), expirationDate: Date(timeIntervalSinceNow: 30))
         }
     }
-    
+
     func synchronizedTokenData(data: Data, rssi: Int?) {
         NSLog("Synchronized token data \(data), rssi: \(String(describing: rssi))")
     }
-}
 
+    private func generateWindow() -> UIWindow {
+        if let tweaksEnabled = Constants.InfoKeys.tweaksEnabled.value,
+            tweaksEnabled == "true" {
+            return TweakWindow(frame: UIScreen.main.bounds,
+                               gestureType: .shake,
+                               tweakStore: DebugMenu.defaultStore)
+        } else {
+            return UIWindow(frame: UIScreen.main.bounds)
+        }
+    }
+
+    private func setupCrashlytics() {
+        #if canImport(Firebase)
+        if let crashlyticsEnabled = Constants.InfoKeys.crashlyticsEnabled.value,
+            crashlyticsEnabled == "true" {
+            FirebaseApp.configure()
+        }
+        #endif
+    }
+}

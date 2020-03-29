@@ -18,7 +18,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     weak var delegate: AdvertiserDelegate?
     /// Current token data
     var currentTokenData: (Data, Date)?
-    
+
     /// Restoration identifier is required to properly resume when application is restored by the OS.
     init(delegate: AdvertiserDelegate) {
         super.init()
@@ -27,18 +27,18 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
             CBPeripheralManagerOptionRestoreIdentifierKey: AnnaServiceUUID
         ])
     }
-    
-    /// TODO:  Add mechnism to restart advertisement when something goeas wrong.
+
+    /// NOTE:  Add mechnism to restart advertisement when something goeas wrong.
     private func scheduleRestartIfNeeded() {
-        
+
     }
-    
-    /// TODO: Add code responsible for monitoring health of advertiser. Check in specific intervals
+
+    /// NOTE: Add code responsible for monitoring health of advertiser. Check in specific intervals
     /// if device is actually advertising and there are tokens available.
     private func initializeHealthCheckIfNeeded() {
-        
+
     }
-    
+
     /// Initialize GATT server database. By default all Anna devices have one specific semonirvice and
     /// characteristic. Characteristic is readonly and returns device information. When no device information
     /// is present characteristic returns zero length byte slice.
@@ -59,12 +59,12 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
         let service = CBMutableService(
           type: serviceUUID,
           primary: true
-        );
+        )
         service.characteristics = [characteristic]
-        
+
         return service
     }
-    
+
     /// Start advertisement. In the background we can only advertise UUID, which is then stored in special "overflow" area
     /// visible only to other iOS devices.
     private func startAdvertisementIfNeeded() {
@@ -74,7 +74,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
             ])
         }
     }
-    
+
     /// Check if token data is present and not expired.
     private func tokenDataIsValid() -> Bool {
         guard let tokenData = self.currentTokenData else {
@@ -82,24 +82,25 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
         }
         return tokenData.1 > Date()
     }
-    
+
     /// Update token data.
     public func updateTokenData(data: Data, expirationDate: Date) {
         NSLog("Token data updated with expiration date: \(expirationDate)")
         self.currentTokenData = (data, expirationDate)
     }
-    
+
     // State management ---------------------------------------------------------------------------------
-    
-    /// This is the first callback called when we are restoring previous state. Make sure to not call any CoreBluetooth methods yet, as we need to
+
+    /// This is the first callback called when we are restoring previous state.
+    /// Make sure to not call any CoreBluetooth methods yet, as we need to
     /// wait for 'PoweredOn' state to do that.
-    func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String : Any]) {
+    func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String: Any]) {
         NSLog("Peripheral manager will restore state")
         // We don't need to add services as they should be already there.
-        let services: Array<CBMutableService>? = dict[CBPeripheralManagerRestoredStateServicesKey] as? Array<CBMutableService>
+        let services: [CBMutableService]? = dict[CBPeripheralManagerRestoredStateServicesKey] as? [CBMutableService]
         self.service = services?.first { $0.uuid == AnnaServiceUUID }
     }
-    
+
     func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
         NSLog("Peripheral manager did add service, error: \(String(describing: error))")
         if error == nil {
@@ -111,7 +112,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
             scheduleRestartIfNeeded()
         }
     }
-    
+
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         NSLog("Peripheral manager did update state \(peripheral.state.rawValue)")
         if peripheral.state == .poweredOn {
@@ -130,57 +131,57 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
             self.service = nil
         }
     }
-    
+
     // Advertising ---------------------------------------------------------------------------------------------
-    
+
     func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
         NSLog("Peripheral manager did start advertising, error: \(String(describing: error))")
         // If we fail to start advertisement, try again later.
-        if (error != nil) {
+        if error != nil {
             scheduleRestartIfNeeded()
         }
     }
-    
+
     // Characteristics -----------------------------------------------------------------------------------------
-    
+
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
         NSLog("Peripheral manager did receive read, offset: \(request.offset)")
-        
+
         // Marker if token data was expired during this transaction.
         var tokenExpired = false
-        
+
         // Check if token data is valid. If not, allow delegate to udpate
         if !tokenDataIsValid() {
             delegate?.tokenDataExpired(previousTokenData: self.currentTokenData)
             tokenExpired = true
         }
-        
+
         // Check once again if data is valid.
         guard let tokenData = self.currentTokenData, self.tokenDataIsValid() else {
             // If not, return that read is not permitted.
             peripheral.respond(to: request, withResult: CBATTError.readNotPermitted)
             return
         }
-        
+
         // Continue transaction when token was not expired or request offset was set to 0.
         guard !tokenExpired || request.offset == 0 else {
             // Read is not permitted.
             peripheral.respond(to: request, withResult: CBATTError.readNotPermitted)
             return
         }
-        
+
         // Check if offset is not out of band.
         guard request.offset < tokenData.0.count else {
             NSLog("Invalid offset: \(request.offset)")
             peripheral.respond(to: request, withResult: CBATTError.invalidOffset)
             return
         }
-        
+
         // Setup value and respond.
         request.value = tokenData.0.subdata(in: request.offset ..< tokenData.0.count)
         peripheral.respond(to: request, withResult: CBATTError.success)
     }
-    
+
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
         NSLog("Peripheral manager did receive write")
         // Reject all writes.

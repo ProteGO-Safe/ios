@@ -18,7 +18,7 @@ enum PeripheralState {
     case DiscoveringCharacteristic
     case DiscoveredCharacteristic(CBCharacteristic)
     case ReadingCharacteristic
-    
+
     func isIdle() -> Bool {
         if case .Idle = self {
             return true

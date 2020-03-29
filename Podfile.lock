@@ -1,4 +1,5 @@
 PODS:
+  - BugfenderSDK (1.8.0)
   - Firebase/CoreOnly (6.21.0):
     - FirebaseCore (= 6.6.5)
   - Firebase/Crashlytics (6.21.0):
@@ -47,11 +48,13 @@ PODS:
   - SwiftLint (0.39.1)
 
 DEPENDENCIES:
+  - BugfenderSDK (= 1.8)
   - Firebase/Crashlytics (= 6.21.0)
   - SwiftLint (= 0.39.1)
 
 SPEC REPOS:
   trunk:
+    - BugfenderSDK
     - Firebase
     - FirebaseAnalyticsInterop
     - FirebaseCore
@@ -67,6 +70,7 @@ SPEC REPOS:
     - SwiftLint
 
 SPEC CHECKSUMS:
+  BugfenderSDK: 5339f373a4c50f7afe155d6b117d52959dae3c7e
   Firebase: f378c80340dd41c0ad0914af740c021eb282a04b
   FirebaseAnalyticsInterop: 3f86269c38ae41f47afeb43ebf32a001f58fcdae
   FirebaseCore: 9f495d3afacb7b558711e6218ebb14b1c51b5802
@@ -81,6 +85,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SwiftLint: 55e96a4a4d537d4a3156859fc1c54bd24851a046
 
-PODFILE CHECKSUM: 1b906cd6b3d5b603f6a4dd9a47ad5ef4e49491c8
+PODFILE CHECKSUM: c989ed3a185087e528ccb6ecf66cfd045a1e8c88
 
 COCOAPODS: 1.9.1

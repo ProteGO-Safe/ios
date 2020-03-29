@@ -21,21 +21,21 @@ class PeripheralContext {
     /// Number of connection retries.
     var connectionRetries = 0
     /// Last RSSI value
-    var lastRSSI: Int? = nil
+    var lastRSSI: Int?
     /// Current state
     var state: PeripheralState = .Idle
-    
+
     init(peripheral: CBPeripheral) {
         self.peripheral = peripheral
     }
-    
+
     /// Defines if peripheral is ready to connect.
     public func readyToConnect() -> Bool {
         // Make sure that we are in idle state
         guard self.state.isIdle() else {
             return false
         }
-        
+
         // If there were connection attempts to this device, wait for a
         // time when we can connect.
         if let lastConnectionDate = self.lastConnectionDate, self.connectionRetries != 0 {
@@ -52,16 +52,16 @@ class PeripheralContext {
         guard let lastSyncDate = self.lastSynchronizationDate else {
             return true
         }
-        
+
         // Check if we are ready for the next connection attempt.
         return lastSyncDate.addingTimeInterval(PeripheralIgnoredTimeoutInSec) < Date()
     }
-    
+
     /// Function specifies if this peripheral has higher priority in the next connection attempt.
     /// - Parameter other: Other peripheral state
     func hasHigherPriorityForConnection(other: PeripheralContext) -> Bool {
         // We check in following order (from most important to less important):
-        
+
         // Current connection state
         let idle = self.state.isIdle()
         let otherIdle = other.state.isIdle()
@@ -69,13 +69,13 @@ class PeripheralContext {
             // Idle peripheral has higher priority
             return idle
         }
-        
+
         // Connection retries
         guard connectionRetries == other.connectionRetries else {
             // If we have lower number of connection retries, we have higher priority.
             return connectionRetries < other.connectionRetries
         }
-        
+
         // Last synchronization time
         let syncTime = self.lastSynchronizationDate?.timeIntervalSince1970 ?? 0
         let otherSyncTime = other.lastSynchronizationDate?.timeIntervalSince1970 ?? 0
@@ -83,11 +83,11 @@ class PeripheralContext {
             // If our sync time is older, we have got priority.
             return syncTime < otherSyncTime
         }
-        
+
         // RSSI
         let RSSI = self.lastRSSI ?? Int.min
         let otherRSSI = other.lastRSSI ?? Int.min
-        
+
         // Higher value means better signal.
         return RSSI >= otherRSSI
     }

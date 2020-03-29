@@ -17,7 +17,6 @@ let AnnaServiceUUID = CBUUID(string: AnnaServiceUUIDString)
 let AnnaCharacteristicUUIDString = "89a60001-4f57-4c1b-9042-7ed87d723b4e"
 let AnnaCharacteristicUUID = CBUUID(string: AnnaCharacteristicUUIDString)
 
-
 /// Time after which we check if connections health
 let PeripheralSynchronizationCheckInSec: TimeInterval = 5
 

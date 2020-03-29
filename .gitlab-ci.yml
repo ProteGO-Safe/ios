@@ -2,10 +2,13 @@ stages:
     - test
     - deploy
 
+default:
+    before_script:
+        - /bin/bash $CACHE_DIR/bundlerScript.bash
+
 tests:
     stage: test
-    before_script:
-    - /bin/bash $CACHE_DIR/bundlerScript.bash
+    retry: 2
     script:
         - bundle exec fastlane tests
     tags:
@@ -13,8 +16,7 @@ tests:
 
 deploy_development:
     stage: deploy
-    before_script:
-    - /bin/bash $CACHE_DIR/bundlerScript.bash
+    retry: 2
     script:
         - bundle exec fastlane deployDev
     tags:
@@ -24,11 +26,20 @@ deploy_development:
 
 deploy_staging:
     stage: deploy
-    before_script:
-    - /bin/bash $CACHE_DIR/bundlerScript.bash
+    retry: 2
     script:
         - bundle exec fastlane deployStg
     tags:
         - xcode-11.3
     only:
         - tags
+
+deploy_production:
+    stage: deploy
+    retry: 2
+    script:
+        - bundle exec fastlane deployProd
+    tags:
+        - xcode-11.3
+    only:
+        - tags        
