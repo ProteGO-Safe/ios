@@ -11,8 +11,18 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     /// List of known peripherals with their state
     private var peripherals: [CBPeripheral: PeripheralContext]
 
+    /// Scanning restart timer. After a timeout we restart scanning.
+    private var scanningRestartTimer: Timer?
+    /// Scanning stop timer. After a timeout we stop scanning.
+    private var scanningStopTimer: Timer?
+
+    /// Background task handle
+    private let backgroundTask: BluetoothBackgroundTask
+    private let scanningTaskID = "bluetooth.scanning"
+
     /// Initialize Central Manager with restored state identifier to be able to work in the background.
-    init(delegate: ScannerDelegate) {
+    init(delegate: ScannerDelegate, backgroundTask: BluetoothBackgroundTask) {
+        self.backgroundTask = backgroundTask
         self.peripherals = [:]
         super.init()
         self.delegate = delegate
@@ -144,6 +154,9 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     private func peripheralSynchronized(peripheralContext: PeripheralContext, data: Data) {
         logger.debug("Peripheral synchronized: \(peripheralContext.peripheral.identifier) with data: \(data)")
 
+        // Stop task
+        backgroundTask.stop(taskName: peripheralContext.peripheral.identifier.uuidString)
+
         // Cancel connection.
         if centralManager.state == .poweredOn {
             centralManager.cancelPeripheralConnection(peripheralContext.peripheral)
@@ -163,6 +176,9 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     /// - Parameter peripheralContext: peripheral which failed to synchronize
     private func peripheralFailedToSynchronize(peripheralContext: PeripheralContext) {
         logger.debug("Peripheral failed to synchronize: \(peripheralContext.peripheral.identifier)")
+
+        // Stop task
+        backgroundTask.stop(taskName: peripheralContext.peripheral.identifier.uuidString)
 
         // Cancel connection.
         let isConnected = peripheralContext.peripheral.state == .connected ||
@@ -254,9 +270,57 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         for i in 0..<freeSlots where i < sortedPeripherals.count {
             let peripheral = sortedPeripherals[i]
             if peripheral.readyToConnect() {
+                // Start background task.
+                backgroundTask.start(taskName: peripheral.peripheral.identifier.uuidString)
+
+                // Start synchronization.
                 peripheral.lastConnectionDate = Date()
                 proceedWithPeripheralSynchronization(peripheralContext: peripheral)
             }
+        }
+    }
+
+    private func startScanningIfNeeded() {
+        logger.debug("Start scanning")
+
+        // Start scanning background task
+        backgroundTask.start(taskName: scanningTaskID)
+
+        // Restart scanning stop timer.
+        self.scanningStopTimer?.invalidate()
+        let newScanningStopTimer = Timer.init(
+            timeInterval: Constants.Bluetooth.ScanningStopTimeout,
+            repeats: false) { [weak self] _ in
+                self?.stopScanningIfNeeded()
+        }
+        RunLoop.main.add(newScanningStopTimer, forMode: .common)
+        self.scanningStopTimer = newScanningStopTimer
+
+        // Restart scanning restart timer.
+        self.scanningRestartTimer?.invalidate()
+        let newScanningRestartTimer = Timer.init(
+            timeInterval: Constants.Bluetooth.ScanningRestartTimeout,
+            repeats: false) { [weak self] _ in
+                self?.startScanningIfNeeded()
+        }
+        RunLoop.main.add(newScanningRestartTimer, forMode: .common)
+        self.scanningRestartTimer = newScanningRestartTimer
+
+        // Start scanning if needed.
+        if !self.centralManager.isScanning {
+            self.centralManager.scanForPeripherals(withServices: [Constants.Bluetooth.AnnaServiceUUID], options: nil)
+        }
+    }
+
+    private func stopScanningIfNeeded() {
+        logger.debug("Stop scanning")
+
+        // Stop scanning background task
+        backgroundTask.stop(taskName: scanningTaskID)
+
+        // Stop scanning if needed.
+        if self.centralManager.isScanning {
+            self.centralManager.stopScan()
         }
     }
 
@@ -280,11 +344,9 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
 
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == .poweredOn {
-            logger.debug("PoweredOn isScanning: \(central.isScanning)")
+            logger.debug("PoweredOn")
             // We can now use central manager functionality.
-            if !central.isScanning {
-                central.scanForPeripherals(withServices: [Constants.Bluetooth.AnnaServiceUUID], options: nil)
-            }
+            self.startScanningIfNeeded()
         } else {
             logger.debug("PoweredOff: \(central.state.rawValue)")
             // We can assume that peripherals are no longer connecting or connected.

@@ -9,6 +9,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate,
     var window: UIWindow?
     var advertiser: Advertiser!
     var scanner: Scanner!
+    var bluetoothBackgroundTask: BluetoothBackgroundTask!
     var byte: UInt8 = 0
 
     func application(_ application: UIApplication,
@@ -22,8 +23,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate,
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
 
-        self.advertiser = BleAdvertiser(delegate: self)
-        self.scanner = BleScanner(delegate: self)
+        self.bluetoothBackgroundTask = BluetoothBackgroundTask()
+        self.bluetoothBackgroundTask.shedule()
+        self.advertiser = BleAdvertiser(delegate: self, backgroundTask: self.bluetoothBackgroundTask)
+        self.scanner = BleScanner(delegate: self, backgroundTask: self.bluetoothBackgroundTask)
         self.window = window
         return true
     }
