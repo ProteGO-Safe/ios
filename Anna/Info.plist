@@ -41,7 +41,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Information about Bluetooth usage</string>
+	<string>Wykorzystane w celu lokalizowania innych użytkowników aplikacji</string>
 	<key>TWEAKS_ENABLED</key>
 	<string>$(TWEAKS_ENABLED)</string>
 	<key>UIBackgroundModes</key>
