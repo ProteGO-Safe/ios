@@ -25,15 +25,37 @@
 		0E6D2610242E956F0037A80C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D260F242E956F0037A80C /* Logger.swift */; };
 		0E965328242EB25C00ADD300 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E965327242EB25C00ADD300 /* GoogleService-Info.plist */; };
 		0E96532B242F436B00ADD300 /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96532A242F436B00ADD300 /* LogLevel.swift */; };
+		0E965352242F81D400ADD300 /* DebugMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96533F242F81D400ADD300 /* DebugMenu.swift */; };
+		0E965355242F82B900ADD300 /* GeneralDebugItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E965354242F82B900ADD300 /* GeneralDebugItems.swift */; };
+		0EE60BD0242F8A3C00D29048 /* InfoKeys+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE60BCD242F8A3C00D29048 /* InfoKeys+Value.swift */; };
+		0EE60BD3242F8A5F00D29048 /* SwiftTweaks+Anna.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE60BD2242F8A5F00D29048 /* SwiftTweaks+Anna.swift */; };
 		83252A12242F63B1001E6D63 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A11242F63B1001E6D63 /* NetworkClient.swift */; };
 		83252A14242F6C22001E6D63 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A13242F6C22001E6D63 /* NetworkRequest.swift */; };
 		83252A16242F6EEA001E6D63 /* UrlRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A15242F6EEA001E6D63 /* UrlRequestBuilder.swift */; };
 		83252A18242F9C11001E6D63 /* UrlRequestBuilderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A17242F9C11001E6D63 /* UrlRequestBuilderType.swift */; };
 		83252A22242FC728001E6D63 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83252A21242FC728001E6D63 /* Reachability.framework */; };
-		0E965352242F81D400ADD300 /* DebugMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96533F242F81D400ADD300 /* DebugMenu.swift */; };
-		0E965355242F82B900ADD300 /* GeneralDebugItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E965354242F82B900ADD300 /* GeneralDebugItems.swift */; };
-		0EE60BD0242F8A3C00D29048 /* InfoKeys+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE60BCD242F8A3C00D29048 /* InfoKeys+Value.swift */; };
-		0EE60BD3242F8A5F00D29048 /* SwiftTweaks+Anna.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE60BD2242F8A5F00D29048 /* SwiftTweaks+Anna.swift */; };
+		87074B78242F57770029AD4B /* AdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B77242F57770029AD4B /* AdvertiserDelegate.swift */; };
+		87074B79242F57770029AD4B /* AdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B77242F57770029AD4B /* AdvertiserDelegate.swift */; };
+		87074B7C242F6A5F0029AD4B /* BleScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7B242F6A5F0029AD4B /* BleScanner.swift */; };
+		87074B7D242F6A5F0029AD4B /* BleScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7B242F6A5F0029AD4B /* BleScanner.swift */; };
+		87074B7F242F6D700029AD4B /* PeripheralContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7E242F6D700029AD4B /* PeripheralContext.swift */; };
+		87074B80242F6D700029AD4B /* PeripheralContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7E242F6D700029AD4B /* PeripheralContext.swift */; };
+		87074B82242F77CB0029AD4B /* ScannerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B81242F77CB0029AD4B /* ScannerDelegate.swift */; };
+		87074B83242F77CB0029AD4B /* ScannerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B81242F77CB0029AD4B /* ScannerDelegate.swift */; };
+		87074B85242F94780029AD4B /* PeripheralState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B84242F94780029AD4B /* PeripheralState.swift */; };
+		87074B86242F94780029AD4B /* PeripheralState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B84242F94780029AD4B /* PeripheralState.swift */; };
+		871208D62430C6A600DA0A4D /* Constants+Bluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871208D52430C6A600DA0A4D /* Constants+Bluetooth.swift */; };
+		871208D72430C6A600DA0A4D /* Constants+Bluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871208D52430C6A600DA0A4D /* Constants+Bluetooth.swift */; };
+		87177C912430A5B7007C8F78 /* MockAdvcertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C902430A5B7007C8F78 /* MockAdvcertiser.swift */; };
+		87177C922430A5B7007C8F78 /* MockAdvcertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C902430A5B7007C8F78 /* MockAdvcertiser.swift */; };
+		87177C942430A6FB007C8F78 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C932430A6FB007C8F78 /* Scanner.swift */; };
+		87177C952430A6FB007C8F78 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C932430A6FB007C8F78 /* Scanner.swift */; };
+		87177C972430A7F6007C8F78 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C962430A7F6007C8F78 /* Advertiser.swift */; };
+		87177C982430A7F6007C8F78 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C962430A7F6007C8F78 /* Advertiser.swift */; };
+		87C985FC242E0A8500335502 /* BleAdvertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C985FB242E0A8500335502 /* BleAdvertiser.swift */; };
+		87C985FD242E0A8500335502 /* BleAdvertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C985FB242E0A8500335502 /* BleAdvertiser.swift */; };
+		87F259E92430A3E2009BF612 /* MockScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F259E82430A3E2009BF612 /* MockScanner.swift */; };
+		87F259EA2430A3E2009BF612 /* MockScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F259E82430A3E2009BF612 /* MockScanner.swift */; };
 		A63BFB76240CADB609E72685 /* Pods_Anna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3458DDABC1020B1EB7984F /* Pods_Anna.framework */; };
 		E6FC73238FEB0689D7FCA95C /* Pods_AnnaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 110266AD057C4616D8381F24 /* Pods_AnnaTests.framework */; };
 /* End PBXBuildFile section */
@@ -90,6 +112,17 @@
 		83252A15242F6EEA001E6D63 /* UrlRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlRequestBuilder.swift; sourceTree = "<group>"; };
 		83252A17242F9C11001E6D63 /* UrlRequestBuilderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlRequestBuilderType.swift; sourceTree = "<group>"; };
 		83252A21242FC728001E6D63 /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
+		87074B77242F57770029AD4B /* AdvertiserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertiserDelegate.swift; sourceTree = "<group>"; };
+		87074B7B242F6A5F0029AD4B /* BleScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleScanner.swift; sourceTree = "<group>"; };
+		87074B7E242F6D700029AD4B /* PeripheralContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralContext.swift; sourceTree = "<group>"; };
+		87074B81242F77CB0029AD4B /* ScannerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerDelegate.swift; sourceTree = "<group>"; };
+		87074B84242F94780029AD4B /* PeripheralState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralState.swift; sourceTree = "<group>"; };
+		871208D52430C6A600DA0A4D /* Constants+Bluetooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Bluetooth.swift"; sourceTree = "<group>"; };
+		87177C902430A5B7007C8F78 /* MockAdvcertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAdvcertiser.swift; sourceTree = "<group>"; };
+		87177C932430A6FB007C8F78 /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
+		87177C962430A7F6007C8F78 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
+		87C985FB242E0A8500335502 /* BleAdvertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleAdvertiser.swift; sourceTree = "<group>"; };
+		87F259E82430A3E2009BF612 /* MockScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockScanner.swift; sourceTree = "<group>"; };
 		95EEA776F9CF0007EA77CC71 /* Pods-Anna.debug_stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.debug_stg.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.debug_stg.xcconfig"; sourceTree = "<group>"; };
 		9700318292BE5F27EB17208D /* Pods-Anna.release_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.release_prod.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.release_prod.xcconfig"; sourceTree = "<group>"; };
 		BEC33F61CC8746F654E7BDEC /* Pods-Anna.debug_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Anna.debug_prod.xcconfig"; path = "Target Support Files/Pods-Anna/Pods-Anna.debug_prod.xcconfig"; sourceTree = "<group>"; };
@@ -192,6 +225,7 @@
 		0E6D2603242E8B540037A80C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				87C985FA242E0A6400335502 /* Bluetooth */,
 				83252A0A242F6043001E6D63 /* Networking */,
 				0E96532D242F819D00ADD300 /* DebugMenu */,
 				0E6D260C242E8E940037A80C /* Extensions */,
@@ -236,25 +270,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		83252A0A242F6043001E6D63 /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-				83252A1D242FB957001E6D63 /* NetworkClient */,
-			);
-			path = Networking;
-			sourceTree = "<group>";
-		};
-		83252A1D242FB957001E6D63 /* NetworkClient */ = {
-			isa = PBXGroup;
-			children = (
-				83252A11242F63B1001E6D63 /* NetworkClient.swift */,
-				83252A13242F6C22001E6D63 /* NetworkRequest.swift */,
-				83252A15242F6EEA001E6D63 /* UrlRequestBuilder.swift */,
-				83252A17242F9C11001E6D63 /* UrlRequestBuilderType.swift */,
-			);
-			path = NetworkClient;
-			sourceTree = "<group>";
-		};
 		0E96532D242F819D00ADD300 /* DebugMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +301,59 @@
 				0EE60BD2242F8A5F00D29048 /* SwiftTweaks+Anna.swift */,
 			);
 			path = SwiftTweaks;
+			sourceTree = "<group>";
+		};
+		83252A0A242F6043001E6D63 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				83252A1D242FB957001E6D63 /* NetworkClient */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		83252A1D242FB957001E6D63 /* NetworkClient */ = {
+			isa = PBXGroup;
+			children = (
+				83252A11242F63B1001E6D63 /* NetworkClient.swift */,
+				83252A13242F6C22001E6D63 /* NetworkRequest.swift */,
+				83252A15242F6EEA001E6D63 /* UrlRequestBuilder.swift */,
+				83252A17242F9C11001E6D63 /* UrlRequestBuilderType.swift */,
+			);
+			path = NetworkClient;
+			sourceTree = "<group>";
+		};
+		87074B7A242F6A4E0029AD4B /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				87177C932430A6FB007C8F78 /* Scanner.swift */,
+				87074B81242F77CB0029AD4B /* ScannerDelegate.swift */,
+				87074B7B242F6A5F0029AD4B /* BleScanner.swift */,
+				87F259E82430A3E2009BF612 /* MockScanner.swift */,
+				87074B7E242F6D700029AD4B /* PeripheralContext.swift */,
+				87074B84242F94780029AD4B /* PeripheralState.swift */,
+			);
+			path = Scanner;
+			sourceTree = "<group>";
+		};
+		87C985FA242E0A6400335502 /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				87074B7A242F6A4E0029AD4B /* Scanner */,
+				87C98604242E2B1A00335502 /* Advertiser */,
+				871208D52430C6A600DA0A4D /* Constants+Bluetooth.swift */,
+			);
+			path = Bluetooth;
+			sourceTree = "<group>";
+		};
+		87C98604242E2B1A00335502 /* Advertiser */ = {
+			isa = PBXGroup;
+			children = (
+				87177C962430A7F6007C8F78 /* Advertiser.swift */,
+				87074B77242F57770029AD4B /* AdvertiserDelegate.swift */,
+				87C985FB242E0A8500335502 /* BleAdvertiser.swift */,
+				87177C902430A5B7007C8F78 /* MockAdvcertiser.swift */,
+			);
+			path = Advertiser;
 			sourceTree = "<group>";
 		};
 		B553474AE7B40F4DF5FB85D0 /* Pods */ = {
@@ -554,8 +622,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87074B82242F77CB0029AD4B /* ScannerDelegate.swift in Sources */,
+				87177C972430A7F6007C8F78 /* Advertiser.swift in Sources */,
+				0E5C2070242B63440038EF8B /* AppDelegate.swift in Sources */,
+				87074B7F242F6D700029AD4B /* PeripheralContext.swift in Sources */,
+				87074B78242F57770029AD4B /* AdvertiserDelegate.swift in Sources */,
+				87177C912430A5B7007C8F78 /* MockAdvcertiser.swift in Sources */,
+				87074B85242F94780029AD4B /* PeripheralState.swift in Sources */,
+				87C985FC242E0A8500335502 /* BleAdvertiser.swift in Sources */,
+				87074B7C242F6A5F0029AD4B /* BleScanner.swift in Sources */,
+				87177C942430A6FB007C8F78 /* Scanner.swift in Sources */,
+				87F259E92430A3E2009BF612 /* MockScanner.swift in Sources */,
 				83252A16242F6EEA001E6D63 /* UrlRequestBuilder.swift in Sources */,
 				0E6D2610242E956F0037A80C /* Logger.swift in Sources */,
+				871208D62430C6A600DA0A4D /* Constants+Bluetooth.swift in Sources */,
 				0E96532B242F436B00ADD300 /* LogLevel.swift in Sources */,
 				0E6D260B242E8B540037A80C /* Constants+InfoKeys.swift in Sources */,
 				0E5C2070242B63440038EF8B /* AppDelegate.swift in Sources */,
@@ -574,7 +654,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87074B83242F77CB0029AD4B /* ScannerDelegate.swift in Sources */,
+				871208D72430C6A600DA0A4D /* Constants+Bluetooth.swift in Sources */,
+				87177C982430A7F6007C8F78 /* Advertiser.swift in Sources */,
 				0E5C2087242B63460038EF8B /* AnnaTests.swift in Sources */,
+				87074B80242F6D700029AD4B /* PeripheralContext.swift in Sources */,
+				87074B79242F57770029AD4B /* AdvertiserDelegate.swift in Sources */,
+				87177C922430A5B7007C8F78 /* MockAdvcertiser.swift in Sources */,
+				87074B86242F94780029AD4B /* PeripheralState.swift in Sources */,
+				87C985FD242E0A8500335502 /* BleAdvertiser.swift in Sources */,
+				87074B7D242F6A5F0029AD4B /* BleScanner.swift in Sources */,
+				87177C952430A6FB007C8F78 /* Scanner.swift in Sources */,
+				87F259EA2430A3E2009BF612 /* MockScanner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

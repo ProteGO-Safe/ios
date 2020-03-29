@@ -5,9 +5,11 @@ import Firebase
 #endif
 
 @UIApplicationMain
-final class AppDelegate: UIResponder, UIApplicationDelegate {
-
+final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate, ScannerDelegate {
     var window: UIWindow?
+    var advertiser: Advertiser!
+    var scanner: Scanner!
+    var byte: UInt8 = 0
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -20,9 +22,19 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
 
+        self.advertiser = BleAdvertiser(delegate: self)
+        self.scanner = BleScanner(delegate: self)
         self.window = window
-
         return true
+    }
+
+    func tokenDataExpired(previousTokenData: (Data, Date)?) {
+        logger.debug("Token data expired \(String(describing: previousTokenData))")
+        self.advertiser.updateTokenData(data: Data([0xFF, byte]), expirationDate: Date(timeIntervalSinceNow: 30))
+    }
+
+    func synchronizedTokenData(data: Data, rssi: Int?) {
+        logger.debug("Synchronized token data \(data), rssi: \(String(describing: rssi))")
     }
 
     private func generateWindow() -> UIWindow {
@@ -43,7 +55,5 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             FirebaseApp.configure()
         }
         #endif
-
     }
-
 }
