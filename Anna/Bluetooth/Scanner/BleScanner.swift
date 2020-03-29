@@ -1,11 +1,3 @@
-//
-//  BleScanner.swift
-//  Anna
-//
-//  Created by Przemysław Lenart on 28/03/2020.
-//  Copyright © 2020 GOV. All rights reserved.
-//
-
 import Foundation
 import CoreBluetooth
 
@@ -41,7 +33,8 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     /// Depending on the peripheral state, invoke actions to finalize synchronization.
     /// - Parameter peripheralContext: peripheral's context
     private func proceedWithPeripheralSynchronization(peripheralContext: PeripheralContext) {
-        NSLog("Proceeding with synchronization: \(peripheralContext.peripheral.identifier): \(peripheralContext.state)")
+        logger.debug("Proceeding with synchronization: " +
+                     " \(peripheralContext.peripheral.identifier): \(peripheralContext.state)")
 
         // Make sure we are in PoweredOn state
         guard centralManager.state == .poweredOn else {
@@ -136,7 +129,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
             return
         }
 
-        NSLog("Unexpected state: \(peripheralContext.state)")
+        logger.debug("Unexpected state: \(peripheralContext.state)")
         peripheralFailedToSynchronize(peripheralContext: peripheralContext)
     }
     // swiftlint:enable function_body_length
@@ -146,7 +139,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     ///   - peripheralContext: Synchronized peripheral.
     ///   - data: Synchronization token data.
     private func peripheralSynchronized(peripheralContext: PeripheralContext, data: Data) {
-        NSLog("Peripheral synchronized: \(peripheralContext.peripheral.identifier) with data: \(data)")
+        logger.debug("Peripheral synchronized: \(peripheralContext.peripheral.identifier) with data: \(data)")
 
         // Cancel connection.
         if centralManager.state == .poweredOn {
@@ -166,7 +159,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     /// Peripheral failed to synchronize due to an error or timeout.
     /// - Parameter peripheralContext: peripheral which failed to synchronize
     private func peripheralFailedToSynchronize(peripheralContext: PeripheralContext) {
-        NSLog("Peripheral failed to synchronize: \(peripheralContext.peripheral.identifier)")
+        logger.debug("Peripheral failed to synchronize: \(peripheralContext.peripheral.identifier)")
 
         // Cancel connection.
         let isConnected = peripheralContext.peripheral.state == .connected ||
@@ -192,7 +185,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     ///   - peripheralContext: Detected peripheral
     ///   - rssi: Peripheral's RSSI during discovery.
     private func peripheralFound(peripheralContext: PeripheralContext, rssi: Int?) {
-        NSLog("Peripheral found: \(peripheralContext.peripheral.identifier) rssi: \(String(describing: rssi))")
+        logger.debug("Peripheral found: \(peripheralContext.peripheral.identifier) rssi: \(String(describing: rssi))")
         // Update peripheral's state
         peripheralContext.lastRSSI = rssi
 
@@ -202,7 +195,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
 
     /// This method is called when we can't synchronize anymore.
     private func cancelSynchronization(onlyOnTimeout: Bool) {
-        NSLog("Cancelling synchronization, onlyOnTimeout: \(onlyOnTimeout)")
+        logger.debug("Cancelling synchronization, onlyOnTimeout: \(onlyOnTimeout)")
         for peripheral in self.peripherals {
             var cancel = !peripheral.value.state.isIdle()
             if let lastConnectionDate = peripheral.value.lastConnectionDate, cancel && onlyOnTimeout {
@@ -217,7 +210,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
 
     /// This method is called every time interval to check the state of a connection.
     private func checkSynchronizationStatus() {
-        NSLog("Check synchronization status")
+        logger.debug("Check synchronization status")
 
         // Fail synchronization, which took to long.
         cancelSynchronization(onlyOnTimeout: true)
@@ -243,7 +236,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         var freeSlots = PeripheralMaxConcurrentConnections
         sortedPeripherals.forEach { peripheral in
             // Get debug info
-            NSLog("[id: \(peripheral.peripheral.identifier), " +
+            logger.debug("[id: \(peripheral.peripheral.identifier), " +
                   "state: \(peripheral.state), " +
                   "retries: \(peripheral.connectionRetries)]")
 
@@ -267,7 +260,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
 
     /// When state is restored make sure to continue processing.
     func centralManager(_ central: CBCentralManager, willRestoreState dict: [String: Any]) {
-        NSLog("CentralManager restored state")
+        logger.debug("CentralManager restored state")
         let connectedPeripherals: [CBPeripheral]? =
             dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral]
         guard let peripherals = connectedPeripherals else {
@@ -283,13 +276,13 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
 
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == .poweredOn {
-            NSLog("PoweredOn isScanning: \(central.isScanning)")
+            logger.debug("PoweredOn isScanning: \(central.isScanning)")
             // We can now use central manager functionality.
             if !central.isScanning {
                 central.scanForPeripherals(withServices: [AnnaServiceUUID], options: nil)
             }
         } else {
-            NSLog("PoweredOff: \(central.state.rawValue)")
+            logger.debug("PoweredOff: \(central.state.rawValue)")
             // We can assume that peripherals are no longer connecting or connected.
             cancelSynchronization(onlyOnTimeout: false)
         }
@@ -298,7 +291,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     // Connection management ----------------------------------------------------------
 
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        NSLog("CentralManager did connect: \(peripheral.identifier)")
+        logger.debug("CentralManager did connect: \(peripheral.identifier)")
         if let peripheralContext = self.peripherals[peripheral] {
             peripheralContext.state = .Connected
             proceedWithPeripheralSynchronization(peripheralContext: peripheralContext)
@@ -306,14 +299,14 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     }
 
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        NSLog("CentralManager did fail to connect: \(peripheral.identifier) error: \(String(describing: error))")
+        logger.debug("CentralManager did fail to connect: \(peripheral.identifier) error: \(String(describing: error))")
         if let peripheralContext = self.peripherals[peripheral] {
             peripheralFailedToSynchronize(peripheralContext: peripheralContext)
         }
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        NSLog("CentralManager did disconnect peripheral \(peripheral.identifier) error: \(String(describing: error))")
+        logger.debug("CentralManager did disconnect peripheral \(peripheral.identifier) error: \(String(describing: error))")
         if let peripheralContext = self.peripherals[peripheral] {
             if error != nil {
                 peripheralFailedToSynchronize(peripheralContext: peripheralContext)
@@ -327,7 +320,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
                         didDiscover peripheral: CBPeripheral,
                         advertisementData: [String: Any],
                         rssi RSSI: NSNumber) {
-        NSLog("CentralManager did discover \(peripheral.identifier) rssi: \(RSSI)")
+        logger.debug("CentralManager did discover \(peripheral.identifier) rssi: \(RSSI)")
         if let peripheralContext = self.peripherals[peripheral] {
             peripheralFound(peripheralContext: peripheralContext, rssi: RSSI.intValue)
         } else {
@@ -339,7 +332,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     }
 
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        NSLog("Peripheral did discover services: \(peripheral.identifier), error: \(String(describing: error))")
+        logger.debug("Peripheral did discover services: \(peripheral.identifier), error: \(String(describing: error))")
         if let peripheralContext = self.peripherals[peripheral] {
             if error == nil {
                 proceedWithPeripheralSynchronization(peripheralContext: peripheralContext)
@@ -350,7 +343,8 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     }
 
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        NSLog("Peripheral did discover characteristics: \(peripheral.identifier), error: \(String(describing: error))")
+        logger.debug("Peripheral did discover characteristics: " +
+                     "\(peripheral.identifier), error: \(String(describing: error))")
 
         if let peripheralContext = self.peripherals[peripheral], service.uuid == AnnaServiceUUID {
             if error == nil {
@@ -362,7 +356,8 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     }
 
     func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
-        NSLog("Peripheral did read RSSI: \(peripheral.identifier), rssi: \(RSSI), error: \(String(describing: error))")
+        logger.debug("Peripheral did read RSSI: " +
+                     "\(peripheral.identifier), rssi: \(RSSI), error: \(String(describing: error))")
         if let peripheralContext = self.peripherals[peripheral], error == nil {
             peripheralContext.lastRSSI = RSSI.intValue
         }
@@ -371,7 +366,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     // Reading value --------------------------------------------------------------------------------
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        NSLog("Peripheral did read value: \(peripheral.identifier), error: \(String(describing: error))")
+        logger.debug("Peripheral did read value: \(peripheral.identifier), error: \(String(describing: error))")
         if let peripheralContext = self.peripherals[peripheral], characteristic.uuid == AnnaCharacteristicUUID {
             if let data = characteristic.value, error == nil {
                 peripheralSynchronized(peripheralContext: peripheralContext, data: data)

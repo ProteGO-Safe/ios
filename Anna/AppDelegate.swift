@@ -29,15 +29,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate,
     }
 
     func tokenDataExpired(previousTokenData: (Data, Date)?) {
-        NSLog("Token data expired \(String(describing: previousTokenData))")
-        byte += 1
-        if byte % 2 == 0 {
-            self.advertiser.updateTokenData(data: Data([0xFF, byte]), expirationDate: Date(timeIntervalSinceNow: 30))
-        }
+        logger.debug("Token data expired \(String(describing: previousTokenData))")
+        self.advertiser.updateTokenData(data: Data([0xFF, byte]), expirationDate: Date(timeIntervalSinceNow: 30))
     }
 
     func synchronizedTokenData(data: Data, rssi: Int?) {
-        NSLog("Synchronized token data \(data), rssi: \(String(describing: rssi))")
+        logger.debug("Synchronized token data \(data), rssi: \(String(describing: rssi))")
     }
 
     private func generateWindow() -> UIWindow {

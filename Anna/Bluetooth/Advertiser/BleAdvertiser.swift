@@ -1,11 +1,3 @@
-//
-//  BleAdvertiser.swift
-//  Anna
-//
-//  Created by Przemysław Lenart on 27/03/2020.
-//  Copyright © 2020 GOV. All rights reserved.
-//
-
 import Foundation
 import CoreBluetooth
 
@@ -85,7 +77,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
 
     /// Update token data.
     public func updateTokenData(data: Data, expirationDate: Date) {
-        NSLog("Token data updated with expiration date: \(expirationDate)")
+        logger.debug("Token data updated with expiration date: \(expirationDate)")
         self.currentTokenData = (data, expirationDate)
     }
 
@@ -95,14 +87,14 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     /// Make sure to not call any CoreBluetooth methods yet, as we need to
     /// wait for 'PoweredOn' state to do that.
     func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String: Any]) {
-        NSLog("Peripheral manager will restore state")
+        logger.debug("Peripheral manager will restore state")
         // We don't need to add services as they should be already there.
         let services: [CBMutableService]? = dict[CBPeripheralManagerRestoredStateServicesKey] as? [CBMutableService]
         self.service = services?.first { $0.uuid == AnnaServiceUUID }
     }
 
     func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
-        NSLog("Peripheral manager did add service, error: \(String(describing: error))")
+        logger.debug("Peripheral manager did add service, error: \(String(describing: error))")
         if error == nil {
             // After service is ready to use, start advertising.
             self.service = service
@@ -114,7 +106,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     }
 
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
-        NSLog("Peripheral manager did update state \(peripheral.state.rawValue)")
+        logger.debug("Peripheral manager did update state \(peripheral.state.rawValue)")
         if peripheral.state == .poweredOn {
             // We can only use API when Bluetooth is powered On.
             if self.service == nil {
@@ -135,7 +127,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     // Advertising ---------------------------------------------------------------------------------------------
 
     func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
-        NSLog("Peripheral manager did start advertising, error: \(String(describing: error))")
+        logger.debug("Peripheral manager did start advertising, error: \(String(describing: error))")
         // If we fail to start advertisement, try again later.
         if error != nil {
             scheduleRestartIfNeeded()
@@ -145,7 +137,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     // Characteristics -----------------------------------------------------------------------------------------
 
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
-        NSLog("Peripheral manager did receive read, offset: \(request.offset)")
+        logger.debug("Peripheral manager did receive read, offset: \(request.offset)")
 
         // Marker if token data was expired during this transaction.
         var tokenExpired = false
@@ -172,7 +164,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
 
         // Check if offset is not out of band.
         guard request.offset < tokenData.0.count else {
-            NSLog("Invalid offset: \(request.offset)")
+            logger.debug("Invalid offset: \(request.offset)")
             peripheral.respond(to: request, withResult: CBATTError.invalidOffset)
             return
         }
@@ -183,7 +175,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     }
 
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
-        NSLog("Peripheral manager did receive write")
+        logger.debug("Peripheral manager did receive write")
         // Reject all writes.
         for request in requests {
             peripheralManager.respond(to: request, withResult: CBATTError.writeNotPermitted)
