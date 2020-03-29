@@ -1,5 +1,5 @@
 //
-//  CentralManager.swift
+//  BleScanner.swift
 //  Anna
 //
 //  Created by Przemysław Lenart on 28/03/2020.
@@ -9,18 +9,18 @@
 import Foundation
 import CoreBluetooth
 
-class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
+class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scanner {
     /// CBCentral manager
     private var centralManager: CBCentralManager!
     
     /// Delegate to tell about events.
-    private weak var delegate: CentralManagerDelegate?
+    private weak var delegate: ScannerDelegate?
     
     /// List of known peripherals with their state
     private var peripherals: [CBPeripheral: PeripheralContext]
     
     /// Initialize Central Manager with restored state identifier to be able to work in the background.
-    init(delegate: CentralManagerDelegate) {
+    init(delegate: ScannerDelegate) {
         self.peripherals = [:]
         super.init()
         self.delegate = delegate

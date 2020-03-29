@@ -1,5 +1,5 @@
 //
-//  PeripheralManager.swift
+//  BleAdvertiser.swift
 //  Anna
 //
 //  Created by Przemysław Lenart on 27/03/2020.
@@ -9,18 +9,18 @@
 import Foundation
 import CoreBluetooth
 
-class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
+class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     /// Main peripheral manager.
     private var peripheralManager: CBPeripheralManager!
     /// Handle to the currently mounted service
     private var service: CBService?
     /// Delegate
-    weak var delegate: PeripheralManagerDelegate?
+    weak var delegate: AdvertiserDelegate?
     /// Current token data
     var currentTokenData: (Data, Date)?
     
     /// Restoration identifier is required to properly resume when application is restored by the OS.
-    init(delegate: PeripheralManagerDelegate) {
+    init(delegate: AdvertiserDelegate) {
         super.init()
         self.delegate = delegate
         self.peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: [

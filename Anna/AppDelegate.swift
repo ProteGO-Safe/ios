@@ -1,10 +1,10 @@
 import UIKit
 
 @UIApplicationMain
-final class AppDelegate: UIResponder, UIApplicationDelegate, PeripheralManagerDelegate, CentralManagerDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate, ScannerDelegate {
     var window: UIWindow?
-    var peripheralManager: PeripheralManager!
-    var centralManager: CentralManager!
+    var advertiser: Advertiser!
+    var scanner: Scanner!
     var byte: UInt8 = 0
 
     func application(_ application: UIApplication,
@@ -16,8 +16,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, PeripheralManagerDe
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
 
-        self.peripheralManager = PeripheralManager(delegate: self)
-        self.centralManager = CentralManager(delegate: self)
+        self.advertiser = BleAdvertiser(delegate: self)
+        self.scanner = BleScanner(delegate: self)
         self.window = window
         return true
     }
@@ -26,7 +26,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, PeripheralManagerDe
         NSLog("Token data expired \(String(describing: previousTokenData))")
         byte += 1
         if byte % 2 == 0 {
-            peripheralManager.updateTokenData(data: Data([0xFF, byte]), expirationDate: Date(timeIntervalSinceNow: 30))
+            self.advertiser.updateTokenData(data: Data([0xFF, byte]), expirationDate: Date(timeIntervalSinceNow: 30))
         }
     }
     

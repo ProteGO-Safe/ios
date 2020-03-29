@@ -1,5 +1,5 @@
 //
-//  PeripheralManagerDelegate.swift
+//  AdvertiserDelegate.swift
 //  Anna
 //
 //  Created by Przemysław Lenart on 28/03/2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PeripheralManagerDelegate: AnyObject {
+protocol AdvertiserDelegate: AnyObject {
     /// This function is a hint that data we want to send to other device is expired and need replacement.
     /// User may call `updateTokenData` on peripheral manager to update token data.
     /// If token data is not updated during this call, incoming request will be rejected.

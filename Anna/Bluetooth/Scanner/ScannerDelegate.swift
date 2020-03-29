@@ -1,5 +1,5 @@
 //
-//  CentralManagerDelegate.swift
+//  ScannerDelegate.swift
 //  Anna
 //
 //  Created by Przemysław Lenart on 28/03/2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CentralManagerDelegate: AnyObject {
+protocol ScannerDelegate: AnyObject {
     /// Callback invoked when token data was successfully retrieved from the surrounding peripheral.
     ///
     /// Note: Make sure this function call is **not blocking**.
