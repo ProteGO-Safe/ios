@@ -48,7 +48,7 @@ class EncountersManagerSpecs: QuickSpec {
 
                         if encountersList.count == 1 {
                             expect(encountersList[0].deviceId).to(equal(mockEncounters[0].deviceId))
-                            expect(encountersList[0].signalStrength).to(equal(mockEncounters[0].signalStrength))
+                            expect(encountersList[0].signalStrength.value).to(equal(mockEncounters[0].signalStrength.value))
                             expect(encountersList[0].date).to(equal(mockEncounters[0].date))
                         }
                     }
@@ -69,9 +69,9 @@ class EncountersManagerSpecs: QuickSpec {
                             expect(encountersList[0].deviceId).to(equal(mockEncounters[0].deviceId))
                             expect(encountersList[1].deviceId).to(equal(mockEncounters[1].deviceId))
                             expect(encountersList[2].deviceId).to(equal(mockEncounters[2].deviceId))
-                            expect(encountersList[0].signalStrength).to(equal(mockEncounters[0].signalStrength))
-                            expect(encountersList[1].signalStrength).to(equal(mockEncounters[1].signalStrength))
-                            expect(encountersList[2].signalStrength).to(equal(mockEncounters[2].signalStrength))
+                            expect(encountersList[0].signalStrength.value).to(equal(mockEncounters[0].signalStrength.value))
+                            expect(encountersList[1].signalStrength.value).to(equal(mockEncounters[1].signalStrength.value))
+                            expect(encountersList[2].signalStrength.value).to(equal(mockEncounters[2].signalStrength.value))
                             expect(encountersList[0].date).to(equal(mockEncounters[0].date))
                             expect(encountersList[1].date).to(equal(mockEncounters[1].date))
                             expect(encountersList[2].date).to(equal(mockEncounters[2].date))
@@ -95,8 +95,8 @@ class EncountersManagerSpecs: QuickSpec {
                         if encountersList.count == 2 {
                             expect(encountersList[0].deviceId).to(equal(mockEncounters[1].deviceId))
                             expect(encountersList[1].deviceId).to(equal(mockEncounters[2].deviceId))
-                            expect(encountersList[0].signalStrength).to(equal(mockEncounters[1].signalStrength))
-                            expect(encountersList[1].signalStrength).to(equal(mockEncounters[2].signalStrength))
+                            expect(encountersList[0].signalStrength.value).to(equal(mockEncounters[1].signalStrength.value))
+                            expect(encountersList[1].signalStrength.value).to(equal(mockEncounters[2].signalStrength.value))
                             expect(encountersList[0].date).to(equal(mockEncounters[1].date))
                             expect(encountersList[1].date).to(equal(mockEncounters[2].date))
                         }

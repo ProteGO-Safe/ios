@@ -6,6 +6,7 @@ struct DebugItemDescription {
     enum Collection: String {
         case general = "Ogólne"
         case encounters = "Spotkania"
+        case bluetooth = "Bluetooth"
     }
 
     enum Group: String {
@@ -32,6 +33,7 @@ class DebugMenu: TweakLibraryType {
 
         allTweaks.append(contentsOf: DebugMenu.generalItems)
         allTweaks.append(contentsOf: DebugMenu.encounterItems)
+        allTweaks.append(contentsOf: DebugMenu.bluetoothItems)
 
         return TweakStore(
             tweaks: allTweaks,

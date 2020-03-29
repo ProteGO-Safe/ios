@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-protocol EncountersManagerType: class {
+protocol EncountersManagerType: ScannerDelegate {
     var allEncounters: Results<Encounter> { get }
 
     func addNewEncounter(encounter: Encounter) throws

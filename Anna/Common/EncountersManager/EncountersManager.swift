@@ -2,7 +2,6 @@ import Foundation
 import RealmSwift
 
 final class EncountersManager: EncountersManagerType {
-
     var allEncounters: Results<Encounter> {
         return self.realmManager.realm.objects(Encounter.self).sorted(byKeyPath: "date", ascending: true)
     }
@@ -28,5 +27,18 @@ final class EncountersManager: EncountersManagerType {
 
     init(realmManager: RealmManagerType) {
         self.realmManager = realmManager
+    }
+}
+
+extension EncountersManager: ScannerDelegate {
+    func synchronizedTokenData(data: Data, rssi: Int?) {
+        logger.debug("Synchronized token data \(data), rssi: \(String(describing: rssi))")
+        let deviceId = String(decoding: data, as: UTF8.self)
+        let newEncounter = Encounter.createEncounter(deviceId: deviceId, signalStrength: rssi, date: Date())
+        do {
+            try self.addNewEncounter(encounter: newEncounter)
+        } catch {
+            logger.error("Error with saving new encounter \(error)")
+        }
     }
 }

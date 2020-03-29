@@ -6,14 +6,14 @@ class Encounter: Object {
 
     @objc dynamic var deviceId: String = ""
 
-    @objc dynamic var signalStrength: Int = 0
+    dynamic var signalStrength = RealmOptional<Int>()
 
     @objc dynamic var date = Date()
 
-    static func createEncounter(deviceId: String, signalStrength: Int, date: Date) -> Encounter {
+    static func createEncounter(deviceId: String, signalStrength: Int?, date: Date) -> Encounter {
         let encounter = Encounter()
         encounter.deviceId = deviceId
-        encounter.signalStrength = signalStrength
+        encounter.signalStrength.value = signalStrength
         encounter.date = date
 
         return encounter

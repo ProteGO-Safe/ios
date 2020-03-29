@@ -64,7 +64,8 @@ extension DebugMenu {
 
             let encountersManager: EncountersManagerType = resolver.resolve(EncountersManagerType.self)
             let interval = DebugMenu.assign(DebugMenu.oldEncountersRemovalInterval)
-            try? encountersManager.deleteAllEncountersOlderThan(date: Date(timeIntervalSinceNow: TimeInterval(interval)))
+            let date = Date(timeIntervalSinceNow: TimeInterval(-interval))
+            try? encountersManager.deleteAllEncountersOlderThan(date: date)
         }
         return tweak
     }()

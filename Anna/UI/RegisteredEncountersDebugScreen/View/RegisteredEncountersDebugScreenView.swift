@@ -34,8 +34,14 @@ final class RegisteredEncountersDebugScreenView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public func addEncounterData(deviceId: String, signalStrength: Int, date: Date) {
-        let newEncounterDescription = "Device: \(deviceId), RSSI: \(signalStrength), Date: \(date) \n"
+    public func addEncounterData(deviceId: String, signalStrength: Int?, date: Date) {
+        var signalStrengthText = "n/a"
+
+        if let signalStrength = signalStrength {
+            signalStrengthText = "\(signalStrength)"
+        }
+
+        let newEncounterDescription = "Device: \(deviceId), RSSI: \(signalStrengthText), Date: \(date) \n"
         self.registeredEncountersTextView.text.append(newEncounterDescription)
     }
 

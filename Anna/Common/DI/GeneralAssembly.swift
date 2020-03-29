@@ -39,6 +39,6 @@ final class GeneralAssembly: Assembly {
             let realmManager: RealmManagerType  = resolver.resolve(RealmManagerType.self)
 
             return EncountersManager(realmManager: realmManager)
-        }
+        }.inObjectScope(.container)
     }
 }
