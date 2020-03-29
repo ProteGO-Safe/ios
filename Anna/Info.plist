@@ -6,6 +6,14 @@
 	<array>
 		<string>pl.gov.anna.BluetoothBackgroundTask</string>
 	</array>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Wykorzystane w celu lokalizowania innych użytkowników aplikacji</string>
+	<key>TWEAKS_ENABLED</key>
+	<string>$(TWEAKS_ENABLED)</string>
+	<key>CRASHLYTICS_ENABLED</key>
+	<string>$(CRASHLYTICS_ENABLED)</string>
+	<key>CONSOLE_LOGGING_ENABLED</key>
+	<string>$(CONSOLE_LOGGING_ENABLED)</string>
 	<key>BUGFENDER_ENABLED</key>
 	<string>$(BUGFENDER_ENABLED)</string>
 	<key>BUGFENDER_KEY</key>

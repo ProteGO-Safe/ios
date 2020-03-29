@@ -1,7 +1,7 @@
 import Foundation
 import CoreBluetooth
 
-public extension Constants {
+extension Constants {
     class Bluetooth {
         /// Bluetooth background task ID.
         static let BackgroundTaskID = "pl.gov.anna.BluetoothBackgroundTask"
