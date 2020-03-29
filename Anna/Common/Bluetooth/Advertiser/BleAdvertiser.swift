@@ -31,7 +31,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
 
     }
 
-    /// Initialize GATT server database. By default all Anna devices have one specific semonirvice and
+    /// Initialize GATT server database. By default all Anna devices have one specific service and
     /// characteristic. Characteristic is readonly and returns device information. When no device information
     /// is present characteristic returns zero length byte slice.
     private func createLocalDatabase() -> CBMutableService {
