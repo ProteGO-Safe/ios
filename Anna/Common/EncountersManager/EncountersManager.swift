@@ -33,7 +33,7 @@ final class EncountersManager: EncountersManagerType {
 extension EncountersManager: ScannerDelegate {
     func synchronizedTokenData(data: Data, rssi: Int?) {
         logger.debug("Synchronized token data \(data), rssi: \(String(describing: rssi))")
-        let deviceId = String(decoding: data, as: UTF8.self)
+        let deviceId = data.map { String(format: "%02hhX", $0) }.joined()
         let newEncounter = Encounter.createEncounter(deviceId: deviceId, signalStrength: rssi, date: Date())
         do {
             try self.addNewEncounter(encounter: newEncounter)

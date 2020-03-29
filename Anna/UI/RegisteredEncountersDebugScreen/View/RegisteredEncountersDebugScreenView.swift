@@ -20,6 +20,8 @@ final class RegisteredEncountersDebugScreenView: UIView {
     private let registeredEncountersTextView: UITextView = {
         let textView = UITextView(frame: .zero)
         textView.font = UIFont.systemFont(ofSize: 12)
+        textView.backgroundColor = .white
+        textView.textColor = .black
         return textView
     }()
 
