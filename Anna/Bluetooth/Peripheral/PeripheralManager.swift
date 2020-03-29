@@ -39,7 +39,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
         
     }
     
-    /// Initialize GATT server database. By default all Anna devices have one specific service and
+    /// Initialize GATT server database. By default all Anna devices have one specific semonirvice and
     /// characteristic. Characteristic is readonly and returns device information. When no device information
     /// is present characteristic returns zero length byte slice.
     private func createLocalDatabase() -> CBMutableService {
@@ -94,14 +94,14 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
     /// This is the first callback called when we are restoring previous state. Make sure to not call any CoreBluetooth methods yet, as we need to
     /// wait for 'PoweredOn' state to do that.
     func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String : Any]) {
-        NSLog("peripheralManager willRestoreState \(dict)")
+        NSLog("Peripheral manager will restore state")
         // We don't need to add services as they should be already there.
         let services: Array<CBMutableService>? = dict[CBPeripheralManagerRestoredStateServicesKey] as? Array<CBMutableService>
         self.service = services?.first { $0.uuid == AnnaServiceUUID }
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
-        NSLog("peripheralManager didAddService \(service) \(String(describing: error))")
+        NSLog("Peripheral manager did add service, error: \(String(describing: error))")
         if error == nil {
             // After service is ready to use, start advertising.
             self.service = service
@@ -113,7 +113,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
     }
     
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
-        NSLog("peripheralManagerDidUpdateState \(String(describing: peripheral.state))")
+        NSLog("Peripheral manager did update state \(peripheral.state.rawValue)")
         if peripheral.state == .poweredOn {
             // We can only use API when Bluetooth is powered On.
             if self.service == nil {
@@ -134,7 +134,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
     // Advertising ---------------------------------------------------------------------------------------------
     
     func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
-        NSLog("peripheralManagerDidStartAdvertising: \(String(describing: error))")
+        NSLog("Peripheral manager did start advertising, error: \(String(describing: error))")
         // If we fail to start advertisement, try again later.
         if (error != nil) {
             scheduleRestartIfNeeded()
@@ -144,7 +144,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
     // Characteristics -----------------------------------------------------------------------------------------
     
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
-        NSLog("peripheralManager didReceiveRead: \(request)")
+        NSLog("Peripheral manager did receive read, offset: \(request.offset)")
         
         // Marker if token data was expired during this transaction.
         var tokenExpired = false
@@ -182,7 +182,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
-        NSLog("peripheralManager didReceiveWrite \(requests)")
+        NSLog("Peripheral manager did receive write")
         // Reject all writes.
         for request in requests {
             peripheralManager.respond(to: request, withResult: CBATTError.writeNotPermitted)

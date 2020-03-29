@@ -16,14 +16,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, PeripheralManagerDe
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
 
-        //self.peripheralManager = PeripheralManager(delegate: self)
+        self.peripheralManager = PeripheralManager(delegate: self)
         self.centralManager = CentralManager(delegate: self)
         self.window = window
         return true
     }
     
     func tokenDataExpired(previousTokenData: (Data, Date)?) {
-        NSLog("tokenDataExpired \(String(describing: previousTokenData))")
+        NSLog("Token data expired \(String(describing: previousTokenData))")
         byte += 1
         if byte % 2 == 0 {
             peripheralManager.updateTokenData(data: Data([0xFF, byte]), expirationDate: Date(timeIntervalSinceNow: 30))
@@ -31,7 +31,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, PeripheralManagerDe
     }
     
     func synchronizedTokenData(data: Data, rssi: Int?) {
-        NSLog("synchronized token data \(data), rssi: \(String(describing: rssi))")
+        NSLog("Synchronized token data \(data), rssi: \(String(describing: rssi))")
     }
 }
 
