@@ -1,5 +1,4 @@
 import Swinject
-import Valet
 
 final class BluetoothAssembly: Assembly {
 
