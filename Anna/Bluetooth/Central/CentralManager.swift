@@ -236,15 +236,13 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             a.hasHigherPriorityForConnection(other: b)
         }
         
-        // Debug peripheral candidates
-        let queueDebugInfo = sortedPeripherals.map { peripheralContext in
-            return "[id: \(peripheralContext.peripheral.identifier), state: \(peripheralContext.state)]"
-        }.joined()
-        NSLog(queueDebugInfo)
-        
         // Check number of pending connections
         var freeSlots = PeripheralMaxConcurrentConnections
         sortedPeripherals.forEach { peripheral in
+            // Get debug info
+            NSLog("[id: \(peripheral.peripheral.identifier), state: \(peripheral.state), retries: \(peripheral.connectionRetries)]")
+            
+            // Remove from slot if peripheral is not idle.
             if !peripheral.state.isIdle() && freeSlots > 0 {
                 freeSlots -= 1
             }

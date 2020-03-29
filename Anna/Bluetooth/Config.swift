@@ -23,17 +23,17 @@ let PeripheralSynchronizationCheckInSec: TimeInterval = 5
 
 /// Synchronization timeout for a peripheral in seconds. Defines how long we should wait for established connection,
 /// discovery and reading value before we decide to cancel our attempt.
-let PeripheralSynchronizationTimeoutInSec: TimeInterval = 30
+let PeripheralSynchronizationTimeoutInSec: TimeInterval = 15
 
 /// Peripheral ignored timeout in seconds. Defines how long we want to restrict connection attempts to this
 /// device when synchronization was already completed.
 let PeripheralIgnoredTimeoutInSec: TimeInterval = 60
 
 /// Define how long we should wait before we attempt to reconnect to the device, which failed to synchronize.
-let PeripheralReconnectionTimeoutPerAttemptInSec: TimeInterval = 10
+let PeripheralReconnectionTimeoutPerAttemptInSec: TimeInterval = 5
 
 /// Maxium number of concurrent connections established by a peripheral manager.
-let PeripheralMaxConcurrentConnections = 1
+let PeripheralMaxConcurrentConnections = 3
 
 /// Maximum number of connection retries before we decide to remove device until discovered once again.
 let PeripheralMaxConnectionRetries = 3
