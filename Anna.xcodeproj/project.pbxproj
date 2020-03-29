@@ -165,7 +165,6 @@
 		0EE60C4A242FF2C200D29048 /* GeneralAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralAssembly.swift; sourceTree = "<group>"; };
 		0EE60C4E242FF40500D29048 /* FilesCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesCoordinator.swift; sourceTree = "<group>"; };
 		0EE60C4F242FF40500D29048 /* FilesCoordinatorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesCoordinatorType.swift; sourceTree = "<group>"; };
-		0EE60C57242FF6DC00D29048 /* Mimus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mimus.framework; path = Carthage/Build/iOS/Mimus.framework; sourceTree = "<group>"; };
 		0EE60C59242FFB3D00D29048 /* Valet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Valet.framework; path = Carthage/Build/iOS/Valet.framework; sourceTree = "<group>"; };
 		0EE60C5C2430014D00D29048 /* SecretsGeneratorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretsGeneratorType.swift; sourceTree = "<group>"; };
 		0EE60C5E2430015E00D29048 /* SecretsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretsGenerator.swift; sourceTree = "<group>"; };
@@ -239,7 +238,6 @@
 			children = (
 				83252A21242FC728001E6D63 /* Reachability.framework */,
 				0EE60C59242FFB3D00D29048 /* Valet.framework */,
-				0EE60C57242FF6DC00D29048 /* Mimus.framework */,
 				0EE60C34242FDB6A00D29048 /* Nimble.framework */,
 				0EE60C35242FDB6A00D29048 /* Quick.framework */,
 				0E3DD5B9242B764100C092E7 /* FirebaseCrashlytics.framework */,
