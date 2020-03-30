@@ -13,8 +13,7 @@ final class BluetoothAssembly: Assembly {
             if DebugMenu.assign(DebugMenu.useMockBluetoothAdvertiser) {
                 return MockAdvertiser(delegate: delegate)
             } else {
-                // swiftlint:disable:next force_unwrapping
-                let backgroundTask = resolver.resolve(BluetoothBackgroundTask.self)!
+                let backgroundTask: BluetoothBackgroundTask = resolver.resolve(BluetoothBackgroundTask.self)
                 return BleAdvertiser(delegate: delegate, backgroundTask: backgroundTask)
             }
         }.inObjectScope(.container)
@@ -25,8 +24,7 @@ final class BluetoothAssembly: Assembly {
             if DebugMenu.assign(DebugMenu.useMockBluetoothScanner) {
                 return MockScanner(delegate: delegate)
             } else {
-                // swiftlint:disable:next force_unwrapping
-                let backgroundTask = resolver.resolve(BluetoothBackgroundTask.self)!
+                let backgroundTask: BluetoothBackgroundTask = resolver.resolve(BluetoothBackgroundTask.self)
                 return BleScanner(delegate: delegate, backgroundTask: backgroundTask)
             }
         }.inObjectScope(.container)

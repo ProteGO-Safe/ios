@@ -5,6 +5,12 @@ extension Constants {
     class Bluetooth {
         /// Bluetooth background task ID.
         static let BackgroundTaskID = "pl.gov.anna.BluetoothBackgroundTask"
+        /// Bluetooth background task earliest start time
+        static let BackgroundTaskEarliestBeginDate: TimeInterval = 15 * 60
+        /// Bluetooth advertising task ID
+        static let AdvertisingBackgroundTaskID = "bluetooth.advertiser"
+        /// Bluetooth scanning task ID
+        static let ScanningBackgroundTaskID = "bluetooth.scanning"
 
         /// Anna Service contained in GATT
         static let AnnaServiceUUIDString = "89a60000-4f57-4c1b-9042-7ed87d723b4e"

@@ -32,8 +32,8 @@ class BluetoothBackgroundTask {
         }
     }
 
-    func shedule() {
-        logger.debug("Sheduling background task")
+    func schedule() {
+        logger.debug("Scheduling background task")
         // On iOS 13 schedule long running processing task.
         if #available(iOS 13.0, *) {
             BGTaskScheduler.shared.getPendingTaskRequests { requests in
@@ -47,11 +47,13 @@ class BluetoothBackgroundTask {
                 let taskRequest = BGProcessingTaskRequest.init(identifier: Constants.Bluetooth.BackgroundTaskID)
                 taskRequest.requiresExternalPower = false
                 taskRequest.requiresNetworkConnectivity = false
-                taskRequest.earliestBeginDate = Date(timeIntervalSinceNow: 15 * 60)
+                taskRequest.earliestBeginDate =
+                    Date(timeIntervalSinceNow: Constants.Bluetooth.BackgroundTaskEarliestBeginDate)
+
                 do {
                     try BGTaskScheduler.shared.submit(taskRequest)
                 } catch {
-                    logger.debug("Failed to shedule processing task \(error)")
+                    logger.debug("Failed to schedule processing task \(error)")
                 }
             }
         }
@@ -67,8 +69,8 @@ class BluetoothBackgroundTask {
                 if let processingTask = task as? BGProcessingTask {
                     self?.processingTaskStarted(task: processingTask)
                     processingTask.expirationHandler = { [weak self] in
-                        if let strongSelf = self {
-                            strongSelf.processingTaskExpired(task: processingTask)
+                        if let self = self {
+                            self.processingTaskExpired(task: processingTask)
                         } else {
                             processingTask.setTaskCompleted(success: false)
                         }
@@ -84,7 +86,7 @@ class BluetoothBackgroundTask {
     private func processingTaskStarted(task: BGProcessingTask) {
         logger.debug("Processing task started")
         // When task started, do nothing but make sure we have registered new background task
-        self.shedule()
+        self.schedule()
     }
 
     @available(iOS 13.0, *)

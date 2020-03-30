@@ -18,7 +18,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
 
     /// Background task handle
     private let backgroundTask: BluetoothBackgroundTask
-    private let scanningTaskID = "bluetooth.scanning"
+    private let scanningTaskID = Constants.Bluetooth.ScanningBackgroundTaskID
 
     /// Initialize Central Manager with restored state identifier to be able to work in the background.
     init(delegate: ScannerDelegate, backgroundTask: BluetoothBackgroundTask) {
