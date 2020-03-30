@@ -1,6 +1,6 @@
 if FastlaneCore::Helper.ci?
-    git_url "https://gitlab-ci-token:#{ENV['CI_BUILD_TOKEN']}@gitlab.polidea.com/Anna/fastlane-certificates.git"
+    git_url "https://gitlab-ci-token:#{ENV['CI_BUILD_TOKEN']}@gitlab.polidea.com/ProteGO/fastlane-certificates.git"
 else
-    git_url 'git@gitlab.polidea.com:Anna/fastlane-certificates.git'
+    git_url 'git@gitlab.polidea.com:ProteGO/fastlane-certificates.git'
 end
 

@@ -23,14 +23,14 @@ def crashlytics
   pod 'GoogleAppMeasurement', '6.4.0', :configurations => ['Debug_dev', 'Release_dev']
 end
 
-target 'Anna' do
+target 'ProteGO' do
   crashlytics
   pod 'BugfenderSDK', '1.8', :configurations => ['Debug_dev', 'Release_dev']
   pod 'SwiftLint', '0.39.1'
   pod 'SwiftGen', '6.1.0'
 end
 
-target 'AnnaTests' do
+target 'ProteGOTests' do
   # Tests are failing then it's not linked, maybe some issue with canImport() 
   # not working in targets referenced by @testable
   crashlytics

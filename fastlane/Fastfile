@@ -18,7 +18,7 @@ platform :ios do
       scheme: scheme,
       include_symbols: true,
       include_bitcode: true,
-      output_name: "Anna",
+      output_name: "ProteGO",
       buildlog_path: "./build/build_log",
       xcargs: "DEBUG_INFORMATION_FORMAT=dwarf-with-dsym CI_JOB_ID=#{ENV["CI_JOB_ID"]} CI_COMMIT_TAG=#{ENV["CI_COMMIT_TAG"]}"
     )
@@ -26,7 +26,7 @@ platform :ios do
     release_notes
     fota_s3
     shuttle
-    fota_mail(to: 'anna-releases@polidea.com')
+    fota_mail(to: 'protego-releases@polidea.com')
   end
   
   def deploy_testflight(scheme, app_identifier, team_identifier)
@@ -37,14 +37,14 @@ platform :ios do
       scheme: scheme,
       include_symbols: true,
       include_bitcode: true,
-      output_name: "Anna",
+      output_name: "ProteGO",
       export_method: 'app-store',
       xcargs: "DEBUG_INFORMATION_FORMAT=dwarf-with-dsym CI_JOB_ID=#{ENV["CI_BUILD_ID"]} CI_COMMIT_TAG=#{ENV["CI_BUILD_TAG"]}"
     )
     extract_app_info
     release_notes
     fota_s3
-    fota_mail(to: 'anna-releases@polidea.com')
+    fota_mail(to: 'protego-releases@polidea.com')
     deliver(
       skip_screenshots: true,
       skip_metadata: true,
@@ -55,25 +55,25 @@ platform :ios do
 
   desc 'Deploy Development to Shuttle'
   lane :deployDev do
-    deploy_shuttle('Anna_dev', 'pl.gov.anna.dev', "MT2B94Q7N6")
+    deploy_shuttle('ProteGO_dev', 'pl.gov.anna.dev', "MT2B94Q7N6")
   end
 
   desc 'Deploy Staging to Shuttle'
   lane :deployStg do
-    deploy_testflight('Anna_stg', 'pl.gov.anna.stg', "MT2B94Q7N6")
+    deploy_testflight('ProteGO_stg', 'pl.gov.anna.stg', "MT2B94Q7N6")
   end
 
   desc 'Deploy Staging to Shuttle'
   lane :deployProd do
-    deploy_testflight('Anna_prod', 'pl.gov.anna.prod', "MT2B94Q7N6")
+    deploy_testflight('ProteGO_prod', 'pl.gov.anna.prod', "MT2B94Q7N6")
   end
 
   desc 'Runs all the tests'
   lane :tests do
     ENV["FASTLANE_XCODEBUILD_SETTINGS_RETRIES"] = "10" 
     scan(
-      workspace: "Anna.xcworkspace",
-      scheme: 'Anna_dev',
+      workspace: "ProteGO.xcworkspace",
+      scheme: 'ProteGO_dev',
       devices: [ "iPhone 11" ],
       derived_data_path: "./fastlane/DerivedData",
       build_for_testing: true,

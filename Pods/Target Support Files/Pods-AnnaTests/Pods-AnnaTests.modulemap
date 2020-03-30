@@ -1,6 +1,0 @@
-framework module Pods_AnnaTests {
-  umbrella header "Pods-AnnaTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

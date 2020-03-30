@@ -1,8 +1,8 @@
-Aplikacja Anna iOS
+Aplikacja ProteGO iOS
 
 # Zależności
 
-Aplikacja Anna wykorzystuje Carthage oraz Cocoapods do zarządzania zależnościami w projekcie. Lista zależnosci standardowo w plikach `Cartfile` i `Podfile`
+Aplikacja ProteGO wykorzystuje Carthage oraz Cocoapods do zarządzania zależnościami w projekcie. Lista zależnosci standardowo w plikach `Cartfile` i `Podfile`
 
 ## Carthage
 
@@ -10,7 +10,7 @@ W folderze `scripts` znajduje się skrypt `updateCarthage.sh` ułatwiający zakt
 
 # Rodzaje środowisk
 
-Aplikacja Anna posiada 3 środowiska:
+Aplikacja ProteGO posiada 3 środowiska:
 
 - development
 - staging

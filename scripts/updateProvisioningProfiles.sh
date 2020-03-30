@@ -20,7 +20,7 @@ prod_team_id="MT2B94Q7N6"
 dev_app_id="pl.gov.anna.dev"
 stg_app_id="pl.gov.anna.stg"
 prod_app_id="pl.gov.anna.prod"
-certs_repo_url="ssh://git@gitlab.polidea.com/Anna/fastlane-certificates.git"
+certs_repo_url="ssh://git@gitlab.polidea.com/ProteGO/fastlane-certificates.git"
 
 case $lastArg in
     "read" )
