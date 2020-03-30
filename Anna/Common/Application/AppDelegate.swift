@@ -24,7 +24,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate 
         self.setupCrashlytics()
         self.setupBluetoothModule()
 
-        let rootViewController = UIViewController()
+        let rootViewController = resolver.resolve(RootViewController.self)
         let window = self.generateWindow()
 
         window.rootViewController = rootViewController
@@ -72,7 +72,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate 
             GeneralAssembly(),
             DebugAssembly(),
             BluetoothAssembly(),
-            NetworkingAssembly()
+            NetworkingAssembly(),
+            RootAssembly(),
+            OnboardingAssembly(),
+            RegistrationAssembly(),
+            DashboardAssembly()
         ])
     }
 }

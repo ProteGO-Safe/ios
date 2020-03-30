@@ -83,6 +83,22 @@
 		83252A7624314EFF001E6D63 /* DefaultRequestParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A7524314EFF001E6D63 /* DefaultRequestParameters.swift */; };
 		83252A782431519F001E6D63 /* NetworkingAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A772431519F001E6D63 /* NetworkingAssembly.swift */; };
 		83252A7C24320586001E6D63 /* Constants+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A7B24320586001E6D63 /* Constants+Networking.swift */; };
+		83252A8A24322156001E6D63 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A8924322156001E6D63 /* RootView.swift */; };
+		83252A8C24322160001E6D63 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A8B24322160001E6D63 /* RootViewController.swift */; };
+		83252A8E24322167001E6D63 /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A8D24322167001E6D63 /* RootViewModel.swift */; };
+		83252A9024322174001E6D63 /* RootModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A8F24322174001E6D63 /* RootModel.swift */; };
+		83252A9224322190001E6D63 /* RootModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A9124322190001E6D63 /* RootModelType.swift */; };
+		83252A942432219A001E6D63 /* RootViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A932432219A001E6D63 /* RootViewModelType.swift */; };
+		83252A9C24322549001E6D63 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A9B24322549001E6D63 /* OnboardingView.swift */; };
+		8368015C2432279900678DBD /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8368015B2432279900678DBD /* RegistrationViewController.swift */; };
+		8368015E243227A100678DBD /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8368015D243227A100678DBD /* RegistrationView.swift */; };
+		83680160243227B400678DBD /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8368015F243227B400678DBD /* OnboardingViewController.swift */; };
+		83680162243227CF00678DBD /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83680161243227CF00678DBD /* DashboardViewController.swift */; };
+		83680164243227D700678DBD /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83680163243227D700678DBD /* DashboardView.swift */; };
+		8368016C24323FE400678DBD /* RootAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8368016B24323FE400678DBD /* RootAssembly.swift */; };
+		8368016E24323FF400678DBD /* OnboardingAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8368016D24323FF400678DBD /* OnboardingAssembly.swift */; };
+		836801702432400500678DBD /* RegistrationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8368016F2432400500678DBD /* RegistrationAssembly.swift */; };
+		836801722432401300678DBD /* DashboardAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836801712432401300678DBD /* DashboardAssembly.swift */; };
 		87074B78242F57770029AD4B /* AdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B77242F57770029AD4B /* AdvertiserDelegate.swift */; };
 		87074B79242F57770029AD4B /* AdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B77242F57770029AD4B /* AdvertiserDelegate.swift */; };
 		87074B7C242F6A5F0029AD4B /* BleScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7B242F6A5F0029AD4B /* BleScanner.swift */; };
@@ -202,6 +218,22 @@
 		83252A7524314EFF001E6D63 /* DefaultRequestParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequestParameters.swift; sourceTree = "<group>"; };
 		83252A772431519F001E6D63 /* NetworkingAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingAssembly.swift; sourceTree = "<group>"; };
 		83252A7B24320586001E6D63 /* Constants+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Networking.swift"; sourceTree = "<group>"; };
+		83252A8924322156001E6D63 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		83252A8B24322160001E6D63 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		83252A8D24322167001E6D63 /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
+		83252A8F24322174001E6D63 /* RootModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootModel.swift; sourceTree = "<group>"; };
+		83252A9124322190001E6D63 /* RootModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootModelType.swift; sourceTree = "<group>"; };
+		83252A932432219A001E6D63 /* RootViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModelType.swift; sourceTree = "<group>"; };
+		83252A9B24322549001E6D63 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		8368015B2432279900678DBD /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		8368015D243227A100678DBD /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		8368015F243227B400678DBD /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		83680161243227CF00678DBD /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		83680163243227D700678DBD /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		8368016B24323FE400678DBD /* RootAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
+		8368016D24323FF400678DBD /* OnboardingAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAssembly.swift; sourceTree = "<group>"; };
+		8368016F2432400500678DBD /* RegistrationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationAssembly.swift; sourceTree = "<group>"; };
+		836801712432401300678DBD /* DashboardAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardAssembly.swift; sourceTree = "<group>"; };
 		87074B77242F57770029AD4B /* AdvertiserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertiserDelegate.swift; sourceTree = "<group>"; };
 		87074B7B242F6A5F0029AD4B /* BleScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleScanner.swift; sourceTree = "<group>"; };
 		87074B7E242F6D700029AD4B /* PeripheralContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralContext.swift; sourceTree = "<group>"; };
@@ -452,6 +484,10 @@
 		0E9DCC9E2430C80700C2670D /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				83252A822432202E001E6D63 /* Root */,
+				83252A952432248A001E6D63 /* Onboarding */,
+				83252A96243224AF001E6D63 /* Registration */,
+				83252A97243224B4001E6D63 /* Dashboard */,
 				0E9DCC9F2430C8B400C2670D /* CustomView */,
 				0E9DCC9B2430C7BC00C2670D /* RegisteredEncountersDebugScreen */,
 			);
@@ -574,6 +610,10 @@
 				0E9DDA6D2430D2D9002D879F /* DebugAssembly.swift */,
 				0ECE7A1E2430E3EE00EED942 /* BluetoothAssembly.swift */,
 				83252A772431519F001E6D63 /* NetworkingAssembly.swift */,
+				8368016B24323FE400678DBD /* RootAssembly.swift */,
+				8368016D24323FF400678DBD /* OnboardingAssembly.swift */,
+				8368016F2432400500678DBD /* RegistrationAssembly.swift */,
+				836801712432401300678DBD /* DashboardAssembly.swift */,
 			);
 			path = DI;
 			sourceTree = "<group>";
@@ -661,6 +701,126 @@
 				83252A7524314EFF001E6D63 /* DefaultRequestParameters.swift */,
 			);
 			path = DefaultRequestParameters;
+			sourceTree = "<group>";
+		};
+		83252A822432202E001E6D63 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				83252A8824322062001E6D63 /* View */,
+				83252A872432205B001E6D63 /* ViewController */,
+				83252A8624322056001E6D63 /* ViewModel */,
+				83252A8524322051001E6D63 /* Model */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		83252A8524322051001E6D63 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				83252A8F24322174001E6D63 /* RootModel.swift */,
+				83252A9124322190001E6D63 /* RootModelType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		83252A8624322056001E6D63 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				83252A8D24322167001E6D63 /* RootViewModel.swift */,
+				83252A932432219A001E6D63 /* RootViewModelType.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		83252A872432205B001E6D63 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				83252A8B24322160001E6D63 /* RootViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		83252A8824322062001E6D63 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				83252A8924322156001E6D63 /* RootView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		83252A952432248A001E6D63 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				83252A9A2432252B001E6D63 /* View */,
+				83252A9924322527001E6D63 /* ViewController */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		83252A96243224AF001E6D63 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				83252A9E24322563001E6D63 /* View */,
+				83252A9D2432255E001E6D63 /* ViewController */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		83252A97243224B4001E6D63 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				83252AA024322570001E6D63 /* View */,
+				83252A9F2432256C001E6D63 /* ViewController */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		83252A9924322527001E6D63 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8368015F243227B400678DBD /* OnboardingViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		83252A9A2432252B001E6D63 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				83252A9B24322549001E6D63 /* OnboardingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		83252A9D2432255E001E6D63 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8368015B2432279900678DBD /* RegistrationViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		83252A9E24322563001E6D63 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8368015D243227A100678DBD /* RegistrationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		83252A9F2432256C001E6D63 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				83680161243227CF00678DBD /* DashboardViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		83252AA024322570001E6D63 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				83680163243227D700678DBD /* DashboardView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		87074B7A242F6A4E0029AD4B /* Scanner */ = {
@@ -995,6 +1155,7 @@
 				87074B78242F57770029AD4B /* AdvertiserDelegate.swift in Sources */,
 				87074B85242F94780029AD4B /* PeripheralState.swift in Sources */,
 				83252A7C24320586001E6D63 /* Constants+Networking.swift in Sources */,
+				8368016E24323FF400678DBD /* OnboardingAssembly.swift in Sources */,
 				87C985FC242E0A8500335502 /* BleAdvertiser.swift in Sources */,
 				87074B7C242F6A5F0029AD4B /* BleScanner.swift in Sources */,
 				87177C942430A6FB007C8F78 /* Scanner.swift in Sources */,
@@ -1002,6 +1163,7 @@
 				83252A16242F6EEA001E6D63 /* UrlRequestBuilder.swift in Sources */,
 				0E9DDA772430E12C002D879F /* AppDelegate.swift in Sources */,
 				83252A6524314BD7001E6D63 /* GcpEndpoint.swift in Sources */,
+				83252A9024322174001E6D63 /* RootModel.swift in Sources */,
 				0EE60C30242FDB2D00D29048 /* RealmManagerType.swift in Sources */,
 				83252A6A24314C74001E6D63 /* RegisterDeviceRequest.swift in Sources */,
 				0E9DCCA52430C9CE00C2670D /* RegisteredEncountersDebugViewModel.swift in Sources */,
@@ -1009,15 +1171,21 @@
 				0E9DDA6E2430D2D9002D879F /* DebugAssembly.swift in Sources */,
 				83252A6C24314C99001E6D63 /* RegisterDeviceResult.swift in Sources */,
 				0E9DDA702430D464002D879F /* EncountersDebugItems.swift in Sources */,
+				83252A942432219A001E6D63 /* RootViewModelType.swift in Sources */,
 				0E6D2610242E956F0037A80C /* Logger.swift in Sources */,
+				836801702432400500678DBD /* RegistrationAssembly.swift in Sources */,
 				871208D62430C6A600DA0A4D /* Constants+Bluetooth.swift in Sources */,
 				0E9DCC942430984A00C2670D /* EncountersManager.swift in Sources */,
 				0E96532B242F436B00ADD300 /* LogLevel.swift in Sources */,
+				83252A8A24322156001E6D63 /* RootView.swift in Sources */,
+				8368015C2432279900678DBD /* RegistrationViewController.swift in Sources */,
 				83252A7624314EFF001E6D63 /* DefaultRequestParameters.swift in Sources */,
 				0E6D260B242E8B540037A80C /* Constants+InfoKeys.swift in Sources */,
 				83252A782431519F001E6D63 /* NetworkingAssembly.swift in Sources */,
+				83252A9224322190001E6D63 /* RootModelType.swift in Sources */,
 				0E9DDA752430DB46002D879F /* String+Random.swift in Sources */,
 				83252A12242F63B1001E6D63 /* NetworkClient.swift in Sources */,
+				83252A8E24322167001E6D63 /* RootViewModel.swift in Sources */,
 				83252A14242F6C22001E6D63 /* NetworkRequest.swift in Sources */,
 				83252A18242F9C11001E6D63 /* UrlRequestBuilderType.swift in Sources */,
 				0E9DCCAB2430CA5A00C2670D /* RegisteredEncountersDebugViewModelType.swift in Sources */,
@@ -1026,20 +1194,27 @@
 				0EE60BD3242F8A5F00D29048 /* SwiftTweaks+Anna.swift in Sources */,
 				0E6D260A242E8B540037A80C /* Constants.swift in Sources */,
 				0EE60C3E242FE4F100D29048 /* Constants+Realm.swift in Sources */,
+				83252A8C24322160001E6D63 /* RootViewController.swift in Sources */,
 				0ECE7A212430E48200EED942 /* BluetoothDebugItems.swift in Sources */,
 				0E965352242F81D400ADD300 /* DebugMenu.swift in Sources */,
 				0E9DCCA92430CA4500C2670D /* RegisteredEncountersDebugModelType.swift in Sources */,
 				0EE60C51242FF40500D29048 /* FilesCoordinator.swift in Sources */,
 				0EE60C3A242FE03100D29048 /* AnnaError.swift in Sources */,
+				8368016C24323FE400678DBD /* RootAssembly.swift in Sources */,
+				83680160243227B400678DBD /* OnboardingViewController.swift in Sources */,
 				0ECE7A1F2430E3EE00EED942 /* BluetoothAssembly.swift in Sources */,
+				83252A9C24322549001E6D63 /* OnboardingView.swift in Sources */,
 				0E965355242F82B900ADD300 /* GeneralDebugItems.swift in Sources */,
 				0ECE7A222430F91F00EED942 /* MockAdvertiser.swift in Sources */,
 				83252A7024314D17001E6D63 /* ConfirmRegistrationResult.swift in Sources */,
+				83680162243227CF00678DBD /* DashboardViewController.swift in Sources */,
 				0E9DCC922430983A00C2670D /* EncountersManagerType.swift in Sources */,
+				83680164243227D700678DBD /* DashboardView.swift in Sources */,
 				0EE60C41242FF14100D29048 /* Resolver+Utils.swift in Sources */,
 				0E9DCCA72430C9E200C2670D /* RegisteredEncountersDebugModel.swift in Sources */,
 				0E9DCCA32430C9A700C2670D /* RegisteredEncountersDebugViewController.swift in Sources */,
 				0E9DCC9D2430C7F100C2670D /* RegisteredEncountersDebugScreenView.swift in Sources */,
+				8368015E243227A100678DBD /* RegistrationView.swift in Sources */,
 				0EE60C5F2430015E00D29048 /* SecretsGenerator.swift in Sources */,
 				0E9DCCA12430C8C200C2670D /* CustomView.swift in Sources */,
 				83252A6E24314CFE001E6D63 /* ConfirmRegistrationRequest.swift in Sources */,
@@ -1048,6 +1223,7 @@
 				0EE60C4B242FF2C200D29048 /* GeneralAssembly.swift in Sources */,
 				0EE60BD0242F8A3C00D29048 /* InfoKeys+Value.swift in Sources */,
 				0EE60C52242FF40500D29048 /* FilesCoordinatorType.swift in Sources */,
+				836801722432401300678DBD /* DashboardAssembly.swift in Sources */,
 				0E9DDA722430D82E002D879F /* Constants+Encounters.swift in Sources */,
 				83252A6024314B59001E6D63 /* GcpClient.swift in Sources */,
 			);
