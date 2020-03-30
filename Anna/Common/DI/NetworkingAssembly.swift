@@ -12,8 +12,11 @@ final class NetworkingAssembly: Assembly {
 
     private func registerReachability(_ container: Container) {
         container.register(Reachability.self) { _ in
-            //swiftlint:disable force_try
-            return try! Reachability()
+            guard let reachability = try? Reachability() else {
+                logger.error("Fatal error: failed to initialize Reachability")
+                fatalError()
+            }
+            return reachability
         }.inObjectScope(.container)
     }
 

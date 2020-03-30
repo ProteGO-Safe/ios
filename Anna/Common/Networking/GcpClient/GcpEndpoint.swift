@@ -2,7 +2,7 @@ import Foundation
 
 enum GcpEndpoint {
 
-    private static let baseUrl = "https://europe-west3-anna-dev-272212.cloudfunctions.net"
+    private static let baseUrl = Constants.InfoKeys.apiBaseUrl.value ?? ""
 
     case registerDevice(RegisterDeviceRequest)
 

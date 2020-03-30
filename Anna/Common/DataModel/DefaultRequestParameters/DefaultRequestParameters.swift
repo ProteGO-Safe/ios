@@ -10,7 +10,7 @@ struct DefaultRequestParameters {
 
     let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
 
-    let apiVersion = "1"
+    let apiVersion = Constants.Networking.apiVersion
 
     let lang = NSLocale.autoupdatingCurrent.languageCode ?? ""
 }
