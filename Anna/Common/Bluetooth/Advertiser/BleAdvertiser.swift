@@ -7,28 +7,25 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     /// Handle to the currently mounted service
     private var service: CBService?
     /// Delegate
-    weak var delegate: AdvertiserDelegate?
+    private weak var delegate: AdvertiserDelegate?
     /// Current token data
-    var currentTokenData: (Data, Date)?
+    private var currentTokenData: (Data, Date)?
+    /// Advertisement restart timer. After a timeout we restart advertising.
+    private var advertisementRestartTimer: Timer?
+    /// Advertisement stop timer. After a timeout we stop advertisement.
+    private var advertisementStopTimer: Timer?
+    /// Background processing task handle.
+    private let backgroundTask: BluetoothBackgroundTask
+    private let advertisementTaskID = Constants.Bluetooth.AdvertisingBackgroundTaskID
 
     /// Restoration identifier is required to properly resume when application is restored by the OS.
-    init(delegate: AdvertiserDelegate) {
+    init(delegate: AdvertiserDelegate, backgroundTask: BluetoothBackgroundTask) {
+        self.backgroundTask = backgroundTask
         super.init()
         self.delegate = delegate
         self.peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: [
             CBPeripheralManagerOptionRestoreIdentifierKey: Constants.Bluetooth.AnnaServiceUUID
         ])
-    }
-
-    /// NOTE:  Add mechnism to restart advertisement when something goeas wrong.
-    private func scheduleRestartIfNeeded() {
-
-    }
-
-    /// NOTE: Add code responsible for monitoring health of advertiser. Check in specific intervals
-    /// if device is actually advertising and there are tokens available.
-    private func initializeHealthCheckIfNeeded() {
-
     }
 
     /// Initialize GATT server database. By default all Anna devices have one specific service and
@@ -60,10 +57,46 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     /// Start advertisement. In the background we can only advertise UUID, which is then stored in special "overflow" area
     /// visible only to other iOS devices.
     private func startAdvertisementIfNeeded() {
+        logger.debug("Starting advertisement")
+
+        // start a task
+        backgroundTask.start(taskName: advertisementTaskID)
+
+        // Restart advertisement stop timer.
+        self.advertisementStopTimer?.invalidate()
+        let newAdvertisementStopTimer = Timer.init(
+            timeInterval: Constants.Bluetooth.AdvertisingStopTimeout,
+            repeats: false) { [weak self] _ in
+                self?.stopAdvertisementIfNeeded()
+        }
+        RunLoop.main.add(newAdvertisementStopTimer, forMode: .common)
+        self.advertisementStopTimer = newAdvertisementStopTimer
+
+        // Restart advertisement restart timer.
+        self.advertisementRestartTimer?.invalidate()
+        let newAdvertisementRestartTimer = Timer.init(
+            timeInterval: Constants.Bluetooth.AdvertisingRestartTimeout,
+            repeats: false) { [weak self] _ in
+                self?.startAdvertisementIfNeeded()
+        }
+        RunLoop.main.add(newAdvertisementRestartTimer, forMode: .common)
+        self.advertisementRestartTimer = newAdvertisementRestartTimer
+
+        // Enable advertising if needed.
         if peripheralManager.state == .poweredOn && !peripheralManager.isAdvertising {
             peripheralManager.startAdvertising([
                 CBAdvertisementDataServiceUUIDsKey: [Constants.Bluetooth.AnnaServiceUUID]
             ])
+        }
+    }
+
+    /// Stop advertisement. We want to limit power consumption in the background to keep our application running for
+    /// a longer time.
+    private func stopAdvertisementIfNeeded() {
+        logger.debug("Stopping advertisement")
+        backgroundTask.stop(taskName: advertisementTaskID)
+        if peripheralManager.state == .poweredOn && peripheralManager.isAdvertising {
+            peripheralManager.stopAdvertising()
         }
     }
 
@@ -98,10 +131,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
         if error == nil {
             // After service is ready to use, start advertising.
             self.service = service
-            startAdvertisementIfNeeded()
-        } else {
-            // Something went wrong. Consider restarting.
-            scheduleRestartIfNeeded()
+            self.startAdvertisementIfNeeded()
         }
     }
 
@@ -130,7 +160,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
         logger.debug("Peripheral manager did start advertising, error: \(String(describing: error))")
         // If we fail to start advertisement, try again later.
         if error != nil {
-            scheduleRestartIfNeeded()
+            self.stopAdvertisementIfNeeded()
         }
     }
 

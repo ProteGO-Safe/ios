@@ -2,14 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>pl.gov.anna.BluetoothBackgroundTask</string>
+	</array>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Wykorzystane w celu lokalizowania innych użytkowników aplikacji</string>
-	<key>TWEAKS_ENABLED</key>
-	<string>$(TWEAKS_ENABLED)</string>
-	<key>CRASHLYTICS_ENABLED</key>
-	<string>$(CRASHLYTICS_ENABLED)</string>
-	<key>CONSOLE_LOGGING_ENABLED</key>
-	<string>$(CONSOLE_LOGGING_ENABLED)</string>
 	<key>BUGFENDER_ENABLED</key>
 	<string>$(BUGFENDER_ENABLED)</string>
 	<key>BUGFENDER_KEY</key>
@@ -32,12 +30,21 @@
 	<string>$(CI_COMMIT_TAG)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CI_JOB_ID)</string>
+	<key>CONSOLE_LOGGING_ENABLED</key>
+	<string>$(CONSOLE_LOGGING_ENABLED)</string>
+	<key>CRASHLYTICS_ENABLED</key>
+	<string>$(CRASHLYTICS_ENABLED)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Wykorzystane w celu lokalizowania innych użytkowników aplikacji</string>
+	<key>TWEAKS_ENABLED</key>
+	<string>$(TWEAKS_ENABLED)</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>
 		<string>bluetooth-peripheral</string>
+		<string>processing</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -49,8 +56,6 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Information about Bluetooth usage</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -92,6 +92,7 @@
 		87074B85242F94780029AD4B /* PeripheralState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B84242F94780029AD4B /* PeripheralState.swift */; };
 		87074B86242F94780029AD4B /* PeripheralState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B84242F94780029AD4B /* PeripheralState.swift */; };
 		871208D62430C6A600DA0A4D /* Constants+Bluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871208D52430C6A600DA0A4D /* Constants+Bluetooth.swift */; };
+		871208D92430D16C00DA0A4D /* BluetoothBackgroudTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871208D82430D16C00DA0A4D /* BluetoothBackgroudTask.swift */; };
 		87177C942430A6FB007C8F78 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C932430A6FB007C8F78 /* Scanner.swift */; };
 		87177C952430A6FB007C8F78 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C932430A6FB007C8F78 /* Scanner.swift */; };
 		87177C972430A7F6007C8F78 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C962430A7F6007C8F78 /* Advertiser.swift */; };
@@ -208,6 +209,7 @@
 		87074B81242F77CB0029AD4B /* ScannerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerDelegate.swift; sourceTree = "<group>"; };
 		87074B84242F94780029AD4B /* PeripheralState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralState.swift; sourceTree = "<group>"; };
 		871208D52430C6A600DA0A4D /* Constants+Bluetooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Bluetooth.swift"; sourceTree = "<group>"; };
+		871208D82430D16C00DA0A4D /* BluetoothBackgroudTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothBackgroudTask.swift; sourceTree = "<group>"; };
 		87177C902430A5B7007C8F78 /* MockAdvertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAdvertiser.swift; sourceTree = "<group>"; };
 		87177C932430A6FB007C8F78 /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		87177C962430A7F6007C8F78 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
@@ -682,6 +684,7 @@
 				87074B7A242F6A4E0029AD4B /* Scanner */,
 				87C98604242E2B1A00335502 /* Advertiser */,
 				871208D52430C6A600DA0A4D /* Constants+Bluetooth.swift */,
+				871208D82430D16C00DA0A4D /* BluetoothBackgroudTask.swift */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -1025,6 +1028,7 @@
 				0EE60C5D2430014D00D29048 /* SecretsGeneratorType.swift in Sources */,
 				0EE60BD3242F8A5F00D29048 /* SwiftTweaks+Anna.swift in Sources */,
 				0E6D260A242E8B540037A80C /* Constants.swift in Sources */,
+				871208D92430D16C00DA0A4D /* BluetoothBackgroudTask.swift in Sources */,
 				0EE60C3E242FE4F100D29048 /* Constants+Realm.swift in Sources */,
 				0ECE7A212430E48200EED942 /* BluetoothDebugItems.swift in Sources */,
 				0E965352242F81D400ADD300 /* DebugMenu.swift in Sources */,
