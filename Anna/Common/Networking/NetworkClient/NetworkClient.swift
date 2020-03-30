@@ -10,7 +10,7 @@ enum NetworkClientError: Error {
     case statusCode(Int, Data)
 }
 
-final class NetworkClient {
+final class NetworkClient: ReactiveCompatible {
 
     fileprivate let session: URLSession
 
@@ -25,30 +25,13 @@ final class NetworkClient {
         self.urlRequestBuilder = urlRequestBuilder
         self.reachability = reachability
     }
-
-    fileprivate func handleRequestCompletion(data: Data?, response: URLResponse?, error: Error?)
-        -> Result<Data, NetworkClientError> {
-            if let error = error {
-                return .failure(NetworkClientError.requestError(error))
-            }
-
-            guard let response = response as? HTTPURLResponse, let data = data else {
-                return .failure(NetworkClientError.networkUnavailable)
-            }
-
-            guard 200...299 ~= response.statusCode else {
-                return .failure(NetworkClientError.statusCode(response.statusCode, data))
-            }
-
-            return .success(data)
-    }
 }
 
 extension Reactive where Base: NetworkClient {
 
-    func dataTask(networkRequest: NetworkRequest) -> Single<Result<Data, NetworkClientError>> {
+    func dataTask(networkRequest: NetworkRequest) -> Single<Result<Data, Error>> {
         guard base.reachability.connection != .unavailable else {
-            return .just(.failure(.networkUnavailable))
+            return .just(.failure(NetworkClientError.networkUnavailable))
         }
 
         let urlRequest: URLRequest
@@ -56,10 +39,10 @@ extension Reactive where Base: NetworkClient {
         case .success(let request):
             urlRequest = request
         case .failure(let error):
-            return .just(.failure(.failedToBuildUrlRequest(error)))
+            return .just(.failure(NetworkClientError.failedToBuildUrlRequest(error)))
         }
 
-        return Single<Result<Data, NetworkClientError>>.create { [weak base] observer -> Disposable in
+        return Single<Result<Data, Error>>.create { [weak base] observer -> Disposable in
             guard let base = base else {
                 observer(.success(.failure(NetworkClientError.deallocated)))
                 return Disposables.create()
@@ -74,7 +57,7 @@ extension Reactive where Base: NetworkClient {
                         return
                     }
 
-                    let result = base.handleRequestCompletion(data: data, response: response, error: error)
+                    let result = base.rx.handleRequestCompletion(data: data, response: response, error: error)
                     observer(.success(result))
             })
 
@@ -84,5 +67,22 @@ extension Reactive where Base: NetworkClient {
                 task.cancel()
             }
         }
+    }
+
+    private func handleRequestCompletion(data: Data?, response: URLResponse?, error: Error?)
+        -> Result<Data, Error> {
+            if let error = error {
+                return .failure(NetworkClientError.requestError(error))
+            }
+
+            guard let response = response as? HTTPURLResponse, let data = data else {
+                return .failure(NetworkClientError.networkUnavailable)
+            }
+
+            guard 200...299 ~= response.statusCode else {
+                return .failure(NetworkClientError.statusCode(response.statusCode, data))
+            }
+
+            return .success(data)
     }
 }

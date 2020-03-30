@@ -11,6 +11,8 @@ struct NetworkRequest {
 
     let url: String
 
+    let headers: [String: String]?
+
     let queryParameters: [String: String]?
 
     let body: Data?

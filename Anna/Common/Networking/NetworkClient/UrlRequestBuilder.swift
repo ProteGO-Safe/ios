@@ -5,11 +5,11 @@ enum UrlRequestBuilderError: Error {
     case failedToCreateUrl
 }
 
-final class UrlRequestBuilder {
+final class UrlRequestBuilder: UrlRequestBuilderType {
 
-    func urlRequest(networkRequest: NetworkRequest) -> Result<URLRequest, UrlRequestBuilderError> {
+    func urlRequest(networkRequest: NetworkRequest) -> Result<URLRequest, Error> {
         guard var urlComponents = URLComponents(string: networkRequest.url) else {
-            return .failure(.failedToCreateUrlComponents)
+            return .failure(UrlRequestBuilderError.failedToCreateUrlComponents)
         }
 
         let queryItems = networkRequest.queryParameters?.map { (name, value) in
@@ -18,12 +18,18 @@ final class UrlRequestBuilder {
         urlComponents.queryItems = queryItems
 
         guard let url = urlComponents.url else {
-            return .failure(.failedToCreateUrl)
+            return .failure(UrlRequestBuilderError.failedToCreateUrl)
         }
 
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = networkRequest.httpMethod.rawValue
         urlRequest.httpBody = networkRequest.body
+
+        if let headers = networkRequest.headers {
+            for (name, value) in headers {
+                urlRequest.setValue(value, forHTTPHeaderField: name)
+            }
+        }
 
         return .success(urlRequest)
     }
