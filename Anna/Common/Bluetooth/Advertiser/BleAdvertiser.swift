@@ -16,7 +16,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     private var advertisementStopTimer: Timer?
     /// Background processing task handle.
     private let backgroundTask: BluetoothBackgroundTask
-    private let advertisementTaskID = "bluetooth.advertiser"
+    private let advertisementTaskID = Constants.Bluetooth.AdvertisingBackgroundTaskID
 
     /// Restoration identifier is required to properly resume when application is restored by the OS.
     init(delegate: AdvertiserDelegate, backgroundTask: BluetoothBackgroundTask) {
