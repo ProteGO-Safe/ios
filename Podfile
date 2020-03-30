@@ -27,6 +27,7 @@ target 'Anna' do
   crashlytics
   pod 'BugfenderSDK', '1.8', :configurations => ['Debug_dev', 'Release_dev']
   pod 'SwiftLint', '0.39.1'
+  pod 'SwiftGen', '6.1.0'
 end
 
 target 'AnnaTests' do

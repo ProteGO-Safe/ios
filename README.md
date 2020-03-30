@@ -25,3 +25,7 @@ Dodatkowo środowisko `development` posiada:
 - Menu deweloperskie dostępne po potrząśnięciu telefonem,
 - Integrację z serwisem Firebase Crashlytics,
 - Integrację z serwisem Bugfender
+
+# Teksty w aplikacji
+
+Aplikacja posiada wsparcie wielu języków. W folderze `scripts` znajduje się skrypt pomocniczy `updateLocalization.sh` który automatycznie ściąga najnowsze teksty z Google Spreadsheet oraz generuje odpowiednie struktury pomocnicze za pomocą SwiftGen.

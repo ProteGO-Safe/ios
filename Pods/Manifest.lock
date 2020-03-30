@@ -89,6 +89,7 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - PromisesObjC (1.2.8)
+  - SwiftGen (6.1.0)
   - SwiftLint (0.39.1)
 
 DEPENDENCIES:
@@ -107,6 +108,7 @@ DEPENDENCIES:
   - GoogleUtilities (= 6.5.2)
   - nanopb (= 0.3.9011)
   - PromisesObjC (= 1.2.8)
+  - SwiftGen (= 6.1.0)
   - SwiftLint (= 0.39.1)
 
 SPEC REPOS:
@@ -126,6 +128,7 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - PromisesObjC
+    - SwiftGen
     - SwiftLint
 
 SPEC CHECKSUMS:
@@ -144,8 +147,9 @@ SPEC CHECKSUMS:
   GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  SwiftGen: f872ca75cbd17bf7103c17f13dcfa0d9a15667b0
   SwiftLint: 55e96a4a4d537d4a3156859fc1c54bd24851a046
 
-PODFILE CHECKSUM: ea1c3d25767b11ce460a04840833781bb4bf1a79
+PODFILE CHECKSUM: 1b772c01eb6c38bb7817b0469574533cca945c2f
 
 COCOAPODS: 1.9.1

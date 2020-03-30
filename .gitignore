@@ -34,3 +34,6 @@ Carthage/Checkouts
 Carthage/Build/iOS/*.bcsymbolmap
 Carthage/Build/tvOS/*.bcsymbolmap
 Carthage/Build/*version
+localization_credentials.json
+venv
+.vscode

@@ -1,0 +1,12 @@
+/* Nazwa aplikacji */
+"app_name" = "Ania";
+
+/* Wyjście z aplikacji */
+"exit" = "Wyjście";
+
+/* Powitanie */
+"welcome" = "Witaj";
+
+/* Pożegnanie */
+"goodbye" = "Do widzenia";
+
