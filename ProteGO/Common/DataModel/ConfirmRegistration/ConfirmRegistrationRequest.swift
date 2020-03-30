@@ -2,8 +2,6 @@ import Foundation
 
 struct ConfirmRegistrationRequest: Encodable {
 
-    let msisdn: String
-
     let code: String
 
     let registrationId: String
@@ -21,7 +19,6 @@ struct ConfirmRegistrationRequest: Encodable {
     let lang: String
 
     enum CodingKeys: String, CodingKey {
-        case msisdn
         case code
         case registrationId = "registration_id"
         case platform
@@ -32,11 +29,9 @@ struct ConfirmRegistrationRequest: Encodable {
         case lang
     }
 
-    init(msisdn: String,
-         code: String,
+    init(code: String,
          registrationId: String,
          defaultParameters: DefaultRequestParameters = DefaultRequestParameters()) {
-        self.msisdn = msisdn
         self.code = code
         self.registrationId = registrationId
         self.platform = defaultParameters.platform
