@@ -17,13 +17,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreenLogo" translatesAutoresizingMaskIntoConstraints="NO" id="ybi-I7-MCW">
-                                <rect key="frame" x="136.5" y="362.5" width="141" height="181"/>
+                                <rect key="frame" x="135" y="361" width="144" height="184"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="SplashScreenBackground" translatesAutoresizingMaskIntoConstraints="NO" id="6Ir-Gb-dXU">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.078431372549019607" green="0.73333333333333328" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="ybi-I7-MCW" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="BP8-Uo-O7o"/>
+                            <constraint firstItem="6Ir-Gb-dXU" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Bsq-di-Ftc"/>
+                            <constraint firstItem="6Ir-Gb-dXU" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Yt1-Oz-Mee"/>
                             <constraint firstItem="ybi-I7-MCW" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="nZF-bR-SWg"/>
+                            <constraint firstAttribute="bottom" secondItem="6Ir-Gb-dXU" secondAttribute="bottom" id="pfY-2o-UUG"/>
+                            <constraint firstAttribute="trailing" secondItem="6Ir-Gb-dXU" secondAttribute="trailing" id="yoL-z1-Oxr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -34,6 +41,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SplashScreenLogo" width="141" height="181"/>
+        <image name="SplashScreenBackground" width="375" height="812"/>
+        <image name="SplashScreenLogo" width="144" height="184"/>
     </resources>
 </document>
