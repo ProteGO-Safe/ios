@@ -92,6 +92,8 @@
 		83252A9224322190001E6D63 /* RootModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A9124322190001E6D63 /* RootModelType.swift */; };
 		83252A942432219A001E6D63 /* RootViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A932432219A001E6D63 /* RootViewModelType.swift */; };
 		83252A9C24322549001E6D63 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A9B24322549001E6D63 /* OnboardingView.swift */; };
+		833181902433A05B00A8E18D /* ConstraintMaker+AspectRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8331818F2433A05B00A8E18D /* ConstraintMaker+AspectRatio.swift */; };
+		833181932433A09B00A8E18D /* UIImage+AspectRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833181922433A09B00A8E18D /* UIImage+AspectRatio.swift */; };
 		83680160243227B400678DBD /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8368015F243227B400678DBD /* OnboardingViewController.swift */; };
 		83680162243227CF00678DBD /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83680161243227CF00678DBD /* DashboardViewController.swift */; };
 		83680164243227D700678DBD /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83680163243227D700678DBD /* DashboardView.swift */; };
@@ -281,6 +283,8 @@
 		83252A9124322190001E6D63 /* RootModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootModelType.swift; sourceTree = "<group>"; };
 		83252A932432219A001E6D63 /* RootViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModelType.swift; sourceTree = "<group>"; };
 		83252A9B24322549001E6D63 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		8331818F2433A05B00A8E18D /* ConstraintMaker+AspectRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstraintMaker+AspectRatio.swift"; sourceTree = "<group>"; };
+		833181922433A09B00A8E18D /* UIImage+AspectRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+AspectRatio.swift"; sourceTree = "<group>"; };
 		8368015F243227B400678DBD /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		83680161243227CF00678DBD /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		83680163243227D700678DBD /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
@@ -509,6 +513,8 @@
 		0E6D260C242E8E940037A80C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				833181912433A08A00A8E18D /* UIImage */,
+				8331818E2433A03A00A8E18D /* ConstraintMaker */,
 				8382897A24332D780054347B /* UIView */,
 				8382897724332D580054347B /* UITextField */,
 				8382897324332D340054347B /* UIScreen */,
@@ -914,6 +920,22 @@
 				83680163243227D700678DBD /* DashboardView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		8331818E2433A03A00A8E18D /* ConstraintMaker */ = {
+			isa = PBXGroup;
+			children = (
+				8331818F2433A05B00A8E18D /* ConstraintMaker+AspectRatio.swift */,
+			);
+			path = ConstraintMaker;
+			sourceTree = "<group>";
+		};
+		833181912433A08A00A8E18D /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				833181922433A09B00A8E18D /* UIImage+AspectRatio.swift */,
+			);
+			path = UIImage;
 			sourceTree = "<group>";
 		};
 		836DF51824334BEC000C00C0 /* ViewModel */ = {
@@ -1533,6 +1555,7 @@
 				838289D5243331110054347B /* VerifyCodeViewModelType.swift in Sources */,
 				0E9DDA6E2430D2D9002D879F /* DebugAssembly.swift in Sources */,
 				83252A6C24314C99001E6D63 /* RegisterDeviceResult.swift in Sources */,
+				833181932433A09B00A8E18D /* UIImage+AspectRatio.swift in Sources */,
 				0E9DDA702430D464002D879F /* EncountersDebugItems.swift in Sources */,
 				83252A942432219A001E6D63 /* RootViewModelType.swift in Sources */,
 				0E6D2610242E956F0037A80C /* Logger.swift in Sources */,
@@ -1603,6 +1626,7 @@
 				836DF52124334C31000C00C0 /* RegistrationModelType.swift in Sources */,
 				0EE60C23242FDAA400D29048 /* Encounter.swift in Sources */,
 				8382896C24332CF40054347B /* UIButton+Factory.swift in Sources */,
+				833181902433A05B00A8E18D /* ConstraintMaker+AspectRatio.swift in Sources */,
 				0EE60C4B242FF2C200D29048 /* GeneralAssembly.swift in Sources */,
 				0EE60BD0242F8A3C00D29048 /* InfoKeys+Value.swift in Sources */,
 				838289BF24332FEE0054347B /* SendCodeView.swift in Sources */,
