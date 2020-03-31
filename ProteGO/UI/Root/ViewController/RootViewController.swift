@@ -90,4 +90,8 @@ extension RootViewController: RegistrationViewControllerDelegate {
     func didTapBackButton() {
         present(content: .onboarding)
     }
+
+    func didFinishRegistration() {
+        present(content: .dashboard)
+    }
 }

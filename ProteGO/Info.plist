@@ -2,18 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>API_BASE_URL</key>
+	<string>$(API_BASE_URL)</string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
 		<string>pl.gov.anna.BluetoothBackgroundTask</string>
 	</array>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Wykorzystane w celu lokalizowania innych użytkowników aplikacji</string>
 	<key>BUGFENDER_ENABLED</key>
 	<string>$(BUGFENDER_ENABLED)</string>
 	<key>BUGFENDER_KEY</key>
 	<string>$(BUGFENDER_KEY)</string>
-	<key>API_BASE_URL</key>
-	<string>$(API_BASE_URL)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -38,8 +36,31 @@
 	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>Wykorzystane w celu lokalizowania innych użytkowników aplikacji</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Wykorzystane w celu lokalizowania innych użytkowników aplikacji</string>
 	<key>TWEAKS_ENABLED</key>
 	<string>$(TWEAKS_ENABLED)</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Poppins-Black.otf</string>
+		<string>Poppins-Light.otf</string>
+		<string>Poppins-BlackItalic.otf</string>
+		<string>Poppins-LightItalic.otf</string>
+		<string>Poppins-Bold.otf</string>
+		<string>Poppins-Medium.otf</string>
+		<string>Poppins-BoldItalic.otf</string>
+		<string>Poppins-MediumItalic.otf</string>
+		<string>Poppins-ExtraBold.otf</string>
+		<string>Poppins-Regular.otf</string>
+		<string>Poppins-ExtraBoldItalic.otf</string>
+		<string>Poppins-SemiBold.otf</string>
+		<string>Poppins-ExtraLight.otf</string>
+		<string>Poppins-SemiBoldItalic.otf</string>
+		<string>Poppins-ExtraLightItalic.otf</string>
+		<string>Poppins-Thin.otf</string>
+		<string>Poppins-Italic.otf</string>
+		<string>Poppins-ThinItalic.otf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>
