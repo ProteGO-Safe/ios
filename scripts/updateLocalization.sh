@@ -2,7 +2,7 @@
 
 VENV_PATH=venv
 LOCALIZATION_OUTPUT_PATH=ProteGO
-GSHEET_KEY=1DkOwDWwbPxThhbkf5UmkRyGVaNtoikhJAyy555kcpkI
+GSHEET_KEY=1vpJiu2jJcxBFWefIyi__QZZH6nwsIVktPFHEohJNMsQ
 GSHEET_CREDENTIALS_PATH=scripts/Localization/export-gsheet-to-app-resources/localization_credentials.json
 GSHEET_EXPORTER_SCRIPT_PATH=scripts/Localization/export-gsheet-to-app-resources/export.py
 GSHEET_EXPORTER_REQUIREMENTS_PATH=scripts/Localization/export-gsheet-to-app-resources/requirements.txt

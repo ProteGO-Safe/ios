@@ -12,13 +12,9 @@ final class SendCodeView: UIView {
         return (prefixTextField.text ?? "") + (phoneNumberTextField.text ?? "")
     }
 
-    private let titleLabel = UILabel.with(text: "Dołącz do aplikacji", fontStyle: .headline)
+    private let titleLabel = UILabel.with(text: L10n.registrationSendTitle, fontStyle: .headline)
 
-    private let descriptionLabel = UILabel.with(text: """
-        Żeby potwierdzić Twoje konto podaj swój numer telefonu. Prześlemy Ci kod weryfikujący.
-
-        Nie będziemy łączyć Twoich danych z numerem telefonu.
-        """, fontStyle: .body)
+    private let descriptionLabel = UILabel.with(text: L10n.registrationSendDescription, fontStyle: .body)
 
     private let prefixTextField: UITextField = {
         let textField = UITextField.with(text: Constants.Networking.phoneNumberPrefix, centered: true)
@@ -28,12 +24,12 @@ final class SendCodeView: UIView {
     }()
 
     private let phoneNumberTextField: UITextField = {
-        let textField = UITextField.with(placeholder: "XXX-XXX-XXX")
+        let textField = UITextField.with(placeholder: L10n.registrationPhonePlaceholder)
         textField.keyboardType = .numberPad
         return textField
     }()
 
-    private let sendCodeButton = UIButton.rectButton(text: "Prześlij kod")
+    private let sendCodeButton = UIButton.rectButton(text: L10n.registrationSendCodeBtn)
 
     init() {
         super.init(frame: .zero)

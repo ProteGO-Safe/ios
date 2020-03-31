@@ -12,19 +12,19 @@ final class VerifyCodeView: UIView {
         return codeTextField.text ?? ""
     }
 
-    private let titleLabel = UILabel.with(text: "Wpisz swój kod SMS", fontStyle: .headline)
+    private let titleLabel = UILabel.with(text: L10n.registrationVerifyTitle, fontStyle: .headline)
 
-    private let descriptionLabel = UILabel.with(text: "Wpisz swój kod, który otrzymałeś w SMSie", fontStyle: .body)
+    private let descriptionLabel = UILabel.with(text: L10n.registrationVerifyDescription, fontStyle: .body)
 
     private let codeTextField: UITextField = {
-        let textField = UITextField.with(placeholder: "XXXXX")
+        let textField = UITextField.with(placeholder: L10n.registrationVerifyCodePlaceholder)
         textField.autocorrectionType = .no
         textField.textContentType = .oneTimeCode
         textField.returnKeyType = .send
         return textField
     }()
 
-    private let verifyCodeButton = UIButton.rectButton(text: "Zweryfikuj kod")
+    private let verifyCodeButton = UIButton.rectButton(text: L10n.registrationVerifyBtn)
 
     init(codeTextFieldDelegate: UITextFieldDelegate) {
         super.init(frame: .zero)
