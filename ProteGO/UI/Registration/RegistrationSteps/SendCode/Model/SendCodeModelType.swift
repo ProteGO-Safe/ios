@@ -3,7 +3,7 @@ import RxSwift
 
 protocol SendCodeModelType {
 
-    var stepFinishedObservable: Observable<Void> { get }
+    var stepFinishedObservable: Observable<SendCodeFinishedData> { get }
 
     func registerDevice(phoneNumber: String)
 }

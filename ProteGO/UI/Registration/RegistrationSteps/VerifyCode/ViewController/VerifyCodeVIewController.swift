@@ -21,11 +21,31 @@ final class VerifyCodeViewController: UIViewController, CustomView {
     }
 
     override func loadView() {
-        view = ViewClass()
+        view = ViewClass(codeTextFieldDelegate: self)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.bind(view: customView)
+    }
+
+    func update(phoneNumber: String) {
+        customView.update(phoneNumber: phoneNumber)
+    }
+}
+
+extension VerifyCodeViewController: DismissKeyboardDelegate {
+
+    func dismissKeyboard() {
+        customView.dismissKeyboard()
+    }
+}
+
+extension VerifyCodeViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        viewModel.confirmRegistration(code: customView.code)
+        return true
     }
 }

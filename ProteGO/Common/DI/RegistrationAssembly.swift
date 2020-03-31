@@ -1,7 +1,6 @@
 import Swinject
 import Valet
 
-//swiftlint:disable force_unwrapping
 final class RegistrationAssembly: Assembly {
 
     func assemble(container: Container) {
@@ -13,7 +12,17 @@ final class RegistrationAssembly: Assembly {
     private func registerRegistrationViewController(_ container: Container) {
 
         container.register(RegistrationViewController.self) { resolver in
+
+            container.register(RegistrationModelType.self) { _ in
+                return RegistrationModel()
+            }
+
+            container.register(RegistrationViewModelType.self) { resolver in
+                return RegistrationViewModel(model: resolver.resolve(RegistrationModelType.self))
+            }
+
             return RegistrationViewController(
+                viewModel: resolver.resolve(RegistrationViewModelType.self),
                 sendCodeViewController: resolver.resolve(SendCodeViewController.self),
                 verifyCodeViewController: resolver.resolve(VerifyCodeViewController.self))
         }
@@ -24,7 +33,7 @@ final class RegistrationAssembly: Assembly {
         container.register(SendCodeModelType.self) { resolver in
             return SendCodeModel(
                 gcpClient: resolver.resolve(GcpClientType.self),
-                valet: Valet.valet(with: Identifier(nonEmpty: "Registration")!, accessibility: .afterFirstUnlock))
+                valet: resolver.resolve(Valet.self))
         }
 
         container.register(SendCodeViewModelType.self) { resolver in
@@ -41,7 +50,7 @@ final class RegistrationAssembly: Assembly {
         container.register(VerifyCodeModelType.self) { resolver in
             return VerifyCodeModel(
                 gcpClient: resolver.resolve(GcpClientType.self),
-                valet: Valet.valet(with: Identifier(nonEmpty: "Registration")!, accessibility: .afterFirstUnlock))
+                valet: resolver.resolve(Valet.self))
         }
 
         container.register(VerifyCodeViewModelType.self) { resolver in

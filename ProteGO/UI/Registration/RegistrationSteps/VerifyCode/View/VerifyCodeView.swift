@@ -19,20 +19,33 @@ final class VerifyCodeView: UIView {
     private let codeTextField: UITextField = {
         let textField = UITextField.with(placeholder: "XXXXX")
         textField.autocorrectionType = .no
+        textField.textContentType = .oneTimeCode
+        textField.returnKeyType = .send
         return textField
     }()
 
     private let verifyCodeButton = UIButton.rectButton(text: "Zweryfikuj kod")
 
-    init() {
+    init(codeTextFieldDelegate: UITextFieldDelegate) {
         super.init(frame: .zero)
         backgroundColor = .white
+
+        codeTextField.delegate = codeTextFieldDelegate
+
         addSubviews()
         setupConstraints()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func update(phoneNumber: String) {
+        descriptionLabel.text = "Wpisz swój kod, który otrzymałeś w SMSie wysłanym na numer \(phoneNumber)"
+    }
+
+    func dismissKeyboard() {
+        codeTextField.resignFirstResponder()
     }
 
     private func addSubviews() {

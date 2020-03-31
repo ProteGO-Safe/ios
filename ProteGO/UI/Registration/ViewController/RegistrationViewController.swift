@@ -6,19 +6,21 @@ protocol RegistrationViewControllerDelegate: class {
     func didFinishRegistration()
 }
 
+protocol DismissKeyboardDelegate: class {
+    func dismissKeyboard()
+}
+
 final class RegistrationViewController: UIViewController, CustomView {
 
     typealias ViewClass = RegistrationView
 
     weak var delegate: RegistrationViewControllerDelegate?
 
-    private enum Content {
-        case sendCode, verifyCode
-    }
-
-    private var currentContent: Content?
+    weak var dismissKeyboardDelegate: DismissKeyboardDelegate?
 
     private var currentContentViewController: UIViewController?
+
+    private let viewModel: RegistrationViewModelType
 
     private let sendCodeViewController: SendCodeViewController
 
@@ -26,8 +28,10 @@ final class RegistrationViewController: UIViewController, CustomView {
 
     let disposeBag = DisposeBag()
 
-    init(sendCodeViewController: SendCodeViewController,
+    init(viewModel: RegistrationViewModelType,
+         sendCodeViewController: SendCodeViewController,
          verifyCodeViewController: VerifyCodeViewController) {
+        self.viewModel = viewModel
         self.sendCodeViewController = sendCodeViewController
         self.verifyCodeViewController = verifyCodeViewController
         super.init(nibName: nil, bundle: nil)
@@ -43,64 +47,63 @@ final class RegistrationViewController: UIViewController, CustomView {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        subscribeStepFinished()
-        subscribeBackButtonTap()
-        presentIntialContent()
+
+        viewModel.bind(view: customView)
+        viewModel.bind(sendCodeViewController: sendCodeViewController)
+        viewModel.bind(verifyCodeViewController: verifyCodeViewController)
+
+        subscribeCurrentStep()
+        subscribeDismissKeyboard()
     }
 
-    private func subscribeBackButtonTap() {
-        customView.backButtonTapEvent.subscribe(onNext: { [weak self] _ in
-            self?.previousStep()
-        }).disposed(by: disposeBag)
-    }
+    private func subscribeCurrentStep() {
+        viewModel.currentStepOnservable
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] stepToPresent in
+                self?.present(step: stepToPresent)
+            }).disposed(by: disposeBag)
 
-    private func subscribeStepFinished() {
-        sendCodeViewController.stepFinishedObservable
+        viewModel.goBackObservable
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
-                self?.nextStep()
-        }).disposed(by: disposeBag)
+                self?.delegate?.didTapBackButton()
+            }).disposed(by: disposeBag)
 
-        verifyCodeViewController.stepFinishedObservable
+        viewModel.registrationFinishedObservable
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 self?.delegate?.didFinishRegistration()
-        }).disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
     }
 
-    private func presentIntialContent() {
-        present(content: .sendCode)
+    private func subscribeDismissKeyboard() {
+        viewModel.dismissKeyboardObservable
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.dismissKeyboardDelegate?.dismissKeyboard()
+            }).disposed(by: disposeBag)
     }
 
-    private func nextStep() {
-        if currentContent == .sendCode {
-            present(content: .verifyCode)
-        }
-    }
-
-    private func previousStep() {
-        if currentContent == .verifyCode {
-            present(content: .sendCode)
-        } else {
-            delegate?.didTapBackButton()
-        }
-    }
-
-    private func present(content: Content) {
-        let viewControllerToPresent: UIViewController
-        switch content {
-        case .sendCode:
-            viewControllerToPresent = sendCodeViewController
-        case .verifyCode:
-            viewControllerToPresent = verifyCodeViewController
-        }
+    private func present(step: RegistrationStep) {
+        let viewControllerToPresent = prepareViewController(step: step)
 
         if let currentViewController = currentContentViewController {
             dismiss(viewController: currentViewController)
         }
 
         present(viewController: viewControllerToPresent)
-        currentContent = content
+    }
+
+    private func prepareViewController(step: RegistrationStep) -> UIViewController {
+        switch step {
+        case .sendCode:
+            dismissKeyboardDelegate = sendCodeViewController
+            return sendCodeViewController
+        case .verifyCode(let phoneNumber):
+            dismissKeyboardDelegate = verifyCodeViewController
+            verifyCodeViewController.update(phoneNumber: phoneNumber)
+            return verifyCodeViewController
+        }
     }
 
     private func present(viewController: UIViewController) {

@@ -1,9 +1,9 @@
-import Foundation
+import UIKit
 import RxSwift
 
 final class SendCodeViewModel: SendCodeViewModelType {
 
-    var stepFinishedObservable: Observable<Void> {
+    var stepFinishedObservable: Observable<SendCodeFinishedData> {
         return model.stepFinishedObservable
     }
 

@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 import RxSwift
 
 final class VerifyCodeViewModel: VerifyCodeViewModelType {
@@ -17,7 +17,11 @@ final class VerifyCodeViewModel: VerifyCodeViewModelType {
 
     func bind(view: VerifyCodeView) {
         view.verifyCodeButtonTapEvent.subscribe(onNext: { [weak self] _ in
-            self?.model.confirmRegistration(code: view.code)
+            self?.confirmRegistration(code: view.code)
         }).disposed(by: disposeBag)
+    }
+
+    func confirmRegistration(code: String) {
+        model.confirmRegistration(code: code)
     }
 }

@@ -99,6 +99,10 @@
 		8368016E24323FF400678DBD /* OnboardingAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8368016D24323FF400678DBD /* OnboardingAssembly.swift */; };
 		836801702432400500678DBD /* RegistrationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8368016F2432400500678DBD /* RegistrationAssembly.swift */; };
 		836801722432401300678DBD /* DashboardAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836801712432401300678DBD /* DashboardAssembly.swift */; };
+		836DF51B24334C14000C00C0 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DF51A24334C14000C00C0 /* RegistrationViewModel.swift */; };
+		836DF51D24334C20000C00C0 /* RegistrationViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DF51C24334C20000C00C0 /* RegistrationViewModelType.swift */; };
+		836DF51F24334C29000C00C0 /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DF51E24334C29000C00C0 /* RegistrationModel.swift */; };
+		836DF52124334C31000C00C0 /* RegistrationModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DF52024334C31000C00C0 /* RegistrationModelType.swift */; };
 		8382896924332CBB0054347B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382896724332C350054347B /* Colors.swift */; };
 		8382896C24332CF40054347B /* UIButton+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382896B24332CF40054347B /* UIButton+Factory.swift */; };
 		8382896F24332D170054347B /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382896E24332D170054347B /* UIColor+Hex.swift */; };
@@ -284,6 +288,10 @@
 		8368016D24323FF400678DBD /* OnboardingAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAssembly.swift; sourceTree = "<group>"; };
 		8368016F2432400500678DBD /* RegistrationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationAssembly.swift; sourceTree = "<group>"; };
 		836801712432401300678DBD /* DashboardAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardAssembly.swift; sourceTree = "<group>"; };
+		836DF51A24334C14000C00C0 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		836DF51C24334C20000C00C0 /* RegistrationViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModelType.swift; sourceTree = "<group>"; };
+		836DF51E24334C29000C00C0 /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
+		836DF52024334C31000C00C0 /* RegistrationModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModelType.swift; sourceTree = "<group>"; };
 		8382896724332C350054347B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		8382896B24332CF40054347B /* UIButton+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Factory.swift"; sourceTree = "<group>"; };
 		8382896E24332D170054347B /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
@@ -908,6 +916,24 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		836DF51824334BEC000C00C0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				836DF51A24334C14000C00C0 /* RegistrationViewModel.swift */,
+				836DF51C24334C20000C00C0 /* RegistrationViewModelType.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		836DF51924334BF3000C00C0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				836DF51E24334C29000C00C0 /* RegistrationModel.swift */,
+				836DF52024334C31000C00C0 /* RegistrationModelType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		8382896624332C160054347B /* Colors */ = {
 			isa = PBXGroup;
 			children = (
@@ -1012,8 +1038,8 @@
 				838289AC24332F030054347B /* RegistrationSteps */,
 				838289B124332F3F0054347B /* View */,
 				838289B024332F390054347B /* ViewController */,
-				838289AF24332F350054347B /* ViewModel */,
-				838289AE24332F280054347B /* Model */,
+				836DF51824334BEC000C00C0 /* ViewModel */,
+				836DF51924334BF3000C00C0 /* Model */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -1025,20 +1051,6 @@
 				838289B524332F6F0054347B /* VerifyCode */,
 			);
 			path = RegistrationSteps;
-			sourceTree = "<group>";
-		};
-		838289AE24332F280054347B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		838289AF24332F350054347B /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		838289B024332F390054347B /* ViewController */ = {
@@ -1567,6 +1579,8 @@
 				83252A9C24322549001E6D63 /* OnboardingView.swift in Sources */,
 				0E965355242F82B900ADD300 /* GeneralDebugItems.swift in Sources */,
 				0ECE7A222430F91F00EED942 /* MockAdvertiser.swift in Sources */,
+				836DF51B24334C14000C00C0 /* RegistrationViewModel.swift in Sources */,
+				836DF51F24334C29000C00C0 /* RegistrationModel.swift in Sources */,
 				83252A7024314D17001E6D63 /* ConfirmRegistrationResult.swift in Sources */,
 				83828A052433350C0054347B /* FontStyle.swift in Sources */,
 				8382897524332D3D0054347B /* UIScreen+Size.swift in Sources */,
@@ -1576,6 +1590,7 @@
 				0E9DCC922430983A00C2670D /* EncountersManagerType.swift in Sources */,
 				83680164243227D700678DBD /* DashboardView.swift in Sources */,
 				0EE60C41242FF14100D29048 /* Resolver+Utils.swift in Sources */,
+				836DF51D24334C20000C00C0 /* RegistrationViewModelType.swift in Sources */,
 				0E9DCCA72430C9E200C2670D /* RegisteredEncountersDebugModel.swift in Sources */,
 				0E9DCCA32430C9A700C2670D /* RegisteredEncountersDebugViewController.swift in Sources */,
 				0E9DCC9D2430C7F100C2670D /* RegisteredEncountersDebugScreenView.swift in Sources */,
@@ -1585,6 +1600,7 @@
 				83252A6E24314CFE001E6D63 /* ConfirmRegistrationRequest.swift in Sources */,
 				8382897924332D670054347B /* UITextFireld+Factory.swift in Sources */,
 				83252A6324314B9A001E6D63 /* GcpClientType.swift in Sources */,
+				836DF52124334C31000C00C0 /* RegistrationModelType.swift in Sources */,
 				0EE60C23242FDAA400D29048 /* Encounter.swift in Sources */,
 				8382896C24332CF40054347B /* UIButton+Factory.swift in Sources */,
 				0EE60C4B242FF2C200D29048 /* GeneralAssembly.swift in Sources */,

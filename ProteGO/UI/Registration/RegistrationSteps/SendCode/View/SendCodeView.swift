@@ -21,7 +21,7 @@ final class SendCodeView: UIView {
         """, fontStyle: .body)
 
     private let prefixTextField: UITextField = {
-        let textField = UITextField.with(text: "+48", centered: true)
+        let textField = UITextField.with(text: Constants.Networking.phoneNumberPrefix, centered: true)
         textField.textAlignment = .center
         textField.isUserInteractionEnabled = false
         return textField
@@ -44,6 +44,10 @@ final class SendCodeView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func dismissKeyboard() {
+        phoneNumberTextField.resignFirstResponder()
     }
 
     private func addSubviews() {

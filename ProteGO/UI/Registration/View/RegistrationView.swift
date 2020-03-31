@@ -7,14 +7,23 @@ final class RegistrationView: UIView {
         bannerView.backButtonTapEvent
     }
 
+    var tapAnywhereEvent: ControlEvent<Void> {
+        let tapObservable = tapGestureRecognizer.rx.event
+            .map { _ in return () }
+        return ControlEvent<Void>(events: tapObservable)
+    }
+
     private let bannerView = BannerView()
 
     private let contentContainerView = UIView()
+
+    private let tapGestureRecognizer = UITapGestureRecognizer()
 
     init() {
         super.init(frame: .zero)
         addSubviews()
         setupConstraints()
+        addGestureRecognizer(tapGestureRecognizer)
     }
 
     required init?(coder: NSCoder) {

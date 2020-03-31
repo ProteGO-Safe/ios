@@ -2,13 +2,17 @@ import Foundation
 import RxSwift
 import Valet
 
+struct SendCodeFinishedData {
+    let phoneNumber: String
+}
+
 final class SendCodeModel: SendCodeModelType {
 
-    var stepFinishedObservable: Observable<Void> {
+    var stepFinishedObservable: Observable<SendCodeFinishedData> {
         return didSendCodeSubject.asObservable()
     }
 
-    private let didSendCodeSubject = PublishSubject<Void>()
+    private let didSendCodeSubject = PublishSubject<SendCodeFinishedData>()
 
     private let gcpClient: GcpClientType
 
@@ -29,7 +33,7 @@ final class SendCodeModel: SendCodeModelType {
             case .success(let result):
                 logger.debug("Did send registration code")
                 self?.valet.set(string: result.registrationId, forKey: Constants.KeychainKeys.registrationIdKey)
-                self?.didSendCodeSubject.onNext(())
+                self?.didSendCodeSubject.onNext(SendCodeFinishedData(phoneNumber: phoneNumber))
             case .failure(let error):
                 logger.error("Failed to send registration code: \(error)")
             }

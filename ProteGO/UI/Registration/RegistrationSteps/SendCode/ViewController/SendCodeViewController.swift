@@ -5,7 +5,7 @@ final class SendCodeViewController: UIViewController, CustomView {
 
     typealias ViewClass = SendCodeView
 
-    var stepFinishedObservable: Observable<Void> {
+    var stepFinishedObservable: Observable<SendCodeFinishedData> {
         return viewModel.stepFinishedObservable
     }
 
@@ -27,5 +27,11 @@ final class SendCodeViewController: UIViewController, CustomView {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.bind(view: customView)
+    }
+}
+
+extension SendCodeViewController: DismissKeyboardDelegate {
+    func dismissKeyboard() {
+        customView.dismissKeyboard()
     }
 }

@@ -7,6 +7,7 @@ final class GeneralAssembly: Assembly {
         registerRealm(container)
         registerFilesCoordinator(container)
         registerSecretsGenerator(container)
+        registerValet(container)
         registerEncountersManager(container)
     }
 
@@ -27,11 +28,17 @@ final class GeneralAssembly: Assembly {
     }
 
     private func registerSecretsGenerator(_ container: Container) {
-        container.register(SecretsGeneratorType.self) { _ in
-            //swiftlint:disable force_unwrapping
-            let valet = Valet.valet(with: Identifier(nonEmpty: "Secrets")!, accessibility: .afterFirstUnlock)
-            return SecretsGenerator(valet: valet)
+        container.register(SecretsGeneratorType.self) { resolver in
+            return SecretsGenerator(valet: resolver.resolve(Valet.self))
         }
+    }
+
+    private func registerValet(_ container: Container) {
+        container.register(Valet.self) { _ in
+            //swiftlint:disable force_unwrapping
+            let sandboxId = Identifier(nonEmpty: Constants.ValetSandboxIds.secrets)!
+            return Valet.valet(with: sandboxId, accessibility: .afterFirstUnlock)
+        }.inObjectScope(.container)
     }
 
     private func registerEncountersManager(_ container: Container) {
