@@ -182,7 +182,6 @@
 		0ECE7A202430E48200EED942 /* BluetoothDebugItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothDebugItems.swift; sourceTree = "<group>"; };
 		0EE4E8F924326BA300EA05ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0EE4E8FA24326BA300EA05ED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		0EE4E8FB24326BAE00EA05ED /* pl */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pl; path = pl.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0EE4E8FC24326BAE00EA05ED /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0EE4E8FF2432717F00EA05ED /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		0EE60BCD242F8A3C00D29048 /* InfoKeys+Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InfoKeys+Value.swift"; sourceTree = "<group>"; };
@@ -1283,7 +1282,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				0EE4E8FA24326BA300EA05ED /* en */,
-				0EE4E8FB24326BAE00EA05ED /* pl */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
