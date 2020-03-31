@@ -106,9 +106,6 @@
 		8382897524332D3D0054347B /* UIScreen+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382897424332D3D0054347B /* UIScreen+Size.swift */; };
 		8382897924332D670054347B /* UITextFireld+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382897824332D670054347B /* UITextFireld+Factory.swift */; };
 		8382897C24332D840054347B /* UIView+AddSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382897B24332D840054347B /* UIView+AddSubviews.swift */; };
-		8382898124332E040054347B /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382897F24332E040054347B /* FontStyle.swift */; };
-		8382898224332E040054347B /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382898024332E040054347B /* Fonts.swift */; };
-		8382898524332E190054347B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382898424332E190054347B /* Images.swift */; };
 		838289BB24332F9E0054347B /* SendCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289BA24332F9E0054347B /* SendCodeModel.swift */; };
 		838289BD24332FB20054347B /* SendCodeModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289BC24332FB20054347B /* SendCodeModelType.swift */; };
 		838289BF24332FEE0054347B /* SendCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289BE24332FEE0054347B /* SendCodeView.swift */; };
@@ -142,6 +139,9 @@
 		838289FF243333330054347B /* Poppins-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 838289ED243333320054347B /* Poppins-Medium.otf */; };
 		83828A00243333330054347B /* Poppins-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 838289EE243333320054347B /* Poppins-SemiBoldItalic.otf */; };
 		83828A01243333330054347B /* Poppins-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 838289EF243333330054347B /* Poppins-Italic.otf */; };
+		83828A03243334BF0054347B /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83828A02243334BF0054347B /* Fonts.swift */; };
+		83828A052433350C0054347B /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83828A042433350C0054347B /* FontStyle.swift */; };
+		83828A082433352D0054347B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83828A072433352D0054347B /* Images.swift */; };
 		87074B78242F57770029AD4B /* AdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B77242F57770029AD4B /* AdvertiserDelegate.swift */; };
 		87074B79242F57770029AD4B /* AdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B77242F57770029AD4B /* AdvertiserDelegate.swift */; };
 		87074B7C242F6A5F0029AD4B /* BleScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7B242F6A5F0029AD4B /* BleScanner.swift */; };
@@ -291,9 +291,6 @@
 		8382897424332D3D0054347B /* UIScreen+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Size.swift"; sourceTree = "<group>"; };
 		8382897824332D670054347B /* UITextFireld+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextFireld+Factory.swift"; sourceTree = "<group>"; };
 		8382897B24332D840054347B /* UIView+AddSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddSubviews.swift"; sourceTree = "<group>"; };
-		8382897F24332E040054347B /* FontStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FontStyle.swift; path = Anna/Common/Fonts/FontStyle.swift; sourceTree = SOURCE_ROOT; };
-		8382898024332E040054347B /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fonts.swift; path = Anna/Common/Fonts/Fonts.swift; sourceTree = SOURCE_ROOT; };
-		8382898424332E190054347B /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Images.swift; path = Anna/Common/Images/Images.swift; sourceTree = SOURCE_ROOT; };
 		838289BA24332F9E0054347B /* SendCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCodeModel.swift; sourceTree = "<group>"; };
 		838289BC24332FB20054347B /* SendCodeModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCodeModelType.swift; sourceTree = "<group>"; };
 		838289BE24332FEE0054347B /* SendCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCodeView.swift; sourceTree = "<group>"; };
@@ -327,6 +324,9 @@
 		838289ED243333320054347B /* Poppins-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.otf"; sourceTree = "<group>"; };
 		838289EE243333320054347B /* Poppins-SemiBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBoldItalic.otf"; sourceTree = "<group>"; };
 		838289EF243333330054347B /* Poppins-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Italic.otf"; sourceTree = "<group>"; };
+		83828A02243334BF0054347B /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		83828A042433350C0054347B /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
+		83828A072433352D0054347B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		87074B77242F57770029AD4B /* AdvertiserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertiserDelegate.swift; sourceTree = "<group>"; };
 		87074B7B242F6A5F0029AD4B /* BleScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleScanner.swift; sourceTree = "<group>"; };
 		87074B7E242F6D700029AD4B /* PeripheralContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralContext.swift; sourceTree = "<group>"; };
@@ -967,8 +967,8 @@
 		8382897E24332DF00054347B /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				8382898024332E040054347B /* Fonts.swift */,
-				8382897F24332E040054347B /* FontStyle.swift */,
+				83828A02243334BF0054347B /* Fonts.swift */,
+				83828A042433350C0054347B /* FontStyle.swift */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -976,7 +976,7 @@
 		8382898324332E0D0054347B /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				8382898424332E190054347B /* Images.swift */,
+				83828A072433352D0054347B /* Images.swift */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1511,8 +1511,8 @@
 				0E9DDA772430E12C002D879F /* AppDelegate.swift in Sources */,
 				83252A6524314BD7001E6D63 /* GcpEndpoint.swift in Sources */,
 				83252A9024322174001E6D63 /* RootModel.swift in Sources */,
+				83828A03243334BF0054347B /* Fonts.swift in Sources */,
 				0EE60C30242FDB2D00D29048 /* RealmManagerType.swift in Sources */,
-				8382898224332E040054347B /* Fonts.swift in Sources */,
 				83252A6A24314C74001E6D63 /* RegisterDeviceRequest.swift in Sources */,
 				0E9DCCA52430C9CE00C2670D /* RegisteredEncountersDebugViewModel.swift in Sources */,
 				8382897224332D2A0054347B /* UILabel+Factory.swift in Sources */,
@@ -1531,8 +1531,8 @@
 				83252A8A24322156001E6D63 /* RootView.swift in Sources */,
 				8382896924332CBB0054347B /* Colors.swift in Sources */,
 				8382896F24332D170054347B /* UIColor+Hex.swift in Sources */,
+				83828A082433352D0054347B /* Images.swift in Sources */,
 				83252A7624314EFF001E6D63 /* DefaultRequestParameters.swift in Sources */,
-				8382898524332E190054347B /* Images.swift in Sources */,
 				838289D9243331ED0054347B /* RegistrationView.swift in Sources */,
 				0E6D260B242E8B540037A80C /* Constants+InfoKeys.swift in Sources */,
 				83252A782431519F001E6D63 /* NetworkingAssembly.swift in Sources */,
@@ -1568,6 +1568,7 @@
 				0E965355242F82B900ADD300 /* GeneralDebugItems.swift in Sources */,
 				0ECE7A222430F91F00EED942 /* MockAdvertiser.swift in Sources */,
 				83252A7024314D17001E6D63 /* ConfirmRegistrationResult.swift in Sources */,
+				83828A052433350C0054347B /* FontStyle.swift in Sources */,
 				8382897524332D3D0054347B /* UIScreen+Size.swift in Sources */,
 				838289CF243330D10054347B /* VerifyCodeView.swift in Sources */,
 				838289D1243330E40054347B /* VerifyCodeVIewController.swift in Sources */,
@@ -1588,7 +1589,6 @@
 				8382896C24332CF40054347B /* UIButton+Factory.swift in Sources */,
 				0EE60C4B242FF2C200D29048 /* GeneralAssembly.swift in Sources */,
 				0EE60BD0242F8A3C00D29048 /* InfoKeys+Value.swift in Sources */,
-				8382898124332E040054347B /* FontStyle.swift in Sources */,
 				838289BF24332FEE0054347B /* SendCodeView.swift in Sources */,
 				838289DB2433320B0054347B /* RegistrationViewController.swift in Sources */,
 				0EE60C52242FF40500D29048 /* FilesCoordinatorType.swift in Sources */,
