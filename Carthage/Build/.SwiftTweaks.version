@@ -3,8 +3,8 @@
   "iOS" : [
     {
       "name" : "SwiftTweaks",
-      "hash" : "4162aa49f8f401caac88cd1dbd8c9f93a12c86ab217f892ab962ef7426662d02",
-      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+      "hash" : "6dc3c3ccb0fe060589816d0f8921ffc484050e216d16470592a470ef6c1a50e5",
+      "swiftToolchainVersion" : "5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)"
     }
   ]
 }

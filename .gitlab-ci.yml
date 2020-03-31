@@ -12,7 +12,7 @@ tests:
     script:
         - bundle exec fastlane tests
     tags:
-        - xcode-11.3
+        - xcode-11.4
 
 deploy_development:
     stage: deploy
@@ -20,7 +20,7 @@ deploy_development:
     script:
         - bundle exec fastlane deployDev
     tags:
-        - xcode-11.3
+        - xcode-11.4
     only:
         - tags
 
@@ -30,7 +30,7 @@ deploy_staging:
     script:
         - bundle exec fastlane deployStg
     tags:
-        - xcode-11.3
+        - xcode-11.4
     only:
         - tags
 
@@ -40,6 +40,6 @@ deploy_production:
     script:
         - bundle exec fastlane deployProd
     tags:
-        - xcode-11.3
+        - xcode-11.4
     only:
         - tags        
