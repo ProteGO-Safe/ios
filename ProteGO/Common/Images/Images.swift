@@ -8,4 +8,6 @@ struct Images {
     static let logoSmall = UIImage(named: "logoSmall")!
 
     static let generalRecommendationExclamationMark = UIImage(named: "generalRecommendationExclamationMark")!
+
+    static let hamburgerIcon = UIImage(named: "hamburgerIcon")!
 }

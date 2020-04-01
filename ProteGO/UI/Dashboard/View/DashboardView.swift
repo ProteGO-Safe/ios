@@ -81,7 +81,7 @@ final class DashboardView: UIView {
         return GeneralRecommendationsCard(config: config)
     }()
 
-    private let bannerView = BannerView(withBackButton: false)
+    private let bannerView = BannerView(withBackButton: false, hamburgerIconVisible: true)
 
     init() {
         super.init(frame: .zero)
