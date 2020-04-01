@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>643788017627-23unr0vbdjqcd7bgvthkg8qri858rc0k.apps.googleusercontent.com</string>
+	<string>953044710318-bqn02cf12kpv40h2mtpc0p1g8n3710jv.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.643788017627-23unr0vbdjqcd7bgvthkg8qri858rc0k</string>
+	<string>com.googleusercontent.apps.953044710318-bqn02cf12kpv40h2mtpc0p1g8n3710jv</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBm0CS0Jo_aJfUEHSz_kux1gQgM8iwA1iM</string>
+	<string>AIzaSyDHx0DRIjsDO_mvkQxiaVQFltYZiAlDlf4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>643788017627</string>
+	<string>953044710318</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>pl.gov.anna.dev</string>
+	<string>pl.gov.mc.protego.dev</string>
 	<key>PROJECT_ID</key>
-	<string>protego-dev-272212</string>
+	<string>protego-dev</string>
 	<key>STORAGE_BUCKET</key>
-	<string>protego-dev-272212.appspot.com</string>
+	<string>protego-dev.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:643788017627:ios:2752e552fe1769631961fe</string>
+	<string>1:953044710318:ios:e760658ecfe2739e734e3f</string>
 	<key>DATABASE_URL</key>
-	<string>https://protego-dev-272212.firebaseio.com</string>
+	<string>https://protego-dev.firebaseio.com</string>
 </dict>
 </plist>
