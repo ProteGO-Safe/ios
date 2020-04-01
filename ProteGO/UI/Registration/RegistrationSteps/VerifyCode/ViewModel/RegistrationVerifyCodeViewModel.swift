@@ -1,24 +1,28 @@
 import UIKit
 import RxSwift
 
-final class VerifyCodeViewModel: VerifyCodeViewModelType {
+final class RegistrationVerifyCodeViewModel: ReegistrationVerifyCodeViewModelType {
 
     var stepFinishedObservable: Observable<Void> {
         return model.stepFinishedObservable
     }
 
-    private let model: VerifyCodeModelType
+    private let model: RegistrationVerifyCodeModelType
 
     private let disposeBag = DisposeBag()
 
-    init(model: VerifyCodeModelType) {
+    init(model: RegistrationVerifyCodeModelType) {
         self.model = model
     }
 
-    func bind(view: VerifyCodeView) {
+    func bind(view: RegistrationVerifyCodeView) {
         view.verifyCodeButtonTapEvent.subscribe(onNext: { [weak self] _ in
             self?.confirmRegistration(code: view.code)
         }).disposed(by: disposeBag)
+
+        model.keyboardHeightWillChangeObservable.subscribe(onNext: { keyboardHeight in
+            view.update(keyboardHeight: keyboardHeight)
+        }) .disposed(by: disposeBag)
     }
 
     func confirmRegistration(code: String) {

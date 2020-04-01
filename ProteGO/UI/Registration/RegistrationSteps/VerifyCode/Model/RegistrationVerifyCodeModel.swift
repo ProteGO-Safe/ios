@@ -1,11 +1,15 @@
-import Foundation
+import UIKit
 import RxSwift
 import Valet
 
-final class VerifyCodeModel: VerifyCodeModelType {
+final class RegistrationVerifyCodeModel: RegistrationVerifyCodeModelType {
 
     var stepFinishedObservable: Observable<Void> {
         return didVerifyCode.asObservable()
+    }
+
+    var keyboardHeightWillChangeObservable: Observable<CGFloat> {
+        keyboardManager.keyboardHeightWillChangeObservable
     }
 
     private let didVerifyCode = PublishSubject<Void>()
@@ -14,12 +18,16 @@ final class VerifyCodeModel: VerifyCodeModelType {
 
     private let valet: Valet
 
+    private let keyboardManager: KeyboardManagerType
+
     private let disposeBag = DisposeBag()
 
     init(gcpClient: GcpClientType,
-         valet: Valet) {
+         valet: Valet,
+         keyboardManager: KeyboardManagerType) {
         self.gcpClient = gcpClient
         self.valet = valet
+        self.keyboardManager = keyboardManager
     }
 
     func confirmRegistration(code: String) {

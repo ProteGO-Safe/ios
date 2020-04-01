@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 import RxSwift
 import Valet
 
@@ -6,10 +6,14 @@ struct SendCodeFinishedData {
     let phoneNumber: String
 }
 
-final class SendCodeModel: SendCodeModelType {
+final class RegistrationSendCodeModel: RegistrationSendCodeModelType {
 
     var stepFinishedObservable: Observable<SendCodeFinishedData> {
         return didSendCodeSubject.asObservable()
+    }
+
+    var keyboardHeightWillChangeObservable: Observable<CGFloat> {
+        keyboardManager.keyboardHeightWillChangeObservable
     }
 
     private let didSendCodeSubject = PublishSubject<SendCodeFinishedData>()
@@ -18,12 +22,16 @@ final class SendCodeModel: SendCodeModelType {
 
     private let valet: Valet
 
+    private let keyboardManager: KeyboardManagerType
+
     private let disposeBag = DisposeBag()
 
     init(gcpClient: GcpClientType,
-         valet: Valet) {
+         valet: Valet,
+         keyboardManager: KeyboardManagerType) {
         self.gcpClient = gcpClient
         self.valet = valet
+        self.keyboardManager = keyboardManager
     }
 
     func registerDevice(phoneNumber: String) {

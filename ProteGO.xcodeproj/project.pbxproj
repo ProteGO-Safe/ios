@@ -111,6 +111,20 @@
 		83252A9C24322549001E6D63 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A9B24322549001E6D63 /* OnboardingView.swift */; };
 		833181902433A05B00A8E18D /* ConstraintMaker+AspectRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8331818F2433A05B00A8E18D /* ConstraintMaker+AspectRatio.swift */; };
 		833181932433A09B00A8E18D /* UIImage+AspectRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833181922433A09B00A8E18D /* UIImage+AspectRatio.swift */; };
+		83512C192434BF00007DB8AD /* NavigationButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83512C182434BF00007DB8AD /* NavigationButtonsView.swift */; };
+		83512C262434D063007DB8AD /* OnboardingWelcomeStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83512C252434D063007DB8AD /* OnboardingWelcomeStepView.swift */; };
+		83512C282434D06F007DB8AD /* OnboardingStatusStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83512C272434D06F007DB8AD /* OnboardingStatusStepView.swift */; };
+		83512C2A2434D07D007DB8AD /* OnboardingBluetoothStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83512C292434D07D007DB8AD /* OnboardingBluetoothStepView.swift */; };
+		83512C2F2434E75E007DB8AD /* OnboardingSharingStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83512C2E2434E75E007DB8AD /* OnboardingSharingStepView.swift */; };
+		83512C312434E9B3007DB8AD /* StatusDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83512C302434E9B3007DB8AD /* StatusDescriptionView.swift */; };
+		83512C382434FFE4007DB8AD /* OnboardingStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83512C372434FFE4007DB8AD /* OnboardingStepView.swift */; };
+		83512C3A24350B70007DB8AD /* StatusDescriptionsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83512C3924350B70007DB8AD /* StatusDescriptionsContainerView.swift */; };
+		83512C3C243510A5007DB8AD /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83512C3B243510A5007DB8AD /* OnboardingModel.swift */; };
+		83512C3E243510B2007DB8AD /* OnboardingModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83512C3D243510B2007DB8AD /* OnboardingModelType.swift */; };
+		83512C4024351EAA007DB8AD /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83512C3F24351EAA007DB8AD /* OnboardingViewModel.swift */; };
+		83512C42243522C2007DB8AD /* OnboardingVIewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83512C41243522C2007DB8AD /* OnboardingVIewModelType.swift */; };
+		83512C4524357EA7007DB8AD /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83512C4424357EA6007DB8AD /* KeyboardManager.swift */; };
+		83512C48243581F1007DB8AD /* KeyboardManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83512C47243581F1007DB8AD /* KeyboardManagerType.swift */; };
 		83680160243227B400678DBD /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8368015F243227B400678DBD /* OnboardingViewController.swift */; };
 		83680162243227CF00678DBD /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83680161243227CF00678DBD /* DashboardViewController.swift */; };
 		83680164243227D700678DBD /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83680163243227D700678DBD /* DashboardView.swift */; };
@@ -129,21 +143,21 @@
 		8382897524332D3D0054347B /* UIScreen+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382897424332D3D0054347B /* UIScreen+Size.swift */; };
 		8382897924332D670054347B /* UITextFireld+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382897824332D670054347B /* UITextFireld+Factory.swift */; };
 		8382897C24332D840054347B /* UIView+AddSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382897B24332D840054347B /* UIView+AddSubviews.swift */; };
-		838289BB24332F9E0054347B /* SendCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289BA24332F9E0054347B /* SendCodeModel.swift */; };
-		838289BD24332FB20054347B /* SendCodeModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289BC24332FB20054347B /* SendCodeModelType.swift */; };
-		838289BF24332FEE0054347B /* SendCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289BE24332FEE0054347B /* SendCodeView.swift */; };
-		838289C1243330080054347B /* SendCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289C0243330080054347B /* SendCodeViewController.swift */; };
-		838289C4243330200054347B /* SendCodeViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289C3243330200054347B /* SendCodeViewModelType.swift */; };
-		838289C6243330320054347B /* SendCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289C5243330320054347B /* SendCodeViewModel.swift */; };
-		838289CC243330B50054347B /* VerifyCodeModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289CB243330B50054347B /* VerifyCodeModelType.swift */; };
-		838289CF243330D10054347B /* VerifyCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289CE243330D10054347B /* VerifyCodeView.swift */; };
-		838289D1243330E40054347B /* VerifyCodeVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D0243330E40054347B /* VerifyCodeVIewController.swift */; };
-		838289D3243330F40054347B /* VerifyCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D2243330F40054347B /* VerifyCodeViewModel.swift */; };
-		838289D5243331110054347B /* VerifyCodeViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D4243331110054347B /* VerifyCodeViewModelType.swift */; };
+		838289BB24332F9E0054347B /* RegistrationSendCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289BA24332F9E0054347B /* RegistrationSendCodeModel.swift */; };
+		838289BD24332FB20054347B /* RegistrationSendCodeModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289BC24332FB20054347B /* RegistrationSendCodeModelType.swift */; };
+		838289BF24332FEE0054347B /* RegistrationSendCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289BE24332FEE0054347B /* RegistrationSendCodeView.swift */; };
+		838289C1243330080054347B /* RegistrationSendCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289C0243330080054347B /* RegistrationSendCodeViewController.swift */; };
+		838289C4243330200054347B /* RegistrationSendCodeViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289C3243330200054347B /* RegistrationSendCodeViewModelType.swift */; };
+		838289C6243330320054347B /* RegistrationSendCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289C5243330320054347B /* RegistrationSendCodeViewModel.swift */; };
+		838289CC243330B50054347B /* RegistrationVerifyCodeModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289CB243330B50054347B /* RegistrationVerifyCodeModelType.swift */; };
+		838289CF243330D10054347B /* RegistrationVerifyCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289CE243330D10054347B /* RegistrationVerifyCodeView.swift */; };
+		838289D1243330E40054347B /* RegistrationVerifyCodeVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D0243330E40054347B /* RegistrationVerifyCodeVIewController.swift */; };
+		838289D3243330F40054347B /* RegistrationVerifyCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D2243330F40054347B /* RegistrationVerifyCodeViewModel.swift */; };
+		838289D5243331110054347B /* RegistrationVerifyCodeViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D4243331110054347B /* RegistrationVerifyCodeViewModelType.swift */; };
 		838289D7243331510054347B /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D6243331510054347B /* BannerView.swift */; };
 		838289D9243331ED0054347B /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D8243331ED0054347B /* RegistrationView.swift */; };
 		838289DB2433320B0054347B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289DA2433320B0054347B /* RegistrationViewController.swift */; };
-		838289DD2433327A0054347B /* VerifyCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289DC2433327A0054347B /* VerifyCodeModel.swift */; };
+		838289DD2433327A0054347B /* RegistrationVerifyCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289DC2433327A0054347B /* RegistrationVerifyCodeModel.swift */; };
 		838289F0243333330054347B /* Poppins-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 838289DE2433332F0054347B /* Poppins-SemiBold.otf */; };
 		838289F1243333330054347B /* Poppins-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 838289DF2433332F0054347B /* Poppins-Bold.otf */; };
 		838289F2243333330054347B /* Poppins-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 838289E0243333300054347B /* Poppins-Black.otf */; };
@@ -318,6 +332,20 @@
 		83252A9B24322549001E6D63 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		8331818F2433A05B00A8E18D /* ConstraintMaker+AspectRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstraintMaker+AspectRatio.swift"; sourceTree = "<group>"; };
 		833181922433A09B00A8E18D /* UIImage+AspectRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+AspectRatio.swift"; sourceTree = "<group>"; };
+		83512C182434BF00007DB8AD /* NavigationButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButtonsView.swift; sourceTree = "<group>"; };
+		83512C252434D063007DB8AD /* OnboardingWelcomeStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeStepView.swift; sourceTree = "<group>"; };
+		83512C272434D06F007DB8AD /* OnboardingStatusStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStatusStepView.swift; sourceTree = "<group>"; };
+		83512C292434D07D007DB8AD /* OnboardingBluetoothStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingBluetoothStepView.swift; sourceTree = "<group>"; };
+		83512C2E2434E75E007DB8AD /* OnboardingSharingStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSharingStepView.swift; sourceTree = "<group>"; };
+		83512C302434E9B3007DB8AD /* StatusDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDescriptionView.swift; sourceTree = "<group>"; };
+		83512C372434FFE4007DB8AD /* OnboardingStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStepView.swift; sourceTree = "<group>"; };
+		83512C3924350B70007DB8AD /* StatusDescriptionsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDescriptionsContainerView.swift; sourceTree = "<group>"; };
+		83512C3B243510A5007DB8AD /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
+		83512C3D243510B2007DB8AD /* OnboardingModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModelType.swift; sourceTree = "<group>"; };
+		83512C3F24351EAA007DB8AD /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		83512C41243522C2007DB8AD /* OnboardingVIewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVIewModelType.swift; sourceTree = "<group>"; };
+		83512C4424357EA6007DB8AD /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
+		83512C47243581F1007DB8AD /* KeyboardManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManagerType.swift; sourceTree = "<group>"; };
 		8368015F243227B400678DBD /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		83680161243227CF00678DBD /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		83680163243227D700678DBD /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
@@ -336,21 +364,21 @@
 		8382897424332D3D0054347B /* UIScreen+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Size.swift"; sourceTree = "<group>"; };
 		8382897824332D670054347B /* UITextFireld+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextFireld+Factory.swift"; sourceTree = "<group>"; };
 		8382897B24332D840054347B /* UIView+AddSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddSubviews.swift"; sourceTree = "<group>"; };
-		838289BA24332F9E0054347B /* SendCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCodeModel.swift; sourceTree = "<group>"; };
-		838289BC24332FB20054347B /* SendCodeModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCodeModelType.swift; sourceTree = "<group>"; };
-		838289BE24332FEE0054347B /* SendCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCodeView.swift; sourceTree = "<group>"; };
-		838289C0243330080054347B /* SendCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCodeViewController.swift; sourceTree = "<group>"; };
-		838289C3243330200054347B /* SendCodeViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCodeViewModelType.swift; sourceTree = "<group>"; };
-		838289C5243330320054347B /* SendCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCodeViewModel.swift; sourceTree = "<group>"; };
-		838289CB243330B50054347B /* VerifyCodeModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCodeModelType.swift; sourceTree = "<group>"; };
-		838289CE243330D10054347B /* VerifyCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCodeView.swift; sourceTree = "<group>"; };
-		838289D0243330E40054347B /* VerifyCodeVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCodeVIewController.swift; sourceTree = "<group>"; };
-		838289D2243330F40054347B /* VerifyCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCodeViewModel.swift; sourceTree = "<group>"; };
-		838289D4243331110054347B /* VerifyCodeViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCodeViewModelType.swift; sourceTree = "<group>"; };
+		838289BA24332F9E0054347B /* RegistrationSendCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationSendCodeModel.swift; sourceTree = "<group>"; };
+		838289BC24332FB20054347B /* RegistrationSendCodeModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationSendCodeModelType.swift; sourceTree = "<group>"; };
+		838289BE24332FEE0054347B /* RegistrationSendCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationSendCodeView.swift; sourceTree = "<group>"; };
+		838289C0243330080054347B /* RegistrationSendCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationSendCodeViewController.swift; sourceTree = "<group>"; };
+		838289C3243330200054347B /* RegistrationSendCodeViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationSendCodeViewModelType.swift; sourceTree = "<group>"; };
+		838289C5243330320054347B /* RegistrationSendCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationSendCodeViewModel.swift; sourceTree = "<group>"; };
+		838289CB243330B50054347B /* RegistrationVerifyCodeModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationVerifyCodeModelType.swift; sourceTree = "<group>"; };
+		838289CE243330D10054347B /* RegistrationVerifyCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationVerifyCodeView.swift; sourceTree = "<group>"; };
+		838289D0243330E40054347B /* RegistrationVerifyCodeVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationVerifyCodeVIewController.swift; sourceTree = "<group>"; };
+		838289D2243330F40054347B /* RegistrationVerifyCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationVerifyCodeViewModel.swift; sourceTree = "<group>"; };
+		838289D4243331110054347B /* RegistrationVerifyCodeViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationVerifyCodeViewModelType.swift; sourceTree = "<group>"; };
 		838289D6243331510054347B /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		838289D8243331ED0054347B /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		838289DA2433320B0054347B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
-		838289DC2433327A0054347B /* VerifyCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCodeModel.swift; sourceTree = "<group>"; };
+		838289DC2433327A0054347B /* RegistrationVerifyCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationVerifyCodeModel.swift; sourceTree = "<group>"; };
 		838289DE2433332F0054347B /* Poppins-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.otf"; sourceTree = "<group>"; };
 		838289DF2433332F0054347B /* Poppins-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.otf"; sourceTree = "<group>"; };
 		838289E0243333300054347B /* Poppins-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Black.otf"; sourceTree = "<group>"; };
@@ -540,6 +568,7 @@
 		0E6D2603242E8B540037A80C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				83512C4324357E92007DB8AD /* KeyboardManager */,
 				0E22F9292434DEC1008AD8EB /* Components */,
 				0E8DED2C2433CC4E00D7F806 /* DangerStatusManager */,
 				8382898324332E0D0054347B /* Images */,
@@ -993,8 +1022,11 @@
 		83252A952432248A001E6D63 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				83512C1A2434C416007DB8AD /* OnboardingSteps */,
 				83252A9A2432252B001E6D63 /* View */,
 				83252A9924322527001E6D63 /* ViewController */,
+				83512C172434BD45007DB8AD /* ViewModel */,
+				83512C162434BD41007DB8AD /* Model */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -1022,6 +1054,7 @@
 			isa = PBXGroup;
 			children = (
 				83252A9B24322549001E6D63 /* OnboardingView.swift */,
+				83512C182434BF00007DB8AD /* NavigationButtonsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1058,6 +1091,79 @@
 				833181922433A09B00A8E18D /* UIImage+AspectRatio.swift */,
 			);
 			path = UIImage;
+			sourceTree = "<group>";
+		};
+		83512C162434BD41007DB8AD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				83512C3B243510A5007DB8AD /* OnboardingModel.swift */,
+				83512C3D243510B2007DB8AD /* OnboardingModelType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		83512C172434BD45007DB8AD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				83512C3F24351EAA007DB8AD /* OnboardingViewModel.swift */,
+				83512C41243522C2007DB8AD /* OnboardingVIewModelType.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		83512C1A2434C416007DB8AD /* OnboardingSteps */ = {
+			isa = PBXGroup;
+			children = (
+				83512C372434FFE4007DB8AD /* OnboardingStepView.swift */,
+				83512C242434D032007DB8AD /* Welcome */,
+				83512C232434D027007DB8AD /* Status */,
+				83512C222434D021007DB8AD /* Bluetooth */,
+				83512C2D2434E74A007DB8AD /* Sharing */,
+			);
+			path = OnboardingSteps;
+			sourceTree = "<group>";
+		};
+		83512C222434D021007DB8AD /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				83512C292434D07D007DB8AD /* OnboardingBluetoothStepView.swift */,
+			);
+			path = Bluetooth;
+			sourceTree = "<group>";
+		};
+		83512C232434D027007DB8AD /* Status */ = {
+			isa = PBXGroup;
+			children = (
+				83512C272434D06F007DB8AD /* OnboardingStatusStepView.swift */,
+				83512C302434E9B3007DB8AD /* StatusDescriptionView.swift */,
+				83512C3924350B70007DB8AD /* StatusDescriptionsContainerView.swift */,
+			);
+			path = Status;
+			sourceTree = "<group>";
+		};
+		83512C242434D032007DB8AD /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				83512C252434D063007DB8AD /* OnboardingWelcomeStepView.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		83512C2D2434E74A007DB8AD /* Sharing */ = {
+			isa = PBXGroup;
+			children = (
+				83512C2E2434E75E007DB8AD /* OnboardingSharingStepView.swift */,
+			);
+			path = Sharing;
+			sourceTree = "<group>";
+		};
+		83512C4324357E92007DB8AD /* KeyboardManager */ = {
+			isa = PBXGroup;
+			children = (
+				83512C4424357EA6007DB8AD /* KeyboardManager.swift */,
+				83512C47243581F1007DB8AD /* KeyboardManagerType.swift */,
+			);
+			path = KeyboardManager;
 			sourceTree = "<group>";
 		};
 		836DF51824334BEC000C00C0 /* ViewModel */ = {
@@ -1239,8 +1345,8 @@
 		838289B624332F7B0054347B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				838289BA24332F9E0054347B /* SendCodeModel.swift */,
-				838289BC24332FB20054347B /* SendCodeModelType.swift */,
+				838289BA24332F9E0054347B /* RegistrationSendCodeModel.swift */,
+				838289BC24332FB20054347B /* RegistrationSendCodeModelType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1248,8 +1354,8 @@
 		838289B724332F7E0054347B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				838289C3243330200054347B /* SendCodeViewModelType.swift */,
-				838289C5243330320054347B /* SendCodeViewModel.swift */,
+				838289C3243330200054347B /* RegistrationSendCodeViewModelType.swift */,
+				838289C5243330320054347B /* RegistrationSendCodeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1257,7 +1363,7 @@
 		838289B824332F840054347B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				838289C0243330080054347B /* SendCodeViewController.swift */,
+				838289C0243330080054347B /* RegistrationSendCodeViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1265,7 +1371,7 @@
 		838289B924332F880054347B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				838289BE24332FEE0054347B /* SendCodeView.swift */,
+				838289BE24332FEE0054347B /* RegistrationSendCodeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1273,8 +1379,8 @@
 		838289C7243330910054347B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				838289CB243330B50054347B /* VerifyCodeModelType.swift */,
-				838289DC2433327A0054347B /* VerifyCodeModel.swift */,
+				838289CB243330B50054347B /* RegistrationVerifyCodeModelType.swift */,
+				838289DC2433327A0054347B /* RegistrationVerifyCodeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1282,8 +1388,8 @@
 		838289C8243330940054347B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				838289D2243330F40054347B /* VerifyCodeViewModel.swift */,
-				838289D4243331110054347B /* VerifyCodeViewModelType.swift */,
+				838289D2243330F40054347B /* RegistrationVerifyCodeViewModel.swift */,
+				838289D4243331110054347B /* RegistrationVerifyCodeViewModelType.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1291,7 +1397,7 @@
 		838289C9243330980054347B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				838289D0243330E40054347B /* VerifyCodeVIewController.swift */,
+				838289D0243330E40054347B /* RegistrationVerifyCodeVIewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1299,7 +1405,7 @@
 		838289CA2433309D0054347B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				838289CE243330D10054347B /* VerifyCodeView.swift */,
+				838289CE243330D10054347B /* RegistrationVerifyCodeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1655,7 +1761,8 @@
 				87074B7F242F6D700029AD4B /* PeripheralContext.swift in Sources */,
 				87074B78242F57770029AD4B /* AdvertiserDelegate.swift in Sources */,
 				87074B85242F94780029AD4B /* PeripheralState.swift in Sources */,
-				838289D3243330F40054347B /* VerifyCodeViewModel.swift in Sources */,
+				838289D3243330F40054347B /* RegistrationVerifyCodeViewModel.swift in Sources */,
+				83512C3E243510B2007DB8AD /* OnboardingModelType.swift in Sources */,
 				83252A7C24320586001E6D63 /* Constants+Networking.swift in Sources */,
 				8368016E24323FF400678DBD /* OnboardingAssembly.swift in Sources */,
 				87C985FC242E0A8500335502 /* BleAdvertiser.swift in Sources */,
@@ -1663,16 +1770,22 @@
 				87177C942430A6FB007C8F78 /* Scanner.swift in Sources */,
 				87F259E92430A3E2009BF612 /* MockScanner.swift in Sources */,
 				83252A16242F6EEA001E6D63 /* UrlRequestBuilder.swift in Sources */,
-				838289C1243330080054347B /* SendCodeViewController.swift in Sources */,
+				838289C1243330080054347B /* RegistrationSendCodeViewController.swift in Sources */,
 				0E9DDA772430E12C002D879F /* AppDelegate.swift in Sources */,
 				83252A6524314BD7001E6D63 /* GcpEndpoint.swift in Sources */,
 				83252A9024322174001E6D63 /* RootModel.swift in Sources */,
+				83512C4524357EA7007DB8AD /* KeyboardManager.swift in Sources */,
 				83828A03243334BF0054347B /* Fonts.swift in Sources */,
 				0EE60C30242FDB2D00D29048 /* RealmManagerType.swift in Sources */,
+				83512C312434E9B3007DB8AD /* StatusDescriptionView.swift in Sources */,
 				83252A6A24314C74001E6D63 /* RegisterDeviceRequest.swift in Sources */,
 				0E9DCCA52430C9CE00C2670D /* RegisteredEncountersDebugViewModel.swift in Sources */,
 				8382897224332D2A0054347B /* UILabel+Factory.swift in Sources */,
 				0E9DCC8824300CC600C2670D /* Constants+KeychainKeys.swift in Sources */,
+				83512C42243522C2007DB8AD /* OnboardingVIewModelType.swift in Sources */,
+				838289C6243330320054347B /* RegistrationSendCodeViewModel.swift in Sources */,
+				83512C4024351EAA007DB8AD /* OnboardingViewModel.swift in Sources */,
+				838289D5243331110054347B /* RegistrationVerifyCodeViewModelType.swift in Sources */,
 				0E22F92E2434DFDE008AD8EB /* DangerStatusCardBottomModule.swift in Sources */,
 				838289C6243330320054347B /* SendCodeViewModel.swift in Sources */,
 				838289D5243331110054347B /* VerifyCodeViewModelType.swift in Sources */,
@@ -1684,6 +1797,7 @@
 				0E9DDA702430D464002D879F /* EncountersDebugItems.swift in Sources */,
 				83252A942432219A001E6D63 /* RootViewModelType.swift in Sources */,
 				0E6D2610242E956F0037A80C /* Logger.swift in Sources */,
+				83512C382434FFE4007DB8AD /* OnboardingStepView.swift in Sources */,
 				836801702432400500678DBD /* RegistrationAssembly.swift in Sources */,
 				871208D62430C6A600DA0A4D /* Constants+Bluetooth.swift in Sources */,
 				0E9DCC942430984A00C2670D /* EncountersManager.swift in Sources */,
@@ -1699,18 +1813,20 @@
 				0E6D260B242E8B540037A80C /* Constants+InfoKeys.swift in Sources */,
 				83252A782431519F001E6D63 /* NetworkingAssembly.swift in Sources */,
 				838289D7243331510054347B /* BannerView.swift in Sources */,
+				838289CC243330B50054347B /* RegistrationVerifyCodeModelType.swift in Sources */,
 				0E8DED382433D86A00D7F806 /* DashboardModel.swift in Sources */,
-				838289CC243330B50054347B /* VerifyCodeModelType.swift in Sources */,
 				83252A9224322190001E6D63 /* RootModelType.swift in Sources */,
 				0E22F9222434A486008AD8EB /* UIButton+BackgroundColor.swift in Sources */,
 				0E9DDA752430DB46002D879F /* String+Random.swift in Sources */,
 				83252A12242F63B1001E6D63 /* NetworkClient.swift in Sources */,
+				83512C3C243510A5007DB8AD /* OnboardingModel.swift in Sources */,
+				83512C2F2434E75E007DB8AD /* OnboardingSharingStepView.swift in Sources */,
 				83252A8E24322167001E6D63 /* RootViewModel.swift in Sources */,
 				83252A14242F6C22001E6D63 /* NetworkRequest.swift in Sources */,
 				83252A18242F9C11001E6D63 /* UrlRequestBuilderType.swift in Sources */,
 				0E9DCCAB2430CA5A00C2670D /* RegisteredEncountersDebugViewModelType.swift in Sources */,
 				0EE60C32242FDB2D00D29048 /* RealmManager.swift in Sources */,
-				838289BD24332FB20054347B /* SendCodeModelType.swift in Sources */,
+				838289BD24332FB20054347B /* RegistrationSendCodeModelType.swift in Sources */,
 				0E8DED45243480F400D7F806 /* YellowStatusCardView.swift in Sources */,
 				0EE60C5D2430014D00D29048 /* SecretsGeneratorType.swift in Sources */,
 				0EE60BD3242F8A5F00D29048 /* SwiftTweaks+ProteGO.swift in Sources */,
@@ -1720,8 +1836,10 @@
 				0E8DED3C2433D88000D7F806 /* DashboardViewModel.swift in Sources */,
 				0EE60C3E242FE4F100D29048 /* Constants+Realm.swift in Sources */,
 				83252A8C24322160001E6D63 /* RootViewController.swift in Sources */,
+				83512C262434D063007DB8AD /* OnboardingWelcomeStepView.swift in Sources */,
 				0ECE7A212430E48200EED942 /* BluetoothDebugItems.swift in Sources */,
 				0E965352242F81D400ADD300 /* DebugMenu.swift in Sources */,
+				83512C282434D06F007DB8AD /* OnboardingStatusStepView.swift in Sources */,
 				0E9DCCA92430CA4500C2670D /* RegisteredEncountersDebugModelType.swift in Sources */,
 				8382897C24332D840054347B /* UIView+AddSubviews.swift in Sources */,
 				0EE60C51242FF40500D29048 /* FilesCoordinator.swift in Sources */,
@@ -1729,7 +1847,7 @@
 				8368016C24323FE400678DBD /* RootAssembly.swift in Sources */,
 				83680160243227B400678DBD /* OnboardingViewController.swift in Sources */,
 				0EE4E9002432717F00EA05ED /* L10n.swift in Sources */,
-				838289BB24332F9E0054347B /* SendCodeModel.swift in Sources */,
+				838289BB24332F9E0054347B /* RegistrationSendCodeModel.swift in Sources */,
 				0ECE7A1F2430E3EE00EED942 /* BluetoothAssembly.swift in Sources */,
 				83252A9C24322549001E6D63 /* OnboardingView.swift in Sources */,
 				0E965355242F82B900ADD300 /* GeneralDebugItems.swift in Sources */,
@@ -1741,12 +1859,15 @@
 				83252A7024314D17001E6D63 /* ConfirmRegistrationResult.swift in Sources */,
 				83828A052433350C0054347B /* FontStyle.swift in Sources */,
 				8382897524332D3D0054347B /* UIScreen+Size.swift in Sources */,
+				838289CF243330D10054347B /* RegistrationVerifyCodeView.swift in Sources */,
+				838289D1243330E40054347B /* RegistrationVerifyCodeVIewController.swift in Sources */,
 				0E22F9202434A117008AD8EB /* RedStatusCard.swift in Sources */,
 				0E8DED3A2433D87300D7F806 /* DashboardModelType.swift in Sources */,
-				838289CF243330D10054347B /* VerifyCodeView.swift in Sources */,
-				838289D1243330E40054347B /* VerifyCodeVIewController.swift in Sources */,
 				83680162243227CF00678DBD /* DashboardViewController.swift in Sources */,
+				83512C48243581F1007DB8AD /* KeyboardManagerType.swift in Sources */,
+				83512C2A2434D07D007DB8AD /* OnboardingBluetoothStepView.swift in Sources */,
 				0E9DCC922430983A00C2670D /* EncountersManagerType.swift in Sources */,
+				83512C3A24350B70007DB8AD /* StatusDescriptionsContainerView.swift in Sources */,
 				83680164243227D700678DBD /* DashboardView.swift in Sources */,
 				0EE60C41242FF14100D29048 /* Resolver+Utils.swift in Sources */,
 				836DF51D24334C20000C00C0 /* RegistrationViewModelType.swift in Sources */,
@@ -1755,7 +1876,8 @@
 				0E9DCCA32430C9A700C2670D /* RegisteredEncountersDebugViewController.swift in Sources */,
 				0E9DCC9D2430C7F100C2670D /* RegisteredEncountersDebugScreenView.swift in Sources */,
 				0EE60C5F2430015E00D29048 /* SecretsGenerator.swift in Sources */,
-				838289C4243330200054347B /* SendCodeViewModelType.swift in Sources */,
+				83512C192434BF00007DB8AD /* NavigationButtonsView.swift in Sources */,
+				838289C4243330200054347B /* RegistrationSendCodeViewModelType.swift in Sources */,
 				0E9DCCA12430C8C200C2670D /* CustomView.swift in Sources */,
 				83252A6E24314CFE001E6D63 /* ConfirmRegistrationRequest.swift in Sources */,
 				8382897924332D670054347B /* UITextFireld+Factory.swift in Sources */,
@@ -1768,11 +1890,11 @@
 				833181902433A05B00A8E18D /* ConstraintMaker+AspectRatio.swift in Sources */,
 				0EE60C4B242FF2C200D29048 /* GeneralAssembly.swift in Sources */,
 				0EE60BD0242F8A3C00D29048 /* InfoKeys+Value.swift in Sources */,
-				838289BF24332FEE0054347B /* SendCodeView.swift in Sources */,
+				838289BF24332FEE0054347B /* RegistrationSendCodeView.swift in Sources */,
 				838289DB2433320B0054347B /* RegistrationViewController.swift in Sources */,
 				0EE60C52242FF40500D29048 /* FilesCoordinatorType.swift in Sources */,
 				836801722432401300678DBD /* DashboardAssembly.swift in Sources */,
-				838289DD2433327A0054347B /* VerifyCodeModel.swift in Sources */,
+				838289DD2433327A0054347B /* RegistrationVerifyCodeModel.swift in Sources */,
 				0E9DDA722430D82E002D879F /* Constants+Encounters.swift in Sources */,
 				83252A6024314B59001E6D63 /* GcpClient.swift in Sources */,
 			);

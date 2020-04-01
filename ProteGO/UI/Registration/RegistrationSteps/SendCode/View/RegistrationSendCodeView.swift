@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 import RxCocoa
 
-final class SendCodeView: UIView {
+final class RegistrationSendCodeView: UIView {
 
     var sendCodeButtonTapEvent: ControlEvent<Void> {
         return sendCodeButton.rx.tap
@@ -12,7 +12,7 @@ final class SendCodeView: UIView {
         return (prefixTextField.text ?? "") + (phoneNumberTextField.text ?? "")
     }
 
-    private let titleLabel = UILabel.with(text: L10n.registrationSendTitle, fontStyle: .headline)
+    private let titleLabel = UILabel.with(text: L10n.registrationSendTitle, fontStyle: .subtitle)
 
     private let descriptionLabel = UILabel.with(text: L10n.registrationSendDescription, fontStyle: .body)
 
@@ -31,6 +31,10 @@ final class SendCodeView: UIView {
 
     private let sendCodeButton = UIButton.rectButton(text: L10n.registrationSendCodeBtn)
 
+    private let contentContainerView = UIView()
+
+    private var contentBottomConstraint: Constraint?
+
     init() {
         super.init(frame: .zero)
         backgroundColor = .white
@@ -42,15 +46,46 @@ final class SendCodeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func clearTextField() {
+        phoneNumberTextField.text = ""
+    }
+
     func dismissKeyboard() {
         phoneNumberTextField.resignFirstResponder()
     }
 
+    func update(keyboardHeight: CGFloat) {
+        updateContraints(keyboardHeight: keyboardHeight)
+        self.setNeedsLayout()
+        UIView.animate(withDuration: 0) { [weak self] in
+            self?.layoutIfNeeded()
+        }
+    }
+
+    private func updateContraints(keyboardHeight: CGFloat) {
+        if keyboardHeight > 0 {
+            contentBottomConstraint?.update(offset: -keyboardHeight).activate()
+        } else {
+            contentBottomConstraint?.deactivate()
+        }
+    }
+
     private func addSubviews() {
-        addSubviews([titleLabel, descriptionLabel, prefixTextField, phoneNumberTextField, sendCodeButton])
+        addSubviews([contentContainerView])
+        contentContainerView.addSubviews([titleLabel,
+                                          descriptionLabel,
+                                          prefixTextField,
+                                          phoneNumberTextField,
+                                          sendCodeButton])
     }
 
     private func setupConstraints() {
+        contentContainerView.snp.makeConstraints {
+            $0.top.equalToSuperview().priority(.low)
+            contentBottomConstraint = $0.bottom.lessThanOrEqualToSuperview().constraint
+            $0.leading.trailing.equalToSuperview()
+        }
+
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(0.028 * UIScreen.height)
             $0.leading.equalToSuperview().offset(0.064 * UIScreen.width)
@@ -80,6 +115,7 @@ final class SendCodeView: UIView {
             $0.top.equalTo(prefixTextField.snp.bottom).offset(0.030 * UIScreen.height)
             $0.leading.trailing.equalTo(titleLabel)
             $0.height.equalTo(48)
+            $0.bottom.equalToSuperview().offset(-0.030 * UIScreen.height)
         }
     }
 }

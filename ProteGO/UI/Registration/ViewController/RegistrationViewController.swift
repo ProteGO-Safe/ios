@@ -22,15 +22,15 @@ final class RegistrationViewController: UIViewController, CustomView {
 
     private let viewModel: RegistrationViewModelType
 
-    private let sendCodeViewController: SendCodeViewController
+    private let sendCodeViewController: RegistrationSendCodeViewController
 
-    private let verifyCodeViewController: VerifyCodeViewController
+    private let verifyCodeViewController: RegistrationVerifyCodeViewController
 
     let disposeBag = DisposeBag()
 
     init(viewModel: RegistrationViewModelType,
-         sendCodeViewController: SendCodeViewController,
-         verifyCodeViewController: VerifyCodeViewController) {
+         sendCodeViewController: RegistrationSendCodeViewController,
+         verifyCodeViewController: RegistrationVerifyCodeViewController) {
         self.viewModel = viewModel
         self.sendCodeViewController = sendCodeViewController
         self.verifyCodeViewController = verifyCodeViewController
@@ -57,7 +57,7 @@ final class RegistrationViewController: UIViewController, CustomView {
     }
 
     private func subscribeCurrentStep() {
-        viewModel.currentStepOnservable
+        viewModel.currentStepObservable
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] stepToPresent in
                 self?.present(step: stepToPresent)
@@ -97,11 +97,12 @@ final class RegistrationViewController: UIViewController, CustomView {
     private func prepareViewController(step: RegistrationStep) -> UIViewController {
         switch step {
         case .sendCode:
+            sendCodeViewController.updateBeforeAppearing()
             dismissKeyboardDelegate = sendCodeViewController
             return sendCodeViewController
         case .verifyCode(let phoneNumber):
+            verifyCodeViewController.updateBeforeAppearing(phoneNumber: phoneNumber)
             dismissKeyboardDelegate = verifyCodeViewController
-            verifyCodeViewController.update(phoneNumber: phoneNumber)
             return verifyCodeViewController
         }
     }

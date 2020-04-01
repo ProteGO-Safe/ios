@@ -1,17 +1,17 @@
 import UIKit
 import RxSwift
 
-final class SendCodeViewController: UIViewController, CustomView {
+final class RegistrationSendCodeViewController: UIViewController, CustomView {
 
-    typealias ViewClass = SendCodeView
+    typealias ViewClass = RegistrationSendCodeView
 
     var stepFinishedObservable: Observable<SendCodeFinishedData> {
         return viewModel.stepFinishedObservable
     }
 
-    private let viewModel: SendCodeViewModelType
+    private let viewModel: RegistrationSendCodeViewModelType
 
-    init(viewModel: SendCodeViewModelType) {
+    init(viewModel: RegistrationSendCodeViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -28,9 +28,17 @@ final class SendCodeViewController: UIViewController, CustomView {
         super.viewDidLoad()
         viewModel.bind(view: customView)
     }
+
+    func updateBeforeAppearing() {
+        customView.clearTextField()
+        customView.update(keyboardHeight: .zero)
+    }
+
+    func clearTextField() {
+    }
 }
 
-extension SendCodeViewController: DismissKeyboardDelegate {
+extension RegistrationSendCodeViewController: DismissKeyboardDelegate {
     func dismissKeyboard() {
         customView.dismissKeyboard()
     }

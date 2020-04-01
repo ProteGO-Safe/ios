@@ -21,6 +21,7 @@ extension UIButton {
         }
 
         button.layer.cornerRadius = cornerRadius
+        button.layer.masksToBounds = true
 
         return button
     }

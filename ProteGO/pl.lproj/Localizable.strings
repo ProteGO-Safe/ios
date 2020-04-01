@@ -2,7 +2,7 @@
 "onboarding_hello_title" = "Witaj w ProteGO!";
 
 /* Onboarding powitanie */
-"onboarding_hello_descritption" = "Cieszymy się, że zdecydowałeś się zainstalować aplikację ProteGO.\n\nDzięki niej dowiesz się, czy istnieje ryzyko, że przebywałeś w pobliżu osób zarażonych koronawirusem SARS-CoV-2.";
+"onboarding_hello_description" = "Cieszymy się, że zdecydowałeś się zainstalować aplikację ProteGO.\n\nDzięki niej dowiesz się, czy istnieje ryzyko, że przebywałeś w pobliżu osób zarażonych koronawirusem SARS-CoV-2.";
 
 /* Onboarding przycisk */
 "onboarding_next_btn" = "Dalej";
@@ -32,7 +32,7 @@
 "onboarding_bluetooth_description" = "Aby aplikacja mogła działać prawidłowo, Bluetooth na Twoim telefonie musi być włączony cały czas.\n\nDzięki połączeniu Bluetooth ProteGO skanuje otoczenie w poszukiwaniu innych użytkowników, którzy korzystają z aplikacji.\n\nInformacje o napotkanych urządzeniach są przechowywane tylko na Twoim telefonie i nie są nigdzie wysyłane.";
 
 /* Onboarding informacje o dzieleniu się danymi */
-"onboarding_shring_title" = "Dzielenie się danymi w przypadku zarażenia";
+"onboarding_sharing_title" = "Dzielenie się danymi w przypadku zarażenia";
 
 /* Onboarding informacje o dzieleniu się danymi */
 "onboarding_sharing_description" = "Jeśli zdiagnozowano u Ciebie SARS-CoV-2 poprosimy Cię o przesłanie danych z aplikacji. Dzięki temu będziemy w stanie zaalarmować osoby, które przebywały w Twoim otoczeniu w ostatnich 14 dniach o możliwości zarażenia. Nie dowiedzą się o Twojej chorobie.";

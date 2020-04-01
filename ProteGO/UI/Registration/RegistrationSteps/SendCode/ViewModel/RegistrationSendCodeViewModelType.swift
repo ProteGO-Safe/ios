@@ -1,9 +1,9 @@
 import Foundation
 import RxSwift
 
-protocol SendCodeViewModelType {
+protocol RegistrationSendCodeViewModelType {
 
     var stepFinishedObservable: Observable<SendCodeFinishedData> { get }
 
-    func bind(view: SendCodeView)
+    func bind(view: RegistrationSendCodeView)
 }
