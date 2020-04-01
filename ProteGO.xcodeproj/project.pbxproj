@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0E153F39242D43D100340838 /* RxSwiftExt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5B4242B764100C092E7 /* RxSwiftExt.framework */; };
+		0E22F9202434A117008AD8EB /* RedStatusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22F91F2434A117008AD8EB /* RedStatusCard.swift */; };
+		0E22F9222434A486008AD8EB /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22F9212434A486008AD8EB /* UIButton+BackgroundColor.swift */; };
+		0E22F9252434A6F8008AD8EB /* GeneralRecommendationsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22F9242434A6F8008AD8EB /* GeneralRecommendationsCard.swift */; };
+		0E22F9282434A861008AD8EB /* UIStackView+AddArrangedSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22F9272434A861008AD8EB /* UIStackView+AddArrangedSubviews.swift */; };
 		0E3DD5BD242B764100C092E7 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5B3242B764100C092E7 /* Realm.framework */; };
 		0E3DD5BF242B764100C092E7 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5B5242B764100C092E7 /* RxSwift.framework */; };
 		0E3DD5C0242B764100C092E7 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5B6242B764100C092E7 /* RxCocoa.framework */; };
@@ -21,6 +25,17 @@
 		0E6D260A242E8B540037A80C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D2607242E8B540037A80C /* Constants.swift */; };
 		0E6D260B242E8B540037A80C /* Constants+InfoKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D2608242E8B540037A80C /* Constants+InfoKeys.swift */; };
 		0E6D2610242E956F0037A80C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D260F242E956F0037A80C /* Logger.swift */; };
+		0E8DED2E2433CC7600D7F806 /* DangerStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED2D2433CC7600D7F806 /* DangerStatusManager.swift */; };
+		0E8DED302433CCCF00D7F806 /* DangerStatusManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED2F2433CCCF00D7F806 /* DangerStatusManagerType.swift */; };
+		0E8DED322433D0CC00D7F806 /* DangerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED312433D0CC00D7F806 /* DangerStatus.swift */; };
+		0E8DED342433D19300D7F806 /* DangerStatusDebugItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED332433D19300D7F806 /* DangerStatusDebugItems.swift */; };
+		0E8DED382433D86A00D7F806 /* DashboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED372433D86A00D7F806 /* DashboardModel.swift */; };
+		0E8DED3A2433D87300D7F806 /* DashboardModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED392433D87300D7F806 /* DashboardModelType.swift */; };
+		0E8DED3C2433D88000D7F806 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED3B2433D88000D7F806 /* DashboardViewModel.swift */; };
+		0E8DED3E2433D88900D7F806 /* DashboardViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED3D2433D88900D7F806 /* DashboardViewModelType.swift */; };
+		0E8DED412433E21100D7F806 /* GreenStatusCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED402433E21100D7F806 /* GreenStatusCardView.swift */; };
+		0E8DED432434722200D7F806 /* DangerStatusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED422434722200D7F806 /* DangerStatusCard.swift */; };
+		0E8DED45243480F400D7F806 /* YellowStatusCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED44243480F400D7F806 /* YellowStatusCardView.swift */; };
 		0E965328242EB25C00ADD300 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E965327242EB25C00ADD300 /* GoogleService-Info.plist */; };
 		0E96532B242F436B00ADD300 /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96532A242F436B00ADD300 /* LogLevel.swift */; };
 		0E965352242F81D400ADD300 /* DebugMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96533F242F81D400ADD300 /* DebugMenu.swift */; };
@@ -180,6 +195,10 @@
 
 /* Begin PBXFileReference section */
 		01D8F6CEA947903B8972BB1F /* Pods-ProteGOTests.debug_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGOTests.debug_prod.xcconfig"; path = "Target Support Files/Pods-ProteGOTests/Pods-ProteGOTests.debug_prod.xcconfig"; sourceTree = "<group>"; };
+		0E22F91F2434A117008AD8EB /* RedStatusCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedStatusCard.swift; sourceTree = "<group>"; };
+		0E22F9212434A486008AD8EB /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
+		0E22F9242434A6F8008AD8EB /* GeneralRecommendationsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralRecommendationsCard.swift; sourceTree = "<group>"; };
+		0E22F9272434A861008AD8EB /* UIStackView+AddArrangedSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+AddArrangedSubviews.swift"; sourceTree = "<group>"; };
 		0E3DD5B3242B764100C092E7 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		0E3DD5B4242B764100C092E7 /* RxSwiftExt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwiftExt.framework; path = Carthage/Build/iOS/RxSwiftExt.framework; sourceTree = "<group>"; };
 		0E3DD5B5242B764100C092E7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
@@ -198,6 +217,17 @@
 		0E6D2607242E8B540037A80C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0E6D2608242E8B540037A80C /* Constants+InfoKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Constants+InfoKeys.swift"; sourceTree = "<group>"; };
 		0E6D260F242E956F0037A80C /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		0E8DED2D2433CC7600D7F806 /* DangerStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerStatusManager.swift; sourceTree = "<group>"; };
+		0E8DED2F2433CCCF00D7F806 /* DangerStatusManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerStatusManagerType.swift; sourceTree = "<group>"; };
+		0E8DED312433D0CC00D7F806 /* DangerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerStatus.swift; sourceTree = "<group>"; };
+		0E8DED332433D19300D7F806 /* DangerStatusDebugItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerStatusDebugItems.swift; sourceTree = "<group>"; };
+		0E8DED372433D86A00D7F806 /* DashboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModel.swift; sourceTree = "<group>"; };
+		0E8DED392433D87300D7F806 /* DashboardModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModelType.swift; sourceTree = "<group>"; };
+		0E8DED3B2433D88000D7F806 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		0E8DED3D2433D88900D7F806 /* DashboardViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModelType.swift; sourceTree = "<group>"; };
+		0E8DED402433E21100D7F806 /* GreenStatusCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenStatusCardView.swift; sourceTree = "<group>"; };
+		0E8DED422434722200D7F806 /* DangerStatusCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerStatusCard.swift; sourceTree = "<group>"; };
+		0E8DED44243480F400D7F806 /* YellowStatusCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowStatusCardView.swift; sourceTree = "<group>"; };
 		0E965327242EB25C00ADD300 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0E96532A242F436B00ADD300 /* LogLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLevel.swift; sourceTree = "<group>"; };
 		0E96533F242F81D400ADD300 /* DebugMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugMenu.swift; sourceTree = "<group>"; };
@@ -390,6 +420,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E22F9232434A6C6008AD8EB /* GeneralRecommendationsCard */ = {
+			isa = PBXGroup;
+			children = (
+				0E22F9242434A6F8008AD8EB /* GeneralRecommendationsCard.swift */,
+			);
+			path = GeneralRecommendationsCard;
+			sourceTree = "<group>";
+		};
+		0E22F9262434A810008AD8EB /* UIStackView */ = {
+			isa = PBXGroup;
+			children = (
+				0E22F9272434A861008AD8EB /* UIStackView+AddArrangedSubviews.swift */,
+			);
+			path = UIStackView;
+			sourceTree = "<group>";
+		};
 		0E3DD5B2242B764100C092E7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -444,7 +490,6 @@
 				0E9DCC9E2430C80700C2670D /* UI */,
 				0E965329242EB30C00ADD300 /* Resources */,
 				0E6D2603242E8B540037A80C /* Common */,
-				0E5C2078242B63460038EF8B /* Assets.xcassets */,
 				0E5C207A242B63460038EF8B /* LaunchScreen.storyboard */,
 				0E5C207D242B63460038EF8B /* Info.plist */,
 				0EEE1F2024322EBA001D006A /* Localizable.strings */,
@@ -465,6 +510,7 @@
 		0E6D2603242E8B540037A80C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0E8DED2C2433CC4E00D7F806 /* DangerStatusManager */,
 				8382898324332E0D0054347B /* Images */,
 				8382897E24332DF00054347B /* Fonts */,
 				8382896624332C160054347B /* Colors */,
@@ -512,6 +558,7 @@
 		0E6D260C242E8E940037A80C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0E22F9262434A810008AD8EB /* UIStackView */,
 				833181912433A08A00A8E18D /* UIImage */,
 				8331818E2433A03A00A8E18D /* ConstraintMaker */,
 				8382897A24332D780054347B /* UIView */,
@@ -528,9 +575,49 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		0E8DED2C2433CC4E00D7F806 /* DangerStatusManager */ = {
+			isa = PBXGroup;
+			children = (
+				0E8DED2D2433CC7600D7F806 /* DangerStatusManager.swift */,
+				0E8DED2F2433CCCF00D7F806 /* DangerStatusManagerType.swift */,
+				0E8DED312433D0CC00D7F806 /* DangerStatus.swift */,
+			);
+			path = DangerStatusManager;
+			sourceTree = "<group>";
+		};
+		0E8DED352433D85300D7F806 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0E8DED3B2433D88000D7F806 /* DashboardViewModel.swift */,
+				0E8DED3D2433D88900D7F806 /* DashboardViewModelType.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0E8DED362433D85900D7F806 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0E8DED372433D86A00D7F806 /* DashboardModel.swift */,
+				0E8DED392433D87300D7F806 /* DashboardModelType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0E8DED3F2433E1EC00D7F806 /* DangerStatusCards */ = {
+			isa = PBXGroup;
+			children = (
+				0E8DED422434722200D7F806 /* DangerStatusCard.swift */,
+				0E8DED402433E21100D7F806 /* GreenStatusCardView.swift */,
+				0E8DED44243480F400D7F806 /* YellowStatusCardView.swift */,
+				0E22F91F2434A117008AD8EB /* RedStatusCard.swift */,
+			);
+			path = DangerStatusCards;
+			sourceTree = "<group>";
+		};
 		0E965329242EB30C00ADD300 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0E5C2078242B63460038EF8B /* Assets.xcassets */,
 				8382898624332E310054347B /* Fonts */,
 				0E965327242EB25C00ADD300 /* GoogleService-Info.plist */,
 			);
@@ -552,6 +639,7 @@
 				0E965354242F82B900ADD300 /* GeneralDebugItems.swift */,
 				0E9DDA6F2430D464002D879F /* EncountersDebugItems.swift */,
 				0ECE7A202430E48200EED942 /* BluetoothDebugItems.swift */,
+				0E8DED332433D19300D7F806 /* DangerStatusDebugItems.swift */,
 			);
 			path = MenuItems;
 			sourceTree = "<group>";
@@ -883,6 +971,8 @@
 		83252A97243224B4001E6D63 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				0E8DED362433D85900D7F806 /* Model */,
+				0E8DED352433D85300D7F806 /* ViewModel */,
 				83252AA024322570001E6D63 /* View */,
 				83252A9F2432256C001E6D63 /* ViewController */,
 			);
@@ -916,6 +1006,8 @@
 		83252AA024322570001E6D63 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0E22F9232434A6C6008AD8EB /* GeneralRecommendationsCard */,
+				0E8DED3F2433E1EC00D7F806 /* DangerStatusCards */,
 				83680163243227D700678DBD /* DashboardView.swift */,
 			);
 			path = View;
@@ -967,6 +1059,7 @@
 			isa = PBXGroup;
 			children = (
 				8382896B24332CF40054347B /* UIButton+Factory.swift */,
+				0E22F9212434A486008AD8EB /* UIButton+BackgroundColor.swift */,
 			);
 			path = UIButton;
 			sourceTree = "<group>";
@@ -1552,9 +1645,11 @@
 				0E9DCC8824300CC600C2670D /* Constants+KeychainKeys.swift in Sources */,
 				838289C6243330320054347B /* SendCodeViewModel.swift in Sources */,
 				838289D5243331110054347B /* VerifyCodeViewModelType.swift in Sources */,
+				0E22F9282434A861008AD8EB /* UIStackView+AddArrangedSubviews.swift in Sources */,
 				0E9DDA6E2430D2D9002D879F /* DebugAssembly.swift in Sources */,
 				83252A6C24314C99001E6D63 /* RegisterDeviceResult.swift in Sources */,
 				833181932433A09B00A8E18D /* UIImage+AspectRatio.swift in Sources */,
+				0E8DED322433D0CC00D7F806 /* DangerStatus.swift in Sources */,
 				0E9DDA702430D464002D879F /* EncountersDebugItems.swift in Sources */,
 				83252A942432219A001E6D63 /* RootViewModelType.swift in Sources */,
 				0E6D2610242E956F0037A80C /* Logger.swift in Sources */,
@@ -1563,6 +1658,7 @@
 				0E9DCC942430984A00C2670D /* EncountersManager.swift in Sources */,
 				0E96532B242F436B00ADD300 /* LogLevel.swift in Sources */,
 				83252A8A24322156001E6D63 /* RootView.swift in Sources */,
+				0E8DED342433D19300D7F806 /* DangerStatusDebugItems.swift in Sources */,
 				8382896924332CBB0054347B /* Colors.swift in Sources */,
 				8382896F24332D170054347B /* UIColor+Hex.swift in Sources */,
 				83828A082433352D0054347B /* Images.swift in Sources */,
@@ -1571,8 +1667,10 @@
 				0E6D260B242E8B540037A80C /* Constants+InfoKeys.swift in Sources */,
 				83252A782431519F001E6D63 /* NetworkingAssembly.swift in Sources */,
 				838289D7243331510054347B /* BannerView.swift in Sources */,
+				0E8DED382433D86A00D7F806 /* DashboardModel.swift in Sources */,
 				838289CC243330B50054347B /* VerifyCodeModelType.swift in Sources */,
 				83252A9224322190001E6D63 /* RootModelType.swift in Sources */,
+				0E22F9222434A486008AD8EB /* UIButton+BackgroundColor.swift in Sources */,
 				0E9DDA752430DB46002D879F /* String+Random.swift in Sources */,
 				83252A12242F63B1001E6D63 /* NetworkClient.swift in Sources */,
 				83252A8E24322167001E6D63 /* RootViewModel.swift in Sources */,
@@ -1581,10 +1679,13 @@
 				0E9DCCAB2430CA5A00C2670D /* RegisteredEncountersDebugViewModelType.swift in Sources */,
 				0EE60C32242FDB2D00D29048 /* RealmManager.swift in Sources */,
 				838289BD24332FB20054347B /* SendCodeModelType.swift in Sources */,
+				0E8DED45243480F400D7F806 /* YellowStatusCardView.swift in Sources */,
 				0EE60C5D2430014D00D29048 /* SecretsGeneratorType.swift in Sources */,
 				0EE60BD3242F8A5F00D29048 /* SwiftTweaks+ProteGO.swift in Sources */,
 				0E6D260A242E8B540037A80C /* Constants.swift in Sources */,
+				0E8DED432434722200D7F806 /* DangerStatusCard.swift in Sources */,
 				871208D92430D16C00DA0A4D /* BluetoothBackgroudTask.swift in Sources */,
+				0E8DED3C2433D88000D7F806 /* DashboardViewModel.swift in Sources */,
 				0EE60C3E242FE4F100D29048 /* Constants+Realm.swift in Sources */,
 				83252A8C24322160001E6D63 /* RootViewController.swift in Sources */,
 				0ECE7A212430E48200EED942 /* BluetoothDebugItems.swift in Sources */,
@@ -1601,11 +1702,15 @@
 				83252A9C24322549001E6D63 /* OnboardingView.swift in Sources */,
 				0E965355242F82B900ADD300 /* GeneralDebugItems.swift in Sources */,
 				0ECE7A222430F91F00EED942 /* MockAdvertiser.swift in Sources */,
+				0E8DED2E2433CC7600D7F806 /* DangerStatusManager.swift in Sources */,
+				0E8DED302433CCCF00D7F806 /* DangerStatusManagerType.swift in Sources */,
 				836DF51B24334C14000C00C0 /* RegistrationViewModel.swift in Sources */,
 				836DF51F24334C29000C00C0 /* RegistrationModel.swift in Sources */,
 				83252A7024314D17001E6D63 /* ConfirmRegistrationResult.swift in Sources */,
 				83828A052433350C0054347B /* FontStyle.swift in Sources */,
 				8382897524332D3D0054347B /* UIScreen+Size.swift in Sources */,
+				0E22F9202434A117008AD8EB /* RedStatusCard.swift in Sources */,
+				0E8DED3A2433D87300D7F806 /* DashboardModelType.swift in Sources */,
 				838289CF243330D10054347B /* VerifyCodeView.swift in Sources */,
 				838289D1243330E40054347B /* VerifyCodeVIewController.swift in Sources */,
 				83680162243227CF00678DBD /* DashboardViewController.swift in Sources */,
@@ -1613,6 +1718,7 @@
 				83680164243227D700678DBD /* DashboardView.swift in Sources */,
 				0EE60C41242FF14100D29048 /* Resolver+Utils.swift in Sources */,
 				836DF51D24334C20000C00C0 /* RegistrationViewModelType.swift in Sources */,
+				0E8DED3E2433D88900D7F806 /* DashboardViewModelType.swift in Sources */,
 				0E9DCCA72430C9E200C2670D /* RegisteredEncountersDebugModel.swift in Sources */,
 				0E9DCCA32430C9A700C2670D /* RegisteredEncountersDebugViewController.swift in Sources */,
 				0E9DCC9D2430C7F100C2670D /* RegisteredEncountersDebugScreenView.swift in Sources */,
@@ -1624,6 +1730,8 @@
 				83252A6324314B9A001E6D63 /* GcpClientType.swift in Sources */,
 				836DF52124334C31000C00C0 /* RegistrationModelType.swift in Sources */,
 				0EE60C23242FDAA400D29048 /* Encounter.swift in Sources */,
+				0E8DED412433E21100D7F806 /* GreenStatusCardView.swift in Sources */,
+				0E22F9252434A6F8008AD8EB /* GeneralRecommendationsCard.swift in Sources */,
 				8382896C24332CF40054347B /* UIButton+Factory.swift in Sources */,
 				833181902433A05B00A8E18D /* ConstraintMaker+AspectRatio.swift in Sources */,
 				0EE60C4B242FF2C200D29048 /* GeneralAssembly.swift in Sources */,

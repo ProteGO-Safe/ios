@@ -6,4 +6,6 @@ struct Images {
     static let backArrow = UIImage(named: "backArrow")!
 
     static let logoSmall = UIImage(named: "logoSmall")!
+
+    static let generalRecommendationExclamationMark = UIImage(named: "generalRecommendationExclamationMark")!
 }

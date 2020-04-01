@@ -13,7 +13,7 @@ final class RegistrationView: UIView {
         return ControlEvent<Void>(events: tapObservable)
     }
 
-    private let bannerView = BannerView()
+    private let bannerView = BannerView(withBackButton: true)
 
     private let contentContainerView = UIView()
 

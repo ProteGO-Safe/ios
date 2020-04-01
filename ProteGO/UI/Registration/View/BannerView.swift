@@ -19,11 +19,12 @@ final class BannerView: UIView {
         return image
     }()
 
-    init() {
+    init(withBackButton: Bool) {
         super.init(frame: .zero)
         addSubviews()
         setupConstraints()
         backgroundColor = Colors.bluishGreen
+        backButton.isHidden = !withBackButton
     }
 
     required init?(coder: NSCoder) {

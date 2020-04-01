@@ -9,6 +9,7 @@ final class GeneralAssembly: Assembly {
         registerSecretsGenerator(container)
         registerValet(container)
         registerEncountersManager(container)
+        registerDangerStatusManager(container)
     }
 
     private func registerRealm(_ container: Container) {
@@ -46,6 +47,12 @@ final class GeneralAssembly: Assembly {
             let realmManager: RealmManagerType  = resolver.resolve(RealmManagerType.self)
 
             return EncountersManager(realmManager: realmManager)
+        }.inObjectScope(.container)
+    }
+
+    private func registerDangerStatusManager(_ container: Container) {
+        container.register(DangerStatusManagerType.self) { _ in
+            return DangerStatusManager()
         }.inObjectScope(.container)
     }
 }
