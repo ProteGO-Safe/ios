@@ -18,7 +18,7 @@ extension DebugMenu {
                 DangerStatus.green.rawValue,
                 DangerStatus.yellow.rawValue,
                 DangerStatus.red.rawValue],
-            defaultValue: DangerStatus.green.rawValue)
+            defaultValue: DangerStatus.yellow.rawValue)
     }()
 
     static var dangerStatusItems: [TweakClusterType] = [

@@ -31,6 +31,7 @@ final class DashboardView: UIView {
 
     private let containerScrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
         return scrollView
     }()
 

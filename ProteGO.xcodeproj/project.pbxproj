@@ -12,6 +12,8 @@
 		0E22F9222434A486008AD8EB /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22F9212434A486008AD8EB /* UIButton+BackgroundColor.swift */; };
 		0E22F9252434A6F8008AD8EB /* GeneralRecommendationsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22F9242434A6F8008AD8EB /* GeneralRecommendationsCard.swift */; };
 		0E22F9282434A861008AD8EB /* UIStackView+AddArrangedSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22F9272434A861008AD8EB /* UIStackView+AddArrangedSubviews.swift */; };
+		0E22F92C2434DFD3008AD8EB /* DangerStatusCardTopModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22F92B2434DFD3008AD8EB /* DangerStatusCardTopModule.swift */; };
+		0E22F92E2434DFDE008AD8EB /* DangerStatusCardBottomModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22F92D2434DFDE008AD8EB /* DangerStatusCardBottomModule.swift */; };
 		0E3DD5BD242B764100C092E7 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5B3242B764100C092E7 /* Realm.framework */; };
 		0E3DD5BF242B764100C092E7 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5B5242B764100C092E7 /* RxSwift.framework */; };
 		0E3DD5C0242B764100C092E7 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5B6242B764100C092E7 /* RxCocoa.framework */; };
@@ -199,6 +201,8 @@
 		0E22F9212434A486008AD8EB /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
 		0E22F9242434A6F8008AD8EB /* GeneralRecommendationsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralRecommendationsCard.swift; sourceTree = "<group>"; };
 		0E22F9272434A861008AD8EB /* UIStackView+AddArrangedSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+AddArrangedSubviews.swift"; sourceTree = "<group>"; };
+		0E22F92B2434DFD3008AD8EB /* DangerStatusCardTopModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerStatusCardTopModule.swift; sourceTree = "<group>"; };
+		0E22F92D2434DFDE008AD8EB /* DangerStatusCardBottomModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerStatusCardBottomModule.swift; sourceTree = "<group>"; };
 		0E3DD5B3242B764100C092E7 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		0E3DD5B4242B764100C092E7 /* RxSwiftExt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwiftExt.framework; path = Carthage/Build/iOS/RxSwiftExt.framework; sourceTree = "<group>"; };
 		0E3DD5B5242B764100C092E7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
@@ -436,6 +440,32 @@
 			path = UIStackView;
 			sourceTree = "<group>";
 		};
+		0E22F9292434DEC1008AD8EB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0E22F92A2434DECF008AD8EB /* Banner */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		0E22F92A2434DECF008AD8EB /* Banner */ = {
+			isa = PBXGroup;
+			children = (
+				838289D6243331510054347B /* BannerView.swift */,
+			);
+			path = Banner;
+			sourceTree = "<group>";
+		};
+		0E22F92F2434DFE1008AD8EB /* Template */ = {
+			isa = PBXGroup;
+			children = (
+				0E8DED422434722200D7F806 /* DangerStatusCard.swift */,
+				0E22F92B2434DFD3008AD8EB /* DangerStatusCardTopModule.swift */,
+				0E22F92D2434DFDE008AD8EB /* DangerStatusCardBottomModule.swift */,
+			);
+			path = Template;
+			sourceTree = "<group>";
+		};
 		0E3DD5B2242B764100C092E7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -510,6 +540,7 @@
 		0E6D2603242E8B540037A80C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0E22F9292434DEC1008AD8EB /* Components */,
 				0E8DED2C2433CC4E00D7F806 /* DangerStatusManager */,
 				8382898324332E0D0054347B /* Images */,
 				8382897E24332DF00054347B /* Fonts */,
@@ -606,7 +637,7 @@
 		0E8DED3F2433E1EC00D7F806 /* DangerStatusCards */ = {
 			isa = PBXGroup;
 			children = (
-				0E8DED422434722200D7F806 /* DangerStatusCard.swift */,
+				0E22F92F2434DFE1008AD8EB /* Template */,
 				0E8DED402433E21100D7F806 /* GreenStatusCardView.swift */,
 				0E8DED44243480F400D7F806 /* YellowStatusCardView.swift */,
 				0E22F91F2434A117008AD8EB /* RedStatusCard.swift */,
@@ -1178,7 +1209,6 @@
 		838289B124332F3F0054347B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				838289D6243331510054347B /* BannerView.swift */,
 				838289D8243331ED0054347B /* RegistrationView.swift */,
 			);
 			path = View;
@@ -1643,6 +1673,7 @@
 				0E9DCCA52430C9CE00C2670D /* RegisteredEncountersDebugViewModel.swift in Sources */,
 				8382897224332D2A0054347B /* UILabel+Factory.swift in Sources */,
 				0E9DCC8824300CC600C2670D /* Constants+KeychainKeys.swift in Sources */,
+				0E22F92E2434DFDE008AD8EB /* DangerStatusCardBottomModule.swift in Sources */,
 				838289C6243330320054347B /* SendCodeViewModel.swift in Sources */,
 				838289D5243331110054347B /* VerifyCodeViewModelType.swift in Sources */,
 				0E22F9282434A861008AD8EB /* UIStackView+AddArrangedSubviews.swift in Sources */,
@@ -1658,6 +1689,7 @@
 				0E9DCC942430984A00C2670D /* EncountersManager.swift in Sources */,
 				0E96532B242F436B00ADD300 /* LogLevel.swift in Sources */,
 				83252A8A24322156001E6D63 /* RootView.swift in Sources */,
+				0E22F92C2434DFD3008AD8EB /* DangerStatusCardTopModule.swift in Sources */,
 				0E8DED342433D19300D7F806 /* DangerStatusDebugItems.swift in Sources */,
 				8382896924332CBB0054347B /* Colors.swift in Sources */,
 				8382896F24332D170054347B /* UIColor+Hex.swift in Sources */,

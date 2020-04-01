@@ -77,9 +77,7 @@ class GeneralRecommendationsCard: UIView {
     }
 
     private func setupTitleLabel(text: String) {
-        self.titleLabel.text = text
-        self.titleLabel.textColor = Colors.lightBlack
-        self.titleLabel.font = Fonts.poppinsBold(24).font
+        self.titleLabel.configure(text: text, fontStyle: .subtitle)
         self.titleLabel.numberOfLines = 0
     }
 

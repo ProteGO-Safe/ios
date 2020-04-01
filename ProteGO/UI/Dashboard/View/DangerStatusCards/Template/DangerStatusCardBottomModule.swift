@@ -3,22 +3,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-struct DangerStatusCardConfig {
-    let color: UIColor
-    let titleText: String
-    let firstParagraphText: String
-}
-
-struct DangerStatusCardSecondParagraphConfig {
-    let secondParagraphTextFunction: (String) -> String
-    let secondParagraphHereText: String
-}
-
-struct DangerStatusCardButtonConfig {
-    let buttonTitle: String
-}
-
-class DangerStatusCardView: UIView {
+class DangerStatusCardBottomModule: UIView {
 
     var tapMoreEvent: ControlEvent<Void> {
         let tapObservable = tapGestureRecognizer.rx.event
@@ -30,20 +15,6 @@ class DangerStatusCardView: UIView {
         return contactButton.rx.tap
     }
 
-    private let containerStackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .vertical
-        return view
-    }()
-
-    private let topContainerView = UIView()
-
-    private let bottomContainerView = UIView()
-
-    private let coloredBoxView = UIView()
-
-    private let titleLabel = UILabel()
-
     private let descriptionFirstParagraphLabel = UILabel()
 
     private let descriptionSecondParagraphLabel = UILabel()
@@ -52,32 +23,24 @@ class DangerStatusCardView: UIView {
 
     private let tapGestureRecognizer = UITapGestureRecognizer()
 
-    init(config: DangerStatusCardConfig, buttonConfig: DangerStatusCardButtonConfig) {
+    init() {
         super.init(frame: .zero)
-        self.configure(with: config, buttonConfig: buttonConfig, secondParagraphConfig: nil)
     }
 
-    init(config: DangerStatusCardConfig, secondParagraphConfig: DangerStatusCardSecondParagraphConfig) {
-        super.init(frame: .zero)
-        self.configure(with: config, buttonConfig: nil, secondParagraphConfig: secondParagraphConfig)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
-    private func configure(with config: DangerStatusCardConfig,
-                           buttonConfig: DangerStatusCardButtonConfig?,
-                           secondParagraphConfig: DangerStatusCardSecondParagraphConfig?) {
-        backgroundColor = .white
-        self.layer.borderColor = config.color.cgColor
-        self.layer.borderWidth = 1
-
+    func configure(config: DangerStatusCardConfig,
+                   buttonConfig: DangerStatusCardButtonConfig?,
+                   secondParagraphConfig: DangerStatusCardSecondParagraphConfig?) {
+        self.backgroundColor = config.color
         self.addCommonSubviews()
         self.setupCommonConstraints()
-        self.setupColoredBoxViewBuilder(color: config.color)
-        self.setupBottomContainerViewBuilder(color: config.color)
-        self.setupTitleLabel(text: config.titleText)
         self.setupDescriptionFirstParagraphLabel(text: config.firstParagraphText)
 
         if let secondParagraphConfig = secondParagraphConfig {
-            self.bottomContainerView.addSubview(self.descriptionSecondParagraphLabel)
+            self.addSubview(self.descriptionSecondParagraphLabel)
             self.setupSecondParagraphConstraints()
             self.descriptionSecondParagraphLabel.addGestureRecognizer(self.tapGestureRecognizer)
             self.setupDescriptionSecondParagraphLabel(
@@ -86,42 +49,17 @@ class DangerStatusCardView: UIView {
         }
 
         if let buttonConfig = buttonConfig {
-            self.bottomContainerView.addSubview(self.contactButton)
+            self.addSubview(self.contactButton)
             self.setupButtonConstraints()
             self.setupContactButton(color: config.color, text: buttonConfig.buttonTitle)
         }
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     private func addCommonSubviews() {
-        self.addSubviews([containerStackView])
-        self.containerStackView.addArrangedSubview(topContainerView)
-        self.containerStackView.addArrangedSubview(bottomContainerView)
-        self.topContainerView.addSubviews([coloredBoxView, titleLabel])
-        self.bottomContainerView.addSubview(descriptionFirstParagraphLabel)
+        self.addSubview(descriptionFirstParagraphLabel)
     }
 
     private func setupCommonConstraints() {
-        self.containerStackView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-
-        self.coloredBoxView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(22)
-            $0.top.equalToSuperview().offset(22)
-            $0.bottom.equalToSuperview().offset(-20)
-            $0.height.width.equalTo(18)
-        }
-
-        self.titleLabel.snp.makeConstraints {
-            $0.leading.equalTo(self.coloredBoxView.snp.trailing).offset(12)
-            $0.centerY.equalTo(self.coloredBoxView.snp.centerY)
-            $0.trailing.lessThanOrEqualTo(self.topContainerView).offset(-20)
-        }
-
         self.descriptionFirstParagraphLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(22)
             $0.trailing.equalToSuperview().offset(-22)
@@ -148,27 +86,8 @@ class DangerStatusCardView: UIView {
         }
     }
 
-    private func setupBottomContainerViewBuilder(color: UIColor) {
-        self.bottomContainerView.backgroundColor = color
-    }
-
-    private func setupColoredBoxViewBuilder(color: UIColor) {
-        self.coloredBoxView.backgroundColor = color
-        self.coloredBoxView.layer.cornerRadius = 4
-    }
-
-    private func setupTitleLabel(text: String) {
-        self.titleLabel.text = text
-        self.titleLabel.textColor = Colors.lightBlack
-        self.titleLabel.font = Fonts.poppinsSemiBold(18).font
-        self.titleLabel.adjustsFontSizeToFitWidth = true
-        self.titleLabel.numberOfLines = 1
-    }
-
     private func setupDescriptionFirstParagraphLabel(text: String) {
-        self.descriptionFirstParagraphLabel.text = text
-        self.descriptionFirstParagraphLabel.font = Fonts.poppinsMedium(14).font
-        self.descriptionFirstParagraphLabel.textColor = .white
+        self.descriptionFirstParagraphLabel.configure(text: text, fontStyle: .bodySmall)
         self.descriptionFirstParagraphLabel.numberOfLines = 0
     }
 

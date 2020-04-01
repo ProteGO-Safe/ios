@@ -12,8 +12,8 @@ final class DashboardViewModel: DashboardViewModelType {
     }
 
     func bind(view: DashboardView) {
-        self.model.currentStatus.subscribe(onNext: { stauts in
-            view.update(withStatus: stauts)
+        self.model.currentStatus.subscribe(onNext: { status in
+            view.update(withStatus: status)
         }).disposed(by: self.disposeBag)
     }
 }
