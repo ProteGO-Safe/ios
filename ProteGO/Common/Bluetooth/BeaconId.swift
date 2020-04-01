@@ -1,6 +1,6 @@
 import Foundation
 
-/// This class represents valid beacon id value.
+/// This class represents valid Beacon ID value.
 class BeaconId {
     private let data: Data
     private static let byteCount = 16
@@ -23,7 +23,11 @@ class BeaconId {
     }
 }
 
-extension BeaconId: Hashable, Equatable {
+extension BeaconId: Hashable, Equatable, CustomStringConvertible {
+    var description: String {
+        return data.toHexString()
+    }
+
     static func == (lhs: BeaconId, rhs: BeaconId) -> Bool {
         return lhs.data.elementsEqual(rhs.data)
     }

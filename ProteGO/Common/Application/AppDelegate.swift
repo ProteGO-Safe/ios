@@ -14,9 +14,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate 
         return resolver
     }()
 
+    var advertiser: Advertiser?
+    var scanner: Scanner?
     var assembler: Assembler?
     var window: UIWindow?
-    var byte: UInt8 = 0
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -34,6 +35,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate 
         return true
     }
 
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        self.advertiser?.setMode(.EnabledAllTime)
+    }
+
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        self.advertiser?.setMode(.EnabledPartTime(advertisingOnTime: 10, advertisingOffTime: 30))
+    }
+
     var count: UInt8 = 0
     func beaconIdExpired(previousBeaconId: (BeaconId, Date)?) {
         let advertiser: Advertiser = self.resolver.resolve(Advertiser.self, argument: self as AdvertiserDelegate)
@@ -45,6 +54,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate 
                                                0x12, 0x13, 0x14, 0x15])) {
             advertiser.updateBeaconId(beaconId: beaconId, expirationDate: Date(timeIntervalSinceNow: 30))
         }
+    }
+
+    func synchronizedBeaconId(beaconId: BeaconId, rssi: Int?) {
+        logger.info("*** synchronized \(beaconId) with rssi: \(String(describing: rssi))")
     }
 
     private func generateWindow() -> UIWindow {
@@ -59,10 +72,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate 
     }
 
     private func setupBluetoothModule() {
-        let _: Advertiser = self.resolver.resolve(Advertiser.self, argument: self as AdvertiserDelegate)
-
+        self.advertiser = self.resolver.resolve(Advertiser.self, argument: self as AdvertiserDelegate)
+        self.advertiser?.setMode(.EnabledAllTime)
         let encountersManager: EncountersManagerType = self.resolver.resolve(EncountersManagerType.self)
-        let _: Scanner = self.resolver.resolve(Scanner.self, argument: encountersManager as ScannerDelegate)
+        self.scanner = self.resolver.resolve(Scanner.self, argument: encountersManager as ScannerDelegate)
     }
 
     private func setupCrashlytics() {

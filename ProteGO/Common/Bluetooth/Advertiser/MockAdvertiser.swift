@@ -1,8 +1,9 @@
 import Foundation
 
 class MockAdvertiser: Advertiser {
-    var previousBeaconId: (BeaconId, Date)?
-    weak var delegate: AdvertiserDelegate?
+    private var mode: AdvertiserMode = .Disabled
+    private var previousBeaconId: (BeaconId, Date)?
+    private weak var delegate: AdvertiserDelegate?
 
     init(delegate: AdvertiserDelegate) {
         self.delegate = delegate
@@ -21,5 +22,20 @@ class MockAdvertiser: Advertiser {
 
     func updateBeaconId(beaconId: BeaconId, expirationDate: Date) {
         self.previousBeaconId = (beaconId, expirationDate)
+    }
+
+    func setMode(_ mode: AdvertiserMode) {
+        self.mode = mode
+    }
+
+    func getMode() -> AdvertiserMode {
+        return self.mode
+    }
+
+    func isAdvertising() -> Bool {
+        if case .Disabled = self.mode {
+            return false
+        }
+        return true
     }
 }

@@ -167,6 +167,8 @@
 		877F3F762434AB5700F774C7 /* BeaconId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F742434AB5700F774C7 /* BeaconId.swift */; };
 		877F3F792434B4F100F774C7 /* Data+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F782434B4F100F774C7 /* Data+HexString.swift */; };
 		877F3F7A2434B4F100F774C7 /* Data+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F782434B4F100F774C7 /* Data+HexString.swift */; };
+		877F3F7C2434E89900F774C7 /* AdvertiserMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F7B2434E89900F774C7 /* AdvertiserMode.swift */; };
+		877F3F7D2434E89900F774C7 /* AdvertiserMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F7B2434E89900F774C7 /* AdvertiserMode.swift */; };
 		87C985FC242E0A8500335502 /* BleAdvertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C985FB242E0A8500335502 /* BleAdvertiser.swift */; };
 		87F259E92430A3E2009BF612 /* MockScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F259E82430A3E2009BF612 /* MockScanner.swift */; };
 		A63BFB76240CADB609E72685 /* Pods_ProteGO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3458DDABC1020B1EB7984F /* Pods_ProteGO.framework */; };
@@ -356,6 +358,7 @@
 		877F3F7224348C0000F774C7 /* DeviceId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceId.swift; sourceTree = "<group>"; };
 		877F3F742434AB5700F774C7 /* BeaconId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconId.swift; sourceTree = "<group>"; };
 		877F3F782434B4F100F774C7 /* Data+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+HexString.swift"; sourceTree = "<group>"; };
+		877F3F7B2434E89900F774C7 /* AdvertiserMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertiserMode.swift; sourceTree = "<group>"; };
 		87C985FB242E0A8500335502 /* BleAdvertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleAdvertiser.swift; sourceTree = "<group>"; };
 		87F259E82430A3E2009BF612 /* MockScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockScanner.swift; sourceTree = "<group>"; };
 		95EEA776F9CF0007EA77CC71 /* Pods-ProteGO.debug_stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGO.debug_stg.xcconfig"; path = "Target Support Files/Pods-ProteGO/Pods-ProteGO.debug_stg.xcconfig"; sourceTree = "<group>"; };
@@ -1228,6 +1231,7 @@
 			isa = PBXGroup;
 			children = (
 				87177C962430A7F6007C8F78 /* Advertiser.swift */,
+				877F3F7B2434E89900F774C7 /* AdvertiserMode.swift */,
 				87074B77242F57770029AD4B /* AdvertiserDelegate.swift */,
 				87C985FB242E0A8500335502 /* BleAdvertiser.swift */,
 				87177C902430A5B7007C8F78 /* MockAdvertiser.swift */,
@@ -1578,6 +1582,7 @@
 				83252A942432219A001E6D63 /* RootViewModelType.swift in Sources */,
 				0E6D2610242E956F0037A80C /* Logger.swift in Sources */,
 				836801702432400500678DBD /* RegistrationAssembly.swift in Sources */,
+				877F3F7C2434E89900F774C7 /* AdvertiserMode.swift in Sources */,
 				871208D62430C6A600DA0A4D /* Constants+Bluetooth.swift in Sources */,
 				0E9DCC942430984A00C2670D /* EncountersManager.swift in Sources */,
 				0E96532B242F436B00ADD300 /* LogLevel.swift in Sources */,
@@ -1674,6 +1679,7 @@
 				877F3F762434AB5700F774C7 /* BeaconId.swift in Sources */,
 				0EE60C612430017A00D29048 /* SecretsGeneratorSpecs.swift in Sources */,
 				0E9DCC8F2430150000C2670D /* RealmManagerSpecs.swift in Sources */,
+				877F3F7D2434E89900F774C7 /* AdvertiserMode.swift in Sources */,
 				0E9DCC962430985900C2670D /* EncountersManagerSpecs.swift in Sources */,
 				0E9DCC8B243010DC00C2670D /* SecretsGeneratorMock.swift in Sources */,
 			);

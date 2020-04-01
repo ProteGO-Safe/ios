@@ -151,7 +151,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     /// Device successfully synchronized.
     /// - Parameters:
     ///   - device: Synchronized device.
-    ///   - data: Synchronization beacon id.
+    ///   - data: Synchronization Beacon ID.
     private func deviceSynchronized(device: Device, beaconId: BeaconId) {
         logger.debug("Device synchronized: \(device.id) with beaconId: \(beaconId)")
 
