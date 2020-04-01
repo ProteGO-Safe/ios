@@ -49,7 +49,7 @@ final class RootViewController: UIViewController, CustomView {
     }
 
     private func presentInitialContent() {
-        present(content: .dashboard)
+        present(content: .registration)
     }
 
     private func present(content: Content) {
