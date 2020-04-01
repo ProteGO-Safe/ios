@@ -1,23 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "group-91.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "group-91@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "group-91@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "dashboard-icon.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
   }
 }
