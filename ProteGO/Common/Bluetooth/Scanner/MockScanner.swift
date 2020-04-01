@@ -8,7 +8,7 @@ class MockScanner: Scanner {
         let timer = Timer.init(
             timeInterval: TimeInterval(DebugMenu.assign(DebugMenu.mockBluetoothScannerInterval)),
             repeats: true) { [weak self] _ in
-                self?.delegate?.synchronizedTokenData(data: Data([0xff]), rssi: -80)
+                self?.delegate?.synchronizedBeaconId(beaconId: BeaconId.random(), rssi: Int.random(in: (-40)..<(-140)))
         }
         RunLoop.current.add(timer, forMode: .common)
     }

@@ -34,10 +34,17 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate 
         return true
     }
 
-    func tokenDataExpired(previousTokenData: (Data, Date)?) {
+    var count: UInt8 = 0
+    func beaconIdExpired(previousBeaconId: (BeaconId, Date)?) {
         let advertiser: Advertiser = self.resolver.resolve(Advertiser.self, argument: self as AdvertiserDelegate)
-        logger.debug("Token data expired \(String(describing: previousTokenData))")
-        advertiser.updateTokenData(data: Data([0xFF, byte]), expirationDate: Date(timeIntervalSinceNow: 30))
+        count += 1
+
+        if let beaconId = BeaconId(data: Data([count, 0x01, 0x02, 0x03,
+                                               0x04, 0x05, 0x06, 0x07,
+                                               0x08, 0x09, 0x10, 0x11,
+                                               0x12, 0x13, 0x14, 0x15])) {
+            advertiser.updateBeaconId(beaconId: beaconId, expirationDate: Date(timeIntervalSinceNow: 30))
+        }
     }
 
     private func generateWindow() -> UIWindow {

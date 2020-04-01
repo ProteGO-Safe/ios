@@ -1,28 +1,37 @@
 import Foundation
 import CoreBluetooth
 
-/// This class provides information about the peripheral which was discovered by
-/// a central manager.
-class PeripheralContext {
-    /// Handle to CBPeripheral
-    let peripheral: CBPeripheral
-    /// Last synchronization date if specified
+/// This class provides information about the device which was discovered by
+/// a central manager. Only device ID is a stable value.
+class Device {
+    /// Unique device identfier
+    let id: DeviceId
+    /// Handle to current CBPeripheral
+    var peripheral: CBPeripheral
+    /// Last discovered device. There is a chance that device with the same ID was
+    /// discovered with different mac address, while current connection is in progress.
+    /// Make sure to remember the handle for later use.
+    var lastDiscoveredPeripheral: CBPeripheral?
+    /// Last successful synchronization date if specified. We use that value to block
+    /// further connection attempts.
     var lastSynchronizationDate: Date?
-    /// Last connection attempt date if specified
+    /// Last connection attempt date if specified. It is used to cancel connections to devices
+    /// which don't manage to finish synchronization procedure in time.
     var lastConnectionDate: Date?
-    /// Number of connection retries.
+    /// Number of connection retries, exceeding certain value will mark this device as lost.
     var connectionRetries = 0
     /// Last RSSI value
     var lastRSSI: Int?
-    /// Current state
+    /// Current synchronization state
     var state: PeripheralState = .Idle
 
-    init(peripheral: CBPeripheral) {
+    init(id: DeviceId, peripheral: CBPeripheral) {
+        self.id = id
         self.peripheral = peripheral
     }
 
     /// Defines if peripheral is ready to connect.
-    public func readyToConnect() -> Bool {
+    public func isReadyToConnect() -> Bool {
         // Make sure that we are in idle state
         guard self.state.isIdle() else {
             return false
@@ -49,9 +58,9 @@ class PeripheralContext {
         return lastSyncDate.addingTimeInterval(Constants.Bluetooth.PeripheralIgnoredTimeoutInSec) < Date()
     }
 
-    /// Function specifies if this peripheral has higher priority in the next connection attempt.
-    /// - Parameter other: Other peripheral state
-    func hasHigherPriorityForConnection(other: PeripheralContext) -> Bool {
+    /// Function specifies if this device has higher priority in the next connection attempt.
+    /// - Parameter other: Other device's state
+    func hasHigherPriorityForConnection(other: Device) -> Bool {
         // We check in following order (from most important to less important):
 
         // Current connection state
@@ -60,6 +69,12 @@ class PeripheralContext {
         guard idle == otherIdle else {
             // Idle peripheral has higher priority
             return idle
+        }
+
+        // Device type. Devices with BeaconId are more prone to be lost quickly.
+        guard self.id.hasBeaconId() == other.id.hasBeaconId() else {
+            // Having Beacon ID gives priority.
+            return self.id.hasBeaconId()
         }
 
         // Connection retries
@@ -82,5 +97,11 @@ class PeripheralContext {
 
         // Higher value means better signal.
         return RSSI >= otherRSSI
+    }
+}
+
+extension Device: CustomStringConvertible {
+    var description: String {
+        return "[id=\(id), state=\(state), retries=\(connectionRetries)]"
     }
 }

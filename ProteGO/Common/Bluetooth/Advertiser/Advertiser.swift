@@ -1,10 +1,10 @@
 import Foundation
 
 protocol Advertiser {
-    /// Update advertised token data
+    /// Update advertised beacon id.
     ///
     /// - Parameters:
-    ///   - data: New token data payload
-    ///   - expirationDate: Expiration date of token data
-    func updateTokenData(data: Data, expirationDate: Date)
+    ///   - beaconId: Beacon ID to synchronize.
+    ///   - expirationDate: Beacon ID expiration date.
+    func updateBeaconId(beaconId: BeaconId, expirationDate: Date)
 }

@@ -8,8 +8,8 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     private var service: CBService?
     /// Delegate
     private weak var delegate: AdvertiserDelegate?
-    /// Current token data
-    private var currentTokenData: (Data, Date)?
+    /// Current beacon id
+    private var currentBeaconId: (BeaconId, Date)?
     /// Advertisement restart timer. After a timeout we restart advertising.
     private var advertisementRestartTimer: Timer?
     /// Advertisement stop timer. After a timeout we stop advertisement.
@@ -100,18 +100,18 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
         }
     }
 
-    /// Check if token data is present and not expired.
-    private func tokenDataIsValid() -> Bool {
-        guard let tokenData = self.currentTokenData else {
+    /// Check if beacon ID is present and not expired.
+    private func beaconIdIsValid() -> Bool {
+        guard let beaconId = self.currentBeaconId else {
             return false
         }
-        return tokenData.1 > Date()
+        return beaconId.1 > Date()
     }
 
-    /// Update token data.
-    public func updateTokenData(data: Data, expirationDate: Date) {
-        logger.debug("Token data updated with expiration date: \(expirationDate)")
-        self.currentTokenData = (data, expirationDate)
+    /// Update beacon ID.
+    func updateBeaconId(beaconId: BeaconId, expirationDate: Date) {
+        logger.debug("Beacon ID (\(beaconId)) updated with expiration date: \(expirationDate)")
+        self.currentBeaconId = (beaconId, expirationDate)
     }
 
     // State management ---------------------------------------------------------------------------------
@@ -169,38 +169,38 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
         logger.debug("Peripheral manager did receive read, offset: \(request.offset)")
 
-        // Marker if token data was expired during this transaction.
-        var tokenExpired = false
+        // Marker if beacon id was expired during this transaction.
+        var beaconIdExpired = false
 
         // Check if token data is valid. If not, allow delegate to udpate
-        if !tokenDataIsValid() {
-            delegate?.tokenDataExpired(previousTokenData: self.currentTokenData)
-            tokenExpired = true
+        if !beaconIdIsValid() {
+            delegate?.beaconIdExpired(previousBeaconId: self.currentBeaconId)
+            beaconIdExpired = true
         }
 
-        // Check once again if data is valid.
-        guard let tokenData = self.currentTokenData, self.tokenDataIsValid() else {
+        // Check once again if beacon id is valid.
+        guard let (beaconId, _) = self.currentBeaconId, self.beaconIdIsValid() else {
             // If not, return that read is not permitted.
             peripheral.respond(to: request, withResult: CBATTError.readNotPermitted)
             return
         }
 
-        // Continue transaction when token was not expired or request offset was set to 0.
-        guard !tokenExpired || request.offset == 0 else {
+        // Continue transaction when beacon id was not expired or request offset was set to 0.
+        guard !beaconIdExpired || request.offset == 0 else {
             // Read is not permitted.
             peripheral.respond(to: request, withResult: CBATTError.readNotPermitted)
             return
         }
 
         // Check if offset is not out of band.
-        guard request.offset < tokenData.0.count else {
+        guard request.offset <  beaconId.getData().count else {
             logger.debug("Invalid offset: \(request.offset)")
             peripheral.respond(to: request, withResult: CBATTError.invalidOffset)
             return
         }
 
         // Setup value and respond.
-        request.value = tokenData.0.subdata(in: request.offset ..< tokenData.0.count)
+        request.value = beaconId.getData().subdata(in: request.offset ..< beaconId.getData().count)
         peripheral.respond(to: request, withResult: CBATTError.success)
     }
 

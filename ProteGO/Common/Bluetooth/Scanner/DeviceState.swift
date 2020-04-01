@@ -1,8 +1,11 @@
 import Foundation
 import CoreBluetooth
 
+/// This enum describes connection flow of the device. All steps
+/// are executed in sequence specified below.
 enum PeripheralState {
     case Idle
+    case Queued
     case Connecting
     case Connected
     case DiscoveringService

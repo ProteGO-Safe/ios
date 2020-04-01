@@ -1,11 +1,12 @@
 import Foundation
 
 protocol ScannerDelegate: AnyObject {
-    /// Callback invoked when token data was successfully retrieved from the surrounding peripheral.
+    /// Callback invoked when beacon id was successfully retrieved from the surrounding device.
     ///
     /// Note: Make sure this function call is **not blocking**.
     ///
-    /// - Parameter data: token data
-    /// - rssi:  RSSI value if we managed fetch one.
-    func synchronizedTokenData(data: Data, rssi: Int?)
+    /// - Parameters:
+    ///   - beaconId: synchronized beacon ID with other device.
+    ///   - rssi: RSSI detected during synchronization if available
+    func synchronizedBeaconId(beaconId: BeaconId, rssi: Int?)
 }

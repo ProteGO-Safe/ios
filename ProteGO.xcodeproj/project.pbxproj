@@ -151,17 +151,22 @@
 		87074B78242F57770029AD4B /* AdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B77242F57770029AD4B /* AdvertiserDelegate.swift */; };
 		87074B79242F57770029AD4B /* AdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B77242F57770029AD4B /* AdvertiserDelegate.swift */; };
 		87074B7C242F6A5F0029AD4B /* BleScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7B242F6A5F0029AD4B /* BleScanner.swift */; };
-		87074B7F242F6D700029AD4B /* PeripheralContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7E242F6D700029AD4B /* PeripheralContext.swift */; };
+		87074B7F242F6D700029AD4B /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7E242F6D700029AD4B /* Device.swift */; };
 		87074B82242F77CB0029AD4B /* ScannerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B81242F77CB0029AD4B /* ScannerDelegate.swift */; };
 		87074B83242F77CB0029AD4B /* ScannerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B81242F77CB0029AD4B /* ScannerDelegate.swift */; };
-		87074B85242F94780029AD4B /* PeripheralState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B84242F94780029AD4B /* PeripheralState.swift */; };
-		87074B86242F94780029AD4B /* PeripheralState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B84242F94780029AD4B /* PeripheralState.swift */; };
+		87074B85242F94780029AD4B /* DeviceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B84242F94780029AD4B /* DeviceState.swift */; };
+		87074B86242F94780029AD4B /* DeviceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B84242F94780029AD4B /* DeviceState.swift */; };
 		871208D62430C6A600DA0A4D /* Constants+Bluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871208D52430C6A600DA0A4D /* Constants+Bluetooth.swift */; };
 		871208D92430D16C00DA0A4D /* BluetoothBackgroudTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871208D82430D16C00DA0A4D /* BluetoothBackgroudTask.swift */; };
 		87177C942430A6FB007C8F78 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C932430A6FB007C8F78 /* Scanner.swift */; };
 		87177C952430A6FB007C8F78 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C932430A6FB007C8F78 /* Scanner.swift */; };
 		87177C972430A7F6007C8F78 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C962430A7F6007C8F78 /* Advertiser.swift */; };
 		87177C982430A7F6007C8F78 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C962430A7F6007C8F78 /* Advertiser.swift */; };
+		877F3F7324348C0000F774C7 /* DeviceId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F7224348C0000F774C7 /* DeviceId.swift */; };
+		877F3F752434AB5700F774C7 /* BeaconId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F742434AB5700F774C7 /* BeaconId.swift */; };
+		877F3F762434AB5700F774C7 /* BeaconId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F742434AB5700F774C7 /* BeaconId.swift */; };
+		877F3F792434B4F100F774C7 /* Data+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F782434B4F100F774C7 /* Data+HexString.swift */; };
+		877F3F7A2434B4F100F774C7 /* Data+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F782434B4F100F774C7 /* Data+HexString.swift */; };
 		87C985FC242E0A8500335502 /* BleAdvertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C985FB242E0A8500335502 /* BleAdvertiser.swift */; };
 		87F259E92430A3E2009BF612 /* MockScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F259E82430A3E2009BF612 /* MockScanner.swift */; };
 		A63BFB76240CADB609E72685 /* Pods_ProteGO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3458DDABC1020B1EB7984F /* Pods_ProteGO.framework */; };
@@ -340,14 +345,17 @@
 		83828A072433352D0054347B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		87074B77242F57770029AD4B /* AdvertiserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertiserDelegate.swift; sourceTree = "<group>"; };
 		87074B7B242F6A5F0029AD4B /* BleScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleScanner.swift; sourceTree = "<group>"; };
-		87074B7E242F6D700029AD4B /* PeripheralContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralContext.swift; sourceTree = "<group>"; };
+		87074B7E242F6D700029AD4B /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		87074B81242F77CB0029AD4B /* ScannerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerDelegate.swift; sourceTree = "<group>"; };
-		87074B84242F94780029AD4B /* PeripheralState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralState.swift; sourceTree = "<group>"; };
+		87074B84242F94780029AD4B /* DeviceState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceState.swift; sourceTree = "<group>"; };
 		871208D52430C6A600DA0A4D /* Constants+Bluetooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Bluetooth.swift"; sourceTree = "<group>"; };
 		871208D82430D16C00DA0A4D /* BluetoothBackgroudTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothBackgroudTask.swift; sourceTree = "<group>"; };
 		87177C902430A5B7007C8F78 /* MockAdvertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAdvertiser.swift; sourceTree = "<group>"; };
 		87177C932430A6FB007C8F78 /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		87177C962430A7F6007C8F78 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
+		877F3F7224348C0000F774C7 /* DeviceId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceId.swift; sourceTree = "<group>"; };
+		877F3F742434AB5700F774C7 /* BeaconId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconId.swift; sourceTree = "<group>"; };
+		877F3F782434B4F100F774C7 /* Data+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+HexString.swift"; sourceTree = "<group>"; };
 		87C985FB242E0A8500335502 /* BleAdvertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleAdvertiser.swift; sourceTree = "<group>"; };
 		87F259E82430A3E2009BF612 /* MockScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockScanner.swift; sourceTree = "<group>"; };
 		95EEA776F9CF0007EA77CC71 /* Pods-ProteGO.debug_stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGO.debug_stg.xcconfig"; path = "Target Support Files/Pods-ProteGO/Pods-ProteGO.debug_stg.xcconfig"; sourceTree = "<group>"; };
@@ -512,6 +520,7 @@
 		0E6D260C242E8E940037A80C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				877F3F772434B4DE00F774C7 /* Data */,
 				833181912433A08A00A8E18D /* UIImage */,
 				8331818E2433A03A00A8E18D /* ConstraintMaker */,
 				8382897A24332D780054347B /* UIView */,
@@ -1188,10 +1197,19 @@
 				87074B81242F77CB0029AD4B /* ScannerDelegate.swift */,
 				87074B7B242F6A5F0029AD4B /* BleScanner.swift */,
 				87F259E82430A3E2009BF612 /* MockScanner.swift */,
-				87074B7E242F6D700029AD4B /* PeripheralContext.swift */,
-				87074B84242F94780029AD4B /* PeripheralState.swift */,
+				87074B7E242F6D700029AD4B /* Device.swift */,
+				87074B84242F94780029AD4B /* DeviceState.swift */,
+				877F3F7224348C0000F774C7 /* DeviceId.swift */,
 			);
 			path = Scanner;
+			sourceTree = "<group>";
+		};
+		877F3F772434B4DE00F774C7 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				877F3F782434B4F100F774C7 /* Data+HexString.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		87C985FA242E0A6400335502 /* Bluetooth */ = {
@@ -1201,6 +1219,7 @@
 				87C98604242E2B1A00335502 /* Advertiser */,
 				871208D52430C6A600DA0A4D /* Constants+Bluetooth.swift */,
 				871208D82430D16C00DA0A4D /* BluetoothBackgroudTask.swift */,
+				877F3F742434AB5700F774C7 /* BeaconId.swift */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -1529,9 +1548,9 @@
 			files = (
 				87074B82242F77CB0029AD4B /* ScannerDelegate.swift in Sources */,
 				87177C972430A7F6007C8F78 /* Advertiser.swift in Sources */,
-				87074B7F242F6D700029AD4B /* PeripheralContext.swift in Sources */,
+				87074B7F242F6D700029AD4B /* Device.swift in Sources */,
 				87074B78242F57770029AD4B /* AdvertiserDelegate.swift in Sources */,
-				87074B85242F94780029AD4B /* PeripheralState.swift in Sources */,
+				87074B85242F94780029AD4B /* DeviceState.swift in Sources */,
 				838289D3243330F40054347B /* VerifyCodeViewModel.swift in Sources */,
 				83252A7C24320586001E6D63 /* Constants+Networking.swift in Sources */,
 				8368016E24323FF400678DBD /* OnboardingAssembly.swift in Sources */,
@@ -1577,6 +1596,7 @@
 				83252A12242F63B1001E6D63 /* NetworkClient.swift in Sources */,
 				83252A8E24322167001E6D63 /* RootViewModel.swift in Sources */,
 				83252A14242F6C22001E6D63 /* NetworkRequest.swift in Sources */,
+				877F3F752434AB5700F774C7 /* BeaconId.swift in Sources */,
 				83252A18242F9C11001E6D63 /* UrlRequestBuilderType.swift in Sources */,
 				0E9DCCAB2430CA5A00C2670D /* RegisteredEncountersDebugViewModelType.swift in Sources */,
 				0EE60C32242FDB2D00D29048 /* RealmManager.swift in Sources */,
@@ -1619,6 +1639,7 @@
 				0EE60C5F2430015E00D29048 /* SecretsGenerator.swift in Sources */,
 				838289C4243330200054347B /* SendCodeViewModelType.swift in Sources */,
 				0E9DCCA12430C8C200C2670D /* CustomView.swift in Sources */,
+				877F3F7324348C0000F774C7 /* DeviceId.swift in Sources */,
 				83252A6E24314CFE001E6D63 /* ConfirmRegistrationRequest.swift in Sources */,
 				8382897924332D670054347B /* UITextFireld+Factory.swift in Sources */,
 				83252A6324314B9A001E6D63 /* GcpClientType.swift in Sources */,
@@ -1630,6 +1651,7 @@
 				0EE60BD0242F8A3C00D29048 /* InfoKeys+Value.swift in Sources */,
 				838289BF24332FEE0054347B /* SendCodeView.swift in Sources */,
 				838289DB2433320B0054347B /* RegistrationViewController.swift in Sources */,
+				877F3F792434B4F100F774C7 /* Data+HexString.swift in Sources */,
 				0EE60C52242FF40500D29048 /* FilesCoordinatorType.swift in Sources */,
 				836801722432401300678DBD /* DashboardAssembly.swift in Sources */,
 				838289DD2433327A0054347B /* VerifyCodeModel.swift in Sources */,
@@ -1642,12 +1664,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				877F3F7A2434B4F100F774C7 /* Data+HexString.swift in Sources */,
 				87074B83242F77CB0029AD4B /* ScannerDelegate.swift in Sources */,
 				87177C982430A7F6007C8F78 /* Advertiser.swift in Sources */,
 				87074B79242F57770029AD4B /* AdvertiserDelegate.swift in Sources */,
-				87074B86242F94780029AD4B /* PeripheralState.swift in Sources */,
+				87074B86242F94780029AD4B /* DeviceState.swift in Sources */,
 				87177C952430A6FB007C8F78 /* Scanner.swift in Sources */,
 				0E9DCC992430987000C2670D /* RealmManagerMock.swift in Sources */,
+				877F3F762434AB5700F774C7 /* BeaconId.swift in Sources */,
 				0EE60C612430017A00D29048 /* SecretsGeneratorSpecs.swift in Sources */,
 				0E9DCC8F2430150000C2670D /* RealmManagerSpecs.swift in Sources */,
 				0E9DCC962430985900C2670D /* EncountersManagerSpecs.swift in Sources */,

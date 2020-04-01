@@ -31,9 +31,9 @@ final class EncountersManager: EncountersManagerType {
 }
 
 extension EncountersManager: ScannerDelegate {
-    func synchronizedTokenData(data: Data, rssi: Int?) {
-        logger.debug("Synchronized token data \(data), rssi: \(String(describing: rssi))")
-        let deviceId = data.map { String(format: "%02hhx", $0) }.joined()
+    func synchronizedBeaconId(beaconId: BeaconId, rssi: Int?) {
+        logger.debug("Synchronized token data \(beaconId), rssi: \(String(describing: rssi))")
+        let deviceId = beaconId.getData().toHexString()
         let newEncounter = Encounter.createEncounter(deviceId: deviceId, signalStrength: rssi, date: Date())
         do {
             try self.addNewEncounter(encounter: newEncounter)
