@@ -12,7 +12,10 @@ enum PeripheralState {
     case DiscoveredService(CBService)
     case DiscoveringCharacteristic
     case DiscoveredCharacteristic(CBCharacteristic)
-    case ReadingCharacteristic
+    case ReadingBeaconId(CBCharacteristic)
+    case SynchronizedBeaconId(CBCharacteristic, BeaconId)
+    case WritingBeaconId(CBCharacteristic, BeaconId)
+    case Synchronized(BeaconId)
 
     func isIdle() -> Bool {
         if case .Idle = self {

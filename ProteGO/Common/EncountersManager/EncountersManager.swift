@@ -30,9 +30,16 @@ final class EncountersManager: EncountersManagerType {
     }
 }
 
-extension EncountersManager: ScannerDelegate {
+extension EncountersManager: BeaconIdAgent {
+    func getBeaconId() -> ExpiringBeaconId? {
+        // NOTE: Get real values later...
+        let expiringBeaconId = ExpiringBeaconId(beaconId: BeaconId.random(), expirationDate: Date(timeIntervalSinceNow: 30))
+        logger.debug("Got expiring Beacon ID: \(expiringBeaconId)")
+        return expiringBeaconId
+    }
+
     func synchronizedBeaconId(beaconId: BeaconId, rssi: Int?) {
-        logger.debug("Synchronized token data \(beaconId), rssi: \(String(describing: rssi))")
+        logger.debug("Synchronized Beacon ID \(beaconId), rssi: \(String(describing: rssi))")
         let deviceId = beaconId.getData().toHexString()
         let newEncounter = Encounter.createEncounter(deviceId: deviceId, signalStrength: rssi, date: Date())
         do {

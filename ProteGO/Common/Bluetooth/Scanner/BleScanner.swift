@@ -1,3 +1,4 @@
+//swiftlint:disable file_length
 import Foundation
 import CoreBluetooth
 
@@ -5,29 +6,29 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     /// CBCentral manager
     private var centralManager: CBCentralManager!
 
-    /// Delegate to tell about events.
-    private weak var delegate: ScannerDelegate?
+    /// Beacon ID agent providing new Beacon IDs.
+    private weak var agent: BeaconIdAgent?
 
-    /// List of known devices with their context
+    /// List of known devices
     private var devices: [DeviceId: Device]
 
-    /// Scanning restart timer. After a timeout we restart scanning.
-    private var scanningRestartTimer: Timer?
-    /// Scanning stop timer. After a timeout we stop scanning.
-    private var scanningStopTimer: Timer?
+    /// Scanning timer controling on/off state of the scanner.
+    private var scanningTimer: Timer?
+
+    /// Scanner mode deciding about enabled/disabled state of discovery.
+    private var mode: ScannerMode = .Disabled
 
     /// Background task handle
     private let backgroundTask: BluetoothBackgroundTask
     private let scanningTaskID = Constants.Bluetooth.ScanningBackgroundTaskID
 
     /// Initialize Central Manager with restored state identifier to be able to work in the background.
-    init(delegate: ScannerDelegate, backgroundTask: BluetoothBackgroundTask) {
+    init(agent: BeaconIdAgent, backgroundTask: BluetoothBackgroundTask) {
         self.backgroundTask = backgroundTask
         self.devices = [:]
         super.init()
-        self.delegate = delegate
-
-        let options = [CBCentralManagerOptionRestoreIdentifierKey: Constants.Bluetooth.ProteGOServiceUUID]
+        self.agent = agent
+        let options = [CBCentralManagerOptionRestoreIdentifierKey: Constants.Bluetooth.BluetoothCentralManagerRestorationID]
         self.centralManager = CBCentralManager(delegate: self, queue: nil, options: options)
 
         /// This timer won't run in the background by itself. When we got time slice for
@@ -40,11 +41,33 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         RunLoop.current.add(syncCheckTimer, forMode: .common)
     }
 
+    /// Set scanner mode
+    /// - Parameter mode: Scanner mode
+    func setMode(_ mode: ScannerMode) {
+        self.mode = mode
+        switch mode {
+        case .Disabled:
+            stopScanningIfNeeded()
+        default:
+            startScanningIfNeeded()
+        }
+    }
+
+    /// Get scanner mode
+    func getMode() -> ScannerMode {
+        return self.mode
+    }
+
+    /// Returns true if scanner is discovering new devices
+    func isScanning() -> Bool {
+        return centralManager.state == .poweredOn && centralManager.isScanning
+    }
+
     /// Depending on the device's state, invoke actions to finalize synchronization.
     /// - Parameter device: device's context
     // swiftlint:disable:next function_body_length
     private func continueDeviceSynchronization(device: Device) {
-        logger.debug("Proceeding with synchronization: \(device.id)")
+        logger.debug("Continue synchronization: \(device.id), state: \(device.state)")
 
         // Make sure we are in PoweredOn state
         guard centralManager.state == .poweredOn else {
@@ -133,14 +156,30 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
             }
         }
 
-        if case let .DiscoveredCharacteristic(characteristic)  = device.state {
+        if case let .DiscoveredCharacteristic(characteristic) = device.state {
             peripheral.readValue(for: characteristic)
-            device.state = .ReadingCharacteristic
+            device.state = .ReadingBeaconId(characteristic)
             return
         }
 
-        if case .ReadingCharacteristic = device.state {
+        if case .ReadingBeaconId = device.state {
             // Wait for result
+            return
+        }
+
+        if case let .SynchronizedBeaconId(characteristic, beaconId) = device.state {
+            // Try to write out own beacon id
+            peripheral.writeValue(Data(), for: characteristic, type: .withResponse)
+            device.state = .WritingBeaconId(characteristic, beaconId)
+        }
+
+        if case .WritingBeaconId = device.state {
+            // Wait for result
+            return
+        }
+
+        if case .Synchronized(_) = device.state {
+            // Finish synchronization.
             return
         }
 
@@ -163,8 +202,8 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
             centralManager.cancelPeripheralConnection(device.peripheral)
         }
 
-        // Inform about a new token
-        delegate?.synchronizedBeaconId(beaconId: beaconId, rssi: device.lastRSSI)
+        // Inform about a new Beacon ID
+        agent?.synchronizedBeaconId(beaconId: beaconId, rssi: device.lastRSSI)
 
         // Update device's state
         device.connectionRetries = 0
@@ -317,45 +356,69 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     }
 
     private func startScanningIfNeeded() {
-        logger.debug("Start scanning")
+        logger.debug("Starting scanning...")
 
         // Start scanning background task
         backgroundTask.start(taskName: scanningTaskID)
 
-        // Restart scanning stop timer.
-        self.scanningStopTimer?.invalidate()
-        let newScanningStopTimer = Timer.init(
-            timeInterval: Constants.Bluetooth.ScanningStopTimeout,
-            repeats: false) { [weak self] _ in
-                self?.stopScanningIfNeeded()
-        }
-        RunLoop.main.add(newScanningStopTimer, forMode: .common)
-        self.scanningStopTimer = newScanningStopTimer
+        // Stop scanning timer
+        self.scanningTimer?.invalidate()
+        self.scanningTimer = nil
 
-        // Restart scanning restart timer.
-        self.scanningRestartTimer?.invalidate()
-        let newScanningRestartTimer = Timer.init(
-            timeInterval: Constants.Bluetooth.ScanningRestartTimeout,
-            repeats: false) { [weak self] _ in
-                self?.startScanningIfNeeded()
+        // Check scanning mode.
+        switch self.mode {
+        case .Disabled:
+            // Scanning is disabled, don't allow starting.
+            logger.debug("Scanning failed to start as scanner is disabled")
+            return
+        case .EnabledAllTime:
+            // Scanning is enabled, all time, no need to setup timer.
+            break
+        case let .EnabledPartTime(scanningOnTime: onTime, scanningOffTime: _):
+            // Prepare timer to stop scanning
+            let timer = Timer.init(timeInterval: onTime, repeats: false) { [weak self] _ in
+                self?.stopScanningIfNeeded()
+            }
+            RunLoop.main.add(timer, forMode: .common)
+            self.scanningTimer = timer
         }
-        RunLoop.main.add(newScanningRestartTimer, forMode: .common)
-        self.scanningRestartTimer = newScanningRestartTimer
 
         // Start scanning if needed.
-        if !self.centralManager.isScanning {
+        if self.centralManager.state == .poweredOn && !self.centralManager.isScanning {
             self.centralManager.scanForPeripherals(withServices: [Constants.Bluetooth.ProteGOServiceUUID], options: nil)
         }
     }
 
     private func stopScanningIfNeeded() {
-        logger.debug("Stop scanning")
+        logger.debug("Stopping scanning...")
 
         // Stop scanning background task
         backgroundTask.stop(taskName: scanningTaskID)
 
+        // Stop scanner timer
+        self.scanningTimer?.invalidate()
+        self.scanningTimer = nil
+
+        // Check scanning mode
+        switch self.mode {
+        case .Disabled:
+            // Stop scanning
+            break
+        case .EnabledAllTime:
+            // Don't allow to stop scanning as it should be enabled all time.
+            logger.debug("Scanner failed to stop as it's forced to be turned on")
+            return
+        case let .EnabledPartTime(scanningOnTime: _, scanningOffTime: offTime):
+            // Setup timer to start scanner after a while
+            let timer = Timer.init(timeInterval: offTime, repeats: false) { [weak self] _ in
+                self?.startScanningIfNeeded()
+            }
+            RunLoop.main.add(timer, forMode: .common)
+            self.scanningTimer = timer
+        }
+
         // Stop scanning if needed.
-        if self.centralManager.isScanning {
+        if self.centralManager.state == .poweredOn && self.centralManager.isScanning {
             self.centralManager.stopScan()
         }
     }

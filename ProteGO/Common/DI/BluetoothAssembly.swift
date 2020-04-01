@@ -9,23 +9,23 @@ final class BluetoothAssembly: Assembly {
     }
 
     private func registerBluetoothAdvertiser(_ container: Container) {
-        container.register(Advertiser.self) { (resolver, delegate: AdvertiserDelegate) in
+        container.register(Advertiser.self) { (resolver, agent: BeaconIdAgent) in
             if DebugMenu.assign(DebugMenu.useMockBluetoothAdvertiser) {
-                return MockAdvertiser(delegate: delegate)
+                return MockAdvertiser(agent: agent)
             } else {
                 let backgroundTask: BluetoothBackgroundTask = resolver.resolve(BluetoothBackgroundTask.self)
-                return BleAdvertiser(delegate: delegate, backgroundTask: backgroundTask)
+                return BleAdvertiser(agent: agent, backgroundTask: backgroundTask)
             }
         }.inObjectScope(.container)
     }
 
     private func registerBluetoothScanner(_ container: Container) {
-        container.register(Scanner.self) { (resolver, delegate: ScannerDelegate) in
+        container.register(Scanner.self) { (resolver, agent: BeaconIdAgent) in
             if DebugMenu.assign(DebugMenu.useMockBluetoothScanner) {
-                return MockScanner(delegate: delegate)
+                return MockScanner(agent: agent)
             } else {
                 let backgroundTask: BluetoothBackgroundTask = resolver.resolve(BluetoothBackgroundTask.self)
-                return BleScanner(delegate: delegate, backgroundTask: backgroundTask)
+                return BleScanner(agent: agent, backgroundTask: backgroundTask)
             }
         }.inObjectScope(.container)
     }

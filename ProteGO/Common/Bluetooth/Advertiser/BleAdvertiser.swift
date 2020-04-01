@@ -6,10 +6,10 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     private var peripheralManager: CBPeripheralManager!
     /// Handle to the currently mounted service
     private var service: CBService?
-    /// Delegate
-    private weak var delegate: AdvertiserDelegate?
+    /// Beacon ID agent.
+    private weak var agent: BeaconIdAgent?
     /// Current Beacon ID to advertise.
-    private var currentBeaconId: (BeaconId, Date)?
+    private var expiringBeaconID: ExpiringBeaconId?
     /// Advertisement timer to schedule start/stop operations.
     private var advertisementTimer: Timer?
     /// Advertising mode deciding about radio usage.
@@ -19,10 +19,10 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     private let advertisementTaskID = Constants.Bluetooth.AdvertisingBackgroundTaskID
 
     /// Restoration identifier is required to properly resume when application is restored by the OS.
-    init(delegate: AdvertiserDelegate, backgroundTask: BluetoothBackgroundTask) {
+    init(agent: BeaconIdAgent, backgroundTask: BluetoothBackgroundTask) {
         self.backgroundTask = backgroundTask
         super.init()
-        self.delegate = delegate
+        self.agent = agent
         self.peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: [
             CBPeripheralManagerOptionRestoreIdentifierKey:
                 Constants.Bluetooth.BluetoothPeripheralManagerRestorationID
@@ -77,7 +77,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     /// Start advertisement. In the background we can only advertise UUID, which is then stored in special "overflow" area
     /// visible only to other iOS devices.
     private func startAdvertisementIfNeeded() {
-        logger.debug("Starting advertisement if needed")
+        logger.debug("Starting advertisement...")
 
         // start a task
         backgroundTask.start(taskName: advertisementTaskID)
@@ -89,7 +89,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
         switch self.mode {
         case .Disabled:
             // We can't enable advertisement
-            logger.debug("Advertisement is disabled")
+            logger.debug("Starting advertisement failed, scanner is disabled")
             return
         case .EnabledAllTime:
             // We don't setup timers to stop advertisement.
@@ -114,7 +114,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     /// Stop advertisement. We want to limit power consumption in the background to keep our application running for
     /// a longer time.
     private func stopAdvertisementIfNeeded() {
-        logger.debug("Stopping advertisement if needed")
+        logger.debug("Stopping advertisement...")
 
         // Stop background task.
         backgroundTask.stop(taskName: advertisementTaskID)
@@ -130,7 +130,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
             break
         case .EnabledAllTime:
             // Don't allow to stop advertisement.
-            logger.debug("Advertisement is always enabled.")
+            logger.debug("Stopping advertisement failed as it's forced to be enabled.")
             return
         case let .EnabledPartTime(advertisingOnTime: _, advertisingOffTime: offTime):
             // Setup advertisement timer to start after a while
@@ -146,18 +146,9 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
         }
     }
 
-    /// Check if Beacon ID is present and not expired.
-    private func beaconIdIsValid() -> Bool {
-        guard let beaconId = self.currentBeaconId else {
-            return false
-        }
-        return beaconId.1 > Date()
-    }
-
-    /// Update Beacon ID.
-    func updateBeaconId(beaconId: BeaconId, expirationDate: Date) {
-        logger.debug("Beacon ID (\(beaconId)) updated with expiration date: \(expirationDate)")
-        self.currentBeaconId = (beaconId, expirationDate)
+    /// Check if Beacon ID is expired.
+    private func isBeaconIdExpired() -> Bool {
+        return self.expiringBeaconID?.isExpired() ?? true
     }
 
     // State management ---------------------------------------------------------------------------------
@@ -219,13 +210,13 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
         var beaconIdExpired = false
 
         // Check if token data is valid. If not, allow delegate to udpate
-        if !beaconIdIsValid() {
-            delegate?.beaconIdExpired(previousBeaconId: self.currentBeaconId)
+        if self.isBeaconIdExpired() {
+            self.expiringBeaconID = agent?.getBeaconId()
             beaconIdExpired = true
         }
 
         // Check once again if Beacon ID is valid.
-        guard let (beaconId, _) = self.currentBeaconId, self.beaconIdIsValid() else {
+        guard let beaconId = self.expiringBeaconID?.getBeaconId() else {
             // If not, return that read is not permitted.
             peripheral.respond(to: request, withResult: .readNotPermitted)
             return
@@ -263,7 +254,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
             // If data is a valid Beacon ID, let's inform user about it.
             logger.debug("write: \(value.toHexString()) from: \(request.central.identifier)")
             if let beaconId = BeaconId(data: value) {
-                delegate?.synchronizedBeaconId(beaconId: beaconId, rssi: nil)
+                agent?.synchronizedBeaconId(beaconId: beaconId, rssi: nil)
                 peripheralManager.respond(to: request, withResult: .success)
                 continue
             }
