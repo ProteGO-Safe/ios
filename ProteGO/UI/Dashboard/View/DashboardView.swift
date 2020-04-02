@@ -1,9 +1,87 @@
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class DashboardView: UIView {
 
-    let label = UILabel.with(text: "Dashboard", fontStyle: .headline)
+    var greenStatusTapMoreEvent: ControlEvent<Void> {
+        greenStatusCardView.tapMoreEvent
+    }
+
+    var yellowStatusTapMoreEvent: ControlEvent<Void> {
+        yellowStatusCardView.tapMoreEvent
+    }
+
+    var redStatusContactButtonTappedEvent: ControlEvent<Void> {
+        redStatusCardView.contactButtonTapEvent
+    }
+
+    var greenGeneralRecommendationsTapMoreEvent: ControlEvent<Void> {
+        greenGeneralRecommendationsCard.tapMoreEvent
+    }
+
+    var yellowGeneralRecommendationsTapMoreEvent: ControlEvent<Void> {
+        yellowGeneralRecommendationsCard.tapMoreEvent
+    }
+
+    var redGeneralRecommendationsTapMoreEvent: ControlEvent<Void> {
+        redGeneralRecommendationsCard.tapMoreEvent
+    }
+
+    private let containerScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
+        return scrollView
+    }()
+
+    private let containerStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.spacing = 20
+        return view
+    }()
+
+    private let greenStatusCardView = GreenStatusCardView()
+
+    private let yellowStatusCardView = YellowStatusCardView()
+
+    private let redStatusCardView = RedStatusCardView()
+
+    private let greenGeneralRecommendationsCard: GeneralRecommendationsCard = {
+        let config = GeneralRecommendationsCardConfig(
+            title: L10n.dashboardGreenRecommendTitle,
+            paragraphs: [L10n.dashboardGreenRecommend1,
+                         L10n.dashboardGreenRecommend2,
+                         L10n.dashboardGreenRecommend3],
+            footerTextFunction: L10n.dashboardGreenRecommendMoreInfoBtn,
+            footerHereText: L10n.dashboardGreenRecommendMoreInfoBtnHere)
+        return GeneralRecommendationsCard(config: config)
+    }()
+
+    private let yellowGeneralRecommendationsCard: GeneralRecommendationsCard = {
+        let config = GeneralRecommendationsCardConfig(
+            title: L10n.dashboardYellowRecommendTitle,
+            paragraphs: [L10n.dashboardYellowRecommend1,
+                         L10n.dashboardYellowRecommend2,
+                         L10n.dashboardYellowRecommend3],
+            footerTextFunction: L10n.dashboardYellowRecommendMoreInfoBtn,
+            footerHereText: L10n.dashboardYellowRecommendMoreInfoBtnHere)
+        return GeneralRecommendationsCard(config: config)
+    }()
+
+    private let redGeneralRecommendationsCard: GeneralRecommendationsCard = {
+        let config = GeneralRecommendationsCardConfig(
+            title: L10n.dashboardRedRecommendTitle,
+            paragraphs: [L10n.dashboardRedRecommend1,
+                         L10n.dashboardRedRecommend2,
+                         L10n.dashboardRedRecommend3],
+            footerTextFunction: L10n.dashboardRedRecommendMoreInfoBtn,
+            footerHereText: L10n.dashboardRedRecommendMoreInfoBtnHere)
+        return GeneralRecommendationsCard(config: config)
+    }()
+
+    private let bannerView = BannerView(withBackButton: false, hamburgerIconVisible: true)
 
     init() {
         super.init(frame: .zero)
@@ -17,12 +95,49 @@ final class DashboardView: UIView {
     }
 
     private func addSubviews() {
-        addSubviews([label])
+        addSubviews([bannerView, containerScrollView])
+        containerScrollView.addSubview(containerStackView)
     }
 
     private func setupConstraints() {
-        label.snp.makeConstraints {
-            $0.center.equalToSuperview()
+        bannerView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(0.099 * UIScreen.height)
         }
+
+        containerScrollView.snp.makeConstraints {
+            $0.top.equalTo(bannerView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+
+        containerStackView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(24)
+            $0.leading.equalToSuperview().offset(24)
+            $0.width.equalToSuperview().offset(-50)
+        }
+    }
+
+    func update(withStatus status: DangerStatus) {
+        for view in containerStackView.arrangedSubviews {
+            containerStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+
+        switch status {
+        case .green:
+            containerStackView.addArrangedSubviews([greenStatusCardView, greenGeneralRecommendationsCard])
+        case .yellow:
+            containerStackView.addArrangedSubviews([yellowStatusCardView, yellowGeneralRecommendationsCard])
+        case .red:
+            containerStackView.addArrangedSubviews([redStatusCardView, redGeneralRecommendationsCard])
+        }
+    }
+
+    func updateScrollViewContentSize() {
+        let bottomOffset: CGFloat = 44
+        let size = CGSize(
+            width: self.containerStackView.frame.size.width,
+            height: self.containerStackView.frame.size.height + bottomOffset)
+        self.containerScrollView.contentSize = size
     }
 }
