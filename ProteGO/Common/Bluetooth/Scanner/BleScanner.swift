@@ -189,12 +189,17 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         // Check if there is a device with this ID
         if let device = self.devices[deviceId] {
             // Update information about the device
-            let oldPeripheral = device.updateDeviceWith(peripheral: peripheral, rssi: rssi)
+            let oldPeripheral = device.updateDeviceWith(peripheral: peripheral)
             oldPeripheral?.delegate = nil
         } else {
             // Create a new device
             let device = Device(id: deviceId, peripheral: peripheral)
             self.devices[deviceId] = device
+        }
+
+        // Update RSSI and synchronize Beacon ID if possible.
+        if let rssi = rssi, let beaconId = self.devices[deviceId]?.updateRSSI(rssi: rssi) {
+            agent?.synchronizedBeaconId(beaconId: beaconId, rssi: rssi)
         }
 
         // Check if we need to synchronize.

@@ -15,6 +15,9 @@ class Device {
     /// Last successful synchronization date if specified. We use that value to block
     /// further connection attempts.
     private var lastSynchronizationDate: Date?
+    /// Last succesful synchronized discovery date. When device is discovered with Beacon ID
+    /// we remember the attempt to limit number of encounters.
+    private var lastSynchronizedDiscoveryDate: Date?
     /// Last connection attempt date if specified. It is used to cancel connections to devices
     /// which don't manage to finish synchronization procedure in time.
     private var lastConnectionDate: Date?
@@ -30,21 +33,29 @@ class Device {
         self.peripheral = peripheral
     }
 
+    /// Returns this instance's ID.
+    /// - Returns: Device ID.
     func getId() -> DeviceId {
         self.id
     }
 
+    /// Returns last discovered or read RSSI value.
+    /// - Returns: RSSI value.
     func getLastRSSI() -> Int? {
         self.lastRSSI
     }
 
+    /// Check if device is Idle
+    /// - Returns: True if device is idle.
     func isIdle() -> Bool {
         self.state.isIdle()
     }
 
-    func updateDeviceWith(peripheral: CBPeripheral, rssi: Int?) -> CBPeripheral? {
-        self.lastRSSI = rssi
-
+    /// Update peripheral instance in next connection attempt. This is useful when peripheral
+    /// instance is advertising with the same Beacon ID, suggesting it's the same device.
+    /// - Parameter peripheral: New peripheral instance.
+    /// - Returns: Old peripheral instance to close.
+    func updateDeviceWith(peripheral: CBPeripheral) -> CBPeripheral? {
         // No need to update if peripheral is the same.
         guard peripheral != self.peripheral else {
             return nil
@@ -61,6 +72,31 @@ class Device {
         return closedPeripheral
     }
 
+    /// Update RSSI of a device. If device is advertising with proper Beacon ID and
+    /// we are ready to synchronize return Beacon ID to suggest synchronization.
+    /// - Parameter rssi: Device RSSI
+    /// - Returns: Beacon ID instance if we are ready to synchronize.
+    func updateRSSI(rssi: Int?) -> BeaconId? {
+        self.lastRSSI = rssi
+
+        guard case let .BeaconId(beaconId) = self.id else {
+            return nil
+        }
+
+        let now = Date()
+        let syncTimeout = TimeInterval(DebugMenu.assign(DebugMenu.bluetoothDeviceIgnoredTimeout))
+        let lastSyncDate = self.lastSynchronizedDiscoveryDate ?? Date(timeIntervalSince1970: 0)
+        if lastSyncDate.addingTimeInterval(syncTimeout) < now {
+            self.lastSynchronizedDiscoveryDate = now
+            return beaconId
+        }
+
+        return nil
+    }
+
+    /// Returns true if specified peripheral instance is currently in use.
+    /// - Parameter peripheral: Peripheral instance
+    /// - Returns: True if currently in use.
     func isPeripheralActive(peripheral: CBPeripheral) -> Bool {
         return self.peripheral == peripheral
     }
