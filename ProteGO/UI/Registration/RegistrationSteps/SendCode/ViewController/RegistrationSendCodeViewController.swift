@@ -33,9 +33,6 @@ final class RegistrationSendCodeViewController: UIViewController, CustomView {
         customView.clearTextField()
         customView.update(keyboardHeight: .zero)
     }
-
-    func clearTextField() {
-    }
 }
 
 extension RegistrationSendCodeViewController: DismissKeyboardDelegate {
