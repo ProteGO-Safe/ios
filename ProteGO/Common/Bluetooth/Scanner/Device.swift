@@ -323,8 +323,13 @@ class Device {
 extension Device: CustomStringConvertible {
     var description: String {
         let now = Date()
-        let lastSync = self.lastSynchronizationDate ?? now
-        let nextSyncDate = now.timeIntervalSince1970 - lastSync.timeIntervalSince1970
-        return "[id=\(id), state=\(state), retries=\(connectionRetries), nextSync=\(Int(nextSyncDate)) s]"
+        var nextSyncTime = 0.0
+        if let lastSync = self.lastSynchronizationDate {
+            let nextSync = lastSync.addingTimeInterval(
+                TimeInterval(DebugMenu.assign(DebugMenu.bluetoothDeviceIgnoredTimeout))
+            )
+            nextSyncTime = nextSync.timeIntervalSince1970 - now.timeIntervalSince1970
+        }
+        return "[id=\(id), state=\(state), retries=\(connectionRetries), nextSync=\(Int(nextSyncTime)) s]"
     }
 }
