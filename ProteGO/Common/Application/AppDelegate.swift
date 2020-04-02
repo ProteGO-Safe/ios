@@ -41,8 +41,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        self.advertiser?.setMode(.EnabledPartTime(advertisingOnTime: 10, advertisingOffTime: 30))
-        self.advertiser?.setMode(.EnabledPartTime(advertisingOnTime: 10, advertisingOffTime: 30))
+        self.advertiser?.setMode(.EnabledPartTime(
+            advertisingOnTime: TimeInterval(DebugMenu.assign(DebugMenu.bluetoothAdvertiserOnTime)),
+            advertisingOffTime: TimeInterval(DebugMenu.assign(DebugMenu.bluetoothAdvertiserOffTime))
+        ))
+        self.scanner?.setMode(.EnabledPartTime(
+            scanningOnTime: TimeInterval(DebugMenu.assign(DebugMenu.bluetoothScannerOnTime)),
+            scanningOffTime: TimeInterval(DebugMenu.assign(DebugMenu.bluetoothScannerOffTime))
+        ))
     }
 
     private func generateWindow() -> UIWindow {

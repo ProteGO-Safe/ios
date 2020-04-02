@@ -239,7 +239,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         }
 
         // Check number of pending connections
-        var freeSlots = Constants.Bluetooth.PeripheralMaxConcurrentConnections
+        var freeSlots = DebugMenu.assign(DebugMenu.bluetoothMaxConcurrentConnections)
         sortedDevices.forEach { device in
             // Get debug info
             logger.debug(device.description)

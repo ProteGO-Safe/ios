@@ -41,25 +41,22 @@ extension Constants {
         /// device when synchronization was already completed.
         static let PeripheralIgnoredTimeoutInSec: TimeInterval = 60
 
-        /// Define how long we should wait before we attempt to reconnect to the device, which failed to synchronize.
-        static let PeripheralReconnectionTimeoutPerAttemptInSec: TimeInterval = 5
-
         /// Maxium number of concurrent connections established by a peripheral manager.
         static let PeripheralMaxConcurrentConnections = 3
 
         /// Maximum number of connection retries before we decide to remove device until discovered once again.
         static let PeripheralMaxConnectionRetries = 3
 
-        /// Advertising restart timeout. After this period of time advertising is resumed.
-        static let AdvertisingRestartTimeout: TimeInterval = 60
+        /// Advertising enabled period (used only in background mode)
+        static let AdvertisingOnTimeout: TimeInterval = 15
 
-        /// Advertising stop timeout. After this period of time advertising is stopped.
-        static let AdvertisingStopTimeout: TimeInterval = 15
+        /// Advertising disabled period (used only in background mode)
+        static let AdvertisingOffTimeout: TimeInterval = 45
 
-        /// Scanning restart timeout. After this period of time scanning is resumed.
-        static let ScanningRestartTimeout: TimeInterval = 60
+        /// Scanning enabled period (used only in background mode)
+        static let ScanningOnTimeout: TimeInterval = 15
 
-        /// Scanning stop timeout. After this period of time scanning is stopped.
-        static let ScanningStopTimeout: TimeInterval = 15
+        /// Scanning disabled period (used only in background mode)
+        static let ScanningOffTimeout: TimeInterval = 45
     }
 }

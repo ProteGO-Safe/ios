@@ -76,8 +76,7 @@ class Device {
         // time when we can connect.
         if let lastConnectionDate = self.lastConnectionDate, self.connectionRetries != 0 {
             let nextReconnectionTime = lastConnectionDate.addingTimeInterval(
-                Constants.Bluetooth.PeripheralSynchronizationTimeoutInSec +
-                Constants.Bluetooth.PeripheralReconnectionTimeoutPerAttemptInSec * Double(self.connectionRetries)
+                TimeInterval(DebugMenu.assign(DebugMenu.bluetoothSynchronizationTimeout))
             )
             if nextReconnectionTime > Date() {
                 return false
@@ -90,7 +89,8 @@ class Device {
         }
 
         // Check if we are ready for the next connection attempt.
-        return lastSyncDate.addingTimeInterval(Constants.Bluetooth.PeripheralIgnoredTimeoutInSec) < Date()
+        let ignoreTimeout = TimeInterval(DebugMenu.assign(DebugMenu.bluetoothDeviceIgnoredTimeout))
+        return lastSyncDate.addingTimeInterval(ignoreTimeout) < Date()
     }
 
     /// Function specifies if this device has higher priority in the next connection attempt.
@@ -144,7 +144,8 @@ class Device {
         if case let .CancelSynchronization(onlyOnTimeout) = event {
             var cancel = !onlyOnTimeout
             if let date = self.lastConnectionDate, onlyOnTimeout {
-                if date.addingTimeInterval(Constants.Bluetooth.PeripheralSynchronizationTimeoutInSec) < Date() {
+                let syncTimeout = TimeInterval(DebugMenu.assign(DebugMenu.bluetoothSynchronizationTimeout))
+                if date.addingTimeInterval(syncTimeout) < Date() {
                     cancel = true
                 }
             }
@@ -224,9 +225,9 @@ class Device {
                 self.connectionRetries = 0
             }
         } else {
-            let allowedConnectionRetries =
-                self.id.hasBeaconId() ? 0 : Constants.Bluetooth.PeripheralMaxConnectionRetries
-            if self.connectionRetries >= allowedConnectionRetries {
+            let maxConnectionRetries =
+                self.id.hasBeaconId() ? 0 : DebugMenu.assign(DebugMenu.bluetoothMaxConnectionRetries)
+            if self.connectionRetries >= maxConnectionRetries {
                 self.state = .Closed
                 effects.append(.Close(self.peripheral))
                 effects.append(.Remove)
