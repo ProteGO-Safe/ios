@@ -3,9 +3,9 @@ import RxCocoa
 import RxSwift
 
 protocol HistoryOverviewModelType: class {
-    var phoneId: BehaviorRelay<String> { get }
+    var phoneId: String { get }
 
-    var historyLastDate: BehaviorRelay<String> { get }
+    var historyLastDate: BehaviorRelay<Date> { get }
 
-    var lastSeenDevicesCount: BehaviorRelay<String> { get }
+    var lastSeenDevicesCount: BehaviorRelay<Int> { get }
 }

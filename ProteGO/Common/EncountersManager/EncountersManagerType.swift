@@ -7,4 +7,6 @@ protocol EncountersManagerType: ScannerDelegate {
     func addNewEncounter(encounter: Encounter) throws
 
     func deleteAllEncountersOlderThan(date: Date) throws
+
+    func uniqueEncountersSince(date: Date) -> Results<Encounter>
 }

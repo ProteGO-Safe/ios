@@ -1,4 +1,5 @@
 import Swinject
+import Valet
 
 final class HistoryOverviewAssembly: Assembly {
 
@@ -23,7 +24,9 @@ final class HistoryOverviewAssembly: Assembly {
 
     private func registerHistoryOverviewModel(_ container: Container) {
         container.register(HistoryOverviewModelType.self) { resolver in
-            return HistoryOverviewModel(encountersManasger: resolver.resolve(EncountersManagerType.self))
+            let encountersManager: EncountersManagerType = resolver.resolve(EncountersManagerType.self)
+            let valet: Valet = resolver.resolve(Valet.self)
+            return HistoryOverviewModel(encountersManager: encountersManager, valet: valet)
         }
     }
 }
