@@ -11,7 +11,7 @@
 "onboarding_status_title" = "Będziemy Cię informować o  możliwym zagrożeniu";
 
 /* Onboarding informacje o statusie */
-"onboarding_status_description" = "Aplikacja przekaże Ci jedną z trzech informacji. Dzięki nim będziesz wiedzieć czy w ostatnich 14 dniach mogłeś mieć styczność z osobami zarażonymi. ";
+"onboarding_status_description" = "Aplikacja przekaże Ci jedną z trzech informacji. Dzięki niej będziesz wiedzieć czy w ostatnich 14 dniach mogłeś mieć styczność z osobami zarażonymi. ";
 
 /* Onboarding informacje o statusie */
 "onboarding_green_description" = "Nie wykryliśmy zagrożenia";
@@ -59,7 +59,7 @@
 "registration_verify_code_placeholder" = "xxxxx";
 
 /* Rejestracja */
-"registration_verify_btn" = "Zweryfikuj kod";
+"registration_verify_btn" = "Potwierdź kod";
 
 /* Rejestracja */
 "registration_terms_of_use_btn_regular_part" = "Dołączając do aplikacji, akceptujesz %@.";
@@ -117,10 +117,10 @@
 "dashboard_yellow_recommend_more_info_btn_here" = "tutaj";
 
 /* Dashboard - status czerwony */
-"dashboard_red_status_title" = "Byłeś w strefies zagrożenia!";
+"dashboard_red_status_title" = "Byłeś blisko osób chorych.";
 
 /* Dashboard - status czerwony */
-"dashboard_red_status_description" = "Przebywałeś w miejscach lub blisko osób, u których wykryto koronawirusa. Poddaj się domowej kwarantannie. Zadzwoń do najbliższego GIS. ";
+"dashboard_red_status_description" = "Przebywałeś blisko osób, u których wykryto koronawirusa. Zadzwoń do najbliższego GIS. Poddaj się domowej kwarantannie. ";
 
 /* Dashboard - status czerwony */
 "dashboard_red_status_contact_btn" = "Skontaktuj się ze specjalistą";
@@ -182,17 +182,23 @@
 /* Dashboard - ekran informacyjny */
 "dashboard_info_send_data_btn" = "Wyślij historię";
 
-/* Dashboard - ekran informacyjny */
+/* Dashboard - ekran informacyjny - do usunięcia */
 "dashboard_info_from_time" = "Od godziny";
 
-/* Dashboard - ekran informacyjny */
+/* Dashboard - ekran informacyjny - do usunięcia */
 "dashboard_info_you_encountered" = "pojawiło się wokół Ciebie";
 
-/* Dashboard - ekran informacyjny */
+/* Dashboard - ekran informacyjny - do usunięcia */
 "dashboard_info_phones_with_app" = "telefonów z aktywnie działającą aplikacją";
 
-/* Dashboard - ekran informacyjny */
+/* Dashboard - ekran informacyjny - do usunięcia */
 "dashboard_info_contact_us_description" = "Chcesz się z nami skontaktować?";
+
+/* Dashboard - ekran informacyjny */
+"dashboard_info_history_overview" = "Liczba urządzeń wykrytych od %@: %@";
+
+/* Dashboard - ekran informacyjny */
+"dashboard_info_contact_us_email" = "kontakt@protego.gov.pl";
 
 /* Dashboard - ekran informacyjny */
 "dashboard_info_terms_of_use_btn" = "Regulamin ProteGO";
@@ -201,7 +207,7 @@
 "dashboard_info_version" = "version";
 
 /* Ekran wysyłania danych */
-"send_data_title" = "Wyślij historię";
+"send_data_title" = "Wyślij listę spotkań";
 
 /* Ekran wysyłania danych */
 "send_data_description" = "Podziel się informacją o osobach, które były w pobliżu Ciebie w ciągu ostatnich dwóch tygodni, abyśmy mogli ostrzec je przed ewentualnym zarażeniem.\n\nNikt nie dowie się o Twojej chorobie.";

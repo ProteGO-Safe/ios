@@ -76,7 +76,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate 
             RootAssembly(),
             OnboardingAssembly(),
             RegistrationAssembly(),
-            DashboardAssembly()
+            DashboardAssembly(),
+            HistoryOverviewAssembly()
         ])
     }
 }

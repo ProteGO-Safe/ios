@@ -29,6 +29,10 @@ final class DashboardView: UIView {
         redGeneralRecommendationsCard.tapMoreEvent
     }
 
+    var hamburgerButtonTapEvent: ControlEvent<Void> {
+        bannerView.rightButtonTapEvent
+    }
+
     private let containerScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
@@ -81,7 +85,7 @@ final class DashboardView: UIView {
         return GeneralRecommendationsCard(config: config)
     }()
 
-    private let bannerView = BannerView(withBackButton: false, hamburgerIconVisible: true)
+    private let bannerView = BannerView(leftButtonImage: nil, rightButtonImage: Images.hamburgerIcon)
 
     init() {
         super.init(frame: .zero)

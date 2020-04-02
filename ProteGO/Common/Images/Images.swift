@@ -17,4 +17,6 @@ struct Images {
     static let generalRecommendationExclamationMark = UIImage(named: "generalRecommendationExclamationMark")!
 
     static let hamburgerIcon = UIImage(named: "hamburgerIcon")!
+
+    static let closeIcon = UIImage(named: "closeIcon")!
 }

@@ -3,15 +3,15 @@ import RxCocoa
 
 final class BannerView: UIView {
 
-    var backButtonTapEvent: ControlEvent<Void> {
-        return backButton.rx.tap
+    var leftButtonTapEvent: ControlEvent<Void> {
+        return leftButton.rx.tap
     }
 
-    var hamburgerButtonTapEvent: ControlEvent<Void> {
-        return hamburgerIconButton.rx.tap
+    var rightButtonTapEvent: ControlEvent<Void> {
+        return rightButton.rx.tap
     }
 
-    private let backButton: UIButton = {
+    private let leftButton: UIButton = {
         let button = UIButton()
         button.setImage(Images.backArrow, for: .normal)
         return button
@@ -23,19 +23,18 @@ final class BannerView: UIView {
         return image
     }()
 
-    private let hamburgerIconButton: UIButton = {
+    private let rightButton: UIButton = {
         let button = UIButton()
-        button.setImage(Images.hamburgerIcon, for: .normal)
         return button
     }()
 
-    init(withBackButton: Bool, hamburgerIconVisible: Bool) {
+    init(leftButtonImage: UIImage?, rightButtonImage: UIImage?) {
         super.init(frame: .zero)
         addSubviews()
         setupConstraints()
         backgroundColor = Colors.bluishGreen
-        backButton.isHidden = !withBackButton
-        hamburgerIconButton.isHidden = !hamburgerIconVisible
+        self.setupLeftButton(image: leftButtonImage)
+        self.setupRightButton(image: rightButtonImage)
     }
 
     required init?(coder: NSCoder) {
@@ -43,7 +42,7 @@ final class BannerView: UIView {
     }
 
     private func addSubviews() {
-        addSubviews([backButton, logoView, hamburgerIconButton])
+        addSubviews([leftButton, logoView, rightButton])
     }
 
     private func setupConstraints() {
@@ -53,14 +52,32 @@ final class BannerView: UIView {
             $0.height.equalTo(29)
         }
 
-        backButton.snp.makeConstraints {
+        leftButton.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(24)
             $0.centerY.equalTo(logoView)
         }
 
-        hamburgerIconButton.snp.makeConstraints {
+        rightButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-24)
             $0.centerY.equalTo(logoView)
+        }
+    }
+
+    private func setupLeftButton(image: UIImage?) {
+        if let image = image {
+            leftButton.isHidden = false
+            leftButton.setImage(image, for: .normal)
+        } else {
+            leftButton.isHidden = true
+        }
+    }
+
+    private func setupRightButton(image: UIImage?) {
+        if let image = image {
+            rightButton.isHidden = false
+            rightButton.setImage(image, for: .normal)
+        } else {
+            rightButton.isHidden = true
         }
     }
 }

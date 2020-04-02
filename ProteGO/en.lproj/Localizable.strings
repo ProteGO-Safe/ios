@@ -11,64 +11,64 @@
 "onboarding_status_title" = "We will keep you informed about a possible threat";
 
 /* Onboarding informacje o statusie */
-"onboarding_status_description" = "Aplikacja przekaże Ci jedną z trzech informacji. Dzięki nim będziesz wiedzieć czy w ostatnich 14 dniach mogłeś mieć styczność z osobami zarażonymi. ";
+"onboarding_status_description" = "The application will presnet one of three statuses. You will learn in could be exposed to infected people within last 2 weeks.";
 
 /* Onboarding informacje o statusie */
-"onboarding_green_description" = "Nie wykryliśmy zagrożenia";
+"onboarding_green_description" = "We didn't dectect any threat";
 
 /* Onboarding informacje o statusie */
-"onboarding_yellow_description" = "Mogłeś przebywać wśród osób zarażonych";
+"onboarding_yellow_description" = "You could have been close to infected people";
 
 /* Onboarding informacje o statusie */
-"onboarding_red_description" = "Zgłoś się do najbliższego ośrodka GIS";
+"onboarding_red_description" = "Call the nearest GIS";
 
 /* Onboarding przycisk */
-"onboarding_back_btn" = "Wstecz";
+"onboarding_back_btn" = "Back";
 
 /* Onboarding informacje o bluetooth */
-"onboarding_bluetooth_title" = "Włącz bluetooth!";
+"onboarding_bluetooth_title" = "Turn on Bluetooth";
 
 /* Onboarding informacje o bluetooth */
-"onboarding_bluetooth_description" = "Aby aplikacja mogła działać prawidłowo, Bluetooth na Twoim telefonie musi być włączony cały czas.\n\nDzięki połączeniu Bluetooth ProteGO skanuje otoczenie w poszukiwaniu innych użytkowników, którzy korzystają z aplikacji.\n\nInformacje o napotkanych urządzeniach są przechowywane tylko na Twoim telefonie i nie są nigdzie wysyłane.";
+"onboarding_bluetooth_description" = "The applicatioin requires Bluetooth to be turned on all the time\n\nProteGO scans your surrounding for other app users via Bluetooth.\n\nThe app stores the 2 weeks history of all your encounters encrypted on your device and doesn't send it anywhere.";
 
 /* Onboarding informacje o dzieleniu się danymi */
-"onboarding_sharing_title" = "Dzielenie się danymi w przypadku zarażenia";
+"onboarding_sharing_title" = "Sharing the data in case of threat";
 
 /* Onboarding informacje o dzieleniu się danymi */
-"onboarding_sharing_description" = "Jeśli zdiagnozowano u Ciebie SARS-CoV-2 poprosimy Cię o przesłanie danych z aplikacji. Dzięki temu będziemy w stanie zaalarmować osoby, które przebywały w Twoim otoczeniu w ostatnich 14 dniach o możliwości zarażenia. Nie dowiedzą się o Twojej chorobie.";
+"onboarding_sharing_description" = "If you are diagnosed with SARS-CoV-2 we will ask you to send the data from your phone. We will use it to alert some of the people who were close to you within last 2 weeks. They may be infected too. They will not learn about your condition.";
 
 /* Rejestracja */
-"registration_send_title" = "Dołącz do aplikacji!";
+"registration_send_title" = "Join the application!";
 
 /* Rejestracja */
-"registration_send_description" = "Potrzebujemy Twojego numeru telefonu, aby móc się z Tobą skontaktować jeśli byłeś w pobliżu osób zarażonych.\n\nPotwierdzimy Twój numer przesyłając Ci kod weryfikacyjny SMSem.";
+"registration_send_description" = "Enter your phone number so that we can contact you if you were closed to people with SARS-CoV-2.\n\nWe will confirm your phone number by sending you an SMS code.";
 
 /* Rejestracja */
 "registration_phone_placeholder" = "xxx xxx xxx";
 
 /* Rejestracja */
-"registration_send_code_btn" = "Prześlij kod";
+"registration_send_code_btn" = "Send code";
 
 /* Rejestracja */
-"registration_verify_title" = "Wpisz swój kod SMS";
+"registration_verify_title" = "Enter your SMS code";
 
 /* Rejestracja */
-"registration_verify_description" = "Wpisz swój kod, który otrzymałeś w SMSie wysłanym na numer";
+"registration_verify_description" = "Enter the code you received on ";
 
 /* Rejestracja */
 "registration_verify_code_placeholder" = "xxxxx";
 
 /* Rejestracja */
-"registration_verify_btn" = "Zweryfikuj kod";
+"registration_verify_btn" = "Verify code";
 
 /* Rejestracja */
-"registration_terms_of_use_btn_regular_part" = "Dołączając do aplikacji, akceptujesz %@.";
+"registration_terms_of_use_btn_regular_part" = "By joing the app you accept %@.";
 
 /* Rejestracja */
-"registration_terms_of_use_btn_underlined_part" = "Regulamin";
+"registration_terms_of_use_btn_underlined_part" = "Term of Use";
 
 /* Ekran błedu - brak internetu */
-"error_no_internet_title" = "Włącz internet";
+"error_no_internet_title" = "Turn on the Internet";
 
 /* Ekran błedu - brak internetu */
 "error_no_internet_description" = "Do korzystania z aplikacji niezbędne jest połączenie z internetem. Włącz wi-fi lub transmisję danych, żeby kontynuować. ";
@@ -98,126 +98,132 @@
 "dashboard_yellow_more_info_btn_here" = "tutaj";
 
 /* Dashboard - status żółty */
-"dashboard_yellow_recommend_title" = "Aktualne zalecenia ministerstwa";
+"dashboard_yellow_recommend_title" = "Current govermental recommendations";
 
 /* Dashboard - status żółty */
-"dashboard_yellow_recommend_1" = "Ograniczenia w przemieszczaniu się z wyjątkiem drogi do pracy, wolontariatu, załatwiania spraw niezbędnych do życia codziennego.";
+"dashboard_yellow_recommend_1" = "Restrictions on movement except for travel to work, volunteering, and arranging matters necessary for everyday life.";
 
 /* Dashboard - status żółty */
-"dashboard_yellow_recommend_2" = "W autobusie może być tyle osób ile wynosi połowa liczby miejsc siedzących.";
+"dashboard_yellow_recommend_2" = "There can be as many people on the bus as half the number of seats.";
 
 /* Dashboard - status żółty */
-"dashboard_yellow_recommend_3" = "Całkowity zakaz zgromadzeń, chyba, że z najbliższymi.";
+"dashboard_yellow_recommend_3" = "Total ban on gatherings, except with the closest ones.";
 
 /* Dashboard - status żółty */
 "dashboard_yellow_recommend_more_info_btn
-" = "Więcej informacji znajdziesz %@.";
+" = "More information %@.";
 
 /* Dashboard - status żółty */
-"dashboard_yellow_recommend_more_info_btn_here" = "tutaj";
+"dashboard_yellow_recommend_more_info_btn_here" = "here";
 
 /* Dashboard - status czerwony */
-"dashboard_red_status_title" = "Byłeś w strefies zagrożenia!";
+"dashboard_red_status_title" = "You were close to infected people.";
 
 /* Dashboard - status czerwony */
-"dashboard_red_status_description" = "Przebywałeś w miejscach lub blisko osób, u których wykryto koronawirusa. Poddaj się domowej kwarantannie. Zadzwoń do najbliższego GIS. ";
+"dashboard_red_status_description" = "You were close to people infected with SARS-CoV-2. Call the nearest GIS. Stay at home quarantine.";
 
 /* Dashboard - status czerwony */
-"dashboard_red_status_contact_btn" = "Skontaktuj się ze specjalistą";
+"dashboard_red_status_contact_btn" = "Contact an expert";
 
 /* Dashboard - status czerwony */
-"dashboard_red_recommend_title" = "Aktualne zalecenia ministerstwa";
+"dashboard_red_recommend_title" = "Current govermental recommendations";
 
 /* Dashboard - status czerwony */
-"dashboard_red_recommend_1" = "Ograniczenia w przemieszczaniu się z wyjątkiem drogi do pracy, wolontariatu, załatwiania spraw niezbędnych do życia codziennego.";
+"dashboard_red_recommend_1" = "Restrictions on movement except for travel to work, volunteering, and arranging matters necessary for everyday life.";
 
 /* Dashboard - status czerwony */
-"dashboard_red_recommend_2" = "W autobusie może być tyle osób ile wynosi połowa liczby miejsc siedzących.";
+"dashboard_red_recommend_2" = "There can be as many people on the bus as half the number of seats.";
 
 /* Dashboard - status czerwony */
-"dashboard_red_recommend_3" = "Całkowity zakaz zgromadzeń, chyba, że z najbliższymi.";
+"dashboard_red_recommend_3" = "Total ban on gatherings, except with the closest ones.";
 
 /* Dashboard - status czerwony */
-"dashboard_red_recommend_more_info_btn" = "Więcej informacji znajdziesz %@.";
+"dashboard_red_recommend_more_info_btn" = "More information %@.";
 
 /* Dashboard - status czerwony */
-"dashboard_red_recommend_more_info_btn_here" = "tutaj";
+"dashboard_red_recommend_more_info_btn_here" = "here";
 
 /* Dashboard - status zielony */
-"dashboard_green_status_title" = "Nie wykryliśmy zagrożenia";
+"dashboard_green_status_title" = "We didn't dectect any threat";
 
 /* Dashboard - status zielony */
-"dashboard_green_status_description" = "Wygląda na to, że nie miałeś kontaktu z osobami zarażonymi.";
+"dashboard_green_status_description" = "It seems you weren't close to infected people";
 
 /* Dashboard - status zielony */
-"dashboard_green_status_more_info_btn" = "Żeby dowiedzieć się jak zachować środki ostrożności kliknij %@.";
+"dashboard_green_status_more_info_btn" = "Learn more on about the precautions, click %@";
 
 /* Dashboard - status zielony */
-"dashboard_green_status_more_info_btn_here" = "tutaj";
+"dashboard_green_status_more_info_btn_here" = "here";
 
 /* Dashboard - status zielony */
-"dashboard_green_recommend_title" = "Aktualne zalecenia ministerstwa";
+"dashboard_green_recommend_title" = "Current govermental recommendations";
 
 /* Dashboard - status zielony */
-"dashboard_green_recommend_1" = "Ograniczenia w przemieszczaniu się z wyjątkiem drogi do pracy, wolontariatu, załatwiania spraw niezbędnych do życia codziennego.";
+"dashboard_green_recommend_1" = "Restrictions on movement except for travel to work, volunteering, and arranging matters necessary for everyday life.";
 
 /* Dashboard - status zielony */
-"dashboard_green_recommend_2" = "W autobusie może być tyle osób ile wynosi połowa liczby miejsc siedzących.";
+"dashboard_green_recommend_2" = "There can be as many people on the bus as half the number of seats.";
 
 /* Dashboard - status zielony */
-"dashboard_green_recommend_3" = "Całkowity zakaz zgromadzeń, chyba, że z najbliższymi.";
+"dashboard_green_recommend_3" = "Total ban on gatherings, except with the closest ones.";
 
 /* Dashboard - status zielony */
-"dashboard_green_recommend_more_info_btn" = "Więcej informacji znajdziesz %@.";
+"dashboard_green_recommend_more_info_btn" = "More information %@.";
 
 /* Dashboard - status zielony */
-"dashboard_green_recommend_more_info_btn_here" = "tutaj";
+"dashboard_green_recommend_more_info_btn_here" = "here";
 
 /* Dashboard - ekran informacyjny */
-"dashboard_info_your_id" = "Twoje ID:";
+"dashboard_info_your_id" = "Your ID:";
 
 /* Dashboard - ekran informacyjny */
 "dashboard_info_id_placehloder" = "xxx xxx xxx";
 
 /* Dashboard - ekran informacyjny */
-"dashboard_info_send_data_btn" = "Wyślij historię";
+"dashboard_info_send_data_btn" = "Send history";
 
-/* Dashboard - ekran informacyjny */
+/* Dashboard - ekran informacyjny - do usunięcia */
 "dashboard_info_from_time" = "Od godziny";
 
-/* Dashboard - ekran informacyjny */
+/* Dashboard - ekran informacyjny - do usunięcia */
 "dashboard_info_you_encountered" = "pojawiło się wokół Ciebie";
 
-/* Dashboard - ekran informacyjny */
+/* Dashboard - ekran informacyjny - do usunięcia */
 "dashboard_info_phones_with_app" = "telefonów z aktywnie działającą aplikacją";
 
-/* Dashboard - ekran informacyjny */
-"dashboard_info_contact_us_description" = "Chcesz się z nami skontaktować?";
+/* Dashboard - ekran informacyjny - do usunięcia */
+"dashboard_info_contact_us_description" = "Need to send us an email?";
 
 /* Dashboard - ekran informacyjny */
-"dashboard_info_terms_of_use_btn" = "Regulamin ProteGO";
+"dashboard_info_history_overview" = "Devices detected since %@: %@";
+
+/* Dashboard - ekran informacyjny */
+"dashboard_info_contact_us_email" = "kontakt@protego.gov.pl";
+
+/* Dashboard - ekran informacyjny */
+"dashboard_info_terms_of_use_btn" = "ProteGO Terms of Use";
 
 /* Dashboard - ekran informacyjny */
 "dashboard_info_version" = "version";
 
 /* Ekran wysyłania danych */
-"send_data_title" = "Wyślij historię";
+"send_data_title" = "Send encounters list";
 
 /* Ekran wysyłania danych */
-"send_data_description" = "Podziel się informacją o osobach, które były w pobliżu Ciebie w ciągu ostatnich dwóch tygodni, abyśmy mogli ostrzec je przed ewentualnym zarażeniem.\n\nNikt nie dowie się o Twojej chorobie.";
+"send_data_description" = "Share the list of users you encounteres nearby within last 2 weeks. Our experts will alert those who might be infected.\n\nNobody will learn about your condition.";
 
 /* Ekran wysyłania danych */
-"send_data_your_id" = "Twoje ID:";
+"send_data_your_id" = "Your ID:";
 
 /* Ekran wysyłania danych */
 "send_data_id_placeholder" = "xxx xxx xxx";
 
 /* Ekran wysyłania danych */
-"send_data_send_button" = "Wyślij";
+"send_data_send_button" = "Send";
 
 /* Alert po wysłaniu danych */
-"send_data_alert_title" = "Dziękujemy!";
+"send_data_alert_title" = "Thank you!";
 
 /* Alert po wysłaniu danych */
-"send_data_alert_description" = "Twoje dane zostały przekazane do Głównego Inspektoratu Sanitarnego.\nZapewniamy, że żadne osoby, którym ewentualnie się skontaktujemy nie poznają Twoich danych osobowych.\n\nW razie jakichkolwiek pytań napisz do nas na %@\nlub zadzwoń %@";
+"send_data_alert_description" = "Your data was sent to GIS.\nWe guarantee nobody will use your personal data while contacting with other people.\n\nIf you have any questions please email as at %@\nor call %@";
 

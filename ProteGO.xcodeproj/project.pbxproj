@@ -65,6 +65,13 @@
 		0E9DDA722430D82E002D879F /* Constants+Encounters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9DDA712430D82E002D879F /* Constants+Encounters.swift */; };
 		0E9DDA752430DB46002D879F /* String+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9DDA742430DB46002D879F /* String+Random.swift */; };
 		0E9DDA772430E12C002D879F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9DDA762430E12C002D879F /* AppDelegate.swift */; };
+		0EB65C792435279300491507 /* HistoryOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C782435279300491507 /* HistoryOverviewView.swift */; };
+		0EB65C7B2435279E00491507 /* HistoryOverviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C7A2435279E00491507 /* HistoryOverviewModel.swift */; };
+		0EB65C7D243527A900491507 /* HistoryOverviewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C7C243527A900491507 /* HistoryOverviewModelType.swift */; };
+		0EB65C7F2435284800491507 /* HistoryOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C7E2435284800491507 /* HistoryOverviewViewModel.swift */; };
+		0EB65C812435285300491507 /* HistoryOverviewViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C802435285300491507 /* HistoryOverviewViewModelType.swift */; };
+		0EB65C832435285E00491507 /* HistoryOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C822435285E00491507 /* HistoryOverviewViewController.swift */; };
+		0EB65C852436195200491507 /* HistoryAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C842436195200491507 /* HistoryAssembly.swift */; };
 		0ECE7A1F2430E3EE00EED942 /* BluetoothAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECE7A1E2430E3EE00EED942 /* BluetoothAssembly.swift */; };
 		0ECE7A212430E48200EED942 /* BluetoothDebugItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECE7A202430E48200EED942 /* BluetoothDebugItems.swift */; };
 		0ECE7A222430F91F00EED942 /* MockAdvertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C902430A5B7007C8F78 /* MockAdvertiser.swift */; };
@@ -273,6 +280,13 @@
 		0E9DDA712430D82E002D879F /* Constants+Encounters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Encounters.swift"; sourceTree = "<group>"; };
 		0E9DDA742430DB46002D879F /* String+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Random.swift"; sourceTree = "<group>"; };
 		0E9DDA762430E12C002D879F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0EB65C782435279300491507 /* HistoryOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOverviewView.swift; sourceTree = "<group>"; };
+		0EB65C7A2435279E00491507 /* HistoryOverviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOverviewModel.swift; sourceTree = "<group>"; };
+		0EB65C7C243527A900491507 /* HistoryOverviewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOverviewModelType.swift; sourceTree = "<group>"; };
+		0EB65C7E2435284800491507 /* HistoryOverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOverviewViewModel.swift; sourceTree = "<group>"; };
+		0EB65C802435285300491507 /* HistoryOverviewViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOverviewViewModelType.swift; sourceTree = "<group>"; };
+		0EB65C822435285E00491507 /* HistoryOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOverviewViewController.swift; sourceTree = "<group>"; };
+		0EB65C842436195200491507 /* HistoryAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryAssembly.swift; sourceTree = "<group>"; };
 		0ECE7A1E2430E3EE00EED942 /* BluetoothAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothAssembly.swift; sourceTree = "<group>"; };
 		0ECE7A202430E48200EED942 /* BluetoothDebugItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothDebugItems.swift; sourceTree = "<group>"; };
 		0EE4E8F924326BA300EA05ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -755,6 +769,7 @@
 		0E9DCC9E2430C80700C2670D /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				0EB65C73243525C200491507 /* HistoryOverview */,
 				83252A822432202E001E6D63 /* Root */,
 				83252A952432248A001E6D63 /* Onboarding */,
 				838289AB24332EFF0054347B /* Registration */,
@@ -823,6 +838,51 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		0EB65C73243525C200491507 /* HistoryOverview */ = {
+			isa = PBXGroup;
+			children = (
+				0EB65C77243525FD00491507 /* ViewController */,
+				0EB65C76243525F600491507 /* ViewModel */,
+				0EB65C75243525F000491507 /* Model */,
+				0EB65C74243525E000491507 /* View */,
+			);
+			path = HistoryOverview;
+			sourceTree = "<group>";
+		};
+		0EB65C74243525E000491507 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0EB65C782435279300491507 /* HistoryOverviewView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0EB65C75243525F000491507 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0EB65C7A2435279E00491507 /* HistoryOverviewModel.swift */,
+				0EB65C7C243527A900491507 /* HistoryOverviewModelType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0EB65C76243525F600491507 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0EB65C7E2435284800491507 /* HistoryOverviewViewModel.swift */,
+				0EB65C802435285300491507 /* HistoryOverviewViewModelType.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0EB65C77243525FD00491507 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0EB65C822435285E00491507 /* HistoryOverviewViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		0EE60BCC242F8A3C00D29048 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -885,6 +945,7 @@
 				8368016D24323FF400678DBD /* OnboardingAssembly.swift */,
 				8368016F2432400500678DBD /* RegistrationAssembly.swift */,
 				836801712432401300678DBD /* DashboardAssembly.swift */,
+				0EB65C842436195200491507 /* HistoryAssembly.swift */,
 			);
 			path = DI;
 			sourceTree = "<group>";
@@ -1800,8 +1861,11 @@
 				83512C382434FFE4007DB8AD /* OnboardingStepView.swift in Sources */,
 				836801702432400500678DBD /* RegistrationAssembly.swift in Sources */,
 				871208D62430C6A600DA0A4D /* Constants+Bluetooth.swift in Sources */,
+				0EB65C812435285300491507 /* HistoryOverviewViewModelType.swift in Sources */,
 				0E9DCC942430984A00C2670D /* EncountersManager.swift in Sources */,
+				0EB65C832435285E00491507 /* HistoryOverviewViewController.swift in Sources */,
 				0E96532B242F436B00ADD300 /* LogLevel.swift in Sources */,
+				0EB65C7B2435279E00491507 /* HistoryOverviewModel.swift in Sources */,
 				83252A8A24322156001E6D63 /* RootView.swift in Sources */,
 				0E22F92C2434DFD3008AD8EB /* DangerStatusCardTopModule.swift in Sources */,
 				0E8DED342433D19300D7F806 /* DangerStatusDebugItems.swift in Sources */,
@@ -1825,6 +1889,7 @@
 				83252A14242F6C22001E6D63 /* NetworkRequest.swift in Sources */,
 				83252A18242F9C11001E6D63 /* UrlRequestBuilderType.swift in Sources */,
 				0E9DCCAB2430CA5A00C2670D /* RegisteredEncountersDebugViewModelType.swift in Sources */,
+				0EB65C852436195200491507 /* HistoryAssembly.swift in Sources */,
 				0EE60C32242FDB2D00D29048 /* RealmManager.swift in Sources */,
 				838289BD24332FB20054347B /* RegistrationSendCodeModelType.swift in Sources */,
 				0E8DED45243480F400D7F806 /* YellowStatusCardView.swift in Sources */,
@@ -1837,6 +1902,7 @@
 				0EE60C3E242FE4F100D29048 /* Constants+Realm.swift in Sources */,
 				83252A8C24322160001E6D63 /* RootViewController.swift in Sources */,
 				83512C262434D063007DB8AD /* OnboardingWelcomeStepView.swift in Sources */,
+				0EB65C7F2435284800491507 /* HistoryOverviewViewModel.swift in Sources */,
 				0ECE7A212430E48200EED942 /* BluetoothDebugItems.swift in Sources */,
 				0E965352242F81D400ADD300 /* DebugMenu.swift in Sources */,
 				83512C282434D06F007DB8AD /* OnboardingStatusStepView.swift in Sources */,
@@ -1852,6 +1918,8 @@
 				83252A9C24322549001E6D63 /* OnboardingView.swift in Sources */,
 				0E965355242F82B900ADD300 /* GeneralDebugItems.swift in Sources */,
 				0ECE7A222430F91F00EED942 /* MockAdvertiser.swift in Sources */,
+				0EB65C7D243527A900491507 /* HistoryOverviewModelType.swift in Sources */,
+				0EB65C792435279300491507 /* HistoryOverviewView.swift in Sources */,
 				0E8DED2E2433CC7600D7F806 /* DangerStatusManager.swift in Sources */,
 				0E8DED302433CCCF00D7F806 /* DangerStatusManagerType.swift in Sources */,
 				836DF51B24334C14000C00C0 /* RegistrationViewModel.swift in Sources */,
