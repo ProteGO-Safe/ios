@@ -170,8 +170,15 @@ class Device {
         return RSSI >= otherRSSI
     }
 
+    /// Handle incoming events from central, peripheral or scanner.
+    /// - Parameter event: Event to handle.
+    /// - Returns: Effects to execute.
     func handleEvent(_ event: DeviceEvent) -> [DeviceEffect] {
         var effects: [DeviceEffect] = []
+
+        if case let .ReadRSSI(_, rssi) = event {
+            self.lastRSSI = rssi
+        }
 
         if case .StartSynchronization = event {
             effects.append(contentsOf: self.startSynchronization())
@@ -273,9 +280,6 @@ class Device {
             }
         }
 
-        // Update other params
-        self.lastRSSI = nil
-
         return effects
     }
 
@@ -318,6 +322,9 @@ class Device {
 
 extension Device: CustomStringConvertible {
     var description: String {
-        return "[id=\(id), state=\(state), retries=\(connectionRetries)]"
+        let now = Date()
+        let lastSync = self.lastSynchronizationDate ?? now
+        let nextSyncDate = now.timeIntervalSince1970 - lastSync.timeIntervalSince1970
+        return "[id=\(id), state=\(state), retries=\(connectionRetries), nextSync=\(Int(nextSyncDate)) s]"
     }
 }

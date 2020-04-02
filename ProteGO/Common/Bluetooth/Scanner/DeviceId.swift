@@ -39,6 +39,10 @@ extension DeviceId: Hashable, Equatable, CustomStringConvertible {
         switch (lhs, rhs) {
         case let (.PeripheralInstance(lhp), .PeripheralInstance(rhp)):
             return lhp == rhp
+        case let (.IncompleteBeaconId(lhd), .IncompleteBeaconId(rhd)):
+            return lhd.elementsEqual(rhd)
+        case let (.BeaconId(lhb), .BeaconId(rhb)):
+            return lhb == rhb
         default:
             return false
         }

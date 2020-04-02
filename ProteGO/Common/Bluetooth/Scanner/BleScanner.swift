@@ -142,7 +142,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         // Company ID is in little endian.
         let prefix: [UInt8] = [
             UInt8((Constants.Bluetooth.PolideaCompanyId) & 0x00FF),
-            UInt8((Constants.Bluetooth.PolideaCompanyId << 8) & 0x00FF),
+            UInt8((Constants.Bluetooth.PolideaCompanyId >> 8) & 0x00FF),
             UInt8(Constants.Bluetooth.PolideaProteGOManufacturerDataVersion)
         ]
 
