@@ -12,7 +12,7 @@ final class StatusDesciptionView: UIView {
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = text
-        label.font = Fonts.poppinsSemibold(16).font
+        label.font = Fonts.poppinsSemiBold(16).font
         label.textColor = Colors.lightBlack
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0

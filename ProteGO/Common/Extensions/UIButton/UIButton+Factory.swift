@@ -13,7 +13,7 @@ extension UIButton {
         button.setTitle(text, for: .normal)
         button.titleLabel?.font = textFont
         button.setTitleColor(textColor, for: .normal)
-        button.backgroundColor = backgroundColor
+        button.setBackgroundColor(backgroundColor, forState: .normal)
 
         if let borderColor = borderColor {
             button.layer.borderColor = borderColor.cgColor
