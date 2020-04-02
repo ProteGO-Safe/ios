@@ -10,6 +10,10 @@ extension UILabel {
 
     func configure(text: String, fontStyle: FontStyle, lineBreakMode: NSLineBreakMode = .byWordWrapping) {
         self.text = text
+        self.configure(fontStyle: fontStyle, lineBreakMode: lineBreakMode)
+    }
+
+    func configure(fontStyle: FontStyle, lineBreakMode: NSLineBreakMode = .byWordWrapping) {
         self.font = fontStyle.font
         self.textColor = fontStyle.color
 

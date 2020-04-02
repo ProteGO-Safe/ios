@@ -10,7 +10,11 @@ final class DashboardAssembly: Assembly {
 
     private func registerDashboardViewController(_ container: Container) {
         container.register(DashboardViewController.self) { resolver in
-            return DashboardViewController(viewModel: resolver.resolve(DashboardViewModelType.self))
+            let historyOverviewBuilder: HistoryOverviewViewControllerBuilder = {
+                return resolver.resolve(HistoryOverviewViewController.self)
+            }
+            let viewModel: DashboardViewModelType = resolver.resolve(DashboardViewModelType.self)
+            return DashboardViewController(viewModel: viewModel, historyOverViewBuilder: historyOverviewBuilder)
         }
     }
 

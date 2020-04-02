@@ -4,7 +4,7 @@ import RxCocoa
 final class RegistrationView: UIView {
 
     var backButtonTapEvent: ControlEvent<Void> {
-        bannerView.backButtonTapEvent
+        bannerView.leftButtonTapEvent
     }
 
     var tapAnywhereEvent: ControlEvent<Void> {
@@ -13,7 +13,7 @@ final class RegistrationView: UIView {
         return ControlEvent<Void>(events: tapObservable)
     }
 
-    private let bannerView = BannerView(withBackButton: true, hamburgerIconVisible: false)
+    private let bannerView = BannerView(leftButtonImage: Images.backArrow, rightButtonImage: nil)
 
     private let contentContainerView = UIView()
 
