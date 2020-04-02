@@ -118,7 +118,7 @@ internal enum L10n {
   /// Nie wykryliśmy zagrożenia
   internal static let onboardingGreenDescription = L10n.tr("Localizable", "onboarding_green_description")
   /// Thank you for installing ProteGO.\n\nThe app will allow you you learn if there is risk you were close to people infected with coronavirus SARS-CoV-2.
-  internal static let onboardingHelloDescritption = L10n.tr("Localizable", "onboarding_hello_descritption")
+  internal static let onboardingHelloDescription = L10n.tr("Localizable", "onboarding_hello_description")
   /// Welcome to ProteGO!
   internal static let onboardingHelloTitle = L10n.tr("Localizable", "onboarding_hello_title")
   /// Next
@@ -128,7 +128,7 @@ internal enum L10n {
   /// Jeśli zdiagnozowano u Ciebie SARS-CoV-2 poprosimy Cię o przesłanie danych z aplikacji. Dzięki temu będziemy w stanie zaalarmować osoby, które przebywały w Twoim otoczeniu w ostatnich 14 dniach o możliwości zarażenia. Nie dowiedzą się o Twojej chorobie.
   internal static let onboardingSharingDescription = L10n.tr("Localizable", "onboarding_sharing_description")
   /// Dzielenie się danymi w przypadku zarażenia
-  internal static let onboardingShringTitle = L10n.tr("Localizable", "onboarding_shring_title")
+  internal static let onboardingSharingTitle = L10n.tr("Localizable", "onboarding_sharing_title")
   /// Aplikacja przekaże Ci jedną z trzech informacji. Dzięki nim będziesz wiedzieć czy w ostatnich 14 dniach mogłeś mieć styczność z osobami zarażonymi. 
   internal static let onboardingStatusDescription = L10n.tr("Localizable", "onboarding_status_description")
   /// We will keep you informed about a possible threat

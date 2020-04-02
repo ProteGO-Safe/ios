@@ -1,17 +1,17 @@
 import UIKit
 import RxSwift
 
-final class VerifyCodeViewController: UIViewController, CustomView {
+final class RegistrationVerifyCodeViewController: UIViewController, CustomView {
 
-    typealias ViewClass = VerifyCodeView
+    typealias ViewClass = RegistrationVerifyCodeView
 
     var stepFinishedObservable: Observable<Void> {
         return viewModel.stepFinishedObservable
     }
 
-    private let viewModel: VerifyCodeViewModelType
+    private let viewModel: ReegistrationVerifyCodeViewModelType
 
-    init(viewModel: VerifyCodeViewModelType) {
+    init(viewModel: ReegistrationVerifyCodeViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -29,19 +29,21 @@ final class VerifyCodeViewController: UIViewController, CustomView {
         viewModel.bind(view: customView)
     }
 
-    func update(phoneNumber: String) {
+    func updateBeforeAppearing(phoneNumber: String) {
         customView.update(phoneNumber: phoneNumber)
+        customView.clearTextField()
+        customView.update(keyboardHeight: .zero)
     }
 }
 
-extension VerifyCodeViewController: DismissKeyboardDelegate {
+extension RegistrationVerifyCodeViewController: DismissKeyboardDelegate {
 
     func dismissKeyboard() {
         customView.dismissKeyboard()
     }
 }
 
-extension VerifyCodeViewController: UITextFieldDelegate {
+extension RegistrationVerifyCodeViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

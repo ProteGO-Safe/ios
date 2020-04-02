@@ -3,7 +3,7 @@ import RxSwift
 
 final class RegistrationViewModel: RegistrationViewModelType {
 
-    var currentStepOnservable: Observable<RegistrationStep> {
+    var currentStepObservable: Observable<RegistrationStep> {
         return model.currentStepOnservable
     }
 
@@ -39,7 +39,7 @@ final class RegistrationViewModel: RegistrationViewModelType {
         }).disposed(by: disposeBag)
     }
 
-    func bind(sendCodeViewController: SendCodeViewController) {
+    func bind(sendCodeViewController: RegistrationSendCodeViewController) {
 
         sendCodeViewController.stepFinishedObservable
             .subscribe(onNext: { [weak self] stepFinishedData in
@@ -47,7 +47,7 @@ final class RegistrationViewModel: RegistrationViewModelType {
         }).disposed(by: disposeBag)
     }
 
-    func bind(verifyCodeViewController: VerifyCodeViewController) {
+    func bind(verifyCodeViewController: RegistrationVerifyCodeViewController) {
         verifyCodeViewController.stepFinishedObservable
             .subscribe(onNext: { [weak self] _ in
                 self?.model.verifyCodeStepFinished()

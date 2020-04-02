@@ -7,6 +7,7 @@ final class RegistrationAssembly: Assembly {
         registerRegistrationViewController(container)
         registerSendCodeViewController(container)
         registerVerifyCodeViewController(container)
+        registerKeyboardManager(container)
     }
 
     private func registerRegistrationViewController(_ container: Container) {
@@ -23,42 +24,52 @@ final class RegistrationAssembly: Assembly {
 
             return RegistrationViewController(
                 viewModel: resolver.resolve(RegistrationViewModelType.self),
-                sendCodeViewController: resolver.resolve(SendCodeViewController.self),
-                verifyCodeViewController: resolver.resolve(VerifyCodeViewController.self))
+                sendCodeViewController: resolver.resolve(RegistrationSendCodeViewController.self),
+                verifyCodeViewController: resolver.resolve(RegistrationVerifyCodeViewController.self))
         }
     }
 
     private func registerSendCodeViewController(_ container: Container) {
 
-        container.register(SendCodeModelType.self) { resolver in
-            return SendCodeModel(
+        container.register(RegistrationSendCodeModelType.self) { resolver in
+            return RegistrationSendCodeModel(
                 gcpClient: resolver.resolve(GcpClientType.self),
-                valet: resolver.resolve(Valet.self))
+                valet: resolver.resolve(Valet.self),
+                keyboardManager: resolver.resolve(KeyboardManagerType.self))
         }
 
-        container.register(SendCodeViewModelType.self) { resolver in
-            return SendCodeViewModel(model: resolver.resolve(SendCodeModelType.self))
+        container.register(RegistrationSendCodeViewModelType.self) { resolver in
+            return RegistrationSendCodeViewModel(model: resolver.resolve(RegistrationSendCodeModelType.self))
         }
 
-        container.register(SendCodeViewController.self) { resolver in
-            return SendCodeViewController(viewModel: resolver.resolve(SendCodeViewModelType.self))
+        container.register(RegistrationSendCodeViewController.self) { resolver in
+            return RegistrationSendCodeViewController(viewModel: resolver.resolve(RegistrationSendCodeViewModelType.self))
         }
     }
 
     private func registerVerifyCodeViewController(_ container: Container) {
 
-        container.register(VerifyCodeModelType.self) { resolver in
-            return VerifyCodeModel(
+        container.register(RegistrationVerifyCodeModelType.self) { resolver in
+            return RegistrationVerifyCodeModel(
                 gcpClient: resolver.resolve(GcpClientType.self),
-                valet: resolver.resolve(Valet.self))
+                valet: resolver.resolve(Valet.self),
+                keyboardManager: resolver.resolve(KeyboardManagerType.self))
         }
 
-        container.register(VerifyCodeViewModelType.self) { resolver in
-            return VerifyCodeViewModel(model: resolver.resolve(VerifyCodeModelType.self))
+        container.register(ReegistrationVerifyCodeViewModelType.self) { resolver in
+            return RegistrationVerifyCodeViewModel(model: resolver.resolve(RegistrationVerifyCodeModelType.self))
         }
 
-        container.register(VerifyCodeViewController.self) { resolver in
-            return VerifyCodeViewController(viewModel: resolver.resolve(VerifyCodeViewModelType.self))
+        container.register(RegistrationVerifyCodeViewController.self) { resolver in
+            return RegistrationVerifyCodeViewController(
+                viewModel: resolver.resolve(ReegistrationVerifyCodeViewModelType.self))
+        }
+    }
+
+    private func registerKeyboardManager(_ container: Container) {
+
+        container.register(KeyboardManagerType.self) { _ in
+            return KeyboardManager(notificationCenter: NotificationCenter.default)
         }
     }
 }

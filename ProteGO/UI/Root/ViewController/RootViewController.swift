@@ -45,11 +45,12 @@ final class RootViewController: UIViewController, CustomView {
     }
 
     private func setupDelegates() {
+        onboardingViewController.delegate = self
         registrationViewController.delegate = self
     }
 
     private func presentInitialContent() {
-        present(content: .registration)
+        present(content: .onboarding)
     }
 
     private func present(content: Content) {
@@ -82,6 +83,13 @@ final class RootViewController: UIViewController, CustomView {
         viewController.removeFromParent()
         viewController.willMove(toParent: nil)
         currentContentViewController = nil
+    }
+}
+
+extension RootViewController: OnboardingViewControllerDelegate {
+
+    func didFinishOnboarding() {
+        present(content: .registration)
     }
 }
 

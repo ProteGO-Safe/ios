@@ -7,8 +7,16 @@ final class OnboardingAssembly: Assembly {
     }
 
     private func registerOnboardingViewController(_ container: Container) {
-        container.register(OnboardingViewController.self) { _ in
-            return OnboardingViewController()
+        container.register(OnboardingModelType.self) { _ in
+            return OnboardingModel()
+        }
+
+        container.register(OnboardingViewModelType.self) { resolver in
+            return OnboardingViewModel(model: resolver.resolve(OnboardingModelType.self))
+        }
+
+        container.register(OnboardingViewController.self) { resolver in
+            return OnboardingViewController(viewModel: resolver.resolve(OnboardingViewModelType.self))
         }
     }
 }

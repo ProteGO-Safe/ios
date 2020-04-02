@@ -1,9 +1,11 @@
-import Foundation
+import UIKit
 import RxSwift
 
-protocol SendCodeModelType {
+protocol RegistrationSendCodeModelType {
 
     var stepFinishedObservable: Observable<SendCodeFinishedData> { get }
+
+    var keyboardHeightWillChangeObservable: Observable<CGFloat> { get }
 
     func registerDevice(phoneNumber: String)
 }
