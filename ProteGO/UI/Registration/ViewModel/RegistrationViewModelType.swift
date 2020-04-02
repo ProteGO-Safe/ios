@@ -3,7 +3,7 @@ import RxSwift
 
 protocol RegistrationViewModelType {
 
-    var currentStepOnservable: Observable<RegistrationStep> { get }
+    var currentStepObservable: Observable<RegistrationStep> { get }
 
     var goBackObservable: Observable<Void> { get }
 
@@ -13,7 +13,7 @@ protocol RegistrationViewModelType {
 
     func bind(view: RegistrationView)
 
-    func bind(sendCodeViewController: SendCodeViewController)
+    func bind(sendCodeViewController: RegistrationSendCodeViewController)
 
-    func bind(verifyCodeViewController: VerifyCodeViewController)
+    func bind(verifyCodeViewController: RegistrationVerifyCodeViewController)
 }

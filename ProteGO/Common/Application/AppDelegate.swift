@@ -88,7 +88,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate  {
             RootAssembly(),
             OnboardingAssembly(),
             RegistrationAssembly(),
-            DashboardAssembly()
+            DashboardAssembly(),
+            HistoryOverviewAssembly()
         ])
     }
 }

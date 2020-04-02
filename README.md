@@ -10,21 +10,7 @@ W folderze `scripts` znajduje się skrypt `updateCarthage.sh` ułatwiający zakt
 
 # Rodzaje środowisk
 
-Aplikacja ProteGO posiada 3 środowiska:
-
-- development
-- staging
-- production
-
-Każde ze środowisk:
-- kontaktuje się z dedykowanymi, odseparowanymi od siebie sobie serwerami,
-- posiada różne ikony aplikacji
-
-Dodatkowo środowisko `development` posiada:
-
-- Menu deweloperskie dostępne po potrząśnięciu telefonem,
-- Integrację z serwisem Firebase Crashlytics,
-- Integrację z serwisem Bugfender
+Aplikacja ProteGO posiada kilka środowisk pracy, które zostały opisane [tutaj](https://github.com/ProteGO-app/specs/blob/master/specs/app_versions.md)
 
 # Teksty w aplikacji
 

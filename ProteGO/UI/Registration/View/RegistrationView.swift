@@ -4,7 +4,7 @@ import RxCocoa
 final class RegistrationView: UIView {
 
     var backButtonTapEvent: ControlEvent<Void> {
-        bannerView.backButtonTapEvent
+        bannerView.leftButtonTapEvent
     }
 
     var tapAnywhereEvent: ControlEvent<Void> {
@@ -13,7 +13,7 @@ final class RegistrationView: UIView {
         return ControlEvent<Void>(events: tapObservable)
     }
 
-    private let bannerView = BannerView()
+    private let bannerView = BannerView(leftButtonImage: Images.backArrow, rightButtonImage: nil)
 
     private let contentContainerView = UIView()
 
@@ -32,6 +32,7 @@ final class RegistrationView: UIView {
 
     func add(contentView: UIView) {
         contentContainerView.addSubview(contentView)
+        sendSubviewToBack(contentContainerView)
         contentView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -48,7 +49,8 @@ final class RegistrationView: UIView {
     private func setupConstraints() {
         bannerView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(0.099 * UIScreen.height)
+            $0.height.equalTo(0.110 * UIScreen.height)
+
         }
 
         contentContainerView.snp.makeConstraints {
