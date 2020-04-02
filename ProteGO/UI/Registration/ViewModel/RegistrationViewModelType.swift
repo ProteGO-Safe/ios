@@ -16,4 +16,6 @@ protocol RegistrationViewModelType {
     func bind(sendCodeViewController: RegistrationSendCodeViewController)
 
     func bind(verifyCodeViewController: RegistrationVerifyCodeViewController)
+
+    func setInitialStep()
 }

@@ -31,6 +31,10 @@ final class RegistrationModel: RegistrationModelType {
 
     private let registrationFinishedSubject = PublishSubject<Void>()
 
+    func setInitialStep() {
+        currentStep = .sendCode
+    }
+
     func previousStep() {
         switch currentStep {
         case .sendCode:

@@ -9,8 +9,9 @@ final class RootAssembly: Assembly {
     }
 
     private func registerRootModel(_ container: Container) {
-        container.register(RootModelType.self) { _ in
-            return RootModel()
+        container.register(RootModelType.self) { resolver in
+            return RootModel(registrationManager: resolver.resolve(RegistrationManagerType.self),
+                             defaultsService: resolver.resolve(DefaultsServiceType.self))
         }
     }
 
