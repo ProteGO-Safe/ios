@@ -1,4 +1,3 @@
-//swiftlint:disable file_length
 import Foundation
 import CoreBluetooth
 
@@ -63,180 +62,108 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         return centralManager.state == .poweredOn && centralManager.isScanning
     }
 
-    /// Depending on the device's state, invoke actions to finalize synchronization.
-    /// - Parameter device: device's context
-    // swiftlint:disable:next function_body_length
-    private func continueDeviceSynchronization(device: Device) {
-        logger.debug("Continue synchronization: \(device.id), state: \(device.state)")
-
-        // Make sure we are in PoweredOn state
-        guard centralManager.state == .poweredOn else {
-            deviceFailedToSynchronize(device: device)
-            return
-        }
-
-        // Gather info about the device
-        let peripheral = device.peripheral
-        let connected = device.peripheral.state == .connected
-        let discoveredService = peripheral.services?.first { $0.uuid == Constants.Bluetooth.ProteGOServiceUUID }
-        let discoveredCharacteristic = discoveredService?.characteristics?.first {
-            $0.uuid == Constants.Bluetooth.ProteGOCharacteristicUUID
-        }
-
-        // Don't do anything in Idle state.
-        if case .Idle = device.state {
-            return
-        }
-
-        if case .Queued = device.state {
-            // Check if we need to connect.
-            if !connected {
-                device.state = .Connecting
-                centralManager.connect(peripheral, options: nil)
-                return
-            } else {
-                // We are already connected for some reason.
-                device.state = .Connected
-            }
-        }
-
-        if case .Connecting = device.state {
-            if !connected {
-                // If we are still not connected, wait for it.
-                return
-            } else {
-                // We are already connected for some reason.
-                device.state = .Connected
-            }
-        }
-
-        if case .Connected = device.state {
-            // Try to get RSSI value
-            peripheral.readRSSI()
-            if let service = discoveredService {
-                // If service is already discovered let's continue...
-                device.state = .DiscoveredService(service)
-            } else {
-                // We need to discover service
-                peripheral.discoverServices([Constants.Bluetooth.ProteGOServiceUUID])
-                device.state = .DiscoveringService
-                return
-            }
-        }
-
-        if case .DiscoveringService = device.state {
-            if let service = discoveredService {
-                // If service is already discovered let's continue...
-                device.state = .DiscoveredService(service)
-            } else {
-                // Wait for discovery to finish...
-                return
-            }
-        }
-
-        if case let .DiscoveredService(service) = device.state {
-            if let characteristic = discoveredCharacteristic {
-                // Characteristic was already discovered
-                device.state = .DiscoveredCharacteristic(characteristic)
-            } else {
-                // Let's discover characteristic
-                peripheral.discoverCharacteristics([Constants.Bluetooth.ProteGOCharacteristicUUID], for: service)
-                device.state = .DiscoveringCharacteristic
-                return
-            }
-        }
-
-        if case .DiscoveringCharacteristic = device.state {
-            if let characteristic = discoveredCharacteristic {
-                // Characteristic was already discovered
-                device.state = .DiscoveredCharacteristic(characteristic)
-            } else {
-                // Wait for discovery to finish
-                return
-            }
-        }
-
-        if case let .DiscoveredCharacteristic(characteristic) = device.state {
-            peripheral.readValue(for: characteristic)
-            device.state = .ReadingBeaconId(characteristic)
-            return
-        }
-
-        if case .ReadingBeaconId = device.state {
-            // Wait for result
-            return
-        }
-
-        if case let .SynchronizedBeaconId(characteristic, beaconId) = device.state {
-            // Try to write out own beacon id
-            peripheral.writeValue(Data(), for: characteristic, type: .withResponse)
-            device.state = .WritingBeaconId(characteristic, beaconId)
-        }
-
-        if case .WritingBeaconId = device.state {
-            // Wait for result
-            return
-        }
-
-        if case .Synchronized(_) = device.state {
-            // Finish synchronization.
-            return
-        }
-
-        logger.debug("Unexpected state: \(device.state)")
-        deviceFailedToSynchronize(device: device)
-    }
-
-    /// Device successfully synchronized.
+    /// Handle events emitted by peripherals and central manager
     /// - Parameters:
-    ///   - device: Synchronized device.
-    ///   - data: Synchronization Beacon ID.
-    private func deviceSynchronized(device: Device, beaconId: BeaconId) {
-        logger.debug("Device synchronized: \(device.id) with beaconId: \(beaconId)")
+    ///   - event: Device event to handle
+    ///   - for: Device for which event is directed.
+    //swiftlint:disable:next function_body_length
+    private func handleDeviceEvent(_ event: DeviceEvent, for device: Device) {
+        logger.debug("Handling event: \(event) for: \(device.getId())")
 
-        // Stop task
-        backgroundTask.stop(taskName: device.id.description)
+        let poweredOff = self.centralManager.state != .poweredOn
+        let effects = device.handleEvent(event)
 
-        // Cancel connection.
-        if centralManager.state == .poweredOn {
-            centralManager.cancelPeripheralConnection(device.peripheral)
+        for effect in effects {
+            logger.debug("Executing effect: \(effect)")
+
+            switch effect {
+            case .Remove:
+                self.devices.removeValue(forKey: device.getId())
+
+            case let .Close(peripheral):
+                peripheral.delegate = nil
+                if poweredOff { break }
+                self.centralManager.cancelPeripheralConnection(peripheral)
+
+            case let .Connect(peripheral):
+                if poweredOff { break }
+                self.centralManager.connect(peripheral, options: nil)
+
+            case let .Disconnect(peripheral):
+                self.backgroundTask.stop(taskName: device.getId().description)
+                if poweredOff { break }
+                self.centralManager.cancelPeripheralConnection(peripheral)
+
+            case let .DiscoverServices(peripheral):
+                if poweredOff || peripheral.state != .connected { break }
+                peripheral.discoverServices([Constants.Bluetooth.ProteGOServiceUUID])
+
+            case let .DiscoverCharacteristics(service):
+                let peripheral = service.peripheral
+                if poweredOff || peripheral.state != .connected { break }
+                peripheral.discoverCharacteristics(
+                    [Constants.Bluetooth.ProteGOCharacteristicUUID], for: service)
+
+            case let .ReadRSSI(peripheral):
+                if poweredOff || peripheral.state != .connected { break }
+                peripheral.readRSSI()
+
+            case let .ReadValue(characteristic):
+                let peripheral = characteristic.service.peripheral
+                if poweredOff || peripheral.state != .connected { break }
+                peripheral.readValue(for: characteristic)
+
+            case let .WriteValue(characteristic):
+                let peripheral = characteristic.service.peripheral
+                if poweredOff || peripheral.state != .connected { break }
+                let data = self.agent?.getBeaconId()?.getBeaconId()?.getData()
+                if let data = data {
+                    peripheral.writeValue(data, for: characteristic, type: .withResponse)
+                } else {
+                    self.centralManager.cancelPeripheralConnection(peripheral)
+                }
+
+            case let .SynchronizeBeaconId(beaconId):
+                self.backgroundTask.stop(taskName: device.getId().description)
+                self.agent?.synchronizedBeaconId(beaconId: beaconId, rssi: device.getLastRSSI())
+            }
         }
-
-        // Inform about a new Beacon ID
-        agent?.synchronizedBeaconId(beaconId: beaconId, rssi: device.lastRSSI)
-
-        // Update device's state
-        device.connectionRetries = 0
-        device.lastRSSI = nil
-        device.lastSynchronizationDate = Date()
-        device.state = .Idle
     }
 
-    /// Device failed to synchronize due to an error or timeout.
-    /// - Parameter device: device which failed to synchronize
-    private func deviceFailedToSynchronize(device: Device) {
-        logger.debug("Device failed to synchronize: \(device.id)")
+    /// Function parses manufacturer data to detect type of a device. If there is no manufacturer data it means that it's
+    /// probably iOS device, which doesn't allow to do that. Otherwise we check if manufacturer data is from Polidea
+    /// company and that there is complete or incomplete beacon id present.
+    /// - Parameters:
+    ///   - data: Manufacturer data
+    ///   - peripheral: Involved peripheral
+    /// - Returns: DeviceId based on the content of manufacturer data.
+    private func parseDeviceIdFromManufacturerData(data: Data?, for peripheral: CBPeripheral) -> DeviceId {
+        // Construct expected manufacturer data prefix.
+        // Company ID is in little endian.
+        let prefix: [UInt8] = [
+            UInt8((Constants.Bluetooth.PolideaCompanyId) & 0x00FF),
+            UInt8((Constants.Bluetooth.PolideaCompanyId << 8) & 0x00FF),
+            UInt8(Constants.Bluetooth.PolideaProteGOManufacturerDataVersion)
+        ]
 
-        // Stop task
-        backgroundTask.stop(taskName: device.id.description)
-
-        // Cancel connection.
-        let isConnected = device.peripheral.state == .connected ||
-                          device.peripheral.state == .connecting
-        if isConnected && centralManager.state == .poweredOn {
-            centralManager.cancelPeripheralConnection(device.peripheral)
+        // Check if data exists
+        guard let data = data else {
+            return .PeripheralInstance(peripheral)
         }
 
-        if device.connectionRetries >= Constants.Bluetooth.PeripheralMaxConnectionRetries {
-            // Remove peripheral until discovered once again.
-            self.devices.removeValue(forKey: device.id)
-            device.peripheral.delegate = nil
-        } else {
-            // Update peripheral's state
-            device.connectionRetries += 1
-            device.lastRSSI = nil
-            device.state = .Idle
+        // Check if prefix is valid and at least one more byte is present
+        guard data.count > prefix.count &&
+              data.subdata(in: 0 ..< prefix.count).elementsEqual(prefix) else {
+            return .PeripheralInstance(peripheral)
         }
+
+        // Try convert to Beacon ID.
+        let beaconIdData = data.subdata(in: prefix.count ..< data.count)
+        if let beaconId = BeaconId(data: beaconIdData) {
+            return .BeaconId(beaconId)
+        }
+
+        return .IncompleteBeaconId(beaconIdData)
     }
 
     /// Device was found by a central manager.
@@ -250,34 +177,25 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         let debugData = String(describing: manufacturerData?.toHexString())
         logger.debug("Device found: \(debugDeviceId) rssi: \(debugRSSI) manu: \(debugData)")
 
-        // Create DeviceId base on the manufacturerData
-        let deviceId: DeviceId
-        if let data = manufacturerData {
-            if let beaconId = BeaconId(data: data) {
-                deviceId = .BeaconId(beaconId)
-            } else {
-                deviceId = .IncompleteBeaconId(data)
-            }
-        } else {
-            deviceId = .PeripheralInstance(peripheral)
-        }
+        // Construct device ID from manufacturer data if present
+        let deviceId = self.parseDeviceIdFromManufacturerData(
+            data: manufacturerData,
+            for: peripheral
+        )
+
+        // Setup delegate on this peripheral as it will be used
+        peripheral.delegate = self
 
         // Check if there is a device with this ID
         if let device = self.devices[deviceId] {
             // Update information about the device
-            device.lastRSSI = rssi
-            if let lastDiscoveredDevice = device.lastDiscoveredPeripheral {
-                lastDiscoveredDevice.delegate = nil
-            }
-            device.lastDiscoveredPeripheral = peripheral
+            let oldPeripheral = device.updateDeviceWith(peripheral: peripheral, rssi: rssi)
+            oldPeripheral?.delegate = nil
         } else {
             // Create a new device
             let device = Device(id: deviceId, peripheral: peripheral)
             self.devices[deviceId] = device
         }
-
-        // Setup delegate on this peripheral as it will be used
-        peripheral.delegate = self
 
         // Check if we need to synchronize.
         startSynchronizationIfNeeded()
@@ -285,38 +203,30 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
 
     /// Utility function to find device by an active peripheral instance
     /// - Parameter peripheral: Active peripheral instance of a device
-    func getDeviceBy(peripheral: CBPeripheral) -> Device? {
-        return self.devices.first { $0.value.peripheral == peripheral }?.value
-    }
-
-    /// This method is called when we want to stop synchronization.
-    private func cancelSynchronization(onlyOnTimeout: Bool) {
-        logger.debug("Cancelling synchronization, onlyOnTimeout: \(onlyOnTimeout)")
-        for device in self.devices.values {
-            var cancel = device.state.isIdle()
-            if let lastConnectionDate = device.lastConnectionDate, cancel && onlyOnTimeout {
-                let timeout = Constants.Bluetooth.PeripheralSynchronizationTimeoutInSec
-                cancel = lastConnectionDate.addingTimeInterval(timeout) < Date()
-            }
-            if cancel {
-                deviceFailedToSynchronize(device: device)
-            }
-        }
+    private func getDeviceBy(peripheral: CBPeripheral) -> Device? {
+        return self.devices.first { $0.value.isPeripheralActive(peripheral: peripheral) }?.value
     }
 
     /// This method is called every time interval to check the state of a connection.
     private func checkSynchronizationStatus() {
         logger.debug("Check synchronization status")
 
-        // Fail synchronization, which took to long.
+        // Finish synchronization which timed out.
         cancelSynchronization(onlyOnTimeout: true)
 
         // Start synchronization if needed
         startSynchronizationIfNeeded()
     }
 
+    /// This method is called when we want to stop synchronization.
+    private func cancelSynchronization(onlyOnTimeout: Bool) {
+        for device in self.devices.values {
+            handleDeviceEvent(.CancelSynchronization(onlyOnTimeout), for: device)
+        }
+    }
+
     /// This function is called when there is an event, which could change state deciding about
-    /// need to synchronize.
+    /// a need to synchronize.
     private func startSynchronizationIfNeeded() {
         // Make sure we are powered on.
         guard self.centralManager.state == .poweredOn else {
@@ -334,8 +244,8 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
             // Get debug info
             logger.debug(device.description)
 
-            // Remove from slot if device is not idle.
-            if !device.state.isIdle() && freeSlots > 0 {
+            // Remove from slot if device is not ready to connect.
+            if !device.isIdle() && freeSlots > 0 {
                 freeSlots -= 1
             }
         }
@@ -344,13 +254,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         for i in 0..<freeSlots where i < sortedDevices.count {
             let device = sortedDevices[i]
             if device.isReadyToConnect() {
-                // Start background task.
-                backgroundTask.start(taskName: device.id.description)
-
-                // Start synchronization.
-                device.lastConnectionDate = Date()
-                device.state = .Queued
-                continueDeviceSynchronization(device: device)
+                handleDeviceEvent(.StartSynchronization, for: device)
             }
         }
     }
@@ -449,7 +353,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         } else {
             logger.debug("PoweredOff: \(central.state.rawValue)")
             // We can assume that peripherals are no longer connecting or connected.
-            cancelSynchronization(onlyOnTimeout: false)
+            self.cancelSynchronization(onlyOnTimeout: false)
         }
     }
 
@@ -458,24 +362,21 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         logger.debug("CentralManager did connect: \(peripheral.identifier)")
         if let device = self.getDeviceBy(peripheral: peripheral) {
-            device.state = .Connected
-            continueDeviceSynchronization(device: device)
+            handleDeviceEvent(.Connected(peripheral), for: device)
         }
     }
 
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         logger.debug("CentralManager did fail to connect: \(peripheral.identifier) error: \(String(describing: error))")
         if let device = self.getDeviceBy(peripheral: peripheral) {
-            deviceFailedToSynchronize(device: device)
+            handleDeviceEvent(.Disconnected(peripheral, error), for: device)
         }
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         logger.debug("CentralManager did disconnect peripheral \(peripheral.identifier) error: \(String(describing: error))")
         if let device = self.getDeviceBy(peripheral: peripheral) {
-            if error != nil {
-                deviceFailedToSynchronize(device: device)
-            }
+            handleDeviceEvent(.Disconnected(peripheral, error), for: device)
         }
     }
 
@@ -486,7 +387,6 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
                         advertisementData: [String: Any],
                         rssi RSSI: NSNumber) {
         logger.debug("CentralManager did discover \(peripheral.identifier) rssi: \(RSSI)")
-
         let manufacturerData: Data? = advertisementData[CBAdvertisementDataManufacturerDataKey] as? Data
         deviceFound(peripheral: peripheral, rssi: RSSI.intValue, manufacturerData: manufacturerData)
     }
@@ -494,18 +394,14 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         logger.debug("Peripheral did discover services: \(peripheral.identifier), error: \(String(describing: error))")
         if let device = self.getDeviceBy(peripheral: peripheral) {
-            if error == nil {
-                continueDeviceSynchronization(device: device)
-            } else {
-                deviceFailedToSynchronize(device: device)
-            }
+            handleDeviceEvent(.DiscoveredServices(error), for: device)
         }
     }
 
     func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
         logger.debug("Peripheral did modify services: \(peripheral.identifier)")
         if let device = self.getDeviceBy(peripheral: peripheral) {
-            continueDeviceSynchronization(device: device)
+            handleDeviceEvent(.DiscoveredServices(nil), for: device)
         }
     }
 
@@ -515,11 +411,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
 
         if let device = self.getDeviceBy(peripheral: peripheral),
                service.uuid == Constants.Bluetooth.ProteGOServiceUUID {
-            if error == nil {
-                continueDeviceSynchronization(device: device)
-            } else {
-                deviceFailedToSynchronize(device: device)
-            }
+            handleDeviceEvent(.DiscoveredCharacteristics(service, error), for: device)
         }
     }
 
@@ -527,7 +419,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         logger.debug("Peripheral did read RSSI: " +
                      "\(peripheral.identifier), rssi: \(RSSI), error: \(String(describing: error))")
         if let device = self.getDeviceBy(peripheral: peripheral), error == nil {
-            device.lastRSSI = RSSI.intValue
+            handleDeviceEvent(.ReadRSSI(peripheral, RSSI.intValue), for: device)
         }
     }
 
@@ -537,12 +429,15 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         logger.debug("Peripheral did read value: \(peripheral.identifier), error: \(String(describing: error))")
         if let device = self.getDeviceBy(peripheral: peripheral),
                characteristic.uuid == Constants.Bluetooth.ProteGOCharacteristicUUID {
+            handleDeviceEvent(.ReadValue(characteristic, error), for: device)
+        }
+    }
 
-            if let data = characteristic.value, let beaconId = BeaconId(data: data) {
-                deviceSynchronized(device: device, beaconId: beaconId)
-            } else {
-                deviceFailedToSynchronize(device: device)
-            }
+    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        logger.debug("Peripheral did write value: \(peripheral.identifier), error: \(String(describing: error))")
+        if let device = self.getDeviceBy(peripheral: peripheral),
+               characteristic.uuid == Constants.Bluetooth.ProteGOCharacteristicUUID {
+            handleDeviceEvent(.WroteValue(characteristic, error), for: device)
         }
     }
 }
