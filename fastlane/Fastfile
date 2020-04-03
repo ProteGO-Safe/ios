@@ -55,12 +55,12 @@ platform :ios do
 
   desc 'Deploy Development to Shuttle'
   lane :deployDev do
-    deploy_shuttle('ProteGO_dev', 'pl.gov.anna.dev', "MT2B94Q7N6")
+    deploy_shuttle('ProteGO_dev', 'pl.gov.mc.protego.dev', "MT2B94Q7N6")
   end
 
   desc 'Deploy Staging to Shuttle'
   lane :deployStg do
-    deploy_testflight('ProteGO_stg', 'pl.gov.anna.stg', "MT2B94Q7N6")
+    deploy_testflight('ProteGO_stg', 'pl.gov.mc.protego.stg', "MT2B94Q7N6")
   end
 
   desc 'Deploy Staging to Shuttle'

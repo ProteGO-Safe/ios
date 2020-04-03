@@ -1907,6 +1907,8 @@
 				83512C42243522C2007DB8AD /* OnboardingVIewModelType.swift in Sources */,
 				83512C4024351EAA007DB8AD /* OnboardingViewModel.swift in Sources */,
 				0E22F92E2434DFDE008AD8EB /* DangerStatusCardBottomModule.swift in Sources */,
+				838289C6243330320054347B /* RegistrationSendCodeViewModel.swift in Sources */,
+				838289D5243331110054347B /* RegistrationVerifyCodeViewModelType.swift in Sources */,
 				0E22F9282434A861008AD8EB /* UIStackView+AddArrangedSubviews.swift in Sources */,
 				0E9DDA6E2430D2D9002D879F /* DebugAssembly.swift in Sources */,
 				83252A6C24314C99001E6D63 /* RegisterDeviceResult.swift in Sources */,
@@ -2232,10 +2234,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.anna.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.mc.protego.dev;
 				PRODUCT_MODULE_NAME = ProteGO;
 				PRODUCT_NAME = "$(TARGET_NAME) Dev";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development pl.gov.anna.dev";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development pl.gov.mc.protego.dev";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2270,10 +2272,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.anna.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.mc.protego.dev;
 				PRODUCT_MODULE_NAME = ProteGO;
 				PRODUCT_NAME = "$(TARGET_NAME) Dev";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc pl.gov.anna.dev";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc pl.gov.mc.protego.dev";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2435,10 +2437,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.anna.stg;
+				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.mc.protego.stg;
 				PRODUCT_MODULE_NAME = ProteGO;
 				PRODUCT_NAME = "$(TARGET_NAME) Stg";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development pl.gov.anna.stg";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development pl.gov.mc.protego.stg";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2695,10 +2697,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.anna.stg;
+				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.mc.protego.stg;
 				PRODUCT_MODULE_NAME = ProteGO;
 				PRODUCT_NAME = "$(TARGET_NAME) Stg";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore pl.gov.anna.stg";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore pl.gov.mc.protego.stg";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
