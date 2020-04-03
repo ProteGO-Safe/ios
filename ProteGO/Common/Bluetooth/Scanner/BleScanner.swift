@@ -68,11 +68,11 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     ///   - event: Device event to handle
     ///   - for: Device for which event is directed.
     //swiftlint:disable:next function_body_length
-    private func handleDeviceEvent(_ event: DeviceEvent, for device: Device) {
+    private func handle(event: DeviceEvent, for device: Device) {
         logger.debug("Handling event: \(event) for: \(device.getId())")
 
         let poweredOff = self.centralManager.state != .poweredOn
-        let effects = device.handleEvent(event)
+        let effects = device.handle(event: event)
 
         for effect in effects {
             logger.debug("Executing effect: \(effect)")
@@ -227,7 +227,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     /// This method is called when we want to stop synchronization.
     private func cancelSynchronization(onlyOnTimeout: Bool) {
         for device in self.devices.values {
-            handleDeviceEvent(.CancelSynchronization(onlyOnTimeout), for: device)
+            handle(event: .CancelSynchronization(onlyOnTimeout), for: device)
         }
     }
 
@@ -260,7 +260,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         for i in 0..<freeSlots where i < sortedDevices.count {
             let device = sortedDevices[i]
             if device.isReadyToConnect() {
-                handleDeviceEvent(.StartSynchronization, for: device)
+                handle(event: .StartSynchronization, for: device)
             }
         }
     }
@@ -368,21 +368,21 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         logger.debug("CentralManager did connect: \(peripheral.identifier)")
         if let device = self.getDeviceBy(peripheral: peripheral) {
-            handleDeviceEvent(.Connected(peripheral), for: device)
+            handle(event: .Connected(peripheral), for: device)
         }
     }
 
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         logger.debug("CentralManager did fail to connect: \(peripheral.identifier) error: \(String(describing: error))")
         if let device = self.getDeviceBy(peripheral: peripheral) {
-            handleDeviceEvent(.Disconnected(peripheral, error), for: device)
+            handle(event: .Disconnected(peripheral, error), for: device)
         }
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         logger.debug("CentralManager did disconnect peripheral \(peripheral.identifier) error: \(String(describing: error))")
         if let device = self.getDeviceBy(peripheral: peripheral) {
-            handleDeviceEvent(.Disconnected(peripheral, error), for: device)
+            handle(event: .Disconnected(peripheral, error), for: device)
         }
     }
 
@@ -400,14 +400,14 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         logger.debug("Peripheral did discover services: \(peripheral.identifier), error: \(String(describing: error))")
         if let device = self.getDeviceBy(peripheral: peripheral) {
-            handleDeviceEvent(.DiscoveredServices(error), for: device)
+            handle(event: .DiscoveredServices(error), for: device)
         }
     }
 
     func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
         logger.debug("Peripheral did modify services: \(peripheral.identifier)")
         if let device = self.getDeviceBy(peripheral: peripheral) {
-            handleDeviceEvent(.DiscoveredServices(nil), for: device)
+            handle(event: .DiscoveredServices(nil), for: device)
         }
     }
 
@@ -417,7 +417,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
 
         if let device = self.getDeviceBy(peripheral: peripheral),
                service.uuid == Constants.Bluetooth.ProteGOServiceUUID {
-            handleDeviceEvent(.DiscoveredCharacteristics(service, error), for: device)
+            handle(event: .DiscoveredCharacteristics(service, error), for: device)
         }
     }
 
@@ -425,7 +425,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         logger.debug("Peripheral did read RSSI: " +
                      "\(peripheral.identifier), rssi: \(RSSI), error: \(String(describing: error))")
         if let device = self.getDeviceBy(peripheral: peripheral), error == nil {
-            handleDeviceEvent(.ReadRSSI(peripheral, RSSI.intValue), for: device)
+            handle(event: .ReadRSSI(peripheral, RSSI.intValue), for: device)
         }
     }
 
@@ -435,7 +435,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         logger.debug("Peripheral did read value: \(peripheral.identifier), error: \(String(describing: error))")
         if let device = self.getDeviceBy(peripheral: peripheral),
                characteristic.uuid == Constants.Bluetooth.ProteGOCharacteristicUUID {
-            handleDeviceEvent(.ReadValue(characteristic, error), for: device)
+            handle(event: .ReadValue(characteristic, error), for: device)
         }
     }
 
@@ -443,7 +443,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         logger.debug("Peripheral did write value: \(peripheral.identifier), error: \(String(describing: error))")
         if let device = self.getDeviceBy(peripheral: peripheral),
                characteristic.uuid == Constants.Bluetooth.ProteGOCharacteristicUUID {
-            handleDeviceEvent(.WroteValue(characteristic, error), for: device)
+            handle(event: .WroteValue(characteristic, error), for: device)
         }
     }
 }

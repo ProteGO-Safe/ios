@@ -173,7 +173,7 @@ class Device {
     /// Handle incoming events from central, peripheral or scanner.
     /// - Parameter event: Event to handle.
     /// - Returns: Effects to execute.
-    func handleEvent(_ event: DeviceEvent) -> [DeviceEffect] {
+    func handle(event: DeviceEvent) -> [DeviceEffect] {
         var effects: [DeviceEffect] = []
 
         if case let .ReadRSSI(_, rssi) = event {
