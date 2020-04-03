@@ -11,15 +11,17 @@ class EncountersManagerSpecs: QuickSpec {
             var sut: EncountersManager!
             var realmMock: RealmManagerMock!
 
-            let mockEncounters = [
-                Encounter.createEncounter(deviceId: "encounter1", signalStrength: 10, date: Date(timeIntervalSince1970: 1)),
-                Encounter.createEncounter(deviceId: "encounter2", signalStrength: 20, date: Date(timeIntervalSince1970: 2)),
-                Encounter.createEncounter(deviceId: "encounter3", signalStrength: 30, date: Date(timeIntervalSince1970: 3))
-            ]
+            var mockEncounters: [Encounter]!
 
             var encountersList: Results<Encounter>!
 
             beforeEach {
+                mockEncounters = [
+                Encounter.createEncounter(deviceId: "encounter1", signalStrength: 10, date: Date(timeIntervalSince1970: 1)),
+                Encounter.createEncounter(deviceId: "encounter2", signalStrength: 20, date: Date(timeIntervalSince1970: 2)),
+                Encounter.createEncounter(deviceId: "encounter3", signalStrength: 30, date: Date(timeIntervalSince1970: 3))
+                ]
+
                 realmMock = RealmManagerMock()
                 // TODO: check why we can't use UUID().uuidString (we get Realm exceltions when adding sth to the DB)
                 realmMock.realmId = "EncountersManagerSpecs"
@@ -56,6 +58,10 @@ class EncountersManagerSpecs: QuickSpec {
 
                 context("adding multiple encounters") {
                     beforeEach {
+                        try! realmMock.realm.write {
+                            realmMock.realm.deleteAll()
+                        }
+
                         try! sut.addNewEncounter(encounter: mockEncounters[0])
                         try! sut.addNewEncounter(encounter: mockEncounters[1])
                         try! sut.addNewEncounter(encounter: mockEncounters[2])
@@ -81,6 +87,10 @@ class EncountersManagerSpecs: QuickSpec {
 
                 context("deleting encounters") {
                     beforeEach {
+                        try! realmMock.realm.write {
+                            realmMock.realm.deleteAll()
+                        }
+
                         try! sut.addNewEncounter(encounter: mockEncounters[0])
                         try! sut.addNewEncounter(encounter: mockEncounters[1])
                         try! sut.addNewEncounter(encounter: mockEncounters[2])
@@ -102,9 +112,58 @@ class EncountersManagerSpecs: QuickSpec {
                         }
                     }
                 }
-
             }
 
+            context("fetching unique encounters since date") {
+                beforeEach {
+                    try! realmMock.realm.write {
+                        realmMock.realm.deleteAll()
+                    }
+
+                    try! sut.addNewEncounter(encounter: mockEncounters[0])
+                    try! sut.addNewEncounter(encounter: mockEncounters[1])
+                    try! sut.addNewEncounter(encounter: mockEncounters[2])
+                    encountersList = sut.uniqueEncountersSince(date: Date(timeIntervalSince1970: 2))
+                }
+
+                it("shouldn't return encounters tha are older") {
+                    expect(encountersList.count).to(equal(1))
+
+                    if encountersList.count == 1 {
+                        expect(encountersList[0].deviceId).to(equal(mockEncounters[2].deviceId))
+                        expect(encountersList[0].signalStrength.value).to(equal(mockEncounters[2].signalStrength.value))
+                        expect(encountersList[0].date).to(equal(mockEncounters[2].date))
+                    }
+                }
+            }
+
+            context("fetching duplicated encounters since date") {
+                beforeEach {
+                    try! realmMock.realm.write {
+                        realmMock.realm.deleteAll()
+                    }
+
+                    try! sut.addNewEncounter(encounter: mockEncounters[0])
+                    try! sut.addNewEncounter(encounter: mockEncounters[1])
+                    try! sut.addNewEncounter(encounter: mockEncounters[2])
+
+                    let duplicatedEncounter = Encounter.createEncounter(deviceId: "encounter3",
+                                                                        signalStrength: 30,
+                                                                        date: Date(timeIntervalSince1970: 3))
+                    try! sut.addNewEncounter(encounter: duplicatedEncounter)
+                    encountersList = sut.uniqueEncountersSince(date: Date(timeIntervalSince1970: 2))
+                }
+
+                it("shouldn't duplicated entries") {
+                    expect(encountersList.count).to(equal(1))
+
+                    if encountersList.count == 1 {
+                        expect(encountersList[0].deviceId).to(equal(mockEncounters[2].deviceId))
+                        expect(encountersList[0].signalStrength.value).to(equal(mockEncounters[2].signalStrength.value))
+                        expect(encountersList[0].date).to(equal(mockEncounters[2].date))
+                    }
+                }
+            }
         }
     }
 }

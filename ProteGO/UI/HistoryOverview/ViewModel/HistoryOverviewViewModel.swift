@@ -13,17 +13,15 @@ final class HistoryOverviewViewModel: HistoryOverviewViewModelType {
     }
 
     func bind(view: HistoryOverviewView) {
-        self.model.phoneId.subscribe(onNext: { phoneId in
-            view.update(phoneId: phoneId)
-        }).disposed(by: self.disposeBag)
+        view.update(phoneId: self.model.phoneId)
 
         BehaviorRelay.combineLatest(self.model.historyLastDate, self.model.lastSeenDevicesCount)
             .subscribe(onNext: { historyLastDate, lastSeenDevicesCount in
-                view.update(historyLastDate: historyLastDate, lastSeenDevicesCount: lastSeenDevicesCount)
+                let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: historyLastDate)
+                if let hour = dateComponents.hour, let minute = dateComponents.minute {
+                    let dateString = "\(String(format: "%02d", hour)):\(String(format: "%02d", minute))"
+                    view.update(historyLastDate: dateString, lastSeenDevicesCount: "\(lastSeenDevicesCount)")
+                }
             }).disposed(by: self.disposeBag)
-
-        self.model.phoneId.subscribe(onNext: { phoneId in
-            view.update(phoneId: phoneId)
-        }).disposed(by: self.disposeBag)
     }
 }

@@ -26,6 +26,7 @@ final class HistoryOverviewView: UIView {
         label.textColor = .white
         label.numberOfLines = 2
         label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
 
@@ -123,6 +124,8 @@ final class HistoryOverviewView: UIView {
         yourIdLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(self.bannerView.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(24)
+            $0.trailing.equalToSuperview().offset(-24)
         }
 
         sendHistoryButton.snp.makeConstraints {

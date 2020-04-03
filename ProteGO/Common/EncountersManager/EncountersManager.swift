@@ -23,6 +23,12 @@ final class EncountersManager: EncountersManagerType {
         }
     }
 
+    func uniqueEncountersSince(date: Date) -> Results<Encounter> {
+        return self.realmManager.realm.objects(Encounter.self)
+            .filter("date > %@", date)
+            .distinct(by: ["deviceId"])
+    }
+
     private let realmManager: RealmManagerType
 
     init(realmManager: RealmManagerType) {
