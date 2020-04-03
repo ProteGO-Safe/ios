@@ -196,7 +196,7 @@ class Device {
                 return []
             }
 
-            effects.append(contentsOf: self.stopSynchronization())
+            effects.append(contentsOf: self.stopSynchronization(forceRemoval: !onlyOnTimeout))
         }
 
         // Synchronize state with periphera's state.
@@ -209,7 +209,7 @@ class Device {
 
         // Check if synchronization is finished.
         if case .SynchronizationFinished = self.state {
-            effects.append(contentsOf: self.stopSynchronization())
+            effects.append(contentsOf: self.stopSynchronization(forceRemoval: false))
         }
 
         return effects
@@ -221,7 +221,7 @@ class Device {
         var effects: [DeviceEffect] = []
 
         // Make sure to stop previous synchronization
-        effects.append(contentsOf: self.stopSynchronization())
+        effects.append(contentsOf: self.stopSynchronization(forceRemoval: false))
         if case .Closed = self.state {
             // Don't start synchronization on already closed device
             return effects
@@ -243,8 +243,9 @@ class Device {
     }
 
     /// Stop synchronization and check if previous attempt was succesfull
+    /// - Parameter forceRemoval: True if device should be immidiately removed.
     /// - Returns: Effects to execute
-    private func stopSynchronization() -> [DeviceEffect] {
+    private func stopSynchronization(forceRemoval: Bool) -> [DeviceEffect] {
         var effects: [DeviceEffect] = []
         var previousSyncFinished = false
 
@@ -257,6 +258,13 @@ class Device {
         if let beaconId = self.state.getSynchronizedBeaconId() {
             effects.append(.SynchronizeBeaconId(beaconId))
             previousSyncFinished = true
+        }
+
+        // Remove if needed.
+        if forceRemoval {
+            effects.append(.Close(self.peripheral))
+            effects.append(.Remove)
+            return effects
         }
 
         // Check connection retries to decide if we should
