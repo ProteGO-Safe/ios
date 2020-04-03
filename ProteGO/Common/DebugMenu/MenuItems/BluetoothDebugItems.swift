@@ -26,10 +26,74 @@ extension DebugMenu {
         return Tweak<Int>.build(with: description, default: 60, min: 0)
     }()
 
+    public static var bluetoothScannerOnTime: Tweak<Int> = {
+        let description = DebugItemDescription(.bluetooth, group: .testing,
+                                               name: "Scan ON time (bg)")
+        return Tweak<Int>.build(with: description, default: Int(Constants.Bluetooth.ScanningOnTimeout), min: 10)
+    }()
+
+    public static var bluetoothScannerOffTime: Tweak<Int> = {
+        let description = DebugItemDescription(.bluetooth, group: .testing,
+                                               name: "Scan OFF time (bg)")
+        return Tweak<Int>.build(with: description, default: Int(Constants.Bluetooth.ScanningOffTimeout), min: 10)
+    }()
+
+    public static var bluetoothAdvertiserOnTime: Tweak<Int> = {
+        let description = DebugItemDescription(.bluetooth, group: .testing,
+                                               name: "Adv. ON time (bg)")
+        return Tweak<Int>.build(with: description, default: Int(Constants.Bluetooth.AdvertisingOnTimeout), min: 10)
+    }()
+
+    public static var bluetoothAdvertiserOffTime: Tweak<Int> = {
+        let description = DebugItemDescription(.bluetooth, group: .testing,
+                                               name: "Adv OFF time (bg)")
+        return Tweak<Int>.build(with: description, default: Int(Constants.Bluetooth.AdvertisingOffTimeout), min: 10)
+    }()
+
+    public static var bluetoothMaxConcurrentConnections: Tweak<Int> = {
+        let description = DebugItemDescription(.bluetooth, group: .testing,
+                                               name: "Max conn.")
+        return Tweak<Int>.build(
+            with: description,
+            default: Int(Constants.Bluetooth.PeripheralMaxConcurrentConnections), min: 1, max: 8)
+    }()
+
+    public static var bluetoothMaxConnectionRetries: Tweak<Int> = {
+        let description = DebugItemDescription(.bluetooth, group: .testing,
+                                               name: "Max retries")
+        return Tweak<Int>.build(
+            with: description,
+            default: Int(Constants.Bluetooth.PeripheralMaxConnectionRetries), min: 1, max: 8)
+    }()
+
+    public static var bluetoothDeviceIgnoredTimeout: Tweak<Int> = {
+        let description = DebugItemDescription(.bluetooth, group: .testing,
+                                               name: "Next sync")
+        return Tweak<Int>.build(
+            with: description,
+            default: Int(Constants.Bluetooth.PeripheralIgnoredTimeoutInSec), min: 10)
+    }()
+
+    public static var bluetoothSynchronizationTimeout: Tweak<Int> = {
+        let description = DebugItemDescription(.bluetooth, group: .testing,
+                                               name: "Sync timeout")
+        return Tweak<Int>.build(
+            with: description,
+            default: Int(Constants.Bluetooth.PeripheralSynchronizationTimeoutInSec), min: 10)
+    }()
+
     static var bluetoothItems: [TweakClusterType] = [
         useMockBluetoothScanner,
         useMockBluetoothAdvertiser,
         mockBluetoothAdvertiserInterval,
-        mockBluetoothScannerInterval
+        mockBluetoothScannerInterval,
+        bluetoothScannerOnTime,
+        bluetoothScannerOffTime,
+        bluetoothAdvertiserOnTime,
+        bluetoothAdvertiserOffTime,
+        bluetoothMaxConcurrentConnections,
+        bluetoothMaxConnectionRetries,
+        bluetoothDeviceIgnoredTimeout,
+        bluetoothSynchronizationTimeout
     ]
 }

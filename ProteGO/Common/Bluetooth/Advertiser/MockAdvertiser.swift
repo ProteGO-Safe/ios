@@ -1,25 +1,35 @@
 import Foundation
 
 class MockAdvertiser: Advertiser {
-    var previousTokenData: (Data, Date)?
-    weak var delegate: AdvertiserDelegate?
+    private var mode: AdvertiserMode = .disabled
+    private var expiringBeaconId: ExpiringBeaconId?
+    private weak var agent: BeaconIdAgent?
 
-    init(delegate: AdvertiserDelegate) {
-        self.delegate = delegate
+    init(agent: BeaconIdAgent) {
+        self.agent = agent
         let timer = Timer.init(timeInterval:
         TimeInterval(DebugMenu.assign(DebugMenu.mockBluetoothAdvertiserInterval)), repeats: true) { [weak self] _ in
-            if let tokenData = self?.previousTokenData {
-                if tokenData.1 < Date() {
-                    self?.delegate?.tokenDataExpired(previousTokenData: self?.previousTokenData)
+            if let self = self {
+                if self.expiringBeaconId?.isExpired() ?? true {
+                    self.expiringBeaconId = self.agent?.getBeaconId()
                 }
-            } else {
-                self?.delegate?.tokenDataExpired(previousTokenData: self?.previousTokenData)
             }
         }
         RunLoop.current.add(timer, forMode: .common)
     }
 
-    public func updateTokenData(data: Data, expirationDate: Date) {
-        self.previousTokenData = (data, expirationDate)
+    func setMode(_ mode: AdvertiserMode) {
+        self.mode = mode
+    }
+
+    func getMode() -> AdvertiserMode {
+        return self.mode
+    }
+
+    func isAdvertising() -> Bool {
+        if case .disabled = self.mode {
+            return false
+        }
+        return true
     }
 }

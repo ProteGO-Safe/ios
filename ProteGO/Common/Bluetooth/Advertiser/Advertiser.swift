@@ -1,10 +1,13 @@
 import Foundation
 
 protocol Advertiser {
-    /// Update advertised token data
-    ///
-    /// - Parameters:
-    ///   - data: New token data payload
-    ///   - expirationDate: Expiration date of token data
-    func updateTokenData(data: Data, expirationDate: Date)
+    /// Set advertiser mode deciding how long advertisement is turned on and off.
+    /// - Parameter mode: Advertiser mode
+    func setMode(_ mode: AdvertiserMode)
+
+    /// Get advertiser mode.
+    func getMode() -> AdvertiserMode
+
+    /// Returns true if advertiser is enabled and advertising.
+    func isAdvertising() -> Bool
 }

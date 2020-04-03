@@ -6,7 +6,7 @@ import Firebase
 #endif
 
 @UIApplicationMain
-final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate  {
+final class AppDelegate: UIResponder, UIApplicationDelegate  {
     lazy var resolver: Resolver = {
         guard let resolver = (assembler?.resolver as? Container)?.synchronize() else {
             fatalError("Assembler not configured")
@@ -14,9 +14,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate 
         return resolver
     }()
 
+    var advertiser: Advertiser?
+    var scanner: Scanner?
     var assembler: Assembler?
     var window: UIWindow?
-    var byte: UInt8 = 0
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -34,10 +35,20 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate 
         return true
     }
 
-    func tokenDataExpired(previousTokenData: (Data, Date)?) {
-        let advertiser: Advertiser = self.resolver.resolve(Advertiser.self, argument: self as AdvertiserDelegate)
-        logger.debug("Token data expired \(String(describing: previousTokenData))")
-        advertiser.updateTokenData(data: Data([0xFF, byte]), expirationDate: Date(timeIntervalSinceNow: 30))
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        self.advertiser?.setMode(.enabledAllTime)
+        self.scanner?.setMode(.enabledAllTime)
+    }
+
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        self.advertiser?.setMode(.enabledPartTime(
+            advertisingOnTime: TimeInterval(DebugMenu.assign(DebugMenu.bluetoothAdvertiserOnTime)),
+            advertisingOffTime: TimeInterval(DebugMenu.assign(DebugMenu.bluetoothAdvertiserOffTime))
+        ))
+        self.scanner?.setMode(.enabledPartTime(
+            scanningOnTime: TimeInterval(DebugMenu.assign(DebugMenu.bluetoothScannerOnTime)),
+            scanningOffTime: TimeInterval(DebugMenu.assign(DebugMenu.bluetoothScannerOffTime))
+        ))
     }
 
     private func generateWindow() -> UIWindow {
@@ -52,10 +63,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, AdvertiserDelegate 
     }
 
     private func setupBluetoothModule() {
-        let _: Advertiser = self.resolver.resolve(Advertiser.self, argument: self as AdvertiserDelegate)
-
         let encountersManager: EncountersManagerType = self.resolver.resolve(EncountersManagerType.self)
-        let _: Scanner = self.resolver.resolve(Scanner.self, argument: encountersManager as ScannerDelegate)
+        self.advertiser = self.resolver.resolve(Advertiser.self, argument: encountersManager as BeaconIdAgent)
+        self.scanner = self.resolver.resolve(Scanner.self, argument: encountersManager as BeaconIdAgent)
+        self.advertiser?.setMode(.enabledAllTime)
+        self.scanner?.setMode(.enabledAllTime)
     }
 
     private func setupCrashlytics() {

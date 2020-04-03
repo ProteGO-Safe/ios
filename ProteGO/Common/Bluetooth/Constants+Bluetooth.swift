@@ -3,8 +3,13 @@ import CoreBluetooth
 
 extension Constants {
     class Bluetooth {
+        /// Bluetooth peripheral restoration ID.
+        static let BluetoothPeripheralManagerRestorationID = "pl.gov.mc.protego.PeripheralManager"
+        /// Bluetooth central manager restoration ID.
+        static let BluetoothCentralManagerRestorationID = "pl.gov.mc.protego.CentralManager"
+
         /// Bluetooth background task ID.
-        static let BackgroundTaskID = "pl.gov.anna.BluetoothBackgroundTask"
+        static let BackgroundTaskID = "pl.gov.mc.protego.BluetoothBackgroundTask"
         /// Bluetooth background task earliest start time
         static let BackgroundTaskEarliestBeginDate: TimeInterval = 15 * 60
         /// Bluetooth advertising task ID
@@ -12,8 +17,13 @@ extension Constants {
         /// Bluetooth scanning task ID
         static let ScanningBackgroundTaskID = "bluetooth.scanning"
 
+        /// Polidea's company ID used in the advertisement data.
+        static let PolideaCompanyId = 0x08AF
+        /// Manufacturer data version indicating that payload has ProteGO format: 16 byte Beacon ID.
+        static let PolideaProteGOManufacturerDataVersion = 0x00
+
         /// ProteGO Service contained in GATT
-        static let ProteGOServiceUUIDString = "89a60000-4f57-4c1b-9042-7ed87d723b4e"
+        static let ProteGOServiceUUIDString = "FD6E"
         static let ProteGOServiceUUID = CBUUID(string: ProteGOServiceUUIDString)
 
         /// ProteGO Characteristic contained in GATT
@@ -31,25 +41,22 @@ extension Constants {
         /// device when synchronization was already completed.
         static let PeripheralIgnoredTimeoutInSec: TimeInterval = 60
 
-        /// Define how long we should wait before we attempt to reconnect to the device, which failed to synchronize.
-        static let PeripheralReconnectionTimeoutPerAttemptInSec: TimeInterval = 5
-
         /// Maxium number of concurrent connections established by a peripheral manager.
         static let PeripheralMaxConcurrentConnections = 3
 
         /// Maximum number of connection retries before we decide to remove device until discovered once again.
         static let PeripheralMaxConnectionRetries = 3
 
-        /// Advertising restart timeout. After this period of time advertising is resumed.
-        static let AdvertisingRestartTimeout: TimeInterval = 60
+        /// Advertising enabled period (used only in background mode)
+        static let AdvertisingOnTimeout: TimeInterval = 15
 
-        /// Advertising stop timeout. After this period of time advertising is stopped.
-        static let AdvertisingStopTimeout: TimeInterval = 15
+        /// Advertising disabled period (used only in background mode)
+        static let AdvertisingOffTimeout: TimeInterval = 45
 
-        /// Scanning restart timeout. After this period of time scanning is resumed.
-        static let ScanningRestartTimeout: TimeInterval = 60
+        /// Scanning enabled period (used only in background mode)
+        static let ScanningOnTimeout: TimeInterval = 15
 
-        /// Scanning stop timeout. After this period of time scanning is stopped.
-        static let ScanningStopTimeout: TimeInterval = 15
+        /// Scanning disabled period (used only in background mode)
+        static let ScanningOffTimeout: TimeInterval = 45
     }
 }

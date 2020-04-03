@@ -203,17 +203,22 @@
 		87074B78242F57770029AD4B /* AdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B77242F57770029AD4B /* AdvertiserDelegate.swift */; };
 		87074B79242F57770029AD4B /* AdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B77242F57770029AD4B /* AdvertiserDelegate.swift */; };
 		87074B7C242F6A5F0029AD4B /* BleScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7B242F6A5F0029AD4B /* BleScanner.swift */; };
-		87074B7F242F6D700029AD4B /* PeripheralContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7E242F6D700029AD4B /* PeripheralContext.swift */; };
-		87074B82242F77CB0029AD4B /* ScannerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B81242F77CB0029AD4B /* ScannerDelegate.swift */; };
-		87074B83242F77CB0029AD4B /* ScannerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B81242F77CB0029AD4B /* ScannerDelegate.swift */; };
-		87074B85242F94780029AD4B /* PeripheralState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B84242F94780029AD4B /* PeripheralState.swift */; };
-		87074B86242F94780029AD4B /* PeripheralState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B84242F94780029AD4B /* PeripheralState.swift */; };
+		87074B7F242F6D700029AD4B /* ProteGoDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7E242F6D700029AD4B /* ProteGoDevice.swift */; };
+		87074B85242F94780029AD4B /* ProteGoDeviceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B84242F94780029AD4B /* ProteGoDeviceState.swift */; };
 		871208D62430C6A600DA0A4D /* Constants+Bluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871208D52430C6A600DA0A4D /* Constants+Bluetooth.swift */; };
 		871208D92430D16C00DA0A4D /* BluetoothBackgroudTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871208D82430D16C00DA0A4D /* BluetoothBackgroudTask.swift */; };
 		87177C942430A6FB007C8F78 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C932430A6FB007C8F78 /* Scanner.swift */; };
-		87177C952430A6FB007C8F78 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C932430A6FB007C8F78 /* Scanner.swift */; };
 		87177C972430A7F6007C8F78 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C962430A7F6007C8F78 /* Advertiser.swift */; };
-		87177C982430A7F6007C8F78 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C962430A7F6007C8F78 /* Advertiser.swift */; };
+		874AAC9D2435E96F00FF7332 /* ProteGoDeviceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874AAC9C2435E96F00FF7332 /* ProteGoDeviceEvent.swift */; };
+		874AACA02435E98400FF7332 /* ProteGoDeviceEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874AAC9F2435E98400FF7332 /* ProteGoDeviceEffect.swift */; };
+		877F3F7324348C0000F774C7 /* ProteGoDeviceId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F7224348C0000F774C7 /* ProteGoDeviceId.swift */; };
+		877F3F752434AB5700F774C7 /* BeaconId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F742434AB5700F774C7 /* BeaconId.swift */; };
+		877F3F792434B4F100F774C7 /* Data+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F782434B4F100F774C7 /* Data+HexString.swift */; };
+		877F3F7A2434B4F100F774C7 /* Data+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F782434B4F100F774C7 /* Data+HexString.swift */; };
+		877F3F7C2434E89900F774C7 /* AdvertiserMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F7B2434E89900F774C7 /* AdvertiserMode.swift */; };
+		877F3F7F2435014E00F774C7 /* ScannerMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F7E2435014E00F774C7 /* ScannerMode.swift */; };
+		877F3F8224351C5700F774C7 /* BeaconIdAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F8124351C5700F774C7 /* BeaconIdAgent.swift */; };
+		877F3F852435216C00F774C7 /* ExpiringBeaconId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F3F842435216C00F774C7 /* ExpiringBeaconId.swift */; };
 		87C985FC242E0A8500335502 /* BleAdvertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C985FB242E0A8500335502 /* BleAdvertiser.swift */; };
 		87F259E92430A3E2009BF612 /* MockScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F259E82430A3E2009BF612 /* MockScanner.swift */; };
 		A63BFB76240CADB609E72685 /* Pods_ProteGO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3458DDABC1020B1EB7984F /* Pods_ProteGO.framework */; };
@@ -441,14 +446,22 @@
 		83DC1EFE24369C62006E54A9 /* RequestBuilderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilderType.swift; sourceTree = "<group>"; };
 		87074B77242F57770029AD4B /* AdvertiserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertiserDelegate.swift; sourceTree = "<group>"; };
 		87074B7B242F6A5F0029AD4B /* BleScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleScanner.swift; sourceTree = "<group>"; };
-		87074B7E242F6D700029AD4B /* PeripheralContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralContext.swift; sourceTree = "<group>"; };
-		87074B81242F77CB0029AD4B /* ScannerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerDelegate.swift; sourceTree = "<group>"; };
-		87074B84242F94780029AD4B /* PeripheralState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralState.swift; sourceTree = "<group>"; };
+		87074B7E242F6D700029AD4B /* ProteGoDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteGoDevice.swift; sourceTree = "<group>"; };
+		87074B84242F94780029AD4B /* ProteGoDeviceState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteGoDeviceState.swift; sourceTree = "<group>"; };
 		871208D52430C6A600DA0A4D /* Constants+Bluetooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Bluetooth.swift"; sourceTree = "<group>"; };
 		871208D82430D16C00DA0A4D /* BluetoothBackgroudTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothBackgroudTask.swift; sourceTree = "<group>"; };
 		87177C902430A5B7007C8F78 /* MockAdvertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAdvertiser.swift; sourceTree = "<group>"; };
 		87177C932430A6FB007C8F78 /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		87177C962430A7F6007C8F78 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
+		874AAC9C2435E96F00FF7332 /* ProteGoDeviceEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteGoDeviceEvent.swift; sourceTree = "<group>"; };
+		874AAC9F2435E98400FF7332 /* ProteGoDeviceEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteGoDeviceEffect.swift; sourceTree = "<group>"; };
+		877F3F7224348C0000F774C7 /* ProteGoDeviceId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteGoDeviceId.swift; sourceTree = "<group>"; };
+		877F3F742434AB5700F774C7 /* BeaconId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconId.swift; sourceTree = "<group>"; };
+		877F3F782434B4F100F774C7 /* Data+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+HexString.swift"; sourceTree = "<group>"; };
+		877F3F7B2434E89900F774C7 /* AdvertiserMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertiserMode.swift; sourceTree = "<group>"; };
+		877F3F7E2435014E00F774C7 /* ScannerMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerMode.swift; sourceTree = "<group>"; };
+		877F3F8124351C5700F774C7 /* BeaconIdAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconIdAgent.swift; sourceTree = "<group>"; };
+		877F3F842435216C00F774C7 /* ExpiringBeaconId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiringBeaconId.swift; sourceTree = "<group>"; };
 		87C985FB242E0A8500335502 /* BleAdvertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleAdvertiser.swift; sourceTree = "<group>"; };
 		87F259E82430A3E2009BF612 /* MockScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockScanner.swift; sourceTree = "<group>"; };
 		95EEA776F9CF0007EA77CC71 /* Pods-ProteGO.debug_stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGO.debug_stg.xcconfig"; path = "Target Support Files/Pods-ProteGO/Pods-ProteGO.debug_stg.xcconfig"; sourceTree = "<group>"; };
@@ -661,6 +674,7 @@
 		0E6D260C242E8E940037A80C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				877F3F772434B4DE00F774C7 /* Data */,
 				0E22F9262434A810008AD8EB /* UIStackView */,
 				833181912433A08A00A8E18D /* UIImage */,
 				8331818E2433A03A00A8E18D /* ConstraintMaker */,
@@ -1033,6 +1047,7 @@
 		83252A6624314C18001E6D63 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				878EFA8724374D84009A436A /* BeaconId */,
 				83DC1F0024369CB2006E54A9 /* RequestBuilder */,
 				83252A7424314EE2001E6D63 /* DefaultRequestParameters */,
 				83252A6824314C37001E6D63 /* RegisterDevice */,
@@ -1535,13 +1550,33 @@
 			isa = PBXGroup;
 			children = (
 				87177C932430A6FB007C8F78 /* Scanner.swift */,
-				87074B81242F77CB0029AD4B /* ScannerDelegate.swift */,
+				877F3F7E2435014E00F774C7 /* ScannerMode.swift */,
 				87074B7B242F6A5F0029AD4B /* BleScanner.swift */,
 				87F259E82430A3E2009BF612 /* MockScanner.swift */,
-				87074B7E242F6D700029AD4B /* PeripheralContext.swift */,
-				87074B84242F94780029AD4B /* PeripheralState.swift */,
+				877F3F7224348C0000F774C7 /* ProteGoDeviceId.swift */,
+				87074B7E242F6D700029AD4B /* ProteGoDevice.swift */,
+				87074B84242F94780029AD4B /* ProteGoDeviceState.swift */,
+				874AAC9C2435E96F00FF7332 /* ProteGoDeviceEvent.swift */,
+				874AAC9F2435E98400FF7332 /* ProteGoDeviceEffect.swift */,
 			);
 			path = Scanner;
+			sourceTree = "<group>";
+		};
+		877F3F772434B4DE00F774C7 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				877F3F782434B4F100F774C7 /* Data+HexString.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		878EFA8724374D84009A436A /* BeaconId */ = {
+			isa = PBXGroup;
+			children = (
+				877F3F742434AB5700F774C7 /* BeaconId.swift */,
+				877F3F842435216C00F774C7 /* ExpiringBeaconId.swift */,
+			);
+			path = BeaconId;
 			sourceTree = "<group>";
 		};
 		87C985FA242E0A6400335502 /* Bluetooth */ = {
@@ -1551,6 +1586,7 @@
 				87C98604242E2B1A00335502 /* Advertiser */,
 				871208D52430C6A600DA0A4D /* Constants+Bluetooth.swift */,
 				871208D82430D16C00DA0A4D /* BluetoothBackgroudTask.swift */,
+				877F3F8124351C5700F774C7 /* BeaconIdAgent.swift */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -1559,7 +1595,7 @@
 			isa = PBXGroup;
 			children = (
 				87177C962430A7F6007C8F78 /* Advertiser.swift */,
-				87074B77242F57770029AD4B /* AdvertiserDelegate.swift */,
+				877F3F7B2434E89900F774C7 /* AdvertiserMode.swift */,
 				87C985FB242E0A8500335502 /* BleAdvertiser.swift */,
 				87177C902430A5B7007C8F78 /* MockAdvertiser.swift */,
 			);
@@ -1877,12 +1913,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87074B82242F77CB0029AD4B /* ScannerDelegate.swift in Sources */,
 				87177C972430A7F6007C8F78 /* Advertiser.swift in Sources */,
-				87074B7F242F6D700029AD4B /* PeripheralContext.swift in Sources */,
-				87074B78242F57770029AD4B /* AdvertiserDelegate.swift in Sources */,
+				877F3F7F2435014E00F774C7 /* ScannerMode.swift in Sources */,
+				87074B7F242F6D700029AD4B /* ProteGoDevice.swift in Sources */,
+				87074B85242F94780029AD4B /* ProteGoDeviceState.swift in Sources */,
 				83DC1EF2243623FE006E54A9 /* RegistrationManagerType.swift in Sources */,
-				87074B85242F94780029AD4B /* PeripheralState.swift in Sources */,
 				83512C3E243510B2007DB8AD /* OnboardingModelType.swift in Sources */,
 				83252A7C24320586001E6D63 /* Constants+Networking.swift in Sources */,
 				8368016E24323FF400678DBD /* OnboardingAssembly.swift in Sources */,
@@ -1924,6 +1959,7 @@
 				8356F93C2436BFF60075FF20 /* ScreensDebugItems.swift in Sources */,
 				83512C382434FFE4007DB8AD /* OnboardingStepView.swift in Sources */,
 				836801702432400500678DBD /* RegistrationAssembly.swift in Sources */,
+				877F3F7C2434E89900F774C7 /* AdvertiserMode.swift in Sources */,
 				871208D62430C6A600DA0A4D /* Constants+Bluetooth.swift in Sources */,
 				0EB65C812435285300491507 /* HistoryOverviewViewModelType.swift in Sources */,
 				0E9DCC942430984A00C2670D /* EncountersManager.swift in Sources */,
@@ -1955,6 +1991,7 @@
 				83512C2F2434E75E007DB8AD /* OnboardingSharingStepView.swift in Sources */,
 				83252A8E24322167001E6D63 /* RootViewModel.swift in Sources */,
 				83252A14242F6C22001E6D63 /* NetworkRequest.swift in Sources */,
+				877F3F752434AB5700F774C7 /* BeaconId.swift in Sources */,
 				83252A18242F9C11001E6D63 /* UrlRequestBuilderType.swift in Sources */,
 				0E9DCCAB2430CA5A00C2670D /* RegisteredEncountersDebugViewModelType.swift in Sources */,
 				0EB65C852436195200491507 /* HistoryAssembly.swift in Sources */,
@@ -1976,6 +2013,8 @@
 				0E965352242F81D400ADD300 /* DebugMenu.swift in Sources */,
 				83512C282434D06F007DB8AD /* OnboardingStatusStepView.swift in Sources */,
 				0E9DCCA92430CA4500C2670D /* RegisteredEncountersDebugModelType.swift in Sources */,
+				874AAC9D2435E96F00FF7332 /* ProteGoDeviceEvent.swift in Sources */,
+				877F3F852435216C00F774C7 /* ExpiringBeaconId.swift in Sources */,
 				8382897C24332D840054347B /* UIView+AddSubviews.swift in Sources */,
 				0EE60C51242FF40500D29048 /* FilesCoordinator.swift in Sources */,
 				0EE60C3A242FE03100D29048 /* ProteGOError.swift in Sources */,
@@ -2020,11 +2059,14 @@
 				83512C192434BF00007DB8AD /* NavigationButtonsView.swift in Sources */,
 				838289C4243330200054347B /* RegistrationSendCodeViewModelType.swift in Sources */,
 				0E9DCCA12430C8C200C2670D /* CustomView.swift in Sources */,
+				874AACA02435E98400FF7332 /* ProteGoDeviceEffect.swift in Sources */,
+				877F3F7324348C0000F774C7 /* ProteGoDeviceId.swift in Sources */,
 				83DC1EFD24369775006E54A9 /* RequestBuilder.swift in Sources */,
 				83252A6E24314CFE001E6D63 /* ConfirmRegistrationRequest.swift in Sources */,
 				8382897924332D670054347B /* UITextFireld+Factory.swift in Sources */,
 				83252A6324314B9A001E6D63 /* GcpClientType.swift in Sources */,
 				836DF52124334C31000C00C0 /* RegistrationModelType.swift in Sources */,
+				877F3F8224351C5700F774C7 /* BeaconIdAgent.swift in Sources */,
 				0EE60C23242FDAA400D29048 /* Encounter.swift in Sources */,
 				0E8DED412433E21100D7F806 /* GreenStatusCardView.swift in Sources */,
 				0E22F9252434A6F8008AD8EB /* GeneralRecommendationsCard.swift in Sources */,
@@ -2033,6 +2075,7 @@
 				0EE60C4B242FF2C200D29048 /* GeneralAssembly.swift in Sources */,
 				0EE60BD0242F8A3C00D29048 /* InfoKeys+Value.swift in Sources */,
 				838289BF24332FEE0054347B /* RegistrationSendCodeView.swift in Sources */,
+				877F3F792434B4F100F774C7 /* Data+HexString.swift in Sources */,
 				0EE60C52242FF40500D29048 /* FilesCoordinatorType.swift in Sources */,
 				836801722432401300678DBD /* DashboardAssembly.swift in Sources */,
 				838289DD2433327A0054347B /* RegistrationVerifyCodeModel.swift in Sources */,
@@ -2045,11 +2088,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87074B83242F77CB0029AD4B /* ScannerDelegate.swift in Sources */,
-				87177C982430A7F6007C8F78 /* Advertiser.swift in Sources */,
-				87074B79242F57770029AD4B /* AdvertiserDelegate.swift in Sources */,
-				87074B86242F94780029AD4B /* PeripheralState.swift in Sources */,
-				87177C952430A6FB007C8F78 /* Scanner.swift in Sources */,
+				877F3F7A2434B4F100F774C7 /* Data+HexString.swift in Sources */,
 				0E9DCC992430987000C2670D /* RealmManagerMock.swift in Sources */,
 				0EE60C612430017A00D29048 /* SecretsGeneratorSpecs.swift in Sources */,
 				0E9DCC8F2430150000C2670D /* RealmManagerSpecs.swift in Sources */,
