@@ -43,6 +43,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     /// Set scanner mode
     /// - Parameter mode: Scanner mode
     func setMode(_ mode: ScannerMode) {
+        logger.debug("Scanner mode: \(mode)")
         self.mode = mode
         switch mode {
         case .Disabled:
