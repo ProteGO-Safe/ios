@@ -2,7 +2,7 @@ import Foundation
 
 class MockScanner: Scanner {
     private weak var agent: BeaconIdAgent?
-    private var mode: ScannerMode = .Disabled
+    private var mode: ScannerMode = .disabled
 
     init(agent: BeaconIdAgent) {
         self.agent = agent
@@ -24,7 +24,7 @@ class MockScanner: Scanner {
 
     func isScanning() -> Bool {
         switch self.mode {
-        case .Disabled:
+        case .disabled:
             return false
         default:
             return true

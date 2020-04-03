@@ -1,8 +1,8 @@
 import Foundation
 
 enum ScannerMode {
-    case Disabled
-    case EnabledAllTime
-    case EnabledPartTime(scanningOnTime: TimeInterval,
+    case disabled
+    case enabledAllTime
+    case enabledPartTime(scanningOnTime: TimeInterval,
                          scanningOffTime: TimeInterval)
 }

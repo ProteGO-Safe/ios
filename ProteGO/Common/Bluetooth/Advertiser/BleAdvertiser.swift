@@ -13,7 +13,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     /// Advertisement timer to schedule start/stop operations.
     private var advertisementTimer: Timer?
     /// Advertising mode deciding about radio usage.
-    private var mode: AdvertiserMode = .Disabled
+    private var mode: AdvertiserMode = .disabled
     /// Background processing task handle.
     private let backgroundTask: BluetoothBackgroundTask
     private let advertisementTaskID = Constants.Bluetooth.AdvertisingBackgroundTaskID
@@ -35,9 +35,9 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
         logger.debug("Advertisement mode: \(mode)")
         self.mode = mode
         switch mode {
-        case .Disabled:
+        case .disabled:
             stopAdvertisementIfNeeded()
-        default:
+        case .enabledAllTime, .enabledPartTime:
             startAdvertisementIfNeeded()
         }
     }
@@ -87,14 +87,14 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
         self.advertisementTimer = nil
 
         switch self.mode {
-        case .Disabled:
+        case .disabled:
             // We can't enable advertisement
             logger.debug("Starting advertisement failed, scanner is disabled")
             return
-        case .EnabledAllTime:
+        case .enabledAllTime:
             // We don't setup timers to stop advertisement.
             break
-        case let .EnabledPartTime(advertisingOnTime: onTime, advertisingOffTime: _):
+        case let .enabledPartTime(advertisingOnTime: onTime, advertisingOffTime: _):
             // Setup timer to stop advertisement.
             let timer = Timer.init(timeInterval: onTime, repeats: false) { [weak self] _ in
                 self?.stopAdvertisementIfNeeded()
@@ -125,14 +125,14 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
 
         // Check advertisement mode.
         switch self.mode {
-        case .Disabled:
+        case .disabled:
             // Let't stop advertising if needed.
             break
-        case .EnabledAllTime:
+        case .enabledAllTime:
             // Don't allow to stop advertisement.
             logger.debug("Stopping advertisement failed as it's forced to be enabled.")
             return
-        case let .EnabledPartTime(advertisingOnTime: _, advertisingOffTime: offTime):
+        case let .enabledPartTime(advertisingOnTime: _, advertisingOffTime: offTime):
             // Setup advertisement timer to start after a while
             let timer = Timer.init(timeInterval: offTime, repeats: false) { [weak self] _ in
                 self?.startAdvertisementIfNeeded()

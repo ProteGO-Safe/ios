@@ -36,16 +36,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        self.advertiser?.setMode(.EnabledAllTime)
-        self.scanner?.setMode(.EnabledAllTime)
+        self.advertiser?.setMode(.enabledAllTime)
+        self.scanner?.setMode(.enabledAllTime)
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        self.advertiser?.setMode(.EnabledPartTime(
+        self.advertiser?.setMode(.enabledPartTime(
             advertisingOnTime: TimeInterval(DebugMenu.assign(DebugMenu.bluetoothAdvertiserOnTime)),
             advertisingOffTime: TimeInterval(DebugMenu.assign(DebugMenu.bluetoothAdvertiserOffTime))
         ))
-        self.scanner?.setMode(.EnabledPartTime(
+        self.scanner?.setMode(.enabledPartTime(
             scanningOnTime: TimeInterval(DebugMenu.assign(DebugMenu.bluetoothScannerOnTime)),
             scanningOffTime: TimeInterval(DebugMenu.assign(DebugMenu.bluetoothScannerOffTime))
         ))
@@ -66,8 +66,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate  {
         let encountersManager: EncountersManagerType = self.resolver.resolve(EncountersManagerType.self)
         self.advertiser = self.resolver.resolve(Advertiser.self, argument: encountersManager as BeaconIdAgent)
         self.scanner = self.resolver.resolve(Scanner.self, argument: encountersManager as BeaconIdAgent)
-        self.advertiser?.setMode(.EnabledAllTime)
-        self.scanner?.setMode(.EnabledAllTime)
+        self.advertiser?.setMode(.enabledAllTime)
+        self.scanner?.setMode(.enabledAllTime)
     }
 
     private func setupCrashlytics() {

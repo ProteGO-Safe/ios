@@ -15,7 +15,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     private var scanningTimer: Timer?
 
     /// Scanner mode deciding about enabled/disabled state of discovery.
-    private var mode: ScannerMode = .Disabled
+    private var mode: ScannerMode = .disabled
 
     /// Background task handle
     private let backgroundTask: BluetoothBackgroundTask
@@ -46,9 +46,9 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         logger.debug("Scanner mode: \(mode)")
         self.mode = mode
         switch mode {
-        case .Disabled:
+        case .disabled:
             stopScanningIfNeeded()
-        default:
+        case .enabledAllTime, .enabledPartTime:
             startScanningIfNeeded()
         }
     }
@@ -277,14 +277,14 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
 
         // Check scanning mode.
         switch self.mode {
-        case .Disabled:
+        case .disabled:
             // Scanning is disabled, don't allow starting.
             logger.debug("Scanning failed to start as scanner is disabled")
             return
-        case .EnabledAllTime:
+        case .enabledAllTime:
             // Scanning is enabled, all time, no need to setup timer.
             break
-        case let .EnabledPartTime(scanningOnTime: onTime, scanningOffTime: _):
+        case let .enabledPartTime(scanningOnTime: onTime, scanningOffTime: _):
             // Prepare timer to stop scanning
             let timer = Timer.init(timeInterval: onTime, repeats: false) { [weak self] _ in
                 self?.stopScanningIfNeeded()
@@ -311,14 +311,14 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
 
         // Check scanning mode
         switch self.mode {
-        case .Disabled:
+        case .disabled:
             // Stop scanning
             break
-        case .EnabledAllTime:
+        case .enabledAllTime:
             // Don't allow to stop scanning as it should be enabled all time.
             logger.debug("Scanner failed to stop as it's forced to be turned on")
             return
-        case let .EnabledPartTime(scanningOnTime: _, scanningOffTime: offTime):
+        case let .enabledPartTime(scanningOnTime: _, scanningOffTime: offTime):
             // Setup timer to start scanner after a while
             let timer = Timer.init(timeInterval: offTime, repeats: false) { [weak self] _ in
                 self?.startScanningIfNeeded()

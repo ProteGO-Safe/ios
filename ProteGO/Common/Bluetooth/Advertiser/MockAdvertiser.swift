@@ -1,7 +1,7 @@
 import Foundation
 
 class MockAdvertiser: Advertiser {
-    private var mode: AdvertiserMode = .Disabled
+    private var mode: AdvertiserMode = .disabled
     private var expiringBeaconId: ExpiringBeaconId?
     private weak var agent: BeaconIdAgent?
 
@@ -27,7 +27,7 @@ class MockAdvertiser: Advertiser {
     }
 
     func isAdvertising() -> Bool {
-        if case .Disabled = self.mode {
+        if case .disabled = self.mode {
             return false
         }
         return true
