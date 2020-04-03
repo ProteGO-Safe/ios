@@ -72,6 +72,9 @@
 		0EB65C812435285300491507 /* HistoryOverviewViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C802435285300491507 /* HistoryOverviewViewModelType.swift */; };
 		0EB65C832435285E00491507 /* HistoryOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C822435285E00491507 /* HistoryOverviewViewController.swift */; };
 		0EB65C852436195200491507 /* HistoryAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C842436195200491507 /* HistoryAssembly.swift */; };
+		0EB65C872436620E00491507 /* Constants+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C862436620E00491507 /* Constants+UI.swift */; };
+		0EB65C882436712C00491507 /* RegistrationSendCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289C5243330320054347B /* RegistrationSendCodeViewModel.swift */; };
+		0EB65C892436713200491507 /* RegistrationVerifyCodeViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D4243331110054347B /* RegistrationVerifyCodeViewModelType.swift */; };
 		0ECE7A1F2430E3EE00EED942 /* BluetoothAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECE7A1E2430E3EE00EED942 /* BluetoothAssembly.swift */; };
 		0ECE7A212430E48200EED942 /* BluetoothDebugItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECE7A202430E48200EED942 /* BluetoothDebugItems.swift */; };
 		0ECE7A222430F91F00EED942 /* MockAdvertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C902430A5B7007C8F78 /* MockAdvertiser.swift */; };
@@ -155,12 +158,10 @@
 		838289BF24332FEE0054347B /* RegistrationSendCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289BE24332FEE0054347B /* RegistrationSendCodeView.swift */; };
 		838289C1243330080054347B /* RegistrationSendCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289C0243330080054347B /* RegistrationSendCodeViewController.swift */; };
 		838289C4243330200054347B /* RegistrationSendCodeViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289C3243330200054347B /* RegistrationSendCodeViewModelType.swift */; };
-		838289C6243330320054347B /* RegistrationSendCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289C5243330320054347B /* RegistrationSendCodeViewModel.swift */; };
 		838289CC243330B50054347B /* RegistrationVerifyCodeModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289CB243330B50054347B /* RegistrationVerifyCodeModelType.swift */; };
 		838289CF243330D10054347B /* RegistrationVerifyCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289CE243330D10054347B /* RegistrationVerifyCodeView.swift */; };
 		838289D1243330E40054347B /* RegistrationVerifyCodeVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D0243330E40054347B /* RegistrationVerifyCodeVIewController.swift */; };
 		838289D3243330F40054347B /* RegistrationVerifyCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D2243330F40054347B /* RegistrationVerifyCodeViewModel.swift */; };
-		838289D5243331110054347B /* RegistrationVerifyCodeViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D4243331110054347B /* RegistrationVerifyCodeViewModelType.swift */; };
 		838289D7243331510054347B /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D6243331510054347B /* BannerView.swift */; };
 		838289D9243331ED0054347B /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D8243331ED0054347B /* RegistrationView.swift */; };
 		838289DB2433320B0054347B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289DA2433320B0054347B /* RegistrationViewController.swift */; };
@@ -290,6 +291,7 @@
 		0EB65C802435285300491507 /* HistoryOverviewViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOverviewViewModelType.swift; sourceTree = "<group>"; };
 		0EB65C822435285E00491507 /* HistoryOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOverviewViewController.swift; sourceTree = "<group>"; };
 		0EB65C842436195200491507 /* HistoryAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryAssembly.swift; sourceTree = "<group>"; };
+		0EB65C862436620E00491507 /* Constants+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+UI.swift"; sourceTree = "<group>"; };
 		0ECE7A1E2430E3EE00EED942 /* BluetoothAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothAssembly.swift; sourceTree = "<group>"; };
 		0ECE7A202430E48200EED942 /* BluetoothDebugItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothDebugItems.swift; sourceTree = "<group>"; };
 		0EE4E8F924326BA300EA05ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -635,6 +637,7 @@
 				0E9DCC8724300CC600C2670D /* Constants+KeychainKeys.swift */,
 				0E9DDA712430D82E002D879F /* Constants+Encounters.swift */,
 				83252A7B24320586001E6D63 /* Constants+Networking.swift */,
+				0EB65C862436620E00491507 /* Constants+UI.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -1877,12 +1880,8 @@
 				8382897224332D2A0054347B /* UILabel+Factory.swift in Sources */,
 				0E9DCC8824300CC600C2670D /* Constants+KeychainKeys.swift in Sources */,
 				83512C42243522C2007DB8AD /* OnboardingVIewModelType.swift in Sources */,
-				838289C6243330320054347B /* RegistrationSendCodeViewModel.swift in Sources */,
 				83512C4024351EAA007DB8AD /* OnboardingViewModel.swift in Sources */,
-				838289D5243331110054347B /* RegistrationVerifyCodeViewModelType.swift in Sources */,
 				0E22F92E2434DFDE008AD8EB /* DangerStatusCardBottomModule.swift in Sources */,
-				838289C6243330320054347B /* RegistrationSendCodeViewModel.swift in Sources */,
-				838289D5243331110054347B /* RegistrationVerifyCodeViewModelType.swift in Sources */,
 				0E22F9282434A861008AD8EB /* UIStackView+AddArrangedSubviews.swift in Sources */,
 				0E9DDA6E2430D2D9002D879F /* DebugAssembly.swift in Sources */,
 				83252A6C24314C99001E6D63 /* RegisterDeviceResult.swift in Sources */,
@@ -1951,6 +1950,7 @@
 				83680160243227B400678DBD /* OnboardingViewController.swift in Sources */,
 				0EE4E9002432717F00EA05ED /* L10n.swift in Sources */,
 				838289BB24332F9E0054347B /* RegistrationSendCodeModel.swift in Sources */,
+				0EB65C872436620E00491507 /* Constants+UI.swift in Sources */,
 				0ECE7A1F2430E3EE00EED942 /* BluetoothAssembly.swift in Sources */,
 				83252A9C24322549001E6D63 /* OnboardingView.swift in Sources */,
 				0E965355242F82B900ADD300 /* GeneralDebugItems.swift in Sources */,
@@ -1958,6 +1958,7 @@
 				0EB65C7D243527A900491507 /* HistoryOverviewModelType.swift in Sources */,
 				0EB65C792435279300491507 /* HistoryOverviewView.swift in Sources */,
 				0E8DED2E2433CC7600D7F806 /* DangerStatusManager.swift in Sources */,
+				0EB65C892436713200491507 /* RegistrationVerifyCodeViewModelType.swift in Sources */,
 				0E8DED302433CCCF00D7F806 /* DangerStatusManagerType.swift in Sources */,
 				836DF51B24334C14000C00C0 /* RegistrationViewModel.swift in Sources */,
 				836DF51F24334C29000C00C0 /* RegistrationModel.swift in Sources */,
@@ -1981,6 +1982,7 @@
 				0E9DCCA32430C9A700C2670D /* RegisteredEncountersDebugViewController.swift in Sources */,
 				0E9DCC9D2430C7F100C2670D /* RegisteredEncountersDebugScreenView.swift in Sources */,
 				0EE60C5F2430015E00D29048 /* SecretsGenerator.swift in Sources */,
+				0EB65C882436712C00491507 /* RegistrationSendCodeViewModel.swift in Sources */,
 				83512C192434BF00007DB8AD /* NavigationButtonsView.swift in Sources */,
 				838289C4243330200054347B /* RegistrationSendCodeViewModelType.swift in Sources */,
 				0E9DCCA12430C8C200C2670D /* CustomView.swift in Sources */,
