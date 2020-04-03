@@ -1,7 +1,7 @@
 import Foundation
 
-/// This class represents valid Beacon ID value.
-class BeaconId {
+/// Structure representing valid Beacon ID value.
+struct BeaconId {
     private let data: Data
     private static let byteCount = 16
 

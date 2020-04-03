@@ -1013,6 +1013,7 @@
 		83252A6624314C18001E6D63 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				878EFA8724374D84009A436A /* BeaconId */,
 				83252A7424314EE2001E6D63 /* DefaultRequestParameters */,
 				83252A6824314C37001E6D63 /* RegisterDevice */,
 				83252A6724314C2A001E6D63 /* ConfirmRegistration */,
@@ -1506,6 +1507,15 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		878EFA8724374D84009A436A /* BeaconId */ = {
+			isa = PBXGroup;
+			children = (
+				877F3F742434AB5700F774C7 /* BeaconId.swift */,
+				877F3F842435216C00F774C7 /* ExpiringBeaconId.swift */,
+			);
+			path = BeaconId;
+			sourceTree = "<group>";
+		};
 		87C985FA242E0A6400335502 /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
@@ -1513,8 +1523,6 @@
 				87C98604242E2B1A00335502 /* Advertiser */,
 				871208D52430C6A600DA0A4D /* Constants+Bluetooth.swift */,
 				871208D82430D16C00DA0A4D /* BluetoothBackgroudTask.swift */,
-				877F3F742434AB5700F774C7 /* BeaconId.swift */,
-				877F3F842435216C00F774C7 /* ExpiringBeaconId.swift */,
 				877F3F8124351C5700F774C7 /* BeaconIdAgent.swift */,
 			);
 			path = Bluetooth;

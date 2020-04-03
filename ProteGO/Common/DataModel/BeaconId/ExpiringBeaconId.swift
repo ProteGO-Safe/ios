@@ -1,6 +1,6 @@
 import Foundation
 
-class ExpiringBeaconId {
+struct ExpiringBeaconId {
     private let beaconId: BeaconId
     private let expirationDate: Date
 
