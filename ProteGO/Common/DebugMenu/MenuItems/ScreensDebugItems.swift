@@ -9,7 +9,10 @@ extension DebugMenu {
         let description = DebugItemDescription(.screens, group: .onboarding, name: "Ustaw finishedOnboarding false")
         let tweak = Tweak<TweakAction>.build(with: description)
         tweak.addClosure {
-            var defaultsService = DefaultsService()
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            let resolver = appDelegate.resolver
+
+            let defaultsService: DefaultsServiceType = resolver.resolve(DefaultsServiceType.self)
             defaultsService.finishedOnboarding = false
         }
         return tweak

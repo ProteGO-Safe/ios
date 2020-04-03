@@ -7,6 +7,7 @@ extension Constants {
         case bugfenderKey = "BUGFENDER_KEY"
         case consoleLoggingEnabled = "CONSOLE_LOGGING_ENABLED"
         case crashlyticsEnabled = "CRASHLYTICS_ENABLED"
+        case environment = "ENVIRONMENT"
         case tweaksEnabled = "TWEAKS_ENABLED"
     }
 }

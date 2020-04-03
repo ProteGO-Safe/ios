@@ -152,6 +152,7 @@
 		836DF51D24334C20000C00C0 /* RegistrationViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DF51C24334C20000C00C0 /* RegistrationViewModelType.swift */; };
 		836DF51F24334C29000C00C0 /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DF51E24334C29000C00C0 /* RegistrationModel.swift */; };
 		836DF52124334C31000C00C0 /* RegistrationModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DF52024334C31000C00C0 /* RegistrationModelType.swift */; };
+		836FE6FE243755920024D83F /* Constants+Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836FE6FD243755920024D83F /* Constants+Environment.swift */; };
 		8382896924332CBB0054347B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382896724332C350054347B /* Colors.swift */; };
 		8382896C24332CF40054347B /* UIButton+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382896B24332CF40054347B /* UIButton+Factory.swift */; };
 		8382896F24332D170054347B /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382896E24332D170054347B /* UIColor+Hex.swift */; };
@@ -391,6 +392,7 @@
 		836DF51C24334C20000C00C0 /* RegistrationViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModelType.swift; sourceTree = "<group>"; };
 		836DF51E24334C29000C00C0 /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
 		836DF52024334C31000C00C0 /* RegistrationModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModelType.swift; sourceTree = "<group>"; };
+		836FE6FD243755920024D83F /* Constants+Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Environment.swift"; sourceTree = "<group>"; };
 		8382896724332C350054347B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		8382896B24332CF40054347B /* UIButton+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Factory.swift"; sourceTree = "<group>"; };
 		8382896E24332D170054347B /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
@@ -647,6 +649,7 @@
 				0EE60C3D242FE4F100D29048 /* Constants+Realm.swift */,
 				0E6D2607242E8B540037A80C /* Constants.swift */,
 				0E6D2608242E8B540037A80C /* Constants+InfoKeys.swift */,
+				836FE6FD243755920024D83F /* Constants+Environment.swift */,
 				0E9DCC8724300CC600C2670D /* Constants+KeychainKeys.swift */,
 				0E9DDA712430D82E002D879F /* Constants+Encounters.swift */,
 				83252A7B24320586001E6D63 /* Constants+Networking.swift */,
@@ -1946,6 +1949,7 @@
 				0E9DDA752430DB46002D879F /* String+Random.swift in Sources */,
 				83252A12242F63B1001E6D63 /* NetworkClient.swift in Sources */,
 				83512C3C243510A5007DB8AD /* OnboardingModel.swift in Sources */,
+				836FE6FE243755920024D83F /* Constants+Environment.swift in Sources */,
 				83512C2F2434E75E007DB8AD /* OnboardingSharingStepView.swift in Sources */,
 				83252A8E24322167001E6D63 /* RootViewModel.swift in Sources */,
 				83252A14242F6C22001E6D63 /* NetworkRequest.swift in Sources */,
@@ -2120,6 +2124,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENVIRONMENT = development;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2181,6 +2186,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENVIRONMENT = development;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2377,6 +2383,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENVIRONMENT = staging;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2509,6 +2516,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENVIRONMENT = production;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2641,6 +2649,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENVIRONMENT = staging;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2766,6 +2775,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENVIRONMENT = production;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
