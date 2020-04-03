@@ -23,7 +23,7 @@ extension Constants {
         static let PolideaProteGOManufacturerDataVersion = 0x00
 
         /// ProteGO Service contained in GATT
-        static let ProteGOServiceUUIDString = "CCCC"
+        static let ProteGOServiceUUIDString = "FD6E"
         static let ProteGOServiceUUID = CBUUID(string: ProteGOServiceUUIDString)
 
         /// ProteGO Characteristic contained in GATT
