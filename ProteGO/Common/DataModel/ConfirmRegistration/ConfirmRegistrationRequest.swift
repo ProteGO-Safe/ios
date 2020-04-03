@@ -4,7 +4,7 @@ struct ConfirmRegistrationRequest: Encodable {
 
     let code: String
 
-    var registrationId: String?
+    let registrationId: String
 
     let platform: String
 

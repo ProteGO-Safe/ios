@@ -43,7 +43,7 @@ final class GcpClient: GcpClientType {
                     logger.debug("Did send registration code")
                     self?.registrationManager.register(registrationId: result.registrationId)
                     if DebugMenu.assign(DebugMenu.registrationDebugNoSms) {
-                        self?.registrationManager.set(debugRegistrationCode: result.code)
+                        self?.registrationManager.set(debugRegistrationCode: result.debugCode)
                     }
 
                 case .failure(let error):

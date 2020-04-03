@@ -4,10 +4,10 @@ struct RegisterDeviceResult: Decodable {
 
     let registrationId: String
 
-    let code: String?
+    let debugCode: String?
 
     enum CodingKeys: String, CodingKey {
-        case code
+        case debugCode = "code"
         case registrationId = "registration_id"
     }
 }
