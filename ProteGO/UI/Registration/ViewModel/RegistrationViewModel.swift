@@ -29,6 +29,10 @@ final class RegistrationViewModel: RegistrationViewModelType {
         self.model = model
     }
 
+    func setInitialStep() {
+        model.setInitialStep()
+    }
+
     func bind(view: RegistrationView) {
         view.backButtonTapEvent.subscribe(onNext: { [weak self] _ in
             self?.model.previousStep()
@@ -42,8 +46,8 @@ final class RegistrationViewModel: RegistrationViewModelType {
     func bind(sendCodeViewController: RegistrationSendCodeViewController) {
 
         sendCodeViewController.stepFinishedObservable
-            .subscribe(onNext: { [weak self] stepFinishedData in
-                self?.model.sendCodeStepFinished(phoneNumber: stepFinishedData.phoneNumber)
+            .subscribe(onNext: { [weak self] result in
+                self?.model.sendCodeStepFinished(phoneNumber: result.phoneNumber)
         }).disposed(by: disposeBag)
     }
 

@@ -7,6 +7,7 @@ final class NetworkingAssembly: Assembly {
         registerReachability(container)
         registerUrlRequestBuilder(container)
         registerNetworkClient(container)
+        registerRequestBuilder(container)
         registerGcpClient(container)
     }
 
@@ -35,9 +36,19 @@ final class NetworkingAssembly: Assembly {
         }
     }
 
+    private func registerRequestBuilder(_ container: Container) {
+        container.register(RequestBuilderType.self) { resolver in
+            return RequestBuilder(registrationManager: resolver.resolve(RegistrationManagerType.self))
+        }
+    }
+
     private func registerGcpClient(_ container: Container) {
         container.register(GcpClientType.self) { resolver in
-            return GcpClient(networkClient: resolver.resolve(NetworkClient.self))
+            return GcpClient(
+                networkClient: resolver.resolve(NetworkClient.self),
+                requestBuilder: resolver.resolve(RequestBuilderType.self),
+                registrationManager: resolver.resolve(RegistrationManagerType.self)
+             )
         }
     }
 }

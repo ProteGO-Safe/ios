@@ -10,6 +10,7 @@ final class GeneralAssembly: Assembly {
         registerValet(container)
         registerEncountersManager(container)
         registerDangerStatusManager(container)
+        registerDefaultsService(container)
     }
 
     private func registerRealm(_ container: Container) {
@@ -53,6 +54,12 @@ final class GeneralAssembly: Assembly {
     private func registerDangerStatusManager(_ container: Container) {
         container.register(DangerStatusManagerType.self) { _ in
             return DangerStatusManager()
+        }.inObjectScope(.container)
+    }
+
+    private func registerDefaultsService(_ container: Container) {
+        container.register(DefaultsServiceType.self) { _ in
+            return DefaultsService()
         }.inObjectScope(.container)
     }
 }
