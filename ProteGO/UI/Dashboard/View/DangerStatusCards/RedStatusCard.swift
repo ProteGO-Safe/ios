@@ -10,7 +10,9 @@ final class RedStatusCardView: DangerStatusCardView {
             titleText: L10n.dashboardRedStatusTitle,
             firstParagraphText: L10n.dashboardRedStatusDescription)
 
-        let buttonConfig = DangerStatusCardButtonConfig(buttonTitle: L10n.dashboardRedStatusContactBtn)
+        let buttonConfig = DangerStatusCardButtonConfig(title: L10n.dashboardRedStatusContactBtn,
+                                                        normalColor: Colors.copper,
+                                                        highlightedColor: Colors.brick)
 
         super.init(config: config, buttonConfig: buttonConfig)
     }

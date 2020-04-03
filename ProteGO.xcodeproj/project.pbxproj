@@ -7,7 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E153F39242D43D100340838 /* RxSwiftExt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5B4242B764100C092E7 /* RxSwiftExt.framework */; };
+		0E0B30D724377172005DFC84 /* HistoryRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0B30D624377172005DFC84 /* HistoryRootViewController.swift */; };
+		0E0B30E32437A2A9005DFC84 /* SendHistoryConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0B30E22437A2A9005DFC84 /* SendHistoryConfirmView.swift */; };
+		0E0B30E52437A2C2005DFC84 /* SendHistoryConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0B30E42437A2C2005DFC84 /* SendHistoryConfirmViewController.swift */; };
+		0E0B30E72437A2CD005DFC84 /* SendHistoryConfirmViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0B30E62437A2CD005DFC84 /* SendHistoryConfirmViewModelType.swift */; };
+		0E0B30E92437A2D6005DFC84 /* SendHistoryConfirmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0B30E82437A2D6005DFC84 /* SendHistoryConfirmViewModel.swift */; };
+		0E0B30EB2437A2EE005DFC84 /* SendHistoryConfirmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0B30EA2437A2EE005DFC84 /* SendHistoryConfirmModel.swift */; };
+		0E0B30ED2437A2F6005DFC84 /* SendHistoryConfirmModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0B30EC2437A2F6005DFC84 /* SendHistoryConfirmModelType.swift */; };
+		0E0B30EF2437A314005DFC84 /* SendHistoryProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0B30EE2437A314005DFC84 /* SendHistoryProgressViewController.swift */; };
+		0E0B30F12437A31A005DFC84 /* SendHistoryProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0B30F02437A31A005DFC84 /* SendHistoryProgressView.swift */; };
+		0E0B30F32437A323005DFC84 /* SendHistoryProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0B30F22437A323005DFC84 /* SendHistoryProgressViewModel.swift */; };
+		0E0B30F52437A32E005DFC84 /* SendHistoryProgressViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0B30F42437A32E005DFC84 /* SendHistoryProgressViewModelType.swift */; };
+		0E0B30F72437A337005DFC84 /* SendHistoryProgressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0B30F62437A337005DFC84 /* SendHistoryProgressModel.swift */; };
+		0E0B30F92437A342005DFC84 /* SendHistoryProgressModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0B30F82437A342005DFC84 /* SendHistoryProgressModelType.swift */; };
 		0E22F9202434A117008AD8EB /* RedStatusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22F91F2434A117008AD8EB /* RedStatusCard.swift */; };
 		0E22F9222434A486008AD8EB /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22F9212434A486008AD8EB /* UIButton+BackgroundColor.swift */; };
 		0E22F9252434A6F8008AD8EB /* GeneralRecommendationsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22F9242434A6F8008AD8EB /* GeneralRecommendationsCard.swift */; };
@@ -65,6 +77,10 @@
 		0E9DDA722430D82E002D879F /* Constants+Encounters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9DDA712430D82E002D879F /* Constants+Encounters.swift */; };
 		0E9DDA752430DB46002D879F /* String+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9DDA742430DB46002D879F /* String+Random.swift */; };
 		0E9DDA772430E12C002D879F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9DDA762430E12C002D879F /* AppDelegate.swift */; };
+		0EB372C7243871C700884C93 /* SendHistoryResultDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB372C6243871C700884C93 /* SendHistoryResultDialogView.swift */; };
+		0EB372C9243871D400884C93 /* SendHistoryResultDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB372C8243871D400884C93 /* SendHistoryResultDialogViewController.swift */; };
+		0EB372CB2438A20800884C93 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB372CA2438A20800884C93 /* Lottie.framework */; };
+		0EB372D02438A39F00884C93 /* progressSpinnerGreen.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EB372CF2438A39F00884C93 /* progressSpinnerGreen.json */; };
 		0EB65C792435279300491507 /* HistoryOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C782435279300491507 /* HistoryOverviewView.swift */; };
 		0EB65C7B2435279E00491507 /* HistoryOverviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C7A2435279E00491507 /* HistoryOverviewModel.swift */; };
 		0EB65C7D243527A900491507 /* HistoryOverviewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C7C243527A900491507 /* HistoryOverviewModelType.swift */; };
@@ -73,8 +89,8 @@
 		0EB65C832435285E00491507 /* HistoryOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C822435285E00491507 /* HistoryOverviewViewController.swift */; };
 		0EB65C852436195200491507 /* HistoryAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C842436195200491507 /* HistoryAssembly.swift */; };
 		0EB65C872436620E00491507 /* Constants+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C862436620E00491507 /* Constants+UI.swift */; };
-		0EB65C882436712C00491507 /* RegistrationSendCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289C5243330320054347B /* RegistrationSendCodeViewModel.swift */; };
-		0EB65C892436713200491507 /* RegistrationVerifyCodeViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D4243331110054347B /* RegistrationVerifyCodeViewModelType.swift */; };
+		0EB65C882436712C00491507 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		0EB65C892436713200491507 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0ECE7A1F2430E3EE00EED942 /* BluetoothAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECE7A1E2430E3EE00EED942 /* BluetoothAssembly.swift */; };
 		0ECE7A212430E48200EED942 /* BluetoothDebugItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECE7A202430E48200EED942 /* BluetoothDebugItems.swift */; };
 		0ECE7A222430F91F00EED942 /* MockAdvertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C902430A5B7007C8F78 /* MockAdvertiser.swift */; };
@@ -167,7 +183,6 @@
 		838289CC243330B50054347B /* RegistrationVerifyCodeModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289CB243330B50054347B /* RegistrationVerifyCodeModelType.swift */; };
 		838289CF243330D10054347B /* RegistrationVerifyCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289CE243330D10054347B /* RegistrationVerifyCodeView.swift */; };
 		838289D1243330E40054347B /* RegistrationVerifyCodeVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D0243330E40054347B /* RegistrationVerifyCodeVIewController.swift */; };
-		838289D3243330F40054347B /* RegistrationVerifyCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D2243330F40054347B /* RegistrationVerifyCodeViewModel.swift */; };
 		838289D7243331510054347B /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D6243331510054347B /* BannerView.swift */; };
 		838289D9243331ED0054347B /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D8243331ED0054347B /* RegistrationView.swift */; };
 		838289DD2433327A0054347B /* RegistrationVerifyCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289DC2433327A0054347B /* RegistrationVerifyCodeModel.swift */; };
@@ -200,8 +215,6 @@
 		83DC1EFB24366EDD006E54A9 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC1EFA24366EDD006E54A9 /* RegistrationViewController.swift */; };
 		83DC1EFD24369775006E54A9 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC1EFC24369775006E54A9 /* RequestBuilder.swift */; };
 		83DC1EFF24369C62006E54A9 /* RequestBuilderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC1EFE24369C62006E54A9 /* RequestBuilderType.swift */; };
-		87074B78242F57770029AD4B /* AdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B77242F57770029AD4B /* AdvertiserDelegate.swift */; };
-		87074B79242F57770029AD4B /* AdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B77242F57770029AD4B /* AdvertiserDelegate.swift */; };
 		87074B7C242F6A5F0029AD4B /* BleScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7B242F6A5F0029AD4B /* BleScanner.swift */; };
 		87074B7F242F6D700029AD4B /* ProteGoDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7E242F6D700029AD4B /* ProteGoDevice.swift */; };
 		87074B85242F94780029AD4B /* ProteGoDeviceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B84242F94780029AD4B /* ProteGoDeviceState.swift */; };
@@ -237,6 +250,19 @@
 
 /* Begin PBXFileReference section */
 		01D8F6CEA947903B8972BB1F /* Pods-ProteGOTests.debug_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGOTests.debug_prod.xcconfig"; path = "Target Support Files/Pods-ProteGOTests/Pods-ProteGOTests.debug_prod.xcconfig"; sourceTree = "<group>"; };
+		0E0B30D624377172005DFC84 /* HistoryRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRootViewController.swift; sourceTree = "<group>"; };
+		0E0B30E22437A2A9005DFC84 /* SendHistoryConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryConfirmView.swift; sourceTree = "<group>"; };
+		0E0B30E42437A2C2005DFC84 /* SendHistoryConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryConfirmViewController.swift; sourceTree = "<group>"; };
+		0E0B30E62437A2CD005DFC84 /* SendHistoryConfirmViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryConfirmViewModelType.swift; sourceTree = "<group>"; };
+		0E0B30E82437A2D6005DFC84 /* SendHistoryConfirmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryConfirmViewModel.swift; sourceTree = "<group>"; };
+		0E0B30EA2437A2EE005DFC84 /* SendHistoryConfirmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryConfirmModel.swift; sourceTree = "<group>"; };
+		0E0B30EC2437A2F6005DFC84 /* SendHistoryConfirmModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryConfirmModelType.swift; sourceTree = "<group>"; };
+		0E0B30EE2437A314005DFC84 /* SendHistoryProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryProgressViewController.swift; sourceTree = "<group>"; };
+		0E0B30F02437A31A005DFC84 /* SendHistoryProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryProgressView.swift; sourceTree = "<group>"; };
+		0E0B30F22437A323005DFC84 /* SendHistoryProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryProgressViewModel.swift; sourceTree = "<group>"; };
+		0E0B30F42437A32E005DFC84 /* SendHistoryProgressViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryProgressViewModelType.swift; sourceTree = "<group>"; };
+		0E0B30F62437A337005DFC84 /* SendHistoryProgressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryProgressModel.swift; sourceTree = "<group>"; };
+		0E0B30F82437A342005DFC84 /* SendHistoryProgressModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryProgressModelType.swift; sourceTree = "<group>"; };
 		0E22F91F2434A117008AD8EB /* RedStatusCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedStatusCard.swift; sourceTree = "<group>"; };
 		0E22F9212434A486008AD8EB /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
 		0E22F9242434A6F8008AD8EB /* GeneralRecommendationsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralRecommendationsCard.swift; sourceTree = "<group>"; };
@@ -244,7 +270,6 @@
 		0E22F92B2434DFD3008AD8EB /* DangerStatusCardTopModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerStatusCardTopModule.swift; sourceTree = "<group>"; };
 		0E22F92D2434DFDE008AD8EB /* DangerStatusCardBottomModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerStatusCardBottomModule.swift; sourceTree = "<group>"; };
 		0E3DD5B3242B764100C092E7 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
-		0E3DD5B4242B764100C092E7 /* RxSwiftExt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwiftExt.framework; path = Carthage/Build/iOS/RxSwiftExt.framework; sourceTree = "<group>"; };
 		0E3DD5B5242B764100C092E7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		0E3DD5B6242B764100C092E7 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		0E3DD5B7242B764100C092E7 /* SwiftTweaks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftTweaks.framework; path = Carthage/Build/iOS/SwiftTweaks.framework; sourceTree = "<group>"; };
@@ -299,6 +324,10 @@
 		0E9DDA712430D82E002D879F /* Constants+Encounters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Encounters.swift"; sourceTree = "<group>"; };
 		0E9DDA742430DB46002D879F /* String+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Random.swift"; sourceTree = "<group>"; };
 		0E9DDA762430E12C002D879F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0EB372C6243871C700884C93 /* SendHistoryResultDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryResultDialogView.swift; sourceTree = "<group>"; };
+		0EB372C8243871D400884C93 /* SendHistoryResultDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryResultDialogViewController.swift; sourceTree = "<group>"; };
+		0EB372CA2438A20800884C93 /* Lottie.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Lottie.framework; path = Carthage/Build/iOS/Lottie.framework; sourceTree = "<group>"; };
+		0EB372CF2438A39F00884C93 /* progressSpinnerGreen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = progressSpinnerGreen.json; sourceTree = "<group>"; };
 		0EB65C782435279300491507 /* HistoryOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOverviewView.swift; sourceTree = "<group>"; };
 		0EB65C7A2435279E00491507 /* HistoryOverviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOverviewModel.swift; sourceTree = "<group>"; };
 		0EB65C7C243527A900491507 /* HistoryOverviewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOverviewModelType.swift; sourceTree = "<group>"; };
@@ -444,7 +473,6 @@
 		83DC1EFA24366EDD006E54A9 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		83DC1EFC24369775006E54A9 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		83DC1EFE24369C62006E54A9 /* RequestBuilderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilderType.swift; sourceTree = "<group>"; };
-		87074B77242F57770029AD4B /* AdvertiserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertiserDelegate.swift; sourceTree = "<group>"; };
 		87074B7B242F6A5F0029AD4B /* BleScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleScanner.swift; sourceTree = "<group>"; };
 		87074B7E242F6D700029AD4B /* ProteGoDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteGoDevice.swift; sourceTree = "<group>"; };
 		87074B84242F94780029AD4B /* ProteGoDeviceState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteGoDeviceState.swift; sourceTree = "<group>"; };
@@ -476,8 +504,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EB372CB2438A20800884C93 /* Lottie.framework in Frameworks */,
 				0EE60C5A242FFB3D00D29048 /* Valet.framework in Frameworks */,
-				0E153F39242D43D100340838 /* RxSwiftExt.framework in Frameworks */,
 				0E3DD5BD242B764100C092E7 /* Realm.framework in Frameworks */,
 				0E3DD5BF242B764100C092E7 /* RxSwift.framework in Frameworks */,
 				0E3DD5C0242B764100C092E7 /* RxCocoa.framework in Frameworks */,
@@ -504,6 +532,116 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E0B30D42437712A005DFC84 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				0EB372C32438716100884C93 /* SendHistoryResultDialog */,
+				0E0B30D92437A1ED005DFC84 /* SendHistoryProgress */,
+				0E0B30D82437A1CF005DFC84 /* SendHistoryConfirm */,
+				0EB65C73243525C200491507 /* HistoryOverview */,
+				0E0B30D524377158005DFC84 /* HistoryRootViewController */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		0E0B30D524377158005DFC84 /* HistoryRootViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0E0B30D624377172005DFC84 /* HistoryRootViewController.swift */,
+			);
+			path = HistoryRootViewController;
+			sourceTree = "<group>";
+		};
+		0E0B30D82437A1CF005DFC84 /* SendHistoryConfirm */ = {
+			isa = PBXGroup;
+			children = (
+				0E0B30DD2437A20A005DFC84 /* Model */,
+				0E0B30DC2437A204005DFC84 /* View */,
+				0E0B30DB2437A1FE005DFC84 /* ViewModel */,
+				0E0B30DA2437A1F7005DFC84 /* ViewController */,
+			);
+			path = SendHistoryConfirm;
+			sourceTree = "<group>";
+		};
+		0E0B30D92437A1ED005DFC84 /* SendHistoryProgress */ = {
+			isa = PBXGroup;
+			children = (
+				0E0B30E12437A244005DFC84 /* Model */,
+				0E0B30E02437A23E005DFC84 /* View */,
+				0E0B30DF2437A22E005DFC84 /* ViewModel */,
+				0E0B30DE2437A222005DFC84 /* ViewController */,
+			);
+			path = SendHistoryProgress;
+			sourceTree = "<group>";
+		};
+		0E0B30DA2437A1F7005DFC84 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0E0B30E42437A2C2005DFC84 /* SendHistoryConfirmViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0E0B30DB2437A1FE005DFC84 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0E0B30E62437A2CD005DFC84 /* SendHistoryConfirmViewModelType.swift */,
+				0E0B30E82437A2D6005DFC84 /* SendHistoryConfirmViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0E0B30DC2437A204005DFC84 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0E0B30E22437A2A9005DFC84 /* SendHistoryConfirmView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0E0B30DD2437A20A005DFC84 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0E0B30EA2437A2EE005DFC84 /* SendHistoryConfirmModel.swift */,
+				0E0B30EC2437A2F6005DFC84 /* SendHistoryConfirmModelType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0E0B30DE2437A222005DFC84 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0E0B30EE2437A314005DFC84 /* SendHistoryProgressViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0E0B30DF2437A22E005DFC84 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0E0B30F22437A323005DFC84 /* SendHistoryProgressViewModel.swift */,
+				0E0B30F42437A32E005DFC84 /* SendHistoryProgressViewModelType.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0E0B30E02437A23E005DFC84 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0E0B30F02437A31A005DFC84 /* SendHistoryProgressView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0E0B30E12437A244005DFC84 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0E0B30F62437A337005DFC84 /* SendHistoryProgressModel.swift */,
+				0E0B30F82437A342005DFC84 /* SendHistoryProgressModelType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		0E22F9232434A6C6008AD8EB /* GeneralRecommendationsCard */ = {
 			isa = PBXGroup;
 			children = (
@@ -549,6 +687,7 @@
 		0E3DD5B2242B764100C092E7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0EB372CA2438A20800884C93 /* Lottie.framework */,
 				83252A21242FC728001E6D63 /* Reachability.framework */,
 				0EE60C59242FFB3D00D29048 /* Valet.framework */,
 				0EE60C34242FDB6A00D29048 /* Nimble.framework */,
@@ -559,7 +698,6 @@
 				0E3DD5B6242B764100C092E7 /* RxCocoa.framework */,
 				0E3DD5BB242B764100C092E7 /* RxRelay.framework */,
 				0E3DD5B5242B764100C092E7 /* RxSwift.framework */,
-				0E3DD5B4242B764100C092E7 /* RxSwiftExt.framework */,
 				0E3DD5BA242B764100C092E7 /* SnapKit.framework */,
 				0E3DD5B7242B764100C092E7 /* SwiftTweaks.framework */,
 				0E3DD5B8242B764100C092E7 /* Swinject.framework */,
@@ -734,6 +872,7 @@
 		0E965329242EB30C00ADD300 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0EB372CC2438A2C100884C93 /* LottieAnimations */,
 				0E5C2078242B63460038EF8B /* Assets.xcassets */,
 				8382898624332E310054347B /* Fonts */,
 				0E965327242EB25C00ADD300 /* GoogleService-Info.plist */,
@@ -814,7 +953,7 @@
 		0E9DCC9E2430C80700C2670D /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				0EB65C73243525C200491507 /* HistoryOverview */,
+				0E0B30D42437712A005DFC84 /* History */,
 				83252A822432202E001E6D63 /* Root */,
 				83252A952432248A001E6D63 /* Onboarding */,
 				838289AB24332EFF0054347B /* Registration */,
@@ -881,6 +1020,39 @@
 				0E9DDA762430E12C002D879F /* AppDelegate.swift */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		0EB372C32438716100884C93 /* SendHistoryResultDialog */ = {
+			isa = PBXGroup;
+			children = (
+				0EB372C52438717900884C93 /* View */,
+				0EB372C42438717700884C93 /* ViewController */,
+			);
+			path = SendHistoryResultDialog;
+			sourceTree = "<group>";
+		};
+		0EB372C42438717700884C93 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0EB372C8243871D400884C93 /* SendHistoryResultDialogViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0EB372C52438717900884C93 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0EB372C6243871C700884C93 /* SendHistoryResultDialogView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0EB372CC2438A2C100884C93 /* LottieAnimations */ = {
+			isa = PBXGroup;
+			children = (
+				0EB372CF2438A39F00884C93 /* progressSpinnerGreen.json */,
+			);
+			path = LottieAnimations;
 			sourceTree = "<group>";
 		};
 		0EB65C73243525C200491507 /* HistoryOverview */ = {
@@ -1732,6 +1904,7 @@
 				838289F7243333330054347B /* Poppins-ExtraLightItalic.otf in Resources */,
 				838289FD243333330054347B /* Poppins-MediumItalic.otf in Resources */,
 				838289FE243333330054347B /* Poppins-ExtraBold.otf in Resources */,
+				0EB372D02438A39F00884C93 /* progressSpinnerGreen.json in Resources */,
 				0EEE1F2224322EBA001D006A /* Localizable.strings in Resources */,
 				0E965328242EB25C00ADD300 /* GoogleService-Info.plist in Resources */,
 				838289F3243333330054347B /* Poppins-Light.otf in Resources */,
@@ -1941,10 +2114,10 @@
 				0E9DCC8824300CC600C2670D /* Constants+KeychainKeys.swift in Sources */,
 				83512C42243522C2007DB8AD /* OnboardingVIewModelType.swift in Sources */,
 				83512C4024351EAA007DB8AD /* OnboardingViewModel.swift in Sources */,
+				0E0B30F32437A323005DFC84 /* SendHistoryProgressViewModel.swift in Sources */,
 				0E22F92E2434DFDE008AD8EB /* DangerStatusCardBottomModule.swift in Sources */,
-				838289C6243330320054347B /* RegistrationSendCodeViewModel.swift in Sources */,
-				838289D5243331110054347B /* RegistrationVerifyCodeViewModelType.swift in Sources */,
 				0E22F9282434A861008AD8EB /* UIStackView+AddArrangedSubviews.swift in Sources */,
+				0E0B30E92437A2D6005DFC84 /* SendHistoryConfirmViewModel.swift in Sources */,
 				0E9DDA6E2430D2D9002D879F /* DebugAssembly.swift in Sources */,
 				83252A6C24314C99001E6D63 /* RegisterDeviceResult.swift in Sources */,
 				833181932433A09B00A8E18D /* UIImage+AspectRatio.swift in Sources */,
@@ -1958,12 +2131,15 @@
 				0E6D2610242E956F0037A80C /* Logger.swift in Sources */,
 				8356F93C2436BFF60075FF20 /* ScreensDebugItems.swift in Sources */,
 				83512C382434FFE4007DB8AD /* OnboardingStepView.swift in Sources */,
+				0E0B30EB2437A2EE005DFC84 /* SendHistoryConfirmModel.swift in Sources */,
+				0EB372C7243871C700884C93 /* SendHistoryResultDialogView.swift in Sources */,
 				836801702432400500678DBD /* RegistrationAssembly.swift in Sources */,
 				877F3F7C2434E89900F774C7 /* AdvertiserMode.swift in Sources */,
 				871208D62430C6A600DA0A4D /* Constants+Bluetooth.swift in Sources */,
 				0EB65C812435285300491507 /* HistoryOverviewViewModelType.swift in Sources */,
 				0E9DCC942430984A00C2670D /* EncountersManager.swift in Sources */,
 				0EB65C832435285E00491507 /* HistoryOverviewViewController.swift in Sources */,
+				0E0B30D724377172005DFC84 /* HistoryRootViewController.swift in Sources */,
 				0E96532B242F436B00ADD300 /* LogLevel.swift in Sources */,
 				83DC1EED24361781006E54A9 /* DefaultsServiceType.swift in Sources */,
 				0EB65C7B2435279E00491507 /* HistoryOverviewModel.swift in Sources */,
@@ -1979,6 +2155,7 @@
 				0E6D260B242E8B540037A80C /* Constants+InfoKeys.swift in Sources */,
 				83252A782431519F001E6D63 /* NetworkingAssembly.swift in Sources */,
 				838289D7243331510054347B /* BannerView.swift in Sources */,
+				0EB372C9243871D400884C93 /* SendHistoryResultDialogViewController.swift in Sources */,
 				83DC1EF024361F1B006E54A9 /* RegistrationManager.swift in Sources */,
 				838289CC243330B50054347B /* RegistrationVerifyCodeModelType.swift in Sources */,
 				0E8DED382433D86A00D7F806 /* DashboardModel.swift in Sources */,
@@ -1995,6 +2172,7 @@
 				83252A18242F9C11001E6D63 /* UrlRequestBuilderType.swift in Sources */,
 				0E9DCCAB2430CA5A00C2670D /* RegisteredEncountersDebugViewModelType.swift in Sources */,
 				0EB65C852436195200491507 /* HistoryAssembly.swift in Sources */,
+				0E0B30EF2437A314005DFC84 /* SendHistoryProgressViewController.swift in Sources */,
 				0EE60C32242FDB2D00D29048 /* RealmManager.swift in Sources */,
 				838289BD24332FB20054347B /* RegistrationSendCodeModelType.swift in Sources */,
 				0E8DED45243480F400D7F806 /* YellowStatusCardView.swift in Sources */,
@@ -2012,18 +2190,20 @@
 				0ECE7A212430E48200EED942 /* BluetoothDebugItems.swift in Sources */,
 				0E965352242F81D400ADD300 /* DebugMenu.swift in Sources */,
 				83512C282434D06F007DB8AD /* OnboardingStatusStepView.swift in Sources */,
+				0E0B30F52437A32E005DFC84 /* SendHistoryProgressViewModelType.swift in Sources */,
 				0E9DCCA92430CA4500C2670D /* RegisteredEncountersDebugModelType.swift in Sources */,
 				874AAC9D2435E96F00FF7332 /* ProteGoDeviceEvent.swift in Sources */,
 				877F3F852435216C00F774C7 /* ExpiringBeaconId.swift in Sources */,
 				8382897C24332D840054347B /* UIView+AddSubviews.swift in Sources */,
+				0E0B30E32437A2A9005DFC84 /* SendHistoryConfirmView.swift in Sources */,
 				0EE60C51242FF40500D29048 /* FilesCoordinator.swift in Sources */,
 				0EE60C3A242FE03100D29048 /* ProteGOError.swift in Sources */,
 				8368016C24323FE400678DBD /* RootAssembly.swift in Sources */,
 				83DC1EFB24366EDD006E54A9 /* RegistrationViewController.swift in Sources */,
 				83680160243227B400678DBD /* OnboardingViewController.swift in Sources */,
 				0EE4E9002432717F00EA05ED /* L10n.swift in Sources */,
-				838289BB24332F9E0054347B /* RegistrationSendCodeModel.swift in Sources */,
 				0EB65C872436620E00491507 /* Constants+UI.swift in Sources */,
+				0E0B30F92437A342005DFC84 /* SendHistoryProgressModelType.swift in Sources */,
 				0ECE7A1F2430E3EE00EED942 /* BluetoothAssembly.swift in Sources */,
 				83252A9C24322549001E6D63 /* OnboardingView.swift in Sources */,
 				0E965355242F82B900ADD300 /* GeneralDebugItems.swift in Sources */,
@@ -2031,9 +2211,10 @@
 				0EB65C7D243527A900491507 /* HistoryOverviewModelType.swift in Sources */,
 				0EB65C792435279300491507 /* HistoryOverviewView.swift in Sources */,
 				0E8DED2E2433CC7600D7F806 /* DangerStatusManager.swift in Sources */,
-				0EB65C892436713200491507 /* RegistrationVerifyCodeViewModelType.swift in Sources */,
+				0EB65C892436713200491507 /* (null) in Sources */,
 				0E8DED302433CCCF00D7F806 /* DangerStatusManagerType.swift in Sources */,
 				836DF51B24334C14000C00C0 /* RegistrationViewModel.swift in Sources */,
+				0E0B30E52437A2C2005DFC84 /* SendHistoryConfirmViewController.swift in Sources */,
 				836DF51F24334C29000C00C0 /* RegistrationModel.swift in Sources */,
 				83252A7024314D17001E6D63 /* ConfirmRegistrationResult.swift in Sources */,
 				83828A052433350C0054347B /* FontStyle.swift in Sources */,
@@ -2046,6 +2227,7 @@
 				83512C48243581F1007DB8AD /* KeyboardManagerType.swift in Sources */,
 				83512C2A2434D07D007DB8AD /* OnboardingBluetoothStepView.swift in Sources */,
 				0E9DCC922430983A00C2670D /* EncountersManagerType.swift in Sources */,
+				0E0B30ED2437A2F6005DFC84 /* SendHistoryConfirmModelType.swift in Sources */,
 				83512C3A24350B70007DB8AD /* StatusDescriptionsContainerView.swift in Sources */,
 				83680164243227D700678DBD /* DashboardView.swift in Sources */,
 				0EE60C41242FF14100D29048 /* Resolver+Utils.swift in Sources */,
@@ -2056,6 +2238,8 @@
 				0E9DCC9D2430C7F100C2670D /* RegisteredEncountersDebugScreenView.swift in Sources */,
 				0EE60C5F2430015E00D29048 /* SecretsGenerator.swift in Sources */,
 				8356F9382436B4270075FF20 /* RegistrationSendCodeViewModel.swift in Sources */,
+				0EB65C882436712C00491507 /* (null) in Sources */,
+				0E0B30E72437A2CD005DFC84 /* SendHistoryConfirmViewModelType.swift in Sources */,
 				83512C192434BF00007DB8AD /* NavigationButtonsView.swift in Sources */,
 				838289C4243330200054347B /* RegistrationSendCodeViewModelType.swift in Sources */,
 				0E9DCCA12430C8C200C2670D /* CustomView.swift in Sources */,
@@ -2070,10 +2254,12 @@
 				0EE60C23242FDAA400D29048 /* Encounter.swift in Sources */,
 				0E8DED412433E21100D7F806 /* GreenStatusCardView.swift in Sources */,
 				0E22F9252434A6F8008AD8EB /* GeneralRecommendationsCard.swift in Sources */,
+				0E0B30F12437A31A005DFC84 /* SendHistoryProgressView.swift in Sources */,
 				8382896C24332CF40054347B /* UIButton+Factory.swift in Sources */,
 				833181902433A05B00A8E18D /* ConstraintMaker+AspectRatio.swift in Sources */,
 				0EE60C4B242FF2C200D29048 /* GeneralAssembly.swift in Sources */,
 				0EE60BD0242F8A3C00D29048 /* InfoKeys+Value.swift in Sources */,
+				0E0B30F72437A337005DFC84 /* SendHistoryProgressModel.swift in Sources */,
 				838289BF24332FEE0054347B /* RegistrationSendCodeView.swift in Sources */,
 				877F3F792434B4F100F774C7 /* Data+HexString.swift in Sources */,
 				0EE60C52242FF40500D29048 /* FilesCoordinatorType.swift in Sources */,

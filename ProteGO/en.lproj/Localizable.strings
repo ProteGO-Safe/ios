@@ -220,11 +220,23 @@
 /* Ekran wysyłania danych */
 "send_data_send_button" = "Send";
 
-/* Alert po wysłaniu danych */
-"send_data_alert_title" = "Thank you!";
+/* Alert po wysłaniu danych - sukces */
+"send_data_alert_succes_title" = "Thank you!";
+
+/* Alert po wysłaniu danych - sukces */
+"send_data_alert_success_description" = "Your data was sent to GIS.\nWe guarantee nobody will use your personal data while contacting with other people.";
+
+/* Alert po wysłaniu danych - błąd */
+"send_data_alert_failure_title" = "Wysłanie historii nie powiodło się";
+
+/* Alert po wysłaniu danych - błąd */
+"send_data_alert_failure_description" = "Spróbuj wysłać dane ponownie.";
 
 /* Alert po wysłaniu danych */
-"send_data_alert_description" = "Your data was sent to GIS.\nWe guarantee nobody will use your personal data while contacting with other people.\n\nIf you have any questions please email as at %@\nor call %@";
+"send_data_alert_footer" = "If you have any questions please email as at %@";
+
+/* Alert po wysłaniu danych */
+"send_data_alert_footer_email" = "kontakt@protego.gov.pl";
 
 /* Ekran wysyłania danych - alert potwierdzający */
 "send_data_confirmation_alert_title" = "Confirm sending the history";
