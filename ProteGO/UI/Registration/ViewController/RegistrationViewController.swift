@@ -56,6 +56,10 @@ final class RegistrationViewController: UIViewController, CustomView {
         subscribeDismissKeyboard()
     }
 
+    func prepareBeforeAppearing() {
+        viewModel.setInitialStep()
+    }
+
     private func subscribeCurrentStep() {
         viewModel.currentStepObservable
             .observeOn(MainScheduler.instance)

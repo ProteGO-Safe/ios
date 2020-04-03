@@ -28,7 +28,7 @@ enum GcpEndpoint {
     private var pathComponent: String {
         switch self {
         case .registerDevice:
-            return "/register_device_PRODUCTION"
+            return "/register"
         case .confirmRegistration:
             return "/confirm_registration"
         }

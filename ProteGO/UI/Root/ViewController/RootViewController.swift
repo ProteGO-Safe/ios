@@ -1,12 +1,9 @@
 import UIKit
+import RxSwift
 
 final class RootViewController: UIViewController, CustomView {
 
     typealias ViewClass = RootView
-
-    private enum Content {
-        case onboarding, registration, dashboard
-    }
 
     private var currentContentViewController: UIViewController?
 
@@ -17,6 +14,8 @@ final class RootViewController: UIViewController, CustomView {
     private let registrationViewController: RegistrationViewController
 
     private let dashboardViewController: DashboardViewController
+
+    private let disposeBag = DisposeBag()
 
     init(viewModel: RootViewModelType,
          onboardingViewController: OnboardingViewController,
@@ -41,7 +40,7 @@ final class RootViewController: UIViewController, CustomView {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presentInitialContent()
+        subscribeCurrentContent()
     }
 
     private func setupDelegates() {
@@ -49,20 +48,17 @@ final class RootViewController: UIViewController, CustomView {
         registrationViewController.delegate = self
     }
 
-    private func presentInitialContent() {
-        present(content: .onboarding)
+    private func subscribeCurrentContent() {
+        viewModel.currentContentObservable
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] contentToPresent in
+                self?.present(content: contentToPresent)
+            }).disposed(by: disposeBag)
     }
 
-    private func present(content: Content) {
-        let viewControllerToPresent: UIViewController
-        switch content {
-        case .onboarding:
-            viewControllerToPresent = onboardingViewController
-        case .registration:
-            viewControllerToPresent = registrationViewController
-        case .dashboard:
-            viewControllerToPresent = dashboardViewController
-        }
+    private func present(content: RootContent) {
+        let viewControllerToPresent = prepareViewController(content: content)
+        guard viewControllerToPresent != currentContentViewController else { return }
 
         if let currentViewController = currentContentViewController {
             dismiss(viewController: currentViewController)
@@ -84,22 +80,34 @@ final class RootViewController: UIViewController, CustomView {
         viewController.willMove(toParent: nil)
         currentContentViewController = nil
     }
+
+    private func prepareViewController(content: RootContent) -> UIViewController {
+        switch content {
+        case .onboarding:
+            return onboardingViewController
+        case .registration:
+            registrationViewController.prepareBeforeAppearing()
+            return registrationViewController
+        case .dashboard:
+            return dashboardViewController
+        }
+    }
 }
 
 extension RootViewController: OnboardingViewControllerDelegate {
 
     func didFinishOnboarding() {
-        present(content: .registration)
+        viewModel.didFinishOnboarding()
     }
 }
 
 extension RootViewController: RegistrationViewControllerDelegate {
 
     func didTapBackButton() {
-        present(content: .onboarding)
+        viewModel.registrationDidTapBack()
     }
 
     func didFinishRegistration() {
-        present(content: .dashboard)
+        viewModel.didFinishRegistration()
     }
 }

@@ -4,10 +4,17 @@ import Valet
 final class RegistrationAssembly: Assembly {
 
     func assemble(container: Container) {
+        registerRegistrationManager(container)
         registerRegistrationViewController(container)
         registerSendCodeViewController(container)
         registerVerifyCodeViewController(container)
         registerKeyboardManager(container)
+    }
+
+    private func registerRegistrationManager(_ container: Container) {
+        container.register(RegistrationManagerType.self) { resolver in
+            return RegistrationManager(valet: resolver.resolve(Valet.self))
+        }.inObjectScope(.container)
     }
 
     private func registerRegistrationViewController(_ container: Container) {
@@ -34,7 +41,6 @@ final class RegistrationAssembly: Assembly {
         container.register(RegistrationSendCodeModelType.self) { resolver in
             return RegistrationSendCodeModel(
                 gcpClient: resolver.resolve(GcpClientType.self),
-                valet: resolver.resolve(Valet.self),
                 keyboardManager: resolver.resolve(KeyboardManagerType.self))
         }
 
@@ -52,7 +58,6 @@ final class RegistrationAssembly: Assembly {
         container.register(RegistrationVerifyCodeModelType.self) { resolver in
             return RegistrationVerifyCodeModel(
                 gcpClient: resolver.resolve(GcpClientType.self),
-                valet: resolver.resolve(Valet.self),
                 keyboardManager: resolver.resolve(KeyboardManagerType.self))
         }
 
