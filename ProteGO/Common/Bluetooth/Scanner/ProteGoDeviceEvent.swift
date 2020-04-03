@@ -30,9 +30,9 @@ extension ProteGoDeviceEvent: CustomStringConvertible {
     var description: String {
         switch self {
         case .SynchronizationStarted:
-            return "StartSynchronization"
+            return "SynchronizationStarted"
         case let .SynchronizationCancelled(onlyOnTimeout):
-            return "CancelSynchronization(\(onlyOnTimeout))"
+            return "SynchronizationCancelled(\(onlyOnTimeout))"
         case let .Connected(peripheral):
             return "Connected(\(peripheral.identifier))"
         case let .Disconnected(peripheral, error):
