@@ -6,7 +6,7 @@ import CoreBluetooth
 /// change their MAC addresses every established connection.
 ///
 /// This enum provides unique device identifier covering both cases.
-enum DeviceId {
+enum ProteGoDeviceId {
     case PeripheralInstance(CBPeripheral)
     case IncompleteBeaconId(Data)
     case BeaconId(BeaconId)
@@ -23,7 +23,7 @@ enum DeviceId {
     }
 }
 
-extension DeviceId: Hashable, Equatable, CustomStringConvertible {
+extension ProteGoDeviceId: Hashable, Equatable, CustomStringConvertible {
     var description: String {
         switch self {
         case let .PeripheralInstance(peripheral):
@@ -35,7 +35,7 @@ extension DeviceId: Hashable, Equatable, CustomStringConvertible {
         }
     }
 
-    static func == (lhs: DeviceId, rhs: DeviceId) -> Bool {
+    static func == (lhs: ProteGoDeviceId, rhs: ProteGoDeviceId) -> Bool {
         switch (lhs, rhs) {
         case let (.PeripheralInstance(lhp), .PeripheralInstance(rhp)):
             return lhp == rhp

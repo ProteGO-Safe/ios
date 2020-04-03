@@ -3,7 +3,7 @@ import CoreBluetooth
 
 /// This enum describes connection flow of the device. All steps
 /// are executed in sequence specified below.
-enum DeviceState {
+enum ProteGoDeviceState {
     /// Device is closed and should no longer be used. It can be closed due to
     /// maxium allowed connection attempts.
     case Closed
@@ -61,7 +61,7 @@ enum DeviceState {
     /// - Parameter event: Triggered event
     /// - Returns: New device state and list of side effects.
     //swiftlint:disable:next function_body_length
-    func handleEvent(_ event: DeviceEvent) -> (DeviceState, [DeviceEffect]) {
+    func handleEvent(_ event: ProteGoDeviceEvent) -> (ProteGoDeviceState, [ProteGoDeviceEffect]) {
         switch (self, event) {
 
         // Ignore events in idle state
@@ -164,7 +164,7 @@ enum DeviceState {
     }
 }
 
-extension DeviceState: CustomStringConvertible {
+extension ProteGoDeviceState: CustomStringConvertible {
     var description: String {
         switch self {
         case .Closed:

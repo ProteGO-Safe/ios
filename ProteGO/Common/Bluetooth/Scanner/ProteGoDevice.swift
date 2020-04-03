@@ -3,9 +3,9 @@ import CoreBluetooth
 
 /// This class provides information about the device which was discovered by
 /// a central manager. Only device ID is a stable value.
-class Device {
+class ProteGoDevice {
     /// Unique device identfier
-    private let id: DeviceId
+    private let id: ProteGoDeviceId
     /// Handle to current CBPeripheral
     private var peripheral: CBPeripheral
     /// Last discovered device. There is a chance that device with the same ID was
@@ -26,16 +26,16 @@ class Device {
     /// Last RSSI value
     private var lastRSSI: Int?
     /// Current synchronization state
-    private var state: DeviceState = .Idle
+    private var state: ProteGoDeviceState = .Idle
 
-    init(id: DeviceId, peripheral: CBPeripheral) {
+    init(id: ProteGoDeviceId, peripheral: CBPeripheral) {
         self.id = id
         self.peripheral = peripheral
     }
 
     /// Returns this instance's ID.
     /// - Returns: Device ID.
-    func getId() -> DeviceId {
+    func getId() -> ProteGoDeviceId {
         self.id
     }
 
@@ -131,7 +131,7 @@ class Device {
 
     /// Function specifies if this device has higher priority in the next connection attempt.
     /// - Parameter other: Other device's state
-    func hasHigherPriorityForConnection(other: Device) -> Bool {
+    func hasHigherPriorityForConnection(other: ProteGoDevice) -> Bool {
         // We check in following order (from most important to less important):
 
         // Current connection state
@@ -173,18 +173,18 @@ class Device {
     /// Handle incoming events from central, peripheral or scanner.
     /// - Parameter event: Event to handle.
     /// - Returns: Effects to execute.
-    func handle(event: DeviceEvent) -> [DeviceEffect] {
-        var effects: [DeviceEffect] = []
+    func handle(event: ProteGoDeviceEvent) -> [ProteGoDeviceEffect] {
+        var effects: [ProteGoDeviceEffect] = []
 
         if case let .ReadRSSI(_, rssi) = event {
             self.lastRSSI = rssi
         }
 
-        if case .StartSynchronization = event {
+        if case .SynchronizationStarted = event {
             effects.append(contentsOf: self.startSynchronization())
         }
 
-        if case let .CancelSynchronization(onlyOnTimeout) = event {
+        if case let .SynchronizationCancelled(onlyOnTimeout) = event {
             var cancel = !onlyOnTimeout
             if let date = self.lastConnectionDate, onlyOnTimeout {
                 let syncTimeout = TimeInterval(DebugMenu.assign(DebugMenu.bluetoothSynchronizationTimeout))
@@ -217,8 +217,8 @@ class Device {
 
     /// Starts new synchronization
     /// - Returns: Effects to execute.
-    private func startSynchronization() -> [DeviceEffect] {
-        var effects: [DeviceEffect] = []
+    private func startSynchronization() -> [ProteGoDeviceEffect] {
+        var effects: [ProteGoDeviceEffect] = []
 
         // Make sure to stop previous synchronization
         effects.append(contentsOf: self.stopSynchronization(forceRemoval: false))
@@ -245,8 +245,8 @@ class Device {
     /// Stop synchronization and check if previous attempt was succesfull
     /// - Parameter forceRemoval: True if device should be immidiately removed.
     /// - Returns: Effects to execute
-    private func stopSynchronization(forceRemoval: Bool) -> [DeviceEffect] {
-        var effects: [DeviceEffect] = []
+    private func stopSynchronization(forceRemoval: Bool) -> [ProteGoDeviceEffect] {
+        var effects: [ProteGoDeviceEffect] = []
         var previousSyncFinished = false
 
         // If not in idle state, disconnect
@@ -328,7 +328,7 @@ class Device {
     }
 }
 
-extension Device: CustomStringConvertible {
+extension ProteGoDevice: CustomStringConvertible {
     var description: String {
         let now = Date()
         var nextSyncTime = 0.0

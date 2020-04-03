@@ -2,13 +2,13 @@ import Foundation
 import CoreBluetooth
 
 /// Device events emitted by scanner, peripheral or central manager.
-enum DeviceEvent {
+enum ProteGoDeviceEvent {
     /// This event starts a synchronization. If synchronization is currently in progress
     /// it will be cancelled beforehand.
-    case StartSynchronization
+    case SynchronizationStarted
     /// Cancel synchronization. First argument decides if only devices which timed out
     /// should be cancelled.
-    case CancelSynchronization(Bool)
+    case SynchronizationCancelled(Bool)
     /// Underlying peripheral connected.
     case Connected(CBPeripheral)
     /// Underlying peripheral disconnected. If error is  not `nil` that means that
@@ -26,12 +26,12 @@ enum DeviceEvent {
     case WroteValue(CBCharacteristic, Error?)
 }
 
-extension DeviceEvent: CustomStringConvertible {
+extension ProteGoDeviceEvent: CustomStringConvertible {
     var description: String {
         switch self {
-        case .StartSynchronization:
+        case .SynchronizationStarted:
             return "StartSynchronization"
-        case let .CancelSynchronization(onlyOnTimeout):
+        case let .SynchronizationCancelled(onlyOnTimeout):
             return "CancelSynchronization(\(onlyOnTimeout))"
         case let .Connected(peripheral):
             return "Connected(\(peripheral.identifier))"

@@ -2,7 +2,7 @@ import Foundation
 import CoreBluetooth
 
 /// Device effect to execute by the scanner.
-enum DeviceEffect {
+enum ProteGoDeviceEffect {
     /// Remove current device from the list of known devices as we
     /// reached a limit of allowed connection attemps.
     case Remove
@@ -26,7 +26,7 @@ enum DeviceEffect {
     case SynchronizeBeaconId(BeaconId)
 }
 
-extension DeviceEffect: CustomStringConvertible {
+extension ProteGoDeviceEffect: CustomStringConvertible {
     var description: String {
         switch self {
         case .Remove:

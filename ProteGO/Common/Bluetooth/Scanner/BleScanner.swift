@@ -9,7 +9,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     private weak var agent: BeaconIdAgent?
 
     /// List of known devices
-    private var devices: [DeviceId: Device]
+    private var devices: [ProteGoDeviceId: ProteGoDevice]
 
     /// Scanning timer controling on/off state of the scanner.
     private var scanningTimer: Timer?
@@ -68,7 +68,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     ///   - event: Device event to handle
     ///   - for: Device for which event is directed.
     //swiftlint:disable:next function_body_length
-    private func handle(event: DeviceEvent, for device: Device) {
+    private func handle(event: ProteGoDeviceEvent, for device: ProteGoDevice) {
         logger.debug("Handling event: \(event) for: \(device.getId())")
 
         let poweredOff = self.centralManager.state != .poweredOn
@@ -138,7 +138,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     ///   - data: Manufacturer data
     ///   - peripheral: Involved peripheral
     /// - Returns: DeviceId based on the content of manufacturer data.
-    private func parseDeviceIdFromManufacturerData(data: Data?, for peripheral: CBPeripheral) -> DeviceId {
+    private func parseDeviceIdFromManufacturerData(data: Data?, for peripheral: CBPeripheral) -> ProteGoDeviceId {
         // Construct expected manufacturer data prefix.
         // Company ID is in little endian.
         let prefix: [UInt8] = [
@@ -194,7 +194,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
             oldPeripheral?.delegate = nil
         } else {
             // Create a new device
-            let device = Device(id: deviceId, peripheral: peripheral)
+            let device = ProteGoDevice(id: deviceId, peripheral: peripheral)
             self.devices[deviceId] = device
         }
 
@@ -209,7 +209,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
 
     /// Utility function to find device by an active peripheral instance
     /// - Parameter peripheral: Active peripheral instance of a device
-    private func getDeviceBy(peripheral: CBPeripheral) -> Device? {
+    private func getDeviceBy(peripheral: CBPeripheral) -> ProteGoDevice? {
         return self.devices.first { $0.value.isPeripheralActive(peripheral: peripheral) }?.value
     }
 
@@ -227,7 +227,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     /// This method is called when we want to stop synchronization.
     private func cancelSynchronization(onlyOnTimeout: Bool) {
         for device in self.devices.values {
-            handle(event: .CancelSynchronization(onlyOnTimeout), for: device)
+            handle(event: .SynchronizationCancelled(onlyOnTimeout), for: device)
         }
     }
 
@@ -260,7 +260,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
         for i in 0..<freeSlots where i < sortedDevices.count {
             let device = sortedDevices[i]
             if device.isReadyToConnect() {
-                handle(event: .StartSynchronization, for: device)
+                handle(event: .SynchronizationStarted, for: device)
             }
         }
     }
