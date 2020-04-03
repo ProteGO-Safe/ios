@@ -9,6 +9,8 @@ protocol RegistrationModelType {
 
     var registrationFinishedObservable: Observable<Void> { get }
 
+    func setInitialStep()
+
     func previousStep()
 
     func sendCodeStepFinished(phoneNumber: String)
