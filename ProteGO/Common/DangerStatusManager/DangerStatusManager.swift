@@ -9,7 +9,7 @@ final class DangerStatusManager: DangerStatusManagerType {
     private var tweakBindings = Set<TweakBindingIdentifier>()
 
     init() {
-        self.currentStatus = BehaviorRelay<DangerStatus>(value: .green)
+        self.currentStatus = BehaviorRelay<DangerStatus>(value: .yellow)
 
         if DebugMenu.assign(DebugMenu.forceDangerStatus) {
             if let status = DangerStatus.init(rawValue: DebugMenu.assign(DebugMenu.forceDangerStatusValue).value) {
