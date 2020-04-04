@@ -80,10 +80,10 @@
 "error_udate_title" = "Zaktualizuj aplikację";
 
 /* Ekran błędu - nowa wersja aplikacji */
-"error_update_description" = "Do poprawnego funkcjonowania aplikacji niezbędna jest najnowsza wersja. Przejdź do App Store lub Google Play, żeby zaktualizować ProteGO.";
+"error_update_description" = "Do poprawnego funkcjonowania aplikacji niezbędna jest najnowsza wersja. Naciśnij \"Zaktualizuj\" i podążaj za dalszymi instrukcjami.";
 
 /* Ekran błędu - nowa wersja aplikacji */
-"error_update_update_btn" = "Zaktualizuj aplikację";
+"error_update_update_btn" = "Zaktualizuj";
 
 /* Dashboard - status żółty */
 "dashboard_yellow_status_title" = "Uważaj na siebie!";
@@ -110,8 +110,7 @@
 "dashboard_yellow_recommend_3" = "Całkowity zakaz zgromadzeń, chyba, że z najbliższymi.";
 
 /* Dashboard - status żółty */
-"dashboard_yellow_recommend_more_info_btn
-" = "Więcej informacji znajdziesz %@.";
+"dashboard_yellow_recommend_more_info_btn" = "Więcej informacji znajdziesz %@.";
 
 /* Dashboard - status żółty */
 "dashboard_yellow_recommend_more_info_btn_here" = "tutaj";
@@ -198,7 +197,7 @@
 "dashboard_info_history_overview" = "Liczba urządzeń wykrytych od %@: %@";
 
 /* Dashboard - ekran informacyjny */
-"dashboard_info_contact_us_email" = "kontakt@protego.gov.pl";
+"dashboard_info_contact_us_email" = "protego@mc.gov.pl";
 
 /* Dashboard - ekran informacyjny */
 "dashboard_info_terms_of_use_btn" = "Regulamin ProteGO";
@@ -226,4 +225,16 @@
 
 /* Alert po wysłaniu danych */
 "send_data_alert_description" = "Twoje dane zostały przekazane do Głównego Inspektoratu Sanitarnego.\nZapewniamy, że żadne osoby, którym ewentualnie się skontaktujemy nie poznają Twoich danych osobowych.\n\nW razie jakichkolwiek pytań napisz do nas na %@\nlub zadzwoń %@";
+
+/* Ekran wysyłania danych - alert potwierdzający */
+"send_data_confirmation_alert_title" = "Potwierdź wysłanie historii";
+
+/* Ekran wysyłania danych - alert potwierdzający */
+"send_data_confirmation_alert_message" = "Prześlij dane tylko w przypadku potwierdzenia u Ciebie zachorowania. ";
+
+/* Ekran wysyłania danych - alert potwierdzający */
+"send_data_confirmation_alert_cancel_btn" = "Anuluj";
+
+/* Ekran wysyłania danych - alert potwierdzający */
+"send_data_confirmation_alert_send_btn" = "Prześlij";
 

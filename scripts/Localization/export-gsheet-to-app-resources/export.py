@@ -12,7 +12,6 @@ parser.add_argument('--ios_res', type=str, help="Path to the iOS res folder")
 parser.add_argument
 args = parser.parse_args()
 
-
 scope = ['https://spreadsheets.google.com/feeds',
         'https://www.googleapis.com/auth/drive']
 credentials = ServiceAccountCredentials.from_json_keyfile_name(args.credentials, scope)
@@ -28,7 +27,6 @@ for s, sheet in enumerate(doc.worksheets()):
         exit(1)
 
     for i, lang in enumerate(columns[1:-1]):
-        
         ids, comments = sheet.col_values(1), sheet.col_values(len(columns))
         texts = sheet.col_values(i+2)
         if args.android_res:
@@ -40,7 +38,8 @@ for s, sheet in enumerate(doc.worksheets()):
             for j in range(1,len(texts)):
                 resources.append(etree.Comment(comments[j]))
                 elem = etree.SubElement(resources, "string", name=ids[j])
-                elem.text = texts[j]
+                text = texts[j].replace("''","\\'")
+                elem.text = text
 
             tree = etree.ElementTree(resources)
             res_filename = res_path.joinpath(f"{sheet.title}.xml")
@@ -55,9 +54,9 @@ for s, sheet in enumerate(doc.worksheets()):
 
             with open(res_filename, 'w' if s == 0 else 'a') as strings:
                 for j in range(1,len(texts)):
+                    text = texts[j].replace("\"","\\\"")
                     strings.write(f'/* {comments[j]} */\n')
-                    strings.write(f'"{ids[j]}" = "{texts[j]}";\n')
+                    strings.write(f'"{ids[j]}" = "{text}";\n')
                     strings.write("\n")
-
 
 
