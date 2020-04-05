@@ -35,15 +35,11 @@ final class HistoryOverviewView: UIView {
     }()
 
     private let sendHistoryButton: UIButton = {
-        let button = UIButton(frame: .zero)
+        let button = UIButton.rectButton(text: L10n.dashboardInfoSendDataBtn)
         button.setBackgroundColor(.white, forState: .normal)
         button.setBackgroundColor(Colors.darkSeaGreen, forState: .highlighted)
         button.setTitleColor(Colors.bluishGreen, for: .normal)
         button.setTitleColor(.white, for: .highlighted)
-        button.setTitle(L10n.dashboardInfoSendDataBtn, for: .normal)
-        button.titleLabel?.font = Fonts.poppinsMedium(16).font
-        button.layer.cornerRadius = 4
-        button.clipsToBounds = true
         return button
     }()
 

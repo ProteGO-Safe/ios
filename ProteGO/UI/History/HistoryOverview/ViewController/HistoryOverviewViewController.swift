@@ -60,7 +60,9 @@ final class HistoryOverviewViewController: UIViewController, CustomView {
         }).disposed(by: disposeBag)
 
         customView.contactUsEmailButtonTapped.subscribe(onNext: {
-            UIApplication.shared.open(URL(fileURLWithPath: "mailto:\(L10n.dashboardInfoContactUsEmail)"))
+            if let url = URL(string: "mailto:\(L10n.dashboardInfoContactUsEmail)") {
+                UIApplication.shared.open(url)
+            }
         }).disposed(by: disposeBag)
     }
 }

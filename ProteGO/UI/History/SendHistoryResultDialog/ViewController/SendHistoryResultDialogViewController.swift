@@ -34,7 +34,9 @@ final class SendHistoryResultDialogViewController: UIViewController, CustomView 
           }).disposed(by: disposeBag)
 
         customView.footerLabelTapped.subscribe(onNext: {
-            logger.debug("contact tapped")
+            if let url = URL(string: "mailto:\(L10n.sendDataAlertFooterEmail)") {
+                UIApplication.shared.open(url)
+            }
         }).disposed(by: disposeBag)
       }
 }

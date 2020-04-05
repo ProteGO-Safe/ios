@@ -19,7 +19,7 @@ class DangerStatusCardBottomModule: UIView {
 
     private let descriptionSecondParagraphLabel = UILabel()
 
-    private let contactButton = UIButton()
+    private let contactButton = UIButton.rectButton(backgroundColor: .white)
 
     private let tapGestureRecognizer = UITapGestureRecognizer()
 
@@ -122,13 +122,9 @@ class DangerStatusCardBottomModule: UIView {
     }
 
     private func setupContactButton(normalColor: UIColor, highlightedColor: UIColor, text: String) {
-        self.contactButton.setBackgroundColor(.white, forState: .normal)
         self.contactButton.setBackgroundColor(highlightedColor, forState: .highlighted)
         self.contactButton.setTitleColor(normalColor, for: .normal)
         self.contactButton.setTitleColor(.white, for: .highlighted)
         self.contactButton.setTitle(text, for: .normal)
-        self.contactButton.titleLabel?.font = Fonts.poppinsMedium(16).font
-        self.contactButton.layer.cornerRadius = 4
-        self.contactButton.clipsToBounds = true
     }
 }
