@@ -96,8 +96,7 @@ final class SendHistoryResultDialogView: UIView {
     private func createConstraints() {
         self.dialogContainer.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(24)
-            $0.trailing.equalToSuperview().offset(-24)
+            $0.leading.trailing.equalToSuperview().inset(24)
         }
 
         self.closeButton.snp.makeConstraints {
@@ -107,28 +106,25 @@ final class SendHistoryResultDialogView: UIView {
 
         self.titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(55)
-            $0.leading.equalToSuperview().offset(22)
-            $0.trailing.equalToSuperview().offset(-22)
+            $0.leading.trailing.equalToSuperview().inset(22)
         }
 
         self.descriptionLabel.snp.makeConstraints {
             $0.top.equalTo(self.titleLabel.snp.bottom).offset(17)
             $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(22)
-            $0.trailing.equalToSuperview().offset(-22)
+            $0.leading.trailing.equalToSuperview().inset(22)
         }
 
         self.footerLabel.snp.makeConstraints {
             $0.top.equalTo(self.descriptionLabel.snp.bottom).offset(17)
-            $0.leading.equalToSuperview().offset(22)
-            $0.trailing.equalToSuperview().offset(-22)
+            $0.leading.trailing.equalToSuperview().inset(22)
             $0.bottom.equalToSuperview().offset(-30)
         }
     }
 
     private func configure(success: Bool) {
         self.dialogContainer.backgroundColor = success ? Colors.bluishGreen : Colors.macaroniAndCheese
-        titleLabel.text = success ? L10n.sendDataAlertSuccesTitle : L10n.sendDataAlertFailureTitle
+        titleLabel.text = success ? L10n.sendDataAlertSuccessTitle : L10n.sendDataAlertFailureTitle
         descriptionLabel.text = success ? L10n.sendDataAlertSuccessDescription : L10n.sendDataAlertFailureDescription
     }
 }

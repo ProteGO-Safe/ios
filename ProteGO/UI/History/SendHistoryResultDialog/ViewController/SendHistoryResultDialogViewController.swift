@@ -29,14 +29,14 @@ final class SendHistoryResultDialogViewController: UIViewController, CustomView 
     }
 
     private func bindUIEvents() {
-          customView.closeButtonTapped.subscribe(onNext: { [weak self] in
+        customView.closeButtonTapped.subscribe(onNext: { [weak self] in
             self?.dismiss(animated: true)
-          }).disposed(by: disposeBag)
+        }).disposed(by: disposeBag)
 
         customView.footerLabelTapped.subscribe(onNext: {
             if let url = URL(string: "mailto:\(L10n.sendDataAlertFooterEmail)") {
                 UIApplication.shared.open(url)
             }
         }).disposed(by: disposeBag)
-      }
+    }
 }

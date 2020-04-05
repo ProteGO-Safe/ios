@@ -135,7 +135,7 @@ internal enum L10n {
   internal static let onboardingSharingDescription = L10n.tr("Localizable", "onboarding_sharing_description")
   /// Sharing the data in case of threat
   internal static let onboardingSharingTitle = L10n.tr("Localizable", "onboarding_sharing_title")
-  /// The application will present one of three statuses. You will learn in could be exposed to infected people within last 2 weeks.
+  /// The application will present one of three statuses. You will learn if you could be exposed to infected people within last 2 weeks.
   internal static let onboardingStatusDescription = L10n.tr("Localizable", "onboarding_status_description")
   /// We will keep you informed about a possible threat
   internal static let onboardingStatusTitle = L10n.tr("Localizable", "onboarding_status_title")
@@ -163,9 +163,9 @@ internal enum L10n {
   internal static let registrationVerifyDescription = L10n.tr("Localizable", "registration_verify_description")
   /// Enter your SMS code
   internal static let registrationVerifyTitle = L10n.tr("Localizable", "registration_verify_title")
-  /// Spróbuj wysłać dane ponownie.
+  /// Please retry.
   internal static let sendDataAlertFailureDescription = L10n.tr("Localizable", "send_data_alert_failure_description")
-  /// Wysłanie historii nie powiodło się
+  /// Sending failed. 
   internal static let sendDataAlertFailureTitle = L10n.tr("Localizable", "send_data_alert_failure_title")
   /// If you have any questions please email as at %@
   internal static func sendDataAlertFooter(_ p1: String) -> String {
@@ -173,10 +173,10 @@ internal enum L10n {
   }
   /// kontakt@protego.gov.pl
   internal static let sendDataAlertFooterEmail = L10n.tr("Localizable", "send_data_alert_footer_email")
-  /// Thank you!
-  internal static let sendDataAlertSuccesTitle = L10n.tr("Localizable", "send_data_alert_succes_title")
   /// Your data was sent to GIS.\nWe guarantee nobody will use your personal data while contacting with other people.
   internal static let sendDataAlertSuccessDescription = L10n.tr("Localizable", "send_data_alert_success_description")
+  /// Thank you!
+  internal static let sendDataAlertSuccessTitle = L10n.tr("Localizable", "send_data_alert_success_title")
   /// Cancel
   internal static let sendDataConfirmationAlertCancelBtn = L10n.tr("Localizable", "send_data_confirmation_alert_cancel_btn")
   /// Send you data only if you are SARS-CoV-2 positive

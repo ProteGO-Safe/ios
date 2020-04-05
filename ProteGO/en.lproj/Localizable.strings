@@ -11,7 +11,7 @@
 "onboarding_status_title" = "We will keep you informed about a possible threat";
 
 /* Onboarding informacje o statusie */
-"onboarding_status_description" = "The application will present one of three statuses. You will learn in could be exposed to infected people within last 2 weeks.";
+"onboarding_status_description" = "The application will present one of three statuses. You will learn if you could be exposed to infected people within last 2 weeks.";
 
 /* Onboarding informacje o statusie */
 "onboarding_green_description" = "We didn't dectect any threat";
@@ -221,16 +221,16 @@
 "send_data_send_button" = "Send";
 
 /* Alert po wysłaniu danych - sukces */
-"send_data_alert_succes_title" = "Thank you!";
+"send_data_alert_success_title" = "Thank you!";
 
 /* Alert po wysłaniu danych - sukces */
 "send_data_alert_success_description" = "Your data was sent to GIS.\nWe guarantee nobody will use your personal data while contacting with other people.";
 
 /* Alert po wysłaniu danych - błąd */
-"send_data_alert_failure_title" = "Wysłanie historii nie powiodło się";
+"send_data_alert_failure_title" = "Sending failed. ";
 
 /* Alert po wysłaniu danych - błąd */
-"send_data_alert_failure_description" = "Spróbuj wysłać dane ponownie.";
+"send_data_alert_failure_description" = "Please retry.";
 
 /* Alert po wysłaniu danych */
 "send_data_alert_footer" = "If you have any questions please email as at %@";

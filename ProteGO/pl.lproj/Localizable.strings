@@ -221,7 +221,7 @@
 "send_data_send_button" = "Wyślij";
 
 /* Alert po wysłaniu danych - sukces */
-"send_data_alert_succes_title" = "Dziękujemy!";
+"send_data_alert_success_title" = "Dziękujemy!";
 
 /* Alert po wysłaniu danych - sukces */
 "send_data_alert_success_description" = "Twoje dane zostały przekazane do Głównego Inspektoratu Sanitarnego.\nZapewniamy, że żadne osoby, którym ewentualnie się skontaktujemy nie poznają Twoich danych osobowych.";
