@@ -65,6 +65,15 @@
 		0E9DDA722430D82E002D879F /* Constants+Encounters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9DDA712430D82E002D879F /* Constants+Encounters.swift */; };
 		0E9DDA752430DB46002D879F /* String+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9DDA742430DB46002D879F /* String+Random.swift */; };
 		0E9DDA772430E12C002D879F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9DDA762430E12C002D879F /* AppDelegate.swift */; };
+		0EB372C7243871C700884C93 /* SendHistoryResultDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB372C6243871C700884C93 /* SendHistoryResultDialogView.swift */; };
+		0EB372C9243871D400884C93 /* SendHistoryResultDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB372C8243871D400884C93 /* SendHistoryResultDialogViewController.swift */; };
+		0EB372CB2438A20800884C93 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB372CA2438A20800884C93 /* Lottie.framework */; };
+		0EB372D02438A39F00884C93 /* progressSpinnerGreen.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EB372CF2438A39F00884C93 /* progressSpinnerGreen.json */; };
+		0EB372D32439BBCE00884C93 /* GetStatusRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB372D22439BBCE00884C93 /* GetStatusRequest.swift */; };
+		0EB372D52439BBE500884C93 /* GetStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB372D42439BBE500884C93 /* GetStatusResponse.swift */; };
+		0EB372D82439E09D00884C93 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB372D72439E09D00884C93 /* DateFormatter.swift */; };
+		0EB372DB243A2AB400884C93 /* DangerStatusManagerSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB372D9243A2A9000884C93 /* DangerStatusManagerSpecs.swift */; };
+		0EB372DE243A2B3100884C93 /* GcpClientMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB372DD243A2B3100884C93 /* GcpClientMock.swift */; };
 		0EB65C792435279300491507 /* HistoryOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C782435279300491507 /* HistoryOverviewView.swift */; };
 		0EB65C7B2435279E00491507 /* HistoryOverviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C7A2435279E00491507 /* HistoryOverviewModel.swift */; };
 		0EB65C7D243527A900491507 /* HistoryOverviewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C7C243527A900491507 /* HistoryOverviewModelType.swift */; };
@@ -299,6 +308,15 @@
 		0E9DDA712430D82E002D879F /* Constants+Encounters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Encounters.swift"; sourceTree = "<group>"; };
 		0E9DDA742430DB46002D879F /* String+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Random.swift"; sourceTree = "<group>"; };
 		0E9DDA762430E12C002D879F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0EB372C6243871C700884C93 /* SendHistoryResultDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryResultDialogView.swift; sourceTree = "<group>"; };
+		0EB372C8243871D400884C93 /* SendHistoryResultDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryResultDialogViewController.swift; sourceTree = "<group>"; };
+		0EB372CA2438A20800884C93 /* Lottie.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Lottie.framework; path = Carthage/Build/iOS/Lottie.framework; sourceTree = "<group>"; };
+		0EB372CF2438A39F00884C93 /* progressSpinnerGreen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = progressSpinnerGreen.json; sourceTree = "<group>"; };
+		0EB372D22439BBCE00884C93 /* GetStatusRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStatusRequest.swift; sourceTree = "<group>"; };
+		0EB372D42439BBE500884C93 /* GetStatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStatusResponse.swift; sourceTree = "<group>"; };
+		0EB372D72439E09D00884C93 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		0EB372D9243A2A9000884C93 /* DangerStatusManagerSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerStatusManagerSpecs.swift; sourceTree = "<group>"; };
+		0EB372DD243A2B3100884C93 /* GcpClientMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GcpClientMock.swift; sourceTree = "<group>"; };
 		0EB65C782435279300491507 /* HistoryOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOverviewView.swift; sourceTree = "<group>"; };
 		0EB65C7A2435279E00491507 /* HistoryOverviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOverviewModel.swift; sourceTree = "<group>"; };
 		0EB65C7C243527A900491507 /* HistoryOverviewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOverviewModelType.swift; sourceTree = "<group>"; };
@@ -610,6 +628,7 @@
 		0E5C2085242B63460038EF8B /* ProteGOTests */ = {
 			isa = PBXGroup;
 			children = (
+				0EB372DC243A2B2400884C93 /* GcpClient */,
 				0E9DCC972430985E00C2670D /* RealmManager */,
 				0E9DCC89243010C900C2670D /* SecretsGenerator */,
 				0E5C2088242B63460038EF8B /* Info.plist */,
@@ -674,6 +693,7 @@
 		0E6D260C242E8E940037A80C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0EB372D62439E08F00884C93 /* DateFormatter */,
 				877F3F772434B4DE00F774C7 /* Data */,
 				0E22F9262434A810008AD8EB /* UIStackView */,
 				833181912433A08A00A8E18D /* UIImage */,
@@ -698,6 +718,7 @@
 				0E8DED2D2433CC7600D7F806 /* DangerStatusManager.swift */,
 				0E8DED2F2433CCCF00D7F806 /* DangerStatusManagerType.swift */,
 				0E8DED312433D0CC00D7F806 /* DangerStatus.swift */,
+				0EB372D9243A2A9000884C93 /* DangerStatusManagerSpecs.swift */,
 			);
 			path = DangerStatusManager;
 			sourceTree = "<group>";
@@ -883,6 +904,31 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		0EB372D12439BBB600884C93 /* GetStatus */ = {
+			isa = PBXGroup;
+			children = (
+				0EB372D22439BBCE00884C93 /* GetStatusRequest.swift */,
+				0EB372D42439BBE500884C93 /* GetStatusResponse.swift */,
+			);
+			path = GetStatus;
+			sourceTree = "<group>";
+		};
+		0EB372D62439E08F00884C93 /* DateFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				0EB372D72439E09D00884C93 /* DateFormatter.swift */,
+			);
+			path = DateFormatter;
+			sourceTree = "<group>";
+		};
+		0EB372DC243A2B2400884C93 /* GcpClient */ = {
+			isa = PBXGroup;
+			children = (
+				0EB372DD243A2B3100884C93 /* GcpClientMock.swift */,
+			);
+			path = GcpClient;
+			sourceTree = "<group>";
+		};
 		0EB65C73243525C200491507 /* HistoryOverview */ = {
 			isa = PBXGroup;
 			children = (
@@ -1047,6 +1093,7 @@
 		83252A6624314C18001E6D63 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				0EB372D12439BBB600884C93 /* GetStatus */,
 				878EFA8724374D84009A436A /* BeaconId */,
 				83DC1F0024369CB2006E54A9 /* RequestBuilder */,
 				83252A7424314EE2001E6D63 /* DefaultRequestParameters */,
@@ -1987,6 +2034,7 @@
 				0E9DDA752430DB46002D879F /* String+Random.swift in Sources */,
 				83252A12242F63B1001E6D63 /* NetworkClient.swift in Sources */,
 				83512C3C243510A5007DB8AD /* OnboardingModel.swift in Sources */,
+				0EB372D32439BBCE00884C93 /* GetStatusRequest.swift in Sources */,
 				836FE6FE243755920024D83F /* Constants+Environment.swift in Sources */,
 				83512C2F2434E75E007DB8AD /* OnboardingSharingStepView.swift in Sources */,
 				83252A8E24322167001E6D63 /* RootViewModel.swift in Sources */,
@@ -2069,6 +2117,7 @@
 				877F3F8224351C5700F774C7 /* BeaconIdAgent.swift in Sources */,
 				0EE60C23242FDAA400D29048 /* Encounter.swift in Sources */,
 				0E8DED412433E21100D7F806 /* GreenStatusCardView.swift in Sources */,
+				0EB372D82439E09D00884C93 /* DateFormatter.swift in Sources */,
 				0E22F9252434A6F8008AD8EB /* GeneralRecommendationsCard.swift in Sources */,
 				8382896C24332CF40054347B /* UIButton+Factory.swift in Sources */,
 				833181902433A05B00A8E18D /* ConstraintMaker+AspectRatio.swift in Sources */,
@@ -2079,6 +2128,7 @@
 				0EE60C52242FF40500D29048 /* FilesCoordinatorType.swift in Sources */,
 				836801722432401300678DBD /* DashboardAssembly.swift in Sources */,
 				838289DD2433327A0054347B /* RegistrationVerifyCodeModel.swift in Sources */,
+				0EB372D52439BBE500884C93 /* GetStatusResponse.swift in Sources */,
 				0E9DDA722430D82E002D879F /* Constants+Encounters.swift in Sources */,
 				83252A6024314B59001E6D63 /* GcpClient.swift in Sources */,
 			);
@@ -2088,6 +2138,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EB372DB243A2AB400884C93 /* DangerStatusManagerSpecs.swift in Sources */,
+				0EB372DE243A2B3100884C93 /* GcpClientMock.swift in Sources */,
 				877F3F7A2434B4F100F774C7 /* Data+HexString.swift in Sources */,
 				0E9DCC992430987000C2670D /* RealmManagerMock.swift in Sources */,
 				0EE60C612430017A00D29048 /* SecretsGeneratorSpecs.swift in Sources */,

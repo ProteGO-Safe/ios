@@ -79,4 +79,34 @@ final class GcpClient: GcpClientType {
                 }
             })
     }
+
+    func getStatus() -> Single<Result<GetStatusResponse, Error>> {
+        guard let request = requestBuilder.getStatusRequest() else {
+            return .just(.failure(GcpClientError.failedToBuildRequest))
+        }
+
+        let endpoint = GcpEndpoint.getStatus(request)
+
+        return networkClient.rx.dataTask(networkRequest: endpoint.networkRequest)
+            .map({ result -> Result<GetStatusResponse, Error> in
+                return result.flatMap { data in
+                    do {
+                        let decoder = JSONDecoder()
+                        decoder.dateDecodingStrategy = .formatted(DateFormatter.yyyMMddHHmmss)
+
+                        let decoded = try decoder.decode(GetStatusResponse.self, from: data)
+                        return .success(decoded)
+                    } catch {
+                        return .failure(GcpClientError.failedToDecodeResponseData(error))
+                    }
+                }
+            }).do(onSuccess: { result in
+                switch result {
+                case .success:
+                    logger.debug("Did recieved status")
+                case .failure(let error):
+                    logger.error("Failed to recieved status: \(error)")
+                }
+            })
+    }
 }

@@ -52,8 +52,9 @@ final class GeneralAssembly: Assembly {
     }
 
     private func registerDangerStatusManager(_ container: Container) {
-        container.register(DangerStatusManagerType.self) { _ in
-            return DangerStatusManager()
+        container.register(DangerStatusManagerType.self) { resolver in
+            return DangerStatusManager(gcpClient: resolver.resolve(GcpClientType.self),
+                                       valet: resolver.resolve(Valet.self))
         }.inObjectScope(.container)
     }
 

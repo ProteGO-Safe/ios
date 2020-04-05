@@ -26,4 +26,11 @@ final class RequestBuilder: RequestBuilderType {
         }
         return ConfirmRegistrationRequest(code: code, registrationId: registrationId)
     }
+
+    func getStatusRequest() -> GetStatusRequest? {
+        guard let userId = registrationManager.userId else {
+            return nil
+        }
+        return GetStatusRequest(userId: userId)
+    }
 }

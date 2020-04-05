@@ -38,6 +38,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate  {
     func applicationWillEnterForeground(_ application: UIApplication) {
         self.advertiser?.setMode(.enabledAllTime)
         self.scanner?.setMode(.enabledAllTime)
+        self.resolver.resolve(DangerStatusManagerType.self)?.updateCurrentDangerStatus()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
