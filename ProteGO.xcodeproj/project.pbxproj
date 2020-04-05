@@ -113,6 +113,7 @@
 		0EE60C5F2430015E00D29048 /* SecretsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE60C5E2430015E00D29048 /* SecretsGenerator.swift */; };
 		0EE60C612430017A00D29048 /* SecretsGeneratorSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE60C602430017A00D29048 /* SecretsGeneratorSpecs.swift */; };
 		0EEE1F2224322EBA001D006A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EEE1F2024322EBA001D006A /* Localizable.strings */; };
+		0EF3C3D4243A6113007224DA /* String+Prefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF3C3D3243A6113007224DA /* String+Prefix.swift */; };
 		83252A12242F63B1001E6D63 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A11242F63B1001E6D63 /* NetworkClient.swift */; };
 		83252A14242F6C22001E6D63 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A13242F6C22001E6D63 /* NetworkRequest.swift */; };
 		83252A16242F6EEA001E6D63 /* UrlRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A15242F6EEA001E6D63 /* UrlRequestBuilder.swift */; };
@@ -363,6 +364,7 @@
 		0EEE1F1D24321BFB001D006A /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		0EEE1F1E24321BFB001D006A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0EEE1F1F24321BFB001D006A /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = Podfile; sourceTree = "<group>"; };
+		0EF3C3D3243A6113007224DA /* String+Prefix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Prefix.swift"; sourceTree = "<group>"; };
 		110266AD057C4616D8381F24 /* Pods_ProteGOTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProteGOTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		224859AED1D43B79EDE86275 /* Pods-ProteGOTests.release_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGOTests.release_prod.xcconfig"; path = "Target Support Files/Pods-ProteGOTests/Pods-ProteGOTests.release_prod.xcconfig"; sourceTree = "<group>"; };
 		482FB5D89F5573E25359B6EB /* Pods-ProteGO.release_dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGO.release_dev.xcconfig"; path = "Target Support Files/Pods-ProteGO/Pods-ProteGO.release_dev.xcconfig"; sourceTree = "<group>"; };
@@ -1010,6 +1012,7 @@
 			isa = PBXGroup;
 			children = (
 				0E9DDA742430DB46002D879F /* String+Random.swift */,
+				0EF3C3D3243A6113007224DA /* String+Prefix.swift */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -2122,6 +2125,7 @@
 				83252A6C24314C99001E6D63 /* RegisterDeviceResult.swift in Sources */,
 				833181932433A09B00A8E18D /* UIImage+AspectRatio.swift in Sources */,
 				0E8DED322433D0CC00D7F806 /* DangerStatus.swift in Sources */,
+				0EF3C3D4243A6113007224DA /* String+Prefix.swift in Sources */,
 				83DC1EFF24369C62006E54A9 /* RequestBuilderType.swift in Sources */,
 				0E9DDA702430D464002D879F /* EncountersDebugItems.swift in Sources */,
 				8356F9362436B3FB0075FF20 /* RegistrationSendCodeModel.swift in Sources */,

@@ -9,7 +9,7 @@ final class HistoryOverviewModel: HistoryOverviewModelType {
         guard let text = self.valet.string(forKey: Constants.KeychainKeys.userIdKey) else {
             return L10n.dashboardInfoIdPlacehloder
         }
-        return String(text.prefix(Int(floor(Double(text.count) * 0.25))))
+        return text.prefix(withLengthRatio: Constants.HistorySend.userIdPrefixLengthRatio)
     }
 
     var historyLastDate: BehaviorRelay<Date>
