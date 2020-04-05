@@ -236,6 +236,10 @@
 		87C985FC242E0A8500335502 /* BleAdvertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C985FB242E0A8500335502 /* BleAdvertiser.swift */; };
 		87F259E92430A3E2009BF612 /* MockScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F259E82430A3E2009BF612 /* MockScanner.swift */; };
 		A63BFB76240CADB609E72685 /* Pods_ProteGO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3458DDABC1020B1EB7984F /* Pods_ProteGO.framework */; };
+		B2318187243A87DF00306B28 /* ValidationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2318186243A87DF00306B28 /* ValidationType.swift */; };
+		B2318189243A880900306B28 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2318188243A880900306B28 /* ValidationError.swift */; };
+		B231818B243A88B800306B28 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B231818A243A88B800306B28 /* Validator.swift */; };
+		B231818E243A921700306B28 /* ValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B231818D243A921700306B28 /* ValidatorTests.swift */; };
 		E6FC73238FEB0689D7FCA95C /* Pods_ProteGOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 110266AD057C4616D8381F24 /* Pods_ProteGOTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -496,6 +500,10 @@
 		87F259E82430A3E2009BF612 /* MockScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockScanner.swift; sourceTree = "<group>"; };
 		95EEA776F9CF0007EA77CC71 /* Pods-ProteGO.debug_stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGO.debug_stg.xcconfig"; path = "Target Support Files/Pods-ProteGO/Pods-ProteGO.debug_stg.xcconfig"; sourceTree = "<group>"; };
 		9700318292BE5F27EB17208D /* Pods-ProteGO.release_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGO.release_prod.xcconfig"; path = "Target Support Files/Pods-ProteGO/Pods-ProteGO.release_prod.xcconfig"; sourceTree = "<group>"; };
+		B2318186243A87DF00306B28 /* ValidationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationType.swift; sourceTree = "<group>"; };
+		B2318188243A880900306B28 /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
+		B231818A243A88B800306B28 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		B231818D243A921700306B28 /* ValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorTests.swift; sourceTree = "<group>"; };
 		BEC33F61CC8746F654E7BDEC /* Pods-ProteGO.debug_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGO.debug_prod.xcconfig"; path = "Target Support Files/Pods-ProteGO/Pods-ProteGO.debug_prod.xcconfig"; sourceTree = "<group>"; };
 		C8E4564A545D17C206EEC75E /* Pods-ProteGO.debug_dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGO.debug_dev.xcconfig"; path = "Target Support Files/Pods-ProteGO/Pods-ProteGO.debug_dev.xcconfig"; sourceTree = "<group>"; };
 		F967271215DF31CF5FA2F3F1 /* Pods-ProteGOTests.debug_dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGOTests.debug_dev.xcconfig"; path = "Target Support Files/Pods-ProteGOTests/Pods-ProteGOTests.debug_dev.xcconfig"; sourceTree = "<group>"; };
@@ -750,6 +758,7 @@
 		0E5C2085242B63460038EF8B /* ProteGOTests */ = {
 			isa = PBXGroup;
 			children = (
+				B231818C243A91E400306B28 /* Validator */,
 				0E9DCC972430985E00C2670D /* RealmManager */,
 				0E9DCC89243010C900C2670D /* SecretsGenerator */,
 				0E5C2088242B63460038EF8B /* Info.plist */,
@@ -760,6 +769,7 @@
 		0E6D2603242E8B540037A80C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B2318185243A86CE00306B28 /* Validator */,
 				83DC1EEE24361F0F006E54A9 /* RegistrationManager */,
 				83DC1EDE2435F008006E54A9 /* UserDefaults */,
 				83512C4324357E92007DB8AD /* KeyboardManager */,
@@ -1777,6 +1787,24 @@
 			path = Advertiser;
 			sourceTree = "<group>";
 		};
+		B2318185243A86CE00306B28 /* Validator */ = {
+			isa = PBXGroup;
+			children = (
+				B2318186243A87DF00306B28 /* ValidationType.swift */,
+				B2318188243A880900306B28 /* ValidationError.swift */,
+				B231818A243A88B800306B28 /* Validator.swift */,
+			);
+			path = Validator;
+			sourceTree = "<group>";
+		};
+		B231818C243A91E400306B28 /* Validator */ = {
+			isa = PBXGroup;
+			children = (
+				B231818D243A921700306B28 /* ValidatorTests.swift */,
+			);
+			path = Validator;
+			sourceTree = "<group>";
+		};
 		B553474AE7B40F4DF5FB85D0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2141,6 +2169,7 @@
 				877F3F7C2434E89900F774C7 /* AdvertiserMode.swift in Sources */,
 				871208D62430C6A600DA0A4D /* Constants+Bluetooth.swift in Sources */,
 				0EB65C812435285300491507 /* HistoryOverviewViewModelType.swift in Sources */,
+				B231818B243A88B800306B28 /* Validator.swift in Sources */,
 				0E9DCC942430984A00C2670D /* EncountersManager.swift in Sources */,
 				0EB65C832435285E00491507 /* HistoryOverviewViewController.swift in Sources */,
 				0E0B30D724377172005DFC84 /* HistoryRootViewController.swift in Sources */,
@@ -2230,6 +2259,7 @@
 				83680162243227CF00678DBD /* DashboardViewController.swift in Sources */,
 				83512C48243581F1007DB8AD /* KeyboardManagerType.swift in Sources */,
 				83512C2A2434D07D007DB8AD /* OnboardingBluetoothStepView.swift in Sources */,
+				B2318189243A880900306B28 /* ValidationError.swift in Sources */,
 				0E9DCC922430983A00C2670D /* EncountersManagerType.swift in Sources */,
 				0E0B30ED2437A2F6005DFC84 /* SendHistoryConfirmModelType.swift in Sources */,
 				83512C3A24350B70007DB8AD /* StatusDescriptionsContainerView.swift in Sources */,
@@ -2249,6 +2279,7 @@
 				0E9DCCA12430C8C200C2670D /* CustomView.swift in Sources */,
 				874AACA02435E98400FF7332 /* ProteGoDeviceEffect.swift in Sources */,
 				877F3F7324348C0000F774C7 /* ProteGoDeviceId.swift in Sources */,
+				B2318187243A87DF00306B28 /* ValidationType.swift in Sources */,
 				83DC1EFD24369775006E54A9 /* RequestBuilder.swift in Sources */,
 				83252A6E24314CFE001E6D63 /* ConfirmRegistrationRequest.swift in Sources */,
 				8382897924332D670054347B /* UITextFireld+Factory.swift in Sources */,
@@ -2279,6 +2310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				877F3F7A2434B4F100F774C7 /* Data+HexString.swift in Sources */,
+				B231818E243A921700306B28 /* ValidatorTests.swift in Sources */,
 				0E9DCC992430987000C2670D /* RealmManagerMock.swift in Sources */,
 				0EE60C612430017A00D29048 /* SecretsGeneratorSpecs.swift in Sources */,
 				0E9DCC8F2430150000C2670D /* RealmManagerSpecs.swift in Sources */,

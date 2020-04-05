@@ -17,7 +17,14 @@ final class RegistrationSendCodeViewModel: RegistrationSendCodeViewModelType {
 
     func bind(view: RegistrationSendCodeView) {
         view.sendCodeButtonTapEvent.subscribe(onNext: { [weak self] _ in
-            self?.model.registerDevice(phoneNumber: view.phoneNumber)
+            let validation = Validator(type: .phoneNumber).isValid(text: view.phoneNumber)
+            switch validation {
+            case .success:
+                self?.model.registerDevice(phoneNumber: view.phoneNumber)
+            case let .failure(error):
+                print(error)
+                // TODO: - Handle Error
+            }
         }).disposed(by: disposeBag)
 
         model.keyboardHeightWillChangeObservable.subscribe(onNext: { keyboardHeight in
