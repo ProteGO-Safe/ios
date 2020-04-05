@@ -220,11 +220,23 @@
 /* Ekran wysyłania danych */
 "send_data_send_button" = "Wyślij";
 
-/* Alert po wysłaniu danych */
-"send_data_alert_title" = "Dziękujemy!";
+/* Alert po wysłaniu danych - sukces */
+"send_data_alert_success_title" = "Dziękujemy!";
+
+/* Alert po wysłaniu danych - sukces */
+"send_data_alert_success_description" = "Twoje dane zostały przekazane do Głównego Inspektoratu Sanitarnego.\nZapewniamy, że żadne osoby, którym ewentualnie się skontaktujemy nie poznają Twoich danych osobowych.";
+
+/* Alert po wysłaniu danych - błąd */
+"send_data_alert_failure_title" = "Wysłanie historii nie powiodło się";
+
+/* Alert po wysłaniu danych - błąd */
+"send_data_alert_failure_description" = "Spróbuj wysłać dane ponownie.";
 
 /* Alert po wysłaniu danych */
-"send_data_alert_description" = "Twoje dane zostały przekazane do Głównego Inspektoratu Sanitarnego.\nZapewniamy, że żadne osoby, którym ewentualnie się skontaktujemy nie poznają Twoich danych osobowych.\n\nW razie jakichkolwiek pytań napisz do nas na %@\nlub zadzwoń %@";
+"send_data_alert_footer" = "W razie jakichkolwiek pytań napisz do nas na %@";
+
+/* Alert po wysłaniu danych */
+"send_data_alert_footer_email" = "kontakt@protego.gov.pl";
 
 /* Ekran wysyłania danych - alert potwierdzający */
 "send_data_confirmation_alert_title" = "Potwierdź wysłanie historii";

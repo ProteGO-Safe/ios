@@ -19,7 +19,7 @@ class DangerStatusCardBottomModule: UIView {
 
     private let descriptionSecondParagraphLabel = UILabel()
 
-    private let contactButton = UIButton()
+    private let contactButton = UIButton.rectButton(backgroundColor: .white)
 
     private let tapGestureRecognizer = UITapGestureRecognizer()
 
@@ -51,7 +51,9 @@ class DangerStatusCardBottomModule: UIView {
         if let buttonConfig = buttonConfig {
             self.addSubview(self.contactButton)
             self.setupButtonConstraints()
-            self.setupContactButton(color: config.color, text: buttonConfig.buttonTitle)
+            self.setupContactButton(normalColor: buttonConfig.normalColor,
+                                    highlightedColor: buttonConfig.highlightedColor,
+                                    text: buttonConfig.title)
         }
     }
 
@@ -108,7 +110,7 @@ class DangerStatusCardBottomModule: UIView {
                 range: hereRange)
             attributedText.addAttribute(
                 NSAttributedString.Key.font,
-                value: Fonts.poppinsBold(14).font,
+                value: Fonts.poppinsSemiBold(14).font,
                 range: hereRange)
 
             self.descriptionSecondParagraphLabel.attributedText = attributedText
@@ -119,12 +121,10 @@ class DangerStatusCardBottomModule: UIView {
         self.descriptionSecondParagraphLabel.isUserInteractionEnabled = true
     }
 
-    private func setupContactButton(color: UIColor, text: String) {
-        self.contactButton.setBackgroundColor(.white, forState: .normal)
-        self.contactButton.setTitleColor(color, for: .normal)
+    private func setupContactButton(normalColor: UIColor, highlightedColor: UIColor, text: String) {
+        self.contactButton.setBackgroundColor(highlightedColor, forState: .highlighted)
+        self.contactButton.setTitleColor(normalColor, for: .normal)
+        self.contactButton.setTitleColor(.white, for: .highlighted)
         self.contactButton.setTitle(text, for: .normal)
-        self.contactButton.titleLabel?.font = Fonts.poppinsMedium(16).font
-        self.contactButton.layer.cornerRadius = 4
-        self.contactButton.clipsToBounds = true
     }
 }

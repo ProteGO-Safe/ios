@@ -1,7 +1,7 @@
 import UIKit
 import RxSwift
 
-typealias HistoryOverviewViewControllerBuilder = () -> HistoryOverviewViewController
+typealias HistoryRootViewControllerBuilder = () -> HistoryRootViewController
 
 final class DashboardViewController: UIViewController, CustomView {
 
@@ -11,11 +11,11 @@ final class DashboardViewController: UIViewController, CustomView {
 
     private let disposeBag: DisposeBag = DisposeBag()
 
-    private let historyOverviewBuilder: HistoryOverviewViewControllerBuilder
+    private let historyRootBuilder: HistoryRootViewControllerBuilder
 
-    init(viewModel: DashboardViewModelType, historyOverViewBuilder: @escaping HistoryOverviewViewControllerBuilder) {
+    init(viewModel: DashboardViewModelType, historyRootBuilder: @escaping HistoryRootViewControllerBuilder) {
         self.viewModel = viewModel
-        self.historyOverviewBuilder = historyOverViewBuilder
+        self.historyRootBuilder = historyRootBuilder
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -63,9 +63,10 @@ final class DashboardViewController: UIViewController, CustomView {
             guard let self = self else {
                 return
             }
-            let historyOverviewViewController = self.historyOverviewBuilder()
-            historyOverviewViewController.modalPresentationStyle = .fullScreen
-            self.present(historyOverviewViewController, animated: true)
+            let historyRootViewController = self.historyRootBuilder()
+            historyRootViewController.historyRootViewControllerDelegate = self
+            historyRootViewController.modalPresentationStyle = .fullScreen
+            self.present(historyRootViewController, animated: true)
         }).disposed(by: disposeBag)
     }
 
@@ -77,5 +78,21 @@ final class DashboardViewController: UIViewController, CustomView {
         DispatchQueue.main.async { [weak self] in
             self?.customView.updateScrollViewContentSize()
         }
+    }
+}
+
+extension DashboardViewController: HistoryRootViewControllerDelegate {
+    func sendHistoryFinished(result: Result<Void, Error>) {
+        let resultDialog: UIViewController
+        switch result {
+        case .success:
+            resultDialog = SendHistoryResultDialogViewController(success: true)
+        case .failure:
+            resultDialog = SendHistoryResultDialogViewController(success: false)
+        }
+
+        resultDialog.modalPresentationStyle = .overCurrentContext
+        resultDialog.modalTransitionStyle = .crossDissolve
+        self.present(resultDialog, animated: true)
     }
 }

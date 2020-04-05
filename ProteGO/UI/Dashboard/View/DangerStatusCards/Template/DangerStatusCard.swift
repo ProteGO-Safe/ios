@@ -15,7 +15,9 @@ struct DangerStatusCardSecondParagraphConfig {
 }
 
 struct DangerStatusCardButtonConfig {
-    let buttonTitle: String
+    let title: String
+    let normalColor: UIColor
+    let highlightedColor: UIColor
 }
 
 class DangerStatusCardView: UIView {

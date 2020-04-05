@@ -98,7 +98,7 @@ class GeneralRecommendationsCard: UIView {
                 range: hereRange)
             attributedText.addAttribute(
                 NSAttributedString.Key.font,
-                value: Fonts.poppinsBold(14).font,
+                value: Fonts.poppinsSemiBold(14).font,
                 range: hereRange)
 
             self.footerLabel.attributedText = attributedText
