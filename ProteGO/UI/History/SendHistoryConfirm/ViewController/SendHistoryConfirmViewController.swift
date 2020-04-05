@@ -59,7 +59,7 @@ final class SendHistoryConfirmViewController: UIViewController, CustomView {
                 alert.dismiss(animated: true) {
                     let sendHistoryProgressViewController = self.sendHistoryProgressViewControllerBuilder()
                     sendHistoryProgressViewController.delegate = self
-                    self.navigationController?.pushViewController(sendHistoryProgressViewController, animated: true)
+                    self.navigationController?.pushViewController(sendHistoryProgressViewController, animated: false)
                 }
             }
 
