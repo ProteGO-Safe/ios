@@ -1,17 +1,18 @@
-Aplikacja ProteGO iOS
+# ProteGO iOS application
 
-# Zależności
 
-Aplikacja ProteGO wykorzystuje Carthage oraz Cocoapods do zarządzania zależnościami w projekcie. Lista zależnosci standardowo w plikach `Cartfile` i `Podfile`
+## Project setup
 
-## Carthage
+The ProteGO application uses Carthage and CocoaPods to manage dependencies in the project. List of dependencies by default in the files `Cartfile` and` Podfile`
+ 
+ * Installation of Ruby Gems (including CocoaPods): `bundle install`
+ * Carthage installation: [there are several possible options](https://github.com/Carthage/Carthage#installing-carthage)
+ * Update dependencies managed by Carthage: `. / Scripts / updateCarthage.sh`
 
-W folderze `scripts` znajduje się skrypt `updateCarthage.sh` ułatwiający zaktualizowanie zależności obsługiwanych przez Carthage.
+## Environments
 
-# Rodzaje środowisk
+The ProteGO application has several work environments that have been described [here](https://github.com/ProteGO-app/specs/blob/master/specs/app_versions.md)
 
-Aplikacja ProteGO posiada kilka środowisk pracy, które zostały opisane [tutaj](https://github.com/ProteGO-app/specs/blob/master/specs/app_versions.md)
+## Text translations
 
-# Teksty w aplikacji
-
-Aplikacja posiada wsparcie wielu języków. W folderze `scripts` znajduje się skrypt pomocniczy `updateLocalization.sh` który automatycznie ściąga najnowsze teksty z Google Spreadsheet oraz generuje odpowiednie struktury pomocnicze za pomocą SwiftGen.
+The application has multi-language support. The `scripts` folder contains the helper script` updateLocalization.sh` which automatically downloads the latest texts from Google Spreadsheet and generates the appropriate support structures using SwiftGen.
