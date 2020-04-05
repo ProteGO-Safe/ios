@@ -20,39 +20,13 @@ final class DangerStatusManager: DangerStatusManagerType {
         self.gcpClient = gcpClient
         self.valet = valet
 
-        var initialDangerStatus = DangerStatus.yellow
-        if let rawDangerStatusValue = valet.string(forKey: Constants.KeychainKeys.currentDangerStatus),
-            let dangerStatus = DangerStatus(rawValue: rawDangerStatusValue) {
-            initialDangerStatus = dangerStatus
-        }
+        let initialDangerStatus = valet.string(forKey: Constants.KeychainKeys.currentDangerStatus)
+            .flatMap(DangerStatus.init(rawValue:)) ?? .yellow
+
         self.currentStatus = BehaviorRelay<DangerStatus>(value: initialDangerStatus)
-
-        self.setupForcedStatusHandling()
-    }
-
-    deinit {
-        self.tweakBindings.forEach(DebugMenu.unbind)
-    }
-
-    func setupForcedStatusHandling() {
-        if DebugMenu.assign(DebugMenu.forceDangerStatus) {
-            if let status = DangerStatus.init(rawValue: DebugMenu.assign(DebugMenu.forceDangerStatusValue).value) {
-                self.currentStatus.accept(status)
-            }
-
-            tweakBindings.insert(DebugMenu.bind(DebugMenu.forceDangerStatusValue) { value in
-                if let status = DangerStatus.init(rawValue: value.value) {
-                    self.currentStatus.accept(status)
-                }
-            })
-        }
     }
 
     func updateCurrentDangerStatus() {
-        guard !DebugMenu.assign(DebugMenu.forceDangerStatus) else {
-            return
-        }
-
         return self.gcpClient.getStatus().subscribe(onSuccess: { [weak self] result in
             guard let self = self else {
                 logger.error("Instance deallocated file: \(#file), line: \(#line)")

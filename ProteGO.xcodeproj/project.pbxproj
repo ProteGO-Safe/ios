@@ -30,7 +30,6 @@
 		0E8DED2E2433CC7600D7F806 /* DangerStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED2D2433CC7600D7F806 /* DangerStatusManager.swift */; };
 		0E8DED302433CCCF00D7F806 /* DangerStatusManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED2F2433CCCF00D7F806 /* DangerStatusManagerType.swift */; };
 		0E8DED322433D0CC00D7F806 /* DangerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED312433D0CC00D7F806 /* DangerStatus.swift */; };
-		0E8DED342433D19300D7F806 /* DangerStatusDebugItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED332433D19300D7F806 /* DangerStatusDebugItems.swift */; };
 		0E8DED382433D86A00D7F806 /* DashboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED372433D86A00D7F806 /* DashboardModel.swift */; };
 		0E8DED3A2433D87300D7F806 /* DashboardModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED392433D87300D7F806 /* DashboardModelType.swift */; };
 		0E8DED3C2433D88000D7F806 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DED3B2433D88000D7F806 /* DashboardViewModel.swift */; };
@@ -65,10 +64,6 @@
 		0E9DDA722430D82E002D879F /* Constants+Encounters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9DDA712430D82E002D879F /* Constants+Encounters.swift */; };
 		0E9DDA752430DB46002D879F /* String+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9DDA742430DB46002D879F /* String+Random.swift */; };
 		0E9DDA772430E12C002D879F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9DDA762430E12C002D879F /* AppDelegate.swift */; };
-		0EB372C7243871C700884C93 /* SendHistoryResultDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB372C6243871C700884C93 /* SendHistoryResultDialogView.swift */; };
-		0EB372C9243871D400884C93 /* SendHistoryResultDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB372C8243871D400884C93 /* SendHistoryResultDialogViewController.swift */; };
-		0EB372CB2438A20800884C93 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB372CA2438A20800884C93 /* Lottie.framework */; };
-		0EB372D02438A39F00884C93 /* progressSpinnerGreen.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EB372CF2438A39F00884C93 /* progressSpinnerGreen.json */; };
 		0EB372D32439BBCE00884C93 /* GetStatusRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB372D22439BBCE00884C93 /* GetStatusRequest.swift */; };
 		0EB372D52439BBE500884C93 /* GetStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB372D42439BBE500884C93 /* GetStatusResponse.swift */; };
 		0EB372D82439E09D00884C93 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB372D72439E09D00884C93 /* DateFormatter.swift */; };
@@ -82,8 +77,7 @@
 		0EB65C832435285E00491507 /* HistoryOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C822435285E00491507 /* HistoryOverviewViewController.swift */; };
 		0EB65C852436195200491507 /* HistoryAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C842436195200491507 /* HistoryAssembly.swift */; };
 		0EB65C872436620E00491507 /* Constants+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C862436620E00491507 /* Constants+UI.swift */; };
-		0EB65C882436712C00491507 /* RegistrationSendCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289C5243330320054347B /* RegistrationSendCodeViewModel.swift */; };
-		0EB65C892436713200491507 /* RegistrationVerifyCodeViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D4243331110054347B /* RegistrationVerifyCodeViewModelType.swift */; };
+		0EB65C892436713200491507 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0ECE7A1F2430E3EE00EED942 /* BluetoothAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECE7A1E2430E3EE00EED942 /* BluetoothAssembly.swift */; };
 		0ECE7A212430E48200EED942 /* BluetoothDebugItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECE7A202430E48200EED942 /* BluetoothDebugItems.swift */; };
 		0ECE7A222430F91F00EED942 /* MockAdvertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C902430A5B7007C8F78 /* MockAdvertiser.swift */; };
@@ -176,7 +170,6 @@
 		838289CC243330B50054347B /* RegistrationVerifyCodeModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289CB243330B50054347B /* RegistrationVerifyCodeModelType.swift */; };
 		838289CF243330D10054347B /* RegistrationVerifyCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289CE243330D10054347B /* RegistrationVerifyCodeView.swift */; };
 		838289D1243330E40054347B /* RegistrationVerifyCodeVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D0243330E40054347B /* RegistrationVerifyCodeVIewController.swift */; };
-		838289D3243330F40054347B /* RegistrationVerifyCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D2243330F40054347B /* RegistrationVerifyCodeViewModel.swift */; };
 		838289D7243331510054347B /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D6243331510054347B /* BannerView.swift */; };
 		838289D9243331ED0054347B /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289D8243331ED0054347B /* RegistrationView.swift */; };
 		838289DD2433327A0054347B /* RegistrationVerifyCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838289DC2433327A0054347B /* RegistrationVerifyCodeModel.swift */; };
@@ -209,8 +202,6 @@
 		83DC1EFB24366EDD006E54A9 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC1EFA24366EDD006E54A9 /* RegistrationViewController.swift */; };
 		83DC1EFD24369775006E54A9 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC1EFC24369775006E54A9 /* RequestBuilder.swift */; };
 		83DC1EFF24369C62006E54A9 /* RequestBuilderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC1EFE24369C62006E54A9 /* RequestBuilderType.swift */; };
-		87074B78242F57770029AD4B /* AdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B77242F57770029AD4B /* AdvertiserDelegate.swift */; };
-		87074B79242F57770029AD4B /* AdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B77242F57770029AD4B /* AdvertiserDelegate.swift */; };
 		87074B7C242F6A5F0029AD4B /* BleScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7B242F6A5F0029AD4B /* BleScanner.swift */; };
 		87074B7F242F6D700029AD4B /* ProteGoDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7E242F6D700029AD4B /* ProteGoDevice.swift */; };
 		87074B85242F94780029AD4B /* ProteGoDeviceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B84242F94780029AD4B /* ProteGoDeviceState.swift */; };
@@ -273,7 +264,6 @@
 		0E8DED2D2433CC7600D7F806 /* DangerStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerStatusManager.swift; sourceTree = "<group>"; };
 		0E8DED2F2433CCCF00D7F806 /* DangerStatusManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerStatusManagerType.swift; sourceTree = "<group>"; };
 		0E8DED312433D0CC00D7F806 /* DangerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerStatus.swift; sourceTree = "<group>"; };
-		0E8DED332433D19300D7F806 /* DangerStatusDebugItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerStatusDebugItems.swift; sourceTree = "<group>"; };
 		0E8DED372433D86A00D7F806 /* DashboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModel.swift; sourceTree = "<group>"; };
 		0E8DED392433D87300D7F806 /* DashboardModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModelType.swift; sourceTree = "<group>"; };
 		0E8DED3B2433D88000D7F806 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
@@ -308,10 +298,6 @@
 		0E9DDA712430D82E002D879F /* Constants+Encounters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Encounters.swift"; sourceTree = "<group>"; };
 		0E9DDA742430DB46002D879F /* String+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Random.swift"; sourceTree = "<group>"; };
 		0E9DDA762430E12C002D879F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0EB372C6243871C700884C93 /* SendHistoryResultDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryResultDialogView.swift; sourceTree = "<group>"; };
-		0EB372C8243871D400884C93 /* SendHistoryResultDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryResultDialogViewController.swift; sourceTree = "<group>"; };
-		0EB372CA2438A20800884C93 /* Lottie.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Lottie.framework; path = Carthage/Build/iOS/Lottie.framework; sourceTree = "<group>"; };
-		0EB372CF2438A39F00884C93 /* progressSpinnerGreen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = progressSpinnerGreen.json; sourceTree = "<group>"; };
 		0EB372D22439BBCE00884C93 /* GetStatusRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStatusRequest.swift; sourceTree = "<group>"; };
 		0EB372D42439BBE500884C93 /* GetStatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStatusResponse.swift; sourceTree = "<group>"; };
 		0EB372D72439E09D00884C93 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
@@ -462,7 +448,6 @@
 		83DC1EFA24366EDD006E54A9 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		83DC1EFC24369775006E54A9 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		83DC1EFE24369C62006E54A9 /* RequestBuilderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilderType.swift; sourceTree = "<group>"; };
-		87074B77242F57770029AD4B /* AdvertiserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertiserDelegate.swift; sourceTree = "<group>"; };
 		87074B7B242F6A5F0029AD4B /* BleScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleScanner.swift; sourceTree = "<group>"; };
 		87074B7E242F6D700029AD4B /* ProteGoDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteGoDevice.swift; sourceTree = "<group>"; };
 		87074B84242F94780029AD4B /* ProteGoDeviceState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteGoDeviceState.swift; sourceTree = "<group>"; };
@@ -777,7 +762,6 @@
 				0E965354242F82B900ADD300 /* GeneralDebugItems.swift */,
 				0E9DDA6F2430D464002D879F /* EncountersDebugItems.swift */,
 				0ECE7A202430E48200EED942 /* BluetoothDebugItems.swift */,
-				0E8DED332433D19300D7F806 /* DangerStatusDebugItems.swift */,
 				8356F93B2436BFF60075FF20 /* ScreensDebugItems.swift */,
 				8356F9392436BD3B0075FF20 /* RegistrationDebugItems.swift */,
 			);
@@ -1989,8 +1973,6 @@
 				83512C42243522C2007DB8AD /* OnboardingVIewModelType.swift in Sources */,
 				83512C4024351EAA007DB8AD /* OnboardingViewModel.swift in Sources */,
 				0E22F92E2434DFDE008AD8EB /* DangerStatusCardBottomModule.swift in Sources */,
-				838289C6243330320054347B /* RegistrationSendCodeViewModel.swift in Sources */,
-				838289D5243331110054347B /* RegistrationVerifyCodeViewModelType.swift in Sources */,
 				0E22F9282434A861008AD8EB /* UIStackView+AddArrangedSubviews.swift in Sources */,
 				0E9DDA6E2430D2D9002D879F /* DebugAssembly.swift in Sources */,
 				83252A6C24314C99001E6D63 /* RegisterDeviceResult.swift in Sources */,
@@ -2016,7 +1998,6 @@
 				0EB65C7B2435279E00491507 /* HistoryOverviewModel.swift in Sources */,
 				83252A8A24322156001E6D63 /* RootView.swift in Sources */,
 				0E22F92C2434DFD3008AD8EB /* DangerStatusCardTopModule.swift in Sources */,
-				0E8DED342433D19300D7F806 /* DangerStatusDebugItems.swift in Sources */,
 				8382896924332CBB0054347B /* Colors.swift in Sources */,
 				8382896F24332D170054347B /* UIColor+Hex.swift in Sources */,
 				83828A082433352D0054347B /* Images.swift in Sources */,
@@ -2070,7 +2051,6 @@
 				83DC1EFB24366EDD006E54A9 /* RegistrationViewController.swift in Sources */,
 				83680160243227B400678DBD /* OnboardingViewController.swift in Sources */,
 				0EE4E9002432717F00EA05ED /* L10n.swift in Sources */,
-				838289BB24332F9E0054347B /* RegistrationSendCodeModel.swift in Sources */,
 				0EB65C872436620E00491507 /* Constants+UI.swift in Sources */,
 				0ECE7A1F2430E3EE00EED942 /* BluetoothAssembly.swift in Sources */,
 				83252A9C24322549001E6D63 /* OnboardingView.swift in Sources */,
@@ -2079,7 +2059,7 @@
 				0EB65C7D243527A900491507 /* HistoryOverviewModelType.swift in Sources */,
 				0EB65C792435279300491507 /* HistoryOverviewView.swift in Sources */,
 				0E8DED2E2433CC7600D7F806 /* DangerStatusManager.swift in Sources */,
-				0EB65C892436713200491507 /* RegistrationVerifyCodeViewModelType.swift in Sources */,
+				0EB65C892436713200491507 /* (null) in Sources */,
 				0E8DED302433CCCF00D7F806 /* DangerStatusManagerType.swift in Sources */,
 				836DF51B24334C14000C00C0 /* RegistrationViewModel.swift in Sources */,
 				836DF51F24334C29000C00C0 /* RegistrationModel.swift in Sources */,
