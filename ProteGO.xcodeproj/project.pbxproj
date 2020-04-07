@@ -114,6 +114,7 @@
 		0EE60C612430017A00D29048 /* SecretsGeneratorSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE60C602430017A00D29048 /* SecretsGeneratorSpecs.swift */; };
 		0EEE1F2224322EBA001D006A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EEE1F2024322EBA001D006A /* Localizable.strings */; };
 		0EF3C3D4243A6113007224DA /* String+Prefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF3C3D3243A6113007224DA /* String+Prefix.swift */; };
+		8318B222243C829D00F19AAD /* DeviceGuru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8318B221243C829D00F19AAD /* DeviceGuru.framework */; };
 		83252A12242F63B1001E6D63 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A11242F63B1001E6D63 /* NetworkClient.swift */; };
 		83252A14242F6C22001E6D63 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A13242F6C22001E6D63 /* NetworkRequest.swift */; };
 		83252A16242F6EEA001E6D63 /* UrlRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A15242F6EEA001E6D63 /* UrlRequestBuilder.swift */; };
@@ -373,6 +374,7 @@
 		629C5CDB70E5FFFB2E1902F9 /* Pods-ProteGOTests.debug_stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGOTests.debug_stg.xcconfig"; path = "Target Support Files/Pods-ProteGOTests/Pods-ProteGOTests.debug_stg.xcconfig"; sourceTree = "<group>"; };
 		6F3458DDABC1020B1EB7984F /* Pods_ProteGO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProteGO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FF92F7BC5F1F6B6F1CDF1E8 /* Pods-ProteGOTests.release_stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGOTests.release_stg.xcconfig"; path = "Target Support Files/Pods-ProteGOTests/Pods-ProteGOTests.release_stg.xcconfig"; sourceTree = "<group>"; };
+		8318B221243C829D00F19AAD /* DeviceGuru.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DeviceGuru.framework; path = Carthage/Build/iOS/DeviceGuru.framework; sourceTree = "<group>"; };
 		83252A11242F63B1001E6D63 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		83252A13242F6C22001E6D63 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		83252A15242F6EEA001E6D63 /* UrlRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlRequestBuilder.swift; sourceTree = "<group>"; };
@@ -513,6 +515,7 @@
 				0E3DD5C0242B764100C092E7 /* RxCocoa.framework in Frameworks */,
 				83252A22242FC728001E6D63 /* Reachability.framework in Frameworks */,
 				0E3DD5C1242B764100C092E7 /* SwiftTweaks.framework in Frameworks */,
+				8318B222243C829D00F19AAD /* DeviceGuru.framework in Frameworks */,
 				0E3DD5C2242B764100C092E7 /* Swinject.framework in Frameworks */,
 				0E3DD5C4242B764100C092E7 /* SnapKit.framework in Frameworks */,
 				0E3DD5C5242B764100C092E7 /* RxRelay.framework in Frameworks */,
@@ -689,6 +692,7 @@
 		0E3DD5B2242B764100C092E7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8318B221243C829D00F19AAD /* DeviceGuru.framework */,
 				0EB372CA2438A20800884C93 /* Lottie.framework */,
 				83252A21242FC728001E6D63 /* Reachability.framework */,
 				0EE60C59242FFB3D00D29048 /* Valet.framework */,

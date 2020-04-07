@@ -9,3 +9,4 @@ $(SRCROOT)/Carthage/Build/iOS/SnapKit.framework
 $(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework
 $(SRCROOT)/Carthage/Build/iOS/Reachability.framework
 $(SRCROOT)/Carthage/Build/iOS/Valet.framework
+$(SRCROOT)/Carthage/Build/iOS/DeviceGuru.framework
