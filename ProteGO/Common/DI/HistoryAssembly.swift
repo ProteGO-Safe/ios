@@ -45,8 +45,8 @@ final class HistoryOverviewAssembly: Assembly {
     private func registerHistoryOverviewModel(_ container: Container) {
         container.register(HistoryOverviewModelType.self) { resolver in
             let encountersManager: EncountersManagerType = resolver.resolve(EncountersManagerType.self)
-            let valet: Valet = resolver.resolve(Valet.self)
-            return HistoryOverviewModel(encountersManager: encountersManager, valet: valet)
+            let keychainProvider: KeychainProviderType = resolver.resolve(KeychainProviderType.self)
+            return HistoryOverviewModel(encountersManager: encountersManager, keychainProvider: keychainProvider)
         }
     }
 

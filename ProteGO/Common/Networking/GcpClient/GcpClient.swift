@@ -23,15 +23,17 @@ final class GcpClient: GcpClientType {
         self.registrationManager = registrationManager
     }
 
-    func registerDevice(msisdn: String) -> Single<Result<RegisterDeviceResult, Error>> {
+    func registerDevice(msisdn: String) -> Single<Result<RegisterDeviceResponse, Error>> {
         let request = requestBuilder.registerDeviceRequest(msisdn: msisdn)
 
         let endpoint = GcpEndpoint.registerDevice(request)
         return networkClient.rx.dataTask(networkRequest: endpoint.networkRequest)
-            .map({ result -> Result<RegisterDeviceResult, Error> in
+            .map({ result -> Result<RegisterDeviceResponse, Error> in
                 return result.flatMap { data in
                     do {
-                        let decoded = try JSONDecoder().decode(RegisterDeviceResult.self, from: data)
+                        let decoder = JSONDecoder()
+                        decoder.keyDecodingStrategy = .convertFromSnakeCase
+                        let decoded = try decoder.decode(RegisterDeviceResponse.self, from: data)
                         return .success(decoded)
                     } catch {
                         return .failure(GcpClientError.failedToDecodeResponseData(error))
@@ -52,7 +54,7 @@ final class GcpClient: GcpClientType {
             })
     }
 
-    func confirmRegistration(code: String) -> Single<Result<ConfirmRegistrationResult, Error>> {
+    func confirmRegistration(code: String) -> Single<Result<ConfirmRegistrationResponse, Error>> {
         guard let request = requestBuilder.confirmRegistrationRequest(code: code) else {
             return .just(.failure(GcpClientError.failedToBuildRequest))
         }
@@ -60,10 +62,12 @@ final class GcpClient: GcpClientType {
         let endpoint = GcpEndpoint.confirmRegistration(request)
 
         return networkClient.rx.dataTask(networkRequest: endpoint.networkRequest)
-            .map({ result -> Result<ConfirmRegistrationResult, Error> in
+            .map({ result -> Result<ConfirmRegistrationResponse, Error> in
                 return result.flatMap { data in
                     do {
-                        let decoded = try JSONDecoder().decode(ConfirmRegistrationResult.self, from: data)
+                        let decoder = JSONDecoder()
+                        decoder.keyDecodingStrategy = .convertFromSnakeCase
+                        let decoded = try decoder.decode(ConfirmRegistrationResponse.self, from: data)
                         return .success(decoded)
                     } catch {
                         return .failure(GcpClientError.failedToDecodeResponseData(error))
@@ -76,6 +80,37 @@ final class GcpClient: GcpClientType {
                     self?.registrationManager.confirmRegistration(userId: result.userId)
                 case .failure(let error):
                     logger.error("Failed to verify registration code: \(error)")
+                }
+            })
+    }
+
+    func getStatus() -> Single<Result<GetStatusResponse, Error>> {
+        guard let request = requestBuilder.getStatusRequest() else {
+            return .just(.failure(GcpClientError.failedToBuildRequest))
+        }
+
+        let endpoint = GcpEndpoint.getStatus(request)
+
+        return networkClient.rx.dataTask(networkRequest: endpoint.networkRequest)
+            .map({ result -> Result<GetStatusResponse, Error> in
+                return result.flatMap { data in
+                    do {
+                        let decoder = JSONDecoder()
+                        decoder.dateDecodingStrategy = .formatted(DateFormatter.yyyyMMddHHmmss)
+                        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+                        let decoded = try decoder.decode(GetStatusResponse.self, from: data)
+                        return .success(decoded)
+                    } catch {
+                        return .failure(GcpClientError.failedToDecodeResponseData(error))
+                    }
+                }
+            }).do(onSuccess: { result in
+                switch result {
+                case .success:
+                    logger.debug("Did recieved status")
+                case .failure(let error):
+                    logger.error("Failed to recieved status: \(error)")
                 }
             })
     }

@@ -1,6 +1,6 @@
 import Foundation
 
-struct RegisterDeviceResult: Decodable {
+struct RegisterDeviceResponse: Decodable {
 
     let registrationId: String
 
@@ -8,6 +8,6 @@ struct RegisterDeviceResult: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case debugCode = "code"
-        case registrationId = "registration_id"
+        case registrationId
     }
 }

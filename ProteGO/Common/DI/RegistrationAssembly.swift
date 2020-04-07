@@ -13,7 +13,7 @@ final class RegistrationAssembly: Assembly {
 
     private func registerRegistrationManager(_ container: Container) {
         container.register(RegistrationManagerType.self) { resolver in
-            return RegistrationManager(valet: resolver.resolve(Valet.self))
+            return RegistrationManager(keychainProvider: resolver.resolve(KeychainProviderType.self))
         }.inObjectScope(.container)
     }
 

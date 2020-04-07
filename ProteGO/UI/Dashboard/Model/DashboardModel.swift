@@ -3,7 +3,6 @@ import RxSwift
 import RxCocoa
 
 final class DashboardModel: DashboardModelType {
-
     var currentStatus: BehaviorRelay<DangerStatus> {
         return self.dangerStatusManager.currentStatus
     }
@@ -12,5 +11,9 @@ final class DashboardModel: DashboardModelType {
 
     init(dangerStatusManager: DangerStatusManagerType) {
         self.dangerStatusManager = dangerStatusManager
+    }
+
+    func updateCurrentDangerStatus() {
+        self.dangerStatusManager.updateCurrentDangerStatus()
     }
 }

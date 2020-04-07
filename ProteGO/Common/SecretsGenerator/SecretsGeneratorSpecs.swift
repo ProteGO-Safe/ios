@@ -4,24 +4,24 @@ import Quick
 import Nimble
 @testable import ProteGO
 
-//swiftlint:disable force_unwrapping force_try
+//swiftlint:disable force_try
 class SecretsGeneratorSpecs: QuickSpec {
     override func spec() {
         describe("SecretsGenerator") {
             var sut: SecretsGenerator!
-            var testValet: Valet!
+            var keychainMock: KeychainProviderType!
 
             beforeEach {
-                testValet = Valet.valet(with: Identifier(nonEmpty: "SecretsGeneratorSpecs")!, accessibility: .always)
-                testValet.removeAllObjects()
-                sut = SecretsGenerator(valet: testValet)
+                keychainMock = KeychainProviderMock()
+                keychainMock.removeAllObjects()
+                sut = SecretsGenerator(keychainProvider: keychainMock)
             }
 
             context("realm encyption key") {
                 var value: Data!
 
                 beforeEach {
-                    testValet.removeAllObjects()
+                    keychainMock.removeAllObjects()
                 }
 
                 context("after initializing") {
@@ -54,7 +54,7 @@ class SecretsGeneratorSpecs: QuickSpec {
                     var value2: Data!
                     beforeEach {
                         value = try! sut.getRealmEncryptionKey()
-                        testValet.removeAllObjects()
+                        keychainMock.removeAllObjects()
                         value2 = try! sut.getRealmEncryptionKey()
                     }
 

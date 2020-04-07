@@ -6,7 +6,7 @@ import Valet
 
 final class HistoryOverviewModel: HistoryOverviewModelType {
     var phoneId: String {
-        guard let text = self.valet.string(forKey: Constants.KeychainKeys.userIdKey) else {
+        guard let text = self.keychainProvider.string(forKey: Constants.KeychainKeys.userIdKey) else {
             return L10n.dashboardInfoIdPlacehloder
         }
         return text.prefix(withLengthRatio: Constants.HistorySend.userIdPrefixLengthRatio)
@@ -18,15 +18,15 @@ final class HistoryOverviewModel: HistoryOverviewModelType {
 
     private let encountersManager: EncountersManagerType
 
-    private let valet: Valet
+    private let keychainProvider: KeychainProviderType
 
     private var lastHistoryDateUpdatingTimer: Timer?
 
     private var notificationToken: NotificationToken?
 
-    init(encountersManager: EncountersManagerType, valet: Valet) {
+    init(encountersManager: EncountersManagerType, keychainProvider: KeychainProviderType) {
         self.encountersManager = encountersManager
-        self.valet = valet
+        self.keychainProvider = keychainProvider
 
         self.historyLastDate = BehaviorRelay<Date>(value: Date())
         self.lastSeenDevicesCount = BehaviorRelay<Int>(value: 0)
