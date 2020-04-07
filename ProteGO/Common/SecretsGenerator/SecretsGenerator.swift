@@ -3,7 +3,7 @@ import Valet
 
 final class SecretsGenerator: SecretsGeneratorType {
     func getRealmEncryptionKey() throws -> Data {
-        if let key = self.valet.object(forKey: Constants.KeychainKeys.realmEncryptionKey) {
+        if let key = self.keychainProvider.object(forKey: Constants.KeychainKeys.realmEncryptionKey) {
             return key
         }
 
@@ -16,14 +16,14 @@ final class SecretsGenerator: SecretsGeneratorType {
         }
 
         let key = Data(bytes: bytes, count: Constants.Realm.encryptionKeyLength)
-        self.valet.set(object: key, forKey: Constants.KeychainKeys.realmEncryptionKey)
+        self.keychainProvider.set(object: key, forKey: Constants.KeychainKeys.realmEncryptionKey)
         return key
     }
 
-    private let valet: Valet
+    private let keychainProvider: KeychainProviderType
 
-    init(valet: Valet) {
-        self.valet = valet
+    init(keychainProvider: KeychainProviderType) {
+        self.keychainProvider = keychainProvider
     }
 }
 

@@ -100,6 +100,10 @@
 		0EE60C5F2430015E00D29048 /* SecretsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE60C5E2430015E00D29048 /* SecretsGenerator.swift */; };
 		0EE60C612430017A00D29048 /* SecretsGeneratorSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE60C602430017A00D29048 /* SecretsGeneratorSpecs.swift */; };
 		0EEE1F2224322EBA001D006A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EEE1F2024322EBA001D006A /* Localizable.strings */; };
+		0EF3C3D6243CA1B1007224DA /* BeaconIdSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF3C3D5243CA1B1007224DA /* BeaconIdSpecs.swift */; };
+		0EF3C3DB243CB908007224DA /* KeychainProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF3C3DA243CB908007224DA /* KeychainProviderType.swift */; };
+		0EF3C3DD243CB94A007224DA /* KeychainProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF3C3DC243CB94A007224DA /* KeychainProvider.swift */; };
+		0EF3C3E2243CBB0E007224DA /* KeychainProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF3C3E1243CBB0E007224DA /* KeychainProviderMock.swift */; };
 		83252A12242F63B1001E6D63 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A11242F63B1001E6D63 /* NetworkClient.swift */; };
 		83252A14242F6C22001E6D63 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A13242F6C22001E6D63 /* NetworkRequest.swift */; };
 		83252A16242F6EEA001E6D63 /* UrlRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A15242F6EEA001E6D63 /* UrlRequestBuilder.swift */; };
@@ -109,9 +113,9 @@
 		83252A6324314B9A001E6D63 /* GcpClientType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A6224314B99001E6D63 /* GcpClientType.swift */; };
 		83252A6524314BD7001E6D63 /* GcpEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A6424314BD7001E6D63 /* GcpEndpoint.swift */; };
 		83252A6A24314C74001E6D63 /* RegisterDeviceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A6924314C74001E6D63 /* RegisterDeviceRequest.swift */; };
-		83252A6C24314C99001E6D63 /* RegisterDeviceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A6B24314C99001E6D63 /* RegisterDeviceResult.swift */; };
+		83252A6C24314C99001E6D63 /* RegisterDeviceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A6B24314C99001E6D63 /* RegisterDeviceResponse.swift */; };
 		83252A6E24314CFE001E6D63 /* ConfirmRegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A6D24314CFE001E6D63 /* ConfirmRegistrationRequest.swift */; };
-		83252A7024314D17001E6D63 /* ConfirmRegistrationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A6F24314D16001E6D63 /* ConfirmRegistrationResult.swift */; };
+		83252A7024314D17001E6D63 /* ConfirmRegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A6F24314D16001E6D63 /* ConfirmRegistrationResponse.swift */; };
 		83252A7624314EFF001E6D63 /* DefaultRequestParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A7524314EFF001E6D63 /* DefaultRequestParameters.swift */; };
 		83252A782431519F001E6D63 /* NetworkingAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A772431519F001E6D63 /* NetworkingAssembly.swift */; };
 		83252A7C24320586001E6D63 /* Constants+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83252A7B24320586001E6D63 /* Constants+Networking.swift */; };
@@ -338,6 +342,10 @@
 		0EEE1F1D24321BFB001D006A /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		0EEE1F1E24321BFB001D006A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0EEE1F1F24321BFB001D006A /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = Podfile; sourceTree = "<group>"; };
+		0EF3C3D5243CA1B1007224DA /* BeaconIdSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconIdSpecs.swift; sourceTree = "<group>"; };
+		0EF3C3DA243CB908007224DA /* KeychainProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProviderType.swift; sourceTree = "<group>"; };
+		0EF3C3DC243CB94A007224DA /* KeychainProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProvider.swift; sourceTree = "<group>"; };
+		0EF3C3E1243CBB0E007224DA /* KeychainProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainProviderMock.swift; sourceTree = "<group>"; };
 		110266AD057C4616D8381F24 /* Pods_ProteGOTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProteGOTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		224859AED1D43B79EDE86275 /* Pods-ProteGOTests.release_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGOTests.release_prod.xcconfig"; path = "Target Support Files/Pods-ProteGOTests/Pods-ProteGOTests.release_prod.xcconfig"; sourceTree = "<group>"; };
 		482FB5D89F5573E25359B6EB /* Pods-ProteGO.release_dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGO.release_dev.xcconfig"; path = "Target Support Files/Pods-ProteGO/Pods-ProteGO.release_dev.xcconfig"; sourceTree = "<group>"; };
@@ -355,9 +363,9 @@
 		83252A6224314B99001E6D63 /* GcpClientType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GcpClientType.swift; sourceTree = "<group>"; };
 		83252A6424314BD7001E6D63 /* GcpEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GcpEndpoint.swift; sourceTree = "<group>"; };
 		83252A6924314C74001E6D63 /* RegisterDeviceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDeviceRequest.swift; sourceTree = "<group>"; };
-		83252A6B24314C99001E6D63 /* RegisterDeviceResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDeviceResult.swift; sourceTree = "<group>"; };
+		83252A6B24314C99001E6D63 /* RegisterDeviceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDeviceResponse.swift; sourceTree = "<group>"; };
 		83252A6D24314CFE001E6D63 /* ConfirmRegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationRequest.swift; sourceTree = "<group>"; };
-		83252A6F24314D16001E6D63 /* ConfirmRegistrationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationResult.swift; sourceTree = "<group>"; };
+		83252A6F24314D16001E6D63 /* ConfirmRegistrationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRegistrationResponse.swift; sourceTree = "<group>"; };
 		83252A7524314EFF001E6D63 /* DefaultRequestParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequestParameters.swift; sourceTree = "<group>"; };
 		83252A772431519F001E6D63 /* NetworkingAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingAssembly.swift; sourceTree = "<group>"; };
 		83252A7B24320586001E6D63 /* Constants+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Networking.swift"; sourceTree = "<group>"; };
@@ -613,6 +621,7 @@
 		0E5C2085242B63460038EF8B /* ProteGOTests */ = {
 			isa = PBXGroup;
 			children = (
+				0EF3C3E0243CBAFE007224DA /* KeychainProvider */,
 				0EB372DC243A2B2400884C93 /* GcpClient */,
 				0E9DCC972430985E00C2670D /* RealmManager */,
 				0E9DCC89243010C900C2670D /* SecretsGenerator */,
@@ -624,6 +633,7 @@
 		0E6D2603242E8B540037A80C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0EF3C3D9243CB8EE007224DA /* KeychainProvider */,
 				83DC1EEE24361F0F006E54A9 /* RegistrationManager */,
 				83DC1EDE2435F008006E54A9 /* UserDefaults */,
 				83512C4324357E92007DB8AD /* KeyboardManager */,
@@ -1044,6 +1054,23 @@
 			path = SecretsGenerator;
 			sourceTree = "<group>";
 		};
+		0EF3C3D9243CB8EE007224DA /* KeychainProvider */ = {
+			isa = PBXGroup;
+			children = (
+				0EF3C3DA243CB908007224DA /* KeychainProviderType.swift */,
+				0EF3C3DC243CB94A007224DA /* KeychainProvider.swift */,
+			);
+			path = KeychainProvider;
+			sourceTree = "<group>";
+		};
+		0EF3C3E0243CBAFE007224DA /* KeychainProvider */ = {
+			isa = PBXGroup;
+			children = (
+				0EF3C3E1243CBB0E007224DA /* KeychainProviderMock.swift */,
+			);
+			path = KeychainProvider;
+			sourceTree = "<group>";
+		};
 		83252A0A242F6043001E6D63 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -1091,7 +1118,7 @@
 			isa = PBXGroup;
 			children = (
 				83252A6D24314CFE001E6D63 /* ConfirmRegistrationRequest.swift */,
-				83252A6F24314D16001E6D63 /* ConfirmRegistrationResult.swift */,
+				83252A6F24314D16001E6D63 /* ConfirmRegistrationResponse.swift */,
 			);
 			path = ConfirmRegistration;
 			sourceTree = "<group>";
@@ -1100,7 +1127,7 @@
 			isa = PBXGroup;
 			children = (
 				83252A6924314C74001E6D63 /* RegisterDeviceRequest.swift */,
-				83252A6B24314C99001E6D63 /* RegisterDeviceResult.swift */,
+				83252A6B24314C99001E6D63 /* RegisterDeviceResponse.swift */,
 			);
 			path = RegisterDevice;
 			sourceTree = "<group>";
@@ -1606,6 +1633,7 @@
 			children = (
 				877F3F742434AB5700F774C7 /* BeaconId.swift */,
 				877F3F842435216C00F774C7 /* ExpiringBeaconId.swift */,
+				0EF3C3D5243CA1B1007224DA /* BeaconIdSpecs.swift */,
 			);
 			path = BeaconId;
 			sourceTree = "<group>";
@@ -1969,13 +1997,14 @@
 				0E9DCCA52430C9CE00C2670D /* RegisteredEncountersDebugViewModel.swift in Sources */,
 				8362C2B62436B05500E2AEDB /* RegistrationVerifyCodeViewModelType.swift in Sources */,
 				8382897224332D2A0054347B /* UILabel+Factory.swift in Sources */,
+				0EF3C3DD243CB94A007224DA /* KeychainProvider.swift in Sources */,
 				0E9DCC8824300CC600C2670D /* Constants+KeychainKeys.swift in Sources */,
 				83512C42243522C2007DB8AD /* OnboardingVIewModelType.swift in Sources */,
 				83512C4024351EAA007DB8AD /* OnboardingViewModel.swift in Sources */,
 				0E22F92E2434DFDE008AD8EB /* DangerStatusCardBottomModule.swift in Sources */,
 				0E22F9282434A861008AD8EB /* UIStackView+AddArrangedSubviews.swift in Sources */,
 				0E9DDA6E2430D2D9002D879F /* DebugAssembly.swift in Sources */,
-				83252A6C24314C99001E6D63 /* RegisterDeviceResult.swift in Sources */,
+				83252A6C24314C99001E6D63 /* RegisterDeviceResponse.swift in Sources */,
 				833181932433A09B00A8E18D /* UIImage+AspectRatio.swift in Sources */,
 				0E8DED322433D0CC00D7F806 /* DangerStatus.swift in Sources */,
 				83DC1EFF24369C62006E54A9 /* RequestBuilderType.swift in Sources */,
@@ -2038,6 +2067,7 @@
 				83252A8C24322160001E6D63 /* RootViewController.swift in Sources */,
 				83512C262434D063007DB8AD /* OnboardingWelcomeStepView.swift in Sources */,
 				0EB65C7F2435284800491507 /* HistoryOverviewViewModel.swift in Sources */,
+				0EF3C3DB243CB908007224DA /* KeychainProviderType.swift in Sources */,
 				0ECE7A212430E48200EED942 /* BluetoothDebugItems.swift in Sources */,
 				0E965352242F81D400ADD300 /* DebugMenu.swift in Sources */,
 				83512C282434D06F007DB8AD /* OnboardingStatusStepView.swift in Sources */,
@@ -2063,7 +2093,7 @@
 				0E8DED302433CCCF00D7F806 /* DangerStatusManagerType.swift in Sources */,
 				836DF51B24334C14000C00C0 /* RegistrationViewModel.swift in Sources */,
 				836DF51F24334C29000C00C0 /* RegistrationModel.swift in Sources */,
-				83252A7024314D17001E6D63 /* ConfirmRegistrationResult.swift in Sources */,
+				83252A7024314D17001E6D63 /* ConfirmRegistrationResponse.swift in Sources */,
 				83828A052433350C0054347B /* FontStyle.swift in Sources */,
 				8382897524332D3D0054347B /* UIScreen+Size.swift in Sources */,
 				838289CF243330D10054347B /* RegistrationVerifyCodeView.swift in Sources */,
@@ -2122,8 +2152,10 @@
 				0EB372DE243A2B3100884C93 /* GcpClientMock.swift in Sources */,
 				877F3F7A2434B4F100F774C7 /* Data+HexString.swift in Sources */,
 				0E9DCC992430987000C2670D /* RealmManagerMock.swift in Sources */,
+				0EF3C3E2243CBB0E007224DA /* KeychainProviderMock.swift in Sources */,
 				0EE60C612430017A00D29048 /* SecretsGeneratorSpecs.swift in Sources */,
 				0E9DCC8F2430150000C2670D /* RealmManagerSpecs.swift in Sources */,
+				0EF3C3D6243CA1B1007224DA /* BeaconIdSpecs.swift in Sources */,
 				0E9DCC962430985900C2670D /* EncountersManagerSpecs.swift in Sources */,
 				0E9DCC8B243010DC00C2670D /* SecretsGeneratorMock.swift in Sources */,
 			);

@@ -48,13 +48,15 @@ enum GcpEndpoint {
     }
 
     private var body: Data? {
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
         switch self {
         case .registerDevice(let body):
-            return try? JSONEncoder().encode(body)
+            return try? encoder.encode(body)
         case .confirmRegistration(let body):
-            return try? JSONEncoder().encode(body)
+            return try? encoder.encode(body)
         case .getStatus(let body):
-            return try? JSONEncoder().encode(body)
+            return try? encoder.encode(body)
         }
     }
 }

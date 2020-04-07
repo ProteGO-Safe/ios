@@ -6,7 +6,7 @@ import Valet
 
 final class HistoryOverviewModel: HistoryOverviewModelType {
     var phoneId: String {
-        return self.valet.string(forKey: Constants.KeychainKeys.userIdKey) ?? L10n.dashboardInfoIdPlacehloder
+        return self.keychainProvider.string(forKey: Constants.KeychainKeys.userIdKey) ?? L10n.dashboardInfoIdPlacehloder
     }
 
     var historyLastDate: BehaviorRelay<Date>
@@ -15,15 +15,15 @@ final class HistoryOverviewModel: HistoryOverviewModelType {
 
     private let encountersManager: EncountersManagerType
 
-    private let valet: Valet
+    private let keychainProvider: KeychainProviderType
 
     private var lastHistoryDateUpdatingTimer: Timer?
 
     private var notificationToken: NotificationToken?
 
-    init(encountersManager: EncountersManagerType, valet: Valet) {
+    init(encountersManager: EncountersManagerType, keychainProvider: KeychainProviderType) {
         self.encountersManager = encountersManager
-        self.valet = valet
+        self.keychainProvider = keychainProvider
 
         self.historyLastDate = BehaviorRelay<Date>(value: Date())
         self.lastSeenDevicesCount = BehaviorRelay<Int>(value: 0)

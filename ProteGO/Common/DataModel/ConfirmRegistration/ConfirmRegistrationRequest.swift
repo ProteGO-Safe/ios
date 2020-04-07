@@ -20,7 +20,7 @@ struct ConfirmRegistrationRequest: Encodable {
 
     enum CodingKeys: String, CodingKey {
         case code
-        case registrationId = "registration_id"
+        case registrationId
         case platform
         case osVersion
         case deviceType

@@ -1,12 +1,12 @@
 import Foundation
 
 struct GetStatusResponseBeaconId: Decodable {
-    let beaconId: String
+    let beaconId: BeaconId
 
     let date: Date
 
     enum CodingKeys: String, CodingKey {
-        case beaconId = "beacon_id"
+        case beaconId
         case date
     }
 }
@@ -19,6 +19,6 @@ struct GetStatusResponse: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case status
-        case beaconIds = "beacon_ids"
+        case beaconIds
     }
 }

@@ -1,7 +1,7 @@
 import Foundation
 
 extension DateFormatter {
-  static let yyyMMddHHmmss: DateFormatter = {
+  static let yyyyMMddHHmmss: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyyMMddHHmmss"
     formatter.timeZone = TimeZone(identifier: "CET")

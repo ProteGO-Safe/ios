@@ -7,7 +7,7 @@ final class GeneralAssembly: Assembly {
         registerRealm(container)
         registerFilesCoordinator(container)
         registerSecretsGenerator(container)
-        registerValet(container)
+        registerKeychainProvider(container)
         registerEncountersManager(container)
         registerDangerStatusManager(container)
         registerDefaultsService(container)
@@ -31,15 +31,18 @@ final class GeneralAssembly: Assembly {
 
     private func registerSecretsGenerator(_ container: Container) {
         container.register(SecretsGeneratorType.self) { resolver in
-            return SecretsGenerator(valet: resolver.resolve(Valet.self))
+            return SecretsGenerator(keychainProvider: resolver.resolve(KeychainProviderType.self))
         }
     }
 
-    private func registerValet(_ container: Container) {
-        container.register(Valet.self) { _ in
-            //swiftlint:disable force_unwrapping
-            let sandboxId = Identifier(nonEmpty: Constants.ValetSandboxIds.secrets)!
-            return Valet.valet(with: sandboxId, accessibility: .afterFirstUnlock)
+    private func registerKeychainProvider(_ container: Container) {
+        container.register(KeychainProviderType.self) { _ in
+            guard let sandboxId = Identifier(nonEmpty: Constants.ValetSandboxIds.secrets) else {
+                logger.error("Fatal error: failed to generate Kaychain Id")
+                fatalError()
+            }
+
+            return KeychainProvider(identifier: sandboxId, accessibility: .afterFirstUnlock)
         }.inObjectScope(.container)
     }
 
@@ -54,7 +57,7 @@ final class GeneralAssembly: Assembly {
     private func registerDangerStatusManager(_ container: Container) {
         container.register(DangerStatusManagerType.self) { resolver in
             return DangerStatusManager(gcpClient: resolver.resolve(GcpClientType.self),
-                                       valet: resolver.resolve(Valet.self))
+                                       keychainProvider: resolver.resolve(KeychainProviderType.self))
         }.inObjectScope(.container)
     }
 

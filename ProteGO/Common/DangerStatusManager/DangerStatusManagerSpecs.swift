@@ -9,15 +9,15 @@ class DangerStatusManagerSpecs: QuickSpec {
     override func spec() {
         describe("DangerStatusManager") {
             var sut: DangerStatusManager!
-            var testValet: Valet!
+            var keychainMock: KeychainProviderType!
             var gcpClientMock: GcpClientMock!
 
             beforeEach {
-                testValet = Valet.valet(with: Identifier(nonEmpty: "SecretsGeneratorSpecs")!, accessibility: .always)
-                testValet.removeAllObjects()
+                keychainMock = KeychainProviderMock()
+                keychainMock.removeAllObjects()
                 gcpClientMock = GcpClientMock()
 
-                sut = DangerStatusManager(gcpClient: gcpClientMock, valet: testValet)
+                sut = DangerStatusManager(gcpClient: gcpClientMock, keychainProvider: keychainMock)
             }
 
             context("clear valet") {
@@ -28,8 +28,8 @@ class DangerStatusManagerSpecs: QuickSpec {
 
             context("valet with previously saved red status") {
                 beforeEach {
-                    testValet.set(string: DangerStatus.red.rawValue, forKey: Constants.KeychainKeys.currentDangerStatus)
-                    sut = DangerStatusManager(gcpClient: gcpClientMock, valet: testValet)
+                    keychainMock.set(string: DangerStatus.red.rawValue, forKey: Constants.KeychainKeys.currentDangerStatus)
+                    sut = DangerStatusManager(gcpClient: gcpClientMock, keychainProvider: keychainMock)
                 }
 
                 it("should return red status") {
@@ -48,13 +48,11 @@ class DangerStatusManagerSpecs: QuickSpec {
                 }
 
                 it("save green to the valet") {
-                    let rawValue = testValet.string(forKey: Constants.KeychainKeys.currentDangerStatus)
+                    let rawValue = keychainMock.string(forKey: Constants.KeychainKeys.currentDangerStatus)
                     expect(rawValue).toNot(beNil())
 
-                    if let rawValue = rawValue {
-                        let value = DangerStatus(rawValue: rawValue)
-                        expect(value).to(equal(DangerStatus.green))
-                    }
+                    let value = DangerStatus(rawValue: rawValue!)
+                    expect(value).to(equal(DangerStatus.green))
                 }
             }
         }

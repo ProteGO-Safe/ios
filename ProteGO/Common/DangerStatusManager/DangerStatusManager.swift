@@ -12,15 +12,15 @@ final class DangerStatusManager: DangerStatusManagerType {
 
     private let gcpClient: GcpClientType
 
-    private let valet: Valet
+    private let keychainProvider: KeychainProviderType
 
     private let disposeBag = DisposeBag()
 
-    init(gcpClient: GcpClientType, valet: Valet) {
+    init(gcpClient: GcpClientType, keychainProvider: KeychainProviderType) {
         self.gcpClient = gcpClient
-        self.valet = valet
+        self.keychainProvider = keychainProvider
 
-        let initialDangerStatus = valet.string(forKey: Constants.KeychainKeys.currentDangerStatus)
+        let initialDangerStatus = keychainProvider.string(forKey: Constants.KeychainKeys.currentDangerStatus)
             .flatMap(DangerStatus.init(rawValue:)) ?? .yellow
 
         self.currentStatus = BehaviorRelay<DangerStatus>(value: initialDangerStatus)
@@ -36,7 +36,7 @@ final class DangerStatusManager: DangerStatusManagerType {
             switch result {
             case .success(let result):
                 self.currentStatus.accept(result.status)
-                self.valet.set(string: result.status.rawValue, forKey: Constants.KeychainKeys.currentDangerStatus)
+                self.keychainProvider.set(string: result.status.rawValue, forKey: Constants.KeychainKeys.currentDangerStatus)
             case .failure(let error):
                 logger.error("Error occurred during status update: \(error)")
                 return

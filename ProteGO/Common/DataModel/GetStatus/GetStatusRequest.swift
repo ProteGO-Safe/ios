@@ -17,12 +17,12 @@ struct GetStatusRequest: Encodable {
     let lang: String
 
     enum CodingKeys: String, CodingKey {
-        case userId = "user_id"
+        case userId
         case platform
-        case osVersion = "os_version"
-        case deviceType = "device_type"
-        case appVersion = "app_version"
-        case apiVersion = "api_version"
+        case osVersion
+        case deviceType
+        case appVersion
+        case apiVersion
         case lang
     }
 
