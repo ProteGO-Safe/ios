@@ -12,7 +12,7 @@ struct BeaconIdSpecsTester: Decodable {
 class BeaconIdSpecs: QuickSpec {
     override func spec() {
         describe("BeaconId") {
-            context("Creating beacond if from correct string") {
+            context("Creating beacond id from correct string") {
                 let testStructure = "{\"beacon\":\"0123456789ABCDEF0123456789ABCDEF\"}"
                 let expectedBytes: [UInt8] = [0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF, 0x01, 0x23, 0x45, 0x67, 0x89,
                                               0xAB, 0xCD, 0xEF]
