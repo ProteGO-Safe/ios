@@ -1,4 +1,5 @@
 import UIKit
+import DeviceGuru
 
 struct DefaultRequestParameters {
 
@@ -6,7 +7,7 @@ struct DefaultRequestParameters {
 
     let osVersion = UIDevice.current.systemVersion
 
-    let deviceType = UIDevice.current.name
+    let deviceType = DeviceGuru().hardwareSimpleDescription() ?? "unknown"
 
     let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
 
