@@ -123,7 +123,7 @@ final class SendHistoryResultDialogView: UIView {
     }
 
     private func configure(success: Bool) {
-        self.dialogContainer.backgroundColor = success ? Colors.bluishGreen : Colors.macaroniAndCheese
+        self.dialogContainer.backgroundColor = success ? UIColor(asset: Assets.bluishGreen) : UIColor(asset: Assets.macaroniAndCheese)
         titleLabel.text = success ? L10n.sendDataAlertSuccessTitle : L10n.sendDataAlertFailureTitle
         descriptionLabel.text = success ? L10n.sendDataAlertSuccessDescription : L10n.sendDataAlertFailureDescription
     }

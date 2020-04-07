@@ -37,8 +37,8 @@ final class HistoryOverviewView: UIView {
     private let sendHistoryButton: UIButton = {
         let button = UIButton.rectButton(text: L10n.dashboardInfoSendDataBtn)
         button.setBackgroundColor(.white, forState: .normal)
-        button.setBackgroundColor(Colors.darkSeaGreen, forState: .highlighted)
-        button.setTitleColor(Colors.bluishGreen, for: .normal)
+        button.setBackgroundColor(UIColor(asset: Assets.darkSeaGreen), forState: .highlighted)
+        button.setTitleColor(UIColor(asset: Assets.bluishGreen), for: .normal)
         button.setTitleColor(.white, for: .highlighted)
         return button
     }()
@@ -97,7 +97,7 @@ final class HistoryOverviewView: UIView {
 
     init() {
         super.init(frame: .zero)
-        backgroundColor = Colors.bluishGreen
+        backgroundColor = UIColor(asset: Assets.bluishGreen)
         self.addSubviews()
         self.createConstraints()
     }

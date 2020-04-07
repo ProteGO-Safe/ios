@@ -29,9 +29,9 @@ enum FontStyle {
     var color: UIColor {
         switch self {
         case .headline, .subtitle, .title:
-            return Colors.lightBlack
+            return UIColor(asset: Assets.lightBlack)
         case .body, .captions:
-            return Colors.greyishBrown
+            return UIColor(asset: Assets.greyishBrown)
         case .bodySmall:
             return .white
         }

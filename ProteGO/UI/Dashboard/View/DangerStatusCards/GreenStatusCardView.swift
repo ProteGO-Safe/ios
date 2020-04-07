@@ -6,7 +6,7 @@ import RxCocoa
 final class GreenStatusCardView: DangerStatusCardView {
     init() {
         let config = DangerStatusCardConfig(
-            color: Colors.bluishGreen,
+            color: UIColor(asset: Assets.bluishGreen),
             titleText: L10n.dashboardGreenStatusTitle,
             firstParagraphText: L10n.dashboardGreenStatusDescription)
 

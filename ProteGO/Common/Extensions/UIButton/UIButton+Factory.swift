@@ -5,7 +5,7 @@ extension UIButton {
     static func rectButton(text: String,
                            textColor: UIColor = .white,
                            textFont: UIFont = Fonts.poppinsMedium(16).font,
-                           backgroundColor: UIColor = Colors.bluishGreen,
+                           backgroundColor: UIColor = UIColor(asset: Assets.bluishGreen),
                            borderColor: UIColor? = nil,
                            cornerRadius: CGFloat = 4) -> UIButton {
         let button = UIButton.rectButton(textColor: textColor,
@@ -19,7 +19,7 @@ extension UIButton {
 
     static func rectButton(textColor: UIColor = .white,
                            textFont: UIFont = Fonts.poppinsMedium(16).font,
-                           backgroundColor: UIColor = Colors.bluishGreen,
+                           backgroundColor: UIColor = UIColor(asset: Assets.bluishGreen),
                            borderColor: UIColor? = nil,
                            cornerRadius: CGFloat = 4) -> UIButton {
 

@@ -2,12 +2,14 @@ import UIKit
 
 final class StatusDescriptionsContainerView: UIView {
 
-    private let greenStatusView = StatusDesciptionView(color: Colors.bluishGreen, text: L10n.onboardingGreenDescription)
+    private let greenStatusView = StatusDesciptionView(color: UIColor(asset: Assets.bluishGreen),
+                                                       text: L10n.onboardingGreenDescription)
 
-    private let yellowStatusView = StatusDesciptionView(color: Colors.macaroniAndCheese,
+    private let yellowStatusView = StatusDesciptionView(color: UIColor(asset: Assets.macaroniAndCheese),
                                                         text: L10n.onboardingYellowDescription)
 
-    private let redStatusView = StatusDesciptionView(color: Colors.copper, text: L10n.onboardingRedDescription)
+    private let redStatusView = StatusDesciptionView(color: UIColor(asset: Assets.copper),
+                                                     text: L10n.onboardingRedDescription)
 
     init() {
         super.init(frame: .zero)

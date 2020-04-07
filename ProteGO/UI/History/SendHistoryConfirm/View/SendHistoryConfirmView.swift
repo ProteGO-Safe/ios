@@ -35,7 +35,7 @@ final class SendHistoryConfirmView: UIView {
     private let yourIdLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = Fonts.poppinsBold(24).font
-        label.textColor = Colors.bluishGreen
+        label.textColor = UIColor(asset: Assets.bluishGreen)
         label.numberOfLines = 2
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
@@ -44,7 +44,7 @@ final class SendHistoryConfirmView: UIView {
 
     private let sendHistoryButton: UIButton = {
         let button = UIButton.rectButton(text: L10n.sendDataSendButton, textColor: .white)
-        button.setBackgroundColor(Colors.darkSeaGreen, forState: .highlighted)
+        button.setBackgroundColor(UIColor(asset: Assets.darkSeaGreen), forState: .highlighted)
         return button
     }()
 

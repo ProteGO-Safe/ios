@@ -4,3 +4,13 @@ strings:
   outputs:
     - templatePath: ../../Pods/SwiftGen/templates/strings/structured-swift4.stencil
       output: ../../ProteGO/Common/Constants/L10n.swift
+      
+      
+xcassets:
+    inputs:
+        - ../../ProteGO/Resources/Colors/Colors.xcassets
+    outputs:
+        templateName: swift4
+        output: ../../ProteGO/Resources/Colors/Colors.swift
+        params:
+            enumName: Assets

@@ -171,9 +171,7 @@
 		836DF51F24334C29000C00C0 /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DF51E24334C29000C00C0 /* RegistrationModel.swift */; };
 		836DF52124334C31000C00C0 /* RegistrationModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DF52024334C31000C00C0 /* RegistrationModelType.swift */; };
 		836FE6FE243755920024D83F /* Constants+Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836FE6FD243755920024D83F /* Constants+Environment.swift */; };
-		8382896924332CBB0054347B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382896724332C350054347B /* Colors.swift */; };
 		8382896C24332CF40054347B /* UIButton+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382896B24332CF40054347B /* UIButton+Factory.swift */; };
-		8382896F24332D170054347B /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382896E24332D170054347B /* UIColor+Hex.swift */; };
 		8382897224332D2A0054347B /* UILabel+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382897124332D2A0054347B /* UILabel+Factory.swift */; };
 		8382897524332D3D0054347B /* UIScreen+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382897424332D3D0054347B /* UIScreen+Size.swift */; };
 		8382897924332D670054347B /* UITextFireld+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8382897824332D670054347B /* UITextFireld+Factory.swift */; };
@@ -237,6 +235,8 @@
 		87C985FC242E0A8500335502 /* BleAdvertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C985FB242E0A8500335502 /* BleAdvertiser.swift */; };
 		87F259E92430A3E2009BF612 /* MockScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F259E82430A3E2009BF612 /* MockScanner.swift */; };
 		A63BFB76240CADB609E72685 /* Pods_ProteGO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F3458DDABC1020B1EB7984F /* Pods_ProteGO.framework */; };
+		D9D904A7243B51C200A58FE1 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9D904A6243B51C200A58FE1 /* Colors.xcassets */; };
+		D9D904AA243B556700A58FE1 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D904A9243B556700A58FE1 /* Colors.swift */; };
 		E6FC73238FEB0689D7FCA95C /* Pods_ProteGOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 110266AD057C4616D8381F24 /* Pods_ProteGOTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -431,9 +431,7 @@
 		836DF51E24334C29000C00C0 /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
 		836DF52024334C31000C00C0 /* RegistrationModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModelType.swift; sourceTree = "<group>"; };
 		836FE6FD243755920024D83F /* Constants+Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Environment.swift"; sourceTree = "<group>"; };
-		8382896724332C350054347B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		8382896B24332CF40054347B /* UIButton+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Factory.swift"; sourceTree = "<group>"; };
-		8382896E24332D170054347B /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		8382897124332D2A0054347B /* UILabel+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Factory.swift"; sourceTree = "<group>"; };
 		8382897424332D3D0054347B /* UIScreen+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Size.swift"; sourceTree = "<group>"; };
 		8382897824332D670054347B /* UITextFireld+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextFireld+Factory.swift"; sourceTree = "<group>"; };
@@ -500,6 +498,8 @@
 		9700318292BE5F27EB17208D /* Pods-ProteGO.release_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGO.release_prod.xcconfig"; path = "Target Support Files/Pods-ProteGO/Pods-ProteGO.release_prod.xcconfig"; sourceTree = "<group>"; };
 		BEC33F61CC8746F654E7BDEC /* Pods-ProteGO.debug_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGO.debug_prod.xcconfig"; path = "Target Support Files/Pods-ProteGO/Pods-ProteGO.debug_prod.xcconfig"; sourceTree = "<group>"; };
 		C8E4564A545D17C206EEC75E /* Pods-ProteGO.debug_dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGO.debug_dev.xcconfig"; path = "Target Support Files/Pods-ProteGO/Pods-ProteGO.debug_dev.xcconfig"; sourceTree = "<group>"; };
+		D9D904A6243B51C200A58FE1 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		D9D904A9243B556700A58FE1 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		F967271215DF31CF5FA2F3F1 /* Pods-ProteGOTests.debug_dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGOTests.debug_dev.xcconfig"; path = "Target Support Files/Pods-ProteGOTests/Pods-ProteGOTests.debug_dev.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -771,7 +771,6 @@
 				0E8DED2C2433CC4E00D7F806 /* DangerStatusManager */,
 				8382898324332E0D0054347B /* Images */,
 				8382897E24332DF00054347B /* Fonts */,
-				8382896624332C160054347B /* Colors */,
 				0E9DDA782430E347002D879F /* Application */,
 				87C985FA242E0A6400335502 /* Bluetooth */,
 				83252A6624314C18001E6D63 /* DataModel */,
@@ -826,7 +825,6 @@
 				8382897724332D580054347B /* UITextField */,
 				8382897324332D340054347B /* UIScreen */,
 				8382897024332D1F0054347B /* UILabel */,
-				8382896D24332D0C0054347B /* UIColor */,
 				8382896A24332CE80054347B /* UIButton */,
 				0E9DDA732430DB3A002D879F /* String */,
 				0EE60C3F242FF14100D29048 /* Resolver */,
@@ -878,6 +876,7 @@
 		0E965329242EB30C00ADD300 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D9D904A8243B551400A58FE1 /* Colors */,
 				0EB372CC2438A2C100884C93 /* LottieAnimations */,
 				0E5C2078242B63460038EF8B /* Assets.xcassets */,
 				8382898624332E310054347B /* Fonts */,
@@ -1471,14 +1470,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		8382896624332C160054347B /* Colors */ = {
-			isa = PBXGroup;
-			children = (
-				8382896724332C350054347B /* Colors.swift */,
-			);
-			path = Colors;
-			sourceTree = "<group>";
-		};
 		8382896A24332CE80054347B /* UIButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -1486,14 +1477,6 @@
 				0E22F9212434A486008AD8EB /* UIButton+BackgroundColor.swift */,
 			);
 			path = UIButton;
-			sourceTree = "<group>";
-		};
-		8382896D24332D0C0054347B /* UIColor */ = {
-			isa = PBXGroup;
-			children = (
-				8382896E24332D170054347B /* UIColor+Hex.swift */,
-			);
-			path = UIColor;
 			sourceTree = "<group>";
 		};
 		8382897024332D1F0054347B /* UILabel */ = {
@@ -1800,6 +1783,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D9D904A8243B551400A58FE1 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				D9D904A9243B556700A58FE1 /* Colors.swift */,
+				D9D904A6243B51C200A58FE1 /* Colors.xcassets */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1903,6 +1895,7 @@
 				838289FC243333330054347B /* Poppins-ThinItalic.otf in Resources */,
 				838289F6243333330054347B /* Poppins-ExtraLight.otf in Resources */,
 				838289F5243333330054347B /* Poppins-ExtraBoldItalic.otf in Resources */,
+				D9D904A7243B51C200A58FE1 /* Colors.xcassets in Resources */,
 				838289F4243333330054347B /* Poppins-BlackItalic.otf in Resources */,
 				0E9DCC812430081100C2670D /* app_input.xcfilelist in Resources */,
 				838289F2243333330054347B /* Poppins-Black.otf in Resources */,
@@ -2120,6 +2113,7 @@
 				8382897224332D2A0054347B /* UILabel+Factory.swift in Sources */,
 				0E9DCC8824300CC600C2670D /* Constants+KeychainKeys.swift in Sources */,
 				83512C42243522C2007DB8AD /* OnboardingVIewModelType.swift in Sources */,
+				D9D904AA243B556700A58FE1 /* Colors.swift in Sources */,
 				83512C4024351EAA007DB8AD /* OnboardingViewModel.swift in Sources */,
 				0E0B30F32437A323005DFC84 /* SendHistoryProgressViewModel.swift in Sources */,
 				0E22F92E2434DFDE008AD8EB /* DangerStatusCardBottomModule.swift in Sources */,
@@ -2154,8 +2148,6 @@
 				83252A8A24322156001E6D63 /* RootView.swift in Sources */,
 				0E22F92C2434DFD3008AD8EB /* DangerStatusCardTopModule.swift in Sources */,
 				0E8DED342433D19300D7F806 /* DangerStatusDebugItems.swift in Sources */,
-				8382896924332CBB0054347B /* Colors.swift in Sources */,
-				8382896F24332D170054347B /* UIColor+Hex.swift in Sources */,
 				83828A082433352D0054347B /* Images.swift in Sources */,
 				83252A7624314EFF001E6D63 /* DefaultRequestParameters.swift in Sources */,
 				83DC1EE72435F2E2006E54A9 /* DefaultsKey.swift in Sources */,

@@ -32,7 +32,7 @@ final class BannerView: UIView {
         super.init(frame: .zero)
         addSubviews()
         setupConstraints()
-        backgroundColor = Colors.bluishGreen
+        backgroundColor = UIColor(asset: Assets.bluishGreen)
         self.setupLeftButton(image: leftButtonImage)
         self.setupRightButton(image: rightButtonImage)
     }

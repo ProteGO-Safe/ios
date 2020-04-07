@@ -13,7 +13,7 @@ final class StatusDesciptionView: UIView {
         let label = UILabel()
         label.text = text
         label.font = Fonts.poppinsSemiBold(16).font
-        label.textColor = Colors.lightBlack
+        label.textColor = UIColor(asset: Assets.lightBlack)
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         return label

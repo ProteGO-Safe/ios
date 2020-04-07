@@ -10,12 +10,12 @@ extension UITextField {
 
         let placeholderAttributes: [NSAttributedString.Key: Any] = [
             .font: Fonts.poppinsMedium(16).font,
-            .foregroundColor: Colors.greyish]
+            .foregroundColor: UIColor(asset: Assets.greyish).cgColor]
         textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: placeholderAttributes)
 
         let textAttributes: [NSAttributedString.Key: Any] = [
             .font: Fonts.poppinsMedium(16).font,
-            .foregroundColor: Colors.bluishGreen]
+            .foregroundColor: UIColor(asset: Assets.bluishGreen).cgColor]
         if let text = text {
             textField.attributedText = NSAttributedString(string: text, attributes: textAttributes)
         } else {
@@ -23,7 +23,7 @@ extension UITextField {
         }
 
         textField.layer.cornerRadius = 4
-        textField.layer.borderColor = Colors.greyish.cgColor
+        textField.layer.borderColor = UIColor(asset: Assets.greyish).cgColor
         textField.layer.borderWidth = 1
 
         if centered {

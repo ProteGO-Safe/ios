@@ -18,8 +18,8 @@ final class NavigationButtonsView: UIView {
     }
 
     private let backButton = UIButton.rectButton(text: L10n.onboardingBackBtn,
-                                                 textColor: Colors.bluishGreen,
-                                                 backgroundColor: .white, borderColor: Colors.bluishGreen)
+                                                 textColor: UIColor(asset: Assets.bluishGreen),
+                                                 backgroundColor: .white, borderColor: UIColor(asset: Assets.bluishGreen))
 
     private let nextButton = UIButton.rectButton(text: L10n.onboardingNextBtn)
 

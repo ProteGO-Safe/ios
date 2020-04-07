@@ -6,13 +6,13 @@ import RxCocoa
 final class RedStatusCardView: DangerStatusCardView {
     init() {
         let config = DangerStatusCardConfig(
-            color: Colors.copper,
+            color: UIColor(asset: Assets.copper),
             titleText: L10n.dashboardRedStatusTitle,
             firstParagraphText: L10n.dashboardRedStatusDescription)
 
         let buttonConfig = DangerStatusCardButtonConfig(title: L10n.dashboardRedStatusContactBtn,
-                                                        normalColor: Colors.copper,
-                                                        highlightedColor: Colors.brick)
+                                                        normalColor: UIColor(asset: Assets.copper),
+                                                        highlightedColor: UIColor(asset: Assets.brick))
 
         super.init(config: config, buttonConfig: buttonConfig)
     }

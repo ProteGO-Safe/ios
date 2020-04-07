@@ -43,7 +43,7 @@ class GeneralRecommendationsCard: UIView {
     init(config: GeneralRecommendationsCardConfig) {
         super.init(frame: .zero)
         backgroundColor = .white
-        self.layer.borderColor = Colors.greyish.cgColor
+        self.layer.borderColor = UIColor(asset: Assets.greyish).cgColor
         self.layer.borderWidth = 1
 
         self.addSubviews()
@@ -104,7 +104,7 @@ class GeneralRecommendationsCard: UIView {
             self.footerLabel.attributedText = attributedText
         }
 
-        self.footerLabel.textColor = Colors.greyishBrown
+        self.footerLabel.textColor = UIColor(asset: Assets.greyishBrown)
         self.footerLabel.numberOfLines = 0
         self.footerLabel.isUserInteractionEnabled = true
     }
@@ -113,7 +113,7 @@ class GeneralRecommendationsCard: UIView {
         for text in paragraphTexts {
             let label = UILabel()
             label.font = Fonts.poppinsMedium(14).font
-            label.textColor = Colors.greyishBrown
+            label.textColor = UIColor(asset: Assets.greyishBrown)
             label.numberOfLines = 0
 
             let image = Images.generalRecommendationExclamationMark
