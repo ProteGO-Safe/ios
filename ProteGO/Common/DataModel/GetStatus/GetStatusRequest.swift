@@ -1,10 +1,8 @@
 import Foundation
 
-struct ConfirmRegistrationRequest: Encodable {
+struct GetStatusRequest: Encodable {
 
-    let code: String
-
-    let registrationId: String
+    let userId: String
 
     let platform: String
 
@@ -19,8 +17,7 @@ struct ConfirmRegistrationRequest: Encodable {
     let lang: String
 
     enum CodingKeys: String, CodingKey {
-        case code
-        case registrationId
+        case userId
         case platform
         case osVersion
         case deviceType
@@ -29,11 +26,9 @@ struct ConfirmRegistrationRequest: Encodable {
         case lang
     }
 
-    init(code: String,
-         registrationId: String,
+    init(userId: String,
          defaultParameters: DefaultRequestParameters = DefaultRequestParameters()) {
-        self.code = code
-        self.registrationId = registrationId
+        self.userId = userId
         self.platform = defaultParameters.platform
         self.osVersion = defaultParameters.osVersion
         self.deviceType = defaultParameters.deviceType

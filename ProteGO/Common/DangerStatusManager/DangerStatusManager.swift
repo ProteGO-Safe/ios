@@ -2,29 +2,45 @@ import Foundation
 import SwiftTweaks
 import RxSwift
 import RxCocoa
+import Valet
 
 final class DangerStatusManager: DangerStatusManagerType {
+
     var currentStatus: BehaviorRelay<DangerStatus>
 
     private var tweakBindings = Set<TweakBindingIdentifier>()
 
-    init() {
-        self.currentStatus = BehaviorRelay<DangerStatus>(value: .yellow)
+    private let gcpClient: GcpClientType
 
-        if DebugMenu.assign(DebugMenu.forceDangerStatus) {
-            if let status = DangerStatus.init(rawValue: DebugMenu.assign(DebugMenu.forceDangerStatusValue).value) {
-                self.currentStatus.accept(status)
-            }
+    private let keychainProvider: KeychainProviderType
 
-            tweakBindings.insert(DebugMenu.bind(DebugMenu.forceDangerStatusValue) { value in
-                if let status = DangerStatus.init(rawValue: value.value) {
-                    self.currentStatus.accept(status)
-                }
-            })
-        }
+    private let disposeBag = DisposeBag()
+
+    init(gcpClient: GcpClientType, keychainProvider: KeychainProviderType) {
+        self.gcpClient = gcpClient
+        self.keychainProvider = keychainProvider
+
+        let initialDangerStatus = keychainProvider.string(forKey: Constants.KeychainKeys.currentDangerStatus)
+            .flatMap(DangerStatus.init(rawValue:)) ?? .yellow
+
+        self.currentStatus = BehaviorRelay<DangerStatus>(value: initialDangerStatus)
     }
 
-    deinit {
-        self.tweakBindings.forEach(DebugMenu.unbind)
+    func updateCurrentDangerStatus() {
+        return self.gcpClient.getStatus().subscribe(onSuccess: { [weak self] result in
+            guard let self = self else {
+                logger.error("Instance deallocated file: \(#file), line: \(#line)")
+                return
+            }
+
+            switch result {
+            case .success(let result):
+                self.currentStatus.accept(result.status)
+                self.keychainProvider.set(string: result.status.rawValue, forKey: Constants.KeychainKeys.currentDangerStatus)
+            case .failure(let error):
+                logger.error("Error occurred during status update: \(error)")
+                return
+            }
+        }).disposed(by: disposeBag)
     }
 }
