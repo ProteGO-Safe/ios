@@ -6,7 +6,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     private var centralManager: CBCentralManager!
 
     /// Beacon ID agent providing new Beacon IDs.
-    private weak var agent: BeaconIdAgent?
+    private weak var agent: BeaconIdAgentType?
 
     /// List of known devices
     private var devices: [ProteGoDeviceId: ProteGoDevice]
@@ -22,7 +22,7 @@ class BleScanner: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Scan
     private let scanningTaskID = Constants.Bluetooth.ScanningBackgroundTaskID
 
     /// Initialize Central Manager with restored state identifier to be able to work in the background.
-    init(agent: BeaconIdAgent, backgroundTask: BluetoothBackgroundTask) {
+    init(agent: BeaconIdAgentType, backgroundTask: BluetoothBackgroundTask) {
         self.backgroundTask = backgroundTask
         self.devices = [:]
         super.init()

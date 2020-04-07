@@ -35,10 +35,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate  {
         return true
     }
 
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        self.resolver.resolve(StatusManagerType.self)?.updateCurrentDangerStatusAndBeaconIds()
+    }
+
     func applicationWillEnterForeground(_ application: UIApplication) {
         self.advertiser?.setMode(.enabledAllTime)
         self.scanner?.setMode(.enabledAllTime)
-        self.resolver.resolve(DangerStatusManagerType.self)?.updateCurrentDangerStatus()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -64,9 +67,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
 
     private func setupBluetoothModule() {
-        let encountersManager: EncountersManagerType = self.resolver.resolve(EncountersManagerType.self)
-        self.advertiser = self.resolver.resolve(Advertiser.self, argument: encountersManager as BeaconIdAgent)
-        self.scanner = self.resolver.resolve(Scanner.self, argument: encountersManager as BeaconIdAgent)
+        let beaconIdAgent: BeaconIdAgentType = self.resolver.resolve(BeaconIdAgentType.self)
+        self.advertiser = self.resolver.resolve(Advertiser.self, argument: beaconIdAgent)
+        self.scanner = self.resolver.resolve(Scanner.self, argument: beaconIdAgent)
         self.advertiser?.setMode(.enabledAllTime)
         self.scanner?.setMode(.enabledAllTime)
     }

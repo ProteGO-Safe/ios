@@ -82,6 +82,33 @@ extension DebugMenu {
             default: Int(Constants.Bluetooth.PeripheralSynchronizationTimeoutInSec), min: 10)
     }()
 
+    static var actionShowBeaconIdsDebugScreen: Tweak<TweakAction> = {
+          let description = DebugItemDescription(.bluetooth, group: .testing, name: "Pokaż identyfikatory BLE")
+          let tweak = Tweak<TweakAction>.build(with: description)
+          tweak.addClosure {
+              guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                  return
+              }
+
+              guard let rootViewController = appDelegate.window?.rootViewController else {
+                  return
+              }
+
+              let debugViewController: RegisteredBeaconIdsDebugViewController =
+                  appDelegate.resolver.resolve(RegisteredBeaconIdsDebugViewController.self)
+
+              if let presentedViewController = rootViewController.presentedViewController {
+                  presentedViewController.dismiss(animated: true) {
+                      rootViewController.present(debugViewController, animated: true)
+                  }
+              } else {
+                  rootViewController.present(debugViewController, animated: true)
+              }
+
+          }
+          return tweak
+      }()
+
     static var bluetoothItems: [TweakClusterType] = [
         useMockBluetoothScanner,
         useMockBluetoothAdvertiser,
@@ -94,6 +121,7 @@ extension DebugMenu {
         bluetoothMaxConcurrentConnections,
         bluetoothMaxConnectionRetries,
         bluetoothDeviceIgnoredTimeout,
-        bluetoothSynchronizationTimeout
+        bluetoothSynchronizationTimeout,
+        actionShowBeaconIdsDebugScreen
     ]
 }

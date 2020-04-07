@@ -56,6 +56,7 @@ enum GcpEndpoint {
         case .confirmRegistration(let body):
             return try? encoder.encode(body)
         case .getStatus(let body):
+            encoder.dateEncodingStrategy = .formatted(DateFormatter.yyyyMMddHH)
             return try? encoder.encode(body)
         }
     }

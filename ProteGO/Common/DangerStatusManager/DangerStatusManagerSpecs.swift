@@ -4,20 +4,17 @@ import Nimble
 import Valet
 @testable import ProteGO
 
-//swiftlint:disable force_unwrapping
 class DangerStatusManagerSpecs: QuickSpec {
     override func spec() {
         describe("DangerStatusManager") {
             var sut: DangerStatusManager!
             var keychainMock: KeychainProviderType!
-            var gcpClientMock: GcpClientMock!
 
             beforeEach {
                 keychainMock = KeychainProviderMock()
                 keychainMock.removeAllObjects()
-                gcpClientMock = GcpClientMock()
 
-                sut = DangerStatusManager(gcpClient: gcpClientMock, keychainProvider: keychainMock)
+                sut = DangerStatusManager(keychainProvider: keychainMock)
             }
 
             context("clear valet") {
@@ -29,7 +26,7 @@ class DangerStatusManagerSpecs: QuickSpec {
             context("valet with previously saved red status") {
                 beforeEach {
                     keychainMock.set(string: DangerStatus.red.rawValue, forKey: Constants.KeychainKeys.currentDangerStatus)
-                    sut = DangerStatusManager(gcpClient: gcpClientMock, keychainProvider: keychainMock)
+                    sut = DangerStatusManager(keychainProvider: keychainMock)
                 }
 
                 it("should return red status") {
@@ -37,22 +34,23 @@ class DangerStatusManagerSpecs: QuickSpec {
                 }
             }
 
-            context("when downloaded green status from the web") {
+            context("when updated with green status") {
                 beforeEach {
-                    gcpClientMock.getStatusResult = .success(GetStatusResponse(status: .green, beaconIds: []))
-                    sut.updateCurrentDangerStatus()
+                    sut.update(with: .green)
                 }
 
                 it("should return green status") {
                     expect(sut.currentStatus.value).to(equal(.green))
                 }
 
-                it("save green to the valet") {
+                it("save green to the keychain") {
                     let rawValue = keychainMock.string(forKey: Constants.KeychainKeys.currentDangerStatus)
                     expect(rawValue).toNot(beNil())
 
-                    let value = DangerStatus(rawValue: rawValue!)
-                    expect(value).to(equal(DangerStatus.green))
+                    if let rawValue = rawValue {
+                        let value = DangerStatus(rawValue: rawValue)
+                        expect(value).to(equal(DangerStatus.green))
+                    }
                 }
             }
         }

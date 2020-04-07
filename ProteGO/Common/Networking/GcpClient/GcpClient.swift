@@ -84,8 +84,8 @@ final class GcpClient: GcpClientType {
             })
     }
 
-    func getStatus() -> Single<Result<GetStatusResponse, Error>> {
-        guard let request = requestBuilder.getStatusRequest() else {
+    func getStatus(lastBeaconDate: Date?) -> Single<Result<GetStatusResponse, Error>> {
+        guard let request = requestBuilder.getStatusRequest(lastBeaconDate: lastBeaconDate) else {
             return .just(.failure(GcpClientError.failedToBuildRequest))
         }
 
@@ -96,7 +96,7 @@ final class GcpClient: GcpClientType {
                 return result.flatMap { data in
                     do {
                         let decoder = JSONDecoder()
-                        decoder.dateDecodingStrategy = .formatted(DateFormatter.yyyyMMddHHmmss)
+                        decoder.dateDecodingStrategy = .formatted(DateFormatter.yyyyMMddHH)
                         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
                         let decoded = try decoder.decode(GetStatusResponse.self, from: data)
