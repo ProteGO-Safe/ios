@@ -6,12 +6,6 @@ struct SendHistoryEncounter: Encodable {
     let encounterDate: Date
 
     let signalStrength: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case beaconId
-        case encounterDate
-        case signalStrength
-    }
 }
 
 struct SendHistoryRequest: Encodable {
@@ -31,17 +25,6 @@ struct SendHistoryRequest: Encodable {
     let apiVersion: String
 
     let lang: String
-
-    enum CodingKeys: String, CodingKey {
-        case encounters
-        case userId
-        case platform
-        case osVersion
-        case deviceType
-        case appVersion
-        case apiVersion
-        case lang
-    }
 
     init(encounters: [Encounter], userId: String, defaultParameters: DefaultRequestParameters = DefaultRequestParameters()) {
         self.encounters = encounters.compactMap({ encounter -> SendHistoryEncounter in
