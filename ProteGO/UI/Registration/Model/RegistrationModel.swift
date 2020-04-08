@@ -44,11 +44,16 @@ final class RegistrationModel: RegistrationModelType {
         }
     }
 
-    func sendCodeStepFinished(phoneNumber: String) {
+    func sendCodeStepFinished(finishedData: SendCodeFinishedData) {
         guard case .sendCode = currentStep else {
             return
         }
-        currentStep = .verifyCode(phoneNumber: phoneNumber)
+        switch finishedData {
+        case .sendCode(let phoneNumber):
+            currentStep = .verifyCode(phoneNumber: phoneNumber)
+        case .registerWithoutPhoneNumber:
+            registrationFinishedSubject.onNext(())
+        }
     }
 
     func verifyCodeStepFinished() {

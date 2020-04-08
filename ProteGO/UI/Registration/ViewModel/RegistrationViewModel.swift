@@ -46,8 +46,8 @@ final class RegistrationViewModel: RegistrationViewModelType {
     func bind(sendCodeViewController: RegistrationSendCodeViewController) {
 
         sendCodeViewController.stepFinishedObservable
-            .subscribe(onNext: { [weak self] result in
-                self?.model.sendCodeStepFinished(phoneNumber: result.phoneNumber)
+            .subscribe(onNext: { [weak self] finishedData in
+                self?.model.sendCodeStepFinished(finishedData: finishedData)
         }).disposed(by: disposeBag)
     }
 
