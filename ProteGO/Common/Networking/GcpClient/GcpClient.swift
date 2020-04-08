@@ -106,7 +106,7 @@ final class GcpClient: GcpClientType {
                     logger.debug("Did register without phone number")
                     self?.registrationManager.confirmRegistration(userId: result.userId)
                 case .failure(let error):
-                    logger.error("Failed to register without phone number: \(error)")
+                    logger.error("Failed to register without phone number: \(error.localizedDescription)")
                 }
             })
     }
