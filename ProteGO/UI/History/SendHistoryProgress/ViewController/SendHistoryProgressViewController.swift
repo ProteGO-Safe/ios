@@ -38,7 +38,9 @@ final class SendHistoryProgressViewController: UIViewController, CustomView {
     }
 
     private func bindViewModelEvents() {
-        self.viewModel.didFinishHistorySendingObservable.subscribe(onNext: { [weak self] result in
+        self.viewModel.sendHistory()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] result in
             self?.delegate?.sendHistoryFinished(result: result)
         }).disposed(by: disposeBag)
     }

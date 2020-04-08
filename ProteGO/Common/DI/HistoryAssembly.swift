@@ -68,8 +68,7 @@ final class HistoryOverviewAssembly: Assembly {
 
     private func registerSendHistoryConfirmModel(_ container: Container) {
         container.register(SendHistoryConfirmModelType.self) { resolver in
-            let valet: Valet = resolver.resolve(Valet.self)
-            return SendHistoryConfirmModel(valet: valet)
+            return SendHistoryConfirmModel(keychainProvider: resolver.resolve(KeychainProviderType.self))
         }
     }
 
@@ -87,8 +86,9 @@ final class HistoryOverviewAssembly: Assembly {
     }
 
     private func registerSendHistoryProgressModel(_ container: Container) {
-        container.register(SendHistoryProgressModelType.self) { _ in
-            return SendHistoryProgressModel()
+        container.register(SendHistoryProgressModelType.self) { resolver in
+            return SendHistoryProgressModel(gcpClient: resolver.resolve(GcpClientType.self),
+                                            encountersManager: resolver.resolve(EncountersManagerType.self))
         }
     }
 }

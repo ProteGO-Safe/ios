@@ -26,7 +26,7 @@ final class StatusManager: StatusManagerType {
     }
 
     func updateCurrentDangerStatusAndBeaconIds() {
-        return self.gcpClient.getStatus(lastBeaconDate: self.beaconIdsManager.lastStoredExpiringBeaconDate)
+        self.gcpClient.getStatus(lastBeaconDate: self.beaconIdsManager.lastStoredExpiringBeaconDate)
             .subscribe(onSuccess: { [weak self] result in
             guard let self = self else {
                 logger.error("Instance deallocated file: \(#file), line: \(#line)")
