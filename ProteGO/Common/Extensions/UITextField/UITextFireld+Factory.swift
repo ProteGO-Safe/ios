@@ -10,12 +10,12 @@ extension UITextField {
 
         let placeholderAttributes: [NSAttributedString.Key: Any] = [
             .font: Fonts.poppinsMedium(16).font,
-            .foregroundColor: UIColor(asset: Assets.greyish).cgColor]
+            .foregroundColor: UIColor(asset: Assets.greyish)!] // swiftlint:disable:this force_unwrapping
         textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: placeholderAttributes)
 
         let textAttributes: [NSAttributedString.Key: Any] = [
             .font: Fonts.poppinsMedium(16).font,
-            .foregroundColor: UIColor(asset: Assets.bluishGreen).cgColor]
+            .foregroundColor: UIColor(asset: Assets.bluishGreen)!] // swiftlint:disable:this force_unwrapping
         if let text = text {
             textField.attributedText = NSAttributedString(string: text, attributes: textAttributes)
         } else {
