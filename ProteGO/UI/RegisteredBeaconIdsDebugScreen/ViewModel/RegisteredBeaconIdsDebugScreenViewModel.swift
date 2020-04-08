@@ -13,10 +13,8 @@ final class RegisteredBeaconIdsDebugScreenViewModel: RegisteredBeaconIdsDebugScr
     }
 
     func bind(view: RegisteredBeaconIdsDebugScreenView) {
-        if let beacon = model.currentBeacon, let beaconId = beacon.getBeaconId() {
-            view.addBeaconData(beaconData: beaconId.getData(),
-                               date: beacon.expirationDate,
-                               prefix: "Current")
+        if let beacon = model.currentBeacon?.getBeaconId() {
+            view.addCurrentBeaconData(beaconData: beacon.getData())
         }
 
         for beacon in self.model.allBeaconIds {

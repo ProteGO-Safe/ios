@@ -36,8 +36,13 @@ final class RegisteredBeaconIdsDebugScreenView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public func addBeaconData(beaconData: Data, date: Date, prefix: String = "") {
-        let newBeaconDescription = "\(prefix) Beacon: \(beaconData.toHexString()), " +
+    public func addCurrentBeaconData(beaconData: Data) {
+        let currentBeaconDescription = "Current Beacon: \(beaconData.toHexString()) \n"
+        self.registeredBeaconsTextView.text.append(currentBeaconDescription)
+    }
+
+    public func addBeaconData(beaconData: Data, date: Date) {
+        let newBeaconDescription = "Beacon: \(beaconData.toHexString()), " +
         "Date: \(DateFormatter.yyyyMMddHH.string(from: date)) \n"
         self.registeredBeaconsTextView.text.append(newBeaconDescription)
     }
