@@ -18,12 +18,12 @@ final class RegisteredBeaconIdsDebugScreenViewModel: RegisteredBeaconIdsDebugScr
         }
 
         for beacon in self.model.allBeaconIds {
-            view.addBeaconData(beaconData: beacon.beaconIdData, date: beacon.expirationDate)
+            view.addBeaconData(beaconData: beacon.beaconIdData, date: beacon.startDate)
         }
 
         model.allBeaconIdsObservable
             .subscribe(onNext: {  beacon in
-                view.addBeaconData(beaconData: beacon.beaconIdData, date: beacon.expirationDate)
+                view.addBeaconData(beaconData: beacon.beaconIdData, date: beacon.startDate)
             }).disposed(by: disposeBag)
     }
 }

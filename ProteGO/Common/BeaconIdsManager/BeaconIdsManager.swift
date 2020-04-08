@@ -4,21 +4,23 @@ import RealmSwift
 final class BeaconIdsManager: BeaconIdsManagerType {
 
     var allBeaconIds: Results<RealmExpiringBeacon> {
-        return self.realmManager.realm.objects(RealmExpiringBeacon.self).sorted(byKeyPath: "expirationDate", ascending: true)
+        return self.realmManager.realm.objects(RealmExpiringBeacon.self)
+            .sorted(byKeyPath: Constants.Realm.EntityKeys.ExpiringBeacon.startDate, ascending: true)
     }
 
     var lastStoredExpiringBeaconDate: Date? {
         return self.realmManager.realm.objects(RealmExpiringBeacon.self)
-            .sorted(byKeyPath: "expirationDate", ascending: false)
+            .sorted(byKeyPath: Constants.Realm.EntityKeys.ExpiringBeacon.startDate, ascending: false)
             .first?
-            .expirationDate
+            .startDate
     }
 
     var currentExpiringBeaconId: ExpiringBeaconId? {
         let currentDate = currentDateProvider.currentDate
 
         guard let previousExpiringBeacon = self.realmManager.realm.objects(RealmExpiringBeacon.self)
-            .filter("expirationDate <= %@", currentDate).sorted(byKeyPath: "expirationDate", ascending: false).first else {
+            .filter("\(Constants.Realm.EntityKeys.ExpiringBeacon.startDate) <= %@", currentDate)
+            .sorted(byKeyPath: Constants.Realm.EntityKeys.ExpiringBeacon.startDate, ascending: false).first else {
                 // no valid beacon found
                 return nil
         }
@@ -29,7 +31,8 @@ final class BeaconIdsManager: BeaconIdsManagerType {
         }
 
         guard let nextExpiringBeacon = self.realmManager.realm.objects(RealmExpiringBeacon.self)
-            .filter("expirationDate > %@", currentDate).sorted(byKeyPath: "expirationDate", ascending: true).first else {
+            .filter("\(Constants.Realm.EntityKeys.ExpiringBeacon.startDate) > %@", currentDate)
+            .sorted(byKeyPath: Constants.Realm.EntityKeys.ExpiringBeacon.startDate, ascending: true).first else {
                 // last beacon with current date + default lifespan
                 let date = currentDate.addingTimeInterval(Constants.Bluetooth.ExpiringBeaconDefaultLifespan)
                 return ExpiringBeaconId(beaconId: previousBeacon,
@@ -39,7 +42,7 @@ final class BeaconIdsManager: BeaconIdsManagerType {
 
         // beacon with date adjusted to the next available beacon
         return ExpiringBeaconId(beaconId: previousBeacon,
-                                expirationDate: nextExpiringBeacon.expirationDate,
+                                expirationDate: nextExpiringBeacon.startDate,
                                 currentDateProvider: self.currentDateProvider)
     }
 

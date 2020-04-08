@@ -6,12 +6,12 @@ class RealmExpiringBeacon: Object {
 
     @objc dynamic var beaconIdData = Data()
 
-    @objc dynamic var expirationDate = Date()
+    @objc dynamic var startDate = Date()
 
     static func createExpiringBeacon(beaconIdData: Data, date: Date) -> RealmExpiringBeacon {
         let beacon = RealmExpiringBeacon()
         beacon.beaconIdData = beaconIdData
-        beacon.expirationDate = date
+        beacon.startDate = date
 
         return beacon
     }

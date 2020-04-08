@@ -43,7 +43,7 @@ class BeaconIdsManagerSpecs: QuickSpec {
                 }
 
                 context("last stored date") {
-                    it("should equal youngest sotred beacon date") {
+                    it("should equal youngest stored beacon date") {
                         expect(sut.lastStoredExpiringBeaconDate).to(equal(exampleBeacons[4].date))
                     }
                 }
@@ -53,7 +53,7 @@ class BeaconIdsManagerSpecs: QuickSpec {
 
                     beforeEach {
                         results = realmManagerMock.realm.objects(RealmExpiringBeacon.self)
-                            .sorted(byKeyPath: "expirationDate", ascending: true)
+                            .sorted(byKeyPath: Constants.Realm.EntityKeys.ExpiringBeacon.startDate, ascending: true)
                     }
 
                     it("there should be correct number of elements in the database") {
@@ -63,7 +63,7 @@ class BeaconIdsManagerSpecs: QuickSpec {
                     it("correct items should be saved to the database") {
                         for i in 0..<exampleBeacons.count {
                             expect(results[i].beaconIdData).to(equal(exampleBeacons[i].beaconId.getData()))
-                            expect(results[i].expirationDate).to(equal(exampleBeacons[i].date))
+                            expect(results[i].startDate).to(equal(exampleBeacons[i].date))
                         }
                     }
                 }
