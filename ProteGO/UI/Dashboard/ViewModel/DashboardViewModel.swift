@@ -18,8 +18,4 @@ final class DashboardViewModel: DashboardViewModelType {
             view.update(withStatus: status)
         }).disposed(by: self.disposeBag)
     }
-
-    func updateCurrentDangerStatus() {
-        self.model.updateCurrentDangerStatus()
-    }
 }

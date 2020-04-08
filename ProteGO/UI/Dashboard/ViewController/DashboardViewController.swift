@@ -34,11 +34,6 @@ final class DashboardViewController: UIViewController, CustomView {
         self.bindUIEvents()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.viewModel.updateCurrentDangerStatus()
-    }
-
     private func bindUIEvents() {
         customView.greenStatusTapMoreEvent.subscribe(onNext: {
             logger.debug("Green more tapped")

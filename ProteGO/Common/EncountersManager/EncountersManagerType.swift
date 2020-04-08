@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-protocol EncountersManagerType: BeaconIdAgent {
+protocol EncountersManagerType {
     var allEncounters: Results<Encounter> { get }
 
     func addNewEncounter(encounter: Encounter) throws
