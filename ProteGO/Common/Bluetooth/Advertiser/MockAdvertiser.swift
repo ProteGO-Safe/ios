@@ -3,9 +3,9 @@ import Foundation
 class MockAdvertiser: Advertiser {
     private var mode: AdvertiserMode = .disabled
     private var expiringBeaconId: ExpiringBeaconId?
-    private weak var agent: BeaconIdAgent?
+    private weak var agent: BeaconIdAgentType?
 
-    init(agent: BeaconIdAgent) {
+    init(agent: BeaconIdAgentType) {
         self.agent = agent
         let timer = Timer.init(timeInterval:
         TimeInterval(DebugMenu.assign(DebugMenu.mockBluetoothAdvertiserInterval)), repeats: true) { [weak self] _ in

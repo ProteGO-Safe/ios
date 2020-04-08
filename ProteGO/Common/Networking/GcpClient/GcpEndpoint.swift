@@ -10,17 +10,15 @@ enum GcpEndpoint {
 
     case getStatus(GetStatusRequest)
 
+    case sendHistory(SendHistoryRequest)
+
     var networkRequest: NetworkRequest {
         return NetworkRequest(httpMethod: httpMethod, url: url, headers: headers, queryParameters: nil, body: body)
     }
 
     private var httpMethod: NetworkRequest.HttpMethod {
         switch self {
-        case .registerDevice:
-            return .post
-        case .confirmRegistration:
-            return .post
-        case .getStatus:
+        case .registerDevice, .confirmRegistration, .getStatus, .sendHistory:
             return .post
         }
     }
@@ -37,12 +35,14 @@ enum GcpEndpoint {
             return "/confirm_registration"
         case .getStatus:
             return "/get_status"
+        case .sendHistory:
+            return "/send_encounters"
         }
     }
 
     private var headers: [String: String]? {
         switch self {
-        case .registerDevice, .confirmRegistration, .getStatus:
+        case .registerDevice, .confirmRegistration, .getStatus, .sendHistory:
             return ["Content-Type": "application/json"]
         }
     }
@@ -56,6 +56,10 @@ enum GcpEndpoint {
         case .confirmRegistration(let body):
             return try? encoder.encode(body)
         case .getStatus(let body):
+            encoder.dateEncodingStrategy = .formatted(DateFormatter.yyyyMMddHH)
+            return try? encoder.encode(body)
+        case .sendHistory(let body):
+            encoder.dateEncodingStrategy = .formatted(DateFormatter.yyyyMMddHH)
             return try? encoder.encode(body)
         }
     }

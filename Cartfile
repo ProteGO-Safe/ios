@@ -9,3 +9,4 @@ github "ashleymills/Reachability.swift" == 5.0.0
 github "Square/Valet" == 3.2.8
 github "airbnb/lottie-ios" == 3.1.6
 github "InderKumarRathore/DeviceGuru" == 6.0.4
+github "Airhelp/Mimus" == 1.1.5

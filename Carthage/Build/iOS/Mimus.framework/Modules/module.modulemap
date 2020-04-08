@@ -1,0 +1,11 @@
+framework module Mimus {
+  umbrella header "Mimus.h"
+
+  export *
+  module * { export * }
+}
+
+module Mimus.Swift {
+    header "Mimus-Swift.h"
+    requires objc
+}

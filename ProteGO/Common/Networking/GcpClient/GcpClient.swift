@@ -49,7 +49,7 @@ final class GcpClient: GcpClientType {
                     }
 
                 case .failure(let error):
-                    logger.error("Failed to send registration code: \(error)")
+                    logger.error("Failed to send registration code: \(error.localizedDescription)")
                 }
             })
     }
@@ -79,13 +79,13 @@ final class GcpClient: GcpClientType {
                     logger.debug("Did verify registration code")
                     self?.registrationManager.confirmRegistration(userId: result.userId)
                 case .failure(let error):
-                    logger.error("Failed to verify registration code: \(error)")
+                    logger.error("Failed to verify registration code: \(error.localizedDescription)")
                 }
             })
     }
 
-    func getStatus() -> Single<Result<GetStatusResponse, Error>> {
-        guard let request = requestBuilder.getStatusRequest() else {
+    func getStatus(lastBeaconDate: Date?) -> Single<Result<GetStatusResponse, Error>> {
+        guard let request = requestBuilder.getStatusRequest(lastBeaconDate: lastBeaconDate) else {
             return .just(.failure(GcpClientError.failedToBuildRequest))
         }
 
@@ -96,7 +96,7 @@ final class GcpClient: GcpClientType {
                 return result.flatMap { data in
                     do {
                         let decoder = JSONDecoder()
-                        decoder.dateDecodingStrategy = .formatted(DateFormatter.yyyyMMddHHmmss)
+                        decoder.dateDecodingStrategy = .formatted(DateFormatter.yyyyMMddHH)
                         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
                         let decoded = try decoder.decode(GetStatusResponse.self, from: data)
@@ -110,8 +110,38 @@ final class GcpClient: GcpClientType {
                 case .success:
                     logger.debug("Did recieved status")
                 case .failure(let error):
-                    logger.error("Failed to recieved status: \(error)")
+                    logger.error("Failed to recieved status: \(error.localizedDescription)")
                 }
             })
     }
+
+    func sendHistory(encounters: [Encounter]) -> Single<Result<SendHistoryResponse, Error>> {
+           guard let request = requestBuilder.sendHistoryRequest(encounters: encounters) else {
+               return .just(.failure(GcpClientError.failedToBuildRequest))
+           }
+
+           let endpoint = GcpEndpoint.sendHistory(request)
+
+           return networkClient.rx.dataTask(networkRequest: endpoint.networkRequest)
+               .map({ result -> Result<SendHistoryResponse, Error> in
+                   return result.flatMap { data in
+                       do {
+                           let decoder = JSONDecoder()
+                           decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+                           let decoded = try decoder.decode(SendHistoryResponse.self, from: data)
+                           return .success(decoded)
+                       } catch {
+                           return .failure(GcpClientError.failedToDecodeResponseData(error))
+                       }
+                   }
+               }).do(onSuccess: { result in
+                   switch result {
+                   case .success:
+                       logger.debug("Successfully send history")
+                   case .failure(let error):
+                    logger.error("Failed to send history: \(error.localizedDescription)")
+                   }
+               })
+       }
 }

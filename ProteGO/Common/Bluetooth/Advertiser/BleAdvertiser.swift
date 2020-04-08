@@ -7,7 +7,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     /// Handle to the currently mounted service
     private var service: CBService?
     /// Beacon ID agent.
-    private weak var agent: BeaconIdAgent?
+    private weak var agent: BeaconIdAgentType?
     /// Current Beacon ID to advertise.
     private var expiringBeaconID: ExpiringBeaconId?
     /// Advertisement timer to schedule start/stop operations.
@@ -19,7 +19,7 @@ class BleAdvertiser: NSObject, CBPeripheralManagerDelegate, Advertiser {
     private let advertisementTaskID = Constants.Bluetooth.AdvertisingBackgroundTaskID
 
     /// Restoration identifier is required to properly resume when application is restored by the OS.
-    init(agent: BeaconIdAgent, backgroundTask: BluetoothBackgroundTask) {
+    init(agent: BeaconIdAgentType, backgroundTask: BluetoothBackgroundTask) {
         self.backgroundTask = backgroundTask
         super.init()
         self.agent = agent

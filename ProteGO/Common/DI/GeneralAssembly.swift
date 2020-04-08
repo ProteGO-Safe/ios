@@ -10,7 +10,10 @@ final class GeneralAssembly: Assembly {
         registerKeychainProvider(container)
         registerEncountersManager(container)
         registerDangerStatusManager(container)
+        registerBeaconIdsManager(container)
+        registerStatusManager(container)
         registerDefaultsService(container)
+        registerCurrentDateProvider(container)
     }
 
     private func registerRealm(_ container: Container) {
@@ -56,8 +59,29 @@ final class GeneralAssembly: Assembly {
 
     private func registerDangerStatusManager(_ container: Container) {
         container.register(DangerStatusManagerType.self) { resolver in
-            return DangerStatusManager(gcpClient: resolver.resolve(GcpClientType.self),
-                                       keychainProvider: resolver.resolve(KeychainProviderType.self))
+            return DangerStatusManager(keychainProvider: resolver.resolve(KeychainProviderType.self))
+        }.inObjectScope(.container)
+    }
+
+    private func registerCurrentDateProvider(_ container: Container) {
+        container.register(CurrentDateProviderType.self) { _ in
+            return CurrentDateProvider()
+        }
+    }
+
+    private func registerBeaconIdsManager(_ container: Container) {
+        container.register(BeaconIdsManagerType.self) { resolver in
+            return BeaconIdsManager(realmManager: resolver.resolve(RealmManagerType.self),
+                                    currentDateProvider: resolver.resolve(CurrentDateProviderType.self))
+        }.inObjectScope(.container)
+    }
+
+    private func registerStatusManager(_ container: Container) {
+        container.register(StatusManagerType.self) { resolver in
+            return StatusManager(gcpClient: resolver.resolve(GcpClientType.self),
+                                 registrationManager: resolver.resolve(RegistrationManagerType.self),
+                                 beaconIdsManager: resolver.resolve(BeaconIdsManagerType.self),
+                                 dangerStatusManager: resolver.resolve(DangerStatusManagerType.self))
         }.inObjectScope(.container)
     }
 

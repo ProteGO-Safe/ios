@@ -2,12 +2,20 @@ import Foundation
 import RxSwift
 import Reachability
 
-enum NetworkClientError: Error {
+enum NetworkClientError: ProteGOError {
     case deallocated
     case networkUnavailable
     case failedToBuildUrlRequest(Error)
     case requestError(Error)
     case statusCode(Int, Data)
+
+    var failureReason: String? {
+        if case let .statusCode(statusCode, data) = self {
+            return "Status code: \(statusCode). Reason: \(String(data: data, encoding: .utf8) ?? "n/a")"
+        }
+
+        return self.localizedDescription
+    }
 }
 
 final class NetworkClient: ReactiveCompatible {

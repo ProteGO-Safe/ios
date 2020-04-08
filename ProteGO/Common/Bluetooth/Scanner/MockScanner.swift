@@ -1,10 +1,10 @@
 import Foundation
 
 class MockScanner: Scanner {
-    private weak var agent: BeaconIdAgent?
+    private weak var agent: BeaconIdAgentType?
     private var mode: ScannerMode = .disabled
 
-    init(agent: BeaconIdAgent) {
+    init(agent: BeaconIdAgentType) {
         self.agent = agent
         let timer = Timer.init(
             timeInterval: TimeInterval(DebugMenu.assign(DebugMenu.mockBluetoothScannerInterval)),
