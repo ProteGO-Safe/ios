@@ -60,6 +60,8 @@
 		0E965391243DF2C20084D019 /* RegisteredBeaconIdsDebugScreenViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E965390243DF2C20084D019 /* RegisteredBeaconIdsDebugScreenViewModelType.swift */; };
 		0E965393243DF2C90084D019 /* RegisteredBeaconIdsDebugScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E965392243DF2C90084D019 /* RegisteredBeaconIdsDebugScreenModel.swift */; };
 		0E965395243DF2D40084D019 /* RegisteredBeaconIdsDebugScreenModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E965394243DF2D40084D019 /* RegisteredBeaconIdsDebugScreenModelType.swift */; };
+		0E965398243E0E1C0084D019 /* SendHistoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E965397243E0E1C0084D019 /* SendHistoryRequest.swift */; };
+		0E96539A243E0E260084D019 /* SendHistoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E965399243E0E260084D019 /* SendHistoryResponse.swift */; };
 		0E9DCC802430081100C2670D /* app_output.xcfilelist in Resources */ = {isa = PBXBuildFile; fileRef = 0E9DCC7E2430081100C2670D /* app_output.xcfilelist */; };
 		0E9DCC812430081100C2670D /* app_input.xcfilelist in Resources */ = {isa = PBXBuildFile; fileRef = 0E9DCC7F2430081100C2670D /* app_input.xcfilelist */; };
 		0E9DCC832430091200C2670D /* tests_input.xcfilelist in Resources */ = {isa = PBXBuildFile; fileRef = 0E9DCC822430091200C2670D /* tests_input.xcfilelist */; };
@@ -343,6 +345,8 @@
 		0E965390243DF2C20084D019 /* RegisteredBeaconIdsDebugScreenViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredBeaconIdsDebugScreenViewModelType.swift; sourceTree = "<group>"; };
 		0E965392243DF2C90084D019 /* RegisteredBeaconIdsDebugScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredBeaconIdsDebugScreenModel.swift; sourceTree = "<group>"; };
 		0E965394243DF2D40084D019 /* RegisteredBeaconIdsDebugScreenModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredBeaconIdsDebugScreenModelType.swift; sourceTree = "<group>"; };
+		0E965397243E0E1C0084D019 /* SendHistoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryRequest.swift; sourceTree = "<group>"; };
+		0E965399243E0E260084D019 /* SendHistoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryResponse.swift; sourceTree = "<group>"; };
 		0E9DCC7E2430081100C2670D /* app_output.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; path = app_output.xcfilelist; sourceTree = "<group>"; };
 		0E9DCC7F2430081100C2670D /* app_input.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; path = app_input.xcfilelist; sourceTree = "<group>"; };
 		0E9DCC822430091200C2670D /* tests_input.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = tests_input.xcfilelist; sourceTree = "<group>"; };
@@ -1054,6 +1058,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		0E965396243E0DFB0084D019 /* SendHistory */ = {
+			isa = PBXGroup;
+			children = (
+				0E965397243E0E1C0084D019 /* SendHistoryRequest.swift */,
+				0E965399243E0E260084D019 /* SendHistoryResponse.swift */,
+			);
+			path = SendHistory;
+			sourceTree = "<group>";
+		};
 		0E9DCC7D2430081100C2670D /* CarthageFilelists */ = {
 			isa = PBXGroup;
 			children = (
@@ -1265,6 +1278,7 @@
 		0EA68EA2243DA20D00361776 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				0E965396243E0DFB0084D019 /* SendHistory */,
 				0EB372D12439BBB600884C93 /* GetStatus */,
 				83DC1F0024369CB2006E54A9 /* RequestBuilder */,
 				83252A7424314EE2001E6D63 /* DefaultRequestParameters */,
@@ -2389,6 +2403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87177C972430A7F6007C8F78 /* Advertiser.swift in Sources */,
+				0E96539A243E0E260084D019 /* SendHistoryResponse.swift in Sources */,
 				877F3F7F2435014E00F774C7 /* ScannerMode.swift in Sources */,
 				87074B7F242F6D700029AD4B /* ProteGoDevice.swift in Sources */,
 				87074B85242F94780029AD4B /* ProteGoDeviceState.swift in Sources */,
@@ -2445,6 +2460,7 @@
 				871208D62430C6A600DA0A4D /* Constants+Bluetooth.swift in Sources */,
 				0EB65C812435285300491507 /* HistoryOverviewViewModelType.swift in Sources */,
 				0E965395243DF2D40084D019 /* RegisteredBeaconIdsDebugScreenModelType.swift in Sources */,
+				0E965398243E0E1C0084D019 /* SendHistoryRequest.swift in Sources */,
 				0E9DCC942430984A00C2670D /* EncountersManager.swift in Sources */,
 				0EB65C832435285E00491507 /* HistoryOverviewViewController.swift in Sources */,
 				0E0B30D724377172005DFC84 /* HistoryRootViewController.swift in Sources */,

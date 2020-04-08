@@ -46,8 +46,8 @@ extension DebugMenu {
             }
 
             let encountersManager: EncountersManagerType = resolver.resolve(EncountersManagerType.self)
-            let randomEncounter = Encounter.createEncounter(deviceId: String.randomString(length: 10),
-                                                            signalStrength: Int.random(in: 0..<100),
+            let randomEncounter = Encounter.createEncounter(deviceId: BeaconId.random().getData().toHexString(),
+                                                            signalStrength: Int.random(in: -100..<0),
                                                             date: Date())
             try? encountersManager.addNewEncounter(encounter: randomEncounter)
         }

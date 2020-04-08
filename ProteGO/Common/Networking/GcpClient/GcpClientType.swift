@@ -8,4 +8,6 @@ protocol GcpClientType {
     func confirmRegistration(code: String) -> Single<Result<ConfirmRegistrationResponse, Error>>
 
     func getStatus(lastBeaconDate: Date?) -> Single<Result<GetStatusResponse, Error>>
+
+    func sendHistory(encounters: [Encounter]) -> Single<Result<SendHistoryResponse, Error>>
 }
