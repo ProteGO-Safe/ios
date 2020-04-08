@@ -1,21 +1,22 @@
 import UIKit
 import RxSwift
 
-struct SendCodeFinishedData {
-    let phoneNumber: String
+enum SendCodeFinishedData {
+    case sendCode(phoneNumber: String)
+    case registerWithoutPhoneNumber
 }
 
 final class RegistrationSendCodeModel: RegistrationSendCodeModelType {
 
     var stepFinishedObservable: Observable<SendCodeFinishedData> {
-        return didSendCodeSubject.asObservable()
+        return stepFinishedSubject.asObservable()
     }
 
     var keyboardHeightWillChangeObservable: Observable<CGFloat> {
         keyboardManager.keyboardHeightWillChangeObservable
     }
 
-    private let didSendCodeSubject = PublishSubject<SendCodeFinishedData>()
+    private let stepFinishedSubject = PublishSubject<SendCodeFinishedData>()
 
     private let gcpClient: GcpClientType
 
@@ -33,7 +34,18 @@ final class RegistrationSendCodeModel: RegistrationSendCodeModelType {
         return gcpClient.registerDevice(msisdn: phoneNumber).subscribe(onSuccess: { [weak self] result in
             switch result {
             case .success:
-                self?.didSendCodeSubject.onNext(SendCodeFinishedData(phoneNumber: phoneNumber))
+                self?.stepFinishedSubject.onNext(.sendCode(phoneNumber: phoneNumber))
+            case .failure:
+                return
+            }
+        }).disposed(by: disposeBag)
+    }
+
+    func registerWithoutPhoneNumber() {
+        return gcpClient.registerNoMsisdn().subscribe(onSuccess: { [weak self] result in
+            switch result {
+            case .success:
+                self?.stepFinishedSubject.onNext((.registerWithoutPhoneNumber))
             case .failure:
                 return
             }

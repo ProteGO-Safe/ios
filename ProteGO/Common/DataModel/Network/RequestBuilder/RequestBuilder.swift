@@ -27,6 +27,10 @@ final class RequestBuilder: RequestBuilderType {
         return ConfirmRegistrationRequest(code: code, registrationId: registrationId)
     }
 
+    func registerNoMsisdnRequest() -> RegisterNoMsisdnRequest {
+        return RegisterNoMsisdnRequest()
+    }
+
     func getStatusRequest(lastBeaconDate: Date?) -> GetStatusRequest? {
         guard let userId = registrationManager.userId else {
             return nil

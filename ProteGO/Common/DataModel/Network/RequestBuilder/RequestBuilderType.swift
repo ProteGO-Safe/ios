@@ -6,6 +6,8 @@ protocol RequestBuilderType {
 
     func confirmRegistrationRequest(code: String) -> ConfirmRegistrationRequest?
 
+    func registerNoMsisdnRequest() -> RegisterNoMsisdnRequest
+
     func getStatusRequest(lastBeaconDate: Date?) -> GetStatusRequest?
 
     func sendHistoryRequest(encounters: [Encounter]) -> SendHistoryRequest?

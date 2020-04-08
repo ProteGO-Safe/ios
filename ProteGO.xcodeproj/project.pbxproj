@@ -245,6 +245,8 @@
 		83828A03243334BF0054347B /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83828A02243334BF0054347B /* Fonts.swift */; };
 		83828A052433350C0054347B /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83828A042433350C0054347B /* FontStyle.swift */; };
 		83828A082433352D0054347B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83828A072433352D0054347B /* Images.swift */; };
+		839A5A33243E6EDE002741CC /* RegisterDeviceNoMsisdnRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839A5A32243E6EDE002741CC /* RegisterDeviceNoMsisdnRequest.swift */; };
+		839A5A36243E6F11002741CC /* RegisterDeviceNoMsisdnResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839A5A35243E6F11002741CC /* RegisterDeviceNoMsisdnResponse.swift */; };
 		83DC1EE72435F2E2006E54A9 /* DefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC1EE62435F2E2006E54A9 /* DefaultsKey.swift */; };
 		83DC1EEA24361765006E54A9 /* DefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC1EE924361765006E54A9 /* DefaultsService.swift */; };
 		83DC1EED24361781006E54A9 /* DefaultsServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC1EEC24361781006E54A9 /* DefaultsServiceType.swift */; };
@@ -541,6 +543,8 @@
 		83828A02243334BF0054347B /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		83828A042433350C0054347B /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
 		83828A072433352D0054347B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		839A5A32243E6EDE002741CC /* RegisterDeviceNoMsisdnRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDeviceNoMsisdnRequest.swift; sourceTree = "<group>"; };
+		839A5A35243E6F11002741CC /* RegisterDeviceNoMsisdnResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDeviceNoMsisdnResponse.swift; sourceTree = "<group>"; };
 		83DC1EE62435F2E2006E54A9 /* DefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKey.swift; sourceTree = "<group>"; };
 		83DC1EE924361765006E54A9 /* DefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsService.swift; sourceTree = "<group>"; };
 		83DC1EEC24361781006E54A9 /* DefaultsServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsServiceType.swift; sourceTree = "<group>"; };
@@ -1278,6 +1282,7 @@
 		0EA68EA2243DA20D00361776 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				839A5A30243E6E9B002741CC /* RegisterDeviceNoMsisdn */,
 				0E965396243E0DFB0084D019 /* SendHistory */,
 				0EB372D12439BBB600884C93 /* GetStatus */,
 				83DC1F0024369CB2006E54A9 /* RequestBuilder */,
@@ -2004,6 +2009,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		839A5A30243E6E9B002741CC /* RegisterDeviceNoMsisdn */ = {
+			isa = PBXGroup;
+			children = (
+				839A5A32243E6EDE002741CC /* RegisterDeviceNoMsisdnRequest.swift */,
+				839A5A35243E6F11002741CC /* RegisterDeviceNoMsisdnResponse.swift */,
+			);
+			path = RegisterDeviceNoMsisdn;
+			sourceTree = "<group>";
+		};
 		83DC1EDE2435F008006E54A9 /* UserDefaults */ = {
 			isa = PBXGroup;
 			children = (
@@ -2426,6 +2440,7 @@
 				0EE60C30242FDB2D00D29048 /* RealmManagerType.swift in Sources */,
 				83512C312434E9B3007DB8AD /* StatusDescriptionView.swift in Sources */,
 				83252A6A24314C74001E6D63 /* RegisterDeviceRequest.swift in Sources */,
+				839A5A33243E6EDE002741CC /* RegisterDeviceNoMsisdnRequest.swift in Sources */,
 				0E9DCCA52430C9CE00C2670D /* RegisteredEncountersDebugViewModel.swift in Sources */,
 				8362C2B62436B05500E2AEDB /* RegistrationVerifyCodeViewModelType.swift in Sources */,
 				8382897224332D2A0054347B /* UILabel+Factory.swift in Sources */,
@@ -2475,6 +2490,7 @@
 				83252A7624314EFF001E6D63 /* DefaultRequestParameters.swift in Sources */,
 				83DC1EE72435F2E2006E54A9 /* DefaultsKey.swift in Sources */,
 				838289D9243331ED0054347B /* RegistrationView.swift in Sources */,
+				839A5A36243E6F11002741CC /* RegisterDeviceNoMsisdnResponse.swift in Sources */,
 				0E6D260B242E8B540037A80C /* Constants+InfoKeys.swift in Sources */,
 				83252A782431519F001E6D63 /* NetworkingAssembly.swift in Sources */,
 				838289D7243331510054347B /* BannerView.swift in Sources */,

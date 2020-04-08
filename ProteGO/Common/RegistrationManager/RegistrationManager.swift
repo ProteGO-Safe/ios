@@ -24,6 +24,7 @@ final class RegistrationManager: RegistrationManagerType {
         set {
             guard let newValue = newValue else {
                 keychainProvider.removeObject(forKey: Constants.KeychainKeys.userIdKey)
+                userIdSubject.onNext(nil)
                 return
             }
             keychainProvider.set(string: newValue, forKey: Constants.KeychainKeys.userIdKey)

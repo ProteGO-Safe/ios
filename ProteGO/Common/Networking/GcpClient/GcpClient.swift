@@ -84,6 +84,33 @@ final class GcpClient: GcpClientType {
             })
     }
 
+    func registerNoMsisdn() -> Single<Result<RegisterNoMsisdnResponse, Error>> {
+        let request = requestBuilder.registerNoMsisdnRequest()
+
+        let endpoint = GcpEndpoint.registerNoMsisdn(request)
+        return networkClient.rx.dataTask(networkRequest: endpoint.networkRequest)
+            .map({ result -> Result<RegisterNoMsisdnResponse, Error> in
+                return result.flatMap { data in
+                    do {
+                        let decoder = JSONDecoder()
+                        decoder.keyDecodingStrategy = .convertFromSnakeCase
+                        let decoded = try decoder.decode(RegisterNoMsisdnResponse.self, from: data)
+                        return .success(decoded)
+                    } catch {
+                        return .failure(GcpClientError.failedToDecodeResponseData(error))
+                    }
+                }
+            }).do(onSuccess: { [weak self] result in
+                switch result {
+                case .success(let result):
+                    logger.debug("Did register without phone number")
+                    self?.registrationManager.confirmRegistration(userId: result.userId)
+                case .failure(let error):
+                    logger.error("Failed to register without phone number: \(error)")
+                }
+            })
+    }
+
     func getStatus(lastBeaconDate: Date?) -> Single<Result<GetStatusResponse, Error>> {
         guard let request = requestBuilder.getStatusRequest(lastBeaconDate: lastBeaconDate) else {
             return .just(.failure(GcpClientError.failedToBuildRequest))

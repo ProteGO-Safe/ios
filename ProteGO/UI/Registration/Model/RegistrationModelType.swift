@@ -13,7 +13,7 @@ protocol RegistrationModelType {
 
     func previousStep()
 
-    func sendCodeStepFinished(phoneNumber: String)
+    func sendCodeStepFinished(finishedData: SendCodeFinishedData)
 
     func verifyCodeStepFinished()
 }
