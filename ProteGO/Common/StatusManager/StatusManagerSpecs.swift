@@ -3,6 +3,7 @@ import Quick
 import Nimble
 @testable import ProteGO
 
+//swiftlint:disable function_body_length
 class StatusManagerSpecs: QuickSpec {
     override func spec() {
         describe("StatusManager") {
@@ -57,6 +58,7 @@ class StatusManagerSpecs: QuickSpec {
                 it("should trigger GCP endpoint") {
                     gcpClientMock.verifyCall(
                     withIdentifier: "getStatus",
+                    arguments: [NSNull()],
                     mode: .times(1))
                 }
             }
