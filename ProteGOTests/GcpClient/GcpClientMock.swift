@@ -24,7 +24,7 @@ final class GcpClientMock: GcpClientType, Mock {
         return .just(self.confirmRegistrationResult)
     }
 
-    func getStatus() -> Single<Result<GetStatusResponse, Error>> {
+    func getStatus(lastBeaconDate: Date?) -> Single<Result<GetStatusResponse, Error>> {
         recordCall(withIdentifier: "getStatus")
         return .just(self.getStatusResult)
     }

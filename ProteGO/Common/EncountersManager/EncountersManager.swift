@@ -2,7 +2,7 @@ import Foundation
 import RealmSwift
 
 final class EncountersManager: EncountersManagerType {
-    
+
     var allEncounters: Results<Encounter> {
         return self.realmManager.realm.objects(Encounter.self).sorted(byKeyPath: "date", ascending: true)
     }
