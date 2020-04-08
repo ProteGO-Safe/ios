@@ -14,6 +14,8 @@ final class GcpClientMock: GcpClientType, Mock {
 
     var getStatusResult: Result<GetStatusResponse, Error> = .failure(ErrorInfo("not initialized"))
 
+    var sendHistoryResult: Result<SendHistoryResponse, Error> = .failure(ErrorInfo("not initialized"))
+
     func registerDevice(msisdn: String) -> Single<Result<RegisterDeviceResponse, Error>> {
         recordCall(withIdentifier: "registerDevice", arguments: [msisdn])
         return .just(self.registerDeviceResult)
@@ -25,7 +27,12 @@ final class GcpClientMock: GcpClientType, Mock {
     }
 
     func getStatus(lastBeaconDate: Date?) -> Single<Result<GetStatusResponse, Error>> {
-        recordCall(withIdentifier: "getStatus")
+        recordCall(withIdentifier: "getStatus", arguments: [lastBeaconDate])
         return .just(self.getStatusResult)
+    }
+
+    func sendHistory(encounters: [Encounter]) -> Single<Result<SendHistoryResponse, Error>> {
+        recordCall(withIdentifier: "sendHistory", arguments: encounters)
+        return .just(self.sendHistoryResult)
     }
 }
