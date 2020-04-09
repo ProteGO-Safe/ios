@@ -2,11 +2,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-enum GcpClientError: Error {
-    case failedToDecodeResponseData(Error)
-    case failedToBuildRequest
-}
-
 final class GcpClient: GcpClientType {
 
     private let networkClient: NetworkClient
