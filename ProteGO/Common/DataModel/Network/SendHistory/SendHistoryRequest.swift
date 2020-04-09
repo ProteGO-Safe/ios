@@ -10,6 +10,8 @@ struct SendHistoryEncounter: Encodable {
 
 struct SendHistoryRequest: Encodable {
 
+    let proof: String
+
     let encounters: [SendHistoryEncounter]
 
     let userId: String
@@ -26,12 +28,15 @@ struct SendHistoryRequest: Encodable {
 
     let lang: String
 
-    init(encounters: [Encounter], userId: String, defaultParameters: DefaultRequestParameters = DefaultRequestParameters()) {
+    init(confirmCode: String, encounters: [Encounter], userId: String,
+         defaultParameters: DefaultRequestParameters = DefaultRequestParameters()) {
         self.encounters = encounters.compactMap({ encounter -> SendHistoryEncounter in
             return SendHistoryEncounter(beaconId: encounter.deviceId,
                                         encounterDate: encounter.date,
                                         signalStrength: encounter.signalStrength.value)
         })
+
+        self.proof = confirmCode
         self.userId = userId
         self.platform = defaultParameters.platform
         self.osVersion = defaultParameters.osVersion

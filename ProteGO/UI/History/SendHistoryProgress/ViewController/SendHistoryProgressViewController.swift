@@ -1,7 +1,7 @@
 import UIKit
 import RxSwift
 
-typealias SendHistoryProgressViewControllerBuilder = () -> SendHistoryProgressViewController
+typealias SendHistoryProgressViewControllerBuilder = (/* code */String) -> SendHistoryProgressViewController
 
 protocol SendHistoryProgressViewControllerDelegate: class {
     func sendHistoryFinished(result: Result<Void, Error>)
@@ -15,9 +15,12 @@ final class SendHistoryProgressViewController: UIViewController, CustomView {
 
     private let viewModel: SendHistoryProgressViewModelType
 
+    private let confirmCode: String
+
     private let disposeBag: DisposeBag = DisposeBag()
 
-    init(viewModel: SendHistoryProgressViewModelType) {
+    init(confirmCode: String, viewModel: SendHistoryProgressViewModelType) {
+        self.confirmCode = confirmCode
         self.viewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)
@@ -39,7 +42,7 @@ final class SendHistoryProgressViewController: UIViewController, CustomView {
     }
 
     private func bindViewModelEvents() {
-        self.viewModel.sendHistory()
+        self.viewModel.sendHistory(confirmCode: self.confirmCode)
             .observeOn(MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] result in
             self?.delegate?.sendHistoryFinished(result: result)

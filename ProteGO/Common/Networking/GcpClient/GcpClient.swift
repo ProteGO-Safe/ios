@@ -142,8 +142,8 @@ final class GcpClient: GcpClientType {
             })
     }
 
-    func sendHistory(encounters: [Encounter]) -> Single<Result<SendHistoryResponse, Error>> {
-           guard let request = requestBuilder.sendHistoryRequest(encounters: encounters) else {
+    func sendHistory(confirmCode: String, encounters: [Encounter]) -> Single<Result<SendHistoryResponse, Error>> {
+           guard let request = requestBuilder.sendHistoryRequest(confirmCode: confirmCode, encounters: encounters) else {
                return .just(.failure(GcpClientError.failedToBuildRequest))
            }
 

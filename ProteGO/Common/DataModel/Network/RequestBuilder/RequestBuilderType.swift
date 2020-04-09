@@ -10,5 +10,5 @@ protocol RequestBuilderType {
 
     func getStatusRequest(lastBeaconDate: Date?) -> GetStatusRequest?
 
-    func sendHistoryRequest(encounters: [Encounter]) -> SendHistoryRequest?
+    func sendHistoryRequest(confirmCode: String, encounters: [Encounter]) -> SendHistoryRequest?
 }

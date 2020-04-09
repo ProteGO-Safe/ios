@@ -183,6 +183,10 @@ internal enum L10n {
   internal static let sendDataAlertSuccessDescription = L10n.tr("Localizable", "send_data_alert_success_description")
   /// Thank you!
   internal static let sendDataAlertSuccessTitle = L10n.tr("Localizable", "send_data_alert_success_title")
+  /// Enter the code you received with your lab results.
+  internal static let sendDataConfirmCodeDescription = L10n.tr("Localizable", "send_data_confirm_code_description")
+  /// xxx xxx
+  internal static let sendDataConfirmCodePlaceholder = L10n.tr("Localizable", "send_data_confirm_code_placeholder")
   /// Cancel
   internal static let sendDataConfirmationAlertCancelBtn = L10n.tr("Localizable", "send_data_confirmation_alert_cancel_btn")
   /// Are you infected? Send the information, to protect others.
@@ -191,7 +195,7 @@ internal enum L10n {
   internal static let sendDataConfirmationAlertSendBtn = L10n.tr("Localizable", "send_data_confirmation_alert_send_btn")
   /// Confirm
   internal static let sendDataConfirmationAlertTitle = L10n.tr("Localizable", "send_data_confirmation_alert_title")
-  /// Share information about devices that have been around you in the last two weeks. Do it for the safety of their owners. \n\n You are anonymous, nobody will know about your condition.
+  /// Share information about devices that have been around you in the last two weeks. Do it for the safety of their owners. \n\n You are anonymous to them, nobody will know about your condition.
   internal static let sendDataDescription = L10n.tr("Localizable", "send_data_description")
   /// xxx xxx xxx
   internal static let sendDataIdPlaceholder = L10n.tr("Localizable", "send_data_id_placeholder")
@@ -201,6 +205,8 @@ internal enum L10n {
   internal static let sendDataTitle = L10n.tr("Localizable", "send_data_title")
   /// Your ID:
   internal static let sendDataYourId = L10n.tr("Localizable", "send_data_your_id")
+  /// ProteGO is an open source software created for Minstry of Digital Affairs
+  internal static let splashScreenOpenSourceLbl = L10n.tr("Localizable", "splash_screen_open_source_lbl")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name
