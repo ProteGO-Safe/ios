@@ -256,6 +256,8 @@
 		83DC1EFB24366EDD006E54A9 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC1EFA24366EDD006E54A9 /* RegistrationViewController.swift */; };
 		83DC1EFD24369775006E54A9 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC1EFC24369775006E54A9 /* RequestBuilder.swift */; };
 		83DC1EFF24369C62006E54A9 /* RequestBuilderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC1EFE24369C62006E54A9 /* RequestBuilderType.swift */; };
+		83E70F4E243F9DCE002A728B /* GcpClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E70F4D243F9DCE002A728B /* GcpClientError.swift */; };
+		83E70F50243F9DEF002A728B /* NetworkClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E70F4F243F9DEF002A728B /* NetworkClientError.swift */; };
 		87074B7C242F6A5F0029AD4B /* BleScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7B242F6A5F0029AD4B /* BleScanner.swift */; };
 		87074B7F242F6D700029AD4B /* ProteGoDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B7E242F6D700029AD4B /* ProteGoDevice.swift */; };
 		87074B85242F94780029AD4B /* ProteGoDeviceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87074B84242F94780029AD4B /* ProteGoDeviceState.swift */; };
@@ -555,6 +557,8 @@
 		83DC1EFA24366EDD006E54A9 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		83DC1EFC24369775006E54A9 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		83DC1EFE24369C62006E54A9 /* RequestBuilderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilderType.swift; sourceTree = "<group>"; };
+		83E70F4D243F9DCE002A728B /* GcpClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GcpClientError.swift; sourceTree = "<group>"; };
+		83E70F4F243F9DEF002A728B /* NetworkClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientError.swift; sourceTree = "<group>"; };
 		87074B7B242F6A5F0029AD4B /* BleScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleScanner.swift; sourceTree = "<group>"; };
 		87074B7E242F6D700029AD4B /* ProteGoDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteGoDevice.swift; sourceTree = "<group>"; };
 		87074B84242F94780029AD4B /* ProteGoDeviceState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteGoDeviceState.swift; sourceTree = "<group>"; };
@@ -1446,6 +1450,8 @@
 			isa = PBXGroup;
 			children = (
 				0EE60C39242FE03100D29048 /* ProteGOError.swift */,
+				83E70F4F243F9DEF002A728B /* NetworkClientError.swift */,
+				83E70F4D243F9DCE002A728B /* GcpClientError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -2433,6 +2439,7 @@
 				87074B7F242F6D700029AD4B /* ProteGoDevice.swift in Sources */,
 				87074B85242F94780029AD4B /* ProteGoDeviceState.swift in Sources */,
 				83DC1EF2243623FE006E54A9 /* RegistrationManagerType.swift in Sources */,
+				83E70F4E243F9DCE002A728B /* GcpClientError.swift in Sources */,
 				83512C3E243510B2007DB8AD /* OnboardingModelType.swift in Sources */,
 				0EA68E9A243D26B800361776 /* CurrentDateProviderType.swift in Sources */,
 				83252A7C24320586001E6D63 /* Constants+Networking.swift in Sources */,
@@ -2601,6 +2608,7 @@
 				0EB65C882436712C00491507 /* (null) in Sources */,
 				0E0B30E72437A2CD005DFC84 /* SendHistoryConfirmViewModelType.swift in Sources */,
 				83512C192434BF00007DB8AD /* NavigationButtonsView.swift in Sources */,
+				83E70F50243F9DEF002A728B /* NetworkClientError.swift in Sources */,
 				838289C4243330200054347B /* RegistrationSendCodeViewModelType.swift in Sources */,
 				0E9DCCA12430C8C200C2670D /* CustomView.swift in Sources */,
 				874AACA02435E98400FF7332 /* ProteGoDeviceEffect.swift in Sources */,
