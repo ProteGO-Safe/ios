@@ -2,11 +2,13 @@ Aplikacja ProteGO iOS
 
 # Zależności
 
-Aplikacja ProteGO wykorzystuje Carthage oraz Cocoapods do zarządzania zależnościami w projekcie. Lista zależnosci standardowo w plikach `Cartfile` i `Podfile`
+Aplikacja ProteGO wykorzystuje Carthage oraz CocoaPods do zarządzania zależnościami w projekcie. Lista zależnosci standardowo w plikach `Cartfile` i `Podfile`
 
-## Carthage
+## Początkowa konfiguracja projektu
 
-W folderze `scripts` znajduje się skrypt `updateCarthage.sh` ułatwiający zaktualizowanie zależności obsługiwanych przez Carthage.
+ * Instalacja Gem-ów Ruby (w tym CocoaPods): `bundle install`
+ * Instalacja Carthage: [jest kilka możliwych opcji](https://github.com/Carthage/Carthage#installing-carthage)
+ * Akualizacja zależności zarządzanych przez Carthage: `./scripts/updateCarthage.sh`
 
 # Rodzaje środowisk
 

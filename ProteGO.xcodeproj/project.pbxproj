@@ -121,8 +121,6 @@
 		0EB65C832435285E00491507 /* HistoryOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C822435285E00491507 /* HistoryOverviewViewController.swift */; };
 		0EB65C852436195200491507 /* HistoryAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C842436195200491507 /* HistoryAssembly.swift */; };
 		0EB65C872436620E00491507 /* Constants+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB65C862436620E00491507 /* Constants+UI.swift */; };
-		0EB65C882436712C00491507 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		0EB65C892436713200491507 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0ECE7A1F2430E3EE00EED942 /* BluetoothAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECE7A1E2430E3EE00EED942 /* BluetoothAssembly.swift */; };
 		0ECE7A212430E48200EED942 /* BluetoothDebugItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECE7A202430E48200EED942 /* BluetoothDebugItems.swift */; };
 		0ECE7A222430F91F00EED942 /* MockAdvertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C902430A5B7007C8F78 /* MockAdvertiser.swift */; };
@@ -2577,7 +2575,6 @@
 				0EB65C7D243527A900491507 /* HistoryOverviewModelType.swift in Sources */,
 				0EB65C792435279300491507 /* HistoryOverviewView.swift in Sources */,
 				0E8DED2E2433CC7600D7F806 /* DangerStatusManager.swift in Sources */,
-				0EB65C892436713200491507 /* (null) in Sources */,
 				0E8DED302433CCCF00D7F806 /* DangerStatusManagerType.swift in Sources */,
 				836DF51B24334C14000C00C0 /* RegistrationViewModel.swift in Sources */,
 				0E0B30E52437A2C2005DFC84 /* SendHistoryConfirmViewController.swift in Sources */,
@@ -2605,7 +2602,6 @@
 				0E9DCC9D2430C7F100C2670D /* RegisteredEncountersDebugScreenView.swift in Sources */,
 				0EE60C5F2430015E00D29048 /* SecretsGenerator.swift in Sources */,
 				8356F9382436B4270075FF20 /* RegistrationSendCodeViewModel.swift in Sources */,
-				0EB65C882436712C00491507 /* (null) in Sources */,
 				0E0B30E72437A2CD005DFC84 /* SendHistoryConfirmViewModelType.swift in Sources */,
 				83512C192434BF00007DB8AD /* NavigationButtonsView.swift in Sources */,
 				83E70F50243F9DEF002A728B /* NetworkClientError.swift in Sources */,
