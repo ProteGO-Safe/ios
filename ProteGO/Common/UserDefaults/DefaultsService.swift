@@ -3,6 +3,15 @@ import RxSwift
 
 final class DefaultsService: DefaultsServiceType {
 
+    public var finishedFirstAppLaunch: Bool {
+        get {
+            return value(forKey: .finishedFirstAppLaunch) as? Bool ?? false
+        }
+        set {
+            save(value: newValue, key: .finishedFirstAppLaunch)
+        }
+    }
+
     public var finishedOnboarding: Bool {
         get {
             return value(forKey: .finishedOnboarding) as? Bool ?? false
