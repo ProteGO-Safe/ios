@@ -9,9 +9,13 @@ final class RegistrationVerifyCodeViewController: UIViewController, CustomView {
         return viewModel.stepFinishedObservable
     }
 
-    private let viewModel: ReegistrationVerifyCodeViewModelType
+    var requestInProgressObservable: Observable<Bool> {
+        return viewModel.requestInProgressObservable
+    }
 
-    init(viewModel: ReegistrationVerifyCodeViewModelType) {
+    private let viewModel: RegistrationVerifyCodeViewModelType
+
+    init(viewModel: RegistrationVerifyCodeViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

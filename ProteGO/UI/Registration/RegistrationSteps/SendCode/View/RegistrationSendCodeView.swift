@@ -50,6 +50,7 @@ final class RegistrationSendCodeView: UIView {
         label.attributedText = attributedText
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
+        label.textColor = Colors.greyishBrown
         return label
     }()
 

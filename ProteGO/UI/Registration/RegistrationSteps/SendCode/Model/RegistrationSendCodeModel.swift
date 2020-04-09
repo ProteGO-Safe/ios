@@ -16,7 +16,13 @@ final class RegistrationSendCodeModel: RegistrationSendCodeModelType {
         keyboardManager.keyboardHeightWillChangeObservable
     }
 
+    var requestInProgressObservable: Observable<Bool> {
+        return requestInProgressSubject.asObservable()
+    }
+
     private let stepFinishedSubject = PublishSubject<SendCodeFinishedData>()
+
+    private let requestInProgressSubject = BehaviorSubject<Bool>(value: false)
 
     private let gcpClient: GcpClientType
 
@@ -31,7 +37,9 @@ final class RegistrationSendCodeModel: RegistrationSendCodeModelType {
     }
 
     func registerDevice(phoneNumber: String) {
+        requestInProgressSubject.onNext(true)
         return gcpClient.registerDevice(msisdn: phoneNumber).subscribe(onSuccess: { [weak self] result in
+            self?.requestInProgressSubject.onNext(false)
             switch result {
             case .success:
                 self?.stepFinishedSubject.onNext(.sendCode(phoneNumber: phoneNumber))
@@ -42,7 +50,9 @@ final class RegistrationSendCodeModel: RegistrationSendCodeModelType {
     }
 
     func registerWithoutPhoneNumber() {
+        requestInProgressSubject.onNext(true)
         return gcpClient.registerNoMsisdn().subscribe(onSuccess: { [weak self] result in
+            self?.requestInProgressSubject.onNext(false)
             switch result {
             case .success:
                 self?.stepFinishedSubject.onNext((.registerWithoutPhoneNumber))

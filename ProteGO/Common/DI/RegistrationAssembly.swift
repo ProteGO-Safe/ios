@@ -61,13 +61,13 @@ final class RegistrationAssembly: Assembly {
                 keyboardManager: resolver.resolve(KeyboardManagerType.self))
         }
 
-        container.register(ReegistrationVerifyCodeViewModelType.self) { resolver in
+        container.register(RegistrationVerifyCodeViewModelType.self) { resolver in
             return RegistrationVerifyCodeViewModel(model: resolver.resolve(RegistrationVerifyCodeModelType.self))
         }
 
         container.register(RegistrationVerifyCodeViewController.self) { resolver in
             return RegistrationVerifyCodeViewController(
-                viewModel: resolver.resolve(ReegistrationVerifyCodeViewModelType.self))
+                viewModel: resolver.resolve(RegistrationVerifyCodeViewModelType.self))
         }
     }
 

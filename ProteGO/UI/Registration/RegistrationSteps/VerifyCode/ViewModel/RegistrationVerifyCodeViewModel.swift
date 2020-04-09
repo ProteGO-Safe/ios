@@ -1,10 +1,14 @@
 import UIKit
 import RxSwift
 
-final class RegistrationVerifyCodeViewModel: ReegistrationVerifyCodeViewModelType {
+final class RegistrationVerifyCodeViewModel: RegistrationVerifyCodeViewModelType {
 
     var stepFinishedObservable: Observable<Void> {
         return model.stepFinishedObservable
+    }
+
+    var requestInProgressObservable: Observable<Bool> {
+        return model.requestInProgressObservable
     }
 
     private let model: RegistrationVerifyCodeModelType

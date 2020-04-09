@@ -35,6 +35,7 @@ final class SendHistoryProgressViewController: UIViewController, CustomView {
         super.viewDidLoad()
         self.viewModel.bind(view: customView)
         self.bindViewModelEvents()
+        customView.startAnimation()
     }
 
     private func bindViewModelEvents() {

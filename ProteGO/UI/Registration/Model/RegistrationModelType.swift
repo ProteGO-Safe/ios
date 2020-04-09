@@ -9,6 +9,8 @@ protocol RegistrationModelType {
 
     var registrationFinishedObservable: Observable<Void> { get }
 
+    var requestInProgressObservable: Observable<Bool> { get }
+
     func setInitialStep()
 
     func previousStep()
@@ -16,4 +18,6 @@ protocol RegistrationModelType {
     func sendCodeStepFinished(finishedData: SendCodeFinishedData)
 
     func verifyCodeStepFinished()
+
+    func requestInProgress(_ inProgress: Bool)
 }

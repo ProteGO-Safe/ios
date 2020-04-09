@@ -7,6 +7,10 @@ final class RegistrationSendCodeViewModel: RegistrationSendCodeViewModelType {
         return model.stepFinishedObservable
     }
 
+    var requestInProgressObservable: Observable<Bool> {
+        return model.requestInProgressObservable
+    }
+
     private let model: RegistrationSendCodeModelType
 
     private let disposeBag = DisposeBag()
