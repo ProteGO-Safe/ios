@@ -14,7 +14,7 @@ enum NetworkClientError: ProteGOError {
             return "Status code: \(statusCode). Reason: \(String(data: data, encoding: .utf8) ?? "n/a")"
         }
 
-        return self.localizedDescription
+        return nil
     }
 }
 

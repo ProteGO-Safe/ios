@@ -69,16 +69,6 @@ final class DashboardViewController: UIViewController, CustomView {
             self.present(historyRootViewController, animated: true)
         }).disposed(by: disposeBag)
     }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        // TODO: This shouldn't be here, I guess that it's working because of the small delay between calling dispatch
-        // and calling contents of this clojure. Without dispatch frame of the internal stack view isn't set
-        DispatchQueue.main.async { [weak self] in
-            self?.customView.updateScrollViewContentSize()
-        }
-    }
 }
 
 extension DashboardViewController: HistoryRootViewControllerDelegate {

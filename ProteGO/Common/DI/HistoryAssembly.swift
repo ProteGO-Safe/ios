@@ -52,8 +52,8 @@ final class HistoryOverviewAssembly: Assembly {
 
     private func registerSendHistoryConfirmViewController(_ container: Container) {
         container.register(SendHistoryConfirmViewController.self) { resolver in
-            let builder: SendHistoryProgressViewControllerBuilder = {
-                return resolver.resolve(SendHistoryProgressViewController.self)
+            let builder: SendHistoryProgressViewControllerBuilder = { (confirmCode: String) in
+                return resolver.resolve(SendHistoryProgressViewController.self, argument: confirmCode)
             }
             let viewModel: SendHistoryConfirmViewModelType = resolver.resolve(SendHistoryConfirmViewModelType.self)
             return SendHistoryConfirmViewController(viewModel: viewModel, sendHistoryProgressViewControllerBuilder: builder)
@@ -68,14 +68,15 @@ final class HistoryOverviewAssembly: Assembly {
 
     private func registerSendHistoryConfirmModel(_ container: Container) {
         container.register(SendHistoryConfirmModelType.self) { resolver in
-            return SendHistoryConfirmModel(keychainProvider: resolver.resolve(KeychainProviderType.self))
+            return SendHistoryConfirmModel(keychainProvider: resolver.resolve(KeychainProviderType.self),
+                                           keyboardManager: resolver.resolve(KeyboardManagerType.self))
         }
     }
 
     private func registerSendHistoryProgressViewController(_ container: Container) {
-        container.register(SendHistoryProgressViewController.self) { resolver in
+        container.register(SendHistoryProgressViewController.self) { (resolver, confirmCode: String) in
             let viewModel: SendHistoryProgressViewModelType = resolver.resolve(SendHistoryProgressViewModelType.self)
-            return SendHistoryProgressViewController(viewModel: viewModel)
+            return SendHistoryProgressViewController(confirmCode: confirmCode, viewModel: viewModel)
         }
     }
 

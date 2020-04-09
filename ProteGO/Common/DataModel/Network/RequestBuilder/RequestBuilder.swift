@@ -38,10 +38,10 @@ final class RequestBuilder: RequestBuilderType {
         return GetStatusRequest(lastBeaconDate: lastBeaconDate, userId: userId)
     }
 
-    func sendHistoryRequest(encounters: [Encounter]) -> SendHistoryRequest? {
+    func sendHistoryRequest(confirmCode: String, encounters: [Encounter]) -> SendHistoryRequest? {
         guard let userId = registrationManager.userId else {
             return nil
         }
-        return SendHistoryRequest(encounters: encounters, userId: userId)
+        return SendHistoryRequest(confirmCode: confirmCode, encounters: encounters, userId: userId)
     }
 }

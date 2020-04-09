@@ -111,11 +111,12 @@ final class DashboardView: UIView {
 
         containerScrollView.snp.makeConstraints {
             $0.top.equalTo(bannerView.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(self.safeAreaInsets.bottom)
         }
 
         containerStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(24)
+            $0.top.bottom.equalToSuperview().inset(24)
             $0.leading.equalToSuperview().offset(24)
             $0.width.equalToSuperview().offset(-50)
         }
@@ -135,13 +136,5 @@ final class DashboardView: UIView {
         case .red:
             containerStackView.addArrangedSubviews([redStatusCardView, redGeneralRecommendationsCard])
         }
-    }
-
-    func updateScrollViewContentSize() {
-        let bottomOffset: CGFloat = 44
-        let size = CGSize(
-            width: self.containerStackView.frame.size.width,
-            height: self.containerStackView.frame.size.height + bottomOffset)
-        self.containerScrollView.contentSize = size
     }
 }

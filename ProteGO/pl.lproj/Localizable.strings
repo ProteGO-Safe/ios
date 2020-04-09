@@ -215,13 +215,19 @@
 "send_data_title" = "Wyślij listę spotkań";
 
 /* Ekran wysyłania danych */
-"send_data_description" = "Podziel się informacją o urządzeniach, które były w Twoim pobliżu w ciągu ostatnich dwóch tygodni. Zrób to dla bezpieczeństwa ich właścicieli. \n\n Jesteś anonimowy, nikt nie dowie się o Twojej chorobie.";
+"send_data_description" = "Podziel się informacją o urządzeniach, które były w Twoim pobliżu w ciągu ostatnich dwóch tygodni. Zrób to dla bezpieczeństwa ich właścicieli. \n\n Jesteś wobec nich anonimowy, nikt nie dowie się o Twojej chorobie.";
 
 /* Ekran wysyłania danych */
 "send_data_your_id" = "Twoje ID:";
 
 /* Ekran wysyłania danych */
 "send_data_id_placeholder" = "xxx xxx xxx";
+
+/* Ekran wysyłania danych */
+"send_data_confirm_code_description" = "Wprowadź kod weryfikujący, który otrzymałeś w wiadomości SMS wraz z wynikami badań.";
+
+/* Ekran wysyłania danych */
+"send_data_confirm_code_placeholder" = "xxx xxx";
 
 /* Ekran wysyłania danych */
 "send_data_send_button" = "Wyślij";
@@ -255,4 +261,7 @@
 
 /* Ekran wysyłania danych - alert potwierdzający */
 "send_data_confirmation_alert_send_btn" = "Prześlij";
+
+/* Splash - notka na dole */
+"splash_screen_open_source_lbl" = "ProteGO to otwarte oprogramowanie stworzone dla Ministerstwa Cyfryzacji";
 
