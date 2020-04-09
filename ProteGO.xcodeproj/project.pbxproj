@@ -239,7 +239,7 @@
 		B2318187243A87DF00306B28 /* ValidationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2318186243A87DF00306B28 /* ValidationType.swift */; };
 		B2318189243A880900306B28 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2318188243A880900306B28 /* ValidationError.swift */; };
 		B231818B243A88B800306B28 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B231818A243A88B800306B28 /* Validator.swift */; };
-		B231818E243A921700306B28 /* ValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B231818D243A921700306B28 /* ValidatorTests.swift */; };
+		B2D5E671243FC4C60083FA61 /* ValidatorSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D5E66F243FC42C0083FA61 /* ValidatorSpecs.swift */; };
 		E6FC73238FEB0689D7FCA95C /* Pods_ProteGOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 110266AD057C4616D8381F24 /* Pods_ProteGOTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -503,7 +503,7 @@
 		B2318186243A87DF00306B28 /* ValidationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationType.swift; sourceTree = "<group>"; };
 		B2318188243A880900306B28 /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
 		B231818A243A88B800306B28 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
-		B231818D243A921700306B28 /* ValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorTests.swift; sourceTree = "<group>"; };
+		B2D5E66F243FC42C0083FA61 /* ValidatorSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorSpecs.swift; sourceTree = "<group>"; };
 		BEC33F61CC8746F654E7BDEC /* Pods-ProteGO.debug_prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGO.debug_prod.xcconfig"; path = "Target Support Files/Pods-ProteGO/Pods-ProteGO.debug_prod.xcconfig"; sourceTree = "<group>"; };
 		C8E4564A545D17C206EEC75E /* Pods-ProteGO.debug_dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGO.debug_dev.xcconfig"; path = "Target Support Files/Pods-ProteGO/Pods-ProteGO.debug_dev.xcconfig"; sourceTree = "<group>"; };
 		F967271215DF31CF5FA2F3F1 /* Pods-ProteGOTests.debug_dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProteGOTests.debug_dev.xcconfig"; path = "Target Support Files/Pods-ProteGOTests/Pods-ProteGOTests.debug_dev.xcconfig"; sourceTree = "<group>"; };
@@ -758,7 +758,6 @@
 		0E5C2085242B63460038EF8B /* ProteGOTests */ = {
 			isa = PBXGroup;
 			children = (
-				B231818C243A91E400306B28 /* Validator */,
 				0E9DCC972430985E00C2670D /* RealmManager */,
 				0E9DCC89243010C900C2670D /* SecretsGenerator */,
 				0E5C2088242B63460038EF8B /* Info.plist */,
@@ -1793,14 +1792,7 @@
 				B2318186243A87DF00306B28 /* ValidationType.swift */,
 				B2318188243A880900306B28 /* ValidationError.swift */,
 				B231818A243A88B800306B28 /* Validator.swift */,
-			);
-			path = Validator;
-			sourceTree = "<group>";
-		};
-		B231818C243A91E400306B28 /* Validator */ = {
-			isa = PBXGroup;
-			children = (
-				B231818D243A921700306B28 /* ValidatorTests.swift */,
+				B2D5E66F243FC42C0083FA61 /* ValidatorSpecs.swift */,
 			);
 			path = Validator;
 			sourceTree = "<group>";
@@ -2310,8 +2302,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				877F3F7A2434B4F100F774C7 /* Data+HexString.swift in Sources */,
-				B231818E243A921700306B28 /* ValidatorTests.swift in Sources */,
 				0E9DCC992430987000C2670D /* RealmManagerMock.swift in Sources */,
+				B2D5E671243FC4C60083FA61 /* ValidatorSpecs.swift in Sources */,
 				0EE60C612430017A00D29048 /* SecretsGeneratorSpecs.swift in Sources */,
 				0E9DCC8F2430150000C2670D /* RealmManagerSpecs.swift in Sources */,
 				0E9DCC962430985900C2670D /* EncountersManagerSpecs.swift in Sources */,
