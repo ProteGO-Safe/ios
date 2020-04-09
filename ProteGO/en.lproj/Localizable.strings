@@ -215,13 +215,19 @@
 "send_data_title" = "Send encounters list";
 
 /* Ekran wysyłania danych */
-"send_data_description" = "Share information about devices that have been around you in the last two weeks. Do it for the safety of their owners. \n\n You are anonymous, nobody will know about your condition.";
+"send_data_description" = "Share information about devices that have been around you in the last two weeks. Do it for the safety of their owners. \n\n You are anonymous to them, nobody will know about your condition.";
 
 /* Ekran wysyłania danych */
 "send_data_your_id" = "Your ID:";
 
 /* Ekran wysyłania danych */
 "send_data_id_placeholder" = "xxx xxx xxx";
+
+/* Ekran wysyłania danych */
+"send_data_confirm_code_description" = "Enter the code you received with your lab results.";
+
+/* Ekran wysyłania danych */
+"send_data_confirm_code_placeholder" = "xxx xxx";
 
 /* Ekran wysyłania danych */
 "send_data_send_button" = "Send";
@@ -255,4 +261,7 @@
 
 /* Ekran wysyłania danych - alert potwierdzający */
 "send_data_confirmation_alert_send_btn" = "Send";
+
+/* Splash - notka na dole */
+"splash_screen_open_source_lbl" = "ProteGO is an open source software created for Minstry of Digital Affairs";
 

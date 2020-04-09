@@ -56,11 +56,13 @@ final class SendHistoryConfirmViewController: UIViewController, CustomView {
                                           preferredStyle: UIAlertController.Style.alert)
 
             let sendHandler = { (_: UIAlertAction) in
-                alert.dismiss(animated: true) {
-                    let sendHistoryProgressViewController = self.sendHistoryProgressViewControllerBuilder()
-                    sendHistoryProgressViewController.delegate = self
-                    self.navigationController?.pushViewController(sendHistoryProgressViewController, animated: false)
+                guard let code = self.customView.confirmationCode else {
+                    return
                 }
+
+                let sendHistoryProgressViewController = self.sendHistoryProgressViewControllerBuilder(code)
+                sendHistoryProgressViewController.delegate = self
+                self.navigationController?.pushViewController(sendHistoryProgressViewController, animated: false)
             }
 
             let cancelHandler = { (_: UIAlertAction) in

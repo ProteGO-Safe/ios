@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 import RxSwift
 import RxCocoa
 import RealmSwift
@@ -12,9 +13,16 @@ final class SendHistoryConfirmModel: SendHistoryConfirmModelType {
         return text.prefix(withLengthRatio: Constants.HistorySend.userIdPrefixLengthRatio)
     }
 
+    var keyboardHeightWillChangeObservable: Observable<CGFloat> {
+        keyboardManager.keyboardHeightWillChangeObservable
+    }
+
+    private let keyboardManager: KeyboardManagerType
+
     private let keychainProvider: KeychainProviderType
 
-    init(keychainProvider: KeychainProviderType) {
+    init(keychainProvider: KeychainProviderType, keyboardManager: KeyboardManagerType) {
         self.keychainProvider = keychainProvider
+        self.keyboardManager = keyboardManager
     }
 }

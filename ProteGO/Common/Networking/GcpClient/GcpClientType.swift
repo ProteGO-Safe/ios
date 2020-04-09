@@ -11,5 +11,5 @@ protocol GcpClientType {
 
     func getStatus(lastBeaconDate: Date?) -> Single<Result<GetStatusResponse, Error>>
 
-    func sendHistory(encounters: [Encounter]) -> Single<Result<SendHistoryResponse, Error>>
+    func sendHistory(confirmCode: String, encounters: [Encounter]) -> Single<Result<SendHistoryResponse, Error>>
 }
