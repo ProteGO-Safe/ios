@@ -23,6 +23,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate  {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.setupDependencyInjection()
         self.setupCrashlytics()
+        self.setupOnFirstAppLaunch()
         self.setupBluetoothModule()
 
         let rootViewController = resolver.resolve(RootViewController.self)
@@ -63,6 +64,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate  {
                                tweakStore: DebugMenu.defaultStore)
         } else {
             return UIWindow(frame: UIScreen.main.bounds)
+        }
+    }
+
+    private func setupOnFirstAppLaunch() {
+        let defaultsService: DefaultsServiceType = resolver.resolve(DefaultsServiceType.self)
+        if defaultsService.finishedFirstAppLaunch == false {
+            let keychainProvider: KeychainProviderType = resolver.resolve(KeychainProviderType.self)
+            keychainProvider.removeAllObjects()
+            defaultsService.finishedFirstAppLaunch = true
         }
     }
 
