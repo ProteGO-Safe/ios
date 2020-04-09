@@ -38,8 +38,8 @@ final class GcpClientMock: GcpClientType, Mock {
         return .just(self.getStatusResult)
     }
 
-    func sendHistory(encounters: [Encounter]) -> Single<Result<SendHistoryResponse, Error>> {
-        recordCall(withIdentifier: "sendHistory", arguments: encounters)
+    func sendHistory(confirmCode: String, encounters: [Encounter]) -> Single<Result<SendHistoryResponse, Error>> {
+        recordCall(withIdentifier: "sendHistory", arguments: [confirmCode, encounters])
         return .just(self.sendHistoryResult)
     }
 }
