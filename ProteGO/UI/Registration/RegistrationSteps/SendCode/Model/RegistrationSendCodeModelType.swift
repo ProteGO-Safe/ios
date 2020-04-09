@@ -1,7 +1,7 @@
 import UIKit
 import RxSwift
 
-protocol RegistrationSendCodeModelType {
+protocol RegistrationSendCodeModelType: AnyObject {
 
     var stepFinishedObservable: Observable<SendCodeFinishedData> { get }
 

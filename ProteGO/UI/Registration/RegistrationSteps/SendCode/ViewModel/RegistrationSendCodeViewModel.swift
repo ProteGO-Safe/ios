@@ -16,16 +16,20 @@ final class RegistrationSendCodeViewModel: RegistrationSendCodeViewModelType {
     }
 
     func bind(view: RegistrationSendCodeView) {
-        view.sendCodeButtonTapEvent.subscribe(onNext: { [weak self] _ in
-            let validation = Validator(type: .phoneNumber).isValid(text: view.phoneNumber)
-            switch validation {
-            case .success:
-                self?.model.registerDevice(phoneNumber: view.phoneNumber)
-            case let .failure(error):
-                print(error)
-                // TODO: - Handle Error
-            }
-        }).disposed(by: disposeBag)
+        view
+            .sendCodeButtonTapEvent
+            .map { _ in view.phoneNumber }
+            .validate(type: .phoneNumber)
+            .subscribe(onNext: { [weak model] validationResult in
+                switch validationResult {
+                case .success:
+                    model?.registerDevice(phoneNumber: view.phoneNumber)
+                case let .failure(error):
+                    print(error)
+                    // TODO: - Handle Error
+                }
+            })
+            .disposed(by: disposeBag)
 
         model.keyboardHeightWillChangeObservable.subscribe(onNext: { keyboardHeight in
             view.update(keyboardHeight: keyboardHeight)
