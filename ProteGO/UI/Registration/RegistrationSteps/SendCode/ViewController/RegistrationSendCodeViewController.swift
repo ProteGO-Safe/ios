@@ -9,6 +9,10 @@ final class RegistrationSendCodeViewController: UIViewController, CustomView {
         return viewModel.stepFinishedObservable
     }
 
+    var requestInProgressObservable: Observable<Bool> {
+        return viewModel.requestInProgressObservable
+    }
+
     private let viewModel: RegistrationSendCodeViewModelType
 
     init(viewModel: RegistrationSendCodeViewModelType) {

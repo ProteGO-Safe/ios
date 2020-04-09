@@ -7,6 +7,8 @@ protocol RegistrationSendCodeModelType {
 
     var keyboardHeightWillChangeObservable: Observable<CGFloat> { get }
 
+    var requestInProgressObservable: Observable<Bool> { get }
+
     func registerDevice(phoneNumber: String)
 
     func registerWithoutPhoneNumber()

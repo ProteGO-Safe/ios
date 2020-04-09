@@ -19,6 +19,10 @@ final class RegistrationModel: RegistrationModelType {
         return registrationFinishedSubject.asObservable()
     }
 
+    var requestInProgressObservable: Observable<Bool> {
+        return requestInProgressSubject.asObservable()
+    }
+
     private var currentStep: RegistrationStep = .sendCode {
         didSet {
             currentStepSubject.onNext(currentStep)
@@ -30,6 +34,8 @@ final class RegistrationModel: RegistrationModelType {
     private let goBackSubject = PublishSubject<Void>()
 
     private let registrationFinishedSubject = PublishSubject<Void>()
+
+    private let requestInProgressSubject = BehaviorSubject<Bool>(value: false)
 
     func setInitialStep() {
         currentStep = .sendCode
@@ -61,5 +67,9 @@ final class RegistrationModel: RegistrationModelType {
             return
         }
         registrationFinishedSubject.onNext(())
+    }
+
+    func requestInProgress(_ inProgress: Bool) {
+        requestInProgressSubject.onNext(inProgress)
     }
 }

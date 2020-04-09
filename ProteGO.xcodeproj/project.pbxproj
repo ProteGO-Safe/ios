@@ -247,6 +247,7 @@
 		83828A082433352D0054347B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83828A072433352D0054347B /* Images.swift */; };
 		839A5A33243E6EDE002741CC /* RegisterDeviceNoMsisdnRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839A5A32243E6EDE002741CC /* RegisterDeviceNoMsisdnRequest.swift */; };
 		839A5A36243E6F11002741CC /* RegisterDeviceNoMsisdnResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839A5A35243E6F11002741CC /* RegisterDeviceNoMsisdnResponse.swift */; };
+		839A5A3E243F65E4002741CC /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839A5A3D243F65E4002741CC /* ProgressView.swift */; };
 		83DC1EE72435F2E2006E54A9 /* DefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC1EE62435F2E2006E54A9 /* DefaultsKey.swift */; };
 		83DC1EEA24361765006E54A9 /* DefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC1EE924361765006E54A9 /* DefaultsService.swift */; };
 		83DC1EED24361781006E54A9 /* DefaultsServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC1EEC24361781006E54A9 /* DefaultsServiceType.swift */; };
@@ -545,6 +546,7 @@
 		83828A072433352D0054347B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		839A5A32243E6EDE002741CC /* RegisterDeviceNoMsisdnRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDeviceNoMsisdnRequest.swift; sourceTree = "<group>"; };
 		839A5A35243E6F11002741CC /* RegisterDeviceNoMsisdnResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDeviceNoMsisdnResponse.swift; sourceTree = "<group>"; };
+		839A5A3D243F65E4002741CC /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		83DC1EE62435F2E2006E54A9 /* DefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKey.swift; sourceTree = "<group>"; };
 		83DC1EE924361765006E54A9 /* DefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsService.swift; sourceTree = "<group>"; };
 		83DC1EEC24361781006E54A9 /* DefaultsServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsServiceType.swift; sourceTree = "<group>"; };
@@ -743,6 +745,7 @@
 		0E22F9292434DEC1008AD8EB /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				839A5A3C243F65AE002741CC /* ProgressView */,
 				0E22F92A2434DECF008AD8EB /* Banner */,
 			);
 			path = Components;
@@ -2018,6 +2021,14 @@
 			path = RegisterDeviceNoMsisdn;
 			sourceTree = "<group>";
 		};
+		839A5A3C243F65AE002741CC /* ProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				839A5A3D243F65E4002741CC /* ProgressView.swift */,
+			);
+			path = ProgressView;
+			sourceTree = "<group>";
+		};
 		83DC1EDE2435F008006E54A9 /* UserDefaults */ = {
 			isa = PBXGroup;
 			children = (
@@ -2513,6 +2524,7 @@
 				0EA68E79243CD95C00361776 /* StatusManagerType.swift in Sources */,
 				83252A18242F9C11001E6D63 /* UrlRequestBuilderType.swift in Sources */,
 				0E965393243DF2C90084D019 /* RegisteredBeaconIdsDebugScreenModel.swift in Sources */,
+				839A5A3E243F65E4002741CC /* ProgressView.swift in Sources */,
 				0E9DCCAB2430CA5A00C2670D /* RegisteredEncountersDebugViewModelType.swift in Sources */,
 				0EB65C852436195200491507 /* HistoryAssembly.swift in Sources */,
 				0E0B30EF2437A314005DFC84 /* SendHistoryProgressViewController.swift in Sources */,
