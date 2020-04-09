@@ -29,6 +29,7 @@ final class SendHistoryConfirmView: UIView {
     private let containerScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.keyboardDismissMode = .interactive
         return scrollView
     }()
 
