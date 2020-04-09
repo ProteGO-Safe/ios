@@ -12,6 +12,10 @@ import SnapKit
 
 final class PWAViewController: ViewController<PWAViewModel> {
     
+    private enum Constants {
+        static let webViewBackground = UIColor(red:0.12, green:0.32, blue:0.62, alpha:1.00)
+    }
+    
     private var webKitView: WKWebView?
     
     override func start() {
@@ -29,8 +33,7 @@ final class PWAViewController: ViewController<PWAViewModel> {
     }
     
     private func setupWebKit() {
-        let configuration = WKWebViewConfiguration()
-        let webKitView = WKWebView(frame: .zero, configuration: configuration)
+        let webKitView = WKWebView(frame: .zero)
         add(subview: webKitView)
         
         self.webKitView = webKitView
