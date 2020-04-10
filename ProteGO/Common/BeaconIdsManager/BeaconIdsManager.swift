@@ -81,6 +81,7 @@ final class BeaconIdsManager: BeaconIdsManagerType {
                 .filter("\(Constants.Realm.EntityKeys.ExpiringBeacon.startDate) < %@", date)
                 .sorted(byKeyPath: Constants.Realm.EntityKeys.ExpiringBeacon.startDate, ascending: true)
             if self.allBeaconIds.count == objectsToDelete.count {
+                // Keep last beacon id, even if it have expired
                 self.realmManager.realm.delete(Array(objectsToDelete).dropLast())
             } else {
                 self.realmManager.realm.delete(objectsToDelete)
