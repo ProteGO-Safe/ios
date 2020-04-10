@@ -13,7 +13,7 @@ final class RegistrationAssembly: Assembly {
 
     private func registerRegistrationManager(_ container: Container) {
         container.register(RegistrationManagerType.self) { resolver in
-            return RegistrationManager(valet: resolver.resolve(Valet.self))
+            return RegistrationManager(keychainProvider: resolver.resolve(KeychainProviderType.self))
         }.inObjectScope(.container)
     }
 
@@ -61,13 +61,13 @@ final class RegistrationAssembly: Assembly {
                 keyboardManager: resolver.resolve(KeyboardManagerType.self))
         }
 
-        container.register(ReegistrationVerifyCodeViewModelType.self) { resolver in
+        container.register(RegistrationVerifyCodeViewModelType.self) { resolver in
             return RegistrationVerifyCodeViewModel(model: resolver.resolve(RegistrationVerifyCodeModelType.self))
         }
 
         container.register(RegistrationVerifyCodeViewController.self) { resolver in
             return RegistrationVerifyCodeViewController(
-                viewModel: resolver.resolve(ReegistrationVerifyCodeViewModelType.self))
+                viewModel: resolver.resolve(RegistrationVerifyCodeViewModelType.self))
         }
     }
 

@@ -7,7 +7,6 @@ struct DebugItemDescription {
         case general = "Ogólne"
         case encounters = "Spotkania"
         case bluetooth = "Bluetooth"
-        case dangerStatus = "Status zagrożenia"
         case screens = "Ekrany"
         case registration = "Rejestracja"
     }
@@ -21,6 +20,7 @@ struct DebugItemDescription {
         case userId = "Identyfikator użytkownika"
         case initialScreen = "Ekran początkowy"
         case oneTimeCode = "Kod jednorazowy"
+        case dataRetention = "Przechowywanie danych"
     }
 
     let collection: Collection
@@ -41,7 +41,6 @@ class DebugMenu: TweakLibraryType {
         allTweaks.append(contentsOf: DebugMenu.generalItems)
         allTweaks.append(contentsOf: DebugMenu.encounterItems)
         allTweaks.append(contentsOf: DebugMenu.bluetoothItems)
-        allTweaks.append(contentsOf: DebugMenu.dangerStatusItems)
         allTweaks.append(contentsOf: DebugMenu.registrationItems)
         allTweaks.append(contentsOf: DebugMenu.screensItems)
 

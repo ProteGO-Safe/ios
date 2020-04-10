@@ -8,13 +8,51 @@ final class RegistrationSendCodeView: UIView {
         return sendCodeButton.rx.tap
     }
 
+    var registerWithoutPhoneNumberTapEvent: ControlEvent<Void> {
+        return registerWithoutPhoneNumberButton.rx.tap
+    }
+
     var phoneNumber: String {
         return (prefixTextField.text ?? "") + (phoneNumberTextField.text ?? "")
     }
 
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.keyboardDismissMode = .interactive
+        return scrollView
+    }()
+
+    private let contentContainerView = UIView()
+
     private let titleLabel = UILabel.with(text: L10n.registrationSendTitle, fontStyle: .subtitle)
 
-    private let descriptionLabel = UILabel.with(text: L10n.registrationSendDescription, fontStyle: .body)
+    private let descriptionLabel: UILabel = {
+        let boldText = L10n.registrationSendDescriptionOptional
+        let descriptionText = L10n.registrationSendDescription(boldText)
+        guard let boldRange = descriptionText.range(of: boldText) else { return UILabel() }
+        let boldNsRange = NSRange(boldRange, in: descriptionText)
+
+        let attributedText = NSMutableAttributedString(string: descriptionText)
+        let wholeTextRange = NSRange(location: 0, length: attributedText.length)
+        attributedText.addAttribute(
+            NSAttributedString.Key.font,
+            value: Fonts.poppinsRegular(16).font,
+            range: wholeTextRange
+        )
+        attributedText.addAttribute(
+            NSAttributedString.Key.font,
+            value: Fonts.poppinsSemiBold(16).font,
+            range: boldNsRange
+        )
+
+        let label = UILabel()
+        label.attributedText = attributedText
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        label.textColor = Colors.greyishBrown
+        return label
+    }()
 
     private let prefixTextField: UITextField = {
         let textField = UITextField.with(text: Constants.Networking.phoneNumberPrefix, centered: true)
@@ -31,9 +69,12 @@ final class RegistrationSendCodeView: UIView {
 
     private let sendCodeButton = UIButton.rectButton(text: L10n.registrationSendCodeBtn)
 
-    private let contentContainerView = UIView()
+    private let registerWithoutPhoneNumberButton = UIButton.rectButton(
+        text: L10n.registrationWithoutPhoneNumberBtn,
+        textColor: Colors.bluishGreen,
+        backgroundColor: .white, borderColor: Colors.bluishGreen)
 
-    private var contentBottomConstraint: Constraint?
+    private var scrollViewBottomConstraint: Constraint?
 
     init() {
         super.init(frame: .zero)
@@ -55,35 +96,37 @@ final class RegistrationSendCodeView: UIView {
     }
 
     func update(keyboardHeight: CGFloat) {
-        updateContraints(keyboardHeight: keyboardHeight)
-        self.setNeedsLayout()
-        UIView.animate(withDuration: 0) { [weak self] in
-            self?.layoutIfNeeded()
-        }
-    }
-
-    private func updateContraints(keyboardHeight: CGFloat) {
+        scrollView.contentInset = UIEdgeInsets(top: .zero, left: .zero, bottom: keyboardHeight, right: .zero)
         if keyboardHeight > 0 {
-            contentBottomConstraint?.update(offset: -keyboardHeight).activate()
+            let bottomOffset = scrollView.contentSize.height - scrollView.bounds.size.height + scrollView.contentInset.bottom
+            scrollView.contentOffset = CGPoint(x: .zero, y: bottomOffset)
         } else {
-            contentBottomConstraint?.deactivate()
+            scrollView.contentOffset = .zero
         }
+
     }
 
     private func addSubviews() {
-        addSubviews([contentContainerView])
+        addSubviews([scrollView])
+        scrollView.addSubview(contentContainerView)
         contentContainerView.addSubviews([titleLabel,
                                           descriptionLabel,
                                           prefixTextField,
                                           phoneNumberTextField,
-                                          sendCodeButton])
+                                          sendCodeButton,
+                                          registerWithoutPhoneNumberButton])
     }
 
     private func setupConstraints() {
+
+        scrollView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
         contentContainerView.snp.makeConstraints {
-            $0.top.equalToSuperview().priority(.low)
-            contentBottomConstraint = $0.bottom.lessThanOrEqualToSuperview().constraint
-            $0.leading.trailing.equalToSuperview()
+            $0.top.bottom.equalToSuperview()
+            $0.width.equalTo(self)
+
         }
 
         titleLabel.snp.makeConstraints {
@@ -113,6 +156,12 @@ final class RegistrationSendCodeView: UIView {
 
         sendCodeButton.snp.makeConstraints {
             $0.top.equalTo(prefixTextField.snp.bottom).offset(0.030 * UIScreen.height)
+            $0.leading.trailing.equalTo(titleLabel)
+            $0.height.equalTo(48)
+        }
+
+        registerWithoutPhoneNumberButton.snp.makeConstraints {
+            $0.top.equalTo(sendCodeButton.snp.bottom).offset(0.025 * UIScreen.height)
             $0.leading.trailing.equalTo(titleLabel)
             $0.height.equalTo(48)
             $0.bottom.equalToSuperview().offset(-0.030 * UIScreen.height)

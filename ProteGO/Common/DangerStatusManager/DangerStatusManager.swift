@@ -1,30 +1,23 @@
 import Foundation
-import SwiftTweaks
-import RxSwift
 import RxCocoa
 
 final class DangerStatusManager: DangerStatusManagerType {
+
     var currentStatus: BehaviorRelay<DangerStatus>
 
-    private var tweakBindings = Set<TweakBindingIdentifier>()
+    private let keychainProvider: KeychainProviderType
 
-    init() {
-        self.currentStatus = BehaviorRelay<DangerStatus>(value: .yellow)
+    init(keychainProvider: KeychainProviderType) {
+        self.keychainProvider = keychainProvider
 
-        if DebugMenu.assign(DebugMenu.forceDangerStatus) {
-            if let status = DangerStatus.init(rawValue: DebugMenu.assign(DebugMenu.forceDangerStatusValue).value) {
-                self.currentStatus.accept(status)
-            }
+        let initialDangerStatus = keychainProvider.string(forKey: Constants.KeychainKeys.currentDangerStatus)
+            .flatMap(DangerStatus.init(rawValue:)) ?? .yellow
 
-            tweakBindings.insert(DebugMenu.bind(DebugMenu.forceDangerStatusValue) { value in
-                if let status = DangerStatus.init(rawValue: value.value) {
-                    self.currentStatus.accept(status)
-                }
-            })
-        }
+        self.currentStatus = BehaviorRelay<DangerStatus>(value: initialDangerStatus)
     }
 
-    deinit {
-        self.tweakBindings.forEach(DebugMenu.unbind)
+    func update(with status: DangerStatus) {
+        self.currentStatus.accept(status)
+        self.keychainProvider.set(string: status.rawValue, forKey: Constants.KeychainKeys.currentDangerStatus)
     }
 }

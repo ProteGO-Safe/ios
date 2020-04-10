@@ -3,5 +3,5 @@ import RxCocoa
 import RxSwift
 
 protocol SendHistoryProgressModelType: class {
-    var didFinishHistorySendingObservable: Observable<Result<Void, Error>> { get }
+    func sendHistory(confirmCode: String) -> Single<Result<Void, Error>>
 }

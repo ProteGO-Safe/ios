@@ -1,2 +1,3 @@
 $(SRCROOT)/Carthage/Build/iOS/Nimble.framework
 $(SRCROOT)/Carthage/Build/iOS/Quick.framework
+$(SRCROOT)/Carthage/Build/iOS/Mimus.framework

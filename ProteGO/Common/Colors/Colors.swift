@@ -17,4 +17,6 @@ struct Colors {
     static let lightBlack = UIColor(hex: 0x2f2d2a)
 
     static let greyish = UIColor(hex: 0xa09f9e)
+
+    static let pinkishGrey = UIColor(hex: 0xc2c1c1)
 }

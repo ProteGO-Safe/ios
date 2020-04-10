@@ -13,9 +13,19 @@ final class RegistrationView: UIView {
         return ControlEvent<Void>(events: tapObservable)
     }
 
+    var requestInProgressBinder: Binder<Bool> {
+        return Binder<Bool>(self) { view, inProgress in
+            view.progressView.isHidden = !inProgress
+            view.progressView.set(animating: inProgress)
+            view.bannerView.buttonsVisibleBinder.onNext(!inProgress)
+        }
+    }
+
     private let bannerView = BannerView(leftButtonImage: Images.backArrow, rightButtonImage: nil)
 
     private let contentContainerView = UIView()
+
+    private let progressView = ProgressView()
 
     private let tapGestureRecognizer = UITapGestureRecognizer()
 
@@ -43,7 +53,7 @@ final class RegistrationView: UIView {
     }
 
     private func addSubviews() {
-        addSubviews([bannerView, contentContainerView])
+        addSubviews([bannerView, contentContainerView, progressView])
     }
 
     private func setupConstraints() {
@@ -56,6 +66,10 @@ final class RegistrationView: UIView {
         contentContainerView.snp.makeConstraints {
             $0.top.equalTo(bannerView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
+        }
+
+        progressView.snp.makeConstraints {
+            $0.edges.equalTo(contentContainerView)
         }
     }
 }

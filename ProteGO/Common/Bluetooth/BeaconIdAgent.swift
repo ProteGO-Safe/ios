@@ -1,18 +1,36 @@
 import Foundation
 
-/// Class implementing this protocol is responsible for giving out Beacon IDs and
-/// receiving them and storing locally.
-protocol BeaconIdAgent: AnyObject {
+final class BeaconIdAgent {
 
-    /// This function should return valid Beacon ID with its expiration date
-    /// which will be exchanged between devices. Can return `nil` if there
-    /// are are no valid Beacon IDs available.
-    func getBeaconId() -> ExpiringBeaconId?
+    private let encountersManager: EncountersManagerType
 
-    /// This function is called when new Beacon ID is synchronized.
-    ///
-    /// - Parameters:
-    ///   - beaconId: Synchronized Beacon ID
-    ///   - rssi: RSSI value for a Beacon ID
-    func synchronizedBeaconId(beaconId: BeaconId, rssi: Int?)
+    private let beaconIdsManager: BeaconIdsManagerType
+
+    private let currentDateProvider: CurrentDateProviderType
+
+    init(encountersManager: EncountersManagerType,
+         beaconIdsManager: BeaconIdsManagerType,
+         currentDateProvider: CurrentDateProviderType) {
+        self.encountersManager = encountersManager
+        self.beaconIdsManager = beaconIdsManager
+        self.currentDateProvider = currentDateProvider
+    }
+}
+
+extension BeaconIdAgent: BeaconIdAgentType {
+    func getBeaconId() -> ExpiringBeaconId? {
+        return self.beaconIdsManager.currentExpiringBeaconId
+    }
+
+    func synchronizedBeaconId(beaconId: BeaconId, rssi: Int?) {
+        logger.info("Synchronized Beacon ID \(beaconId), rssi: \(String(describing: rssi))")
+        let newEncounter = Encounter.createEncounter(beaconId: beaconId,
+                                                     signalStrength: rssi,
+                                                     date: currentDateProvider.currentDate)
+        do {
+            try self.encountersManager.addNewEncounter(encounter: newEncounter)
+        } catch {
+            logger.error("Error with saving new encounter \(error)")
+        }
+    }
 }

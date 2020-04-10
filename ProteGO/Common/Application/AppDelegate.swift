@@ -23,6 +23,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate  {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.setupDependencyInjection()
         self.setupCrashlytics()
+        self.setupOnFirstAppLaunch()
         self.setupBluetoothModule()
 
         let rootViewController = resolver.resolve(RootViewController.self)
@@ -33,6 +34,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate  {
 
         self.window = window
         return true
+    }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        self.resolver.resolve(StatusManagerType.self)?.updateCurrentDangerStatusAndBeaconIds()
+        do {
+            try self.resolver.resolve(RealmCleanerType.self)?.clean()
+        } catch {
+            logger.error("Error cleaning old database data \(error)")
+        }
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -62,10 +72,19 @@ final class AppDelegate: UIResponder, UIApplicationDelegate  {
         }
     }
 
+    private func setupOnFirstAppLaunch() {
+        let defaultsService: DefaultsServiceType = resolver.resolve(DefaultsServiceType.self)
+        if defaultsService.finishedFirstAppLaunch == false {
+            let keychainProvider: KeychainProviderType = resolver.resolve(KeychainProviderType.self)
+            keychainProvider.removeAllObjects()
+            defaultsService.finishedFirstAppLaunch = true
+        }
+    }
+
     private func setupBluetoothModule() {
-        let encountersManager: EncountersManagerType = self.resolver.resolve(EncountersManagerType.self)
-        self.advertiser = self.resolver.resolve(Advertiser.self, argument: encountersManager as BeaconIdAgent)
-        self.scanner = self.resolver.resolve(Scanner.self, argument: encountersManager as BeaconIdAgent)
+        let beaconIdAgent: BeaconIdAgentType = self.resolver.resolve(BeaconIdAgentType.self)
+        self.advertiser = self.resolver.resolve(Advertiser.self, argument: beaconIdAgent)
+        self.scanner = self.resolver.resolve(Scanner.self, argument: beaconIdAgent)
         self.advertiser?.setMode(.enabledAllTime)
         self.scanner?.setMode(.enabledAllTime)
     }

@@ -2,14 +2,6 @@ import Foundation
 import RxSwift
 import Reachability
 
-enum NetworkClientError: Error {
-    case deallocated
-    case networkUnavailable
-    case failedToBuildUrlRequest(Error)
-    case requestError(Error)
-    case statusCode(Int, Data)
-}
-
 final class NetworkClient: ReactiveCompatible {
 
     fileprivate let session: URLSession

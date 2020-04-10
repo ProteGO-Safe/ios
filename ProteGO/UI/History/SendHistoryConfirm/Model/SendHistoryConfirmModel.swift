@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 import RxSwift
 import RxCocoa
 import RealmSwift
@@ -6,15 +7,22 @@ import Valet
 
 final class SendHistoryConfirmModel: SendHistoryConfirmModelType {
     var phoneId: String {
-        guard let text = self.valet.string(forKey: Constants.KeychainKeys.userIdKey) else {
+        guard let text = self.keychainProvider.string(forKey: Constants.KeychainKeys.userIdKey) else {
             return L10n.dashboardInfoIdPlacehloder
         }
         return text.prefix(withLengthRatio: Constants.HistorySend.userIdPrefixLengthRatio)
     }
 
-    private let valet: Valet
+    var keyboardHeightWillChangeObservable: Observable<CGFloat> {
+        keyboardManager.keyboardHeightWillChangeObservable
+    }
 
-    init(valet: Valet) {
-        self.valet = valet
+    private let keyboardManager: KeyboardManagerType
+
+    private let keychainProvider: KeychainProviderType
+
+    init(keychainProvider: KeychainProviderType, keyboardManager: KeyboardManagerType) {
+        self.keychainProvider = keychainProvider
+        self.keyboardManager = keyboardManager
     }
 }

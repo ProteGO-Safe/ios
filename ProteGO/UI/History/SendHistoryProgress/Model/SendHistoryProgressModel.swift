@@ -4,26 +4,17 @@ import RxCocoa
 
 final class SendHistoryProgressModel: SendHistoryProgressModelType {
 
-    var didFinishHistorySendingObservable: Observable<Result<Void, Error>> {
-        return didSendHistorySubject.asObservable()
+    private let gcpClient: GcpClientType
+
+    private let encountersManager: EncountersManagerType
+
+    init(gcpClient: GcpClientType, encountersManager: EncountersManagerType) {
+        self.gcpClient = gcpClient
+        self.encountersManager = encountersManager
     }
 
-    private let didSendHistorySubject = PublishSubject<Result<Void, Error>>()
-
-    private var timer: Timer?
-
-    init() {
-        // TODO Implement history sending
-        let timer = Timer.init(
-            timeInterval: 1,
-            repeats: false) { [weak self] _ in
-                self?.didSendHistorySubject.onNext(.success(()))
-        }
-        RunLoop.main.add(timer, forMode: .common)
-        self.timer = timer
-    }
-
-    deinit {
-        self.timer?.invalidate()
+    func sendHistory(confirmCode: String) -> Single<Result<Void, Error>> {
+        return self.gcpClient.sendHistory(confirmCode: confirmCode, encounters: Array(self.encountersManager.allEncounters))
+            .map { $0.map { _ in return Void() } }
     }
 }

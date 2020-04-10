@@ -7,10 +7,14 @@ final class GeneralAssembly: Assembly {
         registerRealm(container)
         registerFilesCoordinator(container)
         registerSecretsGenerator(container)
-        registerValet(container)
+        registerKeychainProvider(container)
         registerEncountersManager(container)
         registerDangerStatusManager(container)
+        registerBeaconIdsManager(container)
+        registerStatusManager(container)
         registerDefaultsService(container)
+        registerCurrentDateProvider(container)
+        registerRealmCleaner(container)
     }
 
     private func registerRealm(_ container: Container) {
@@ -31,15 +35,18 @@ final class GeneralAssembly: Assembly {
 
     private func registerSecretsGenerator(_ container: Container) {
         container.register(SecretsGeneratorType.self) { resolver in
-            return SecretsGenerator(valet: resolver.resolve(Valet.self))
+            return SecretsGenerator(keychainProvider: resolver.resolve(KeychainProviderType.self))
         }
     }
 
-    private func registerValet(_ container: Container) {
-        container.register(Valet.self) { _ in
-            //swiftlint:disable force_unwrapping
-            let sandboxId = Identifier(nonEmpty: Constants.ValetSandboxIds.secrets)!
-            return Valet.valet(with: sandboxId, accessibility: .afterFirstUnlock)
+    private func registerKeychainProvider(_ container: Container) {
+        container.register(KeychainProviderType.self) { _ in
+            guard let sandboxId = Identifier(nonEmpty: Constants.ValetSandboxIds.secrets) else {
+                logger.error("Fatal error: failed to generate Kaychain Id")
+                fatalError()
+            }
+
+            return KeychainProvider(identifier: sandboxId, accessibility: .afterFirstUnlock)
         }.inObjectScope(.container)
     }
 
@@ -52,8 +59,39 @@ final class GeneralAssembly: Assembly {
     }
 
     private func registerDangerStatusManager(_ container: Container) {
-        container.register(DangerStatusManagerType.self) { _ in
-            return DangerStatusManager()
+        container.register(DangerStatusManagerType.self) { resolver in
+            return DangerStatusManager(keychainProvider: resolver.resolve(KeychainProviderType.self))
+        }.inObjectScope(.container)
+    }
+
+    private func registerCurrentDateProvider(_ container: Container) {
+        container.register(CurrentDateProviderType.self) { _ in
+            return CurrentDateProvider()
+        }
+    }
+
+    private func registerBeaconIdsManager(_ container: Container) {
+        container.register(BeaconIdsManagerType.self) { resolver in
+            return BeaconIdsManager(realmManager: resolver.resolve(RealmManagerType.self),
+                                    currentDateProvider: resolver.resolve(CurrentDateProviderType.self))
+        }.inObjectScope(.container)
+    }
+
+    private func registerRealmCleaner(_ container: Container) {
+        container.register(RealmCleanerType.self) { resolver in
+            return RealmCleaner(dataRetentionPeriod: TimeInterval(DebugMenu.assign(DebugMenu.databaseDataRetentionInterval)),
+                                currentDateProvider: resolver.resolve(CurrentDateProviderType.self),
+                                encounterManager: resolver.resolve(EncountersManagerType.self),
+                                beaconIdsManager: resolver.resolve(BeaconIdsManagerType.self))
+        }
+    }
+
+    private func registerStatusManager(_ container: Container) {
+        container.register(StatusManagerType.self) { resolver in
+            return StatusManager(gcpClient: resolver.resolve(GcpClientType.self),
+                                 registrationManager: resolver.resolve(RegistrationManagerType.self),
+                                 beaconIdsManager: resolver.resolve(BeaconIdsManagerType.self),
+                                 dangerStatusManager: resolver.resolve(DangerStatusManagerType.self))
         }.inObjectScope(.container)
     }
 

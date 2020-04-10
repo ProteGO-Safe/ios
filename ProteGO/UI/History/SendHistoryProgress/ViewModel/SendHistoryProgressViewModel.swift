@@ -4,8 +4,8 @@ import RxCocoa
 
 final class SendHistoryProgressViewModel: SendHistoryProgressViewModelType {
 
-    var didFinishHistorySendingObservable: Observable<Result<Void, Error>> {
-        return self.model.didFinishHistorySendingObservable
+    func sendHistory(confirmCode: String) -> Single<Result<Void, Error>> {
+        return self.model.sendHistory(confirmCode: confirmCode)
     }
 
     private let model: SendHistoryProgressModelType

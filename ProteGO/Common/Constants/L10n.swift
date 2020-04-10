@@ -13,9 +13,9 @@ import Foundation
 internal enum L10n {
   /// Restrictions on movement except for travel to work, volunteering, and arranging matters necessary for everyday life.
   internal static let dashboardGreenRecommend1 = L10n.tr("Localizable", "dashboard_green_recommend_1")
-  /// There can be as many people on the bus as half the number of seats.
+  /// When traveling by public transport - remember that only half of the seats should be occupied on a bus or tram.
   internal static let dashboardGreenRecommend2 = L10n.tr("Localizable", "dashboard_green_recommend_2")
-  /// Total ban on gatherings, except with the closest ones.
+  /// Total ban on gatherings.
   internal static let dashboardGreenRecommend3 = L10n.tr("Localizable", "dashboard_green_recommend_3")
   /// More information %@.
   internal static func dashboardGreenRecommendMoreInfoBtn(_ p1: String) -> String {
@@ -23,9 +23,9 @@ internal enum L10n {
   }
   /// here
   internal static let dashboardGreenRecommendMoreInfoBtnHere = L10n.tr("Localizable", "dashboard_green_recommend_more_info_btn_here")
-  /// Current govermental recommendations
+  /// Current health recommendations
   internal static let dashboardGreenRecommendTitle = L10n.tr("Localizable", "dashboard_green_recommend_title")
-  /// It seems you weren't close to infected people
+  /// You are OK but remember the basic principles of safety and hygiene.
   internal static let dashboardGreenStatusDescription = L10n.tr("Localizable", "dashboard_green_status_description")
   /// Learn more on about the precautions, click %@
   internal static func dashboardGreenStatusMoreInfoBtn(_ p1: String) -> String {
@@ -61,9 +61,9 @@ internal enum L10n {
   internal static let dashboardInfoYourId = L10n.tr("Localizable", "dashboard_info_your_id")
   /// Restrictions on movement except for travel to work, volunteering, and arranging matters necessary for everyday life.
   internal static let dashboardRedRecommend1 = L10n.tr("Localizable", "dashboard_red_recommend_1")
-  /// There can be as many people on the bus as half the number of seats.
+  /// When traveling by public transport - remember that only half of the seats should be occupied on a bus or tram.
   internal static let dashboardRedRecommend2 = L10n.tr("Localizable", "dashboard_red_recommend_2")
-  /// Total ban on gatherings, except with the closest ones.
+  /// Total ban on gatherings.
   internal static let dashboardRedRecommend3 = L10n.tr("Localizable", "dashboard_red_recommend_3")
   /// More information %@.
   internal static func dashboardRedRecommendMoreInfoBtn(_ p1: String) -> String {
@@ -71,11 +71,11 @@ internal enum L10n {
   }
   /// here
   internal static let dashboardRedRecommendMoreInfoBtnHere = L10n.tr("Localizable", "dashboard_red_recommend_more_info_btn_here")
-  /// Current govermental recommendations
+  /// Current health recommendations
   internal static let dashboardRedRecommendTitle = L10n.tr("Localizable", "dashboard_red_recommend_title")
   /// Contact an expert
   internal static let dashboardRedStatusContactBtn = L10n.tr("Localizable", "dashboard_red_status_contact_btn")
-  /// You were close to people infected with SARS-CoV-2. Call the nearest GIS. Stay at home quarantine.
+  /// You were close to infected people. Call the nearest health authority. Stay at home quarantine.
   internal static let dashboardRedStatusDescription = L10n.tr("Localizable", "dashboard_red_status_description")
   /// You were close to infected people.
   internal static let dashboardRedStatusTitle = L10n.tr("Localizable", "dashboard_red_status_title")
@@ -87,9 +87,9 @@ internal enum L10n {
   internal static let dashboardYellowMoreInfoBtnHere = L10n.tr("Localizable", "dashboard_yellow_more_info_btn_here")
   /// Restrictions on movement except for travel to work, volunteering, and arranging matters necessary for everyday life.
   internal static let dashboardYellowRecommend1 = L10n.tr("Localizable", "dashboard_yellow_recommend_1")
-  /// There can be as many people on the bus as half the number of seats.
+  /// When traveling by public transport - remember that only half of the seats should be occupied on a bus or tram.
   internal static let dashboardYellowRecommend2 = L10n.tr("Localizable", "dashboard_yellow_recommend_2")
-  /// Total ban on gatherings, except with the closest ones.
+  /// Total ban on gatherings.
   internal static let dashboardYellowRecommend3 = L10n.tr("Localizable", "dashboard_yellow_recommend_3")
   /// More information %@.
   internal static func dashboardYellowRecommendMoreInfoBtn(_ p1: String) -> String {
@@ -97,9 +97,9 @@ internal enum L10n {
   }
   /// here
   internal static let dashboardYellowRecommendMoreInfoBtnHere = L10n.tr("Localizable", "dashboard_yellow_recommend_more_info_btn_here")
-  /// Current govermental recommendations
+  /// Current health recommendations
   internal static let dashboardYellowRecommendTitle = L10n.tr("Localizable", "dashboard_yellow_recommend_title")
-  /// We will be able to determine your status after 14 days of using the application. Be careful and stay mostly at home.
+  /// We need 14 days to determine your status. The application does not yet have enough data to inform you about any risk or lack thereof. Please be patient.
   internal static let dashboardYellowStatusDescription = L10n.tr("Localizable", "dashboard_yellow_status_description")
   /// Be careful!
   internal static let dashboardYellowStatusTitle = L10n.tr("Localizable", "dashboard_yellow_status_title")
@@ -121,32 +121,36 @@ internal enum L10n {
   internal static let onboardingBluetoothDescription = L10n.tr("Localizable", "onboarding_bluetooth_description")
   /// Turn on Bluetooth
   internal static let onboardingBluetoothTitle = L10n.tr("Localizable", "onboarding_bluetooth_title")
-  /// We didn't dectect any threat
+  /// GO! You are not at risk. Please keep in mind the basic principles of safety and hygiene.
   internal static let onboardingGreenDescription = L10n.tr("Localizable", "onboarding_green_description")
-  /// Thank you for installing ProteGO.\n\nThe app will allow you you learn if there is risk you were close to people infected with coronavirus SARS-CoV-2.
+  /// Let's fight the coronavirus together!\n\nThis application will help you take care of your and your loved ones' health.
   internal static let onboardingHelloDescription = L10n.tr("Localizable", "onboarding_hello_description")
   /// Welcome to ProteGO!
   internal static let onboardingHelloTitle = L10n.tr("Localizable", "onboarding_hello_title")
   /// Next
   internal static let onboardingNextBtn = L10n.tr("Localizable", "onboarding_next_btn")
-  /// Call the nearest GIS
+  /// Call the nearest health authority. If necessary - quarantine yourself
   internal static let onboardingRedDescription = L10n.tr("Localizable", "onboarding_red_description")
-  /// If you are diagnosed with SARS-CoV-2 we will ask you to send the data from your phone. We will use it to alert some of the people who were close to you within last 2 weeks. They may be infected too. They will not learn about your condition.
+  /// If it turns out that you are infected with coronavirus, we will ask you to anonymously inform other users of the application. You do it for the good and health of people you have had contact with in the last 14 days. This information will help them. Think about your loved ones and friends.
   internal static let onboardingSharingDescription = L10n.tr("Localizable", "onboarding_sharing_description")
-  /// Sharing the data in case of threat
+  /// Infected? Let others know
   internal static let onboardingSharingTitle = L10n.tr("Localizable", "onboarding_sharing_title")
-  /// The application will present one of three statuses. You will learn if you could be exposed to infected people within last 2 weeks.
+  /// Do you want to be sure you're safe? Pay attention to information in the application. We will help you avoid a potential threat.
   internal static let onboardingStatusDescription = L10n.tr("Localizable", "onboarding_status_description")
-  /// We will keep you informed about a possible threat
+  /// We want you to be safe
   internal static let onboardingStatusTitle = L10n.tr("Localizable", "onboarding_status_title")
-  /// You could have been close to infected people
+  /// We will determine your status 14 days after you instlled the application. Wait patiently
   internal static let onboardingYellowDescription = L10n.tr("Localizable", "onboarding_yellow_description")
   /// xxx xxx xxx
   internal static let registrationPhonePlaceholder = L10n.tr("Localizable", "registration_phone_placeholder")
   /// Send code
   internal static let registrationSendCodeBtn = L10n.tr("Localizable", "registration_send_code_btn")
-  /// Enter your phone number so that we can contact you if you were close to people with SARS-CoV-2.\n\nWe will confirm your phone number by sending you an SMS code.
-  internal static let registrationSendDescription = L10n.tr("Localizable", "registration_send_description")
+  /// We can also text you information about the change of your status. \nIf you want to be up to date without need to constantly check the status in the application, enter your phone number. %@\n\nWe will ask you to confirm the number with an SMS code.
+  internal static func registrationSendDescription(_ p1: String) -> String {
+    return L10n.tr("Localizable", "registration_send_description", p1)
+  }
+  /// It's optional
+  internal static let registrationSendDescriptionOptional = L10n.tr("Localizable", "registration_send_description_optional")
   /// Join the application!
   internal static let registrationSendTitle = L10n.tr("Localizable", "registration_send_title")
   /// By joing the app you accept %@.
@@ -163,29 +167,35 @@ internal enum L10n {
   internal static let registrationVerifyDescription = L10n.tr("Localizable", "registration_verify_description")
   /// Enter your SMS code
   internal static let registrationVerifyTitle = L10n.tr("Localizable", "registration_verify_title")
+  /// Join without phone number
+  internal static let registrationWithoutPhoneNumberBtn = L10n.tr("Localizable", "registration_without_phone_number_btn")
   /// Please retry.
   internal static let sendDataAlertFailureDescription = L10n.tr("Localizable", "send_data_alert_failure_description")
-  /// Sending failed. 
+  /// Ups. Something is wrong. Try again.
   internal static let sendDataAlertFailureTitle = L10n.tr("Localizable", "send_data_alert_failure_title")
   /// If you have any questions please email as at %@
   internal static func sendDataAlertFooter(_ p1: String) -> String {
     return L10n.tr("Localizable", "send_data_alert_footer", p1)
   }
-  /// kontakt@protego.gov.pl
+  /// protego@mc.gov.pl
   internal static let sendDataAlertFooterEmail = L10n.tr("Localizable", "send_data_alert_footer_email")
-  /// Your data was sent to GIS.\nWe guarantee nobody will use your personal data while contacting with other people.
+  /// Thank you. Take care of yourself and don'r worry - your data if safe.
   internal static let sendDataAlertSuccessDescription = L10n.tr("Localizable", "send_data_alert_success_description")
   /// Thank you!
   internal static let sendDataAlertSuccessTitle = L10n.tr("Localizable", "send_data_alert_success_title")
+  /// Enter the code you received with your lab results.
+  internal static let sendDataConfirmCodeDescription = L10n.tr("Localizable", "send_data_confirm_code_description")
+  /// xxx xxx
+  internal static let sendDataConfirmCodePlaceholder = L10n.tr("Localizable", "send_data_confirm_code_placeholder")
   /// Cancel
   internal static let sendDataConfirmationAlertCancelBtn = L10n.tr("Localizable", "send_data_confirmation_alert_cancel_btn")
-  /// Send you data only if you are SARS-CoV-2 positive
+  /// Are you infected? Send the information, to protect others.
   internal static let sendDataConfirmationAlertMessage = L10n.tr("Localizable", "send_data_confirmation_alert_message")
   /// Send
   internal static let sendDataConfirmationAlertSendBtn = L10n.tr("Localizable", "send_data_confirmation_alert_send_btn")
-  /// Confirm sending the history
+  /// Confirm
   internal static let sendDataConfirmationAlertTitle = L10n.tr("Localizable", "send_data_confirmation_alert_title")
-  /// Share the list of users you encounteres nearby within last 2 weeks. Our experts will alert those who might be infected.\n\nNobody will learn about your condition.
+  /// Share information about devices that have been around you in the last two weeks. Do it for the safety of their owners. \n\n You are anonymous to them, nobody will know about your condition.
   internal static let sendDataDescription = L10n.tr("Localizable", "send_data_description")
   /// xxx xxx xxx
   internal static let sendDataIdPlaceholder = L10n.tr("Localizable", "send_data_id_placeholder")
@@ -195,6 +205,8 @@ internal enum L10n {
   internal static let sendDataTitle = L10n.tr("Localizable", "send_data_title")
   /// Your ID:
   internal static let sendDataYourId = L10n.tr("Localizable", "send_data_your_id")
+  /// ProteGO is an open source software created for Minstry of Digital Affairs
+  internal static let splashScreenOpenSourceLbl = L10n.tr("Localizable", "splash_screen_open_source_lbl")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name

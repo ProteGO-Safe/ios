@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
@@ -13,15 +13,78 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="SplashScreenBackground" translatesAutoresizingMaskIntoConstraints="NO" id="6Ir-Gb-dXU">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreenLogo" translatesAutoresizingMaskIntoConstraints="NO" id="ybi-I7-MCW">
-                                <rect key="frame" x="135" y="361" width="144" height="184"/>
+                                <rect key="frame" x="88" y="148" width="144" height="184"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PGc-TP-5ND" userLabel="footer">
+                                <rect key="frame" x="0.0" y="406" width="320" height="74"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dTl-kC-9nZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CG7-xu-II4">
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="74"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" id="rJc-dh-HsO"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2M-Qg-o3q">
+                                                <rect key="frame" x="8" y="23" width="188.5" height="28"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment>
+                                                        <string key="content">ProteGO to otwarte oprogramowanie
+stworzone dla Ministerstwa Cyfryzacji</string>
+                                                        <attributes>
+                                                            <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="NSColor" red="0.32941176470588235" green="0.32549019607843138" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="10" name="Poppins-Medium"/>
+                                                            <real key="NSKern" value="0.0"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                                <tabStops/>
+                                                            </paragraphStyle>
+                                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreenMCLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Aqx-t8-GYE">
+                                                <rect key="frame" x="204" y="17" width="108" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="108" id="2eb-3K-IWe"/>
+                                                    <constraint firstAttribute="height" constant="40" id="cyJ-te-IlK"/>
+                                                </constraints>
+                                            </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r6u-ao-z6Q">
+                                                <rect key="frame" x="320" y="0.0" width="0.0" height="74"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" id="7uX-2I-DsO"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="74" id="OCN-sc-eou"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="dTl-kC-9nZ" secondAttribute="bottom" id="OFA-hg-jgY"/>
+                                    <constraint firstAttribute="trailing" secondItem="dTl-kC-9nZ" secondAttribute="trailing" id="g13-hX-Jqc"/>
+                                    <constraint firstItem="dTl-kC-9nZ" firstAttribute="top" secondItem="PGc-TP-5ND" secondAttribute="top" id="pzf-FV-CP6"/>
+                                    <constraint firstItem="dTl-kC-9nZ" firstAttribute="leading" secondItem="PGc-TP-5ND" secondAttribute="leading" id="s3P-KR-Dlk"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -30,7 +93,10 @@
                             <constraint firstItem="6Ir-Gb-dXU" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Yt1-Oz-Mee"/>
                             <constraint firstItem="ybi-I7-MCW" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="nZF-bR-SWg"/>
                             <constraint firstAttribute="bottom" secondItem="6Ir-Gb-dXU" secondAttribute="bottom" id="pfY-2o-UUG"/>
+                            <constraint firstAttribute="bottom" secondItem="PGc-TP-5ND" secondAttribute="bottom" id="ppS-pO-Grn"/>
+                            <constraint firstItem="PGc-TP-5ND" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="t9M-ZQ-HSW"/>
                             <constraint firstAttribute="trailing" secondItem="6Ir-Gb-dXU" secondAttribute="trailing" id="yoL-z1-Oxr"/>
+                            <constraint firstItem="PGc-TP-5ND" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="z5t-F1-GOm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -43,5 +109,6 @@
     <resources>
         <image name="SplashScreenBackground" width="375" height="812"/>
         <image name="SplashScreenLogo" width="144" height="184"/>
+        <image name="SplashScreenMCLogo" width="108" height="41"/>
     </resources>
 </document>

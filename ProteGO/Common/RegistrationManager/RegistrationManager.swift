@@ -19,28 +19,29 @@ final class RegistrationManager: RegistrationManagerType {
 
     private(set) var userId: String? {
         get {
-            return valet.string(forKey: Constants.KeychainKeys.userIdKey)
+            return keychainProvider.string(forKey: Constants.KeychainKeys.userIdKey)
         }
         set {
             guard let newValue = newValue else {
-                valet.removeObject(forKey: Constants.KeychainKeys.userIdKey)
+                keychainProvider.removeObject(forKey: Constants.KeychainKeys.userIdKey)
+                userIdSubject.onNext(nil)
                 return
             }
-            valet.set(string: newValue, forKey: Constants.KeychainKeys.userIdKey)
+            keychainProvider.set(string: newValue, forKey: Constants.KeychainKeys.userIdKey)
             userIdSubject.onNext(newValue)
         }
     }
 
     private(set) var registrationId: String? {
         get {
-            return valet.string(forKey: Constants.KeychainKeys.registrationIdKey)
+            return keychainProvider.string(forKey: Constants.KeychainKeys.registrationIdKey)
         }
         set {
             guard let newValue = newValue else {
-                valet.removeObject(forKey: Constants.KeychainKeys.registrationIdKey)
+                keychainProvider.removeObject(forKey: Constants.KeychainKeys.registrationIdKey)
                 return
             }
-            valet.set(string: newValue, forKey: Constants.KeychainKeys.registrationIdKey)
+            keychainProvider.set(string: newValue, forKey: Constants.KeychainKeys.registrationIdKey)
         }
     }
 
@@ -48,12 +49,12 @@ final class RegistrationManager: RegistrationManagerType {
 
     private let userIdSubject = PublishSubject<String?>()
 
-    private let valet: Valet
+    private let keychainProvider: KeychainProviderType
 
     private let disposeBag = DisposeBag()
 
-    init(valet: Valet) {
-        self.valet = valet
+    init(keychainProvider: KeychainProviderType) {
+        self.keychainProvider = keychainProvider
     }
 
     func register(registrationId: String) {
