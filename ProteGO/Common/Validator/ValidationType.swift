@@ -3,7 +3,7 @@ enum ValidationType {
     var regex: String {
         switch self {
         case .phoneNumber:
-            return "^\\+48[0-9]{9}$"
+            return "^\\\(Constants.Networking.phoneNumberPrefix)[0-9]{9}$"
         }
     }
 
