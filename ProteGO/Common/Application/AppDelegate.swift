@@ -38,6 +38,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate  {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         self.resolver.resolve(StatusManagerType.self)?.updateCurrentDangerStatusAndBeaconIds()
+        do {
+            try self.resolver.resolve(RealmCleanerType.self)?.clean()
+        } catch {
+            logger.error("Error cleaning old database data \(error)")
+        }
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {

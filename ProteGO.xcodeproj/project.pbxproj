@@ -34,6 +34,7 @@
 		0E3DD5C4242B764100C092E7 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5BA242B764100C092E7 /* SnapKit.framework */; };
 		0E3DD5C5242B764100C092E7 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5BB242B764100C092E7 /* RxRelay.framework */; };
 		0E3DD5C6242B764100C092E7 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E3DD5BC242B764100C092E7 /* RealmSwift.framework */; };
+		0E4030F6244067160031F890 /* BeaconIdsManagerGeneralSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4030F4244066B70031F890 /* BeaconIdsManagerGeneralSpecs.swift */; };
 		0E5C2079242B63460038EF8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C2078242B63460038EF8B /* Assets.xcassets */; };
 		0E5C207C242B63460038EF8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E5C207A242B63460038EF8B /* LaunchScreen.storyboard */; };
 		0E6162C1243DA54A0062BE5F /* RealmExpiringBeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6162C0243DA54A0062BE5F /* RealmExpiringBeacon.swift */; };
@@ -103,7 +104,7 @@
 		0EA68E9A243D26B800361776 /* CurrentDateProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA68E99243D26B800361776 /* CurrentDateProviderType.swift */; };
 		0EA68E9C243D26E600361776 /* CurrentDateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA68E9B243D26E600361776 /* CurrentDateProvider.swift */; };
 		0EA68E9F243D272000361776 /* CurrentDateProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA68E9E243D272000361776 /* CurrentDateProviderMock.swift */; };
-		0EA68EA1243D9FBF00361776 /* BeaconIdsManagerSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA68EA0243D9FBF00361776 /* BeaconIdsManagerSpecs.swift */; };
+		0EA68EA1243D9FBF00361776 /* BeaconIdsManagerCleanupSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA68EA0243D9FBF00361776 /* BeaconIdsManagerCleanupSpecs.swift */; };
 		0EB372C7243871C700884C93 /* SendHistoryResultDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB372C6243871C700884C93 /* SendHistoryResultDialogView.swift */; };
 		0EB372C9243871D400884C93 /* SendHistoryResultDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB372C8243871D400884C93 /* SendHistoryResultDialogViewController.swift */; };
 		0EB372CB2438A20800884C93 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB372CA2438A20800884C93 /* Lottie.framework */; };
@@ -124,6 +125,10 @@
 		0ECE7A1F2430E3EE00EED942 /* BluetoothAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECE7A1E2430E3EE00EED942 /* BluetoothAssembly.swift */; };
 		0ECE7A212430E48200EED942 /* BluetoothDebugItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECE7A202430E48200EED942 /* BluetoothDebugItems.swift */; };
 		0ECE7A222430F91F00EED942 /* MockAdvertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87177C902430A5B7007C8F78 /* MockAdvertiser.swift */; };
+		0EDDB09B24404AF100F3396A /* RealmCleanerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDDB09A24404AF100F3396A /* RealmCleanerType.swift */; };
+		0EDDB09D24404AF900F3396A /* RealmCleaner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDDB09C24404AF900F3396A /* RealmCleaner.swift */; };
+		0EDDB09F24404B0500F3396A /* RealmCleanerSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDDB09E24404B0500F3396A /* RealmCleanerSpecs.swift */; };
+		0EDDB0A52440506500F3396A /* Date+MockEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDDB0A42440506500F3396A /* Date+MockEquatable.swift */; };
 		0EE4E9002432717F00EA05ED /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE4E8FF2432717F00EA05ED /* L10n.swift */; };
 		0EE60BD0242F8A3C00D29048 /* InfoKeys+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE60BCD242F8A3C00D29048 /* InfoKeys+Value.swift */; };
 		0EE60BD3242F8A5F00D29048 /* SwiftTweaks+ProteGO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE60BD2242F8A5F00D29048 /* SwiftTweaks+ProteGO.swift */; };
@@ -319,6 +324,7 @@
 		0E3DD5BA242B764100C092E7 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		0E3DD5BB242B764100C092E7 /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
 		0E3DD5BC242B764100C092E7 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		0E4030F4244066B70031F890 /* BeaconIdsManagerGeneralSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconIdsManagerGeneralSpecs.swift; sourceTree = "<group>"; };
 		0E5C206C242B63440038EF8B /* ProteGO Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ProteGO Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E5C2078242B63460038EF8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E5C207D242B63460038EF8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -391,7 +397,7 @@
 		0EA68E99243D26B800361776 /* CurrentDateProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDateProviderType.swift; sourceTree = "<group>"; };
 		0EA68E9B243D26E600361776 /* CurrentDateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDateProvider.swift; sourceTree = "<group>"; };
 		0EA68E9E243D272000361776 /* CurrentDateProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDateProviderMock.swift; sourceTree = "<group>"; };
-		0EA68EA0243D9FBF00361776 /* BeaconIdsManagerSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconIdsManagerSpecs.swift; sourceTree = "<group>"; };
+		0EA68EA0243D9FBF00361776 /* BeaconIdsManagerCleanupSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconIdsManagerCleanupSpecs.swift; sourceTree = "<group>"; };
 		0EB372C6243871C700884C93 /* SendHistoryResultDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryResultDialogView.swift; sourceTree = "<group>"; };
 		0EB372C8243871D400884C93 /* SendHistoryResultDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendHistoryResultDialogViewController.swift; sourceTree = "<group>"; };
 		0EB372CA2438A20800884C93 /* Lottie.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Lottie.framework; path = Carthage/Build/iOS/Lottie.framework; sourceTree = "<group>"; };
@@ -411,6 +417,10 @@
 		0EB65C862436620E00491507 /* Constants+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+UI.swift"; sourceTree = "<group>"; };
 		0ECE7A1E2430E3EE00EED942 /* BluetoothAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothAssembly.swift; sourceTree = "<group>"; };
 		0ECE7A202430E48200EED942 /* BluetoothDebugItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothDebugItems.swift; sourceTree = "<group>"; };
+		0EDDB09A24404AF100F3396A /* RealmCleanerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCleanerType.swift; sourceTree = "<group>"; };
+		0EDDB09C24404AF900F3396A /* RealmCleaner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCleaner.swift; sourceTree = "<group>"; };
+		0EDDB09E24404B0500F3396A /* RealmCleanerSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCleanerSpecs.swift; sourceTree = "<group>"; };
+		0EDDB0A42440506500F3396A /* Date+MockEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+MockEquatable.swift"; sourceTree = "<group>"; };
 		0EE4E8F924326BA300EA05ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0EE4E8FA24326BA300EA05ED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0EE4E8FC24326BAE00EA05ED /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -837,10 +847,9 @@
 		0E5C2085242B63460038EF8B /* ProteGOTests */ = {
 			isa = PBXGroup;
 			children = (
+				0EDDB0A02440502200F3396A /* Extensions */,
 				0EA68E9D243D271000361776 /* CurrentDateProvider */,
 				0EA68E91243D226100361776 /* EncountersManager */,
-				0EA68E8C243D108A00361776 /* GetStatus */,
-				0EA68E89243D0F9700361776 /* DangerStatus */,
 				0EA68E86243D0AB100361776 /* RegistrationManager */,
 				0EA68E83243D09F100361776 /* BeaconIdsManager */,
 				0EA68E80243D083100361776 /* DangerStatusManager */,
@@ -872,6 +881,7 @@
 		0E6D2603242E8B540037A80C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0EDDB09924404AD700F3396A /* RealmCleaner */,
 				0EA68E98243D26A400361776 /* CurrentDateProvider */,
 				0EA68E73243CD91E00361776 /* BeaconIdsManager */,
 				0EA68E72243CD90E00361776 /* StatusManager */,
@@ -1213,7 +1223,8 @@
 			children = (
 				0EA68E74243CD93E00361776 /* BeaconIdsManagerType.swift */,
 				0EA68E76243CD94600361776 /* BeaconIdsManager.swift */,
-				0EA68EA0243D9FBF00361776 /* BeaconIdsManagerSpecs.swift */,
+				0EA68EA0243D9FBF00361776 /* BeaconIdsManagerCleanupSpecs.swift */,
+				0E4030F4244066B70031F890 /* BeaconIdsManagerGeneralSpecs.swift */,
 			);
 			path = BeaconIdsManager;
 			sourceTree = "<group>";
@@ -1250,19 +1261,10 @@
 			path = DangerStatus;
 			sourceTree = "<group>";
 		};
-		0EA68E8C243D108A00361776 /* GetStatus */ = {
-			isa = PBXGroup;
-			children = (
-				0EA68E8D243D109900361776 /* GetStatusResponseBeaconId+MockEquatable.swift */,
-			);
-			path = GetStatus;
-			sourceTree = "<group>";
-		};
 		0EA68E91243D226100361776 /* EncountersManager */ = {
 			isa = PBXGroup;
 			children = (
 				0EA68E92243D226F00361776 /* EncountersManagerMock.swift */,
-				0EA68E96243D258400361776 /* Encounter+MockEquatable.swift */,
 			);
 			path = EncountersManager;
 			sourceTree = "<group>";
@@ -1416,6 +1418,51 @@
 				0EB65C822435285E00491507 /* HistoryOverviewViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0EDDB09924404AD700F3396A /* RealmCleaner */ = {
+			isa = PBXGroup;
+			children = (
+				0EDDB09A24404AF100F3396A /* RealmCleanerType.swift */,
+				0EDDB09C24404AF900F3396A /* RealmCleaner.swift */,
+				0EDDB09E24404B0500F3396A /* RealmCleanerSpecs.swift */,
+			);
+			path = RealmCleaner;
+			sourceTree = "<group>";
+		};
+		0EDDB0A02440502200F3396A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0EDDB0A32440505A00F3396A /* Date */,
+				0EA68E89243D0F9700361776 /* DangerStatus */,
+				0EDDB0A22440504100F3396A /* GetStatus */,
+				0EDDB0A12440503000F3396A /* Encounter */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0EDDB0A12440503000F3396A /* Encounter */ = {
+			isa = PBXGroup;
+			children = (
+				0EA68E96243D258400361776 /* Encounter+MockEquatable.swift */,
+			);
+			path = Encounter;
+			sourceTree = "<group>";
+		};
+		0EDDB0A22440504100F3396A /* GetStatus */ = {
+			isa = PBXGroup;
+			children = (
+				0EA68E8D243D109900361776 /* GetStatusResponseBeaconId+MockEquatable.swift */,
+			);
+			path = GetStatus;
+			sourceTree = "<group>";
+		};
+		0EDDB0A32440505A00F3396A /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				0EDDB0A42440506500F3396A /* Date+MockEquatable.swift */,
+			);
+			path = Date;
 			sourceTree = "<group>";
 		};
 		0EE60BCC242F8A3C00D29048 /* Constants */ = {
@@ -2585,6 +2632,7 @@
 				8382897524332D3D0054347B /* UIScreen+Size.swift in Sources */,
 				838289CF243330D10054347B /* RegistrationVerifyCodeView.swift in Sources */,
 				838289D1243330E40054347B /* RegistrationVerifyCodeVIewController.swift in Sources */,
+				0EDDB09D24404AF900F3396A /* RealmCleaner.swift in Sources */,
 				0E22F9202434A117008AD8EB /* RedStatusCard.swift in Sources */,
 				0E8DED3A2433D87300D7F806 /* DashboardModelType.swift in Sources */,
 				83680162243227CF00678DBD /* DashboardViewController.swift in Sources */,
@@ -2635,6 +2683,7 @@
 				0EB372D52439BBE500884C93 /* GetStatusResponse.swift in Sources */,
 				0EA68E9C243D26E600361776 /* CurrentDateProvider.swift in Sources */,
 				0E9DDA722430D82E002D879F /* Constants+Encounters.swift in Sources */,
+				0EDDB09B24404AF100F3396A /* RealmCleanerType.swift in Sources */,
 				83252A6024314B59001E6D63 /* GcpClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2645,7 +2694,7 @@
 			files = (
 				0EA68E85243D0A0400361776 /* BeaconIdsManagerMock.swift in Sources */,
 				0EA68E95243D244300361776 /* BeaconIdAgentSpecs.swift in Sources */,
-				0EA68EA1243D9FBF00361776 /* BeaconIdsManagerSpecs.swift in Sources */,
+				0EA68EA1243D9FBF00361776 /* BeaconIdsManagerCleanupSpecs.swift in Sources */,
 				0EB372DB243A2AB400884C93 /* DangerStatusManagerSpecs.swift in Sources */,
 				0EB372DE243A2B3100884C93 /* GcpClientMock.swift in Sources */,
 				877F3F7A2434B4F100F774C7 /* Data+HexString.swift in Sources */,
@@ -2654,12 +2703,15 @@
 				0EA68E97243D258400361776 /* Encounter+MockEquatable.swift in Sources */,
 				0EA68E93243D226F00361776 /* EncountersManagerMock.swift in Sources */,
 				0EA68E88243D0AC200361776 /* RegistrationManagerMock.swift in Sources */,
+				0EDDB09F24404B0500F3396A /* RealmCleanerSpecs.swift in Sources */,
+				0E4030F6244067160031F890 /* BeaconIdsManagerGeneralSpecs.swift in Sources */,
 				0EA68E9F243D272000361776 /* CurrentDateProviderMock.swift in Sources */,
 				0EE60C612430017A00D29048 /* SecretsGeneratorSpecs.swift in Sources */,
 				0EA68E82243D084900361776 /* DangerStatusManagerMock.swift in Sources */,
 				0EA68E8E243D109900361776 /* GetStatusResponseBeaconId+MockEquatable.swift in Sources */,
 				0E9DCC8F2430150000C2670D /* RealmManagerSpecs.swift in Sources */,
 				0EA68E8B243D0FAB00361776 /* DangerStatus+MockEquatable.swift in Sources */,
+				0EDDB0A52440506500F3396A /* Date+MockEquatable.swift in Sources */,
 				0EF3C3D6243CA1B1007224DA /* BeaconIdSpecs.swift in Sources */,
 				0E9DCC962430985900C2670D /* EncountersManagerSpecs.swift in Sources */,
 				0EA68E7F243D05D400361776 /* StatusManagerSpecs.swift in Sources */,
