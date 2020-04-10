@@ -14,6 +14,7 @@ final class GeneralAssembly: Assembly {
         registerStatusManager(container)
         registerDefaultsService(container)
         registerCurrentDateProvider(container)
+        registerRealmCleaner(container)
     }
 
     private func registerRealm(_ container: Container) {
@@ -74,6 +75,15 @@ final class GeneralAssembly: Assembly {
             return BeaconIdsManager(realmManager: resolver.resolve(RealmManagerType.self),
                                     currentDateProvider: resolver.resolve(CurrentDateProviderType.self))
         }.inObjectScope(.container)
+    }
+
+    private func registerRealmCleaner(_ container: Container) {
+        container.register(RealmCleanerType.self) { resolver in
+            return RealmCleaner(dataRetentionPeriod: TimeInterval(DebugMenu.assign(DebugMenu.databaseDataRetentionInterval)),
+                                currentDateProvider: resolver.resolve(CurrentDateProviderType.self),
+                                encounterManager: resolver.resolve(EncountersManagerType.self),
+                                beaconIdsManager: resolver.resolve(BeaconIdsManagerType.self))
+        }
     }
 
     private func registerStatusManager(_ container: Container) {

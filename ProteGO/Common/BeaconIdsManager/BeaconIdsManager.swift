@@ -70,4 +70,24 @@ final class BeaconIdsManager: BeaconIdsManagerType {
             logger.error("Error with saving new expiring beacon ids \(error)")
         }
     }
+
+    func deleteAllIdsOlderThan(date: Date) throws {
+        try self.realmManager.realm.write {  [weak self] in
+            guard let self = self else {
+                throw InstanceError.deallocated(#file, #line)
+            }
+
+            let objectsToDelete = self.realmManager.realm.objects(RealmExpiringBeacon.self)
+                .filter("\(Constants.Realm.EntityKeys.ExpiringBeacon.startDate) < %@", date)
+                .sorted(byKeyPath: Constants.Realm.EntityKeys.ExpiringBeacon.startDate, ascending: true)
+            if self.allBeaconIds.count == objectsToDelete.count {
+                // Keep last beacon id, even if it have expired
+                self.realmManager.realm.delete(Array(objectsToDelete).dropLast())
+            } else {
+                self.realmManager.realm.delete(objectsToDelete)
+            }
+
+            logger.info("Finished deleting old beacon ids")
+        }
+    }
 }
