@@ -23,7 +23,7 @@
 		D5308666243F048C00FCA5DD /* StoredDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308665243F048C00FCA5DD /* StoredDefaults.swift */; };
 		D530866A243F0FB600FCA5DD /* PWAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308669243F0FB600FCA5DD /* PWAViewController.swift */; };
 		D530866C243F0FBF00FCA5DD /* PWAViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530866B243F0FBF00FCA5DD /* PWAViewModel.swift */; };
-		DA7578E837C8D02982E5B618 /* Pods_safesafe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBCD6F7A1720707C90576426 /* Pods_safesafe.framework */; };
+		F7E0B1753F66DCC1A02F08CA /* Pods_safesafe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBCD6F7A1720707C90576426 /* Pods_safesafe.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,7 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA7578E837C8D02982E5B618 /* Pods_safesafe.framework in Frameworks */,
+				F7E0B1753F66DCC1A02F08CA /* Pods_safesafe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,10 +442,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = safesafe/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -463,10 +463,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = safesafe/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
