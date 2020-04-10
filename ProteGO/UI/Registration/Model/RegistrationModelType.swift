@@ -9,11 +9,15 @@ protocol RegistrationModelType {
 
     var registrationFinishedObservable: Observable<Void> { get }
 
+    var requestInProgressObservable: Observable<Bool> { get }
+
     func setInitialStep()
 
     func previousStep()
 
-    func sendCodeStepFinished(phoneNumber: String)
+    func sendCodeStepFinished(finishedData: SendCodeFinishedData)
 
     func verifyCodeStepFinished()
+
+    func requestInProgress(_ inProgress: Bool)
 }

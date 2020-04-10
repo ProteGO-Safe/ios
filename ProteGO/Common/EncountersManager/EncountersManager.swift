@@ -21,6 +21,7 @@ final class EncountersManager: EncountersManagerType {
 
             let objectsToDelete = self.realmManager.realm.objects(Encounter.self).filter("date < %@", date)
             self.realmManager.realm.delete(objectsToDelete)
+            logger.info("Finished deleting old enconters")
         }
     }
 

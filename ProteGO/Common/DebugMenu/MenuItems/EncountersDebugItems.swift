@@ -31,12 +31,6 @@ extension DebugMenu {
         return tweak
     }()
 
-    public static var oldEncountersRemovalInterval: Tweak<Int> = {
-        let description = DebugItemDescription(.encounters, group: .overview,
-                                               name: "Najstarsze spotkania")
-        return Tweak<Int>.build(with: description, default: Constants.Encounters.defaultOldEncountersRemovalInterval, min: 0)
-    }()
-
     static var addRandomEncounter: Tweak<TweakAction> = {
         let description = DebugItemDescription(.encounters, group: .testing, name: "Dodaj losowe spotkanie")
         let tweak = Tweak<TweakAction>.build(with: description)
@@ -54,26 +48,8 @@ extension DebugMenu {
         return tweak
     }()
 
-    static var deleteOldEncounters: Tweak<TweakAction> = {
-        let description = DebugItemDescription(.encounters, group: .testing, name: "Usuń stare spotkania")
-        let tweak = Tweak<TweakAction>.build(with: description)
-        tweak.addClosure {
-            guard let resolver = (UIApplication.shared.delegate as? AppDelegate)?.resolver else {
-                return
-            }
-
-            let encountersManager: EncountersManagerType = resolver.resolve(EncountersManagerType.self)
-            let interval = DebugMenu.assign(DebugMenu.oldEncountersRemovalInterval)
-            let date = Date(timeIntervalSinceNow: TimeInterval(-interval))
-            try? encountersManager.deleteAllEncountersOlderThan(date: date)
-        }
-        return tweak
-    }()
-
     static var encounterItems: [TweakClusterType] = [
         actionShowEncountersDebugScreen,
-        oldEncountersRemovalInterval,
-        addRandomEncounter,
-        deleteOldEncounters
+        addRandomEncounter
     ]
 }

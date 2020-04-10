@@ -42,8 +42,16 @@ extension DebugMenu {
         return tweak
     }()
 
+    public static var databaseDataRetentionInterval: Tweak<Int> = {
+        let description = DebugItemDescription(.general, group: .dataRetention,
+                                               name: "Okres przetrzymywania danych")
+        return Tweak<Int>.build(with: description,
+                                default: Constants.Encounters.defaultDatabaseDataRetentionInterval, min: 0)
+    }()
+
     static var generalItems: [TweakClusterType] = [
         actionShowBugfenderSessionId,
-        performCrash
+        performCrash,
+        databaseDataRetentionInterval
     ]
 }

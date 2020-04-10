@@ -13,8 +13,8 @@ final class SendHistoryProgressModel: SendHistoryProgressModelType {
         self.encountersManager = encountersManager
     }
 
-    func sendHistory() -> Single<Result<Void, Error>> {
-        return self.gcpClient.sendHistory(encounters: Array(self.encountersManager.allEncounters))
+    func sendHistory(confirmCode: String) -> Single<Result<Void, Error>> {
+        return self.gcpClient.sendHistory(confirmCode: confirmCode, encounters: Array(self.encountersManager.allEncounters))
             .map { $0.map { _ in return Void() } }
     }
 }

@@ -27,6 +27,10 @@ final class RequestBuilder: RequestBuilderType {
         return ConfirmRegistrationRequest(code: code, registrationId: registrationId)
     }
 
+    func registerNoMsisdnRequest() -> RegisterNoMsisdnRequest {
+        return RegisterNoMsisdnRequest()
+    }
+
     func getStatusRequest(lastBeaconDate: Date?) -> GetStatusRequest? {
         guard let userId = registrationManager.userId else {
             return nil
@@ -34,10 +38,10 @@ final class RequestBuilder: RequestBuilderType {
         return GetStatusRequest(lastBeaconDate: lastBeaconDate, userId: userId)
     }
 
-    func sendHistoryRequest(encounters: [Encounter]) -> SendHistoryRequest? {
+    func sendHistoryRequest(confirmCode: String, encounters: [Encounter]) -> SendHistoryRequest? {
         guard let userId = registrationManager.userId else {
             return nil
         }
-        return SendHistoryRequest(encounters: encounters, userId: userId)
+        return SendHistoryRequest(confirmCode: confirmCode, encounters: encounters, userId: userId)
     }
 }

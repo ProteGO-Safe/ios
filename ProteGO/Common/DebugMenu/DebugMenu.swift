@@ -20,6 +20,7 @@ struct DebugItemDescription {
         case userId = "Identyfikator użytkownika"
         case initialScreen = "Ekran początkowy"
         case oneTimeCode = "Kod jednorazowy"
+        case dataRetention = "Przechowywanie danych"
     }
 
     let collection: Collection

@@ -4,13 +4,14 @@ import Nimble
 import RealmSwift
 @testable import ProteGO
 
-class BeaconIdsManagerSpecs: QuickSpec {
+class BeaconIdsManagerGeneralSpecs: QuickSpec {
     //swiftlint:disable function_body_length
     override func spec() {
         describe("BeaconIdsManager") {
             var sut: BeaconIdsManager!
             var realmManagerMock: RealmManagerMock!
             var currentDateProviderMock: CurrentDateProviderMock!
+            var results: Results<RealmExpiringBeacon>!
 
             let exampleBeacons = [
                 GetStatusResponseBeaconId(beaconId: BeaconId.random(), date: Date(timeIntervalSince1970: 100)),
@@ -49,8 +50,6 @@ class BeaconIdsManagerSpecs: QuickSpec {
                 }
 
                 context("saving to the database") {
-                    var results: Results<RealmExpiringBeacon>!
-
                     beforeEach {
                         results = realmManagerMock.realm.objects(RealmExpiringBeacon.self)
                             .sorted(byKeyPath: Constants.Realm.EntityKeys.ExpiringBeacon.startDate, ascending: true)

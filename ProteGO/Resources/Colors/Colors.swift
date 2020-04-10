@@ -26,6 +26,7 @@ internal enum Assets {
   internal static let greyishBrown = ColorAsset(name: "greyishBrown")
   internal static let lightBlack = ColorAsset(name: "lightBlack")
   internal static let macaroniAndCheese = ColorAsset(name: "macaroniAndCheese")
+  internal static let pinkishGrey = ColorAsset(name: "pinkishGrey")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

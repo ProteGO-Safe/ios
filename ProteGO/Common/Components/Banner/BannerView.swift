@@ -3,6 +3,13 @@ import RxCocoa
 
 final class BannerView: UIView {
 
+    var buttonsVisibleBinder: Binder<Bool> {
+        return Binder<Bool>(self) { view, visible in
+            view.leftButton.isHidden = !visible
+            view.rightButton.isHidden = !visible
+        }
+    }
+
     var leftButtonTapEvent: ControlEvent<Void> {
         return leftButton.rx.tap
     }

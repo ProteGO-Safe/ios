@@ -7,5 +7,7 @@ protocol RegistrationVerifyCodeModelType {
 
     var keyboardHeightWillChangeObservable: Observable<CGFloat> { get }
 
+    var requestInProgressObservable: Observable<Bool> { get }
+
     func confirmRegistration(code: String)
 }

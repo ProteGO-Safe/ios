@@ -4,6 +4,7 @@ import RealmSwift
 @testable import ProteGO
 
 final class BeaconIdsManagerMock: BeaconIdsManagerType, Mock {
+
     var allBeaconIds: Results<RealmExpiringBeacon> {
         recordCall(withIdentifier: "allBeaconIds")
         return realmManagerMock.realm.objects(RealmExpiringBeacon.self)
@@ -21,9 +22,13 @@ final class BeaconIdsManagerMock: BeaconIdsManagerType, Mock {
         return nil
     }
 
+    private let realmManagerMock = RealmManagerMock()
+
     func update(with response: [GetStatusResponseBeaconId]) {
         recordCall(withIdentifier: "update", arguments: [response])
     }
 
-    private let realmManagerMock = RealmManagerMock()
+    func deleteAllIdsOlderThan(date: Date) throws {
+        recordCall(withIdentifier: "deleteAllIdsOlderThan", arguments: [date])
+    }
 }

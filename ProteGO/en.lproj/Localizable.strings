@@ -2,25 +2,25 @@
 "onboarding_hello_title" = "Welcome to ProteGO!";
 
 /* Onboarding powitanie */
-"onboarding_hello_description" = "Thank you for installing ProteGO.\n\nThe app will allow you you learn if there is risk you were close to people infected with coronavirus SARS-CoV-2.";
+"onboarding_hello_description" = "Let's fight the coronavirus together!\n\nThis application will help you take care of your and your loved ones' health.";
 
 /* Onboarding przycisk */
 "onboarding_next_btn" = "Next";
 
 /* Onboarding informacje o statusie */
-"onboarding_status_title" = "We will keep you informed about a possible threat";
+"onboarding_status_title" = "We want you to be safe";
 
 /* Onboarding informacje o statusie */
-"onboarding_status_description" = "The application will present one of three statuses. You will learn if you could be exposed to infected people within last 2 weeks.";
+"onboarding_status_description" = "Do you want to be sure you're safe? Pay attention to information in the application. We will help you avoid a potential threat.";
 
 /* Onboarding informacje o statusie */
-"onboarding_green_description" = "We didn't dectect any threat";
+"onboarding_green_description" = "GO! You are not at risk. Please keep in mind the basic principles of safety and hygiene.";
 
 /* Onboarding informacje o statusie */
-"onboarding_yellow_description" = "You could have been close to infected people";
+"onboarding_yellow_description" = "We will determine your status 14 days after you instlled the application. Wait patiently";
 
 /* Onboarding informacje o statusie */
-"onboarding_red_description" = "Call the nearest GIS";
+"onboarding_red_description" = "Call the nearest health authority. If necessary - quarantine yourself";
 
 /* Onboarding przycisk */
 "onboarding_back_btn" = "Back";
@@ -32,22 +32,28 @@
 "onboarding_bluetooth_description" = "The applicatioin requires Bluetooth to be turned on all the time\n\nProteGO scans your surrounding for other app users via Bluetooth.\n\nThe app stores the 2 weeks history of all your encounters encrypted on your device and doesn't send it anywhere.";
 
 /* Onboarding informacje o dzieleniu się danymi */
-"onboarding_sharing_title" = "Sharing the data in case of threat";
+"onboarding_sharing_title" = "Infected? Let others know";
 
 /* Onboarding informacje o dzieleniu się danymi */
-"onboarding_sharing_description" = "If you are diagnosed with SARS-CoV-2 we will ask you to send the data from your phone. We will use it to alert some of the people who were close to you within last 2 weeks. They may be infected too. They will not learn about your condition.";
+"onboarding_sharing_description" = "If it turns out that you are infected with coronavirus, we will ask you to anonymously inform other users of the application. You do it for the good and health of people you have had contact with in the last 14 days. This information will help them. Think about your loved ones and friends.";
 
 /* Rejestracja */
 "registration_send_title" = "Join the application!";
 
 /* Rejestracja */
-"registration_send_description" = "Enter your phone number so that we can contact you if you were close to people with SARS-CoV-2.\n\nWe will confirm your phone number by sending you an SMS code.";
+"registration_send_description" = "We can also text you information about the change of your status. \nIf you want to be up to date without need to constantly check the status in the application, enter your phone number. %@\n\nWe will ask you to confirm the number with an SMS code.";
+
+/* Rejestracja */
+"registration_send_description_optional" = "It's optional";
 
 /* Rejestracja */
 "registration_phone_placeholder" = "xxx xxx xxx";
 
 /* Rejestracja */
 "registration_send_code_btn" = "Send code";
+
+/* Rejestracja */
+"registration_without_phone_number_btn" = "Join without phone number";
 
 /* Rejestracja */
 "registration_verify_title" = "Enter your SMS code";
@@ -89,7 +95,7 @@
 "dashboard_yellow_status_title" = "Be careful!";
 
 /* Dashboard - status żółty */
-"dashboard_yellow_status_description" = "We will be able to determine your status after 14 days of using the application. Be careful and stay mostly at home.";
+"dashboard_yellow_status_description" = "We need 14 days to determine your status. The application does not yet have enough data to inform you about any risk or lack thereof. Please be patient.";
 
 /* Dashboard - status żółty */
 "dashboard_yellow_more_info_btn" = "More information %@.";
@@ -98,16 +104,16 @@
 "dashboard_yellow_more_info_btn_here" = "here";
 
 /* Dashboard - status żółty */
-"dashboard_yellow_recommend_title" = "Current govermental recommendations";
+"dashboard_yellow_recommend_title" = "Current health recommendations";
 
 /* Dashboard - status żółty */
 "dashboard_yellow_recommend_1" = "Restrictions on movement except for travel to work, volunteering, and arranging matters necessary for everyday life.";
 
 /* Dashboard - status żółty */
-"dashboard_yellow_recommend_2" = "There can be as many people on the bus as half the number of seats.";
+"dashboard_yellow_recommend_2" = "When traveling by public transport - remember that only half of the seats should be occupied on a bus or tram.";
 
 /* Dashboard - status żółty */
-"dashboard_yellow_recommend_3" = "Total ban on gatherings, except with the closest ones.";
+"dashboard_yellow_recommend_3" = "Total ban on gatherings.";
 
 /* Dashboard - status żółty */
 "dashboard_yellow_recommend_more_info_btn" = "More information %@.";
@@ -119,22 +125,22 @@
 "dashboard_red_status_title" = "You were close to infected people.";
 
 /* Dashboard - status czerwony */
-"dashboard_red_status_description" = "You were close to people infected with SARS-CoV-2. Call the nearest GIS. Stay at home quarantine.";
+"dashboard_red_status_description" = "You were close to infected people. Call the nearest health authority. Stay at home quarantine.";
 
 /* Dashboard - status czerwony */
 "dashboard_red_status_contact_btn" = "Contact an expert";
 
 /* Dashboard - status czerwony */
-"dashboard_red_recommend_title" = "Current govermental recommendations";
+"dashboard_red_recommend_title" = "Current health recommendations";
 
 /* Dashboard - status czerwony */
 "dashboard_red_recommend_1" = "Restrictions on movement except for travel to work, volunteering, and arranging matters necessary for everyday life.";
 
 /* Dashboard - status czerwony */
-"dashboard_red_recommend_2" = "There can be as many people on the bus as half the number of seats.";
+"dashboard_red_recommend_2" = "When traveling by public transport - remember that only half of the seats should be occupied on a bus or tram.";
 
 /* Dashboard - status czerwony */
-"dashboard_red_recommend_3" = "Total ban on gatherings, except with the closest ones.";
+"dashboard_red_recommend_3" = "Total ban on gatherings.";
 
 /* Dashboard - status czerwony */
 "dashboard_red_recommend_more_info_btn" = "More information %@.";
@@ -146,7 +152,7 @@
 "dashboard_green_status_title" = "We didn't dectect any threat";
 
 /* Dashboard - status zielony */
-"dashboard_green_status_description" = "It seems you weren't close to infected people";
+"dashboard_green_status_description" = "You are OK but remember the basic principles of safety and hygiene.";
 
 /* Dashboard - status zielony */
 "dashboard_green_status_more_info_btn" = "Learn more on about the precautions, click %@";
@@ -155,16 +161,16 @@
 "dashboard_green_status_more_info_btn_here" = "here";
 
 /* Dashboard - status zielony */
-"dashboard_green_recommend_title" = "Current govermental recommendations";
+"dashboard_green_recommend_title" = "Current health recommendations";
 
 /* Dashboard - status zielony */
 "dashboard_green_recommend_1" = "Restrictions on movement except for travel to work, volunteering, and arranging matters necessary for everyday life.";
 
 /* Dashboard - status zielony */
-"dashboard_green_recommend_2" = "There can be as many people on the bus as half the number of seats.";
+"dashboard_green_recommend_2" = "When traveling by public transport - remember that only half of the seats should be occupied on a bus or tram.";
 
 /* Dashboard - status zielony */
-"dashboard_green_recommend_3" = "Total ban on gatherings, except with the closest ones.";
+"dashboard_green_recommend_3" = "Total ban on gatherings.";
 
 /* Dashboard - status zielony */
 "dashboard_green_recommend_more_info_btn" = "More information %@.";
@@ -209,7 +215,7 @@
 "send_data_title" = "Send encounters list";
 
 /* Ekran wysyłania danych */
-"send_data_description" = "Share the list of users you encounteres nearby within last 2 weeks. Our experts will alert those who might be infected.\n\nNobody will learn about your condition.";
+"send_data_description" = "Share information about devices that have been around you in the last two weeks. Do it for the safety of their owners. \n\n You are anonymous to them, nobody will know about your condition.";
 
 /* Ekran wysyłania danych */
 "send_data_your_id" = "Your ID:";
@@ -218,16 +224,22 @@
 "send_data_id_placeholder" = "xxx xxx xxx";
 
 /* Ekran wysyłania danych */
+"send_data_confirm_code_description" = "Enter the code you received with your lab results.";
+
+/* Ekran wysyłania danych */
+"send_data_confirm_code_placeholder" = "xxx xxx";
+
+/* Ekran wysyłania danych */
 "send_data_send_button" = "Send";
 
 /* Alert po wysłaniu danych - sukces */
 "send_data_alert_success_title" = "Thank you!";
 
 /* Alert po wysłaniu danych - sukces */
-"send_data_alert_success_description" = "Your data was sent to GIS.\nWe guarantee nobody will use your personal data while contacting with other people.";
+"send_data_alert_success_description" = "Thank you. Take care of yourself and don'r worry - your data if safe.";
 
 /* Alert po wysłaniu danych - błąd */
-"send_data_alert_failure_title" = "Sending failed. ";
+"send_data_alert_failure_title" = "Ups. Something is wrong. Try again.";
 
 /* Alert po wysłaniu danych - błąd */
 "send_data_alert_failure_description" = "Please retry.";
@@ -236,17 +248,20 @@
 "send_data_alert_footer" = "If you have any questions please email as at %@";
 
 /* Alert po wysłaniu danych */
-"send_data_alert_footer_email" = "kontakt@protego.gov.pl";
+"send_data_alert_footer_email" = "protego@mc.gov.pl";
 
 /* Ekran wysyłania danych - alert potwierdzający */
-"send_data_confirmation_alert_title" = "Confirm sending the history";
+"send_data_confirmation_alert_title" = "Confirm";
 
 /* Ekran wysyłania danych - alert potwierdzający */
-"send_data_confirmation_alert_message" = "Send you data only if you are SARS-CoV-2 positive";
+"send_data_confirmation_alert_message" = "Are you infected? Send the information, to protect others.";
 
 /* Ekran wysyłania danych - alert potwierdzający */
 "send_data_confirmation_alert_cancel_btn" = "Cancel";
 
 /* Ekran wysyłania danych - alert potwierdzający */
 "send_data_confirmation_alert_send_btn" = "Send";
+
+/* Splash - notka na dole */
+"splash_screen_open_source_lbl" = "ProteGO is an open source software created for Minstry of Digital Affairs";
 

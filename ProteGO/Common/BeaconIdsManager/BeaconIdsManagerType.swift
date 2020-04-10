@@ -9,4 +9,6 @@ protocol BeaconIdsManagerType: class {
     var lastStoredExpiringBeaconDate: Date? { get }
 
     func update(with response: [GetStatusResponseBeaconId])
+
+    func deleteAllIdsOlderThan(date: Date) throws
 }
