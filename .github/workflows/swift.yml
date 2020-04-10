@@ -1,0 +1,14 @@
+name: CI
+
+on: push
+env:
+  DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
+
+jobs:
+  test:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: maierj/fastlane-action@v1.4.0
+      with:
+        lane: 'tests'
