@@ -59,6 +59,8 @@ internal enum L10n {
   internal static let dashboardInfoYouEncountered = L10n.tr("Localizable", "dashboard_info_you_encountered")
   /// Your ID:
   internal static let dashboardInfoYourId = L10n.tr("Localizable", "dashboard_info_your_id")
+  /// https://www.gov.pl/web/koronawirus
+  internal static let dashboardMoreInfoBtnLink = L10n.tr("Localizable", "dashboard_more_info_btn_link")
   /// Restrictions on movement except for travel to work, volunteering, and arranging matters necessary for everyday life.
   internal static let dashboardRedRecommend1 = L10n.tr("Localizable", "dashboard_red_recommend_1")
   /// When traveling by public transport - remember that only half of the seats should be occupied on a bus or tram.
@@ -75,6 +77,8 @@ internal enum L10n {
   internal static let dashboardRedRecommendTitle = L10n.tr("Localizable", "dashboard_red_recommend_title")
   /// Contact an expert
   internal static let dashboardRedStatusContactBtn = L10n.tr("Localizable", "dashboard_red_status_contact_btn")
+  /// 800190590
+  internal static let dashboardRedStatusContactBtnPhone = L10n.tr("Localizable", "dashboard_red_status_contact_btn_phone")
   /// You were close to infected people. Call the nearest health authority. Stay at home quarantine.
   internal static let dashboardRedStatusDescription = L10n.tr("Localizable", "dashboard_red_status_description")
   /// You were close to infected people.

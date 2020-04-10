@@ -36,27 +36,21 @@ final class DashboardViewController: UIViewController, CustomView {
 
     private func bindUIEvents() {
         customView.greenStatusTapMoreEvent.subscribe(onNext: {
-            logger.debug("Green more tapped")
+            if let url = URL(string: L10n.dashboardMoreInfoBtnLink) {
+                UIApplication.shared.open(url)
+            }
         }).disposed(by: disposeBag)
 
         customView.yellowStatusTapMoreEvent.subscribe(onNext: {
-            logger.debug("Yellow more tapped")
+            if let url = URL(string: L10n.dashboardMoreInfoBtnLink) {
+                UIApplication.shared.open(url)
+            }
         }).disposed(by: disposeBag)
 
         customView.redStatusContactButtonTappedEvent.subscribe(onNext: {
-            logger.debug("Red contact button tapped")
-        }).disposed(by: disposeBag)
-
-        customView.greenGeneralRecommendationsTapMoreEvent.subscribe(onNext: {
-            logger.debug("Green more recommended tapped")
-        }).disposed(by: disposeBag)
-
-        customView.yellowGeneralRecommendationsTapMoreEvent.subscribe(onNext: {
-            logger.debug("Yellow more recommended tapped")
-        }).disposed(by: disposeBag)
-
-        customView.redGeneralRecommendationsTapMoreEvent.subscribe(onNext: {
-            logger.debug("Red more recommended tapped")
+            if let url = URL(string: "tel://\(L10n.dashboardRedStatusContactBtnPhone)") {
+                UIApplication.shared.open(url)
+            }
         }).disposed(by: disposeBag)
 
         customView.hamburgerButtonTapEvent.subscribe(onNext: { [weak self] in

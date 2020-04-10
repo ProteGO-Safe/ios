@@ -131,6 +131,9 @@
 "dashboard_red_status_contact_btn" = "Contact an expert";
 
 /* Dashboard - status czerwony */
+"dashboard_red_status_contact_btn_phone" = "800190590";
+
+/* Dashboard - status czerwony */
 "dashboard_red_recommend_title" = "Current health recommendations";
 
 /* Dashboard - status czerwony */
@@ -177,6 +180,9 @@
 
 /* Dashboard - status zielony */
 "dashboard_green_recommend_more_info_btn_here" = "here";
+
+/* Dashboard - status żółty */
+"dashboard_more_info_btn_link" = "https://www.gov.pl/web/koronawirus";
 
 /* Dashboard - ekran informacyjny */
 "dashboard_info_your_id" = "Your ID:";

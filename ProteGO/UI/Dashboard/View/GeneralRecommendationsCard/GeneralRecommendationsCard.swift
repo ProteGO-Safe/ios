@@ -6,17 +6,9 @@ import RxCocoa
 struct GeneralRecommendationsCardConfig {
     let title: String
     let paragraphs: [String]
-    let footerTextFunction: (String) -> String
-    let footerHereText: String
 }
 
 class GeneralRecommendationsCard: UIView {
-
-    var tapMoreEvent: ControlEvent<Void> {
-        let tapObservable = tapGestureRecognizer.rx.event
-            .map { _ in return () }
-        return ControlEvent<Void>(events: tapObservable)
-    }
 
     private let generalContainerStackView: UIStackView = {
         let view = UIStackView()
@@ -36,10 +28,6 @@ class GeneralRecommendationsCard: UIView {
 
     private var paragraphLabels: [UILabel] = []
 
-    private let footerLabel = UILabel()
-
-    private let tapGestureRecognizer = UITapGestureRecognizer()
-
     init(config: GeneralRecommendationsCardConfig) {
         super.init(frame: .zero)
         backgroundColor = .white
@@ -50,9 +38,7 @@ class GeneralRecommendationsCard: UIView {
         self.setupConstraints()
 
         self.setupTitleLabel(text: config.title)
-        self.setupFooterLabel(textFunction: config.footerTextFunction, hereText: config.footerHereText)
         self.setupParagraphs(paragraphTexts: config.paragraphs)
-        self.footerLabel.addGestureRecognizer(self.tapGestureRecognizer)
     }
 
     required init?(coder: NSCoder) {
@@ -63,8 +49,7 @@ class GeneralRecommendationsCard: UIView {
         self.addSubview(self.generalContainerStackView)
         self.generalContainerStackView.addArrangedSubviews([
             self.titleLabel,
-            self.paragraphsContainerStackView,
-            self.footerLabel])
+            self.paragraphsContainerStackView])
     }
 
     private func setupConstraints() {
@@ -79,34 +64,6 @@ class GeneralRecommendationsCard: UIView {
     private func setupTitleLabel(text: String) {
         self.titleLabel.configure(text: text, fontStyle: .subtitle)
         self.titleLabel.numberOfLines = 0
-    }
-
-    private func setupFooterLabel(textFunction: (String) -> String, hereText: String) {
-        let text = textFunction(hereText)
-
-        if let range = text.range(of: hereText) {
-            let attributedText = NSMutableAttributedString.init(string: text)
-            let wholeLabelRange = NSRange(location: 0, length: attributedText.length)
-            let hereRange = NSRange(range, in: text)
-            attributedText.addAttribute(
-                NSAttributedString.Key.font,
-                value: Fonts.poppinsMedium(14).font,
-                range: wholeLabelRange)
-            attributedText.addAttribute(
-                NSAttributedString.Key.underlineStyle,
-                value: 1,
-                range: hereRange)
-            attributedText.addAttribute(
-                NSAttributedString.Key.font,
-                value: Fonts.poppinsSemiBold(14).font,
-                range: hereRange)
-
-            self.footerLabel.attributedText = attributedText
-        }
-
-        self.footerLabel.textColor = Colors.greyishBrown
-        self.footerLabel.numberOfLines = 0
-        self.footerLabel.isUserInteractionEnabled = true
     }
 
     func setupParagraphs(paragraphTexts: [String]) {

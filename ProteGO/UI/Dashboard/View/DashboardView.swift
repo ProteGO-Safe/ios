@@ -17,18 +17,6 @@ final class DashboardView: UIView {
         redStatusCardView.contactButtonTapEvent
     }
 
-    var greenGeneralRecommendationsTapMoreEvent: ControlEvent<Void> {
-        greenGeneralRecommendationsCard.tapMoreEvent
-    }
-
-    var yellowGeneralRecommendationsTapMoreEvent: ControlEvent<Void> {
-        yellowGeneralRecommendationsCard.tapMoreEvent
-    }
-
-    var redGeneralRecommendationsTapMoreEvent: ControlEvent<Void> {
-        redGeneralRecommendationsCard.tapMoreEvent
-    }
-
     var hamburgerButtonTapEvent: ControlEvent<Void> {
         bannerView.rightButtonTapEvent
     }
@@ -57,9 +45,7 @@ final class DashboardView: UIView {
             title: L10n.dashboardGreenRecommendTitle,
             paragraphs: [L10n.dashboardGreenRecommend1,
                          L10n.dashboardGreenRecommend2,
-                         L10n.dashboardGreenRecommend3],
-            footerTextFunction: L10n.dashboardGreenRecommendMoreInfoBtn,
-            footerHereText: L10n.dashboardGreenRecommendMoreInfoBtnHere)
+                         L10n.dashboardGreenRecommend3])
         return GeneralRecommendationsCard(config: config)
     }()
 
@@ -68,9 +54,7 @@ final class DashboardView: UIView {
             title: L10n.dashboardYellowRecommendTitle,
             paragraphs: [L10n.dashboardYellowRecommend1,
                          L10n.dashboardYellowRecommend2,
-                         L10n.dashboardYellowRecommend3],
-            footerTextFunction: L10n.dashboardYellowRecommendMoreInfoBtn,
-            footerHereText: L10n.dashboardYellowRecommendMoreInfoBtnHere)
+                         L10n.dashboardYellowRecommend3])
         return GeneralRecommendationsCard(config: config)
     }()
 
@@ -79,9 +63,7 @@ final class DashboardView: UIView {
             title: L10n.dashboardRedRecommendTitle,
             paragraphs: [L10n.dashboardRedRecommend1,
                          L10n.dashboardRedRecommend2,
-                         L10n.dashboardRedRecommend3],
-            footerTextFunction: L10n.dashboardRedRecommendMoreInfoBtn,
-            footerHereText: L10n.dashboardRedRecommendMoreInfoBtnHere)
+                         L10n.dashboardRedRecommend3])
         return GeneralRecommendationsCard(config: config)
     }()
 
