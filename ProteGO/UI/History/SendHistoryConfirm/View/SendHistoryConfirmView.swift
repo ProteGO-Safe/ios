@@ -62,7 +62,7 @@ final class SendHistoryConfirmView: UIView {
     private let confirmationCodeDescriptionLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = Fonts.poppinsMedium(14).font
-        label.textColor = Colors.greyishBrown
+        label.textColor = UIColor(asset: Assets.greyishBrown)
         label.text = L10n.sendDataConfirmCodeDescription
         label.numberOfLines = 0
         label.textAlignment = .left

@@ -50,7 +50,7 @@ final class RegistrationSendCodeView: UIView {
         label.attributedText = attributedText
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
-        label.textColor = Colors.greyishBrown
+        label.textColor = UIColor(asset: Assets.greyishBrown)
         return label
     }()
 
@@ -71,8 +71,8 @@ final class RegistrationSendCodeView: UIView {
 
     private let registerWithoutPhoneNumberButton = UIButton.rectButton(
         text: L10n.registrationWithoutPhoneNumberBtn,
-        textColor: Colors.bluishGreen,
-        backgroundColor: .white, borderColor: Colors.bluishGreen)
+        textColor: UIColor(asset: Assets.bluishGreen),
+        backgroundColor: .white, borderColor: UIColor(asset: Assets.bluishGreen))
 
     private var scrollViewBottomConstraint: Constraint?
 
