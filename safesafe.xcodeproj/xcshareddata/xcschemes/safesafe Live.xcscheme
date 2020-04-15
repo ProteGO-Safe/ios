@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D5308633243EF86E00FCA5DD"
-               BuildableName = "safesafe.app"
-               BlueprintName = "safesafe"
+               BuildableName = "safesafe Live.app"
+               BlueprintName = "safesafe Live"
                ReferencedContainer = "container:safesafe.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D5308633243EF86E00FCA5DD"
-            BuildableName = "safesafe.app"
-            BlueprintName = "safesafe"
+            BuildableName = "safesafe Live.app"
+            BlueprintName = "safesafe Live"
             ReferencedContainer = "container:safesafe.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -69,8 +69,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D5308633243EF86E00FCA5DD"
-            BuildableName = "safesafe.app"
-            BlueprintName = "safesafe"
+            BuildableName = "safesafe Live.app"
+            BlueprintName = "safesafe Live"
             ReferencedContainer = "container:safesafe.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

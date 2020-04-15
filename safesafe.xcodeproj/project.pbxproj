@@ -23,6 +23,23 @@
 		D5308666243F048C00FCA5DD /* StoredDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308665243F048C00FCA5DD /* StoredDefaults.swift */; };
 		D530866A243F0FB600FCA5DD /* PWAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308669243F0FB600FCA5DD /* PWAViewController.swift */; };
 		D530866C243F0FBF00FCA5DD /* PWAViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530866B243F0FBF00FCA5DD /* PWAViewModel.swift */; };
+		D5B207AB24471AA90083FCEC /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308660243F00F300FCA5DD /* AppCoordinator.swift */; };
+		D5B207AC24471AA90083FCEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308637243EF86E00FCA5DD /* AppDelegate.swift */; };
+		D5B207AD24471AA90083FCEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308639243EF86E00FCA5DD /* SceneDelegate.swift */; };
+		D5B207AE24471AA90083FCEC /* PollCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530864C243EF8B600FCA5DD /* PollCoordinator.swift */; };
+		D5B207AF24471AA90083FCEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530865B243EFB3200FCA5DD /* ViewController.swift */; };
+		D5B207B024471AA90083FCEC /* ViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308656243EF94C00FCA5DD /* ViewControllerType.swift */; };
+		D5B207B124471AA90083FCEC /* PWAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308669243F0FB600FCA5DD /* PWAViewController.swift */; };
+		D5B207B224471AA90083FCEC /* PollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530864E243EF8BF00FCA5DD /* PollViewController.swift */; };
+		D5B207B324471AA90083FCEC /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308663243F03DF00FCA5DD /* AppManager.swift */; };
+		D5B207B424471AA90083FCEC /* StoredDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308665243F048C00FCA5DD /* StoredDefaults.swift */; };
+		D5B207B524471AA90083FCEC /* PollViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308650243EF8C900FCA5DD /* PollViewModel.swift */; };
+		D5B207B624471AA90083FCEC /* PWAViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530866B243F0FBF00FCA5DD /* PWAViewModel.swift */; };
+		D5B207B724471AA90083FCEC /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308658243EF99500FCA5DD /* CoordinatorType.swift */; };
+		D5B207B824471AA90083FCEC /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308654243EF92D00FCA5DD /* ViewModelType.swift */; };
+		D5B207BA24471AA90083FCEC /* Pods_safesafe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBCD6F7A1720707C90576426 /* Pods_safesafe.framework */; };
+		D5B207BC24471AA90083FCEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5308642243EF87000FCA5DD /* LaunchScreen.storyboard */; };
+		D5B207BD24471AA90083FCEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5308640243EF87000FCA5DD /* Assets.xcassets */; };
 		F7E0B1753F66DCC1A02F08CA /* Pods_safesafe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBCD6F7A1720707C90576426 /* Pods_safesafe.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,12 +47,12 @@
 		A8F65182C19D137F0993BF88 /* Pods-safesafe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safesafe.release.xcconfig"; path = "Target Support Files/Pods-safesafe/Pods-safesafe.release.xcconfig"; sourceTree = "<group>"; };
 		BBCD6F7A1720707C90576426 /* Pods_safesafe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safesafe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDBFEAE37DD89E3034756663 /* Pods-safesafe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safesafe.debug.xcconfig"; path = "Target Support Files/Pods-safesafe/Pods-safesafe.debug.xcconfig"; sourceTree = "<group>"; };
-		D5308634243EF86E00FCA5DD /* safesafe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = safesafe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5308634243EF86E00FCA5DD /* safesafe Live.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "safesafe Live.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5308637243EF86E00FCA5DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5308639243EF86E00FCA5DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D5308640243EF87000FCA5DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5308643243EF87000FCA5DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D5308645243EF87000FCA5DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5308645243EF87000FCA5DD /* Info-live.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-live.plist"; sourceTree = "<group>"; };
 		D530864C243EF8B600FCA5DD /* PollCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollCoordinator.swift; sourceTree = "<group>"; };
 		D530864E243EF8BF00FCA5DD /* PollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollViewController.swift; sourceTree = "<group>"; };
 		D5308650243EF8C900FCA5DD /* PollViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollViewModel.swift; sourceTree = "<group>"; };
@@ -48,6 +65,8 @@
 		D5308665243F048C00FCA5DD /* StoredDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredDefaults.swift; sourceTree = "<group>"; };
 		D5308669243F0FB600FCA5DD /* PWAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAViewController.swift; sourceTree = "<group>"; };
 		D530866B243F0FBF00FCA5DD /* PWAViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAViewModel.swift; sourceTree = "<group>"; };
+		D5B207C224471AA90083FCEC /* safesafe Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "safesafe Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5B207C324471AAA0083FCEC /* Info-dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-dev.plist"; path = "/Users/lukaszszyszkowski/Documents/@projekty_ios/safesafe/Info-dev.plist"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +75,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7E0B1753F66DCC1A02F08CA /* Pods_safesafe.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5B207B924471AA90083FCEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5B207BA24471AA90083FCEC /* Pods_safesafe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,7 +119,8 @@
 		D5308635243EF86E00FCA5DD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D5308634243EF86E00FCA5DD /* safesafe.app */,
+				D5308634243EF86E00FCA5DD /* safesafe Live.app */,
+				D5B207C224471AA90083FCEC /* safesafe Dev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,7 +136,8 @@
 				D5308639243EF86E00FCA5DD /* SceneDelegate.swift */,
 				D5308640243EF87000FCA5DD /* Assets.xcassets */,
 				D5308642243EF87000FCA5DD /* LaunchScreen.storyboard */,
-				D5308645243EF87000FCA5DD /* Info.plist */,
+				D5308645243EF87000FCA5DD /* Info-live.plist */,
+				D5B207C324471AAA0083FCEC /* Info-dev.plist */,
 			);
 			path = safesafe;
 			sourceTree = "<group>";
@@ -180,9 +209,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D5308633243EF86E00FCA5DD /* safesafe */ = {
+		D5308633243EF86E00FCA5DD /* safesafe Live */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D5308648243EF87000FCA5DD /* Build configuration list for PBXNativeTarget "safesafe" */;
+			buildConfigurationList = D5308648243EF87000FCA5DD /* Build configuration list for PBXNativeTarget "safesafe Live" */;
 			buildPhases = (
 				E3A7CBC7E6EB5CBB5A902027 /* [CP] Check Pods Manifest.lock */,
 				D5308630243EF86E00FCA5DD /* Sources */,
@@ -194,9 +223,28 @@
 			);
 			dependencies = (
 			);
-			name = safesafe;
+			name = "safesafe Live";
 			productName = safesafe;
-			productReference = D5308634243EF86E00FCA5DD /* safesafe.app */;
+			productReference = D5308634243EF86E00FCA5DD /* safesafe Live.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D5B207A824471AA90083FCEC /* safesafe Dev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5B207BF24471AA90083FCEC /* Build configuration list for PBXNativeTarget "safesafe Dev" */;
+			buildPhases = (
+				D5B207A924471AA90083FCEC /* [CP] Check Pods Manifest.lock */,
+				D5B207AA24471AA90083FCEC /* Sources */,
+				D5B207B924471AA90083FCEC /* Frameworks */,
+				D5B207BB24471AA90083FCEC /* Resources */,
+				D5B207BE24471AA90083FCEC /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "safesafe Dev";
+			productName = safesafe;
+			productReference = D5B207C224471AA90083FCEC /* safesafe Dev.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -227,7 +275,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D5308633243EF86E00FCA5DD /* safesafe */,
+				D5308633243EF86E00FCA5DD /* safesafe Live */,
+				D5B207A824471AA90083FCEC /* safesafe Dev */,
 			);
 		};
 /* End PBXProject section */
@@ -242,10 +291,58 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D5B207BB24471AA90083FCEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5B207BC24471AA90083FCEC /* LaunchScreen.storyboard in Resources */,
+				D5B207BD24471AA90083FCEC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		7EEFCA8BD40A9FA2BC356C0F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-safesafe/Pods-safesafe-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-safesafe/Pods-safesafe-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-safesafe/Pods-safesafe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5B207A924471AA90083FCEC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-safesafe-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5B207BE24471AA90083FCEC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -305,6 +402,27 @@
 				D530866C243F0FBF00FCA5DD /* PWAViewModel.swift in Sources */,
 				D5308659243EF99500FCA5DD /* CoordinatorType.swift in Sources */,
 				D5308655243EF92D00FCA5DD /* ViewModelType.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5B207AA24471AA90083FCEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5B207AB24471AA90083FCEC /* AppCoordinator.swift in Sources */,
+				D5B207AC24471AA90083FCEC /* AppDelegate.swift in Sources */,
+				D5B207AD24471AA90083FCEC /* SceneDelegate.swift in Sources */,
+				D5B207AE24471AA90083FCEC /* PollCoordinator.swift in Sources */,
+				D5B207AF24471AA90083FCEC /* ViewController.swift in Sources */,
+				D5B207B024471AA90083FCEC /* ViewControllerType.swift in Sources */,
+				D5B207B124471AA90083FCEC /* PWAViewController.swift in Sources */,
+				D5B207B224471AA90083FCEC /* PollViewController.swift in Sources */,
+				D5B207B324471AA90083FCEC /* AppManager.swift in Sources */,
+				D5B207B424471AA90083FCEC /* StoredDefaults.swift in Sources */,
+				D5B207B524471AA90083FCEC /* PollViewModel.swift in Sources */,
+				D5B207B624471AA90083FCEC /* PWAViewModel.swift in Sources */,
+				D5B207B724471AA90083FCEC /* CoordinatorType.swift in Sources */,
+				D5B207B824471AA90083FCEC /* ViewModelType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,12 +562,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
-				INFOPLIST_FILE = safesafe/Info.plist;
+				INFOPLIST_FILE = "safesafe/Info-live.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D LIVE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.holdapp.safesafe.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -465,12 +584,57 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
-				INFOPLIST_FILE = safesafe/Info.plist;
+				INFOPLIST_FILE = "safesafe/Info-live.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D LIVE";
+				PRODUCT_BUNDLE_IDENTIFIER = com.holdapp.safesafe.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		D5B207C024471AA90083FCEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDBFEAE37DD89E3034756663 /* Pods-safesafe.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
+				DEVELOPMENT_TEAM = HU9FKSEQXD;
+				INFOPLIST_FILE = "safesafe/Info-dev.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D DEV";
+				PRODUCT_BUNDLE_IDENTIFIER = com.holdapp.safesafe.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		D5B207C124471AA90083FCEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8F65182C19D137F0993BF88 /* Pods-safesafe.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
+				DEVELOPMENT_TEAM = HU9FKSEQXD;
+				INFOPLIST_FILE = "safesafe/Info-dev.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D DEV";
 				PRODUCT_BUNDLE_IDENTIFIER = com.holdapp.safesafe.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -490,11 +654,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D5308648243EF87000FCA5DD /* Build configuration list for PBXNativeTarget "safesafe" */ = {
+		D5308648243EF87000FCA5DD /* Build configuration list for PBXNativeTarget "safesafe Live" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D5308649243EF87000FCA5DD /* Debug */,
 				D530864A243EF87000FCA5DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5B207BF24471AA90083FCEC /* Build configuration list for PBXNativeTarget "safesafe Dev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5B207C024471AA90083FCEC /* Debug */,
+				D5B207C124471AA90083FCEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
