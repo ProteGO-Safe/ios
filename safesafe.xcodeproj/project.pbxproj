@@ -66,7 +66,7 @@
 		D5308669243F0FB600FCA5DD /* PWAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAViewController.swift; sourceTree = "<group>"; };
 		D530866B243F0FBF00FCA5DD /* PWAViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAViewModel.swift; sourceTree = "<group>"; };
 		D5B207C224471AA90083FCEC /* safesafe Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "safesafe Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5B207C324471AAA0083FCEC /* Info-dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-dev.plist"; path = "/Users/lukaszszyszkowski/Documents/@projekty_ios/safesafe/Info-dev.plist"; sourceTree = "<absolute>"; };
+		D5B207C324471AAA0083FCEC /* Info-dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-dev.plist"; path = "/Users/lukaszszyszkowski/Documents/@projekty_ios/safesafe/safesafe/Info-dev.plist"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
