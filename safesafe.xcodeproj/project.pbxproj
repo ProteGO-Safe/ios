@@ -43,6 +43,7 @@
 		D5B207C5244822280083FCEC /* JSBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207C4244822280083FCEC /* JSBridge.swift */; };
 		D5B207C7244822890083FCEC /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207C6244822890083FCEC /* Logger.swift */; };
 		D5B207C8244822890083FCEC /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207C6244822890083FCEC /* Logger.swift */; };
+		D5B207CB244838EA0083FCEC /* URLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207CA244838EA0083FCEC /* URLConstants.swift */; };
 		F323E011013558DA4DBD2332 /* Pods_safesafe_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB89FF3C4CABEDD7B7DABF0D /* Pods_safesafe_Dev.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +77,7 @@
 		D5B207C324471AAA0083FCEC /* Info-dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-dev.plist"; path = "/Users/lukaszszyszkowski/Documents/@projekty_ios/safesafe/safesafe/Info-dev.plist"; sourceTree = "<absolute>"; };
 		D5B207C4244822280083FCEC /* JSBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSBridge.swift; sourceTree = "<group>"; };
 		D5B207C6244822890083FCEC /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		D5B207CA244838EA0083FCEC /* URLConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstants.swift; sourceTree = "<group>"; };
 		E987233A19187BA6CB82B7CA /* Pods_safesafe_Live.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safesafe_Live.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -170,6 +172,7 @@
 		D5308652243EF91B00FCA5DD /* common */ = {
 			isa = PBXGroup;
 			children = (
+				D5B207C9244838DA0083FCEC /* constants */,
 				D5308662243F03CE00FCA5DD /* helpers */,
 				D530865A243EFB2300FCA5DD /* base */,
 				D5308653243EF92100FCA5DD /* protocols */,
@@ -221,6 +224,14 @@
 				D530866B243F0FBF00FCA5DD /* PWAViewModel.swift */,
 			);
 			path = pwa;
+			sourceTree = "<group>";
+		};
+		D5B207C9244838DA0083FCEC /* constants */ = {
+			isa = PBXGroup;
+			children = (
+				D5B207CA244838EA0083FCEC /* URLConstants.swift */,
+			);
+			path = constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -408,6 +419,7 @@
 				D5308661243F00F300FCA5DD /* AppCoordinator.swift in Sources */,
 				D5308638243EF86E00FCA5DD /* AppDelegate.swift in Sources */,
 				D530863A243EF86E00FCA5DD /* SceneDelegate.swift in Sources */,
+				D5B207CB244838EA0083FCEC /* URLConstants.swift in Sources */,
 				D530864D243EF8B600FCA5DD /* PollCoordinator.swift in Sources */,
 				D5B207C5244822280083FCEC /* JSBridge.swift in Sources */,
 				D530865C243EFB3200FCA5DD /* ViewController.swift in Sources */,

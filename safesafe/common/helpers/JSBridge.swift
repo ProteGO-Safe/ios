@@ -12,16 +12,20 @@ final class JSBridge: NSObject {
     
     static let shared = JSBridge()
     
-    override private init() {}
+    enum BridgeDataType: Int {
+        case notification
+        case userIds
+    }
+    
+    enum SendMethod: String, CaseIterable {
+        case setBridgeData = "setBridgeData"
+    }
     
     private enum ReceivedMethod: String, CaseIterable {
         case getNotification = "getNotification"
     }
     
-    enum SendMethod: String, CaseIterable {
-        case postNotification = "postNotification"
-    }
-    
+    private weak var webView: WKWebView?
     private var controller: WKUserContentController?
     
     var contentController: WKUserContentController {
@@ -33,6 +37,13 @@ final class JSBridge: NSObject {
         self.controller = controller
         
         return controller
+    }
+    
+    override private init() {}
+    
+    func setBridgeData(type: BridgeDataType, body: String, completion: ((Any?, Error?) -> ())? = nil) {
+        let method = "\(SendMethod.setBridgeData.rawValue)('\(type.rawValue)', '\(body)')"
+        webView?.evaluateJavaScript(method, completionHandler: completion)
     }
 }
 
