@@ -12,11 +12,16 @@ import UIKit
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    private var appCoordinator: AppCoordinator?
     var window: UIWindow?
+
+    private let notificationManager = NotificationManager()
+
+    private var appCoordinator: AppCoordinator?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+
+        notificationManager.configure()
+
         if #available(iOS 13.0, *) {} else {
             window = UIWindow(frame: UIScreen.main.bounds)
             appCoordinator = AppCoordinator(appWindow: window)
@@ -40,6 +45,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        notificationManager.update(token: deviceToken)
     }
 }
 
