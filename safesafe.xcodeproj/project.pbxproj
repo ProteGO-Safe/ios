@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		22DCAAB9FFB004B2BFDB355B /* Pods_safesafe_Live.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E987233A19187BA6CB82B7CA /* Pods_safesafe_Live.framework */; };
+		824DCE1A24483FF800C1EADC /* URLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207CA244838EA0083FCEC /* URLConstants.swift */; };
+		824DCE1B2448400B00C1EADC /* JSBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207C4244822280083FCEC /* JSBridge.swift */; };
 		D5308638243EF86E00FCA5DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308637243EF86E00FCA5DD /* AppDelegate.swift */; };
 		D530863A243EF86E00FCA5DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308639243EF86E00FCA5DD /* SceneDelegate.swift */; };
 		D5308641243EF87000FCA5DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5308640243EF87000FCA5DD /* Assets.xcassets */; };
@@ -447,12 +449,14 @@
 				D5B207AF24471AA90083FCEC /* ViewController.swift in Sources */,
 				D5B207B024471AA90083FCEC /* ViewControllerType.swift in Sources */,
 				D5B207B124471AA90083FCEC /* PWAViewController.swift in Sources */,
+				824DCE1B2448400B00C1EADC /* JSBridge.swift in Sources */,
 				D5B207B224471AA90083FCEC /* PollViewController.swift in Sources */,
 				D5B207B324471AA90083FCEC /* AppManager.swift in Sources */,
 				D5B207B424471AA90083FCEC /* StoredDefaults.swift in Sources */,
 				D5B207C8244822890083FCEC /* Logger.swift in Sources */,
 				D5B207B524471AA90083FCEC /* PollViewModel.swift in Sources */,
 				D5B207B624471AA90083FCEC /* PWAViewModel.swift in Sources */,
+				824DCE1A24483FF800C1EADC /* URLConstants.swift in Sources */,
 				D5B207B724471AA90083FCEC /* CoordinatorType.swift in Sources */,
 				D5B207B824471AA90083FCEC /* ViewModelType.swift in Sources */,
 			);
@@ -635,7 +639,8 @@
 			baseConfigurationReference = 30610EA30383E99E0B2DD84C /* Pods-safesafe Dev.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = "safesafe/Info-dev.plist";
@@ -647,6 +652,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D DEV";
 				PRODUCT_BUNDLE_IDENTIFIER = com.holdapp.safesafe.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "SafeSafe Development";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -657,7 +663,8 @@
 			baseConfigurationReference = 164E1C1A2438B7277E9EF8EF /* Pods-safesafe Dev.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = "safesafe/Info-dev.plist";
@@ -669,6 +676,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D DEV";
 				PRODUCT_BUNDLE_IDENTIFIER = com.holdapp.safesafe.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "SafeSafe Development";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
