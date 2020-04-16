@@ -9,6 +9,7 @@
 import UIKit
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private var appCoordinator: AppCoordinator?
@@ -40,7 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
 }
 
+@inlinable public func console(_ value: Any, file: String = #file, function: String = #function, line: Int = #line) {
+    Logger.log(value, file: file, function: function, line: line)
+}

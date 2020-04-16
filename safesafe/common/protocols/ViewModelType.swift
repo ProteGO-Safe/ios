@@ -26,4 +26,5 @@ extension ViewModelType {
     func onViewDidAppear() {}
     func onViewWillDisappear() {}
     func onViewDidDisappear() {}
+    func start() {}
 }

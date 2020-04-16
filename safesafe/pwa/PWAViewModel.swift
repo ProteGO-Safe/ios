@@ -7,26 +7,16 @@
 //
 
 import Foundation
+import WebKit.WKUserContentController
 
 protocol PWAViewModelDelegate: class {
     func load(url: URL)
+    func configureWebKit(controler: WKUserContentController)
 }
 
 final class PWAViewModel: ViewModelType {
     
-    private enum Constants {
-        #if DEV
-        static let url = URL(string: "https://safesafe.thecoders.io")!
-        #elseif LIVE
-        static let url = URL(string: "https://safesafe.app")!
-        #endif
-    }
-    
     weak var delegate: PWAViewModelDelegate?
-    
-    func start() {
-        
-    }
 }
 
 // VC Life Cycle
@@ -36,6 +26,12 @@ extension PWAViewModel {
             return
         }
         
-        delegate?.load(url: Constants.url)
+        delegate?.load(url: URLContants.pwaURL)
+    }
+    
+    func onViewDidLoad(setupFinished: Bool) {
+        if setupFinished {
+            delegate?.configureWebKit(controler: JSBridge.shared.contentController)
+        }
     }
 }
