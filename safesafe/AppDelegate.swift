@@ -43,6 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-@inlinable public func console(_ value: String, file: String = #file, function: String = #function, line: Int = #line) {
+@inlinable public func console(_ value: Any, file: String = #file, function: String = #function, line: Int = #line) {
     Logger.log(value, file: file, function: function, line: line)
 }

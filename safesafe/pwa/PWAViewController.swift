@@ -22,26 +22,26 @@ final class PWAViewController: ViewController<PWAViewModel> {
         viewModel.delegate = self
     }
     
-    override func setup() {
-        setupWebKit()
-    }
+    override func setup() {}
     
     override func layout() {
         webKitView?.snp.makeConstraints({ maker in
             maker.edges.equalToSuperview()
         })
     }
-    
-    private func setupWebKit() {
-        let webKitView = WKWebView(frame: .zero)
-        add(subview: webKitView)
-        
-        self.webKitView = webKitView
-    }
 }
 
 extension PWAViewController: PWAViewModelDelegate {
     func load(url: URL) {
         webKitView?.load(URLRequest(url: url))
+    }
+    
+    func configureWebKit(controler: WKUserContentController) {
+        let configuration = WKWebViewConfiguration()
+        configuration.userContentController = controler
+        let webKitView = WKWebView(frame: .zero, configuration: configuration)
+        add(subview: webKitView)
+        
+        self.webKitView = webKitView
     }
 }

@@ -9,13 +9,13 @@
 import Foundation
 
 public final class Logger {
-    public static func log(_ value: String, file: String, function: String, line: Int, fullPath: Bool = false) {
+    public static func log(_ value: Any, file: String, function: String, line: Int, fullPath: Bool = false) {
         #if DEBUG
         var file = file
         if !fullPath {
             file = String(file.split(separator: "/").last ?? "")
         }
-        print("Logger[\(file):\(function):\(line)] \(value)")
+        print("Logger[\(file):\(function):\(line)] \(String(describing: value))")
         #endif
     }
 }

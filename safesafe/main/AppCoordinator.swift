@@ -29,9 +29,6 @@ final class AppCoordinator: CoordinatorType {
         window.backgroundColor = .white
         window.rootViewController = pwa()
         window.makeKeyAndVisible()
-    
-        console("Hello")
-        
     }
     
     private func pwa() -> UIViewController {

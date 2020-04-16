@@ -7,9 +7,11 @@
 //
 
 import Foundation
+import WebKit.WKUserContentController
 
 protocol PWAViewModelDelegate: class {
     func load(url: URL)
+    func configureWebKit(controler: WKUserContentController)
 }
 
 final class PWAViewModel: ViewModelType {
@@ -37,5 +39,11 @@ extension PWAViewModel {
         }
         
         delegate?.load(url: Constants.url)
+    }
+    
+    func onViewDidLoad(setupFinished: Bool) {
+        if setupFinished {
+            delegate?.configureWebKit(controler: JSBridge.shared.contentController)
+        }
     }
 }
