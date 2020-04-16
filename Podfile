@@ -6,6 +6,9 @@ def pods_definition
   use_frameworks!
 
   pod 'SnapKit', '5.0.1'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Messaging'
+
 end
 
 target 'safesafe Live' do
