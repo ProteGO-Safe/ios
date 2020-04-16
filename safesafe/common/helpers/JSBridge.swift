@@ -41,9 +41,17 @@ final class JSBridge: NSObject {
     
     override private init() {}
     
+    func register(webView: WKWebView)  {
+        self.webView = webView
+    }
+    
     func setBridgeData(type: BridgeDataType, body: String, completion: ((Any?, Error?) -> ())? = nil) {
+        guard let webView = webView else {
+            console("WebView not registered. Please use `register(webView: WKWebView)` before use this method", type: .warning)
+            return
+        }
         let method = "\(SendMethod.setBridgeData.rawValue)('\(type.rawValue)', '\(body)')"
-        webView?.evaluateJavaScript(method, completionHandler: completion)
+        webView.evaluateJavaScript(method, completionHandler: completion)
     }
 }
 
