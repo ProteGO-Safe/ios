@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
 
-    private let notificationManager = NotificationManager()
+    private let notificationManager = NotificationManager.shared
 
     private var appCoordinator: AppCoordinator?
     
@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             appCoordinator = AppCoordinator(appWindow: window)
             appCoordinator?.start()
         }
+        
+        StoredDefaults.standard.set(value: true, key: .isFirstRun)
         
         return true
     }
@@ -48,10 +50,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        var token = ""
+        for i in 0..<deviceToken.count {
+            token = token + String(format: "%02.2hhx", arguments: [deviceToken[i]])
+        }
+        print(token)
         notificationManager.update(token: deviceToken)
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        notificationManager.clearBadgeNumber()
     }
 }
 
-@inlinable public func console(_ value: Any, file: String = #file, function: String = #function, line: Int = #line) {
-    Logger.log(value, file: file, function: function, line: line)
+@inlinable public func console(_ value: Any?, type: Logger.LogType = .regular, file: String = #file, function: String = #function, line: Int = #line) {
+    Logger.log(value, type: type, file: file, function: function, line: line)
 }

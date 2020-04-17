@@ -10,8 +10,9 @@ import Foundation
 
 enum URLContants {
     #if DEV
-    static let pwaURL = URL(string: "https://safesafe.thecoders.io")!
+    static let pwaURL = URL(string: "https://safesafe-dev.thecoders.io")!
     #elseif LIVE
     static let pwaURL = URL(string: "https://safesafe.app")!
     #endif
 }
+

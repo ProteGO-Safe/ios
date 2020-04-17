@@ -33,6 +33,9 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 
+safesafe/resources/Dev/GoogleService-Info.plist
+safesafe/resources/Live/GoogleService-Info.plist
+
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace

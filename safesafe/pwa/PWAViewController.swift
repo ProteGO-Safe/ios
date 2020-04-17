@@ -40,7 +40,9 @@ extension PWAViewController: PWAViewModelDelegate {
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = controler
         let webKitView = WKWebView(frame: .zero, configuration: configuration)
+        
         add(subview: webKitView)
+        JSBridge.shared.register(webView: webKitView)
         
         self.webKitView = webKitView
     }
