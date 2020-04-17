@@ -27,7 +27,7 @@ public final class Logger {
         }
     }
     
-    public static func log(_ value: Any, type: LogType, file: String, function: String, line: Int, fullPath: Bool = false) {
+    public static func log(_ value: Any?, type: LogType, file: String, function: String, line: Int, fullPath: Bool = false) {
         #if DEBUG
         var file = file
         if !fullPath {

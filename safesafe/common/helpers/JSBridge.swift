@@ -9,23 +9,31 @@
 import WebKit
 
 final class JSBridge: NSObject {
-    
+
     static let shared = JSBridge()
     
     enum BridgeDataType: Int {
-        case notification
-        case userIds
+        case notification = 1
+        case userId
     }
     
     enum SendMethod: String, CaseIterable {
-        case setBridgeData = "setBridgeData"
+        case bridgeDataResponse = "bridgeDataResponse"
     }
     
     private enum ReceivedMethod: String, CaseIterable {
-        case getNotification = "getNotification"
+        case setBridgeData = "setBridgeData"
+        case bridgeDataRequest = "bridgeDataRequest"
+        case getBridgeData = "getBridgeData"
+    }
+    
+    private enum Key {
+        static let timestamp = "timestamp"
+        static let data = "data"
     }
     
     private weak var webView: WKWebView?
+    private var notificationPayload: String?
     private var controller: WKUserContentController?
     
     var contentController: WKUserContentController {
@@ -45,12 +53,17 @@ final class JSBridge: NSObject {
         self.webView = webView
     }
     
-    func setBridgeData(type: BridgeDataType, body: String, completion: ((Any?, Error?) -> ())? = nil) {
+    func storePayload(_ payload: Any) {
+        
+    }
+    
+    func bridgeDataResponse(type: BridgeDataType, body: String, completion: ((Any?, Error?) -> ())? = nil) {
         guard let webView = webView else {
             console("WebView not registered. Please use `register(webView: WKWebView)` before use this method", type: .warning)
             return
         }
-        let method = "\(SendMethod.setBridgeData.rawValue)('\(type.rawValue)', '\(body)')"
+        let method = "\(SendMethod.bridgeDataResponse.rawValue)('\(type.rawValue)', '\(body)')"
+        console(method)
         webView.evaluateJavaScript(method, completionHandler: completion)
     }
 }
@@ -63,8 +76,40 @@ extension JSBridge: WKScriptMessageHandler {
         }
         
         switch method {
-        case .getNotification:
+        case .setBridgeData:
+            setBridgeDataManage(body: message.body)
+        case .bridgeDataRequest:
             console(message.body)
+        case .getBridgeData:
+            getBridgeDataManage(body: message.body)
+        }
+    }
+    
+    private func setBridgeDataManage(body: Any) {
+        guard
+            let object = body as? [String: Any],
+            let data = object[Key.data] as? [String: Any],
+            let timestamp = data[Key.timestamp] as? TimeInterval
+        else {
+            console("Can't cast data: \n\(body)", type: .warning)
+            return
+        }
+        
+        NotificationManager.shared.unsubscribeFromDailyTopic(timestamp: timestamp)
+    }
+    
+    private func getBridgeDataManage(body: Any) {
+        guard let jsonData = NotificationManager.shared.stringifyUserInfo() else {
+            return
+        }
+        
+        bridgeDataResponse(type: .notification, body: jsonData) { resp, error in
+            NotificationManager.shared.clearUserInfo()
+            if let error = error {
+                console(error, type: .error)
+            } else {
+                console(resp)
+            }
         }
     }
 }
