@@ -43,7 +43,11 @@ final class NotificationManager: NSObject {
         var toString: [String] {
             switch self {
             case .general:
-                return ["general", "general\(Topic.devSuffix)"]
+                #if DEV
+                return ["general\(Topic.devSuffix)"]
+                #elseif LIVE
+                return ["general"]
+                #endif
             case let .daily(startDate):
                 return dailyTopics(startDate: startDate)
             }
@@ -60,8 +64,11 @@ final class NotificationManager: NSObject {
                     continue
                 }
                 let formatted = dateFormatter.string(from: date)
+                #if DEV
                 topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
+                #elseif LIVE
                 topics.append("\(Topic.dailyPrefix)\(formatted)")
+                #endif
             }
             
             return topics
@@ -133,19 +140,16 @@ extension NotificationManager: NotificationManagerProtocol {
         dateFormatter.dateFormat = NotificationManager.Constants.dailyTopicDateFormat
         
         let formatted = dateFormatter.string(from: date)
-        let topicDev = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
+        
+        #if DEV
+        let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
+        #elseif LIVE
         let topic = "\(Topic.dailyPrefix)\(formatted)"
+        #endif
         
         Messaging.messaging().unsubscribe(fromTopic: topic) { error in
             if let error = error {
                 console(error, type: .error)
-            }
-            
-            // This shouldn't be nested - need to be fixed later
-            Messaging.messaging().unsubscribe(fromTopic: topicDev) { error in
-                if let error = error {
-                    console(error, type: .error)
-                }
             }
         }
     }

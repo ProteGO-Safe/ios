@@ -30,6 +30,7 @@ final class JSBridge: NSObject {
     private enum Key {
         static let timestamp = "timestamp"
         static let data = "data"
+        static let requestId = "requestId"
     }
     
     private weak var webView: WKWebView?
@@ -57,12 +58,12 @@ final class JSBridge: NSObject {
         
     }
     
-    func bridgeDataResponse(type: BridgeDataType, body: String, completion: ((Any?, Error?) -> ())? = nil) {
+    func bridgeDataResponse(type: BridgeDataType, body: String, requestId: String, completion: ((Any?, Error?) -> ())? = nil) {
         guard let webView = webView else {
             console("WebView not registered. Please use `register(webView: WKWebView)` before use this method", type: .warning)
             return
         }
-        let method = "\(SendMethod.bridgeDataResponse.rawValue)('\(type.rawValue)', '\(body)')"
+        let method = "\(SendMethod.bridgeDataResponse.rawValue)('\(body)','\(type.rawValue)','\(requestId)')"
         console(method)
         webView.evaluateJavaScript(method, completionHandler: completion)
     }
@@ -99,16 +100,18 @@ extension JSBridge: WKScriptMessageHandler {
     }
     
     private func getBridgeDataManage(body: Any) {
-        guard let jsonData = NotificationManager.shared.stringifyUserInfo() else {
+        guard
+            let jsonData = NotificationManager.shared.stringifyUserInfo(),
+            let requestData = body as? [String: Any],
+            let requestId = requestData[Key.requestId] as? String
+        else {
             return
         }
         
-        bridgeDataResponse(type: .notification, body: jsonData) { resp, error in
+        bridgeDataResponse(type: .notification, body: jsonData, requestId: requestId) { _, error in
             NotificationManager.shared.clearUserInfo()
             if let error = error {
                 console(error, type: .error)
-            } else {
-                console(resp)
             }
         }
     }
