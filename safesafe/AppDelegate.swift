@@ -6,6 +6,7 @@
 //  Copyright © 2020 Lukasz szyszkowski. All rights reserved.
 //
 
+import CoreData
 import UIKit
 
 @UIApplicationMain
@@ -29,6 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         StoredDefaults.standard.set(value: true, key: .isFirstRun)
+        
+        BluetraceManager.shared.turnOn()
+        EncounterMessageManager.shared.setup()
+        BlueTraceLocalNotifications.shared.initialConfiguration()
+        //UIApplication.shared.isIdleTimerDisabled = true
         
         return true
     }
@@ -61,6 +67,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         notificationManager.clearBadgeNumber()
     }
+    
+    // MARK: - Core Data
+
+    /**
+     Property from https://github.com/opentrace-community/opentrace-ios/blob/master/OpenTrace/AppDelegate.swift
+     
+     Used in OpenTrace sources.
+    */
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "tracer")
+        container.loadPersistentStores(completionHandler: { (_, error) in
+            if let error = error as NSError? {
+                // Replace this implementation with code to handle the error appropriately.
+
+                /*
+                 Typical reasons for an error here include:
+                 * The parent directory does not exist, cannot be created, or disallows writing.
+                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                 * The device is out of space.
+                 * The store could not be migrated to the current model version.
+                 Check the error message to determine what the actual problem was.
+                 */
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+    
 }
 
 @inlinable public func console(_ value: Any?, type: Logger.LogType = .regular, file: String = #file, function: String = #function, line: Int = #line) {

@@ -13,6 +13,50 @@
 		82ED892F2448431500305D4B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ED892E2448431500305D4B /* NotificationManager.swift */; };
 		82ED89302448431500305D4B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ED892E2448431500305D4B /* NotificationManager.swift */; };
 		9FA2FAD28A5ABBCCC3EA3A1E /* Pods_safesafe_Live.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A29642DBCEBA27DA1E2E483 /* Pods_safesafe_Live.framework */; };
+		B35B603A244CAA3E007B913B /* PushNotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FDB244CAA3E007B913B /* PushNotificationConstants.swift */; };
+		B35B603B244CAA3E007B913B /* PushNotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FDB244CAA3E007B913B /* PushNotificationConstants.swift */; };
+		B35B603E244CAA3E007B913B /* PlistHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FDE244CAA3E007B913B /* PlistHelper.swift */; };
+		B35B603F244CAA3E007B913B /* PlistHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FDE244CAA3E007B913B /* PlistHelper.swift */; };
+		B35B6040244CAA3E007B913B /* FirebaseAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FDF244CAA3E007B913B /* FirebaseAPIs.swift */; };
+		B35B6041244CAA3E007B913B /* FirebaseAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FDF244CAA3E007B913B /* FirebaseAPIs.swift */; };
+		B35B6048244CAA3E007B913B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B35B5FE5244CAA3E007B913B /* Localizable.strings */; };
+		B35B6049244CAA3E007B913B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B35B5FE5244CAA3E007B913B /* Localizable.strings */; };
+		B35B604A244CAA3E007B913B /* BluetraceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FE7244CAA3E007B913B /* BluetraceUtils.swift */; };
+		B35B604B244CAA3E007B913B /* BluetraceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FE7244CAA3E007B913B /* BluetraceUtils.swift */; };
+		B35B604C244CAA3E007B913B /* BluetraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FE8244CAA3E007B913B /* BluetraceConfig.swift */; };
+		B35B604D244CAA3E007B913B /* BluetraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FE8244CAA3E007B913B /* BluetraceConfig.swift */; };
+		B35B604E244CAA3E007B913B /* PeripheralController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FE9244CAA3E007B913B /* PeripheralController.swift */; };
+		B35B604F244CAA3E007B913B /* PeripheralController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FE9244CAA3E007B913B /* PeripheralController.swift */; };
+		B35B6050244CAA3E007B913B /* Encounter+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FEB244CAA3E007B913B /* Encounter+Event.swift */; };
+		B35B6051244CAA3E007B913B /* Encounter+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FEB244CAA3E007B913B /* Encounter+Event.swift */; };
+		B35B6052244CAA3E007B913B /* Encounter+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FEC244CAA3E007B913B /* Encounter+CoreDataProperties.swift */; };
+		B35B6053244CAA3E007B913B /* Encounter+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FEC244CAA3E007B913B /* Encounter+CoreDataProperties.swift */; };
+		B35B6054244CAA3E007B913B /* Encounter+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FED244CAA3E007B913B /* Encounter+CoreDataClass.swift */; };
+		B35B6055244CAA3E007B913B /* Encounter+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FED244CAA3E007B913B /* Encounter+CoreDataClass.swift */; };
+		B35B6056244CAA3E007B913B /* tracer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FEE244CAA3E007B913B /* tracer.xcdatamodeld */; };
+		B35B6057244CAA3E007B913B /* tracer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FEE244CAA3E007B913B /* tracer.xcdatamodeld */; };
+		B35B6058244CAA3E007B913B /* Bluetrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF1244CAA3E007B913B /* Bluetrace.swift */; };
+		B35B6059244CAA3E007B913B /* Bluetrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF1244CAA3E007B913B /* Bluetrace.swift */; };
+		B35B605A244CAA3E007B913B /* BluetraceV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF3244CAA3E007B913B /* BluetraceV2.swift */; };
+		B35B605B244CAA3E007B913B /* BluetraceV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF3244CAA3E007B913B /* BluetraceV2.swift */; };
+		B35B605C244CAA3E007B913B /* BluetraceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF4244CAA3E007B913B /* BluetraceProtocol.swift */; };
+		B35B605D244CAA3E007B913B /* BluetraceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF4244CAA3E007B913B /* BluetraceProtocol.swift */; };
+		B35B605E244CAA3E007B913B /* EncounterMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF5244CAA3E007B913B /* EncounterMessageManager.swift */; };
+		B35B605F244CAA3E007B913B /* EncounterMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF5244CAA3E007B913B /* EncounterMessageManager.swift */; };
+		B35B6060244CAA3E007B913B /* BluetraceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF6244CAA3E007B913B /* BluetraceManager.swift */; };
+		B35B6061244CAA3E007B913B /* BluetraceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF6244CAA3E007B913B /* BluetraceManager.swift */; };
+		B35B6062244CAA3E007B913B /* Encounter+EncounterRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF8244CAA3E007B913B /* Encounter+EncounterRecord.swift */; };
+		B35B6063244CAA3E007B913B /* Encounter+EncounterRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF8244CAA3E007B913B /* Encounter+EncounterRecord.swift */; };
+		B35B6064244CAA3E007B913B /* EncounterRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF9244CAA3E007B913B /* EncounterRecord.swift */; };
+		B35B6065244CAA3E007B913B /* EncounterRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF9244CAA3E007B913B /* EncounterRecord.swift */; };
+		B35B6066244CAA3E007B913B /* CentralController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FFA244CAA3E007B913B /* CentralController.swift */; };
+		B35B6067244CAA3E007B913B /* CentralController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FFA244CAA3E007B913B /* CentralController.swift */; };
+		B35B6068244CAA3E007B913B /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FFB244CAA3E007B913B /* DeviceInfo.swift */; };
+		B35B6069244CAA3E007B913B /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FFB244CAA3E007B913B /* DeviceInfo.swift */; };
+		B35B606A244CAA3E007B913B /* BlueTraceLocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FFC244CAA3E007B913B /* BlueTraceLocalNotifications.swift */; };
+		B35B606B244CAA3E007B913B /* BlueTraceLocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FFC244CAA3E007B913B /* BlueTraceLocalNotifications.swift */; };
+		B35B60A0244CAA3E007B913B /* PogoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B6023244CAA3E007B913B /* PogoManager.swift */; };
+		B35B60A1244CAA3E007B913B /* PogoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B6023244CAA3E007B913B /* PogoManager.swift */; };
 		D5308638243EF86E00FCA5DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308637243EF86E00FCA5DD /* AppDelegate.swift */; };
 		D530863A243EF86E00FCA5DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308639243EF86E00FCA5DD /* SceneDelegate.swift */; };
 		D5308641243EF87000FCA5DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5308640243EF87000FCA5DD /* Assets.xcassets */; };
@@ -74,6 +118,28 @@
 		82ED89322448432200305D4B /* safesafe Live.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "safesafe Live.entitlements"; sourceTree = "<group>"; };
 		89C49B1DA05BC54A647CE1DE /* Pods_safesafe_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safesafe_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A29642DBCEBA27DA1E2E483 /* Pods_safesafe_Live.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safesafe_Live.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B35B5FDB244CAA3E007B913B /* PushNotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationConstants.swift; sourceTree = "<group>"; };
+		B35B5FDE244CAA3E007B913B /* PlistHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistHelper.swift; sourceTree = "<group>"; };
+		B35B5FDF244CAA3E007B913B /* FirebaseAPIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAPIs.swift; sourceTree = "<group>"; };
+		B35B5FE5244CAA3E007B913B /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		B35B5FE7244CAA3E007B913B /* BluetraceUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceUtils.swift; sourceTree = "<group>"; };
+		B35B5FE8244CAA3E007B913B /* BluetraceConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceConfig.swift; sourceTree = "<group>"; };
+		B35B5FE9244CAA3E007B913B /* PeripheralController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralController.swift; sourceTree = "<group>"; };
+		B35B5FEB244CAA3E007B913B /* Encounter+Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encounter+Event.swift"; sourceTree = "<group>"; };
+		B35B5FEC244CAA3E007B913B /* Encounter+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encounter+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B35B5FED244CAA3E007B913B /* Encounter+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encounter+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B35B5FEF244CAA3E007B913B /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		B35B5FF1244CAA3E007B913B /* Bluetrace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bluetrace.swift; sourceTree = "<group>"; };
+		B35B5FF3244CAA3E007B913B /* BluetraceV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceV2.swift; sourceTree = "<group>"; };
+		B35B5FF4244CAA3E007B913B /* BluetraceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceProtocol.swift; sourceTree = "<group>"; };
+		B35B5FF5244CAA3E007B913B /* EncounterMessageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncounterMessageManager.swift; sourceTree = "<group>"; };
+		B35B5FF6244CAA3E007B913B /* BluetraceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceManager.swift; sourceTree = "<group>"; };
+		B35B5FF8244CAA3E007B913B /* Encounter+EncounterRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encounter+EncounterRecord.swift"; sourceTree = "<group>"; };
+		B35B5FF9244CAA3E007B913B /* EncounterRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncounterRecord.swift; sourceTree = "<group>"; };
+		B35B5FFA244CAA3E007B913B /* CentralController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralController.swift; sourceTree = "<group>"; };
+		B35B5FFB244CAA3E007B913B /* DeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
+		B35B5FFC244CAA3E007B913B /* BlueTraceLocalNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueTraceLocalNotifications.swift; sourceTree = "<group>"; };
+		B35B6023244CAA3E007B913B /* PogoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PogoManager.swift; sourceTree = "<group>"; };
 		D5308634243EF86E00FCA5DD /* safesafe Live.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "safesafe Live.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5308637243EF86E00FCA5DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5308639243EF86E00FCA5DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,7 +159,7 @@
 		D5308669243F0FB600FCA5DD /* PWAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAViewController.swift; sourceTree = "<group>"; };
 		D530866B243F0FBF00FCA5DD /* PWAViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAViewModel.swift; sourceTree = "<group>"; };
 		D5B207C224471AA90083FCEC /* safesafe Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "safesafe Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5B207C324471AAA0083FCEC /* Info-dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-dev.plist"; path = "/Users/lukaszszyszkowski/Documents/@projekty_ios/safesafe/safesafe/Info-dev.plist"; sourceTree = "<absolute>"; };
+		D5B207C324471AAA0083FCEC /* Info-dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-dev.plist"; path = "../../safesafe-ios/safesafe/Info-dev.plist"; sourceTree = "<group>"; };
 		D5B207C4244822280083FCEC /* JSBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSBridge.swift; sourceTree = "<group>"; };
 		D5B207C6244822890083FCEC /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		D5B207CA244838EA0083FCEC /* URLConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstants.swift; sourceTree = "<group>"; };
@@ -156,11 +222,106 @@
 			path = resources;
 			sourceTree = "<group>";
 		};
+		B35B5FD6244CAA3E007B913B /* OpenTrace */ = {
+			isa = PBXGroup;
+			children = (
+				B35B5FDA244CAA3E007B913B /* Constants */,
+				B35B5FDD244CAA3E007B913B /* Utils */,
+				B35B5FE5244CAA3E007B913B /* Localizable.strings */,
+				B35B5FE6244CAA3E007B913B /* Bluetrace */,
+				B35B6022244CAA3E007B913B /* Power saver */,
+			);
+			name = OpenTrace;
+			path = "Submodules/opentrace-ios/OpenTrace";
+			sourceTree = "<group>";
+		};
+		B35B5FDA244CAA3E007B913B /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				B35B5FDB244CAA3E007B913B /* PushNotificationConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		B35B5FDD244CAA3E007B913B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B35B5FDE244CAA3E007B913B /* PlistHelper.swift */,
+				B35B5FDF244CAA3E007B913B /* FirebaseAPIs.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		B35B5FE6244CAA3E007B913B /* Bluetrace */ = {
+			isa = PBXGroup;
+			children = (
+				B35B5FE7244CAA3E007B913B /* BluetraceUtils.swift */,
+				B35B5FE8244CAA3E007B913B /* BluetraceConfig.swift */,
+				B35B5FE9244CAA3E007B913B /* PeripheralController.swift */,
+				B35B5FEA244CAA3E007B913B /* Models */,
+				B35B5FF0244CAA3E007B913B /* Protocol */,
+				B35B5FF5244CAA3E007B913B /* EncounterMessageManager.swift */,
+				B35B5FF6244CAA3E007B913B /* BluetraceManager.swift */,
+				B35B5FF7244CAA3E007B913B /* Structs */,
+				B35B5FFA244CAA3E007B913B /* CentralController.swift */,
+				B35B5FFB244CAA3E007B913B /* DeviceInfo.swift */,
+				B35B5FFC244CAA3E007B913B /* BlueTraceLocalNotifications.swift */,
+			);
+			path = Bluetrace;
+			sourceTree = "<group>";
+		};
+		B35B5FEA244CAA3E007B913B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B35B5FEB244CAA3E007B913B /* Encounter+Event.swift */,
+				B35B5FEC244CAA3E007B913B /* Encounter+CoreDataProperties.swift */,
+				B35B5FED244CAA3E007B913B /* Encounter+CoreDataClass.swift */,
+				B35B5FEE244CAA3E007B913B /* tracer.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B35B5FF0244CAA3E007B913B /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				B35B5FF1244CAA3E007B913B /* Bluetrace.swift */,
+				B35B5FF2244CAA3E007B913B /* v2 */,
+				B35B5FF4244CAA3E007B913B /* BluetraceProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		B35B5FF2244CAA3E007B913B /* v2 */ = {
+			isa = PBXGroup;
+			children = (
+				B35B5FF3244CAA3E007B913B /* BluetraceV2.swift */,
+			);
+			path = v2;
+			sourceTree = "<group>";
+		};
+		B35B5FF7244CAA3E007B913B /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				B35B5FF8244CAA3E007B913B /* Encounter+EncounterRecord.swift */,
+				B35B5FF9244CAA3E007B913B /* EncounterRecord.swift */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
+		B35B6022244CAA3E007B913B /* Power saver */ = {
+			isa = PBXGroup;
+			children = (
+				B35B6023244CAA3E007B913B /* PogoManager.swift */,
+			);
+			path = "Power saver";
+			sourceTree = "<group>";
+		};
 		D530862B243EF86E00FCA5DD = {
 			isa = PBXGroup;
 			children = (
 				82ED89322448432200305D4B /* safesafe Live.entitlements */,
 				82ED89312448431C00305D4B /* safesafe Dev.entitlements */,
+				B35B5FD6244CAA3E007B913B /* OpenTrace */,
 				D5308636243EF86E00FCA5DD /* safesafe */,
 				D5308635243EF86E00FCA5DD /* Products */,
 				3E3234D8FD23F7FC22AAC103 /* Pods */,
@@ -378,6 +539,7 @@
 			files = (
 				D5308644243EF87000FCA5DD /* LaunchScreen.storyboard in Resources */,
 				D5308641243EF87000FCA5DD /* Assets.xcassets in Resources */,
+				B35B6048244CAA3E007B913B /* Localizable.strings in Resources */,
 				D5B207FB24499A830083FCEC /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,6 +550,7 @@
 			files = (
 				D5B207BC24471AA90083FCEC /* LaunchScreen.storyboard in Resources */,
 				D5B207FE24499A830083FCEC /* GoogleService-Info.plist in Resources */,
+				B35B6049244CAA3E007B913B /* Localizable.strings in Resources */,
 				D5B207BD24471AA90083FCEC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,23 +644,44 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5308661243F00F300FCA5DD /* AppCoordinator.swift in Sources */,
+				B35B6054244CAA3E007B913B /* Encounter+CoreDataClass.swift in Sources */,
 				D5308638243EF86E00FCA5DD /* AppDelegate.swift in Sources */,
+				B35B603A244CAA3E007B913B /* PushNotificationConstants.swift in Sources */,
+				B35B604E244CAA3E007B913B /* PeripheralController.swift in Sources */,
+				B35B6050244CAA3E007B913B /* Encounter+Event.swift in Sources */,
+				B35B6060244CAA3E007B913B /* BluetraceManager.swift in Sources */,
 				D530863A243EF86E00FCA5DD /* SceneDelegate.swift in Sources */,
 				D5B207CB244838EA0083FCEC /* URLConstants.swift in Sources */,
 				D530864D243EF8B600FCA5DD /* PollCoordinator.swift in Sources */,
 				D5B207C5244822280083FCEC /* JSBridge.swift in Sources */,
+				B35B6064244CAA3E007B913B /* EncounterRecord.swift in Sources */,
+				B35B6040244CAA3E007B913B /* FirebaseAPIs.swift in Sources */,
+				B35B60A0244CAA3E007B913B /* PogoManager.swift in Sources */,
+				B35B605A244CAA3E007B913B /* BluetraceV2.swift in Sources */,
 				D530865C243EFB3200FCA5DD /* ViewController.swift in Sources */,
+				B35B604C244CAA3E007B913B /* BluetraceConfig.swift in Sources */,
 				D5308657243EF94C00FCA5DD /* ViewControllerType.swift in Sources */,
 				D5B207C7244822890083FCEC /* Logger.swift in Sources */,
+				B35B6052244CAA3E007B913B /* Encounter+CoreDataProperties.swift in Sources */,
 				D530866A243F0FB600FCA5DD /* PWAViewController.swift in Sources */,
 				D530864F243EF8BF00FCA5DD /* PollViewController.swift in Sources */,
+				B35B6058244CAA3E007B913B /* Bluetrace.swift in Sources */,
+				B35B605C244CAA3E007B913B /* BluetraceProtocol.swift in Sources */,
 				D5308664243F03DF00FCA5DD /* AppManager.swift in Sources */,
+				B35B6056244CAA3E007B913B /* tracer.xcdatamodeld in Sources */,
 				82ED892F2448431500305D4B /* NotificationManager.swift in Sources */,
 				D5308666243F048C00FCA5DD /* StoredDefaults.swift in Sources */,
+				B35B6068244CAA3E007B913B /* DeviceInfo.swift in Sources */,
 				D5308651243EF8C900FCA5DD /* PollViewModel.swift in Sources */,
 				D530866C243F0FBF00FCA5DD /* PWAViewModel.swift in Sources */,
+				B35B606A244CAA3E007B913B /* BlueTraceLocalNotifications.swift in Sources */,
+				B35B6062244CAA3E007B913B /* Encounter+EncounterRecord.swift in Sources */,
 				D5308659243EF99500FCA5DD /* CoordinatorType.swift in Sources */,
+				B35B6066244CAA3E007B913B /* CentralController.swift in Sources */,
+				B35B603E244CAA3E007B913B /* PlistHelper.swift in Sources */,
 				D5308655243EF92D00FCA5DD /* ViewModelType.swift in Sources */,
+				B35B604A244CAA3E007B913B /* BluetraceUtils.swift in Sources */,
+				B35B605E244CAA3E007B913B /* EncounterMessageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,23 +690,44 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5B207AB24471AA90083FCEC /* AppCoordinator.swift in Sources */,
+				B35B6055244CAA3E007B913B /* Encounter+CoreDataClass.swift in Sources */,
 				D5B207AC24471AA90083FCEC /* AppDelegate.swift in Sources */,
+				B35B603B244CAA3E007B913B /* PushNotificationConstants.swift in Sources */,
+				B35B604F244CAA3E007B913B /* PeripheralController.swift in Sources */,
+				B35B6051244CAA3E007B913B /* Encounter+Event.swift in Sources */,
+				B35B6061244CAA3E007B913B /* BluetraceManager.swift in Sources */,
 				D5B207AD24471AA90083FCEC /* SceneDelegate.swift in Sources */,
 				D5B207AE24471AA90083FCEC /* PollCoordinator.swift in Sources */,
 				D5B207AF24471AA90083FCEC /* ViewController.swift in Sources */,
 				D5B207B024471AA90083FCEC /* ViewControllerType.swift in Sources */,
+				B35B6065244CAA3E007B913B /* EncounterRecord.swift in Sources */,
+				B35B6041244CAA3E007B913B /* FirebaseAPIs.swift in Sources */,
+				B35B60A1244CAA3E007B913B /* PogoManager.swift in Sources */,
+				B35B605B244CAA3E007B913B /* BluetraceV2.swift in Sources */,
 				D5B207B124471AA90083FCEC /* PWAViewController.swift in Sources */,
+				B35B604D244CAA3E007B913B /* BluetraceConfig.swift in Sources */,
 				824DCE1B2448400B00C1EADC /* JSBridge.swift in Sources */,
 				D5B207B224471AA90083FCEC /* PollViewController.swift in Sources */,
+				B35B6053244CAA3E007B913B /* Encounter+CoreDataProperties.swift in Sources */,
 				D5B207B324471AA90083FCEC /* AppManager.swift in Sources */,
 				D5B207B424471AA90083FCEC /* StoredDefaults.swift in Sources */,
+				B35B6059244CAA3E007B913B /* Bluetrace.swift in Sources */,
+				B35B605D244CAA3E007B913B /* BluetraceProtocol.swift in Sources */,
 				D5B207C8244822890083FCEC /* Logger.swift in Sources */,
+				B35B6057244CAA3E007B913B /* tracer.xcdatamodeld in Sources */,
 				82ED89302448431500305D4B /* NotificationManager.swift in Sources */,
 				D5B207B524471AA90083FCEC /* PollViewModel.swift in Sources */,
+				B35B6069244CAA3E007B913B /* DeviceInfo.swift in Sources */,
 				D5B207B624471AA90083FCEC /* PWAViewModel.swift in Sources */,
 				824DCE1A24483FF800C1EADC /* URLConstants.swift in Sources */,
+				B35B606B244CAA3E007B913B /* BlueTraceLocalNotifications.swift in Sources */,
+				B35B6063244CAA3E007B913B /* Encounter+EncounterRecord.swift in Sources */,
 				D5B207B724471AA90083FCEC /* CoordinatorType.swift in Sources */,
+				B35B6067244CAA3E007B913B /* CentralController.swift in Sources */,
+				B35B603F244CAA3E007B913B /* PlistHelper.swift in Sources */,
 				D5B207B824471AA90083FCEC /* ViewModelType.swift in Sources */,
+				B35B604B244CAA3E007B913B /* BluetraceUtils.swift in Sources */,
+				B35B605F244CAA3E007B913B /* EncounterMessageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,8 +866,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "safesafe Live.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = "safesafe/Info-live.plist";
@@ -675,7 +880,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D LIVE";
 				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.mc.protegosafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "protegosafe-development";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -689,8 +894,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "safesafe Live.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = "safesafe/Info-live.plist";
@@ -703,7 +908,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D LIVE";
 				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.mc.protegosafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "protegosafe-appstore";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -716,8 +921,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = "safesafe/Info-dev.plist";
@@ -730,7 +935,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D DEV";
 				PRODUCT_BUNDLE_IDENTIFIER = se.sigmaconnectivity.protegosafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "protegosafe-development";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -743,8 +948,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = "safesafe/Info-dev.plist";
@@ -757,7 +962,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D DEV";
 				PRODUCT_BUNDLE_IDENTIFIER = se.sigmaconnectivity.protegosafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "protegosafe-development";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -795,6 +1000,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B35B5FEE244CAA3E007B913B /* tracer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B35B5FEF244CAA3E007B913B /* Model.xcdatamodel */,
+			);
+			currentVersion = B35B5FEF244CAA3E007B913B /* Model.xcdatamodel */;
+			path = tracer.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D530862C243EF86E00FCA5DD /* Project object */;
 }
