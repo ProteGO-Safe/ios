@@ -40,10 +40,21 @@ extension PWAViewController: PWAViewModelDelegate {
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = controler
         let webKitView = WKWebView(frame: .zero, configuration: configuration)
+        webKitView.navigationDelegate = self
         
         add(subview: webKitView)
         JSBridge.shared.register(webView: webKitView)
         
         self.webKitView = webKitView
+    }
+}
+
+extension PWAViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if viewModel.manageNativeActions(with: navigationAction.request.url) {
+            decisionHandler(.cancel)
+        } else {
+            decisionHandler(.allow)
+        }
     }
 }

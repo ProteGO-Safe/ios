@@ -17,6 +17,18 @@ protocol PWAViewModelDelegate: class {
 final class PWAViewModel: ViewModelType {
     
     weak var delegate: PWAViewModelDelegate?
+    
+    func manageNativeActions(with url: URL?) -> Bool {
+        guard
+            let url = url,
+            let scheme = url.scheme,
+            let action = URLAction(rawValue: scheme)
+        else { return false }
+        
+        action.call(url: url)
+        
+        return true
+    }
 }
 
 // VC Life Cycle
