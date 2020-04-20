@@ -1,6 +1,0 @@
-strings:
-  inputs: 
-    - ../../ProteGO/en.lproj/Localizable.strings
-  outputs:
-    - templatePath: ../../Pods/SwiftGen/templates/strings/structured-swift4.stencil
-      output: ../../ProteGO/Common/Constants/L10n.swift

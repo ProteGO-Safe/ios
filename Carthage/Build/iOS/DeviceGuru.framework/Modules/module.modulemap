@@ -1,4 +1,0 @@
-framework module DeviceGuru {
-  header "DeviceGuru-Swift.h"
-  requires objc
-}
