@@ -19,8 +19,6 @@
 		B35B603F244CAA3E007B913B /* PlistHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FDE244CAA3E007B913B /* PlistHelper.swift */; };
 		B35B6040244CAA3E007B913B /* FirebaseAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FDF244CAA3E007B913B /* FirebaseAPIs.swift */; };
 		B35B6041244CAA3E007B913B /* FirebaseAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FDF244CAA3E007B913B /* FirebaseAPIs.swift */; };
-		B35B6048244CAA3E007B913B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B35B5FE5244CAA3E007B913B /* Localizable.strings */; };
-		B35B6049244CAA3E007B913B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B35B5FE5244CAA3E007B913B /* Localizable.strings */; };
 		B35B604A244CAA3E007B913B /* BluetraceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FE7244CAA3E007B913B /* BluetraceUtils.swift */; };
 		B35B604B244CAA3E007B913B /* BluetraceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FE7244CAA3E007B913B /* BluetraceUtils.swift */; };
 		B35B604C244CAA3E007B913B /* BluetraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FE8244CAA3E007B913B /* BluetraceConfig.swift */; };
@@ -35,11 +33,9 @@
 		B35B6055244CAA3E007B913B /* Encounter+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FED244CAA3E007B913B /* Encounter+CoreDataClass.swift */; };
 		B35B6056244CAA3E007B913B /* tracer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FEE244CAA3E007B913B /* tracer.xcdatamodeld */; };
 		B35B6057244CAA3E007B913B /* tracer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FEE244CAA3E007B913B /* tracer.xcdatamodeld */; };
-		B35B6058244CAA3E007B913B /* Bluetrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF1244CAA3E007B913B /* Bluetrace.swift */; };
 		B35B6059244CAA3E007B913B /* Bluetrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF1244CAA3E007B913B /* Bluetrace.swift */; };
 		B35B605A244CAA3E007B913B /* BluetraceV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF3244CAA3E007B913B /* BluetraceV2.swift */; };
 		B35B605B244CAA3E007B913B /* BluetraceV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF3244CAA3E007B913B /* BluetraceV2.swift */; };
-		B35B605C244CAA3E007B913B /* BluetraceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF4244CAA3E007B913B /* BluetraceProtocol.swift */; };
 		B35B605D244CAA3E007B913B /* BluetraceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF4244CAA3E007B913B /* BluetraceProtocol.swift */; };
 		B35B605E244CAA3E007B913B /* EncounterMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF5244CAA3E007B913B /* EncounterMessageManager.swift */; };
 		B35B605F244CAA3E007B913B /* EncounterMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FF5244CAA3E007B913B /* EncounterMessageManager.swift */; };
@@ -123,7 +119,6 @@
 		B35B5FDB244CAA3E007B913B /* PushNotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationConstants.swift; sourceTree = "<group>"; };
 		B35B5FDE244CAA3E007B913B /* PlistHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistHelper.swift; sourceTree = "<group>"; };
 		B35B5FDF244CAA3E007B913B /* FirebaseAPIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAPIs.swift; sourceTree = "<group>"; };
-		B35B5FE5244CAA3E007B913B /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		B35B5FE7244CAA3E007B913B /* BluetraceUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceUtils.swift; sourceTree = "<group>"; };
 		B35B5FE8244CAA3E007B913B /* BluetraceConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceConfig.swift; sourceTree = "<group>"; };
 		B35B5FE9244CAA3E007B913B /* PeripheralController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralController.swift; sourceTree = "<group>"; };
@@ -230,7 +225,6 @@
 			children = (
 				B35B5FDA244CAA3E007B913B /* Constants */,
 				B35B5FDD244CAA3E007B913B /* Utils */,
-				B35B5FE5244CAA3E007B913B /* Localizable.strings */,
 				B35B5FE6244CAA3E007B913B /* Bluetrace */,
 				B35B6022244CAA3E007B913B /* Power saver */,
 			);
@@ -543,7 +537,6 @@
 			files = (
 				D5308644243EF87000FCA5DD /* LaunchScreen.storyboard in Resources */,
 				D5308641243EF87000FCA5DD /* Assets.xcassets in Resources */,
-				B35B6048244CAA3E007B913B /* Localizable.strings in Resources */,
 				D5B207FB24499A830083FCEC /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -554,7 +547,6 @@
 			files = (
 				D5B207BC24471AA90083FCEC /* LaunchScreen.storyboard in Resources */,
 				D5B207FE24499A830083FCEC /* GoogleService-Info.plist in Resources */,
-				B35B6049244CAA3E007B913B /* Localizable.strings in Resources */,
 				D5B207BD24471AA90083FCEC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

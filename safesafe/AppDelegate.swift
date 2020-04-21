@@ -33,8 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         BluetraceManager.shared.turnOn()
         EncounterMessageManager.shared.setup()
-        BlueTraceLocalNotifications.shared.initialConfiguration()
-        //UIApplication.shared.isIdleTimerDisabled = true
         
         return true
     }
