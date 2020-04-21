@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6A3F929EE8F256BE3AA8CBB9 /* Pods_safesafe_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C49B1DA05BC54A647CE1DE /* Pods_safesafe_Dev.framework */; };
 		824DCE1A24483FF800C1EADC /* URLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207CA244838EA0083FCEC /* URLConstants.swift */; };
 		824DCE1B2448400B00C1EADC /* JSBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207C4244822280083FCEC /* JSBridge.swift */; };
 		82ED892F2448431500305D4B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ED892E2448431500305D4B /* NotificationManager.swift */; };
 		82ED89302448431500305D4B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ED892E2448431500305D4B /* NotificationManager.swift */; };
-		9FA2FAD28A5ABBCCC3EA3A1E /* Pods_safesafe_Live.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A29642DBCEBA27DA1E2E483 /* Pods_safesafe_Live.framework */; };
+		9DD6FF4F244E32D500A6327C /* PhoneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD6FF4E244E32D500A6327C /* PhoneManager.swift */; };
+		9DD6FF52244E367B00A6327C /* PhoneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD6FF4E244E32D500A6327C /* PhoneManager.swift */; };
+		9DD6FF54244E36F400A6327C /* InternalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD6FF53244E36F400A6327C /* InternalError.swift */; };
+		9DD6FF55244E376200A6327C /* InternalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD6FF53244E36F400A6327C /* InternalError.swift */; };
 		B35B603A244CAA3E007B913B /* PushNotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FDB244CAA3E007B913B /* PushNotificationConstants.swift */; };
 		B35B603B244CAA3E007B913B /* PushNotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FDB244CAA3E007B913B /* PushNotificationConstants.swift */; };
 		B35B603E244CAA3E007B913B /* PlistHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FDE244CAA3E007B913B /* PlistHelper.swift */; };
@@ -53,6 +55,7 @@
 		B35B606B244CAA3E007B913B /* BlueTraceLocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FFC244CAA3E007B913B /* BlueTraceLocalNotifications.swift */; };
 		B35B60A0244CAA3E007B913B /* PogoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B6023244CAA3E007B913B /* PogoManager.swift */; };
 		B35B60A1244CAA3E007B913B /* PogoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B6023244CAA3E007B913B /* PogoManager.swift */; };
+		B384E5EE725CB3453EFD23F7 /* Pods_safesafe_Live.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459F9F2D085557F6709B0EDE /* Pods_safesafe_Live.framework */; };
 		D5308638243EF86E00FCA5DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308637243EF86E00FCA5DD /* AppDelegate.swift */; };
 		D530863A243EF86E00FCA5DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308639243EF86E00FCA5DD /* SceneDelegate.swift */; };
 		D5308641243EF87000FCA5DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5308640243EF87000FCA5DD /* Assets.xcassets */; };
@@ -93,6 +96,7 @@
 		D5B207CB244838EA0083FCEC /* URLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207CA244838EA0083FCEC /* URLConstants.swift */; };
 		D5B207FB24499A830083FCEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5B207F824499A830083FCEC /* GoogleService-Info.plist */; };
 		D5B207FE24499A830083FCEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5B207FA24499A830083FCEC /* GoogleService-Info.plist */; };
+		EDB001780C34441E570595B7 /* Pods_safesafe_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 755A412AE1302E2AA5493CFE /* Pods_safesafe_Dev.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -109,13 +113,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3B2EC495CA26A3F2C6199477 /* Pods-safesafe Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safesafe Dev.release.xcconfig"; path = "Target Support Files/Pods-safesafe Dev/Pods-safesafe Dev.release.xcconfig"; sourceTree = "<group>"; };
-		5C85A9A2E6BA0F5AAD519651 /* Pods-safesafe Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safesafe Dev.debug.xcconfig"; path = "Target Support Files/Pods-safesafe Dev/Pods-safesafe Dev.debug.xcconfig"; sourceTree = "<group>"; };
+		459F9F2D085557F6709B0EDE /* Pods_safesafe_Live.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safesafe_Live.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		755A412AE1302E2AA5493CFE /* Pods_safesafe_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safesafe_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82ED892E2448431500305D4B /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		82ED89312448431C00305D4B /* safesafe Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "safesafe Dev.entitlements"; sourceTree = "<group>"; };
 		82ED89322448432200305D4B /* safesafe Live.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "safesafe Live.entitlements"; sourceTree = "<group>"; };
-		89C49B1DA05BC54A647CE1DE /* Pods_safesafe_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safesafe_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A29642DBCEBA27DA1E2E483 /* Pods_safesafe_Live.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safesafe_Live.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8529787B77E4F44D38EB14A9 /* Pods-safesafe Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safesafe Dev.debug.xcconfig"; path = "Target Support Files/Pods-safesafe Dev/Pods-safesafe Dev.debug.xcconfig"; sourceTree = "<group>"; };
+		954CD2F272B3ECC49D2DD49E /* Pods-safesafe Live.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safesafe Live.debug.xcconfig"; path = "Target Support Files/Pods-safesafe Live/Pods-safesafe Live.debug.xcconfig"; sourceTree = "<group>"; };
+		9DD6FF4E244E32D500A6327C /* PhoneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneManager.swift; sourceTree = "<group>"; };
+		9DD6FF53244E36F400A6327C /* InternalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalError.swift; sourceTree = "<group>"; };
 		B35B5FDB244CAA3E007B913B /* PushNotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationConstants.swift; sourceTree = "<group>"; };
 		B35B5FDE244CAA3E007B913B /* PlistHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistHelper.swift; sourceTree = "<group>"; };
 		B35B5FDF244CAA3E007B913B /* FirebaseAPIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAPIs.swift; sourceTree = "<group>"; };
@@ -165,8 +171,8 @@
 		D5B207D324486E5C0083FCEC /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		D5B207F824499A830083FCEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D5B207FA24499A830083FCEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		EA009D7C4A0F68EBEF9D5F59 /* Pods-safesafe Live.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safesafe Live.debug.xcconfig"; path = "Target Support Files/Pods-safesafe Live/Pods-safesafe Live.debug.xcconfig"; sourceTree = "<group>"; };
-		F2C58D5B5ED39446FEB6171F /* Pods-safesafe Live.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safesafe Live.release.xcconfig"; path = "Target Support Files/Pods-safesafe Live/Pods-safesafe Live.release.xcconfig"; sourceTree = "<group>"; };
+		DDC2A6754E02A5BEDAFA38E5 /* Pods-safesafe Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safesafe Dev.release.xcconfig"; path = "Target Support Files/Pods-safesafe Dev/Pods-safesafe Dev.release.xcconfig"; sourceTree = "<group>"; };
+		E873ADA1D9D6B41F3AF62F5A /* Pods-safesafe Live.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safesafe Live.release.xcconfig"; path = "Target Support Files/Pods-safesafe Live/Pods-safesafe Live.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,7 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FA2FAD28A5ABBCCC3EA3A1E /* Pods_safesafe_Live.framework in Frameworks */,
+				B384E5EE725CB3453EFD23F7 /* Pods_safesafe_Live.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,7 +188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A3F929EE8F256BE3AA8CBB9 /* Pods_safesafe_Dev.framework in Frameworks */,
+				EDB001780C34441E570595B7 /* Pods_safesafe_Dev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,10 +198,10 @@
 		1F9D03ABF3CC00097B7831B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				89C49B1DA05BC54A647CE1DE /* Pods_safesafe_Dev.framework */,
-				8A29642DBCEBA27DA1E2E483 /* Pods_safesafe_Live.framework */,
 				D5B207D124486E5C0083FCEC /* UserNotifications.framework */,
 				D5B207D324486E5C0083FCEC /* UserNotificationsUI.framework */,
+				755A412AE1302E2AA5493CFE /* Pods_safesafe_Dev.framework */,
+				459F9F2D085557F6709B0EDE /* Pods_safesafe_Live.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -203,10 +209,10 @@
 		3E3234D8FD23F7FC22AAC103 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5C85A9A2E6BA0F5AAD519651 /* Pods-safesafe Dev.debug.xcconfig */,
-				3B2EC495CA26A3F2C6199477 /* Pods-safesafe Dev.release.xcconfig */,
-				EA009D7C4A0F68EBEF9D5F59 /* Pods-safesafe Live.debug.xcconfig */,
-				F2C58D5B5ED39446FEB6171F /* Pods-safesafe Live.release.xcconfig */,
+				8529787B77E4F44D38EB14A9 /* Pods-safesafe Dev.debug.xcconfig */,
+				DDC2A6754E02A5BEDAFA38E5 /* Pods-safesafe Dev.release.xcconfig */,
+				954CD2F272B3ECC49D2DD49E /* Pods-safesafe Live.debug.xcconfig */,
+				E873ADA1D9D6B41F3AF62F5A /* Pods-safesafe Live.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -218,6 +224,14 @@
 				D5B207F724499A830083FCEC /* Live */,
 			);
 			path = resources;
+			sourceTree = "<group>";
+		};
+		9DD6FF4D244E328500A6327C /* phone */ = {
+			isa = PBXGroup;
+			children = (
+				9DD6FF4E244E32D500A6327C /* PhoneManager.swift */,
+			);
+			path = phone;
 			sourceTree = "<group>";
 		};
 		B35B5FD6244CAA3E007B913B /* OpenTrace */ = {
@@ -338,6 +352,7 @@
 		D5308636243EF86E00FCA5DD /* safesafe */ = {
 			isa = PBXGroup;
 			children = (
+				9DD6FF4D244E328500A6327C /* phone */,
 				D5308668243F0FA100FCA5DD /* pwa */,
 				D530865F243F00E600FCA5DD /* main */,
 				D5308652243EF91B00FCA5DD /* common */,
@@ -371,6 +386,7 @@
 				D5308662243F03CE00FCA5DD /* helpers */,
 				D530865A243EFB2300FCA5DD /* base */,
 				D5308653243EF92100FCA5DD /* protocols */,
+				9DD6FF53244E36F400A6327C /* InternalError.swift */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -461,12 +477,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5308648243EF87000FCA5DD /* Build configuration list for PBXNativeTarget "safesafe Live" */;
 			buildPhases = (
-				C277556E788A6C077603BEB5 /* [CP] Check Pods Manifest.lock */,
+				77A2FFCDDDE857E4E425C0B5 /* [CP] Check Pods Manifest.lock */,
 				D5308630243EF86E00FCA5DD /* Sources */,
 				D5308631243EF86E00FCA5DD /* Frameworks */,
 				D5308632243EF86E00FCA5DD /* Resources */,
-				612E2E9E4B9B6AD57702BC09 /* [CP] Embed Pods Frameworks */,
 				D5B207E224486E5C0083FCEC /* Embed App Extensions */,
+				D84AECC850DA6F67318ABABC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -481,11 +497,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5B207BF24471AA90083FCEC /* Build configuration list for PBXNativeTarget "safesafe Dev" */;
 			buildPhases = (
-				DF8C1B8E04714D70CD2C9F39 /* [CP] Check Pods Manifest.lock */,
+				D88EFFB4B7C565C8FDD1C6BB /* [CP] Check Pods Manifest.lock */,
 				D5B207AA24471AA90083FCEC /* Sources */,
 				D5B207B924471AA90083FCEC /* Frameworks */,
 				D5B207BB24471AA90083FCEC /* Resources */,
-				1B9D523C3C3A642172FF4E12 /* [CP] Embed Pods Frameworks */,
+				A7EA387CAC380EBBF577612F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -502,7 +518,7 @@
 		D530862C243EF86E00FCA5DD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1120;
+				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "Lukasz szyszkowski";
 				TargetAttributes = {
@@ -554,41 +570,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1B9D523C3C3A642172FF4E12 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-safesafe Dev/Pods-safesafe Dev-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-safesafe Dev/Pods-safesafe Dev-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-safesafe Dev/Pods-safesafe Dev-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		612E2E9E4B9B6AD57702BC09 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-safesafe Live/Pods-safesafe Live-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-safesafe Live/Pods-safesafe Live-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-safesafe Live/Pods-safesafe Live-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C277556E788A6C077603BEB5 /* [CP] Check Pods Manifest.lock */ = {
+		77A2FFCDDDE857E4E425C0B5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -610,7 +592,41 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DF8C1B8E04714D70CD2C9F39 /* [CP] Check Pods Manifest.lock */ = {
+		A7EA387CAC380EBBF577612F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-safesafe Dev/Pods-safesafe Dev-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-safesafe Dev/Pods-safesafe Dev-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-safesafe Dev/Pods-safesafe Dev-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D84AECC850DA6F67318ABABC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-safesafe Live/Pods-safesafe Live-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-safesafe Live/Pods-safesafe Live-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-safesafe Live/Pods-safesafe Live-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D88EFFB4B7C565C8FDD1C6BB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -649,6 +665,7 @@
 				D530863A243EF86E00FCA5DD /* SceneDelegate.swift in Sources */,
 				D5B207CB244838EA0083FCEC /* URLConstants.swift in Sources */,
 				D530864D243EF8B600FCA5DD /* PollCoordinator.swift in Sources */,
+				9DD6FF54244E36F400A6327C /* InternalError.swift in Sources */,
 				D5B207C5244822280083FCEC /* JSBridge.swift in Sources */,
 				B35B6064244CAA3E007B913B /* EncounterRecord.swift in Sources */,
 				B35B6040244CAA3E007B913B /* FirebaseAPIs.swift in Sources */,
@@ -660,6 +677,7 @@
 				D5B207C7244822890083FCEC /* Logger.swift in Sources */,
 				B35B6052244CAA3E007B913B /* Encounter+CoreDataProperties.swift in Sources */,
 				D530866A243F0FB600FCA5DD /* PWAViewController.swift in Sources */,
+				9DD6FF4F244E32D500A6327C /* PhoneManager.swift in Sources */,
 				D530864F243EF8BF00FCA5DD /* PollViewController.swift in Sources */,
 				D5791CE6244DB826000039C5 /* URLAction.swift in Sources */,
 				D5308664243F03DF00FCA5DD /* AppManager.swift in Sources */,
@@ -694,6 +712,7 @@
 				D5B207AD24471AA90083FCEC /* SceneDelegate.swift in Sources */,
 				D5B207AE24471AA90083FCEC /* PollCoordinator.swift in Sources */,
 				D5B207AF24471AA90083FCEC /* ViewController.swift in Sources */,
+				9DD6FF55244E376200A6327C /* InternalError.swift in Sources */,
 				D5B207B024471AA90083FCEC /* ViewControllerType.swift in Sources */,
 				B35B6065244CAA3E007B913B /* EncounterRecord.swift in Sources */,
 				B35B6041244CAA3E007B913B /* FirebaseAPIs.swift in Sources */,
@@ -705,6 +724,7 @@
 				D5B207B224471AA90083FCEC /* PollViewController.swift in Sources */,
 				B35B6053244CAA3E007B913B /* Encounter+CoreDataProperties.swift in Sources */,
 				D5B207B324471AA90083FCEC /* AppManager.swift in Sources */,
+				9DD6FF52244E367B00A6327C /* PhoneManager.swift in Sources */,
 				D5B207B424471AA90083FCEC /* StoredDefaults.swift in Sources */,
 				B35B6059244CAA3E007B913B /* Bluetrace.swift in Sources */,
 				B35B605D244CAA3E007B913B /* BluetraceProtocol.swift in Sources */,
@@ -857,7 +877,7 @@
 		};
 		D5308649243EF87000FCA5DD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA009D7C4A0F68EBEF9D5F59 /* Pods-safesafe Live.debug.xcconfig */;
+			baseConfigurationReference = 954CD2F272B3ECC49D2DD49E /* Pods-safesafe Live.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -885,7 +905,7 @@
 		};
 		D530864A243EF87000FCA5DD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2C58D5B5ED39446FEB6171F /* Pods-safesafe Live.release.xcconfig */;
+			baseConfigurationReference = E873ADA1D9D6B41F3AF62F5A /* Pods-safesafe Live.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -913,7 +933,7 @@
 		};
 		D5B207C024471AA90083FCEC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C85A9A2E6BA0F5AAD519651 /* Pods-safesafe Dev.debug.xcconfig */;
+			baseConfigurationReference = 8529787B77E4F44D38EB14A9 /* Pods-safesafe Dev.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
@@ -940,7 +960,7 @@
 		};
 		D5B207C124471AA90083FCEC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B2EC495CA26A3F2C6199477 /* Pods-safesafe Dev.release.xcconfig */;
+			baseConfigurationReference = DDC2A6754E02A5BEDAFA38E5 /* Pods-safesafe Dev.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";

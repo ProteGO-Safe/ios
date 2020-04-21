@@ -9,6 +9,7 @@ def pods_definition
   pod 'Firebase/Analytics'
   pod 'Firebase/Functions'
   pod 'Firebase/Messaging'
+  pod 'Firebase/Auth'
   pod 'PromiseKit', '~> 6.8'
 
 end
