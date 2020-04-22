@@ -92,6 +92,7 @@ extension JSBridge: WKScriptMessageHandler {
             let data = object[Key.data] as? [String: Any],
             let timestamp = data[Key.timestamp] as? TimeInterval
         else {
+            assertionFailure("Failed to unwrap `setBridgeData` body")
             console("Can't cast data: \n\(body)", type: .warning)
             return
         }

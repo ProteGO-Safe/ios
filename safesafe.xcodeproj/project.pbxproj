@@ -17,6 +17,9 @@
 		9D2E22FF244F924600E224C4 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E22FD244F90BF00E224C4 /* LoginManager.swift */; };
 		9D2E230124504FD900E224C4 /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E230024504FD900E224C4 /* Result+Void.swift */; };
 		9D2E2302245050D300E224C4 /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E230024504FD900E224C4 /* Result+Void.swift */; };
+		9D5D2B382450DC770007C494 /* AppStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5D2B372450DC770007C494 /* AppStateManager.swift */; };
+		9D5D2B3A2450DD400007C494 /* AppStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5D2B392450DD400007C494 /* AppStatus.swift */; };
+		9D5D2B3B2450DF2B0007C494 /* AppStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5D2B392450DD400007C494 /* AppStatus.swift */; };
 		9DD6FF54244E36F400A6327C /* InternalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD6FF53244E36F400A6327C /* InternalError.swift */; };
 		9DD6FF55244E376200A6327C /* InternalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD6FF53244E36F400A6327C /* InternalError.swift */; };
 		B35B603A244CAA3E007B913B /* PushNotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FDB244CAA3E007B913B /* PushNotificationConstants.swift */; };
@@ -132,6 +135,8 @@
 		82EE5EAE7895754583144D33 /* Pods-safesafe Live.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safesafe Live.debug.xcconfig"; path = "Target Support Files/Pods-safesafe Live/Pods-safesafe Live.debug.xcconfig"; sourceTree = "<group>"; };
 		9D2E22FD244F90BF00E224C4 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		9D2E230024504FD900E224C4 /* Result+Void.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Result+Void.swift"; path = "safesafe/authentication/Result+Void.swift"; sourceTree = SOURCE_ROOT; };
+		9D5D2B372450DC770007C494 /* AppStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateManager.swift; sourceTree = "<group>"; };
+		9D5D2B392450DD400007C494 /* AppStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStatus.swift; sourceTree = "<group>"; };
 		9DD6FF53244E36F400A6327C /* InternalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalError.swift; sourceTree = "<group>"; };
 		A702C66ED8F006C36EE3E9B8 /* Pods_safesafe_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safesafe_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B35B5FDB244CAA3E007B913B /* PushNotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationConstants.swift; sourceTree = "<group>"; };
@@ -447,6 +452,8 @@
 				D5308665243F048C00FCA5DD /* StoredDefaults.swift */,
 				D5B207C4244822280083FCEC /* JSBridge.swift */,
 				D5B207C6244822890083FCEC /* Logger.swift */,
+				9D5D2B372450DC770007C494 /* AppStateManager.swift */,
+				9D5D2B392450DD400007C494 /* AppStatus.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -730,11 +737,13 @@
 				D5791CE6244DB826000039C5 /* URLAction.swift in Sources */,
 				D568B4482450416E00F8E864 /* URL+utils.swift in Sources */,
 				D5308664243F03DF00FCA5DD /* AppManager.swift in Sources */,
+				9D5D2B3A2450DD400007C494 /* AppStatus.swift in Sources */,
 				B35B6056244CAA3E007B913B /* tracer.xcdatamodeld in Sources */,
 				82ED892F2448431500305D4B /* NotificationManager.swift in Sources */,
 				D5308666243F048C00FCA5DD /* StoredDefaults.swift in Sources */,
 				B35B6068244CAA3E007B913B /* DeviceInfo.swift in Sources */,
 				D5308651243EF8C900FCA5DD /* PollViewModel.swift in Sources */,
+				9D5D2B382450DC770007C494 /* AppStateManager.swift in Sources */,
 				D530866C243F0FBF00FCA5DD /* PWAViewModel.swift in Sources */,
 				B35B606A244CAA3E007B913B /* BlueTraceLocalNotifications.swift in Sources */,
 				B35B6062244CAA3E007B913B /* Encounter+EncounterRecord.swift in Sources */,
@@ -784,6 +793,7 @@
 				D568B4492450416E00F8E864 /* URL+utils.swift in Sources */,
 				D5B207C8244822890083FCEC /* Logger.swift in Sources */,
 				B35B6057244CAA3E007B913B /* tracer.xcdatamodeld in Sources */,
+				9D5D2B3B2450DF2B0007C494 /* AppStatus.swift in Sources */,
 				82ED89302448431500305D4B /* NotificationManager.swift in Sources */,
 				D5B207B524471AA90083FCEC /* PollViewModel.swift in Sources */,
 				B35B6069244CAA3E007B913B /* DeviceInfo.swift in Sources */,
