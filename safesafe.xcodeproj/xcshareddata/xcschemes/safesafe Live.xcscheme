@@ -5,6 +5,15 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "custom_sim=`xcrun simctl list | grep &apos;Custom Simulators&apos; | awk -F&apos;[()]&apos; &apos;{print $2}&apos;`&#10;if [ -z &quot;${custom_sim}&quot; ]; then&#10;    xcrun simctl create Custom\ Simulators com.apple.CoreSimulator.SimDeviceType.iPhone-X `xcrun simctl list runtimes | grep iOS | tail -1 | sed -e &apos;s/^.*) - //p&apos; | sort -u`&#10;fi&#10;">
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"

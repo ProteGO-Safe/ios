@@ -15,4 +15,3 @@ enum URLContants {
     static let pwaURL = URL(string: "https://safesafe.app")!
     #endif
 }
-

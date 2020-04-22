@@ -33,6 +33,7 @@ final class AppCoordinator: CoordinatorType {
     
     private func pwa() -> UIViewController {
         let viewModel = PWAViewModel()
-        return PWAViewController(viewModel: viewModel)
+        let navigationController = NavigationControler(rootViewController: PWAViewController(viewModel: viewModel))
+        return navigationController
     }
 }
