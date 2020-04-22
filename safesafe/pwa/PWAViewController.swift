@@ -13,20 +13,30 @@ import SnapKit
 final class PWAViewController: ViewController<PWAViewModel> {
     
     private enum Constants {
-        static let webViewBackground = UIColor(red:0.12, green:0.32, blue:0.62, alpha:1.00)
+        static let color = UIColor(red:0.18, green:0.45, blue:0.85, alpha:1.00)
     }
     
     private var webKitView: WKWebView?
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        navigationController?.setStatusBar(backgroundColor: Constants.color)
+    }
     
     override func start() {
         viewModel.delegate = self
     }
     
-    override func setup() {}
+    override func setup() {   }
     
     override func layout() {
         webKitView?.snp.makeConstraints({ maker in
-            maker.edges.equalToSuperview()
+            maker.leading.trailing.bottom.equalToSuperview()
+            maker.top.equalToSuperview()
         })
     }
 }
@@ -40,6 +50,10 @@ extension PWAViewController: PWAViewModelDelegate {
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = controler
         let webKitView = WKWebView(frame: .zero, configuration: configuration)
+        if #available(iOS 11.0, *) {
+            webKitView.scrollView.contentInsetAdjustmentBehavior = .never
+        }
+        webKitView.scrollView.bounces = false
         webKitView.navigationDelegate = self
         
         add(subview: webKitView)
@@ -51,7 +65,7 @@ extension PWAViewController: PWAViewModelDelegate {
 
 extension PWAViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if viewModel.manageNativeActions(with: navigationAction.request.url) {
+        if viewModel.manageNativeActions(with: navigationAction.request.url) || viewModel.openExternallyIfNeeded(url: navigationAction.request.url) {
             decisionHandler(.cancel)
         } else {
             decisionHandler(.allow)
