@@ -1,0 +1,3 @@
+[submodule "Submodules/opentrace-ios"]
+	path = Submodules/opentrace-ios
+	url = https://github.com/opentrace-community/opentrace-ios.git

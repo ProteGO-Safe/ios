@@ -36,5 +36,19 @@ public final class Logger {
         print("\(type.prefix)[\(file):\(function):\(line)] \(String(describing: value))")
         #endif
     }
+    
+    /**
+     Function from https://github.com/opentrace-community/opentrace-ios/blob/master/OpenTrace/Utils/Logger.swift
+     
+     Used in OpenTrace sources.
+    */
+    static func DLog(_ message: String, file: NSString = #file, line: Int = #line, functionName: String = #function) {
+        #if DEBUG
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS "
+        print("[\(formatter.string(from: Date()))][\(file.lastPathComponent):\(line)][\(functionName)]: \(message)")
+        #endif
+    }
+    
 }
 
