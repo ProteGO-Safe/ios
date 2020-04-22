@@ -19,7 +19,7 @@ final class LoginManager: LoginManagerProtocol {
     
     func signIn(_ completion: @escaping (Result<Void, InternalError>) -> Void) {
         guard Auth.auth().currentUser == nil else {
-            completion(.failure(.alreadySignedIn))
+            completion(.success(()))
             return
         }
         

@@ -12,6 +12,5 @@ enum InternalError: Error {
     
     // Login
     case signInFailed
-    case alreadySignedIn
     
 }
