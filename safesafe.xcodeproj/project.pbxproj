@@ -15,6 +15,8 @@
 		82ED89302448431500305D4B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ED892E2448431500305D4B /* NotificationManager.swift */; };
 		9D2E22FE244F90BF00E224C4 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E22FD244F90BF00E224C4 /* LoginManager.swift */; };
 		9D2E22FF244F924600E224C4 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E22FD244F90BF00E224C4 /* LoginManager.swift */; };
+		9D2E230124504FD900E224C4 /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E230024504FD900E224C4 /* Result+Void.swift */; };
+		9D2E2302245050D300E224C4 /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E230024504FD900E224C4 /* Result+Void.swift */; };
 		9DD6FF54244E36F400A6327C /* InternalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD6FF53244E36F400A6327C /* InternalError.swift */; };
 		9DD6FF55244E376200A6327C /* InternalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD6FF53244E36F400A6327C /* InternalError.swift */; };
 		B35B603A244CAA3E007B913B /* PushNotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FDB244CAA3E007B913B /* PushNotificationConstants.swift */; };
@@ -120,6 +122,7 @@
 		82ED89322448432200305D4B /* safesafe Live.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "safesafe Live.entitlements"; sourceTree = "<group>"; };
 		9232CBB623AD5057C4A51875 /* Pods-safesafe Live.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safesafe Live.debug.xcconfig"; path = "Target Support Files/Pods-safesafe Live/Pods-safesafe Live.debug.xcconfig"; sourceTree = "<group>"; };
 		9D2E22FD244F90BF00E224C4 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		9D2E230024504FD900E224C4 /* Result+Void.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Result+Void.swift"; path = "safesafe/authentication/Result+Void.swift"; sourceTree = SOURCE_ROOT; };
 		9DD6FF53244E36F400A6327C /* InternalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalError.swift; sourceTree = "<group>"; };
 		B35B5FDB244CAA3E007B913B /* PushNotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationConstants.swift; sourceTree = "<group>"; };
 		B35B5FDE244CAA3E007B913B /* PlistHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistHelper.swift; sourceTree = "<group>"; };
@@ -450,6 +453,7 @@
 		D5B207F32448B5CB0083FCEC /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9D2E230024504FD900E224C4 /* Result+Void.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -658,6 +662,7 @@
 				D5308661243F00F300FCA5DD /* AppCoordinator.swift in Sources */,
 				B35B6054244CAA3E007B913B /* Encounter+CoreDataClass.swift in Sources */,
 				D5308638243EF86E00FCA5DD /* AppDelegate.swift in Sources */,
+				9D2E230124504FD900E224C4 /* Result+Void.swift in Sources */,
 				B35B603A244CAA3E007B913B /* PushNotificationConstants.swift in Sources */,
 				B35B604E244CAA3E007B913B /* PeripheralController.swift in Sources */,
 				B35B6050244CAA3E007B913B /* Encounter+Event.swift in Sources */,
@@ -709,6 +714,7 @@
 				B35B604F244CAA3E007B913B /* PeripheralController.swift in Sources */,
 				B35B6051244CAA3E007B913B /* Encounter+Event.swift in Sources */,
 				B35B6061244CAA3E007B913B /* BluetraceManager.swift in Sources */,
+				9D2E2302245050D300E224C4 /* Result+Void.swift in Sources */,
 				D5B207AD24471AA90083FCEC /* SceneDelegate.swift in Sources */,
 				D5B207AE24471AA90083FCEC /* PollCoordinator.swift in Sources */,
 				D5B207AF24471AA90083FCEC /* ViewController.swift in Sources */,
