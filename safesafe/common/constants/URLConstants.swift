@@ -10,9 +10,12 @@ import Foundation
 
 enum URLContants {
     #if DEV
-    static let pwaURL = URL(string: "https://safesafe-dev.thecoders.io")!
+    static let pwaHost = "safesafe-dev.thecoders.io"
+    static let pwaScheme = "https"
     #elseif LIVE
-    static let pwaURL = URL(string: "https://safesafe.app")!
+    static let pwaHost = "safesafe.app"
+    static let pwaScheme = "https"
     #endif
+    
+    static var pwaURL: URL = .build(scheme: URLContants.pwaScheme, host: URLContants.pwaHost)!
 }
-
