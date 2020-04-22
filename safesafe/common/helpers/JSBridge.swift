@@ -14,7 +14,8 @@ final class JSBridge: NSObject {
     
     enum BridgeDataType: Int {
         case notification = 1
-        case userId
+        case userId = 2
+        case appStatus = 31
     }
     
     enum SendMethod: String, CaseIterable {

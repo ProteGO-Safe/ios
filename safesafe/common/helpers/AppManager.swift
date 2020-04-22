@@ -17,9 +17,14 @@ class AppManager {
         return defaults.get(key: .isFirstRun) ?? false
     }
     
+    var isBluetraceAllowed: Bool {
+        return defaults.get(key: .isBluetraceAllowed) ?? false
+    }
+    
     private init() {}
 }
 
 extension StoredDefaults.Key {
     static let isFirstRun = StoredDefaults.Key("isFirstRun")
+    static let isBluetraceAllowed = StoredDefaults.Key("isBluetraceAllowed")
 }

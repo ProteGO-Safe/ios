@@ -17,9 +17,10 @@
 		9D2E22FF244F924600E224C4 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E22FD244F90BF00E224C4 /* LoginManager.swift */; };
 		9D2E230124504FD900E224C4 /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E230024504FD900E224C4 /* Result+Void.swift */; };
 		9D2E2302245050D300E224C4 /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E230024504FD900E224C4 /* Result+Void.swift */; };
-		9D5D2B382450DC770007C494 /* AppStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5D2B372450DC770007C494 /* AppStateManager.swift */; };
+		9D5D2B382450DC770007C494 /* AppStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5D2B372450DC770007C494 /* AppStatusManager.swift */; };
 		9D5D2B3A2450DD400007C494 /* AppStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5D2B392450DD400007C494 /* AppStatus.swift */; };
 		9D5D2B3B2450DF2B0007C494 /* AppStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5D2B392450DD400007C494 /* AppStatus.swift */; };
+		9D5D2B3C2450E5990007C494 /* AppStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5D2B372450DC770007C494 /* AppStatusManager.swift */; };
 		9DD6FF54244E36F400A6327C /* InternalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD6FF53244E36F400A6327C /* InternalError.swift */; };
 		9DD6FF55244E376200A6327C /* InternalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD6FF53244E36F400A6327C /* InternalError.swift */; };
 		B35B603A244CAA3E007B913B /* PushNotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35B5FDB244CAA3E007B913B /* PushNotificationConstants.swift */; };
@@ -135,7 +136,7 @@
 		82EE5EAE7895754583144D33 /* Pods-safesafe Live.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-safesafe Live.debug.xcconfig"; path = "Target Support Files/Pods-safesafe Live/Pods-safesafe Live.debug.xcconfig"; sourceTree = "<group>"; };
 		9D2E22FD244F90BF00E224C4 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		9D2E230024504FD900E224C4 /* Result+Void.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Result+Void.swift"; path = "safesafe/authentication/Result+Void.swift"; sourceTree = SOURCE_ROOT; };
-		9D5D2B372450DC770007C494 /* AppStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateManager.swift; sourceTree = "<group>"; };
+		9D5D2B372450DC770007C494 /* AppStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStatusManager.swift; sourceTree = "<group>"; };
 		9D5D2B392450DD400007C494 /* AppStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStatus.swift; sourceTree = "<group>"; };
 		9DD6FF53244E36F400A6327C /* InternalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalError.swift; sourceTree = "<group>"; };
 		A702C66ED8F006C36EE3E9B8 /* Pods_safesafe_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safesafe_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -452,7 +453,7 @@
 				D5308665243F048C00FCA5DD /* StoredDefaults.swift */,
 				D5B207C4244822280083FCEC /* JSBridge.swift */,
 				D5B207C6244822890083FCEC /* Logger.swift */,
-				9D5D2B372450DC770007C494 /* AppStateManager.swift */,
+				9D5D2B372450DC770007C494 /* AppStatusManager.swift */,
 				9D5D2B392450DD400007C494 /* AppStatus.swift */,
 			);
 			path = helpers;
@@ -743,7 +744,7 @@
 				D5308666243F048C00FCA5DD /* StoredDefaults.swift in Sources */,
 				B35B6068244CAA3E007B913B /* DeviceInfo.swift in Sources */,
 				D5308651243EF8C900FCA5DD /* PollViewModel.swift in Sources */,
-				9D5D2B382450DC770007C494 /* AppStateManager.swift in Sources */,
+				9D5D2B382450DC770007C494 /* AppStatusManager.swift in Sources */,
 				D530866C243F0FBF00FCA5DD /* PWAViewModel.swift in Sources */,
 				B35B606A244CAA3E007B913B /* BlueTraceLocalNotifications.swift in Sources */,
 				B35B6062244CAA3E007B913B /* Encounter+EncounterRecord.swift in Sources */,
@@ -787,6 +788,7 @@
 				D5FA09C7244F03570042A702 /* UINavigationController+statusBar.swift in Sources */,
 				D5B207B324471AA90083FCEC /* AppManager.swift in Sources */,
 				D5B207B424471AA90083FCEC /* StoredDefaults.swift in Sources */,
+				9D5D2B3C2450E5990007C494 /* AppStatusManager.swift in Sources */,
 				B35B6059244CAA3E007B913B /* Bluetrace.swift in Sources */,
 				B35B605D244CAA3E007B913B /* BluetraceProtocol.swift in Sources */,
 				D5791CE7244DB826000039C5 /* URLAction.swift in Sources */,

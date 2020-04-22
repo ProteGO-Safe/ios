@@ -10,6 +10,9 @@ import Foundation
 
 enum InternalError: Error {
     
+    // Common
+    case deinitialized
+    
     // Login
     case signInFailed
     
