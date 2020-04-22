@@ -65,7 +65,7 @@ extension PWAViewController: PWAViewModelDelegate {
 
 extension PWAViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if viewModel.manageNativeActions(with: navigationAction.request.url) {
+        if viewModel.manageNativeActions(with: navigationAction.request.url) || viewModel.openExternallyIfNeeded(url: navigationAction.request.url) {
             decisionHandler(.cancel)
         } else {
             decisionHandler(.allow)
