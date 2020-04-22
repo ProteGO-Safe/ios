@@ -18,6 +18,8 @@ final class PWAViewModel: ViewModelType {
     
     weak var delegate: PWAViewModelDelegate?
     
+    /// Manage custom actions for schemes defined in  URLAction
+    /// - Parameter url: WebKit navigation URL
     func manageNativeActions(with url: URL?) -> Bool {
         guard
             let url = url,
@@ -26,6 +28,20 @@ final class PWAViewModel: ViewModelType {
         else { return false }
         
         action.call(url: url)
+        
+        return true
+    }
+    
+    
+    /// Open url in external browser (safari) if url host is not from PWA domain
+    /// defined in URLConstants
+    /// - Parameter url: WebKit navigation URL
+    func openExternallyIfNeeded(url: URL?) -> Bool {
+        guard let url = url, !url.isHostEqual(to: URLContants.pwaHost) else {
+            return false
+        }
+        
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
         
         return true
     }

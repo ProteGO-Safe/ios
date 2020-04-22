@@ -35,6 +35,7 @@ final class NotificationManager: NSObject {
     enum Topic {
         static let devSuffix = "-dev"
         static let dailyPrefix = "daily_"
+        static let generalPrefix = "general"
         static let daysNum = 50
         
         case general
@@ -44,9 +45,9 @@ final class NotificationManager: NSObject {
             switch self {
             case .general:
                 #if DEV
-                return ["general\(Topic.devSuffix)"]
+                return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
                 #elseif LIVE
-                return ["general"]
+                return [Topic.generalPrefix]
                 #endif
             case let .daily(startDate):
                 return dailyTopics(startDate: startDate)
