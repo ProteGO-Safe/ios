@@ -10,8 +10,7 @@ import Foundation
 
 enum InternalError: Error {
     
-    // PhoneManager
-    case phoneVerificationFailed
-    case otpVerificationFailed
+    // Login
+    case signInFailed
     
 }
