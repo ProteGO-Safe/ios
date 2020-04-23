@@ -8,11 +8,30 @@
 
 import Foundation
 import CoreBluetooth
+import PromiseKit
 
 extension BluetraceManager {
     
-    var currentState: CBManagerState {
-        switch getCentralStateText() {
+    var isBluetoothEnabled: Promise<Bool> {
+        Promise<Bool> { [weak self] seal in
+            guard let self = self else {
+                seal.reject(InternalError.deinitialized)
+                return
+            }
+            
+            guard self.state == .unknown else {
+                seal.fulfill(self.isBluetoothOn())
+                return
+            }
+            
+            self.bluetoothDidUpdateStateCallback = { _ in
+                seal.fulfill(self.isBluetoothOn())
+            }
+        }
+    }
+    
+    private var state: CBManagerState {
+        switch self.getCentralStateText() {
         case "poweredOff":
             return .poweredOff
         case "poweredOn":

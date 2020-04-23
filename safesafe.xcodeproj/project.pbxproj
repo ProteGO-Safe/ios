@@ -17,6 +17,9 @@
 		9DD136552452193900A9AC2F /* BluetraceManager+CurrentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD136542452193900A9AC2F /* BluetraceManager+CurrentState.swift */; };
 		9DD13656245219A100A9AC2F /* BluetraceManager+CurrentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD136542452193900A9AC2F /* BluetraceManager+CurrentState.swift */; };
 		9DD13657245219AA00A9AC2F /* BluetraceManager+CurrentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD136542452193900A9AC2F /* BluetraceManager+CurrentState.swift */; };
+		9DD1365924521C2900A9AC2F /* RejectedServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceRequest.swift */; };
+		9DD1365A24521C2900A9AC2F /* RejectedServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceRequest.swift */; };
+		9DD1365B24521C2900A9AC2F /* RejectedServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceRequest.swift */; };
 		C58678B6ADE10D3C41590CEB /* Pods_safesafe_Stage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F13885626319B40E92CBCF /* Pods_safesafe_Stage.framework */; };
 		D5308638243EF86E00FCA5DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308637243EF86E00FCA5DD /* AppDelegate.swift */; };
 		D530863A243EF86E00FCA5DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308639243EF86E00FCA5DD /* SceneDelegate.swift */; };
@@ -206,6 +209,7 @@
 		82ED89312448431C00305D4B /* safesafe Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "safesafe Dev.entitlements"; sourceTree = "<group>"; };
 		82ED89322448432200305D4B /* safesafe Live.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "safesafe Live.entitlements"; sourceTree = "<group>"; };
 		9DD136542452193900A9AC2F /* BluetraceManager+CurrentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BluetraceManager+CurrentState.swift"; sourceTree = "<group>"; };
+		9DD1365824521C2900A9AC2F /* RejectedServiceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectedServiceRequest.swift; sourceTree = "<group>"; };
 		C575CBBE4321563CBB7712E1 /* Pods_safesafe_Live.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safesafe_Live.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5308634243EF86E00FCA5DD /* safesafe Live.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "safesafe Live.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5308637243EF86E00FCA5DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -580,6 +584,7 @@
 			children = (
 				D54971B12451CD23009F0AF1 /* SurveyFinishedResponse.swift */,
 				D534838B2451DEDB0019C577 /* OpentraceToggleResponse.swift */,
+				9DD1365824521C2900A9AC2F /* RejectedServiceRequest.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -908,6 +913,7 @@
 				D5308661243F00F300FCA5DD /* AppCoordinator.swift in Sources */,
 				D54971592451C6F1009F0AF1 /* FirebaseAPIs.swift in Sources */,
 				D5308638243EF86E00FCA5DD /* AppDelegate.swift in Sources */,
+				9DD1365924521C2900A9AC2F /* RejectedServiceRequest.swift in Sources */,
 				D530863A243EF86E00FCA5DD /* SceneDelegate.swift in Sources */,
 				D54971A92451C75F009F0AF1 /* PogoManager.swift in Sources */,
 				D5B207CB244838EA0083FCEC /* URLConstants.swift in Sources */,
@@ -966,6 +972,7 @@
 				D5A3805C24519A7E005E5E72 /* AppCoordinator.swift in Sources */,
 				D549715B2451C6F1009F0AF1 /* FirebaseAPIs.swift in Sources */,
 				D5A3805D24519A7E005E5E72 /* AppDelegate.swift in Sources */,
+				9DD1365B24521C2900A9AC2F /* RejectedServiceRequest.swift in Sources */,
 				D5A3805E24519A7E005E5E72 /* SceneDelegate.swift in Sources */,
 				D54971AB2451C75F009F0AF1 /* PogoManager.swift in Sources */,
 				D5A3805F24519A7E005E5E72 /* PollCoordinator.swift in Sources */,
@@ -1024,6 +1031,7 @@
 				D5B207AB24471AA90083FCEC /* AppCoordinator.swift in Sources */,
 				D549715A2451C6F1009F0AF1 /* FirebaseAPIs.swift in Sources */,
 				D5B207AC24471AA90083FCEC /* AppDelegate.swift in Sources */,
+				9DD1365A24521C2900A9AC2F /* RejectedServiceRequest.swift in Sources */,
 				D5B207AD24471AA90083FCEC /* SceneDelegate.swift in Sources */,
 				D54971AA2451C75F009F0AF1 /* PogoManager.swift in Sources */,
 				D5B207AE24471AA90083FCEC /* PollCoordinator.swift in Sources */,

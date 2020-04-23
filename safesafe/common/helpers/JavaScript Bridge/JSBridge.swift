@@ -19,6 +19,7 @@ final class JSBridge: NSObject {
         case bluetoothPermission = 33
         case notificationsPermission = 35
         case opentraceToggle = 36
+        case permissionRejected = 37
     }
     
     enum SendMethod: String, CaseIterable {
@@ -173,6 +174,10 @@ private extension JSBridge {
             BluetraceManager.shared.turnOff()
         }
         
+        // onBridgeData(type: type, body: "/* JSON string using `AppStatusManager`HERE */")
+    }
+    
+    func permissionRejected(jsonString: String?, type: BridgeDataType) {
         // onBridgeData(type: type, body: "/* JSON string using `AppStatusManager`HERE */")
     }
 }
