@@ -1,5 +1,5 @@
 //
-//  RejectedServiceRequest.swift
+//  RejectedServiceResponse.swift
 //  safesafe
 //
 //  Created by Rafał Małczyński on 23/04/2020.
@@ -15,7 +15,7 @@ enum RejectedService: String, Codable {
     
 }
 
-struct RejectedServiceRequest: Codable {
+struct RejectedServiceResponse: Codable {
     
     var rejectService: RejectedService
     
