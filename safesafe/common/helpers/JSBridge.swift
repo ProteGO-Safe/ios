@@ -14,7 +14,8 @@ final class JSBridge: NSObject {
     
     enum BridgeDataType: Int {
         case notification = 1
-        case userId
+        case userId = 2
+        case appStatus = 31
     }
     
     enum SendMethod: String, CaseIterable {
@@ -92,6 +93,7 @@ extension JSBridge: WKScriptMessageHandler {
             let data = object[Key.data] as? [String: Any],
             let timestamp = data[Key.timestamp] as? TimeInterval
         else {
+            assertionFailure("Failed to unwrap `setBridgeData` body")
             console("Can't cast data: \n\(body)", type: .warning)
             return
         }

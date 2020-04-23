@@ -32,6 +32,10 @@ final class NotificationManager: NSObject {
     private let dipspatchQueue = DispatchQueue(label: "dispatch.protegosafe.main")
     private let group = DispatchGroup()
     
+    var didAuthorizeAPN: Bool {
+        return StoredDefaults.standard.get(key: .didAuthorizeAPN) ?? false
+    }
+    
     enum Topic {
         static let devSuffix = "-dev"
         static let dailyPrefix = "daily_"
