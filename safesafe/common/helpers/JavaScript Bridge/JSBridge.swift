@@ -124,8 +124,8 @@ extension JSBridge: WKScriptMessageHandler {
     }
 }
 
-extension JSBridge {
-    private func unsubscribeFromTopic(jsonString: String?) {
+private extension JSBridge {
+    func unsubscribeFromTopic(jsonString: String?) {
         guard
             let jsonString = jsonString,
             let data = jsonString.data(using: .utf8),
