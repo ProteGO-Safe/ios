@@ -871,7 +871,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Live.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = "safesafe/Info-live.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -899,7 +899,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Live.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = "safesafe/Info-live.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -926,8 +926,8 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
-				DEVELOPMENT_TEAM = HU9FKSEQXD;
+				CURRENT_PROJECT_VERSION = 21;
+				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = safesafe/Info.stage.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -936,7 +936,7 @@
 				);
 				MARKETING_VERSION = 2.0.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D STAGE";
-				PRODUCT_BUNDLE_IDENTIFIER = "se.sigmaconnectivity.protegosafe-stage";
+				PRODUCT_BUNDLE_IDENTIFIER = "pl.gov.mc.protegosafe-staging";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -953,8 +953,8 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
-				DEVELOPMENT_TEAM = HU9FKSEQXD;
+				CURRENT_PROJECT_VERSION = 21;
+				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = safesafe/Info.stage.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -963,7 +963,7 @@
 				);
 				MARKETING_VERSION = 2.0.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D STAGE";
-				PRODUCT_BUNDLE_IDENTIFIER = "se.sigmaconnectivity.protegosafe-stage";
+				PRODUCT_BUNDLE_IDENTIFIER = "pl.gov.mc.protegosafe-staging";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -980,7 +980,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = "safesafe/Info-dev.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1007,7 +1007,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = "safesafe/Info-dev.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
