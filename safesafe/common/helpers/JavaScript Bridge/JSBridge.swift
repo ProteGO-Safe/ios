@@ -173,7 +173,7 @@ private extension JSBridge {
     func appStatusGetBridgeDataResponse(requestID: String) {
         appStatusManager.appStatusJson
             .done { [weak self] json in
-                self?.onBridgeData(type: .appStatus, body: json)
+                self?.bridgeDataResponse(type: .appStatus, body: json, requestId: requestID)
             }.catch { error in
                 console(error, type: .error)
             }
