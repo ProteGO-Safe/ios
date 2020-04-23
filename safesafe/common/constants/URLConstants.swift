@@ -12,6 +12,9 @@ enum URLContants {
     #if DEV
     static let pwaHost = "safesafe-dev.thecoders.io"
     static let pwaScheme = "https"
+    #elseif STAGE
+    static let pwaHost = "safesafe-stage.thecoders.io"
+    static let pwaScheme = "https"
     #elseif LIVE
     static let pwaHost = "safesafe.app"
     static let pwaScheme = "https"

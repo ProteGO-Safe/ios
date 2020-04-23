@@ -24,7 +24,7 @@ final class PWAViewController: ViewController<PWAViewModel> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        navigationController?.setStatusBar(backgroundColor: Constants.color)
+//        navigationController?.setStatusBar(backgroundColor: Constants.color)
     }
     
     override func start() {
