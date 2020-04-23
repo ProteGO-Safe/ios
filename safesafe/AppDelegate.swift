@@ -31,9 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         StoredDefaults.standard.set(value: true, key: .isFirstRun)
-        
-        EncounterMessageManager.shared.setup()
-
+    
         return true
     }
 
