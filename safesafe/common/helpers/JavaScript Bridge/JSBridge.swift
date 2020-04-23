@@ -86,8 +86,7 @@ final class JSBridge: NSObject {
             console("WebView not registered. Please use `register(webView: WKWebView)` before use this method", type: .warning)
             return
         }
-        
-        let method = "\(SendMethod.onBridgeData.rawValue)('\(body)','\(type.rawValue)')"
+        let method = "\(SendMethod.onBridgeData.rawValue)('\(type.rawValue)','\(body)')"
         webView.evaluateJavaScript(method, completionHandler: completion)
     }
 }
