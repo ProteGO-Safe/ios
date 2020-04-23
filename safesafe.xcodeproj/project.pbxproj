@@ -14,6 +14,9 @@
 		82ED892F2448431500305D4B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ED892E2448431500305D4B /* NotificationManager.swift */; };
 		82ED89302448431500305D4B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ED892E2448431500305D4B /* NotificationManager.swift */; };
 		8AB0358181DDE47E58657DF3 /* Pods_safesafe_Live.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C575CBBE4321563CBB7712E1 /* Pods_safesafe_Live.framework */; };
+		B3ED332C2452460F0048E424 /* BluetraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED332B2452460F0048E424 /* BluetraceConfig.swift */; };
+		B3ED332D2452460F0048E424 /* BluetraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED332B2452460F0048E424 /* BluetraceConfig.swift */; };
+		B3ED332E2452460F0048E424 /* BluetraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED332B2452460F0048E424 /* BluetraceConfig.swift */; };
 		C58678B6ADE10D3C41590CEB /* Pods_safesafe_Stage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F13885626319B40E92CBCF /* Pods_safesafe_Stage.framework */; };
 		D5308638243EF86E00FCA5DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308637243EF86E00FCA5DD /* AppDelegate.swift */; };
 		D530863A243EF86E00FCA5DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308639243EF86E00FCA5DD /* SceneDelegate.swift */; };
@@ -72,9 +75,6 @@
 		D54971762451C705009F0AF1 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971642451C705009F0AF1 /* DeviceInfo.swift */; };
 		D54971772451C705009F0AF1 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971642451C705009F0AF1 /* DeviceInfo.swift */; };
 		D54971782451C705009F0AF1 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971642451C705009F0AF1 /* DeviceInfo.swift */; };
-		D54971792451C705009F0AF1 /* BluetraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971652451C705009F0AF1 /* BluetraceConfig.swift */; };
-		D549717A2451C705009F0AF1 /* BluetraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971652451C705009F0AF1 /* BluetraceConfig.swift */; };
-		D549717B2451C705009F0AF1 /* BluetraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971652451C705009F0AF1 /* BluetraceConfig.swift */; };
 		D549717C2451C705009F0AF1 /* EncounterMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971662451C705009F0AF1 /* EncounterMessageManager.swift */; };
 		D549717D2451C705009F0AF1 /* EncounterMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971662451C705009F0AF1 /* EncounterMessageManager.swift */; };
 		D549717E2451C705009F0AF1 /* EncounterMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971662451C705009F0AF1 /* EncounterMessageManager.swift */; };
@@ -202,6 +202,7 @@
 		82ED892E2448431500305D4B /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		82ED89312448431C00305D4B /* safesafe Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "safesafe Dev.entitlements"; sourceTree = "<group>"; };
 		82ED89322448432200305D4B /* safesafe Live.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "safesafe Live.entitlements"; sourceTree = "<group>"; };
+		B3ED332B2452460F0048E424 /* BluetraceConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceConfig.swift; sourceTree = "<group>"; };
 		C575CBBE4321563CBB7712E1 /* Pods_safesafe_Live.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safesafe_Live.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5308634243EF86E00FCA5DD /* safesafe Live.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "safesafe Live.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5308637243EF86E00FCA5DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -235,7 +236,6 @@
 		D54971622451C705009F0AF1 /* PeripheralController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralController.swift; sourceTree = "<group>"; };
 		D54971632451C705009F0AF1 /* BluetraceUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceUtils.swift; sourceTree = "<group>"; };
 		D54971642451C705009F0AF1 /* DeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
-		D54971652451C705009F0AF1 /* BluetraceConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceConfig.swift; sourceTree = "<group>"; };
 		D54971662451C705009F0AF1 /* EncounterMessageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncounterMessageManager.swift; sourceTree = "<group>"; };
 		D54971832451C727009F0AF1 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		D54971842451C727009F0AF1 /* Encounter+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encounter+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -373,7 +373,6 @@
 		B35B5FE6244CAA3E007B913B /* Bluetrace */ = {
 			isa = PBXGroup;
 			children = (
-				D54971652451C705009F0AF1 /* BluetraceConfig.swift */,
 				D54971602451C705009F0AF1 /* BlueTraceLocalNotifications.swift */,
 				D54971612451C705009F0AF1 /* BluetraceManager.swift */,
 				D54971632451C705009F0AF1 /* BluetraceUtils.swift */,
@@ -591,6 +590,7 @@
 		D5B207C9244838DA0083FCEC /* constants */ = {
 			isa = PBXGroup;
 			children = (
+				B3ED332B2452460F0048E424 /* BluetraceConfig.swift */,
 				D5B207CA244838EA0083FCEC /* URLConstants.swift */,
 			);
 			path = constants;
@@ -909,6 +909,7 @@
 				D530864D243EF8B600FCA5DD /* PollCoordinator.swift in Sources */,
 				D54971732451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
 				D54971762451C705009F0AF1 /* DeviceInfo.swift in Sources */,
+				B3ED332C2452460F0048E424 /* BluetraceConfig.swift in Sources */,
 				D5B207C5244822280083FCEC /* JSBridge.swift in Sources */,
 				D54971992451C73D009F0AF1 /* Bluetrace.swift in Sources */,
 				D54971672451C705009F0AF1 /* CentralController.swift in Sources */,
@@ -937,7 +938,6 @@
 				82ED892F2448431500305D4B /* NotificationManager.swift in Sources */,
 				D53483952451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AC2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
-				D54971792451C705009F0AF1 /* BluetraceConfig.swift in Sources */,
 				D5308666243F048C00FCA5DD /* StoredDefaults.swift in Sources */,
 				D5308651243EF8C900FCA5DD /* PollViewModel.swift in Sources */,
 				D530866C243F0FBF00FCA5DD /* PWAViewModel.swift in Sources */,
@@ -966,6 +966,7 @@
 				D5A3806024519A7E005E5E72 /* ViewController.swift in Sources */,
 				D54971752451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
 				D54971782451C705009F0AF1 /* DeviceInfo.swift in Sources */,
+				B3ED332E2452460F0048E424 /* BluetraceConfig.swift in Sources */,
 				D5A3806124519A7E005E5E72 /* ViewControllerType.swift in Sources */,
 				D549719B2451C73D009F0AF1 /* Bluetrace.swift in Sources */,
 				D54971692451C705009F0AF1 /* CentralController.swift in Sources */,
@@ -994,7 +995,6 @@
 				D5A3806B24519A7E005E5E72 /* NotificationManager.swift in Sources */,
 				D53483972451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AE2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
-				D549717B2451C705009F0AF1 /* BluetraceConfig.swift in Sources */,
 				D5A3806C24519A7E005E5E72 /* PollViewModel.swift in Sources */,
 				D5A3806D24519A7E005E5E72 /* PWAViewModel.swift in Sources */,
 				D5A3806E24519A7E005E5E72 /* URLConstants.swift in Sources */,
@@ -1023,6 +1023,7 @@
 				D5B207AF24471AA90083FCEC /* ViewController.swift in Sources */,
 				D54971742451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
 				D54971772451C705009F0AF1 /* DeviceInfo.swift in Sources */,
+				B3ED332D2452460F0048E424 /* BluetraceConfig.swift in Sources */,
 				D5B207B024471AA90083FCEC /* ViewControllerType.swift in Sources */,
 				D549719A2451C73D009F0AF1 /* Bluetrace.swift in Sources */,
 				D54971682451C705009F0AF1 /* CentralController.swift in Sources */,
@@ -1051,7 +1052,6 @@
 				82ED89302448431500305D4B /* NotificationManager.swift in Sources */,
 				D53483962451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AD2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
-				D549717A2451C705009F0AF1 /* BluetraceConfig.swift in Sources */,
 				D5B207B524471AA90083FCEC /* PollViewModel.swift in Sources */,
 				D5B207B624471AA90083FCEC /* PWAViewModel.swift in Sources */,
 				824DCE1A24483FF800C1EADC /* URLConstants.swift in Sources */,
