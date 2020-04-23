@@ -19,7 +19,10 @@ extension BluetraceManager {
                 return
             }
             
-            guard self.state == .unknown else {
+            guard
+                self.state == .unknown,
+                self.isBluetoothAuthorized()
+            else {
                 seal.fulfill(self.isBluetoothOn())
                 return
             }
