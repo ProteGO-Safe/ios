@@ -19,3 +19,7 @@ end
 target 'safesafe Dev' do
   pods_definition
 end
+
+target 'safesafe Stage' do
+  pods_definition
+end
