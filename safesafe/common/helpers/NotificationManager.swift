@@ -12,6 +12,8 @@ import Firebase
 import PromiseKit
 
 protocol NotificationManagerProtocol {
+    func registerForRemoteNotifications() -> Guarantee<Bool>
+    func currentStatus() -> Guarantee<UNAuthorizationStatus>
     func configure()
     func clearBadgeNumber()
     func update(token: Data)
@@ -84,50 +86,45 @@ final class NotificationManager: NSObject {
     
     private var userInfo: [AnyHashable : Any]?
     
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
-    }
-    
     override private init() {
         super.init()
         UNUserNotificationCenter.current().delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
-    }
-    
-    private func registerForRemoteNotifications() {
-        let didRegister = StoredDefaults.standard.get(key: .didAuthorizeAPN) ?? false
-        guard !didRegister else { return }
-        
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
-            guard granted else { return }
-            
-            DispatchQueue.main.async {
-                UIApplication.shared.registerForRemoteNotifications()
-            }
-            
-            StoredDefaults.standard.set(value: true, key: .didAuthorizeAPN)
-        }
-        
-    }
-    
-    @objc
-    private func applicationDidBecomeActive(notification: Notification) {
-        UNUserNotificationCenter.current().getNotificationSettings { [weak self] settings in
-            switch settings.authorizationStatus {
-            case.denied:
-                console("denied")
-            case .authorized, .notDetermined:
-                self?.registerForRemoteNotifications()
-            case .provisional:
-                console("provisional")
-            @unknown default:
-                console("Unknown authorization status", type: .warning)
-            }
-        }
     }
 }
 
 extension NotificationManager: NotificationManagerProtocol {
+    func currentStatus() -> Guarantee<UNAuthorizationStatus> {
+        return Guarantee { fulfill in
+            UNUserNotificationCenter.current().getNotificationSettings { settings in
+                fulfill(settings.authorizationStatus)
+            }
+        }
+    }
+    
+    func registerForRemoteNotifications() -> Guarantee<Bool> {
+        return Guarantee { fulfill in
+            let didRegister = StoredDefaults.standard.get(key: .didAuthorizeAPN) ?? false
+            guard !didRegister else {
+                fulfill(true)
+                return
+            }
+            
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
+                guard granted else {
+                    fulfill(false)
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+                
+                StoredDefaults.standard.set(value: true, key: .didAuthorizeAPN)
+                fulfill(true)
+            }
+        }
+    }
+    
     func configure() {
         FirebaseApp.configure()
     }

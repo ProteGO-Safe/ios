@@ -30,6 +30,21 @@
 		D5308666243F048C00FCA5DD /* StoredDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308665243F048C00FCA5DD /* StoredDefaults.swift */; };
 		D530866A243F0FB600FCA5DD /* PWAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308669243F0FB600FCA5DD /* PWAViewController.swift */; };
 		D530866C243F0FBF00FCA5DD /* PWAViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530866B243F0FBF00FCA5DD /* PWAViewModel.swift */; };
+		D534838C2451DEDB0019C577 /* OpentraceToggleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D534838B2451DEDB0019C577 /* OpentraceToggleResponse.swift */; };
+		D534838D2451DEDB0019C577 /* OpentraceToggleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D534838B2451DEDB0019C577 /* OpentraceToggleResponse.swift */; };
+		D534838E2451DEDB0019C577 /* OpentraceToggleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D534838B2451DEDB0019C577 /* OpentraceToggleResponse.swift */; };
+		D53483902451DF250019C577 /* String+json.swift in Sources */ = {isa = PBXBuildFile; fileRef = D534838F2451DF250019C577 /* String+json.swift */; };
+		D53483912451DF250019C577 /* String+json.swift in Sources */ = {isa = PBXBuildFile; fileRef = D534838F2451DF250019C577 /* String+json.swift */; };
+		D53483922451DF250019C577 /* String+json.swift in Sources */ = {isa = PBXBuildFile; fileRef = D534838F2451DF250019C577 /* String+json.swift */; };
+		D53483952451E37C0019C577 /* AppStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483932451E37C0019C577 /* AppStatusManager.swift */; };
+		D53483962451E37C0019C577 /* AppStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483932451E37C0019C577 /* AppStatusManager.swift */; };
+		D53483972451E37C0019C577 /* AppStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483932451E37C0019C577 /* AppStatusManager.swift */; };
+		D53483982451E37C0019C577 /* AppStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483942451E37C0019C577 /* AppStatus.swift */; };
+		D53483992451E37C0019C577 /* AppStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483942451E37C0019C577 /* AppStatus.swift */; };
+		D534839A2451E37C0019C577 /* AppStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483942451E37C0019C577 /* AppStatus.swift */; };
+		D534839D2451E3D70019C577 /* InternalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D534839C2451E3D70019C577 /* InternalError.swift */; };
+		D534839E2451E3D70019C577 /* InternalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D534839C2451E3D70019C577 /* InternalError.swift */; };
+		D534839F2451E3D70019C577 /* InternalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D534839C2451E3D70019C577 /* InternalError.swift */; };
 		D54971502451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549714F2451C6D1009F0AF1 /* PushNotificationConstants.swift */; };
 		D54971512451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549714F2451C6D1009F0AF1 /* PushNotificationConstants.swift */; };
 		D54971522451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549714F2451C6D1009F0AF1 /* PushNotificationConstants.swift */; };
@@ -206,6 +221,11 @@
 		D5308665243F048C00FCA5DD /* StoredDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredDefaults.swift; sourceTree = "<group>"; };
 		D5308669243F0FB600FCA5DD /* PWAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAViewController.swift; sourceTree = "<group>"; };
 		D530866B243F0FBF00FCA5DD /* PWAViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWAViewModel.swift; sourceTree = "<group>"; };
+		D534838B2451DEDB0019C577 /* OpentraceToggleResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpentraceToggleResponse.swift; sourceTree = "<group>"; };
+		D534838F2451DF250019C577 /* String+json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+json.swift"; sourceTree = "<group>"; };
+		D53483932451E37C0019C577 /* AppStatusManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStatusManager.swift; sourceTree = "<group>"; };
+		D53483942451E37C0019C577 /* AppStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStatus.swift; sourceTree = "<group>"; };
+		D534839C2451E3D70019C577 /* InternalError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalError.swift; sourceTree = "<group>"; };
 		D549714F2451C6D1009F0AF1 /* PushNotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationConstants.swift; sourceTree = "<group>"; };
 		D54971532451C6F1009F0AF1 /* PlistHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistHelper.swift; sourceTree = "<group>"; };
 		D54971542451C6F1009F0AF1 /* FirebaseAPIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAPIs.swift; sourceTree = "<group>"; };
@@ -473,6 +493,7 @@
 		D5308652243EF91B00FCA5DD /* common */ = {
 			isa = PBXGroup;
 			children = (
+				D534839B2451E3C50019C577 /* error */,
 				D5B207F32448B5CB0083FCEC /* extensions */,
 				D5B207C9244838DA0083FCEC /* constants */,
 				D5308662243F03CE00FCA5DD /* helpers */,
@@ -518,6 +539,8 @@
 				D5308663243F03DF00FCA5DD /* AppManager.swift */,
 				D5308665243F048C00FCA5DD /* StoredDefaults.swift */,
 				D5B207C6244822890083FCEC /* Logger.swift */,
+				D53483942451E37C0019C577 /* AppStatus.swift */,
+				D53483932451E37C0019C577 /* AppStatusManager.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -529,6 +552,14 @@
 				D530866B243F0FBF00FCA5DD /* PWAViewModel.swift */,
 			);
 			path = pwa;
+			sourceTree = "<group>";
+		};
+		D534839B2451E3C50019C577 /* error */ = {
+			isa = PBXGroup;
+			children = (
+				D534839C2451E3D70019C577 /* InternalError.swift */,
+			);
+			path = error;
 			sourceTree = "<group>";
 		};
 		D54971AF2451CCDD009F0AF1 /* JavaScript Bridge */ = {
@@ -544,6 +575,7 @@
 			isa = PBXGroup;
 			children = (
 				D54971B12451CD23009F0AF1 /* SurveyFinishedResponse.swift */,
+				D534838B2451DEDB0019C577 /* OpentraceToggleResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -569,6 +601,7 @@
 			children = (
 				D5FA09C5244F03560042A702 /* UINavigationController+statusBar.swift */,
 				D568B4472450416E00F8E864 /* URL+utils.swift */,
+				D534838F2451DF250019C577 /* String+json.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -892,13 +925,17 @@
 				D530866A243F0FB600FCA5DD /* PWAViewController.swift in Sources */,
 				D530864F243EF8BF00FCA5DD /* PollViewController.swift in Sources */,
 				D5791CE6244DB826000039C5 /* URLAction.swift in Sources */,
+				D534839D2451E3D70019C577 /* InternalError.swift in Sources */,
 				D54971B22451CD23009F0AF1 /* SurveyFinishedResponse.swift in Sources */,
 				D54971A12451C755009F0AF1 /* Encounter+EncounterRecord.swift in Sources */,
+				D53483982451E37C0019C577 /* AppStatus.swift in Sources */,
 				D54971942451C736009F0AF1 /* BluetraceV2.swift in Sources */,
+				D53483902451DF250019C577 /* String+json.swift in Sources */,
 				D568B4482450416E00F8E864 /* URL+utils.swift in Sources */,
 				D5308664243F03DF00FCA5DD /* AppManager.swift in Sources */,
 				D54971562451C6F1009F0AF1 /* PlistHelper.swift in Sources */,
 				82ED892F2448431500305D4B /* NotificationManager.swift in Sources */,
+				D53483952451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AC2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
 				D54971792451C705009F0AF1 /* BluetraceConfig.swift in Sources */,
 				D5308666243F048C00FCA5DD /* StoredDefaults.swift in Sources */,
@@ -907,6 +944,7 @@
 				D54971872451C727009F0AF1 /* tracer.xcdatamodeld in Sources */,
 				D5308659243EF99500FCA5DD /* CoordinatorType.swift in Sources */,
 				D5FA09C0244EFE4B0042A702 /* NavigationController.swift in Sources */,
+				D534838C2451DEDB0019C577 /* OpentraceToggleResponse.swift in Sources */,
 				D549718D2451C727009F0AF1 /* Encounter+Event.swift in Sources */,
 				D54971902451C727009F0AF1 /* Encounter+CoreDataProperties.swift in Sources */,
 				D5308655243EF92D00FCA5DD /* ViewModelType.swift in Sources */,
@@ -944,13 +982,17 @@
 				D5A3806624519A7E005E5E72 /* AppManager.swift in Sources */,
 				D5A3806724519A7E005E5E72 /* StoredDefaults.swift in Sources */,
 				D5A3806824519A7E005E5E72 /* URLAction.swift in Sources */,
+				D534839F2451E3D70019C577 /* InternalError.swift in Sources */,
 				D54971B42451CD23009F0AF1 /* SurveyFinishedResponse.swift in Sources */,
 				D54971A32451C755009F0AF1 /* Encounter+EncounterRecord.swift in Sources */,
+				D534839A2451E37C0019C577 /* AppStatus.swift in Sources */,
 				D54971962451C736009F0AF1 /* BluetraceV2.swift in Sources */,
+				D53483922451DF250019C577 /* String+json.swift in Sources */,
 				D5A3806924519A7E005E5E72 /* URL+utils.swift in Sources */,
 				D5A3806A24519A7E005E5E72 /* Logger.swift in Sources */,
 				D54971582451C6F1009F0AF1 /* PlistHelper.swift in Sources */,
 				D5A3806B24519A7E005E5E72 /* NotificationManager.swift in Sources */,
+				D53483972451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AE2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
 				D549717B2451C705009F0AF1 /* BluetraceConfig.swift in Sources */,
 				D5A3806C24519A7E005E5E72 /* PollViewModel.swift in Sources */,
@@ -959,6 +1001,7 @@
 				D54971892451C727009F0AF1 /* tracer.xcdatamodeld in Sources */,
 				D5A3806F24519A7E005E5E72 /* CoordinatorType.swift in Sources */,
 				D5A3807024519A7E005E5E72 /* NavigationController.swift in Sources */,
+				D534838E2451DEDB0019C577 /* OpentraceToggleResponse.swift in Sources */,
 				D549718F2451C727009F0AF1 /* Encounter+Event.swift in Sources */,
 				D54971922451C727009F0AF1 /* Encounter+CoreDataProperties.swift in Sources */,
 				D5A3807124519A7E005E5E72 /* ViewModelType.swift in Sources */,
@@ -996,13 +1039,17 @@
 				D5B207B324471AA90083FCEC /* AppManager.swift in Sources */,
 				D5B207B424471AA90083FCEC /* StoredDefaults.swift in Sources */,
 				D5791CE7244DB826000039C5 /* URLAction.swift in Sources */,
+				D534839E2451E3D70019C577 /* InternalError.swift in Sources */,
 				D54971B32451CD23009F0AF1 /* SurveyFinishedResponse.swift in Sources */,
 				D54971A22451C755009F0AF1 /* Encounter+EncounterRecord.swift in Sources */,
+				D53483992451E37C0019C577 /* AppStatus.swift in Sources */,
 				D54971952451C736009F0AF1 /* BluetraceV2.swift in Sources */,
+				D53483912451DF250019C577 /* String+json.swift in Sources */,
 				D568B4492450416E00F8E864 /* URL+utils.swift in Sources */,
 				D5B207C8244822890083FCEC /* Logger.swift in Sources */,
 				D54971572451C6F1009F0AF1 /* PlistHelper.swift in Sources */,
 				82ED89302448431500305D4B /* NotificationManager.swift in Sources */,
+				D53483962451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AD2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
 				D549717A2451C705009F0AF1 /* BluetraceConfig.swift in Sources */,
 				D5B207B524471AA90083FCEC /* PollViewModel.swift in Sources */,
@@ -1011,6 +1058,7 @@
 				D54971882451C727009F0AF1 /* tracer.xcdatamodeld in Sources */,
 				D5B207B724471AA90083FCEC /* CoordinatorType.swift in Sources */,
 				D5FA09C1244EFE4B0042A702 /* NavigationController.swift in Sources */,
+				D534838D2451DEDB0019C577 /* OpentraceToggleResponse.swift in Sources */,
 				D549718E2451C727009F0AF1 /* Encounter+Event.swift in Sources */,
 				D54971912451C727009F0AF1 /* Encounter+CoreDataProperties.swift in Sources */,
 				D5B207B824471AA90083FCEC /* ViewModelType.swift in Sources */,
