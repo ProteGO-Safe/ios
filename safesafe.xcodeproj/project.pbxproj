@@ -14,6 +14,9 @@
 		82ED892F2448431500305D4B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ED892E2448431500305D4B /* NotificationManager.swift */; };
 		82ED89302448431500305D4B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ED892E2448431500305D4B /* NotificationManager.swift */; };
 		8AB0358181DDE47E58657DF3 /* Pods_safesafe_Live.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C575CBBE4321563CBB7712E1 /* Pods_safesafe_Live.framework */; };
+		9DD136552452193900A9AC2F /* BluetraceManager+CurrentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD136542452193900A9AC2F /* BluetraceManager+CurrentState.swift */; };
+		9DD13656245219A100A9AC2F /* BluetraceManager+CurrentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD136542452193900A9AC2F /* BluetraceManager+CurrentState.swift */; };
+		9DD13657245219AA00A9AC2F /* BluetraceManager+CurrentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD136542452193900A9AC2F /* BluetraceManager+CurrentState.swift */; };
 		C58678B6ADE10D3C41590CEB /* Pods_safesafe_Stage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F13885626319B40E92CBCF /* Pods_safesafe_Stage.framework */; };
 		D5308638243EF86E00FCA5DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308637243EF86E00FCA5DD /* AppDelegate.swift */; };
 		D530863A243EF86E00FCA5DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308639243EF86E00FCA5DD /* SceneDelegate.swift */; };
@@ -202,6 +205,7 @@
 		82ED892E2448431500305D4B /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		82ED89312448431C00305D4B /* safesafe Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "safesafe Dev.entitlements"; sourceTree = "<group>"; };
 		82ED89322448432200305D4B /* safesafe Live.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "safesafe Live.entitlements"; sourceTree = "<group>"; };
+		9DD136542452193900A9AC2F /* BluetraceManager+CurrentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BluetraceManager+CurrentState.swift"; sourceTree = "<group>"; };
 		C575CBBE4321563CBB7712E1 /* Pods_safesafe_Live.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safesafe_Live.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5308634243EF86E00FCA5DD /* safesafe Live.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "safesafe Live.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5308637243EF86E00FCA5DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -602,6 +606,7 @@
 				D5FA09C5244F03560042A702 /* UINavigationController+statusBar.swift */,
 				D568B4472450416E00F8E864 /* URL+utils.swift */,
 				D534838F2451DF250019C577 /* String+json.swift */,
+				9DD136542452193900A9AC2F /* BluetraceManager+CurrentState.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -935,6 +940,7 @@
 				D5308664243F03DF00FCA5DD /* AppManager.swift in Sources */,
 				D54971562451C6F1009F0AF1 /* PlistHelper.swift in Sources */,
 				82ED892F2448431500305D4B /* NotificationManager.swift in Sources */,
+				9DD136552452193900A9AC2F /* BluetraceManager+CurrentState.swift in Sources */,
 				D53483952451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AC2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
 				D54971792451C705009F0AF1 /* BluetraceConfig.swift in Sources */,
@@ -992,6 +998,7 @@
 				D5A3806A24519A7E005E5E72 /* Logger.swift in Sources */,
 				D54971582451C6F1009F0AF1 /* PlistHelper.swift in Sources */,
 				D5A3806B24519A7E005E5E72 /* NotificationManager.swift in Sources */,
+				9DD13657245219AA00A9AC2F /* BluetraceManager+CurrentState.swift in Sources */,
 				D53483972451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AE2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
 				D549717B2451C705009F0AF1 /* BluetraceConfig.swift in Sources */,
@@ -1049,6 +1056,7 @@
 				D5B207C8244822890083FCEC /* Logger.swift in Sources */,
 				D54971572451C6F1009F0AF1 /* PlistHelper.swift in Sources */,
 				82ED89302448431500305D4B /* NotificationManager.swift in Sources */,
+				9DD13656245219A100A9AC2F /* BluetraceManager+CurrentState.swift in Sources */,
 				D53483962451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AD2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
 				D549717A2451C705009F0AF1 /* BluetraceConfig.swift in Sources */,

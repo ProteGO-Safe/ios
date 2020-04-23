@@ -47,12 +47,10 @@ final class AppStatusManager: AppStatusManagerProtocol {
             
             // If state is `unknown`, then CBCentralManager hasn't informed his delegate about the state yet
             // -> that's why we wait for the callback execution
-//            guard self.bluetraceManager.currentState == .unknown else {
-//                seal.fulfill(self.makeAppStatus())
-//                return
-//            }
-            
-            /* CODE ABOVE IS WAITING FOR OPENTRACE FORK :( */
+            guard self.bluetraceManager.currentState == .unknown else {
+                seal.fulfill(self.makeAppStatus())
+                return
+            }
             
             self.bluetraceManager.bluetoothDidUpdateStateCallback = { _ in
                 seal.fulfill(self.makeAppStatus())
