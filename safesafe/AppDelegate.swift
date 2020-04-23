@@ -8,6 +8,7 @@
 
 import CoreData
 import UIKit
+import PromiseKit
 
 @UIApplicationMain
 
@@ -30,10 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         StoredDefaults.standard.set(value: true, key: .isFirstRun)
-        
-        BluetraceManager.shared.turnOn()
-        EncounterMessageManager.shared.setup()
-        
+    
         return true
     }
 

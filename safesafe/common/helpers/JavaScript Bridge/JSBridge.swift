@@ -16,10 +16,14 @@ final class JSBridge: NSObject {
         case notification = 1
         case userId = 2
         case appStatus = 31
+        case bluetoothPermission = 33
+        case notificationsPermission = 35
+        case opentraceToggle = 36
     }
     
     enum SendMethod: String, CaseIterable {
         case bridgeDataResponse = "bridgeDataResponse"
+        case onBridgeData = "onBridgeData"
     }
     
     private enum ReceivedMethod: String, CaseIterable {
@@ -67,7 +71,16 @@ final class JSBridge: NSObject {
             return
         }
         let method = "\(SendMethod.bridgeDataResponse.rawValue)('\(body)','\(type.rawValue)','\(requestId)')"
-        console(method)
+        webView.evaluateJavaScript(method, completionHandler: completion)
+    }
+    
+    func onBridgeData(type: BridgeDataType, body: String, completion: ((Any?, Error?) -> ())? = nil) {
+        guard let webView = webView else {
+            console("WebView not registered. Please use `register(webView: WKWebView)` before use this method", type: .warning)
+            return
+        }
+        
+        let method = "\(SendMethod.onBridgeData.rawValue)('\(body)','\(type.rawValue)')"
         webView.evaluateJavaScript(method, completionHandler: completion)
     }
 }
@@ -82,10 +95,10 @@ extension JSBridge: WKScriptMessageHandler {
         switch method {
         case .setBridgeData:
             setBridgeDataManage(body: message.body)
-        case .bridgeDataRequest:
-            console(message.body)
         case .getBridgeData:
             getBridgeDataManage(body: message.body)
+        default:
+            assertionFailure("Not managed yet \(method)")
         }
     }
     
@@ -98,9 +111,16 @@ extension JSBridge: WKScriptMessageHandler {
             return
         }
 
+        let jsonString = object[Key.data] as? String
         switch bridgeDataType {
         case .notification:
-            unsubscribeFromTopic(jsonString: object[Key.data] as? String)
+            unsubscribeFromTopic(jsonString: jsonString, type: bridgeDataType)
+        case .bluetoothPermission:
+            bluetoothPermission(jsonString: jsonString, type: bridgeDataType)
+        case .notificationsPermission:
+            notificationsPermission(jsonString: jsonString, type: bridgeDataType)
+        case .opentraceToggle:
+            opentraceToggle(jsonString: jsonString, type: bridgeDataType)
         default:
             console("Not managed yet", type: .warning)
         }
@@ -125,15 +145,34 @@ extension JSBridge: WKScriptMessageHandler {
 }
 
 private extension JSBridge {
-    func unsubscribeFromTopic(jsonString: String?) {
-        guard
-            let jsonString = jsonString,
-            let data = jsonString.data(using: .utf8),
-            let model = try? jsonDecoder.decode(SurveyFinishedResponse.self, from: data)
-        else {
-            return
-        }
+    func unsubscribeFromTopic(jsonString: String?, type: BridgeDataType) {
+        guard let model: SurveyFinishedResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
         
         NotificationManager.shared.unsubscribeFromDailyTopic(timestamp: model.timestamp)
+    }
+    
+    func bluetoothPermission(jsonString: String?, type: BridgeDataType) {
+        // BluetraceManager.shared.turnOn()
+        
+        // onBridgeData(type: type, body: "/* JSON string using `AppStatusManager`HERE */")
+    }
+    
+    func notificationsPermission(jsonString: String?, type: BridgeDataType) {
+        // Request for notifications permissions  UNUserNotificationCenter.current().requestAuthorization(options: [ ...
+        
+        // onBridgeData(type: type, body: "/* JSON string using `AppStatusManager`HERE */")
+    }
+    
+    func opentraceToggle(jsonString: String?, type: BridgeDataType) {
+        // turn on / off BlueTrace peripheral and central
+        guard let model: OpentraceToggleResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
+        
+        if model.enableBtService {
+            BluetraceManager.shared.turnOn()
+        } else {
+            BluetraceManager.shared.turnOff()
+        }
+        
+        // onBridgeData(type: type, body: "/* JSON string using `AppStatusManager`HERE */")
     }
 }
