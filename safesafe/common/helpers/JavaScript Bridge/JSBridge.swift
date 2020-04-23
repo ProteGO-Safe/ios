@@ -32,11 +32,13 @@ final class JSBridge: NSObject {
         static let timestamp = "timestamp"
         static let data = "data"
         static let requestId = "requestId"
+        static let type = "type"
     }
     
     private weak var webView: WKWebView?
     private var notificationPayload: String?
     private var controller: WKUserContentController?
+    private let jsonDecoder = JSONDecoder()
     
     var contentController: WKUserContentController {
         let controller = self.controller ?? WKUserContentController()
@@ -90,15 +92,18 @@ extension JSBridge: WKScriptMessageHandler {
     private func setBridgeDataManage(body: Any) {
         guard
             let object = body as? [String: Any],
-            let data = object[Key.data] as? [String: Any],
-            let timestamp = data[Key.timestamp] as? TimeInterval
+            let type = object[Key.type] as? Int,
+            let bridgeDataType = BridgeDataType(rawValue: type)
         else {
-            assertionFailure("Failed to unwrap `setBridgeData` body")
-            console("Can't cast data: \n\(body)", type: .warning)
             return
         }
-        
-        NotificationManager.shared.unsubscribeFromDailyTopic(timestamp: timestamp)
+
+        switch bridgeDataType {
+        case .notification:
+            unsubscribeFromTopic(jsonString: object[Key.data] as? String)
+        default:
+            console("Not managed yet", type: .warning)
+        }
     }
     
     private func getBridgeDataManage(body: Any) {
@@ -116,5 +121,19 @@ extension JSBridge: WKScriptMessageHandler {
                 console(error, type: .error)
             }
         }
+    }
+}
+
+extension JSBridge {
+    private func unsubscribeFromTopic(jsonString: String?) {
+        guard
+            let jsonString = jsonString,
+            let data = jsonString.data(using: .utf8),
+            let model = try? jsonDecoder.decode(SurveyFinishedResponse.self, from: data)
+        else {
+            return
+        }
+        
+        NotificationManager.shared.unsubscribeFromDailyTopic(timestamp: model.timestamp)
     }
 }
