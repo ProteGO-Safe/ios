@@ -86,7 +86,7 @@ final class JSBridge: NSObject {
             console("WebView not registered. Please use `register(webView: WKWebView)` before use this method", type: .warning)
             return
         }
-        let method = "\(SendMethod.onBridgeData.rawValue)('\(type.rawValue)','\(body)')"
+        let method = "\(SendMethod.onBridgeData.rawValue)(\(type.rawValue),'\(body)')"
         webView.evaluateJavaScript(method, completionHandler: completion)
     }
 }
@@ -189,7 +189,7 @@ private extension JSBridge {
     }
     
     func bluetoothPermission(jsonString: String?, type: BridgeDataType) {
-        // BluetraceManager.shared.turnOn()
+        BluetraceManager.shared.turnOn()
         
         appStatusManager.appStatusJson
             .done { [weak self] json in
