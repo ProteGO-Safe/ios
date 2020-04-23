@@ -29,6 +29,8 @@ final class AppCoordinator: CoordinatorType {
         window.backgroundColor = .white
         window.rootViewController = pwa()
         window.makeKeyAndVisible()
+        
+        startBluetraceIfNeeded()
     }
     
     private func pwa() -> UIViewController {
@@ -36,4 +38,12 @@ final class AppCoordinator: CoordinatorType {
         let navigationController = NavigationControler(rootViewController: PWAViewController(viewModel: viewModel))
         return navigationController
     }
+    
+    private func startBluetraceIfNeeded() {
+        guard appManager.isBluetraceAllowed else { return }
+        
+        BluetraceManager.shared.turnOn()
+        EncounterMessageManager.shared.authSetup()
+    }
+    
 }

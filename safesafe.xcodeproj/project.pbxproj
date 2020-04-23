@@ -14,6 +14,18 @@
 		82ED892F2448431500305D4B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ED892E2448431500305D4B /* NotificationManager.swift */; };
 		82ED89302448431500305D4B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ED892E2448431500305D4B /* NotificationManager.swift */; };
 		8AB0358181DDE47E58657DF3 /* Pods_safesafe_Live.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C575CBBE4321563CBB7712E1 /* Pods_safesafe_Live.framework */; };
+		B3A89614245252790091262B /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89612245252790091262B /* Result+Void.swift */; };
+		B3A89615245252790091262B /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89612245252790091262B /* Result+Void.swift */; };
+		B3A89616245252790091262B /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89612245252790091262B /* Result+Void.swift */; };
+		B3A89617245252790091262B /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89613245252790091262B /* LoginManager.swift */; };
+		B3A89618245252790091262B /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89613245252790091262B /* LoginManager.swift */; };
+		B3A89619245252790091262B /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89613245252790091262B /* LoginManager.swift */; };
+		B3A8961B245258F60091262B /* EncounterMessageManager+AuthSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8961A245258F60091262B /* EncounterMessageManager+AuthSetup.swift */; };
+		B3A8961C245258F60091262B /* EncounterMessageManager+AuthSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8961A245258F60091262B /* EncounterMessageManager+AuthSetup.swift */; };
+		B3A8961D245258F60091262B /* EncounterMessageManager+AuthSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8961A245258F60091262B /* EncounterMessageManager+AuthSetup.swift */; };
+		B3A8961F245259AE0091262B /* FirebaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8961E245259AE0091262B /* FirebaseConfig.swift */; };
+		B3A89620245259AE0091262B /* FirebaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8961E245259AE0091262B /* FirebaseConfig.swift */; };
+		B3A89621245259AE0091262B /* FirebaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8961E245259AE0091262B /* FirebaseConfig.swift */; };
 		B3ED332C2452460F0048E424 /* BluetraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED332B2452460F0048E424 /* BluetraceConfig.swift */; };
 		B3ED332D2452460F0048E424 /* BluetraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED332B2452460F0048E424 /* BluetraceConfig.swift */; };
 		B3ED332E2452460F0048E424 /* BluetraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED332B2452460F0048E424 /* BluetraceConfig.swift */; };
@@ -202,6 +214,10 @@
 		82ED892E2448431500305D4B /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		82ED89312448431C00305D4B /* safesafe Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "safesafe Dev.entitlements"; sourceTree = "<group>"; };
 		82ED89322448432200305D4B /* safesafe Live.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "safesafe Live.entitlements"; sourceTree = "<group>"; };
+		B3A89612245252790091262B /* Result+Void.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Result+Void.swift"; sourceTree = "<group>"; };
+		B3A89613245252790091262B /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		B3A8961A245258F60091262B /* EncounterMessageManager+AuthSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EncounterMessageManager+AuthSetup.swift"; sourceTree = "<group>"; };
+		B3A8961E245259AE0091262B /* FirebaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConfig.swift; sourceTree = "<group>"; };
 		B3ED332B2452460F0048E424 /* BluetraceConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceConfig.swift; sourceTree = "<group>"; };
 		C575CBBE4321563CBB7712E1 /* Pods_safesafe_Live.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safesafe_Live.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5308634243EF86E00FCA5DD /* safesafe Live.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "safesafe Live.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -337,6 +353,8 @@
 		9D2E22FC244F90AB00E224C4 /* authentication */ = {
 			isa = PBXGroup;
 			children = (
+				B3A89613245252790091262B /* LoginManager.swift */,
+				B3A89612245252790091262B /* Result+Void.swift */,
 			);
 			path = authentication;
 			sourceTree = "<group>";
@@ -592,6 +610,7 @@
 			children = (
 				B3ED332B2452460F0048E424 /* BluetraceConfig.swift */,
 				D5B207CA244838EA0083FCEC /* URLConstants.swift */,
+				B3A8961E245259AE0091262B /* FirebaseConfig.swift */,
 			);
 			path = constants;
 			sourceTree = "<group>";
@@ -602,6 +621,7 @@
 				D5FA09C5244F03560042A702 /* UINavigationController+statusBar.swift */,
 				D568B4472450416E00F8E864 /* URL+utils.swift */,
 				D534838F2451DF250019C577 /* String+json.swift */,
+				B3A8961A245258F60091262B /* EncounterMessageManager+AuthSetup.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -905,14 +925,17 @@
 				D5308638243EF86E00FCA5DD /* AppDelegate.swift in Sources */,
 				D530863A243EF86E00FCA5DD /* SceneDelegate.swift in Sources */,
 				D54971A92451C75F009F0AF1 /* PogoManager.swift in Sources */,
+				B3A89617245252790091262B /* LoginManager.swift in Sources */,
 				D5B207CB244838EA0083FCEC /* URLConstants.swift in Sources */,
 				D530864D243EF8B600FCA5DD /* PollCoordinator.swift in Sources */,
 				D54971732451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
 				D54971762451C705009F0AF1 /* DeviceInfo.swift in Sources */,
 				B3ED332C2452460F0048E424 /* BluetraceConfig.swift in Sources */,
+				B3A8961B245258F60091262B /* EncounterMessageManager+AuthSetup.swift in Sources */,
 				D5B207C5244822280083FCEC /* JSBridge.swift in Sources */,
 				D54971992451C73D009F0AF1 /* Bluetrace.swift in Sources */,
 				D54971672451C705009F0AF1 /* CentralController.swift in Sources */,
+				B3A89614245252790091262B /* Result+Void.swift in Sources */,
 				D549716A2451C705009F0AF1 /* BlueTraceLocalNotifications.swift in Sources */,
 				D530865C243EFB3200FCA5DD /* ViewController.swift in Sources */,
 				D5308657243EF94C00FCA5DD /* ViewControllerType.swift in Sources */,
@@ -939,6 +962,7 @@
 				D53483952451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AC2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
 				D5308666243F048C00FCA5DD /* StoredDefaults.swift in Sources */,
+				B3A8961F245259AE0091262B /* FirebaseConfig.swift in Sources */,
 				D5308651243EF8C900FCA5DD /* PollViewModel.swift in Sources */,
 				D530866C243F0FBF00FCA5DD /* PWAViewModel.swift in Sources */,
 				D54971872451C727009F0AF1 /* tracer.xcdatamodeld in Sources */,
@@ -962,14 +986,17 @@
 				D5A3805D24519A7E005E5E72 /* AppDelegate.swift in Sources */,
 				D5A3805E24519A7E005E5E72 /* SceneDelegate.swift in Sources */,
 				D54971AB2451C75F009F0AF1 /* PogoManager.swift in Sources */,
+				B3A89619245252790091262B /* LoginManager.swift in Sources */,
 				D5A3805F24519A7E005E5E72 /* PollCoordinator.swift in Sources */,
 				D5A3806024519A7E005E5E72 /* ViewController.swift in Sources */,
 				D54971752451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
 				D54971782451C705009F0AF1 /* DeviceInfo.swift in Sources */,
 				B3ED332E2452460F0048E424 /* BluetraceConfig.swift in Sources */,
+				B3A8961D245258F60091262B /* EncounterMessageManager+AuthSetup.swift in Sources */,
 				D5A3806124519A7E005E5E72 /* ViewControllerType.swift in Sources */,
 				D549719B2451C73D009F0AF1 /* Bluetrace.swift in Sources */,
 				D54971692451C705009F0AF1 /* CentralController.swift in Sources */,
+				B3A89616245252790091262B /* Result+Void.swift in Sources */,
 				D549716C2451C705009F0AF1 /* BlueTraceLocalNotifications.swift in Sources */,
 				D5A3806224519A7E005E5E72 /* PWAViewController.swift in Sources */,
 				D5A3806324519A7E005E5E72 /* JSBridge.swift in Sources */,
@@ -996,6 +1023,7 @@
 				D53483972451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AE2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
 				D5A3806C24519A7E005E5E72 /* PollViewModel.swift in Sources */,
+				B3A89621245259AE0091262B /* FirebaseConfig.swift in Sources */,
 				D5A3806D24519A7E005E5E72 /* PWAViewModel.swift in Sources */,
 				D5A3806E24519A7E005E5E72 /* URLConstants.swift in Sources */,
 				D54971892451C727009F0AF1 /* tracer.xcdatamodeld in Sources */,
@@ -1019,14 +1047,17 @@
 				D5B207AC24471AA90083FCEC /* AppDelegate.swift in Sources */,
 				D5B207AD24471AA90083FCEC /* SceneDelegate.swift in Sources */,
 				D54971AA2451C75F009F0AF1 /* PogoManager.swift in Sources */,
+				B3A89618245252790091262B /* LoginManager.swift in Sources */,
 				D5B207AE24471AA90083FCEC /* PollCoordinator.swift in Sources */,
 				D5B207AF24471AA90083FCEC /* ViewController.swift in Sources */,
 				D54971742451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
 				D54971772451C705009F0AF1 /* DeviceInfo.swift in Sources */,
 				B3ED332D2452460F0048E424 /* BluetraceConfig.swift in Sources */,
+				B3A8961C245258F60091262B /* EncounterMessageManager+AuthSetup.swift in Sources */,
 				D5B207B024471AA90083FCEC /* ViewControllerType.swift in Sources */,
 				D549719A2451C73D009F0AF1 /* Bluetrace.swift in Sources */,
 				D54971682451C705009F0AF1 /* CentralController.swift in Sources */,
+				B3A89615245252790091262B /* Result+Void.swift in Sources */,
 				D549716B2451C705009F0AF1 /* BlueTraceLocalNotifications.swift in Sources */,
 				D5B207B124471AA90083FCEC /* PWAViewController.swift in Sources */,
 				824DCE1B2448400B00C1EADC /* JSBridge.swift in Sources */,
@@ -1053,6 +1084,7 @@
 				D53483962451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AD2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
 				D5B207B524471AA90083FCEC /* PollViewModel.swift in Sources */,
+				B3A89620245259AE0091262B /* FirebaseConfig.swift in Sources */,
 				D5B207B624471AA90083FCEC /* PWAViewModel.swift in Sources */,
 				824DCE1A24483FF800C1EADC /* URLConstants.swift in Sources */,
 				D54971882451C727009F0AF1 /* tracer.xcdatamodeld in Sources */,
