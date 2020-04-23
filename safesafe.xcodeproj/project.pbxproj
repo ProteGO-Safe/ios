@@ -96,6 +96,9 @@
 		D54971AC2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A82451C75F009F0AF1 /* PogoInstructionsViewController.swift */; };
 		D54971AD2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A82451C75F009F0AF1 /* PogoInstructionsViewController.swift */; };
 		D54971AE2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A82451C75F009F0AF1 /* PogoInstructionsViewController.swift */; };
+		D54971B22451CD23009F0AF1 /* SurveyFinishedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971B12451CD23009F0AF1 /* SurveyFinishedResponse.swift */; };
+		D54971B32451CD23009F0AF1 /* SurveyFinishedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971B12451CD23009F0AF1 /* SurveyFinishedResponse.swift */; };
+		D54971B42451CD23009F0AF1 /* SurveyFinishedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971B12451CD23009F0AF1 /* SurveyFinishedResponse.swift */; };
 		D568B4482450416E00F8E864 /* URL+utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D568B4472450416E00F8E864 /* URL+utils.swift */; };
 		D568B4492450416E00F8E864 /* URL+utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D568B4472450416E00F8E864 /* URL+utils.swift */; };
 		D5791CE6244DB826000039C5 /* URLAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5791CE5244DB826000039C5 /* URLAction.swift */; };
@@ -225,6 +228,7 @@
 		D54971A02451C755009F0AF1 /* EncounterRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncounterRecord.swift; sourceTree = "<group>"; };
 		D54971A72451C75F009F0AF1 /* PogoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PogoManager.swift; sourceTree = "<group>"; };
 		D54971A82451C75F009F0AF1 /* PogoInstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PogoInstructionsViewController.swift; sourceTree = "<group>"; };
+		D54971B12451CD23009F0AF1 /* SurveyFinishedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyFinishedResponse.swift; sourceTree = "<group>"; };
 		D568B4472450416E00F8E864 /* URL+utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+utils.swift"; sourceTree = "<group>"; };
 		D5791CE5244DB826000039C5 /* URLAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLAction.swift; sourceTree = "<group>"; };
 		D5A3807E24519A7E005E5E72 /* safesafe Stage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "safesafe Stage.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -508,11 +512,11 @@
 		D5308662243F03CE00FCA5DD /* helpers */ = {
 			isa = PBXGroup;
 			children = (
+				D54971AF2451CCDD009F0AF1 /* JavaScript Bridge */,
 				82ED892E2448431500305D4B /* NotificationManager.swift */,
 				D5791CE5244DB826000039C5 /* URLAction.swift */,
 				D5308663243F03DF00FCA5DD /* AppManager.swift */,
 				D5308665243F048C00FCA5DD /* StoredDefaults.swift */,
-				D5B207C4244822280083FCEC /* JSBridge.swift */,
 				D5B207C6244822890083FCEC /* Logger.swift */,
 			);
 			path = helpers;
@@ -525,6 +529,23 @@
 				D530866B243F0FBF00FCA5DD /* PWAViewModel.swift */,
 			);
 			path = pwa;
+			sourceTree = "<group>";
+		};
+		D54971AF2451CCDD009F0AF1 /* JavaScript Bridge */ = {
+			isa = PBXGroup;
+			children = (
+				D54971B02451CCFF009F0AF1 /* Models */,
+				D5B207C4244822280083FCEC /* JSBridge.swift */,
+			);
+			path = "JavaScript Bridge";
+			sourceTree = "<group>";
+		};
+		D54971B02451CCFF009F0AF1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D54971B12451CD23009F0AF1 /* SurveyFinishedResponse.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		D5A3808024519B8D005E5E72 /* Stage */ = {
@@ -871,6 +892,7 @@
 				D530866A243F0FB600FCA5DD /* PWAViewController.swift in Sources */,
 				D530864F243EF8BF00FCA5DD /* PollViewController.swift in Sources */,
 				D5791CE6244DB826000039C5 /* URLAction.swift in Sources */,
+				D54971B22451CD23009F0AF1 /* SurveyFinishedResponse.swift in Sources */,
 				D54971A12451C755009F0AF1 /* Encounter+EncounterRecord.swift in Sources */,
 				D54971942451C736009F0AF1 /* BluetraceV2.swift in Sources */,
 				D568B4482450416E00F8E864 /* URL+utils.swift in Sources */,
@@ -922,6 +944,7 @@
 				D5A3806624519A7E005E5E72 /* AppManager.swift in Sources */,
 				D5A3806724519A7E005E5E72 /* StoredDefaults.swift in Sources */,
 				D5A3806824519A7E005E5E72 /* URLAction.swift in Sources */,
+				D54971B42451CD23009F0AF1 /* SurveyFinishedResponse.swift in Sources */,
 				D54971A32451C755009F0AF1 /* Encounter+EncounterRecord.swift in Sources */,
 				D54971962451C736009F0AF1 /* BluetraceV2.swift in Sources */,
 				D5A3806924519A7E005E5E72 /* URL+utils.swift in Sources */,
@@ -973,6 +996,7 @@
 				D5B207B324471AA90083FCEC /* AppManager.swift in Sources */,
 				D5B207B424471AA90083FCEC /* StoredDefaults.swift in Sources */,
 				D5791CE7244DB826000039C5 /* URLAction.swift in Sources */,
+				D54971B32451CD23009F0AF1 /* SurveyFinishedResponse.swift in Sources */,
 				D54971A22451C755009F0AF1 /* Encounter+EncounterRecord.swift in Sources */,
 				D54971952451C736009F0AF1 /* BluetraceV2.swift in Sources */,
 				D568B4492450416E00F8E864 /* URL+utils.swift in Sources */,
