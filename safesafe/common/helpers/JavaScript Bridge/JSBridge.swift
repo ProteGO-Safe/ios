@@ -192,12 +192,14 @@ private extension JSBridge {
         BluetraceManager.shared.turnOn()
         EncounterMessageManager.shared.authSetup()
         
-        appStatusManager.appStatusJson
-            .done { [weak self] json in
-                self?.onBridgeData(type: type, body: json)
+        BluetraceManager.shared.bluetoothDidUpdateStateCallbackForBridge = { [appStatusManager] _ in
+            appStatusManager.appStatusJson
+                .done { [weak self] json in
+                    self?.onBridgeData(type: type, body: json)
             }.catch { error in
                 console(error, type: .error)
             }
+        }
     }
     
     func notificationsPermission(jsonString: String?, type: BridgeDataType) {
