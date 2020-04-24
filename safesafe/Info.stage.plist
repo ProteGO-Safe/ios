@@ -30,9 +30,9 @@
 		<true/>
 	</dict>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>TODO</string>
+	<string>Korzystając z modułu Bluetooth dbasz o siebie i bliskich. Włącz go, żeby aplikacja mogła ostrzegać Cię o zagrożeniach.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>TODO</string>
+	<string>Korzystając z modułu Bluetooth dbasz o siebie i bliskich. Włącz go, żeby aplikacja mogła ostrzegać Cię o zagrożeniach.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
