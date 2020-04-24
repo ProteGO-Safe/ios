@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Network
 
 final class AppCoordinator: CoordinatorType {
     
     private let appManager = AppManager.instance
     private let window: UIWindow
+    private let monitor = NWPathMonitor()
+    private var noInternetAlert: UIAlertController?
     
     required init() {
         fatalError("Not implemented")
@@ -30,7 +33,17 @@ final class AppCoordinator: CoordinatorType {
         window.rootViewController = pwa()
         window.makeKeyAndVisible()
         
-        startBluetraceIfNeeded()
+        monitor.pathUpdateHandler = { [weak self] path in
+            DispatchQueue.main.async {
+                if path.status == .satisfied {
+                    self?.noInternetAlert?.dismiss(animated: false)
+                    self?.startBluetraceIfNeeded()
+                } else {
+                    self?.showInternetAlert()
+                }
+            }
+        }
+        monitor.start(queue: DispatchQueue.global(qos: .background))
     }
     
     private func pwa() -> UIViewController {
@@ -46,4 +59,12 @@ final class AppCoordinator: CoordinatorType {
         EncounterMessageManager.shared.authSetup()
     }
     
+    private func showInternetAlert() {
+        noInternetAlert?.dismiss(animated: false)
+        
+        let noInternetAlert = UIAlertController(title: "Brak połączenia", message: "Brak połączenia z internetem", preferredStyle: .alert)
+        window.rootViewController?.present(noInternetAlert, animated: true)
+        
+        self.noInternetAlert = noInternetAlert
+    }
 }
