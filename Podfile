@@ -6,7 +6,7 @@ def pods_definition
   use_frameworks!
 
   pod 'SnapKit', '5.0.1'
-  pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics'
   pod 'Firebase/Functions'
   pod 'Firebase/Messaging'
   pod 'Firebase/Auth'
