@@ -17,6 +17,6 @@ enum RejectedService: String, Codable {
 
 struct RejectedServiceResponse: Codable {
     
-    var rejectService: RejectedService
+    var rejectedService: RejectedService
     
 }

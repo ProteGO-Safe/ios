@@ -73,21 +73,25 @@ final class JSBridge: NSObject {
     }
     
     func bridgeDataResponse(type: BridgeDataType, body: String, requestId: String, completion: ((Any?, Error?) -> ())? = nil) {
-        guard let webView = webView else {
-            console("WebView not registered. Please use `register(webView: WKWebView)` before use this method", type: .warning)
-            return
+        DispatchQueue.main.async {
+            guard let webView = self.webView else {
+                console("WebView not registered. Please use `register(webView: WKWebView)` before use this method", type: .warning)
+                return
+            }
+            let method = "\(SendMethod.bridgeDataResponse.rawValue)('\(body)','\(type.rawValue)','\(requestId)')"
+            webView.evaluateJavaScript(method, completionHandler: completion)
         }
-        let method = "\(SendMethod.bridgeDataResponse.rawValue)('\(body)','\(type.rawValue)','\(requestId)')"
-        webView.evaluateJavaScript(method, completionHandler: completion)
     }
     
     func onBridgeData(type: BridgeDataType, body: String, completion: ((Any?, Error?) -> ())? = nil) {
-        guard let webView = webView else {
-            console("WebView not registered. Please use `register(webView: WKWebView)` before use this method", type: .warning)
-            return
+        DispatchQueue.main.async {
+            guard let webView = self.webView else {
+                console("WebView not registered. Please use `register(webView: WKWebView)` before use this method", type: .warning)
+                return
+            }
+            let method = "\(SendMethod.onBridgeData.rawValue)(\(type.rawValue),'\(body)')"
+            webView.evaluateJavaScript(method, completionHandler: completion)
         }
-        let method = "\(SendMethod.onBridgeData.rawValue)(\(type.rawValue),'\(body)')"
-        webView.evaluateJavaScript(method, completionHandler: completion)
     }
 }
 
@@ -190,14 +194,21 @@ private extension JSBridge {
     
     func bluetoothPermission(jsonString: String?, type: BridgeDataType) {
         BluetraceManager.shared.turnOn()
-        EncounterMessageManager.shared.authSetup()
         
-        BluetraceManager.shared.bluetoothDidUpdateStateCallbackForBridge = { [appStatusManager] _ in
-            appStatusManager.appStatusJson
-                .done { [weak self] json in
-                    self?.onBridgeData(type: type, body: json)
-            }.catch { error in
-                console(error, type: .error)
+        BluetraceManager.shared.bluetoothDidUpdateStateCallbackForBridge = { [weak self] _ in
+            guard let self = self else { return }
+            
+            if BluetraceManager.shared.isBluetoothOn() {
+               EncounterMessageManager.shared.authSetup()
+                self.appStatusManager.appStatusJson
+                    .done { [weak self] json in
+                        self?.onBridgeData(type: type, body: json)
+                }.catch { error in
+                    console(error, type: .error)
+                }
+            } else {
+                BluetraceManager.shared.turnOff()
+                self.permissionRejected(for: .bluetooth)
             }
         }
     }
@@ -238,7 +249,7 @@ private extension JSBridge {
     }
     
     func permissionRejected(for service: RejectedService) {
-        let response = RejectedServiceResponse(rejectService: service)
+        let response = RejectedServiceResponse(rejectedService: service)
         
         guard
             let data = try? JSONEncoder().encode(response),
@@ -247,6 +258,12 @@ private extension JSBridge {
             return
         }
         
-        onBridgeData(type: .permissionRejected, body: json)
+        onBridgeData(type: .permissionRejected, body: json) { ret, error in
+            if let error = error {
+                console(error, type: .error)
+            } else {
+                console(ret)
+            }
+        }
     }
 }
