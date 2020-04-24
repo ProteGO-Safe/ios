@@ -7,6 +7,7 @@
 //
 
 import WebKit
+import PromiseKit
 
 final class JSBridge: NSObject {
 
@@ -19,6 +20,7 @@ final class JSBridge: NSObject {
         case bluetoothPermission = 33
         case notificationsPermission = 35
         case opentraceToggle = 36
+        case permissionRejected = 37
     }
     
     enum SendMethod: String, CaseIterable {
@@ -55,6 +57,11 @@ final class JSBridge: NSObject {
         return controller
     }
     
+    private var appStatusManager: AppStatusManagerProtocol = AppStatusManager(
+        bluetraceManager: BluetraceManager.shared,
+        notificationManager: NotificationManager.shared
+    )
+    
     override private init() {}
     
     func register(webView: WKWebView)  {
@@ -79,8 +86,7 @@ final class JSBridge: NSObject {
             console("WebView not registered. Please use `register(webView: WKWebView)` before use this method", type: .warning)
             return
         }
-        
-        let method = "\(SendMethod.onBridgeData.rawValue)('\(body)','\(type.rawValue)')"
+        let method = "\(SendMethod.onBridgeData.rawValue)(\(type.rawValue),'\(body)')"
         webView.evaluateJavaScript(method, completionHandler: completion)
     }
 }
@@ -128,22 +134,53 @@ extension JSBridge: WKScriptMessageHandler {
     
     private func getBridgeDataManage(body: Any) {
         guard
-            let jsonData = NotificationManager.shared.stringifyUserInfo(),
             let requestData = body as? [String: Any],
-            let requestId = requestData[Key.requestId] as? String
+            let requestId = requestData[Key.requestId] as? String,
+            let type = requestData[Key.type] as? Int,
+            let bridgeDataType = BridgeDataType(rawValue: type)
         else {
             return
         }
         
-        bridgeDataResponse(type: .notification, body: jsonData, requestId: requestId) { _, error in
+        switch bridgeDataType {
+        case .notification:
+            notificationGetBridgeDataResponse(requestID: requestId)
+        case .appStatus:
+            appStatusGetBridgeDataResponse(requestID: requestId)
+        default:
+            return
+        }
+    }
+}
+
+// MARK: - getBridgeData handling
+private extension JSBridge {
+    
+    func notificationGetBridgeDataResponse(requestID: String) {
+        guard let jsonData = NotificationManager.shared.stringifyUserInfo() else {
+            return
+        }
+        
+        bridgeDataResponse(type: .notification, body: jsonData, requestId: requestID) { _, error in
             NotificationManager.shared.clearUserInfo()
             if let error = error {
                 console(error, type: .error)
             }
         }
     }
+    
+    func appStatusGetBridgeDataResponse(requestID: String) {
+        appStatusManager.appStatusJson
+            .done { [weak self] json in
+                self?.bridgeDataResponse(type: .appStatus, body: json, requestId: requestID)
+            }.catch { error in
+                console(error, type: .error)
+            }
+    }
+    
 }
 
+// MARK: - onBridgeData handling
 private extension JSBridge {
     func unsubscribeFromTopic(jsonString: String?, type: BridgeDataType) {
         guard let model: SurveyFinishedResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
@@ -155,13 +192,28 @@ private extension JSBridge {
         BluetraceManager.shared.turnOn()
         EncounterMessageManager.shared.authSetup()
         
-        // onBridgeData(type: type, body: "/* JSON string using `AppStatusManager`HERE */")
+        appStatusManager.appStatusJson
+            .done { [weak self] json in
+                self?.onBridgeData(type: type, body: json)
+            }.catch { error in
+                console(error, type: .error)
+            }
     }
     
     func notificationsPermission(jsonString: String?, type: BridgeDataType) {
-        // Request for notifications permissions  UNUserNotificationCenter.current().requestAuthorization(options: [ ...
-        
-        // onBridgeData(type: type, body: "/* JSON string using `AppStatusManager`HERE */")
+        NotificationManager.shared.registerForRemoteNotifications()
+            .done { [weak self] isRegistered in
+                if isRegistered {
+                    self?.appStatusManager.appStatusJson
+                    .done { json in
+                        self?.onBridgeData(type: type, body: json)
+                    }.catch { error in
+                        console(error, type: .error)
+                    }
+                } else {
+                    self?.permissionRejected(for: .notification)
+                }
+            }
     }
     
     func opentraceToggle(jsonString: String?, type: BridgeDataType) {
@@ -175,6 +227,24 @@ private extension JSBridge {
             BluetraceManager.shared.turnOff()
         }
         
-        // onBridgeData(type: type, body: "/* JSON string using `AppStatusManager`HERE */")
+        appStatusManager.appStatusJson
+            .done { [weak self] json in
+                self?.onBridgeData(type: type, body: json)
+            }.catch { error in
+                console(error, type: .error)
+            }
+    }
+    
+    func permissionRejected(for service: RejectedService) {
+        let response = RejectedServiceResponse(rejectService: service)
+        
+        guard
+            let data = try? JSONEncoder().encode(response),
+            let json = String(data: data, encoding: .utf8)
+        else {
+            return
+        }
+        
+        onBridgeData(type: .permissionRejected, body: json)
     }
 }

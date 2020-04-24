@@ -13,6 +13,7 @@ import PromiseKit
 protocol AppStatusManagerProtocol {
     
     var currentAppStatus: Promise<AppStatus> { get }
+    var appStatusJson: Promise<String> { get }
     
 }
 
@@ -21,23 +22,12 @@ final class AppStatusManager: AppStatusManagerProtocol {
     // MARK: - Properties
     
     private let bluetraceManager: BluetraceManager
+    private let notificationManager: NotificationManagerProtocol
     
     private var isBluetoothServiceOn: Bool {
         AppManager.instance.isBluetraceAllowed
     }
-    
-    private var areNotificationsEnabled: Bool {
-        NotificationManager.shared.didAuthorizeAPN
-    }
-    
-    private var appStatus: AppStatus {
-        AppStatus(
-            isBluetoothOn: self.bluetraceManager.isBluetoothOn(),
-            isNotificationEnabled: self.areNotificationsEnabled,
-            isBluetoothServiceOn: self.isBluetoothServiceOn
-        )
-    }
-    
+
     var currentAppStatus: Promise<AppStatus> {
         Promise<AppStatus> { [weak self] seal in
             guard let self = self else {
@@ -45,35 +35,53 @@ final class AppStatusManager: AppStatusManagerProtocol {
                 return
             }
             
-            // If state is `unknown`, then CBCentralManager hasn't informed his delegate about the state yet
-            // -> that's why we wait for the callback execution
-//            guard self.bluetraceManager.currentState == .unknown else {
-//                seal.fulfill(self.makeAppStatus())
-//                return
-//            }
-            
-            /* CODE ABOVE IS WAITING FOR OPENTRACE FORK :( */
-            
-            self.bluetraceManager.bluetoothDidUpdateStateCallback = { _ in
-                seal.fulfill(self.makeAppStatus())
+            firstly {
+                when(fulfilled: self.notificationManager.currentStatus(), self.bluetraceManager.isBluetoothEnabled)
+            }.done { notificationStatus, isBluetoothOn in
+                seal.fulfill(AppStatus(servicesStatus: .init(
+                    isBluetoothOn: isBluetoothOn,
+                    isNotificationEnabled: notificationStatus == .authorized,
+                    isBluetoothServiceOn: self.isBluetoothServiceOn)
+                ))
+            }.catch { error in
+                console(error, type: .error)
+                seal.reject(error)
             }
+        }
+    }
+    
+    var appStatusJson: Promise<String> {
+        Promise<String> { [weak self] seal in
+            guard let self = self else {
+                seal.reject(InternalError.deinitialized)
+                return
+            }
+            
+            self.currentAppStatus
+                .done { status in
+                    guard
+                        let data = try? JSONEncoder().encode(status),
+                        let json = String(data: data, encoding: .utf8)
+                    else {
+                        seal.reject(InternalError.serializationFailed)
+                        return
+                    }
+                    
+                    seal.fulfill(json)
+                }.catch { error in
+                    seal.reject(error)
+                }
         }
     }
     
     // MARK: - Life Cycle
     
-    init(bluetraceManager: BluetraceManager) {
+    init(
+        bluetraceManager: BluetraceManager,
+        notificationManager: NotificationManagerProtocol
+    ) {
         self.bluetraceManager = bluetraceManager
-    }
-    
-    // MARK: - Private methods
-    
-    private func makeAppStatus() -> AppStatus {
-        AppStatus(
-            isBluetoothOn: bluetraceManager.isBluetoothOn(),
-            isNotificationEnabled: areNotificationsEnabled,
-            isBluetoothServiceOn: isBluetoothServiceOn
-        )
+        self.notificationManager = notificationManager
     }
     
 }

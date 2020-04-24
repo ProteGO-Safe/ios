@@ -16,6 +16,10 @@ protocol PWAViewModelDelegate: class {
 
 final class PWAViewModel: ViewModelType {
     
+    private enum Constants {
+        static var pwaURL: URL = .build(scheme: ConfigManager.default.pwaScheme, host:ConfigManager.default.pwaHost)!
+    }
+    
     weak var delegate: PWAViewModelDelegate?
     
     /// Manage custom actions for schemes defined in  URLAction
@@ -34,10 +38,10 @@ final class PWAViewModel: ViewModelType {
     
     
     /// Open url in external browser (safari) if url host is not from PWA domain
-    /// defined in URLConstants
+    /// defined in Config.plist
     /// - Parameter url: WebKit navigation URL
     func openExternallyIfNeeded(url: URL?) -> Bool {
-        guard let url = url, !url.isHostEqual(to: URLContants.pwaHost) else {
+        guard let url = url, !url.isHostEqual(to: ConfigManager.default.pwaHost) else {
             return false
         }
         
@@ -54,7 +58,7 @@ extension PWAViewModel {
             return
         }
         
-        delegate?.load(url: URLContants.pwaURL)
+        delegate?.load(url: Constants.pwaURL)
     }
     
     func onViewDidLoad(setupFinished: Bool) {
