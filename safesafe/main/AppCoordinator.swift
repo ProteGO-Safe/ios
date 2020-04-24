@@ -15,6 +15,11 @@ final class AppCoordinator: CoordinatorType {
     private let window: UIWindow
     private let monitor = NWPathMonitor()
     private var noInternetAlert: UIAlertController?
+    private let pogoMM: PogoMotionManager
+    
+    deinit {
+        removeUIApplicationObservers()
+    }
     
     required init() {
         fatalError("Not implemented")
@@ -24,7 +29,7 @@ final class AppCoordinator: CoordinatorType {
         guard let window = appWindow else {
             fatalError("Window doesn't exists")
         }
-        
+        pogoMM = PogoMotionManager(window: window)
         self.window = window
     }
     
@@ -44,6 +49,7 @@ final class AppCoordinator: CoordinatorType {
             }
         }
         monitor.start(queue: DispatchQueue.global(qos: .background))
+        addUIApplicationObservers()
     }
     
     private func pwa() -> UIViewController {
@@ -66,5 +72,36 @@ final class AppCoordinator: CoordinatorType {
         window.rootViewController?.present(noInternetAlert, animated: true)
         
         self.noInternetAlert = noInternetAlert
+    }
+    
+    private func addUIApplicationObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appicationDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillTerminate), name: UIApplication.willTerminateNotification, object: nil)
+    }
+    
+    private func removeUIApplicationObservers() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc
+    private func applicationDidBecomeActive(notification: Notification) {
+        pogoMM.startAccelerometerUpdates()
+    }
+    
+    @objc
+    private func appicationDidEnterBackground(notification: Notification) {
+        pogoMM.stopAllMotion()
+    }
+    
+    @objc
+    private func applicationWillEnterForeground(notification: Notification) {
+        pogoMM.stopAllMotion()
+    }
+    
+    @objc
+    private func applicationWillTerminate(notification: Notification) {
+        pogoMM.stopAllMotion()
     }
 }

@@ -20,6 +20,7 @@ class BluetraceManager {
     var queue: DispatchQueue!
     var bluetoothDidUpdateStateCallback: ((CBManagerState) -> Void)?
     var bluetoothDidUpdateStateCallbackForBridge: ((CBManagerState) -> Void)?
+    private(set) var isOn: Bool = false
 
     static let shared = BluetraceManager()
 
@@ -72,11 +73,13 @@ class BluetraceManager {
     }
 
     func turnOn() {
+        isOn = true
         peripheralController.turnOn()
         centralController.turnOn()
     }
 
     func turnOff() {
+        isOn = false
         peripheralController.turnOff()
         centralController.turnOff()
     }
