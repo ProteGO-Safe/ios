@@ -31,6 +31,8 @@
 	</dict>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>TODO</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>TODO</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
