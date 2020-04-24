@@ -19,6 +19,12 @@
 		9DD1365924521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */; };
 		9DD1365A24521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */; };
 		9DD1365B24521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */; };
+		B3A89614245252790091262B /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89612245252790091262B /* Result+Void.swift */; };
+		B3A89615245252790091262B /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89612245252790091262B /* Result+Void.swift */; };
+		B3A89616245252790091262B /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89612245252790091262B /* Result+Void.swift */; };
+		B3A89617245252790091262B /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89613245252790091262B /* LoginManager.swift */; };
+		B3A89618245252790091262B /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89613245252790091262B /* LoginManager.swift */; };
+		B3A89619245252790091262B /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89613245252790091262B /* LoginManager.swift */; };
 		C58678B6ADE10D3C41590CEB /* Pods_safesafe_Stage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F13885626319B40E92CBCF /* Pods_safesafe_Stage.framework */; };
 		D5308638243EF86E00FCA5DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308637243EF86E00FCA5DD /* AppDelegate.swift */; };
 		D530863A243EF86E00FCA5DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308639243EF86E00FCA5DD /* SceneDelegate.swift */; };
@@ -177,6 +183,12 @@
 		D5B207C8244822890083FCEC /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207C6244822890083FCEC /* Logger.swift */; };
 		D5B207FB24499A830083FCEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5B207F824499A830083FCEC /* GoogleService-Info.plist */; };
 		D5B207FE24499A830083FCEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5B207FA24499A830083FCEC /* GoogleService-Info.plist */; };
+		D5F5BC722452B57E008FD0F1 /* FirebaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC6E2452B57E008FD0F1 /* FirebaseConfig.swift */; };
+		D5F5BC732452B57E008FD0F1 /* FirebaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC6E2452B57E008FD0F1 /* FirebaseConfig.swift */; };
+		D5F5BC742452B57E008FD0F1 /* FirebaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC6E2452B57E008FD0F1 /* FirebaseConfig.swift */; };
+		D5F5BC762452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC752452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift */; };
+		D5F5BC772452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC752452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift */; };
+		D5F5BC782452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC752452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift */; };
 		D5FA09B9244EF82E0042A702 /* SimulatorsList.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5FA09B8244EF82D0042A702 /* SimulatorsList.txt */; };
 		D5FA09BA244EF82E0042A702 /* SimulatorsList.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5FA09B8244EF82D0042A702 /* SimulatorsList.txt */; };
 		D5FA09BC244EF8FB0042A702 /* multipleSimulatorsStartup.sh in Resources */ = {isa = PBXBuildFile; fileRef = D5FA09BB244EF8FB0042A702 /* multipleSimulatorsStartup.sh */; };
@@ -213,6 +225,8 @@
 		82ED89322448432200305D4B /* safesafe Live.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "safesafe Live.entitlements"; sourceTree = "<group>"; };
 		9DD136542452193900A9AC2F /* BluetraceManager+CurrentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BluetraceManager+CurrentState.swift"; sourceTree = "<group>"; };
 		9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectedServiceResponse.swift; sourceTree = "<group>"; };
+		B3A89612245252790091262B /* Result+Void.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Result+Void.swift"; sourceTree = "<group>"; };
+		B3A89613245252790091262B /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		C575CBBE4321563CBB7712E1 /* Pods_safesafe_Live.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safesafe_Live.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5308634243EF86E00FCA5DD /* safesafe Live.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "safesafe Live.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5308637243EF86E00FCA5DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -275,6 +289,8 @@
 		D5B207D324486E5C0083FCEC /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		D5B207F824499A830083FCEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D5B207FA24499A830083FCEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D5F5BC6E2452B57E008FD0F1 /* FirebaseConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseConfig.swift; sourceTree = "<group>"; };
+		D5F5BC752452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EncounterMessageManager+AuthSetup.swift"; sourceTree = "<group>"; };
 		D5FA09B8244EF82D0042A702 /* SimulatorsList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimulatorsList.txt; sourceTree = "<group>"; };
 		D5FA09BB244EF8FB0042A702 /* multipleSimulatorsStartup.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = multipleSimulatorsStartup.sh; sourceTree = "<group>"; };
 		D5FA09BF244EFE4B0042A702 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -350,6 +366,8 @@
 		9D2E22FC244F90AB00E224C4 /* authentication */ = {
 			isa = PBXGroup;
 			children = (
+				B3A89613245252790091262B /* LoginManager.swift */,
+				B3A89612245252790091262B /* Result+Void.swift */,
 			);
 			path = authentication;
 			sourceTree = "<group>";
@@ -475,6 +493,7 @@
 		D5308636243EF86E00FCA5DD /* safesafe */ = {
 			isa = PBXGroup;
 			children = (
+				D5F5BC6C2452B57E008FD0F1 /* constants */,
 				D53483A124529E9A0019C577 /* vendor */,
 				9D2E22FC244F90AB00E224C4 /* authentication */,
 				D5308668243F0FA100FCA5DD /* pwa */,
@@ -621,6 +640,7 @@
 		D5B207F32448B5CB0083FCEC /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D5F5BC752452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift */,
 				D5FA09C5244F03560042A702 /* UINavigationController+statusBar.swift */,
 				D568B4472450416E00F8E864 /* URL+utils.swift */,
 				D534838F2451DF250019C577 /* String+json.swift */,
@@ -643,6 +663,15 @@
 				D5B207FA24499A830083FCEC /* GoogleService-Info.plist */,
 			);
 			path = Dev;
+			sourceTree = "<group>";
+		};
+		D5F5BC6C2452B57E008FD0F1 /* constants */ = {
+			isa = PBXGroup;
+			children = (
+				D5F5BC6E2452B57E008FD0F1 /* FirebaseConfig.swift */,
+			);
+			name = constants;
+			path = common/constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -934,17 +963,21 @@
 				D53483AC2452A21F0019C577 /* ConfigManager.swift in Sources */,
 				D53483A424529EAE0019C577 /* BlueTraceConfig.swift in Sources */,
 				D54971A92451C75F009F0AF1 /* PogoManager.swift in Sources */,
+				B3A89617245252790091262B /* LoginManager.swift in Sources */,
 				D530864D243EF8B600FCA5DD /* PollCoordinator.swift in Sources */,
 				D54971732451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
 				D54971762451C705009F0AF1 /* DeviceInfo.swift in Sources */,
 				D5B207C5244822280083FCEC /* JSBridge.swift in Sources */,
 				D54971992451C73D009F0AF1 /* Bluetrace.swift in Sources */,
 				D54971672451C705009F0AF1 /* CentralController.swift in Sources */,
+				B3A89614245252790091262B /* Result+Void.swift in Sources */,
 				D549716A2451C705009F0AF1 /* BlueTraceLocalNotifications.swift in Sources */,
 				D530865C243EFB3200FCA5DD /* ViewController.swift in Sources */,
 				D5308657243EF94C00FCA5DD /* ViewControllerType.swift in Sources */,
+				D5F5BC762452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift in Sources */,
 				D5B207C7244822890083FCEC /* Logger.swift in Sources */,
 				D54971702451C705009F0AF1 /* PeripheralController.swift in Sources */,
+				D5F5BC722452B57E008FD0F1 /* FirebaseConfig.swift in Sources */,
 				D5FA09C6244F03570042A702 /* UINavigationController+statusBar.swift in Sources */,
 				D54971502451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */,
 				D54971A42451C755009F0AF1 /* EncounterRecord.swift in Sources */,
@@ -993,6 +1026,7 @@
 				D53483AE2452A21F0019C577 /* ConfigManager.swift in Sources */,
 				D53483A624529EAE0019C577 /* BlueTraceConfig.swift in Sources */,
 				D54971AB2451C75F009F0AF1 /* PogoManager.swift in Sources */,
+				B3A89619245252790091262B /* LoginManager.swift in Sources */,
 				D5A3805F24519A7E005E5E72 /* PollCoordinator.swift in Sources */,
 				D5A3806024519A7E005E5E72 /* ViewController.swift in Sources */,
 				D54971752451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
@@ -1000,10 +1034,13 @@
 				D5A3806124519A7E005E5E72 /* ViewControllerType.swift in Sources */,
 				D549719B2451C73D009F0AF1 /* Bluetrace.swift in Sources */,
 				D54971692451C705009F0AF1 /* CentralController.swift in Sources */,
+				B3A89616245252790091262B /* Result+Void.swift in Sources */,
 				D549716C2451C705009F0AF1 /* BlueTraceLocalNotifications.swift in Sources */,
 				D5A3806224519A7E005E5E72 /* PWAViewController.swift in Sources */,
+				D5F5BC782452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift in Sources */,
 				D5A3806324519A7E005E5E72 /* JSBridge.swift in Sources */,
 				D5A3806424519A7E005E5E72 /* PollViewController.swift in Sources */,
+				D5F5BC742452B57E008FD0F1 /* FirebaseConfig.swift in Sources */,
 				D54971722451C705009F0AF1 /* PeripheralController.swift in Sources */,
 				D5A3806524519A7E005E5E72 /* UINavigationController+statusBar.swift in Sources */,
 				D54971522451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */,
@@ -1052,6 +1089,7 @@
 				D53483AD2452A21F0019C577 /* ConfigManager.swift in Sources */,
 				D53483A524529EAE0019C577 /* BlueTraceConfig.swift in Sources */,
 				D54971AA2451C75F009F0AF1 /* PogoManager.swift in Sources */,
+				B3A89618245252790091262B /* LoginManager.swift in Sources */,
 				D5B207AE24471AA90083FCEC /* PollCoordinator.swift in Sources */,
 				D5B207AF24471AA90083FCEC /* ViewController.swift in Sources */,
 				D54971742451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
@@ -1059,10 +1097,13 @@
 				D5B207B024471AA90083FCEC /* ViewControllerType.swift in Sources */,
 				D549719A2451C73D009F0AF1 /* Bluetrace.swift in Sources */,
 				D54971682451C705009F0AF1 /* CentralController.swift in Sources */,
+				B3A89615245252790091262B /* Result+Void.swift in Sources */,
 				D549716B2451C705009F0AF1 /* BlueTraceLocalNotifications.swift in Sources */,
 				D5B207B124471AA90083FCEC /* PWAViewController.swift in Sources */,
+				D5F5BC772452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift in Sources */,
 				824DCE1B2448400B00C1EADC /* JSBridge.swift in Sources */,
 				D5B207B224471AA90083FCEC /* PollViewController.swift in Sources */,
+				D5F5BC732452B57E008FD0F1 /* FirebaseConfig.swift in Sources */,
 				D54971712451C705009F0AF1 /* PeripheralController.swift in Sources */,
 				D5FA09C7244F03570042A702 /* UINavigationController+statusBar.swift in Sources */,
 				D54971512451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */,

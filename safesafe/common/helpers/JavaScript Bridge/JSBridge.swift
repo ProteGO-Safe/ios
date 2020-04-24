@@ -190,6 +190,7 @@ private extension JSBridge {
     
     func bluetoothPermission(jsonString: String?, type: BridgeDataType) {
         BluetraceManager.shared.turnOn()
+        EncounterMessageManager.shared.authSetup()
         
         appStatusManager.appStatusJson
             .done { [weak self] json in
@@ -221,6 +222,7 @@ private extension JSBridge {
         
         if model.enableBtService {
             BluetraceManager.shared.turnOn()
+            EncounterMessageManager.shared.authSetup()
         } else {
             BluetraceManager.shared.turnOff()
         }
