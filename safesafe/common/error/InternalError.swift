@@ -16,4 +16,7 @@ enum InternalError: Error {
     // Login
     case signInFailed
     
+    // AppManagerStatus
+    case serializationFailed
+    
 }
