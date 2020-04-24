@@ -18,7 +18,12 @@ class AppManager {
     }
     
     var isBluetraceAllowed: Bool {
-        return defaults.get(key: .isBluetraceAllowed) ?? false
+        get {
+            return defaults.get(key: .isBluetraceAllowed) ?? false
+        }
+        set {
+            return defaults.set(value: newValue, key: .isBluetraceAllowed)
+        }
     }
     
     private init() {}

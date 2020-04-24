@@ -10,7 +10,7 @@ import WebKit
 import PromiseKit
 
 final class JSBridge: NSObject {
-
+    
     static let shared = JSBridge()
     
     enum BridgeDataType: Int {
@@ -117,10 +117,10 @@ extension JSBridge: WKScriptMessageHandler {
             let object = body as? [String: Any],
             let type = object[Key.type] as? Int,
             let bridgeDataType = BridgeDataType(rawValue: type)
-        else {
-            return
+            else {
+                return
         }
-
+        
         let jsonString = object[Key.data] as? String
         switch bridgeDataType {
         case .notification:
@@ -142,8 +142,8 @@ extension JSBridge: WKScriptMessageHandler {
             let requestId = requestData[Key.requestId] as? String,
             let type = requestData[Key.type] as? Int,
             let bridgeDataType = BridgeDataType(rawValue: type)
-        else {
-            return
+            else {
+                return
         }
         
         switch bridgeDataType {
@@ -177,9 +177,9 @@ private extension JSBridge {
         appStatusManager.appStatusJson
             .done { [weak self] json in
                 self?.bridgeDataResponse(type: .appStatus, body: json, requestId: requestID)
-            }.catch { error in
-                console(error, type: .error)
-            }
+        }.catch { error in
+            console(error, type: .error)
+        }
     }
     
 }
@@ -199,7 +199,8 @@ private extension JSBridge {
             guard let self = self else { return }
             
             if BluetraceManager.shared.isBluetoothOn() {
-               EncounterMessageManager.shared.authSetup()
+                AppManager.instance.isBluetraceAllowed = true
+                EncounterMessageManager.shared.authSetup()
                 self.appStatusManager.appStatusJson
                     .done { [weak self] json in
                         self?.onBridgeData(type: type, body: json)
@@ -218,15 +219,15 @@ private extension JSBridge {
             .done { [weak self] isRegistered in
                 if isRegistered {
                     self?.appStatusManager.appStatusJson
-                    .done { json in
-                        self?.onBridgeData(type: type, body: json)
+                        .done { json in
+                            self?.onBridgeData(type: type, body: json)
                     }.catch { error in
                         console(error, type: .error)
                     }
                 } else {
                     self?.permissionRejected(for: .notification)
                 }
-            }
+        }
     }
     
     func opentraceToggle(jsonString: String?, type: BridgeDataType) {
@@ -243,9 +244,9 @@ private extension JSBridge {
         appStatusManager.appStatusJson
             .done { [weak self] json in
                 self?.onBridgeData(type: type, body: json)
-            }.catch { error in
-                console(error, type: .error)
-            }
+        }.catch { error in
+            console(error, type: .error)
+        }
     }
     
     func permissionRejected(for service: RejectedService) {
@@ -254,8 +255,8 @@ private extension JSBridge {
         guard
             let data = try? JSONEncoder().encode(response),
             let json = String(data: data, encoding: .utf8)
-        else {
-            return
+            else {
+                return
         }
         
         onBridgeData(type: .permissionRejected, body: json) { ret, error in

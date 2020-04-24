@@ -7,6 +7,7 @@ def pods_definition
 
   pod 'SnapKit', '5.0.1'
   pod 'Firebase/Crashlytics'
+  pod 'Firebase/Analytics'
   pod 'Firebase/Functions'
   pod 'Firebase/Messaging'
   pod 'Firebase/Auth'

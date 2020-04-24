@@ -119,9 +119,6 @@
 		D54971A42451C755009F0AF1 /* EncounterRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A02451C755009F0AF1 /* EncounterRecord.swift */; };
 		D54971A52451C755009F0AF1 /* EncounterRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A02451C755009F0AF1 /* EncounterRecord.swift */; };
 		D54971A62451C755009F0AF1 /* EncounterRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A02451C755009F0AF1 /* EncounterRecord.swift */; };
-		D54971A92451C75F009F0AF1 /* PogoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A72451C75F009F0AF1 /* PogoManager.swift */; };
-		D54971AA2451C75F009F0AF1 /* PogoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A72451C75F009F0AF1 /* PogoManager.swift */; };
-		D54971AB2451C75F009F0AF1 /* PogoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A72451C75F009F0AF1 /* PogoManager.swift */; };
 		D54971AC2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A82451C75F009F0AF1 /* PogoInstructionsViewController.swift */; };
 		D54971AD2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A82451C75F009F0AF1 /* PogoInstructionsViewController.swift */; };
 		D54971AE2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A82451C75F009F0AF1 /* PogoInstructionsViewController.swift */; };
@@ -189,6 +186,9 @@
 		D5F5BC7A2452C9F8008FD0F1 /* BlueTraceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC792452C9F8008FD0F1 /* BlueTraceManager.swift */; };
 		D5F5BC7B2452C9F8008FD0F1 /* BlueTraceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC792452C9F8008FD0F1 /* BlueTraceManager.swift */; };
 		D5F5BC7C2452C9F8008FD0F1 /* BlueTraceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC792452C9F8008FD0F1 /* BlueTraceManager.swift */; };
+		D5F5BC812452F656008FD0F1 /* PogoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC802452F656008FD0F1 /* PogoManager.swift */; };
+		D5F5BC822452F656008FD0F1 /* PogoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC802452F656008FD0F1 /* PogoManager.swift */; };
+		D5F5BC832452F656008FD0F1 /* PogoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC802452F656008FD0F1 /* PogoManager.swift */; };
 		D5FA09B9244EF82E0042A702 /* SimulatorsList.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5FA09B8244EF82D0042A702 /* SimulatorsList.txt */; };
 		D5FA09BA244EF82E0042A702 /* SimulatorsList.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5FA09B8244EF82D0042A702 /* SimulatorsList.txt */; };
 		D5FA09BC244EF8FB0042A702 /* multipleSimulatorsStartup.sh in Resources */ = {isa = PBXBuildFile; fileRef = D5FA09BB244EF8FB0042A702 /* multipleSimulatorsStartup.sh */; };
@@ -272,7 +272,6 @@
 		D54971982451C73D009F0AF1 /* BluetraceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceProtocol.swift; sourceTree = "<group>"; };
 		D549719F2451C754009F0AF1 /* Encounter+EncounterRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encounter+EncounterRecord.swift"; sourceTree = "<group>"; };
 		D54971A02451C755009F0AF1 /* EncounterRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncounterRecord.swift; sourceTree = "<group>"; };
-		D54971A72451C75F009F0AF1 /* PogoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PogoManager.swift; sourceTree = "<group>"; };
 		D54971A82451C75F009F0AF1 /* PogoInstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PogoInstructionsViewController.swift; sourceTree = "<group>"; };
 		D54971B12451CD23009F0AF1 /* SurveyFinishedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyFinishedResponse.swift; sourceTree = "<group>"; };
 		D568B4472450416E00F8E864 /* URL+utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+utils.swift"; sourceTree = "<group>"; };
@@ -291,6 +290,7 @@
 		D5F5BC6E2452B57E008FD0F1 /* FirebaseConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseConfig.swift; sourceTree = "<group>"; };
 		D5F5BC752452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EncounterMessageManager+AuthSetup.swift"; sourceTree = "<group>"; };
 		D5F5BC792452C9F8008FD0F1 /* BlueTraceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueTraceManager.swift; sourceTree = "<group>"; };
+		D5F5BC802452F656008FD0F1 /* PogoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PogoManager.swift; sourceTree = "<group>"; };
 		D5FA09B8244EF82D0042A702 /* SimulatorsList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimulatorsList.txt; sourceTree = "<group>"; };
 		D5FA09BB244EF8FB0042A702 /* multipleSimulatorsStartup.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = multipleSimulatorsStartup.sh; sourceTree = "<group>"; };
 		D5FA09BF244EFE4B0042A702 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -459,7 +459,6 @@
 			isa = PBXGroup;
 			children = (
 				D54971A82451C75F009F0AF1 /* PogoInstructionsViewController.swift */,
-				D54971A72451C75F009F0AF1 /* PogoManager.swift */,
 			);
 			path = "Power saver";
 			sourceTree = "<group>";
@@ -606,6 +605,7 @@
 			children = (
 				D53483A324529EAE0019C577 /* BlueTraceConfig.swift */,
 				D5F5BC792452C9F8008FD0F1 /* BlueTraceManager.swift */,
+				D5F5BC802452F656008FD0F1 /* PogoManager.swift */,
 			);
 			path = BlueTrace;
 			sourceTree = "<group>";
@@ -1020,7 +1020,6 @@
 				D530863A243EF86E00FCA5DD /* SceneDelegate.swift in Sources */,
 				D53483AC2452A21F0019C577 /* ConfigManager.swift in Sources */,
 				D53483A424529EAE0019C577 /* BlueTraceConfig.swift in Sources */,
-				D54971A92451C75F009F0AF1 /* PogoManager.swift in Sources */,
 				B3A89617245252790091262B /* LoginManager.swift in Sources */,
 				D530864D243EF8B600FCA5DD /* PollCoordinator.swift in Sources */,
 				D54971732451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
@@ -1058,6 +1057,7 @@
 				D53483952451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AC2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
 				D5308666243F048C00FCA5DD /* StoredDefaults.swift in Sources */,
+				D5F5BC812452F656008FD0F1 /* PogoManager.swift in Sources */,
 				D5308651243EF8C900FCA5DD /* PollViewModel.swift in Sources */,
 				D530866C243F0FBF00FCA5DD /* PWAViewModel.swift in Sources */,
 				D54971872451C727009F0AF1 /* tracer.xcdatamodeld in Sources */,
@@ -1083,7 +1083,6 @@
 				D5A3805E24519A7E005E5E72 /* SceneDelegate.swift in Sources */,
 				D53483AE2452A21F0019C577 /* ConfigManager.swift in Sources */,
 				D53483A624529EAE0019C577 /* BlueTraceConfig.swift in Sources */,
-				D54971AB2451C75F009F0AF1 /* PogoManager.swift in Sources */,
 				B3A89619245252790091262B /* LoginManager.swift in Sources */,
 				D5A3805F24519A7E005E5E72 /* PollCoordinator.swift in Sources */,
 				D5A3806024519A7E005E5E72 /* ViewController.swift in Sources */,
@@ -1121,6 +1120,7 @@
 				9DD13657245219AA00A9AC2F /* BluetraceManager+CurrentState.swift in Sources */,
 				D53483972451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AE2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
+				D5F5BC832452F656008FD0F1 /* PogoManager.swift in Sources */,
 				D5A3806C24519A7E005E5E72 /* PollViewModel.swift in Sources */,
 				D5A3806D24519A7E005E5E72 /* PWAViewModel.swift in Sources */,
 				D54971892451C727009F0AF1 /* tracer.xcdatamodeld in Sources */,
@@ -1146,7 +1146,6 @@
 				D5B207AD24471AA90083FCEC /* SceneDelegate.swift in Sources */,
 				D53483AD2452A21F0019C577 /* ConfigManager.swift in Sources */,
 				D53483A524529EAE0019C577 /* BlueTraceConfig.swift in Sources */,
-				D54971AA2451C75F009F0AF1 /* PogoManager.swift in Sources */,
 				B3A89618245252790091262B /* LoginManager.swift in Sources */,
 				D5B207AE24471AA90083FCEC /* PollCoordinator.swift in Sources */,
 				D5B207AF24471AA90083FCEC /* ViewController.swift in Sources */,
@@ -1184,6 +1183,7 @@
 				9DD13656245219A100A9AC2F /* BluetraceManager+CurrentState.swift in Sources */,
 				D53483962451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AD2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
+				D5F5BC822452F656008FD0F1 /* PogoManager.swift in Sources */,
 				D5B207B524471AA90083FCEC /* PollViewModel.swift in Sources */,
 				D5B207B624471AA90083FCEC /* PWAViewModel.swift in Sources */,
 				D54971882451C727009F0AF1 /* tracer.xcdatamodeld in Sources */,
@@ -1335,7 +1335,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Live.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = "safesafe/Info-live.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1363,7 +1363,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Live.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = "safesafe/Info-live.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1390,7 +1390,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = safesafe/Info.stage.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1417,7 +1417,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = safesafe/Info.stage.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1444,7 +1444,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = "safesafe/Info-dev.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1471,7 +1471,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = "safesafe/Info-dev.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
