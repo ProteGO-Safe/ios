@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		209D6B1DF074EC45C4D9D724 /* Pods_safesafe_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5CDA5BE528850841C6C038 /* Pods_safesafe_Dev.framework */; };
 		6A3F929EE8F256BE3AA8CBB9 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
-		824DCE1A24483FF800C1EADC /* URLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207CA244838EA0083FCEC /* URLConstants.swift */; };
 		824DCE1B2448400B00C1EADC /* JSBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207C4244822280083FCEC /* JSBridge.swift */; };
 		82ED892F2448431500305D4B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ED892E2448431500305D4B /* NotificationManager.swift */; };
 		82ED89302448431500305D4B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ED892E2448431500305D4B /* NotificationManager.swift */; };
@@ -51,6 +50,15 @@
 		D534839D2451E3D70019C577 /* InternalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D534839C2451E3D70019C577 /* InternalError.swift */; };
 		D534839E2451E3D70019C577 /* InternalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D534839C2451E3D70019C577 /* InternalError.swift */; };
 		D534839F2451E3D70019C577 /* InternalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D534839C2451E3D70019C577 /* InternalError.swift */; };
+		D53483A424529EAE0019C577 /* BlueTraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483A324529EAE0019C577 /* BlueTraceConfig.swift */; };
+		D53483A524529EAE0019C577 /* BlueTraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483A324529EAE0019C577 /* BlueTraceConfig.swift */; };
+		D53483A624529EAE0019C577 /* BlueTraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483A324529EAE0019C577 /* BlueTraceConfig.swift */; };
+		D53483A824529F760019C577 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = D53483A724529F760019C577 /* Config.plist */; };
+		D53483A924529F760019C577 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = D53483A724529F760019C577 /* Config.plist */; };
+		D53483AA24529F760019C577 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = D53483A724529F760019C577 /* Config.plist */; };
+		D53483AC2452A21F0019C577 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483AB2452A21F0019C577 /* ConfigManager.swift */; };
+		D53483AD2452A21F0019C577 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483AB2452A21F0019C577 /* ConfigManager.swift */; };
+		D53483AE2452A21F0019C577 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483AB2452A21F0019C577 /* ConfigManager.swift */; };
 		D54971502451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549714F2451C6D1009F0AF1 /* PushNotificationConstants.swift */; };
 		D54971512451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549714F2451C6D1009F0AF1 /* PushNotificationConstants.swift */; };
 		D54971522451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549714F2451C6D1009F0AF1 /* PushNotificationConstants.swift */; };
@@ -78,9 +86,6 @@
 		D54971762451C705009F0AF1 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971642451C705009F0AF1 /* DeviceInfo.swift */; };
 		D54971772451C705009F0AF1 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971642451C705009F0AF1 /* DeviceInfo.swift */; };
 		D54971782451C705009F0AF1 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971642451C705009F0AF1 /* DeviceInfo.swift */; };
-		D54971792451C705009F0AF1 /* BluetraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971652451C705009F0AF1 /* BluetraceConfig.swift */; };
-		D549717A2451C705009F0AF1 /* BluetraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971652451C705009F0AF1 /* BluetraceConfig.swift */; };
-		D549717B2451C705009F0AF1 /* BluetraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971652451C705009F0AF1 /* BluetraceConfig.swift */; };
 		D549717C2451C705009F0AF1 /* EncounterMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971662451C705009F0AF1 /* EncounterMessageManager.swift */; };
 		D549717D2451C705009F0AF1 /* EncounterMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971662451C705009F0AF1 /* EncounterMessageManager.swift */; };
 		D549717E2451C705009F0AF1 /* EncounterMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971662451C705009F0AF1 /* EncounterMessageManager.swift */; };
@@ -142,7 +147,6 @@
 		D5A3806B24519A7E005E5E72 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ED892E2448431500305D4B /* NotificationManager.swift */; };
 		D5A3806C24519A7E005E5E72 /* PollViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308650243EF8C900FCA5DD /* PollViewModel.swift */; };
 		D5A3806D24519A7E005E5E72 /* PWAViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530866B243F0FBF00FCA5DD /* PWAViewModel.swift */; };
-		D5A3806E24519A7E005E5E72 /* URLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207CA244838EA0083FCEC /* URLConstants.swift */; };
 		D5A3806F24519A7E005E5E72 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308658243EF99500FCA5DD /* CoordinatorType.swift */; };
 		D5A3807024519A7E005E5E72 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FA09BF244EFE4B0042A702 /* NavigationController.swift */; };
 		D5A3807124519A7E005E5E72 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308654243EF92D00FCA5DD /* ViewModelType.swift */; };
@@ -171,7 +175,6 @@
 		D5B207C5244822280083FCEC /* JSBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207C4244822280083FCEC /* JSBridge.swift */; };
 		D5B207C7244822890083FCEC /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207C6244822890083FCEC /* Logger.swift */; };
 		D5B207C8244822890083FCEC /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207C6244822890083FCEC /* Logger.swift */; };
-		D5B207CB244838EA0083FCEC /* URLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207CA244838EA0083FCEC /* URLConstants.swift */; };
 		D5B207FB24499A830083FCEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5B207F824499A830083FCEC /* GoogleService-Info.plist */; };
 		D5B207FE24499A830083FCEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5B207FA24499A830083FCEC /* GoogleService-Info.plist */; };
 		D5FA09B9244EF82E0042A702 /* SimulatorsList.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5FA09B8244EF82D0042A702 /* SimulatorsList.txt */; };
@@ -234,6 +237,9 @@
 		D53483932451E37C0019C577 /* AppStatusManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStatusManager.swift; sourceTree = "<group>"; };
 		D53483942451E37C0019C577 /* AppStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStatus.swift; sourceTree = "<group>"; };
 		D534839C2451E3D70019C577 /* InternalError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalError.swift; sourceTree = "<group>"; };
+		D53483A324529EAE0019C577 /* BlueTraceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueTraceConfig.swift; sourceTree = "<group>"; };
+		D53483A724529F760019C577 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		D53483AB2452A21F0019C577 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		D549714F2451C6D1009F0AF1 /* PushNotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationConstants.swift; sourceTree = "<group>"; };
 		D54971532451C6F1009F0AF1 /* PlistHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistHelper.swift; sourceTree = "<group>"; };
 		D54971542451C6F1009F0AF1 /* FirebaseAPIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAPIs.swift; sourceTree = "<group>"; };
@@ -243,7 +249,6 @@
 		D54971622451C705009F0AF1 /* PeripheralController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralController.swift; sourceTree = "<group>"; };
 		D54971632451C705009F0AF1 /* BluetraceUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceUtils.swift; sourceTree = "<group>"; };
 		D54971642451C705009F0AF1 /* DeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
-		D54971652451C705009F0AF1 /* BluetraceConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceConfig.swift; sourceTree = "<group>"; };
 		D54971662451C705009F0AF1 /* EncounterMessageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncounterMessageManager.swift; sourceTree = "<group>"; };
 		D54971832451C727009F0AF1 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		D54971842451C727009F0AF1 /* Encounter+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encounter+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -266,7 +271,6 @@
 		D5B207C324471AAA0083FCEC /* Info-dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-dev.plist"; path = "../../safesafe-ios/safesafe/Info-dev.plist"; sourceTree = "<group>"; };
 		D5B207C4244822280083FCEC /* JSBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSBridge.swift; sourceTree = "<group>"; };
 		D5B207C6244822890083FCEC /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		D5B207CA244838EA0083FCEC /* URLConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstants.swift; sourceTree = "<group>"; };
 		D5B207D124486E5C0083FCEC /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		D5B207D324486E5C0083FCEC /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		D5B207F824499A830083FCEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -338,6 +342,7 @@
 				D5A3808024519B8D005E5E72 /* Stage */,
 				D5B207F924499A830083FCEC /* Dev */,
 				D5B207F724499A830083FCEC /* Live */,
+				D53483A724529F760019C577 /* Config.plist */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -381,7 +386,6 @@
 		B35B5FE6244CAA3E007B913B /* Bluetrace */ = {
 			isa = PBXGroup;
 			children = (
-				D54971652451C705009F0AF1 /* BluetraceConfig.swift */,
 				D54971602451C705009F0AF1 /* BlueTraceLocalNotifications.swift */,
 				D54971612451C705009F0AF1 /* BluetraceManager.swift */,
 				D54971632451C705009F0AF1 /* BluetraceUtils.swift */,
@@ -471,6 +475,7 @@
 		D5308636243EF86E00FCA5DD /* safesafe */ = {
 			isa = PBXGroup;
 			children = (
+				D53483A124529E9A0019C577 /* vendor */,
 				9D2E22FC244F90AB00E224C4 /* authentication */,
 				D5308668243F0FA100FCA5DD /* pwa */,
 				D530865F243F00E600FCA5DD /* main */,
@@ -503,7 +508,6 @@
 			children = (
 				D534839B2451E3C50019C577 /* error */,
 				D5B207F32448B5CB0083FCEC /* extensions */,
-				D5B207C9244838DA0083FCEC /* constants */,
 				D5308662243F03CE00FCA5DD /* helpers */,
 				D530865A243EFB2300FCA5DD /* base */,
 				D5308653243EF92100FCA5DD /* protocols */,
@@ -549,6 +553,7 @@
 				D5B207C6244822890083FCEC /* Logger.swift */,
 				D53483942451E37C0019C577 /* AppStatus.swift */,
 				D53483932451E37C0019C577 /* AppStatusManager.swift */,
+				D53483AB2452A21F0019C577 /* ConfigManager.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -568,6 +573,22 @@
 				D534839C2451E3D70019C577 /* InternalError.swift */,
 			);
 			path = error;
+			sourceTree = "<group>";
+		};
+		D53483A124529E9A0019C577 /* vendor */ = {
+			isa = PBXGroup;
+			children = (
+				D53483A224529E9E0019C577 /* BlueTrace */,
+			);
+			path = vendor;
+			sourceTree = "<group>";
+		};
+		D53483A224529E9E0019C577 /* BlueTrace */ = {
+			isa = PBXGroup;
+			children = (
+				D53483A324529EAE0019C577 /* BlueTraceConfig.swift */,
+			);
+			path = BlueTrace;
 			sourceTree = "<group>";
 		};
 		D54971AF2451CCDD009F0AF1 /* JavaScript Bridge */ = {
@@ -595,14 +616,6 @@
 				D5A3808124519F29005E5E72 /* GoogleService-Info.plist */,
 			);
 			path = Stage;
-			sourceTree = "<group>";
-		};
-		D5B207C9244838DA0083FCEC /* constants */ = {
-			isa = PBXGroup;
-			children = (
-				D5B207CA244838EA0083FCEC /* URLConstants.swift */,
-			);
-			path = constants;
 			sourceTree = "<group>";
 		};
 		D5B207F32448B5CB0083FCEC /* extensions */ = {
@@ -738,6 +751,7 @@
 				D5308644243EF87000FCA5DD /* LaunchScreen.storyboard in Resources */,
 				D5B207FB24499A830083FCEC /* GoogleService-Info.plist in Resources */,
 				D5FA09B9244EF82E0042A702 /* SimulatorsList.txt in Resources */,
+				D53483A824529F760019C577 /* Config.plist in Resources */,
 				D5A380862451A1CA005E5E72 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -750,6 +764,7 @@
 				D5A3807624519A7E005E5E72 /* LaunchScreen.storyboard in Resources */,
 				D5A3807924519A7E005E5E72 /* SimulatorsList.txt in Resources */,
 				D5A3808224519F29005E5E72 /* GoogleService-Info.plist in Resources */,
+				D53483AA24529F760019C577 /* Config.plist in Resources */,
 				D5A380842451A1C0005E5E72 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -762,6 +777,7 @@
 				D5B207BC24471AA90083FCEC /* LaunchScreen.storyboard in Resources */,
 				D5B207FE24499A830083FCEC /* GoogleService-Info.plist in Resources */,
 				D5FA09BA244EF82E0042A702 /* SimulatorsList.txt in Resources */,
+				D53483A924529F760019C577 /* Config.plist in Resources */,
 				D5A380852451A1CA005E5E72 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -915,8 +931,9 @@
 				D5308638243EF86E00FCA5DD /* AppDelegate.swift in Sources */,
 				9DD1365924521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */,
 				D530863A243EF86E00FCA5DD /* SceneDelegate.swift in Sources */,
+				D53483AC2452A21F0019C577 /* ConfigManager.swift in Sources */,
+				D53483A424529EAE0019C577 /* BlueTraceConfig.swift in Sources */,
 				D54971A92451C75F009F0AF1 /* PogoManager.swift in Sources */,
-				D5B207CB244838EA0083FCEC /* URLConstants.swift in Sources */,
 				D530864D243EF8B600FCA5DD /* PollCoordinator.swift in Sources */,
 				D54971732451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
 				D54971762451C705009F0AF1 /* DeviceInfo.swift in Sources */,
@@ -949,7 +966,6 @@
 				9DD136552452193900A9AC2F /* BluetraceManager+CurrentState.swift in Sources */,
 				D53483952451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AC2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
-				D54971792451C705009F0AF1 /* BluetraceConfig.swift in Sources */,
 				D5308666243F048C00FCA5DD /* StoredDefaults.swift in Sources */,
 				D5308651243EF8C900FCA5DD /* PollViewModel.swift in Sources */,
 				D530866C243F0FBF00FCA5DD /* PWAViewModel.swift in Sources */,
@@ -974,6 +990,8 @@
 				D5A3805D24519A7E005E5E72 /* AppDelegate.swift in Sources */,
 				9DD1365B24521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */,
 				D5A3805E24519A7E005E5E72 /* SceneDelegate.swift in Sources */,
+				D53483AE2452A21F0019C577 /* ConfigManager.swift in Sources */,
+				D53483A624529EAE0019C577 /* BlueTraceConfig.swift in Sources */,
 				D54971AB2451C75F009F0AF1 /* PogoManager.swift in Sources */,
 				D5A3805F24519A7E005E5E72 /* PollCoordinator.swift in Sources */,
 				D5A3806024519A7E005E5E72 /* ViewController.swift in Sources */,
@@ -1008,10 +1026,8 @@
 				9DD13657245219AA00A9AC2F /* BluetraceManager+CurrentState.swift in Sources */,
 				D53483972451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AE2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
-				D549717B2451C705009F0AF1 /* BluetraceConfig.swift in Sources */,
 				D5A3806C24519A7E005E5E72 /* PollViewModel.swift in Sources */,
 				D5A3806D24519A7E005E5E72 /* PWAViewModel.swift in Sources */,
-				D5A3806E24519A7E005E5E72 /* URLConstants.swift in Sources */,
 				D54971892451C727009F0AF1 /* tracer.xcdatamodeld in Sources */,
 				D5A3806F24519A7E005E5E72 /* CoordinatorType.swift in Sources */,
 				D5A3807024519A7E005E5E72 /* NavigationController.swift in Sources */,
@@ -1033,6 +1049,8 @@
 				D5B207AC24471AA90083FCEC /* AppDelegate.swift in Sources */,
 				9DD1365A24521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */,
 				D5B207AD24471AA90083FCEC /* SceneDelegate.swift in Sources */,
+				D53483AD2452A21F0019C577 /* ConfigManager.swift in Sources */,
+				D53483A524529EAE0019C577 /* BlueTraceConfig.swift in Sources */,
 				D54971AA2451C75F009F0AF1 /* PogoManager.swift in Sources */,
 				D5B207AE24471AA90083FCEC /* PollCoordinator.swift in Sources */,
 				D5B207AF24471AA90083FCEC /* ViewController.swift in Sources */,
@@ -1067,10 +1085,8 @@
 				9DD13656245219A100A9AC2F /* BluetraceManager+CurrentState.swift in Sources */,
 				D53483962451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D54971AD2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
-				D549717A2451C705009F0AF1 /* BluetraceConfig.swift in Sources */,
 				D5B207B524471AA90083FCEC /* PollViewModel.swift in Sources */,
 				D5B207B624471AA90083FCEC /* PWAViewModel.swift in Sources */,
-				824DCE1A24483FF800C1EADC /* URLConstants.swift in Sources */,
 				D54971882451C727009F0AF1 /* tracer.xcdatamodeld in Sources */,
 				D5B207B724471AA90083FCEC /* CoordinatorType.swift in Sources */,
 				D5FA09C1244EFE4B0042A702 /* NavigationController.swift in Sources */,
@@ -1218,10 +1234,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "safesafe Live.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 15;
-				DEVELOPMENT_TEAM = QZ7GPNNM9G;
+				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = "safesafe/Info-live.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1232,7 +1248,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D LIVE";
 				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.mc.protegosafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "protegosafe-development";
+				PROVISIONING_PROFILE_SPECIFIER = "protegosafe-appstore";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
