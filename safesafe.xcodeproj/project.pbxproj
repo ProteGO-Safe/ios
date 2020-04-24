@@ -80,9 +80,6 @@
 		D549716A2451C705009F0AF1 /* BlueTraceLocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971602451C705009F0AF1 /* BlueTraceLocalNotifications.swift */; };
 		D549716B2451C705009F0AF1 /* BlueTraceLocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971602451C705009F0AF1 /* BlueTraceLocalNotifications.swift */; };
 		D549716C2451C705009F0AF1 /* BlueTraceLocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971602451C705009F0AF1 /* BlueTraceLocalNotifications.swift */; };
-		D549716D2451C705009F0AF1 /* BluetraceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971612451C705009F0AF1 /* BluetraceManager.swift */; };
-		D549716E2451C705009F0AF1 /* BluetraceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971612451C705009F0AF1 /* BluetraceManager.swift */; };
-		D549716F2451C705009F0AF1 /* BluetraceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971612451C705009F0AF1 /* BluetraceManager.swift */; };
 		D54971702451C705009F0AF1 /* PeripheralController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971622451C705009F0AF1 /* PeripheralController.swift */; };
 		D54971712451C705009F0AF1 /* PeripheralController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971622451C705009F0AF1 /* PeripheralController.swift */; };
 		D54971722451C705009F0AF1 /* PeripheralController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971622451C705009F0AF1 /* PeripheralController.swift */; };
@@ -189,6 +186,9 @@
 		D5F5BC762452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC752452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift */; };
 		D5F5BC772452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC752452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift */; };
 		D5F5BC782452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC752452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift */; };
+		D5F5BC7A2452C9F8008FD0F1 /* BlueTraceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC792452C9F8008FD0F1 /* BlueTraceManager.swift */; };
+		D5F5BC7B2452C9F8008FD0F1 /* BlueTraceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC792452C9F8008FD0F1 /* BlueTraceManager.swift */; };
+		D5F5BC7C2452C9F8008FD0F1 /* BlueTraceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5BC792452C9F8008FD0F1 /* BlueTraceManager.swift */; };
 		D5FA09B9244EF82E0042A702 /* SimulatorsList.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5FA09B8244EF82D0042A702 /* SimulatorsList.txt */; };
 		D5FA09BA244EF82E0042A702 /* SimulatorsList.txt in Resources */ = {isa = PBXBuildFile; fileRef = D5FA09B8244EF82D0042A702 /* SimulatorsList.txt */; };
 		D5FA09BC244EF8FB0042A702 /* multipleSimulatorsStartup.sh in Resources */ = {isa = PBXBuildFile; fileRef = D5FA09BB244EF8FB0042A702 /* multipleSimulatorsStartup.sh */; };
@@ -259,7 +259,6 @@
 		D54971542451C6F1009F0AF1 /* FirebaseAPIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAPIs.swift; sourceTree = "<group>"; };
 		D549715F2451C705009F0AF1 /* CentralController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralController.swift; sourceTree = "<group>"; };
 		D54971602451C705009F0AF1 /* BlueTraceLocalNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueTraceLocalNotifications.swift; sourceTree = "<group>"; };
-		D54971612451C705009F0AF1 /* BluetraceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceManager.swift; sourceTree = "<group>"; };
 		D54971622451C705009F0AF1 /* PeripheralController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralController.swift; sourceTree = "<group>"; };
 		D54971632451C705009F0AF1 /* BluetraceUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceUtils.swift; sourceTree = "<group>"; };
 		D54971642451C705009F0AF1 /* DeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
@@ -291,6 +290,7 @@
 		D5B207FA24499A830083FCEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D5F5BC6E2452B57E008FD0F1 /* FirebaseConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseConfig.swift; sourceTree = "<group>"; };
 		D5F5BC752452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EncounterMessageManager+AuthSetup.swift"; sourceTree = "<group>"; };
+		D5F5BC792452C9F8008FD0F1 /* BlueTraceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueTraceManager.swift; sourceTree = "<group>"; };
 		D5FA09B8244EF82D0042A702 /* SimulatorsList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimulatorsList.txt; sourceTree = "<group>"; };
 		D5FA09BB244EF8FB0042A702 /* multipleSimulatorsStartup.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = multipleSimulatorsStartup.sh; sourceTree = "<group>"; };
 		D5FA09BF244EFE4B0042A702 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -405,7 +405,6 @@
 			isa = PBXGroup;
 			children = (
 				D54971602451C705009F0AF1 /* BlueTraceLocalNotifications.swift */,
-				D54971612451C705009F0AF1 /* BluetraceManager.swift */,
 				D54971632451C705009F0AF1 /* BluetraceUtils.swift */,
 				D549715F2451C705009F0AF1 /* CentralController.swift */,
 				D54971642451C705009F0AF1 /* DeviceInfo.swift */,
@@ -606,6 +605,7 @@
 			isa = PBXGroup;
 			children = (
 				D53483A324529EAE0019C577 /* BlueTraceConfig.swift */,
+				D5F5BC792452C9F8008FD0F1 /* BlueTraceManager.swift */,
 			);
 			path = BlueTrace;
 			sourceTree = "<group>";
@@ -981,8 +981,8 @@
 				D5FA09C6244F03570042A702 /* UINavigationController+statusBar.swift in Sources */,
 				D54971502451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */,
 				D54971A42451C755009F0AF1 /* EncounterRecord.swift in Sources */,
-				D549716D2451C705009F0AF1 /* BluetraceManager.swift in Sources */,
 				D549718A2451C727009F0AF1 /* Encounter+CoreDataClass.swift in Sources */,
+				D5F5BC7A2452C9F8008FD0F1 /* BlueTraceManager.swift in Sources */,
 				D530866A243F0FB600FCA5DD /* PWAViewController.swift in Sources */,
 				D530864F243EF8BF00FCA5DD /* PollViewController.swift in Sources */,
 				D5791CE6244DB826000039C5 /* URLAction.swift in Sources */,
@@ -1045,7 +1045,7 @@
 				D5A3806524519A7E005E5E72 /* UINavigationController+statusBar.swift in Sources */,
 				D54971522451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */,
 				D54971A62451C755009F0AF1 /* EncounterRecord.swift in Sources */,
-				D549716F2451C705009F0AF1 /* BluetraceManager.swift in Sources */,
+				D5F5BC7C2452C9F8008FD0F1 /* BlueTraceManager.swift in Sources */,
 				D549718C2451C727009F0AF1 /* Encounter+CoreDataClass.swift in Sources */,
 				D5A3806624519A7E005E5E72 /* AppManager.swift in Sources */,
 				D5A3806724519A7E005E5E72 /* StoredDefaults.swift in Sources */,
@@ -1108,7 +1108,7 @@
 				D5FA09C7244F03570042A702 /* UINavigationController+statusBar.swift in Sources */,
 				D54971512451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */,
 				D54971A52451C755009F0AF1 /* EncounterRecord.swift in Sources */,
-				D549716E2451C705009F0AF1 /* BluetraceManager.swift in Sources */,
+				D5F5BC7B2452C9F8008FD0F1 /* BlueTraceManager.swift in Sources */,
 				D549718B2451C727009F0AF1 /* Encounter+CoreDataClass.swift in Sources */,
 				D5B207B324471AA90083FCEC /* AppManager.swift in Sources */,
 				D5B207B424471AA90083FCEC /* StoredDefaults.swift in Sources */,
@@ -1277,7 +1277,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Live.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = "safesafe/Info-live.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1305,7 +1305,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Live.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = "safesafe/Info-live.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1332,7 +1332,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = safesafe/Info.stage.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1359,7 +1359,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = safesafe/Info.stage.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1386,7 +1386,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = "safesafe/Info-dev.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1411,9 +1411,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = "safesafe/Info-dev.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1425,7 +1425,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D DEV";
 				PRODUCT_BUNDLE_IDENTIFIER = se.sigmaconnectivity.protegosafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "protegosafe-development";
+				PROVISIONING_PROFILE_SPECIFIER = "protegosafe-adhoc";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
