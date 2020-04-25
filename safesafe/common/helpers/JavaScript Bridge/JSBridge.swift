@@ -193,14 +193,10 @@ private extension JSBridge {
     }
     
     func bluetoothPermission(jsonString: String?, type: BridgeDataType) {
-        BluetraceManager.shared.turnOn()
-        
         BluetraceManager.shared.bluetoothDidUpdateStateCallbackForBridge = { [weak self] _ in
             guard let self = self else { return }
             
-            if BluetraceManager.shared.isBluetoothOn() {
-                AppManager.instance.isBluetraceAllowed = true
-                EncounterMessageManager.shared.authSetup()
+            if BluetraceManager.shared.isBluetoothAuthorized() {
                 self.appStatusManager.appStatusJson
                     .done { [weak self] json in
                         self?.onBridgeData(type: type, body: json)
@@ -212,6 +208,8 @@ private extension JSBridge {
                 self.permissionRejected(for: .bluetooth)
             }
         }
+        
+        BluetraceManager.shared.permissionAsk()
     }
     
     func notificationsPermission(jsonString: String?, type: BridgeDataType) {
@@ -234,10 +232,12 @@ private extension JSBridge {
         // turn on / off BlueTrace peripheral and central
         guard let model: OpentraceToggleResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
         
-        if model.enableBtService {
+        if model.enableBtService && BluetraceManager.shared.isBluetoothAuthorized() {
+            AppManager.instance.isBluetraceAllowed = true
             BluetraceManager.shared.turnOn()
             EncounterMessageManager.shared.authSetup()
         } else {
+            AppManager.instance.isBluetraceAllowed = false
             BluetraceManager.shared.turnOff()
         }
         
@@ -249,7 +249,7 @@ private extension JSBridge {
         }
     }
     
-    func permissionRejected(for service: RejectedService) {
+    func permissionRejected(for service: RejectedService) { 
         let response = RejectedServiceResponse(rejectedService: service)
         
         guard

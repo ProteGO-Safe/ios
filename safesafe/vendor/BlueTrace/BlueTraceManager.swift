@@ -72,6 +72,10 @@ class BluetraceManager {
         #endif
     }
 
+    func permissionAsk() {
+        centralController.initializeBluetooth()
+    }
+    
     func turnOn() {
         isOn = true
         peripheralController.turnOn()
@@ -110,7 +114,6 @@ class BluetraceManager {
         case .resetting, .unauthorized, .unknown: ()
         case .unsupported:
             centralController.turnOn()
-            presentBluetoothAlert("Unsupported State")
         default:
             print("Bluetooth is on")
         }

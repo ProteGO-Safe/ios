@@ -27,9 +27,7 @@ extension BluetraceManager {
                 return
             }
             
-            self.bluetoothDidUpdateStateCallbackForBridge = { _ in
-                seal.fulfill(self.isBluetoothOn())
-            }
+            seal.fulfill(self.isBluetoothOn())
         }
     }
     
