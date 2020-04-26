@@ -42,6 +42,7 @@ final class JSBridge: NSObject {
     }
     
     private weak var webView: WKWebView?
+    private var currentDataType: BridgeDataType?
     private var notificationPayload: String?
     private var controller: WKUserContentController?
     private let jsonDecoder = JSONDecoder()
@@ -62,7 +63,10 @@ final class JSBridge: NSObject {
         notificationManager: NotificationManager.shared
     )
     
-    override private init() {}
+    override private init() {
+        super.init()
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
     
     func register(webView: WKWebView)  {
         self.webView = webView
@@ -126,10 +130,13 @@ extension JSBridge: WKScriptMessageHandler {
         case .notification:
             unsubscribeFromTopic(jsonString: jsonString, type: bridgeDataType)
         case .bluetoothPermission:
+            currentDataType = bridgeDataType
             bluetoothPermission(jsonString: jsonString, type: bridgeDataType)
         case .notificationsPermission:
+            currentDataType = bridgeDataType
             notificationsPermission(jsonString: jsonString, type: bridgeDataType)
         case .opentraceToggle:
+            currentDataType = bridgeDataType
             opentraceToggle(jsonString: jsonString, type: bridgeDataType)
         default:
             console("Not managed yet", type: .warning)
@@ -193,60 +200,81 @@ private extension JSBridge {
     }
     
     func bluetoothPermission(jsonString: String?, type: BridgeDataType) {
-        BluetraceManager.shared.bluetoothDidUpdateStateCallbackForBridge = { [weak self] _ in
-            guard let self = self else { return }
-            
-            if BluetraceManager.shared.isBluetoothAuthorized() {
-                self.appStatusManager.appStatusJson
-                    .done { [weak self] json in
-                        self?.onBridgeData(type: type, body: json)
-                }.catch { error in
-                    console(error, type: .error)
+        Permissions.instance.state(for: .bluetooth)
+            .then { state -> Promise<Permissions.State> in
+                switch state {
+                case .neverAsked:
+                    return Permissions.instance.state(for: .bluetooth, shouldAsk: true)
+                case .authorized:
+                    return Promise.value(state)
+                case .rejected:
+                    return Permissions.instance.settingsAlert(for: .bluetooth, on: (self.webView?.window?.rootViewController)!).map { _ in Permissions.State.unknown }
+                default:
+                    return Promise.value(.unknown)
                 }
-            } else {
+        }
+        .done { state in
+            if state == .authorized {
+                self.sendAppStateJSON(type: type)
+            } else if state == .rejected {
                 BluetraceManager.shared.turnOff()
                 self.permissionRejected(for: .bluetooth)
             }
         }
-        
-        BluetraceManager.shared.permissionAsk()
+        .catch {_ in}
     }
     
     func notificationsPermission(jsonString: String?, type: BridgeDataType) {
-        NotificationManager.shared.registerForRemoteNotifications()
-            .done { [weak self] isRegistered in
-                if isRegistered {
-                    self?.appStatusManager.appStatusJson
-                        .done { json in
-                            self?.onBridgeData(type: type, body: json)
-                    }.catch { error in
-                        console(error, type: .error)
-                    }
-                } else {
-                    self?.permissionRejected(for: .notification)
+        Permissions.instance.state(for: .notifications)
+            .then { state -> Promise<Permissions.State> in
+                switch state {
+                case .neverAsked:
+                    return Permissions.instance.state(for: .notifications, shouldAsk: true)
+                case .authorized:
+                    return Promise.value(state)
+                case .rejected:
+                    return Permissions.instance.settingsAlert(for: .notifications, on: (self.webView?.window?.rootViewController)!).map { _ in Permissions.State.unknown }
+                default:
+                    return Promise.value(.unknown)
                 }
         }
+        .done { state in
+            let didAuthorizeAPN = StoredDefaults.standard.get(key: .didAuthorizeAPN) ?? false
+            if state == .authorized && !didAuthorizeAPN {
+                StoredDefaults.standard.set(value: true, key: .didAuthorizeAPN)
+                
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+                self.sendAppStateJSON(type: type)
+            } else if state == .rejected {
+                BluetraceManager.shared.turnOff()
+                self.permissionRejected(for: .bluetooth)
+            }
+        }
+        .catch {_ in}
     }
     
     func opentraceToggle(jsonString: String?, type: BridgeDataType) {
         // turn on / off BlueTrace peripheral and central
         guard let model: OpentraceToggleResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
         
-        if model.enableBtService && BluetraceManager.shared.isBluetoothAuthorized() {
-            AppManager.instance.isBluetraceAllowed = true
-            BluetraceManager.shared.turnOn()
-            EncounterMessageManager.shared.authSetup()
-        } else {
-            AppManager.instance.isBluetraceAllowed = false
-            BluetraceManager.shared.turnOff()
+        Permissions.instance.state(for: .bluetooth)
+            .done { state in
+                if state == .authorized && model.enableBtService {
+                     AppManager.instance.isBluetraceAllowed = true
+                     BluetraceManager.shared.turnOn()
+                     EncounterMessageManager.shared.authSetup()
+                } else {
+                    AppManager.instance.isBluetraceAllowed = false
+                    BluetraceManager.shared.turnOff()
+                }
         }
-        
-        appStatusManager.appStatusJson
-            .done { [weak self] json in
-                self?.onBridgeData(type: type, body: json)
-        }.catch { error in
-            console(error, type: .error)
+        .ensure {
+            self.sendAppStateJSON(type: type)
         }
+        .catch {_ in}
+
     }
     
     func permissionRejected(for service: RejectedService) { 
@@ -266,5 +294,28 @@ private extension JSBridge {
                 console(ret)
             }
         }
+    }
+    
+    private func sendAppStateJSON(type: BridgeDataType) {
+        appStatusManager.appStatusJson
+            .done { json in
+                console(json)
+                self.onBridgeData(type: type, body: json)
+        }
+        .ensure {
+            self.currentDataType = nil
+        }
+        .catch { error in
+            console(error, type: .error)
+        }
+    }
+    
+    @objc
+    private func applicationDidBecomeActive(notification: Notification) {
+        guard let type = currentDataType else {
+            return
+        }
+        
+        sendAppStateJSON(type: type)
     }
 }

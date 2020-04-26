@@ -62,6 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         notificationManager.clearBadgeNumber()
+    
     }
     
     // MARK: - Core Data

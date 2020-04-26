@@ -36,10 +36,10 @@ final class AppStatusManager: AppStatusManagerProtocol {
             }
             
             firstly {
-                when(fulfilled: self.notificationManager.currentStatus(), self.bluetraceManager.isBluetoothEnabled)
-            }.done { notificationStatus, _ in
+                when(fulfilled: Permissions.instance.state(for: .notifications), Permissions.instance.state(for: .bluetooth))
+            }.done { notificationStatus, bluetoothStatus in
                 seal.fulfill(AppStatus(servicesStatus: .init(
-                    isBluetoothOn: self.bluetraceManager.isBluetoothAuthorized(),
+                    isBluetoothOn: bluetoothStatus == .authorized,
                     isNotificationEnabled: notificationStatus == .authorized,
                     isBluetoothServiceOn: self.isBluetoothServiceOn)
                 ))
