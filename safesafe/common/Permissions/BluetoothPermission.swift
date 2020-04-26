@@ -89,9 +89,18 @@ final class BluetoothPermission: PermissionType {
                     seal.fulfill(.unknown)
                 }
             } else {
-                // Until authorization is required since ios 13.1
-                // we could always return .authorized for ios 13.0 and 12.x
-                seal.fulfill(.authorized)
+                switch CBPeripheralManager.authorizationStatus() {
+                case .authorized:
+                    seal.fulfill(.authorized)
+                case .denied:
+                    seal.fulfill(.rejected)
+                case .notDetermined:
+                    seal.fulfill(.neverAsked)
+                case .restricted:
+                    seal.fulfill(.cantUse)
+                @unknown default:
+                    seal.fulfill(.unknown)
+                }
             }
         }
     }
