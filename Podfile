@@ -12,6 +12,8 @@ def pods_definition
   pod 'Firebase/Messaging'
   pod 'Firebase/Auth'
   pod 'PromiseKit', '~> 6.8'
+  
+  pod 'DBDebugToolkit', :configurations => ['Debug']
 
 end
 

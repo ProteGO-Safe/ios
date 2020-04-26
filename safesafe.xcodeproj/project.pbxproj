@@ -19,6 +19,9 @@
 		9DD1365924521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */; };
 		9DD1365A24521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */; };
 		9DD1365B24521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */; };
+		9DD833D124563C6E00C2D920 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DD833D024563C6E00C2D920 /* Config.plist */; };
+		9DD833D224563C6E00C2D920 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DD833D024563C6E00C2D920 /* Config.plist */; };
+		9DD833D324563C6E00C2D920 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DD833D024563C6E00C2D920 /* Config.plist */; };
 		B3A89614245252790091262B /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89612245252790091262B /* Result+Void.swift */; };
 		B3A89615245252790091262B /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89612245252790091262B /* Result+Void.swift */; };
 		B3A89616245252790091262B /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89612245252790091262B /* Result+Void.swift */; };
@@ -62,9 +65,6 @@
 		D53483A424529EAE0019C577 /* BlueTraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483A324529EAE0019C577 /* BlueTraceConfig.swift */; };
 		D53483A524529EAE0019C577 /* BlueTraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483A324529EAE0019C577 /* BlueTraceConfig.swift */; };
 		D53483A624529EAE0019C577 /* BlueTraceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483A324529EAE0019C577 /* BlueTraceConfig.swift */; };
-		D53483A824529F760019C577 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = D53483A724529F760019C577 /* Config.plist */; };
-		D53483A924529F760019C577 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = D53483A724529F760019C577 /* Config.plist */; };
-		D53483AA24529F760019C577 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = D53483A724529F760019C577 /* Config.plist */; };
 		D53483AC2452A21F0019C577 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483AB2452A21F0019C577 /* ConfigManager.swift */; };
 		D53483AD2452A21F0019C577 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483AB2452A21F0019C577 /* ConfigManager.swift */; };
 		D53483AE2452A21F0019C577 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483AB2452A21F0019C577 /* ConfigManager.swift */; };
@@ -237,6 +237,7 @@
 		82ED89322448432200305D4B /* safesafe Live.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "safesafe Live.entitlements"; sourceTree = "<group>"; };
 		9DD136542452193900A9AC2F /* BluetraceManager+CurrentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BluetraceManager+CurrentState.swift"; sourceTree = "<group>"; };
 		9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectedServiceResponse.swift; sourceTree = "<group>"; };
+		9DD833D024563C6E00C2D920 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		B3A89612245252790091262B /* Result+Void.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Result+Void.swift"; sourceTree = "<group>"; };
 		B3A89613245252790091262B /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		C575CBBE4321563CBB7712E1 /* Pods_safesafe_Live.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safesafe_Live.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -265,7 +266,6 @@
 		D53483942451E37C0019C577 /* AppStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStatus.swift; sourceTree = "<group>"; };
 		D534839C2451E3D70019C577 /* InternalError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalError.swift; sourceTree = "<group>"; };
 		D53483A324529EAE0019C577 /* BlueTraceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueTraceConfig.swift; sourceTree = "<group>"; };
-		D53483A724529F760019C577 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		D53483AB2452A21F0019C577 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		D549714F2451C6D1009F0AF1 /* PushNotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationConstants.swift; sourceTree = "<group>"; };
 		D54971532451C6F1009F0AF1 /* PlistHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistHelper.swift; sourceTree = "<group>"; };
@@ -371,10 +371,10 @@
 		82ED89332448443700305D4B /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				9DD833D024563C6E00C2D920 /* Config.plist */,
 				D5A3808024519B8D005E5E72 /* Stage */,
 				D5B207F924499A830083FCEC /* Dev */,
 				D5B207F724499A830083FCEC /* Live */,
-				D53483A724529F760019C577 /* Config.plist */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -819,7 +819,7 @@
 				D5308644243EF87000FCA5DD /* LaunchScreen.storyboard in Resources */,
 				D5B207FB24499A830083FCEC /* GoogleService-Info.plist in Resources */,
 				D5FA09B9244EF82E0042A702 /* SimulatorsList.txt in Resources */,
-				D53483A824529F760019C577 /* Config.plist in Resources */,
+				9DD833D124563C6E00C2D920 /* Config.plist in Resources */,
 				D5A380862451A1CA005E5E72 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -832,7 +832,7 @@
 				D5A3807624519A7E005E5E72 /* LaunchScreen.storyboard in Resources */,
 				D5A3807924519A7E005E5E72 /* SimulatorsList.txt in Resources */,
 				D5A3808224519F29005E5E72 /* GoogleService-Info.plist in Resources */,
-				D53483AA24529F760019C577 /* Config.plist in Resources */,
+				9DD833D324563C6E00C2D920 /* Config.plist in Resources */,
 				D5A380842451A1C0005E5E72 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -845,7 +845,7 @@
 				D5B207BC24471AA90083FCEC /* LaunchScreen.storyboard in Resources */,
 				D5B207FE24499A830083FCEC /* GoogleService-Info.plist in Resources */,
 				D5FA09BA244EF82E0042A702 /* SimulatorsList.txt in Resources */,
-				D53483A924529F760019C577 /* Config.plist in Resources */,
+				9DD833D224563C6E00C2D920 /* Config.plist in Resources */,
 				D5A380852451A1CA005E5E72 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1490,8 +1490,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = "safesafe/Info-dev.plist";
@@ -1504,7 +1504,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D DEV";
 				PRODUCT_BUNDLE_IDENTIFIER = se.sigmaconnectivity.protegosafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "protegosafe-development";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
