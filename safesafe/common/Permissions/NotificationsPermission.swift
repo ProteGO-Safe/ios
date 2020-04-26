@@ -45,11 +45,7 @@ final class NotificationsPermission: PermissionType {
     private func askForPermissions() -> Promise<Permissions.State> {
         return Promise { seal in
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
-                if granted {
-                    seal.fulfill(.authorized)
-                } else {
-                    seal.fulfill(.rejected)
-                }
+                seal.fulfill(granted ? .authorized : .rejected)
             }
         }
     }

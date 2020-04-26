@@ -208,7 +208,10 @@ private extension JSBridge {
                 case .authorized:
                     return Promise.value(state)
                 case .rejected:
-                    return Permissions.instance.settingsAlert(for: .bluetooth, on: (self.webView?.window?.rootViewController)!).map { _ in Permissions.State.unknown }
+                    guard let rootViewController = self.webView?.window?.rootViewController else {
+                        throw InternalError.nilValue
+                    }
+                    return Permissions.instance.settingsAlert(for: .bluetooth, on: rootViewController).map { _ in Permissions.State.unknown }
                 default:
                     return Promise.value(.unknown)
                 }
@@ -221,7 +224,9 @@ private extension JSBridge {
                 self.permissionRejected(for: .bluetooth)
             }
         }
-        .catch {_ in}
+        .catch { error in
+            assertionFailure(error.localizedDescription)
+        }
     }
     
     func notificationsPermission(jsonString: String?, type: BridgeDataType) {
@@ -233,7 +238,10 @@ private extension JSBridge {
                 case .authorized:
                     return Promise.value(state)
                 case .rejected:
-                    return Permissions.instance.settingsAlert(for: .notifications, on: (self.webView?.window?.rootViewController)!).map { _ in Permissions.State.unknown }
+                    guard let rootViewController = self.webView?.window?.rootViewController else {
+                        throw InternalError.nilValue
+                    }
+                    return Permissions.instance.settingsAlert(for: .notifications, on: rootViewController).map { _ in Permissions.State.unknown }
                 default:
                     return Promise.value(.unknown)
                 }
@@ -252,7 +260,9 @@ private extension JSBridge {
                 self.permissionRejected(for: .bluetooth)
             }
         }
-        .catch {_ in}
+        .catch { error in
+            assertionFailure(error.localizedDescription)
+        }
     }
     
     func opentraceToggle(jsonString: String?, type: BridgeDataType) {
@@ -262,9 +272,9 @@ private extension JSBridge {
         Permissions.instance.state(for: .bluetooth)
             .done { state in
                 if state == .authorized && model.enableBtService {
-                     AppManager.instance.isBluetraceAllowed = true
-                     BluetraceManager.shared.turnOn()
-                     EncounterMessageManager.shared.authSetup()
+                    AppManager.instance.isBluetraceAllowed = true
+                    BluetraceManager.shared.turnOn()
+                    EncounterMessageManager.shared.authSetup()
                 } else {
                     AppManager.instance.isBluetraceAllowed = false
                     BluetraceManager.shared.turnOff()
@@ -274,10 +284,10 @@ private extension JSBridge {
             self.sendAppStateJSON(type: type)
         }
         .catch {_ in}
-
+        
     }
     
-    func permissionRejected(for service: RejectedService) { 
+    func permissionRejected(for service: RejectedService) {
         let response = RejectedServiceResponse(rejectedService: service)
         
         guard

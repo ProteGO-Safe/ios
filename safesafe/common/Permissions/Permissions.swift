@@ -34,9 +34,7 @@ final class Permissions {
         case cancel
         case settings
     }
-    
-    private var bluetoothCentral: CBCentralManager?
-    
+        
     private init() {}
     
     
