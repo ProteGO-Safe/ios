@@ -127,6 +127,18 @@
 		D54971B42451CD23009F0AF1 /* SurveyFinishedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971B12451CD23009F0AF1 /* SurveyFinishedResponse.swift */; };
 		D568B4482450416E00F8E864 /* URL+utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D568B4472450416E00F8E864 /* URL+utils.swift */; };
 		D568B4492450416E00F8E864 /* URL+utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D568B4472450416E00F8E864 /* URL+utils.swift */; };
+		D56C95E72455BB790048F19F /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C95E62455BB790048F19F /* Permissions.swift */; };
+		D56C95E82455BB790048F19F /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C95E62455BB790048F19F /* Permissions.swift */; };
+		D56C95E92455BB790048F19F /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C95E62455BB790048F19F /* Permissions.swift */; };
+		D56C95EB2455BD770048F19F /* BluetoothPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C95EA2455BD770048F19F /* BluetoothPermission.swift */; };
+		D56C95EC2455BD770048F19F /* BluetoothPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C95EA2455BD770048F19F /* BluetoothPermission.swift */; };
+		D56C95ED2455BD770048F19F /* BluetoothPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C95EA2455BD770048F19F /* BluetoothPermission.swift */; };
+		D56C95F02455BD8E0048F19F /* PermissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C95EF2455BD8E0048F19F /* PermissionType.swift */; };
+		D56C95F12455BD8E0048F19F /* PermissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C95EF2455BD8E0048F19F /* PermissionType.swift */; };
+		D56C95F22455BD8E0048F19F /* PermissionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C95EF2455BD8E0048F19F /* PermissionType.swift */; };
+		D56C95F42455D3400048F19F /* NotificationsPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C95F32455D3400048F19F /* NotificationsPermission.swift */; };
+		D56C95F52455D3400048F19F /* NotificationsPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C95F32455D3400048F19F /* NotificationsPermission.swift */; };
+		D56C95F62455D3400048F19F /* NotificationsPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C95F32455D3400048F19F /* NotificationsPermission.swift */; };
 		D5791CE6244DB826000039C5 /* URLAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5791CE5244DB826000039C5 /* URLAction.swift */; };
 		D5791CE7244DB826000039C5 /* URLAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5791CE5244DB826000039C5 /* URLAction.swift */; };
 		D5A3805C24519A7E005E5E72 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308660243F00F300FCA5DD /* AppCoordinator.swift */; };
@@ -275,13 +287,17 @@
 		D54971A82451C75F009F0AF1 /* PogoInstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PogoInstructionsViewController.swift; sourceTree = "<group>"; };
 		D54971B12451CD23009F0AF1 /* SurveyFinishedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyFinishedResponse.swift; sourceTree = "<group>"; };
 		D568B4472450416E00F8E864 /* URL+utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+utils.swift"; sourceTree = "<group>"; };
+		D56C95E62455BB790048F19F /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
+		D56C95EA2455BD770048F19F /* BluetoothPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPermission.swift; sourceTree = "<group>"; };
+		D56C95EF2455BD8E0048F19F /* PermissionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionType.swift; sourceTree = "<group>"; };
+		D56C95F32455D3400048F19F /* NotificationsPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPermission.swift; sourceTree = "<group>"; };
 		D5791CE5244DB826000039C5 /* URLAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLAction.swift; sourceTree = "<group>"; };
 		D5A3807E24519A7E005E5E72 /* safesafe Stage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "safesafe Stage.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5A3807F24519A7E005E5E72 /* Info-stage.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-stage.plist"; path = "/Users/lukaszszyszkowski/Documents/@projekty_ios/safesafe/safesafe/Info-stage.plist"; sourceTree = "<absolute>"; };
 		D5A3808124519F29005E5E72 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D5B207C224471AA90083FCEC /* safesafe Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "safesafe Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5B207C324471AAA0083FCEC /* Info-dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-dev.plist"; path = "../../safesafe-ios/safesafe/Info-dev.plist"; sourceTree = "<group>"; };
-		D5B207C4244822280083FCEC /* JSBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSBridge.swift; sourceTree = "<group>"; };
+		D5B207C4244822280083FCEC /* JSBridge.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = JSBridge.swift; sourceTree = "<group>"; tabWidth = 4; };
 		D5B207C6244822890083FCEC /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		D5B207D124486E5C0083FCEC /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		D5B207D324486E5C0083FCEC /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
@@ -522,6 +538,7 @@
 		D5308652243EF91B00FCA5DD /* common */ = {
 			isa = PBXGroup;
 			children = (
+				D56C95E52455BB620048F19F /* Permissions */,
 				D534839B2451E3C50019C577 /* error */,
 				D5B207F32448B5CB0083FCEC /* extensions */,
 				D5308662243F03CE00FCA5DD /* helpers */,
@@ -627,6 +644,25 @@
 				9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		D56C95E52455BB620048F19F /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				D56C95EE2455BD800048F19F /* Protocols */,
+				D56C95E62455BB790048F19F /* Permissions.swift */,
+				D56C95EA2455BD770048F19F /* BluetoothPermission.swift */,
+				D56C95F32455D3400048F19F /* NotificationsPermission.swift */,
+			);
+			path = Permissions;
+			sourceTree = "<group>";
+		};
+		D56C95EE2455BD800048F19F /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D56C95EF2455BD8E0048F19F /* PermissionType.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		D5A3808024519B8D005E5E72 /* Stage */ = {
@@ -1024,6 +1060,7 @@
 				D530864D243EF8B600FCA5DD /* PollCoordinator.swift in Sources */,
 				D54971732451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
 				D54971762451C705009F0AF1 /* DeviceInfo.swift in Sources */,
+				D56C95F42455D3400048F19F /* NotificationsPermission.swift in Sources */,
 				D5B207C5244822280083FCEC /* JSBridge.swift in Sources */,
 				D54971992451C73D009F0AF1 /* Bluetrace.swift in Sources */,
 				B3A89614245252790091262B /* Result+Void.swift in Sources */,
@@ -1036,6 +1073,8 @@
 				D5F5BC722452B57E008FD0F1 /* FirebaseConfig.swift in Sources */,
 				D5FA09C6244F03570042A702 /* UINavigationController+statusBar.swift in Sources */,
 				D54971502451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */,
+				D56C95F02455BD8E0048F19F /* PermissionType.swift in Sources */,
+				D56C95EB2455BD770048F19F /* BluetoothPermission.swift in Sources */,
 				D54971A42451C755009F0AF1 /* EncounterRecord.swift in Sources */,
 				D549718A2451C727009F0AF1 /* Encounter+CoreDataClass.swift in Sources */,
 				D5F5BC7A2452C9F8008FD0F1 /* BlueTraceManager.swift in Sources */,
@@ -1044,6 +1083,7 @@
 				D5791CE6244DB826000039C5 /* URLAction.swift in Sources */,
 				D534839D2451E3D70019C577 /* InternalError.swift in Sources */,
 				D54971B22451CD23009F0AF1 /* SurveyFinishedResponse.swift in Sources */,
+				D56C95E72455BB790048F19F /* Permissions.swift in Sources */,
 				D54971A12451C755009F0AF1 /* Encounter+EncounterRecord.swift in Sources */,
 				D53483982451E37C0019C577 /* AppStatus.swift in Sources */,
 				D54971942451C736009F0AF1 /* BluetraceV2.swift in Sources */,
@@ -1087,6 +1127,7 @@
 				D5A3805F24519A7E005E5E72 /* PollCoordinator.swift in Sources */,
 				D5A3806024519A7E005E5E72 /* ViewController.swift in Sources */,
 				D54971752451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
+				D56C95F62455D3400048F19F /* NotificationsPermission.swift in Sources */,
 				D54971782451C705009F0AF1 /* DeviceInfo.swift in Sources */,
 				D5A3806124519A7E005E5E72 /* ViewControllerType.swift in Sources */,
 				D549719B2451C73D009F0AF1 /* Bluetrace.swift in Sources */,
@@ -1099,6 +1140,8 @@
 				D5F5BC742452B57E008FD0F1 /* FirebaseConfig.swift in Sources */,
 				D54971722451C705009F0AF1 /* PeripheralController.swift in Sources */,
 				D5A3806524519A7E005E5E72 /* UINavigationController+statusBar.swift in Sources */,
+				D56C95F22455BD8E0048F19F /* PermissionType.swift in Sources */,
+				D56C95ED2455BD770048F19F /* BluetoothPermission.swift in Sources */,
 				D54971522451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */,
 				D54971A62451C755009F0AF1 /* EncounterRecord.swift in Sources */,
 				D5F5BC7C2452C9F8008FD0F1 /* BlueTraceManager.swift in Sources */,
@@ -1107,6 +1150,7 @@
 				D5A3806724519A7E005E5E72 /* StoredDefaults.swift in Sources */,
 				D5A3806824519A7E005E5E72 /* URLAction.swift in Sources */,
 				D534839F2451E3D70019C577 /* InternalError.swift in Sources */,
+				D56C95E92455BB790048F19F /* Permissions.swift in Sources */,
 				D54971B42451CD23009F0AF1 /* SurveyFinishedResponse.swift in Sources */,
 				D54971A32451C755009F0AF1 /* Encounter+EncounterRecord.swift in Sources */,
 				D534839A2451E37C0019C577 /* AppStatus.swift in Sources */,
@@ -1150,6 +1194,7 @@
 				D5B207AE24471AA90083FCEC /* PollCoordinator.swift in Sources */,
 				D5B207AF24471AA90083FCEC /* ViewController.swift in Sources */,
 				D54971742451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
+				D56C95F52455D3400048F19F /* NotificationsPermission.swift in Sources */,
 				D54971772451C705009F0AF1 /* DeviceInfo.swift in Sources */,
 				D5B207B024471AA90083FCEC /* ViewControllerType.swift in Sources */,
 				D549719A2451C73D009F0AF1 /* Bluetrace.swift in Sources */,
@@ -1162,6 +1207,8 @@
 				D5F5BC732452B57E008FD0F1 /* FirebaseConfig.swift in Sources */,
 				D54971712451C705009F0AF1 /* PeripheralController.swift in Sources */,
 				D5FA09C7244F03570042A702 /* UINavigationController+statusBar.swift in Sources */,
+				D56C95F12455BD8E0048F19F /* PermissionType.swift in Sources */,
+				D56C95EC2455BD770048F19F /* BluetoothPermission.swift in Sources */,
 				D54971512451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */,
 				D54971A52451C755009F0AF1 /* EncounterRecord.swift in Sources */,
 				D5F5BC7B2452C9F8008FD0F1 /* BlueTraceManager.swift in Sources */,
@@ -1170,6 +1217,7 @@
 				D5B207B424471AA90083FCEC /* StoredDefaults.swift in Sources */,
 				D5791CE7244DB826000039C5 /* URLAction.swift in Sources */,
 				D534839E2451E3D70019C577 /* InternalError.swift in Sources */,
+				D56C95E82455BB790048F19F /* Permissions.swift in Sources */,
 				D54971B32451CD23009F0AF1 /* SurveyFinishedResponse.swift in Sources */,
 				D54971A22451C755009F0AF1 /* Encounter+EncounterRecord.swift in Sources */,
 				D53483992451E37C0019C577 /* AppStatus.swift in Sources */,
@@ -1335,7 +1383,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Live.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = "safesafe/Info-live.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1363,7 +1411,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Live.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = "safesafe/Info-live.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1390,7 +1438,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = safesafe/Info.stage.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1417,7 +1465,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = safesafe/Info.stage.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1444,7 +1492,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = "safesafe/Info-dev.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1471,7 +1519,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = "safesafe/Info-dev.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
