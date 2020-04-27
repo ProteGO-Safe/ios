@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 import CoreBluetooth
 
-private final class BluetoothDelegateProxy: NSObject, CBCentralManagerDelegate {
+private final class BluetoothDelegateProxy: NSObject, CBCentralManagerDelegate, CBPeripheralManagerDelegate {
     let (promise, seal) = Promise<Permissions.State>.pending()
     private var retainCycle: BluetoothDelegateProxy?
     
@@ -46,26 +46,57 @@ private final class BluetoothDelegateProxy: NSObject, CBCentralManagerDelegate {
             seal.fulfill(.authorized)
         }
     }
+    
+    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
+        if #available(iOS 13.0, *) {} else {
+            switch CBPeripheralManager.authorizationStatus() {
+            case .authorized:
+                seal.fulfill(.authorized)
+            case .denied:
+                seal.fulfill(.rejected)
+            case .notDetermined:
+                seal.fulfill(.neverAsked)
+            case .restricted:
+                seal.fulfill(.cantUse)
+            @unknown default:
+                seal.fulfill(.unknown)
+            }
+        }
+    }
 }
 
 final class BluetoothPermission: PermissionType {
     
     private var proxy = BluetoothDelegateProxy()
     private var centralManager: CBCentralManager?
+    private var peripheralManager: CBPeripheralManager?
     
     func state(shouldAsk: Bool) -> Promise<Permissions.State> {
         if shouldAsk {
             return readState()
                 .then { currentState -> Promise<Permissions.State> in
-                    if currentState == .neverAsked {
-                        self.centralManager = CBCentralManager(delegate: self.proxy, queue: nil)
-                        return self.proxy.promise
-                            .then { state -> Promise<Permissions.State> in
-                                self.centralManager = nil
-                                return Promise.value(state)
+                    if #available(iOS 13.0, *) {
+                        if currentState == .neverAsked {
+                            self.centralManager = CBCentralManager(delegate: self.proxy, queue: nil)
+                            return self.proxy.promise
+                                .then { state -> Promise<Permissions.State> in
+                                    self.centralManager = nil
+                                    return Promise.value(state)
+                            }
+                        } else {
+                            return Promise.value(currentState)
                         }
                     } else {
-                        return Promise.value(currentState)
+                        if currentState == .neverAsked {
+                            self.peripheralManager = CBPeripheralManager(delegate: self.proxy, queue: nil)
+                            return self.proxy.promise
+                                .then { state -> Promise<Permissions.State> in
+                                    self.peripheralManager = nil
+                                    return Promise.value(state)
+                            }
+                        } else {
+                            return Promise.value(currentState)
+                        }
                     }
             }
         } else {
