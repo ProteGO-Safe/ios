@@ -217,12 +217,12 @@ private extension JSBridge {
                 }
         }
         .done { state in
-            if state == .authorized {
-                self.sendAppStateJSON(type: type)
-            } else if state == .rejected {
+            if state == .rejected {
                 BluetraceManager.shared.turnOff()
-                self.permissionRejected(for: .bluetooth)
+                self.sendAppStateJSON(type: type)
             }
+            
+            self.sendAppStateJSON(type: type)
         }
         .catch { error in
             assertionFailure(error.localizedDescription)
@@ -254,11 +254,9 @@ private extension JSBridge {
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
                 }
-                self.sendAppStateJSON(type: type)
-            } else if state == .rejected {
-                BluetraceManager.shared.turnOff()
-                self.permissionRejected(for: .bluetooth)
             }
+            
+            self.sendAppStateJSON(type: type)
         }
         .catch { error in
             assertionFailure(error.localizedDescription)
@@ -269,7 +267,7 @@ private extension JSBridge {
         // turn on / off BlueTrace peripheral and central
         guard let model: OpentraceToggleResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
         
-        Permissions.instance.state(for: .bluetooth)
+        Permissions.instance.state(for: .bluetooth, shouldAsk: model.enableBtService)
             .done { state in
                 if state == .authorized && model.enableBtService {
                     AppManager.instance.isBluetraceAllowed = true
