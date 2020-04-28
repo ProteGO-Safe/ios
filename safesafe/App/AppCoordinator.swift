@@ -42,6 +42,7 @@ final class AppCoordinator: CoordinatorType {
             DispatchQueue.main.async {
                 if path.status == .satisfied {
                     self?.noInternetAlert?.dismiss(animated: false)
+                    EncounterMessageManager.shared.authSetup()
                     self?.startBluetraceIfNeeded()
                 } else {
                     self?.showInternetAlert()

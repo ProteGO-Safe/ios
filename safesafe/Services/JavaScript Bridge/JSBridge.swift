@@ -272,7 +272,6 @@ private extension JSBridge {
                 if state == .authorized && model.enableBtService {
                     AppManager.instance.isBluetraceAllowed = true
                     BluetraceManager.shared.turnOn()
-                    EncounterMessageManager.shared.authSetup()
                 } else {
                     AppManager.instance.isBluetraceAllowed = false
                     BluetraceManager.shared.turnOff()
