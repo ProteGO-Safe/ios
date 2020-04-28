@@ -1,5 +1,4 @@
 PODS:
-  - DBDebugToolkit (0.5.0)
   - Firebase/Analytics (6.22.0):
     - Firebase/Core
   - Firebase/Auth (6.22.0):
@@ -126,7 +125,6 @@ PODS:
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
-  - DBDebugToolkit
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Crashlytics
@@ -137,7 +135,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - DBDebugToolkit
     - Firebase
     - FirebaseAnalytics
     - FirebaseAnalyticsInterop
@@ -163,7 +160,6 @@ SPEC REPOS:
     - SnapKit
 
 SPEC CHECKSUMS:
-  DBDebugToolkit: c04bb6f618051d3de447a4b4323f37826116cfed
   Firebase: 32f9520684e87c7af3f0704f7f88042626d6b536
   FirebaseAnalytics: 83f822fd0d33a46f49f89b8c3ab16ab4d89df08a
   FirebaseAnalyticsInterop: 3f86269c38ae41f47afeb43ebf32a001f58fcdae
@@ -188,6 +184,6 @@ SPEC CHECKSUMS:
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: bb584bfd477b49e9f4b71d9d3575425176b57314
+PODFILE CHECKSUM: 5c287f61d401d27baee671eb2f311cd2e30e0b78
 
-COCOAPODS: 1.9.0
+COCOAPODS: 1.9.1

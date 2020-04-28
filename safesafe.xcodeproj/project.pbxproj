@@ -35,9 +35,6 @@
 		D5308638243EF86E00FCA5DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308637243EF86E00FCA5DD /* AppDelegate.swift */; };
 		D530863A243EF86E00FCA5DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308639243EF86E00FCA5DD /* SceneDelegate.swift */; };
 		D5308644243EF87000FCA5DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5308642243EF87000FCA5DD /* LaunchScreen.storyboard */; };
-		D530864D243EF8B600FCA5DD /* PollCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530864C243EF8B600FCA5DD /* PollCoordinator.swift */; };
-		D530864F243EF8BF00FCA5DD /* PollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530864E243EF8BF00FCA5DD /* PollViewController.swift */; };
-		D5308651243EF8C900FCA5DD /* PollViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308650243EF8C900FCA5DD /* PollViewModel.swift */; };
 		D5308655243EF92D00FCA5DD /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308654243EF92D00FCA5DD /* ViewModelType.swift */; };
 		D5308657243EF94C00FCA5DD /* ViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308656243EF94C00FCA5DD /* ViewControllerType.swift */; };
 		D5308659243EF99500FCA5DD /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308658243EF99500FCA5DD /* CoordinatorType.swift */; };
@@ -68,18 +65,9 @@
 		D53483AC2452A21F0019C577 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483AB2452A21F0019C577 /* ConfigManager.swift */; };
 		D53483AD2452A21F0019C577 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483AB2452A21F0019C577 /* ConfigManager.swift */; };
 		D53483AE2452A21F0019C577 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53483AB2452A21F0019C577 /* ConfigManager.swift */; };
-		D54971502451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549714F2451C6D1009F0AF1 /* PushNotificationConstants.swift */; };
-		D54971512451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549714F2451C6D1009F0AF1 /* PushNotificationConstants.swift */; };
-		D54971522451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549714F2451C6D1009F0AF1 /* PushNotificationConstants.swift */; };
-		D54971562451C6F1009F0AF1 /* PlistHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971532451C6F1009F0AF1 /* PlistHelper.swift */; };
-		D54971572451C6F1009F0AF1 /* PlistHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971532451C6F1009F0AF1 /* PlistHelper.swift */; };
-		D54971582451C6F1009F0AF1 /* PlistHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971532451C6F1009F0AF1 /* PlistHelper.swift */; };
 		D54971592451C6F1009F0AF1 /* FirebaseAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971542451C6F1009F0AF1 /* FirebaseAPIs.swift */; };
 		D549715A2451C6F1009F0AF1 /* FirebaseAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971542451C6F1009F0AF1 /* FirebaseAPIs.swift */; };
 		D549715B2451C6F1009F0AF1 /* FirebaseAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971542451C6F1009F0AF1 /* FirebaseAPIs.swift */; };
-		D549716A2451C705009F0AF1 /* BlueTraceLocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971602451C705009F0AF1 /* BlueTraceLocalNotifications.swift */; };
-		D549716B2451C705009F0AF1 /* BlueTraceLocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971602451C705009F0AF1 /* BlueTraceLocalNotifications.swift */; };
-		D549716C2451C705009F0AF1 /* BlueTraceLocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971602451C705009F0AF1 /* BlueTraceLocalNotifications.swift */; };
 		D54971702451C705009F0AF1 /* PeripheralController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971622451C705009F0AF1 /* PeripheralController.swift */; };
 		D54971712451C705009F0AF1 /* PeripheralController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971622451C705009F0AF1 /* PeripheralController.swift */; };
 		D54971722451C705009F0AF1 /* PeripheralController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971622451C705009F0AF1 /* PeripheralController.swift */; };
@@ -119,9 +107,6 @@
 		D54971A42451C755009F0AF1 /* EncounterRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A02451C755009F0AF1 /* EncounterRecord.swift */; };
 		D54971A52451C755009F0AF1 /* EncounterRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A02451C755009F0AF1 /* EncounterRecord.swift */; };
 		D54971A62451C755009F0AF1 /* EncounterRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A02451C755009F0AF1 /* EncounterRecord.swift */; };
-		D54971AC2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A82451C75F009F0AF1 /* PogoInstructionsViewController.swift */; };
-		D54971AD2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A82451C75F009F0AF1 /* PogoInstructionsViewController.swift */; };
-		D54971AE2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971A82451C75F009F0AF1 /* PogoInstructionsViewController.swift */; };
 		D54971B22451CD23009F0AF1 /* SurveyFinishedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971B12451CD23009F0AF1 /* SurveyFinishedResponse.swift */; };
 		D54971B32451CD23009F0AF1 /* SurveyFinishedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971B12451CD23009F0AF1 /* SurveyFinishedResponse.swift */; };
 		D54971B42451CD23009F0AF1 /* SurveyFinishedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54971B12451CD23009F0AF1 /* SurveyFinishedResponse.swift */; };
@@ -144,12 +129,10 @@
 		D5A3805C24519A7E005E5E72 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308660243F00F300FCA5DD /* AppCoordinator.swift */; };
 		D5A3805D24519A7E005E5E72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308637243EF86E00FCA5DD /* AppDelegate.swift */; };
 		D5A3805E24519A7E005E5E72 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308639243EF86E00FCA5DD /* SceneDelegate.swift */; };
-		D5A3805F24519A7E005E5E72 /* PollCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530864C243EF8B600FCA5DD /* PollCoordinator.swift */; };
 		D5A3806024519A7E005E5E72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530865B243EFB3200FCA5DD /* ViewController.swift */; };
 		D5A3806124519A7E005E5E72 /* ViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308656243EF94C00FCA5DD /* ViewControllerType.swift */; };
 		D5A3806224519A7E005E5E72 /* PWAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308669243F0FB600FCA5DD /* PWAViewController.swift */; };
 		D5A3806324519A7E005E5E72 /* JSBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207C4244822280083FCEC /* JSBridge.swift */; };
-		D5A3806424519A7E005E5E72 /* PollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530864E243EF8BF00FCA5DD /* PollViewController.swift */; };
 		D5A3806524519A7E005E5E72 /* UINavigationController+statusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FA09C5244F03560042A702 /* UINavigationController+statusBar.swift */; };
 		D5A3806624519A7E005E5E72 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308663243F03DF00FCA5DD /* AppManager.swift */; };
 		D5A3806724519A7E005E5E72 /* StoredDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308665243F048C00FCA5DD /* StoredDefaults.swift */; };
@@ -157,7 +140,6 @@
 		D5A3806924519A7E005E5E72 /* URL+utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D568B4472450416E00F8E864 /* URL+utils.swift */; };
 		D5A3806A24519A7E005E5E72 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B207C6244822890083FCEC /* Logger.swift */; };
 		D5A3806B24519A7E005E5E72 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82ED892E2448431500305D4B /* NotificationManager.swift */; };
-		D5A3806C24519A7E005E5E72 /* PollViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308650243EF8C900FCA5DD /* PollViewModel.swift */; };
 		D5A3806D24519A7E005E5E72 /* PWAViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530866B243F0FBF00FCA5DD /* PWAViewModel.swift */; };
 		D5A3806F24519A7E005E5E72 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308658243EF99500FCA5DD /* CoordinatorType.swift */; };
 		D5A3807024519A7E005E5E72 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FA09BF244EFE4B0042A702 /* NavigationController.swift */; };
@@ -172,14 +154,11 @@
 		D5B207AB24471AA90083FCEC /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308660243F00F300FCA5DD /* AppCoordinator.swift */; };
 		D5B207AC24471AA90083FCEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308637243EF86E00FCA5DD /* AppDelegate.swift */; };
 		D5B207AD24471AA90083FCEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308639243EF86E00FCA5DD /* SceneDelegate.swift */; };
-		D5B207AE24471AA90083FCEC /* PollCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530864C243EF8B600FCA5DD /* PollCoordinator.swift */; };
 		D5B207AF24471AA90083FCEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530865B243EFB3200FCA5DD /* ViewController.swift */; };
 		D5B207B024471AA90083FCEC /* ViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308656243EF94C00FCA5DD /* ViewControllerType.swift */; };
 		D5B207B124471AA90083FCEC /* PWAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308669243F0FB600FCA5DD /* PWAViewController.swift */; };
-		D5B207B224471AA90083FCEC /* PollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530864E243EF8BF00FCA5DD /* PollViewController.swift */; };
 		D5B207B324471AA90083FCEC /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308663243F03DF00FCA5DD /* AppManager.swift */; };
 		D5B207B424471AA90083FCEC /* StoredDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308665243F048C00FCA5DD /* StoredDefaults.swift */; };
-		D5B207B524471AA90083FCEC /* PollViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308650243EF8C900FCA5DD /* PollViewModel.swift */; };
 		D5B207B624471AA90083FCEC /* PWAViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D530866B243F0FBF00FCA5DD /* PWAViewModel.swift */; };
 		D5B207B724471AA90083FCEC /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308658243EF99500FCA5DD /* CoordinatorType.swift */; };
 		D5B207B824471AA90083FCEC /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5308654243EF92D00FCA5DD /* ViewModelType.swift */; };
@@ -248,9 +227,6 @@
 		D5308640243EF87000FCA5DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5308643243EF87000FCA5DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D5308645243EF87000FCA5DD /* Info-live.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-live.plist"; sourceTree = "<group>"; };
-		D530864C243EF8B600FCA5DD /* PollCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollCoordinator.swift; sourceTree = "<group>"; };
-		D530864E243EF8BF00FCA5DD /* PollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollViewController.swift; sourceTree = "<group>"; };
-		D5308650243EF8C900FCA5DD /* PollViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollViewModel.swift; sourceTree = "<group>"; };
 		D5308654243EF92D00FCA5DD /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		D5308656243EF94C00FCA5DD /* ViewControllerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerType.swift; sourceTree = "<group>"; };
 		D5308658243EF99500FCA5DD /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
@@ -267,10 +243,7 @@
 		D534839C2451E3D70019C577 /* InternalError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalError.swift; sourceTree = "<group>"; };
 		D53483A324529EAE0019C577 /* BlueTraceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueTraceConfig.swift; sourceTree = "<group>"; };
 		D53483AB2452A21F0019C577 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
-		D549714F2451C6D1009F0AF1 /* PushNotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationConstants.swift; sourceTree = "<group>"; };
-		D54971532451C6F1009F0AF1 /* PlistHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistHelper.swift; sourceTree = "<group>"; };
 		D54971542451C6F1009F0AF1 /* FirebaseAPIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAPIs.swift; sourceTree = "<group>"; };
-		D54971602451C705009F0AF1 /* BlueTraceLocalNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueTraceLocalNotifications.swift; sourceTree = "<group>"; };
 		D54971622451C705009F0AF1 /* PeripheralController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralController.swift; sourceTree = "<group>"; };
 		D54971632451C705009F0AF1 /* BluetraceUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceUtils.swift; sourceTree = "<group>"; };
 		D54971642451C705009F0AF1 /* DeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
@@ -284,7 +257,6 @@
 		D54971982451C73D009F0AF1 /* BluetraceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetraceProtocol.swift; sourceTree = "<group>"; };
 		D549719F2451C754009F0AF1 /* Encounter+EncounterRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encounter+EncounterRecord.swift"; sourceTree = "<group>"; };
 		D54971A02451C755009F0AF1 /* EncounterRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncounterRecord.swift; sourceTree = "<group>"; };
-		D54971A82451C75F009F0AF1 /* PogoInstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PogoInstructionsViewController.swift; sourceTree = "<group>"; };
 		D54971B12451CD23009F0AF1 /* SurveyFinishedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyFinishedResponse.swift; sourceTree = "<group>"; };
 		D568B4472450416E00F8E864 /* URL+utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+utils.swift"; sourceTree = "<group>"; };
 		D56C95E62455BB790048F19F /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
@@ -293,7 +265,7 @@
 		D56C95F32455D3400048F19F /* NotificationsPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPermission.swift; sourceTree = "<group>"; };
 		D5791CE5244DB826000039C5 /* URLAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLAction.swift; sourceTree = "<group>"; };
 		D5A3807E24519A7E005E5E72 /* safesafe Stage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "safesafe Stage.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5A3807F24519A7E005E5E72 /* Info-stage.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-stage.plist"; path = "/Users/lukaszszyszkowski/Documents/@projekty_ios/safesafe/safesafe/Info-stage.plist"; sourceTree = "<absolute>"; };
+		D5A3807F24519A7E005E5E72 /* Info-stage.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-stage.plist"; sourceTree = "<group>"; };
 		D5A3808124519F29005E5E72 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D5B207C224471AA90083FCEC /* safesafe Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "safesafe Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5B207C324471AAA0083FCEC /* Info-dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-dev.plist"; path = "../../safesafe-ios/safesafe/Info-dev.plist"; sourceTree = "<group>"; };
@@ -368,51 +340,65 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		82ED89332448443700305D4B /* resources */ = {
+		82ED89332448443700305D4B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				9DD833D024563C6E00C2D920 /* Config.plist */,
+				D5308640243EF87000FCA5DD /* Assets.xcassets */,
+				D5308642243EF87000FCA5DD /* LaunchScreen.storyboard */,
 				D5A3808024519B8D005E5E72 /* Stage */,
 				D5B207F924499A830083FCEC /* Dev */,
 				D5B207F724499A830083FCEC /* Live */,
 			);
-			path = resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
-		9D2E22FC244F90AB00E224C4 /* authentication */ = {
+		B34C326124562B0500B543B7 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				B3A89613245252790091262B /* LoginManager.swift */,
-				B3A89612245252790091262B /* Result+Void.swift */,
+				D5308668243F0FA100FCA5DD /* PWA */,
 			);
-			path = authentication;
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B34C326224562B2500B543B7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B34C326324562C1B00B543B7 /* AppStatus */,
+				D54971AF2451CCDD009F0AF1 /* JavaScript Bridge */,
+				D56C95E52455BB620048F19F /* Permissions */,
+				D5308663243F03DF00FCA5DD /* AppManager.swift */,
+				D53483AB2452A21F0019C577 /* ConfigManager.swift */,
+				B3A89613245252790091262B /* LoginManager.swift */,
+				82ED892E2448431500305D4B /* NotificationManager.swift */,
+				D5308665243F048C00FCA5DD /* StoredDefaults.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B34C326324562C1B00B543B7 /* AppStatus */ = {
+			isa = PBXGroup;
+			children = (
+				D53483942451E37C0019C577 /* AppStatus.swift */,
+				D53483932451E37C0019C577 /* AppStatusManager.swift */,
+			);
+			path = AppStatus;
 			sourceTree = "<group>";
 		};
 		B35B5FD6244CAA3E007B913B /* OpenTrace */ = {
 			isa = PBXGroup;
 			children = (
-				B35B5FDA244CAA3E007B913B /* Constants */,
 				B35B5FDD244CAA3E007B913B /* Utils */,
 				B35B5FE6244CAA3E007B913B /* Bluetrace */,
-				B35B6022244CAA3E007B913B /* Power saver */,
 			);
 			name = OpenTrace;
 			path = "Submodules/opentrace-ios/OpenTrace";
-			sourceTree = "<group>";
-		};
-		B35B5FDA244CAA3E007B913B /* Constants */ = {
-			isa = PBXGroup;
-			children = (
-				D549714F2451C6D1009F0AF1 /* PushNotificationConstants.swift */,
-			);
-			path = Constants;
 			sourceTree = "<group>";
 		};
 		B35B5FDD244CAA3E007B913B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				D54971542451C6F1009F0AF1 /* FirebaseAPIs.swift */,
-				D54971532451C6F1009F0AF1 /* PlistHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -420,7 +406,6 @@
 		B35B5FE6244CAA3E007B913B /* Bluetrace */ = {
 			isa = PBXGroup;
 			children = (
-				D54971602451C705009F0AF1 /* BlueTraceLocalNotifications.swift */,
 				D54971632451C705009F0AF1 /* BluetraceUtils.swift */,
 				D54971642451C705009F0AF1 /* DeviceInfo.swift */,
 				D54971662451C705009F0AF1 /* EncounterMessageManager.swift */,
@@ -470,14 +455,6 @@
 			path = Structs;
 			sourceTree = "<group>";
 		};
-		B35B6022244CAA3E007B913B /* Power saver */ = {
-			isa = PBXGroup;
-			children = (
-				D54971A82451C75F009F0AF1 /* PogoInstructionsViewController.swift */,
-			);
-			path = "Power saver";
-			sourceTree = "<group>";
-		};
 		D530862B243EF86E00FCA5DD = {
 			isa = PBXGroup;
 			children = (
@@ -506,18 +483,12 @@
 		D5308636243EF86E00FCA5DD /* safesafe */ = {
 			isa = PBXGroup;
 			children = (
-				D5F5BC6C2452B57E008FD0F1 /* constants */,
-				D53483A124529E9A0019C577 /* vendor */,
-				9D2E22FC244F90AB00E224C4 /* authentication */,
-				D5308668243F0FA100FCA5DD /* pwa */,
-				D530865F243F00E600FCA5DD /* main */,
-				D5308652243EF91B00FCA5DD /* common */,
-				D530864B243EF89600FCA5DD /* poll */,
-				82ED89332448443700305D4B /* resources */,
-				D5308637243EF86E00FCA5DD /* AppDelegate.swift */,
-				D5308639243EF86E00FCA5DD /* SceneDelegate.swift */,
-				D5308640243EF87000FCA5DD /* Assets.xcassets */,
-				D5308642243EF87000FCA5DD /* LaunchScreen.storyboard */,
+				D530865F243F00E600FCA5DD /* App */,
+				D5308652243EF91B00FCA5DD /* Common */,
+				B34C326124562B0500B543B7 /* Components */,
+				B34C326224562B2500B543B7 /* Services */,
+				82ED89332448443700305D4B /* Resources */,
+				D53483A124529E9A0019C577 /* Vendor */,
 				D5308645243EF87000FCA5DD /* Info-live.plist */,
 				D5B207C324471AAA0083FCEC /* Info-dev.plist */,
 				D5A3807F24519A7E005E5E72 /* Info-stage.plist */,
@@ -525,95 +496,80 @@
 			path = safesafe;
 			sourceTree = "<group>";
 		};
-		D530864B243EF89600FCA5DD /* poll */ = {
+		D5308652243EF91B00FCA5DD /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				D530864C243EF8B600FCA5DD /* PollCoordinator.swift */,
-				D530864E243EF8BF00FCA5DD /* PollViewController.swift */,
-				D5308650243EF8C900FCA5DD /* PollViewModel.swift */,
+				D530865A243EFB2300FCA5DD /* Base */,
+				D5F5BC6C2452B57E008FD0F1 /* Constants */,
+				D534839B2451E3C50019C577 /* Error */,
+				D5B207F32448B5CB0083FCEC /* Extensions */,
+				D5308662243F03CE00FCA5DD /* Helpers */,
+				D5308653243EF92100FCA5DD /* Protocols */,
 			);
-			path = poll;
+			path = Common;
 			sourceTree = "<group>";
 		};
-		D5308652243EF91B00FCA5DD /* common */ = {
-			isa = PBXGroup;
-			children = (
-				D56C95E52455BB620048F19F /* Permissions */,
-				D534839B2451E3C50019C577 /* error */,
-				D5B207F32448B5CB0083FCEC /* extensions */,
-				D5308662243F03CE00FCA5DD /* helpers */,
-				D530865A243EFB2300FCA5DD /* base */,
-				D5308653243EF92100FCA5DD /* protocols */,
-			);
-			path = common;
-			sourceTree = "<group>";
-		};
-		D5308653243EF92100FCA5DD /* protocols */ = {
+		D5308653243EF92100FCA5DD /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				D5308654243EF92D00FCA5DD /* ViewModelType.swift */,
 				D5308656243EF94C00FCA5DD /* ViewControllerType.swift */,
 				D5308658243EF99500FCA5DD /* CoordinatorType.swift */,
 			);
-			path = protocols;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
-		D530865A243EFB2300FCA5DD /* base */ = {
+		D530865A243EFB2300FCA5DD /* Base */ = {
 			isa = PBXGroup;
 			children = (
 				D530865B243EFB3200FCA5DD /* ViewController.swift */,
 				D5FA09BF244EFE4B0042A702 /* NavigationController.swift */,
 			);
-			path = base;
+			path = Base;
 			sourceTree = "<group>";
 		};
-		D530865F243F00E600FCA5DD /* main */ = {
+		D530865F243F00E600FCA5DD /* App */ = {
 			isa = PBXGroup;
 			children = (
+				D5308637243EF86E00FCA5DD /* AppDelegate.swift */,
+				D5308639243EF86E00FCA5DD /* SceneDelegate.swift */,
 				D5308660243F00F300FCA5DD /* AppCoordinator.swift */,
 			);
-			path = main;
+			path = App;
 			sourceTree = "<group>";
 		};
-		D5308662243F03CE00FCA5DD /* helpers */ = {
+		D5308662243F03CE00FCA5DD /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				D54971AF2451CCDD009F0AF1 /* JavaScript Bridge */,
-				82ED892E2448431500305D4B /* NotificationManager.swift */,
 				D5791CE5244DB826000039C5 /* URLAction.swift */,
-				D5308663243F03DF00FCA5DD /* AppManager.swift */,
-				D5308665243F048C00FCA5DD /* StoredDefaults.swift */,
 				D5B207C6244822890083FCEC /* Logger.swift */,
-				D53483942451E37C0019C577 /* AppStatus.swift */,
-				D53483932451E37C0019C577 /* AppStatusManager.swift */,
-				D53483AB2452A21F0019C577 /* ConfigManager.swift */,
 			);
-			path = helpers;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
-		D5308668243F0FA100FCA5DD /* pwa */ = {
+		D5308668243F0FA100FCA5DD /* PWA */ = {
 			isa = PBXGroup;
 			children = (
 				D5308669243F0FB600FCA5DD /* PWAViewController.swift */,
 				D530866B243F0FBF00FCA5DD /* PWAViewModel.swift */,
 			);
-			path = pwa;
+			path = PWA;
 			sourceTree = "<group>";
 		};
-		D534839B2451E3C50019C577 /* error */ = {
+		D534839B2451E3C50019C577 /* Error */ = {
 			isa = PBXGroup;
 			children = (
 				D534839C2451E3D70019C577 /* InternalError.swift */,
 			);
-			path = error;
+			path = Error;
 			sourceTree = "<group>";
 		};
-		D53483A124529E9A0019C577 /* vendor */ = {
+		D53483A124529E9A0019C577 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
 				D53483A224529E9E0019C577 /* BlueTrace */,
 			);
-			path = vendor;
+			path = Vendor;
 			sourceTree = "<group>";
 		};
 		D53483A224529E9E0019C577 /* BlueTrace */ = {
@@ -673,16 +629,17 @@
 			path = Stage;
 			sourceTree = "<group>";
 		};
-		D5B207F32448B5CB0083FCEC /* extensions */ = {
+		D5B207F32448B5CB0083FCEC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				D5F5BC752452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift */,
 				D5FA09C5244F03560042A702 /* UINavigationController+statusBar.swift */,
 				D568B4472450416E00F8E864 /* URL+utils.swift */,
 				D534838F2451DF250019C577 /* String+json.swift */,
+				B3A89612245252790091262B /* Result+Void.swift */,
 				9DD136542452193900A9AC2F /* BluetraceManager+CurrentState.swift */,
 			);
-			path = extensions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D5B207F724499A830083FCEC /* Live */ = {
@@ -701,13 +658,12 @@
 			path = Dev;
 			sourceTree = "<group>";
 		};
-		D5F5BC6C2452B57E008FD0F1 /* constants */ = {
+		D5F5BC6C2452B57E008FD0F1 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
 				D5F5BC6E2452B57E008FD0F1 /* FirebaseConfig.swift */,
 			);
-			name = constants;
-			path = common/constants;
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1057,14 +1013,12 @@
 				D53483AC2452A21F0019C577 /* ConfigManager.swift in Sources */,
 				D53483A424529EAE0019C577 /* BlueTraceConfig.swift in Sources */,
 				B3A89617245252790091262B /* LoginManager.swift in Sources */,
-				D530864D243EF8B600FCA5DD /* PollCoordinator.swift in Sources */,
 				D54971732451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
 				D54971762451C705009F0AF1 /* DeviceInfo.swift in Sources */,
 				D56C95F42455D3400048F19F /* NotificationsPermission.swift in Sources */,
 				D5B207C5244822280083FCEC /* JSBridge.swift in Sources */,
 				D54971992451C73D009F0AF1 /* Bluetrace.swift in Sources */,
 				B3A89614245252790091262B /* Result+Void.swift in Sources */,
-				D549716A2451C705009F0AF1 /* BlueTraceLocalNotifications.swift in Sources */,
 				D530865C243EFB3200FCA5DD /* ViewController.swift in Sources */,
 				D5308657243EF94C00FCA5DD /* ViewControllerType.swift in Sources */,
 				D5F5BC762452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift in Sources */,
@@ -1072,14 +1026,12 @@
 				D54971702451C705009F0AF1 /* PeripheralController.swift in Sources */,
 				D5F5BC722452B57E008FD0F1 /* FirebaseConfig.swift in Sources */,
 				D5FA09C6244F03570042A702 /* UINavigationController+statusBar.swift in Sources */,
-				D54971502451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */,
 				D56C95F02455BD8E0048F19F /* PermissionType.swift in Sources */,
 				D56C95EB2455BD770048F19F /* BluetoothPermission.swift in Sources */,
 				D54971A42451C755009F0AF1 /* EncounterRecord.swift in Sources */,
 				D549718A2451C727009F0AF1 /* Encounter+CoreDataClass.swift in Sources */,
 				D5F5BC7A2452C9F8008FD0F1 /* BlueTraceManager.swift in Sources */,
 				D530866A243F0FB600FCA5DD /* PWAViewController.swift in Sources */,
-				D530864F243EF8BF00FCA5DD /* PollViewController.swift in Sources */,
 				D5791CE6244DB826000039C5 /* URLAction.swift in Sources */,
 				D534839D2451E3D70019C577 /* InternalError.swift in Sources */,
 				D54971B22451CD23009F0AF1 /* SurveyFinishedResponse.swift in Sources */,
@@ -1090,14 +1042,11 @@
 				D53483902451DF250019C577 /* String+json.swift in Sources */,
 				D568B4482450416E00F8E864 /* URL+utils.swift in Sources */,
 				D5308664243F03DF00FCA5DD /* AppManager.swift in Sources */,
-				D54971562451C6F1009F0AF1 /* PlistHelper.swift in Sources */,
 				82ED892F2448431500305D4B /* NotificationManager.swift in Sources */,
 				9DD136552452193900A9AC2F /* BluetraceManager+CurrentState.swift in Sources */,
 				D53483952451E37C0019C577 /* AppStatusManager.swift in Sources */,
-				D54971AC2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
 				D5308666243F048C00FCA5DD /* StoredDefaults.swift in Sources */,
 				D5F5BC812452F656008FD0F1 /* PogoManager.swift in Sources */,
-				D5308651243EF8C900FCA5DD /* PollViewModel.swift in Sources */,
 				D530866C243F0FBF00FCA5DD /* PWAViewModel.swift in Sources */,
 				D54971872451C727009F0AF1 /* tracer.xcdatamodeld in Sources */,
 				D5308659243EF99500FCA5DD /* CoordinatorType.swift in Sources */,
@@ -1124,7 +1073,6 @@
 				D53483AE2452A21F0019C577 /* ConfigManager.swift in Sources */,
 				D53483A624529EAE0019C577 /* BlueTraceConfig.swift in Sources */,
 				B3A89619245252790091262B /* LoginManager.swift in Sources */,
-				D5A3805F24519A7E005E5E72 /* PollCoordinator.swift in Sources */,
 				D5A3806024519A7E005E5E72 /* ViewController.swift in Sources */,
 				D54971752451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
 				D56C95F62455D3400048F19F /* NotificationsPermission.swift in Sources */,
@@ -1132,17 +1080,14 @@
 				D5A3806124519A7E005E5E72 /* ViewControllerType.swift in Sources */,
 				D549719B2451C73D009F0AF1 /* Bluetrace.swift in Sources */,
 				B3A89616245252790091262B /* Result+Void.swift in Sources */,
-				D549716C2451C705009F0AF1 /* BlueTraceLocalNotifications.swift in Sources */,
 				D5A3806224519A7E005E5E72 /* PWAViewController.swift in Sources */,
 				D5F5BC782452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift in Sources */,
 				D5A3806324519A7E005E5E72 /* JSBridge.swift in Sources */,
-				D5A3806424519A7E005E5E72 /* PollViewController.swift in Sources */,
 				D5F5BC742452B57E008FD0F1 /* FirebaseConfig.swift in Sources */,
 				D54971722451C705009F0AF1 /* PeripheralController.swift in Sources */,
 				D5A3806524519A7E005E5E72 /* UINavigationController+statusBar.swift in Sources */,
 				D56C95F22455BD8E0048F19F /* PermissionType.swift in Sources */,
 				D56C95ED2455BD770048F19F /* BluetoothPermission.swift in Sources */,
-				D54971522451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */,
 				D54971A62451C755009F0AF1 /* EncounterRecord.swift in Sources */,
 				D5F5BC7C2452C9F8008FD0F1 /* BlueTraceManager.swift in Sources */,
 				D549718C2451C727009F0AF1 /* Encounter+CoreDataClass.swift in Sources */,
@@ -1158,13 +1103,10 @@
 				D53483922451DF250019C577 /* String+json.swift in Sources */,
 				D5A3806924519A7E005E5E72 /* URL+utils.swift in Sources */,
 				D5A3806A24519A7E005E5E72 /* Logger.swift in Sources */,
-				D54971582451C6F1009F0AF1 /* PlistHelper.swift in Sources */,
 				D5A3806B24519A7E005E5E72 /* NotificationManager.swift in Sources */,
 				9DD13657245219AA00A9AC2F /* BluetraceManager+CurrentState.swift in Sources */,
 				D53483972451E37C0019C577 /* AppStatusManager.swift in Sources */,
-				D54971AE2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
 				D5F5BC832452F656008FD0F1 /* PogoManager.swift in Sources */,
-				D5A3806C24519A7E005E5E72 /* PollViewModel.swift in Sources */,
 				D5A3806D24519A7E005E5E72 /* PWAViewModel.swift in Sources */,
 				D54971892451C727009F0AF1 /* tracer.xcdatamodeld in Sources */,
 				D5A3806F24519A7E005E5E72 /* CoordinatorType.swift in Sources */,
@@ -1191,7 +1133,6 @@
 				D53483AD2452A21F0019C577 /* ConfigManager.swift in Sources */,
 				D53483A524529EAE0019C577 /* BlueTraceConfig.swift in Sources */,
 				B3A89618245252790091262B /* LoginManager.swift in Sources */,
-				D5B207AE24471AA90083FCEC /* PollCoordinator.swift in Sources */,
 				D5B207AF24471AA90083FCEC /* ViewController.swift in Sources */,
 				D54971742451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
 				D56C95F52455D3400048F19F /* NotificationsPermission.swift in Sources */,
@@ -1199,17 +1140,14 @@
 				D5B207B024471AA90083FCEC /* ViewControllerType.swift in Sources */,
 				D549719A2451C73D009F0AF1 /* Bluetrace.swift in Sources */,
 				B3A89615245252790091262B /* Result+Void.swift in Sources */,
-				D549716B2451C705009F0AF1 /* BlueTraceLocalNotifications.swift in Sources */,
 				D5B207B124471AA90083FCEC /* PWAViewController.swift in Sources */,
 				D5F5BC772452B5E3008FD0F1 /* EncounterMessageManager+AuthSetup.swift in Sources */,
 				824DCE1B2448400B00C1EADC /* JSBridge.swift in Sources */,
-				D5B207B224471AA90083FCEC /* PollViewController.swift in Sources */,
 				D5F5BC732452B57E008FD0F1 /* FirebaseConfig.swift in Sources */,
 				D54971712451C705009F0AF1 /* PeripheralController.swift in Sources */,
 				D5FA09C7244F03570042A702 /* UINavigationController+statusBar.swift in Sources */,
 				D56C95F12455BD8E0048F19F /* PermissionType.swift in Sources */,
 				D56C95EC2455BD770048F19F /* BluetoothPermission.swift in Sources */,
-				D54971512451C6D1009F0AF1 /* PushNotificationConstants.swift in Sources */,
 				D54971A52451C755009F0AF1 /* EncounterRecord.swift in Sources */,
 				D5F5BC7B2452C9F8008FD0F1 /* BlueTraceManager.swift in Sources */,
 				D549718B2451C727009F0AF1 /* Encounter+CoreDataClass.swift in Sources */,
@@ -1225,13 +1163,10 @@
 				D53483912451DF250019C577 /* String+json.swift in Sources */,
 				D568B4492450416E00F8E864 /* URL+utils.swift in Sources */,
 				D5B207C8244822890083FCEC /* Logger.swift in Sources */,
-				D54971572451C6F1009F0AF1 /* PlistHelper.swift in Sources */,
 				82ED89302448431500305D4B /* NotificationManager.swift in Sources */,
 				9DD13656245219A100A9AC2F /* BluetraceManager+CurrentState.swift in Sources */,
 				D53483962451E37C0019C577 /* AppStatusManager.swift in Sources */,
-				D54971AD2451C75F009F0AF1 /* PogoInstructionsViewController.swift in Sources */,
 				D5F5BC822452F656008FD0F1 /* PogoManager.swift in Sources */,
-				D5B207B524471AA90083FCEC /* PollViewModel.swift in Sources */,
 				D5B207B624471AA90083FCEC /* PWAViewModel.swift in Sources */,
 				D54971882451C727009F0AF1 /* tracer.xcdatamodeld in Sources */,
 				D5B207B724471AA90083FCEC /* CoordinatorType.swift in Sources */,
@@ -1383,7 +1318,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Live.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 36;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = "safesafe/Info-live.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1391,7 +1326,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D LIVE";
 				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.mc.protegosafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1411,7 +1346,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Live.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 36;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = "safesafe/Info-live.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1419,7 +1354,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D LIVE";
 				PRODUCT_BUNDLE_IDENTIFIER = pl.gov.mc.protegosafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1438,7 +1373,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 36;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = safesafe/Info.stage.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1446,7 +1381,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D STAGE";
 				PRODUCT_BUNDLE_IDENTIFIER = "pl.gov.mc.protegosafe-staging";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1465,7 +1400,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 36;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = 85GAG994R5;
 				INFOPLIST_FILE = safesafe/Info.stage.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1473,7 +1408,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D STAGE";
 				PRODUCT_BUNDLE_IDENTIFIER = "pl.gov.mc.protegosafe-staging";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1490,9 +1425,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
+<<<<<<< HEAD
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 36;
+=======
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 40;
+>>>>>>> develop
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = "safesafe/Info-dev.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1500,7 +1441,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D DEV";
 				PRODUCT_BUNDLE_IDENTIFIER = se.sigmaconnectivity.protegosafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1519,7 +1460,7 @@
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 36;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = "safesafe/Info-dev.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1527,11 +1468,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D DEV";
 				PRODUCT_BUNDLE_IDENTIFIER = se.sigmaconnectivity.protegosafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "protegosafe-development";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";

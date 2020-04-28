@@ -54,7 +54,7 @@ final class AppCoordinator: CoordinatorType {
     
     private func pwa() -> UIViewController {
         let viewModel = PWAViewModel()
-        let navigationController = NavigationControler(rootViewController: PWAViewController(viewModel: viewModel))
+        let navigationController = NavigationController(rootViewController: PWAViewController(viewModel: viewModel))
         return navigationController
     }
     
