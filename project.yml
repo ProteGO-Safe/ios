@@ -1,0 +1,53 @@
+name: safesafe
+
+include:
+  - XcodeGenConfig/dev.yml
+  - XcodeGenConfig/stage.yml
+  - XcodeGenConfig/live.yml
+
+settings:
+  CODE_SIGN_STYLE: Manual
+  MARKETING_VERSION: "3.0.0"
+
+targets:
+  safesafe Dev:
+    type: application
+    platform: iOS
+    deploymentTarget: "12.1"
+    sources: 
+      - safesafe
+      - "safesafe Live.entitlements"
+      - "safesafe Dev.entitlements"
+    postBuildScripts:
+      - script: "${PODS_ROOT}/FirebaseCrashlytics/run"
+        name: "Crashlytics"
+
+  safesafe Stage:
+    type: application
+    platform: iOS
+    deploymentTarget: "12.1"
+    sources: 
+      - safesafe
+      - "safesafe Live.entitlements"
+      - "safesafe Dev.entitlements"
+    postBuildScripts:
+      - script: "${PODS_ROOT}/FirebaseCrashlytics/run"
+        name: "Crashlytics"
+
+  safesafe Live:
+    type: application
+    platform: iOS
+    deploymentTarget: "12.1"
+    sources: 
+      - safesafe
+      - "safesafe Live.entitlements"
+      - "safesafe Dev.entitlements"
+    postBuildScripts:
+      - script:
+          custom_sim=`xcrun simctl list | grep 'Custom Simulators' | awk -F'[()]' '{print $2}'`
+          if [ ! -z "${custom_sim}" ] && [ "${TARGET_DEVICE_IDENTIFIER}" = "${custom_sim}" ]; then
+          /bin/sh multipleSimulatorsStartup.sh
+          fi
+        name: "Custom sims"
+      - script: "${PODS_ROOT}/FirebaseCrashlytics/run"
+        name: "Crashlytics"
