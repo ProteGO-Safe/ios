@@ -42,8 +42,8 @@ final class AppCoordinator: CoordinatorType {
             DispatchQueue.main.async {
                 if path.status == .satisfied {
                     self?.noInternetAlert?.dismiss(animated: false)
-                    EncounterMessageManager.shared.authSetup()
                     self?.startBluetraceIfNeeded()
+                    self?.signInIfNeeded()
                 } else {
                     self?.showInternetAlert()
                 }
@@ -64,6 +64,14 @@ final class AppCoordinator: CoordinatorType {
         
         BluetraceManager.shared.turnOn()
         EncounterMessageManager.shared.authSetup()
+    }
+    
+    private func signInIfNeeded() {
+        LoginManager().signIn { result in
+            if case let .failure(error) = result {
+                console(error, type: .error)
+            }
+        }
     }
     
     private func showInternetAlert() {
