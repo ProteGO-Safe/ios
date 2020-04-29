@@ -10,6 +10,10 @@ import CoreData
 import UIKit
 import PromiseKit
 
+#if !LIVE
+    import DBDebugToolkit
+#endif
+
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,6 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         StoredDefaults.standard.set(value: true, key: .isFirstRun)
+        
+        #if !LIVE
+            DBDebugToolkit.setup()
+        #endif
             
         return true
     }
