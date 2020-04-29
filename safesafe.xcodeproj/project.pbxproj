@@ -19,15 +19,15 @@
 		9DD1365924521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */; };
 		9DD1365A24521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */; };
 		9DD1365B24521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */; };
+		9DD833D124563C6E00C2D920 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DD833D024563C6E00C2D920 /* Config.plist */; };
+		9DD833D224563C6E00C2D920 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DD833D024563C6E00C2D920 /* Config.plist */; };
+		9DD833D324563C6E00C2D920 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DD833D024563C6E00C2D920 /* Config.plist */; };
 		B376C7762458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B376C7752458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift */; };
 		B376C7772458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B376C7752458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift */; };
 		B376C7782458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B376C7752458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift */; };
 		B376C77A2458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B376C7792458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift */; };
 		B376C77B2458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B376C7792458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift */; };
 		B376C77C2458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B376C7792458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift */; };
-		9DD833D124563C6E00C2D920 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DD833D024563C6E00C2D920 /* Config.plist */; };
-		9DD833D224563C6E00C2D920 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DD833D024563C6E00C2D920 /* Config.plist */; };
-		9DD833D324563C6E00C2D920 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DD833D024563C6E00C2D920 /* Config.plist */; };
 		B3A89614245252790091262B /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89612245252790091262B /* Result+Void.swift */; };
 		B3A89615245252790091262B /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89612245252790091262B /* Result+Void.swift */; };
 		B3A89616245252790091262B /* Result+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A89612245252790091262B /* Result+Void.swift */; };
@@ -222,9 +222,9 @@
 		82ED89322448432200305D4B /* safesafe Live.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "safesafe Live.entitlements"; sourceTree = "<group>"; };
 		9DD136542452193900A9AC2F /* BluetraceManager+CurrentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BluetraceManager+CurrentState.swift"; sourceTree = "<group>"; };
 		9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectedServiceResponse.swift; sourceTree = "<group>"; };
+		9DD833D024563C6E00C2D920 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		B376C7752458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearBluetoothDataResponse.swift; sourceTree = "<group>"; };
 		B376C7792458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BluetraceUtils+RemoveData.swift"; sourceTree = "<group>"; };
-		9DD833D024563C6E00C2D920 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		B3A89612245252790091262B /* Result+Void.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Result+Void.swift"; sourceTree = "<group>"; };
 		B3A89613245252790091262B /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		C575CBBE4321563CBB7712E1 /* Pods_safesafe_Live.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_safesafe_Live.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -690,7 +690,6 @@
 				D5B207E224486E5C0083FCEC /* Embed App Extensions */,
 				D5FA09BE244EF9220042A702 /* Custom sims */,
 				5F7907AF8667776B11F003F1 /* [CP] Embed Pods Frameworks */,
-				D5F5BC7F2452E63C008FD0F1 /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -889,24 +888,6 @@
 			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		D5F5BC7E2452E614008FD0F1 /* Crashlytics */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = Crashlytics;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
-		};
-		D5F5BC7F2452E63C008FD0F1 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
