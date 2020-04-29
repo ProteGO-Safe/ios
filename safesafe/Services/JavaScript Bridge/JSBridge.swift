@@ -21,7 +21,6 @@ final class JSBridge: NSObject {
         case notificationsPermission = 35
         case opentraceToggle = 36
         case clearBluetoothData = 37
-        case permissionRejected = -1 // TODO: check why not used and assign proper data type if needed
     }
     
     enum SendMethod: String, CaseIterable {
@@ -299,25 +298,6 @@ private extension JSBridge {
         BluetraceUtils.removeAllData()
         
         console("Bluetooth data cleared")
-    }
-    
-    func permissionRejected(for service: RejectedService) {
-        let response = RejectedServiceResponse(rejectedService: service)
-        
-        guard
-            let data = try? JSONEncoder().encode(response),
-            let json = String(data: data, encoding: .utf8)
-        else {
-            return
-        }
-        
-        onBridgeData(type: .permissionRejected, body: json) { ret, error in
-            if let error = error {
-                console(error, type: .error)
-            } else {
-                console(ret)
-            }
-        }
     }
     
     private func sendAppStateJSON(type: BridgeDataType) {
