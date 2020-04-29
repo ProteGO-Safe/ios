@@ -29,6 +29,8 @@ final class AppCoordinator: CoordinatorType {
         guard let window = appWindow else {
             fatalError("Window doesn't exists")
         }
+        
+        UIApplication.shared.isIdleTimerDisabled = true
         pogoMM = PogoMotionManager(window: window)
         self.window = window
     }
