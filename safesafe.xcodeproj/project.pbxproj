@@ -19,6 +19,12 @@
 		9DD1365924521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */; };
 		9DD1365A24521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */; };
 		9DD1365B24521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */; };
+		B376C7762458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B376C7752458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift */; };
+		B376C7772458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B376C7752458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift */; };
+		B376C7782458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B376C7752458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift */; };
+		B376C77A2458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B376C7792458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift */; };
+		B376C77B2458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B376C7792458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift */; };
+		B376C77C2458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B376C7792458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift */; };
 		9DD833D124563C6E00C2D920 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DD833D024563C6E00C2D920 /* Config.plist */; };
 		9DD833D224563C6E00C2D920 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DD833D024563C6E00C2D920 /* Config.plist */; };
 		9DD833D324563C6E00C2D920 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DD833D024563C6E00C2D920 /* Config.plist */; };
@@ -216,6 +222,8 @@
 		82ED89322448432200305D4B /* safesafe Live.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "safesafe Live.entitlements"; sourceTree = "<group>"; };
 		9DD136542452193900A9AC2F /* BluetraceManager+CurrentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BluetraceManager+CurrentState.swift"; sourceTree = "<group>"; };
 		9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectedServiceResponse.swift; sourceTree = "<group>"; };
+		B376C7752458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearBluetoothDataResponse.swift; sourceTree = "<group>"; };
+		B376C7792458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BluetraceUtils+RemoveData.swift"; sourceTree = "<group>"; };
 		9DD833D024563C6E00C2D920 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		B3A89612245252790091262B /* Result+Void.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Result+Void.swift"; sourceTree = "<group>"; };
 		B3A89613245252790091262B /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
@@ -598,6 +606,7 @@
 				D54971B12451CD23009F0AF1 /* SurveyFinishedResponse.swift */,
 				D534838B2451DEDB0019C577 /* OpentraceToggleResponse.swift */,
 				9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */,
+				B376C7752458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -638,6 +647,7 @@
 				D534838F2451DF250019C577 /* String+json.swift */,
 				B3A89612245252790091262B /* Result+Void.swift */,
 				9DD136542452193900A9AC2F /* BluetraceManager+CurrentState.swift */,
+				B376C7792458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1013,6 +1023,7 @@
 				D53483AC2452A21F0019C577 /* ConfigManager.swift in Sources */,
 				D53483A424529EAE0019C577 /* BlueTraceConfig.swift in Sources */,
 				B3A89617245252790091262B /* LoginManager.swift in Sources */,
+				B376C77A2458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift in Sources */,
 				D54971732451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
 				D54971762451C705009F0AF1 /* DeviceInfo.swift in Sources */,
 				D56C95F42455D3400048F19F /* NotificationsPermission.swift in Sources */,
@@ -1045,6 +1056,7 @@
 				82ED892F2448431500305D4B /* NotificationManager.swift in Sources */,
 				9DD136552452193900A9AC2F /* BluetraceManager+CurrentState.swift in Sources */,
 				D53483952451E37C0019C577 /* AppStatusManager.swift in Sources */,
+				B376C7762458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift in Sources */,
 				D5308666243F048C00FCA5DD /* StoredDefaults.swift in Sources */,
 				D5F5BC812452F656008FD0F1 /* PogoManager.swift in Sources */,
 				D530866C243F0FBF00FCA5DD /* PWAViewModel.swift in Sources */,
@@ -1073,6 +1085,7 @@
 				D53483AE2452A21F0019C577 /* ConfigManager.swift in Sources */,
 				D53483A624529EAE0019C577 /* BlueTraceConfig.swift in Sources */,
 				B3A89619245252790091262B /* LoginManager.swift in Sources */,
+				B376C77C2458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift in Sources */,
 				D5A3806024519A7E005E5E72 /* ViewController.swift in Sources */,
 				D54971752451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
 				D56C95F62455D3400048F19F /* NotificationsPermission.swift in Sources */,
@@ -1105,6 +1118,7 @@
 				D5A3806A24519A7E005E5E72 /* Logger.swift in Sources */,
 				D5A3806B24519A7E005E5E72 /* NotificationManager.swift in Sources */,
 				9DD13657245219AA00A9AC2F /* BluetraceManager+CurrentState.swift in Sources */,
+				B376C7782458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift in Sources */,
 				D53483972451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D5F5BC832452F656008FD0F1 /* PogoManager.swift in Sources */,
 				D5A3806D24519A7E005E5E72 /* PWAViewModel.swift in Sources */,
@@ -1133,6 +1147,7 @@
 				D53483AD2452A21F0019C577 /* ConfigManager.swift in Sources */,
 				D53483A524529EAE0019C577 /* BlueTraceConfig.swift in Sources */,
 				B3A89618245252790091262B /* LoginManager.swift in Sources */,
+				B376C77B2458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift in Sources */,
 				D5B207AF24471AA90083FCEC /* ViewController.swift in Sources */,
 				D54971742451C705009F0AF1 /* BluetraceUtils.swift in Sources */,
 				D56C95F52455D3400048F19F /* NotificationsPermission.swift in Sources */,
@@ -1165,6 +1180,7 @@
 				D5B207C8244822890083FCEC /* Logger.swift in Sources */,
 				82ED89302448431500305D4B /* NotificationManager.swift in Sources */,
 				9DD13656245219A100A9AC2F /* BluetraceManager+CurrentState.swift in Sources */,
+				B376C7772458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift in Sources */,
 				D53483962451E37C0019C577 /* AppStatusManager.swift in Sources */,
 				D5F5BC822452F656008FD0F1 /* PogoManager.swift in Sources */,
 				D5B207B624471AA90083FCEC /* PWAViewModel.swift in Sources */,
@@ -1371,11 +1387,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Stage";
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = 85GAG994R5;
-				INFOPLIST_FILE = safesafe/Info.stage.plist;
+				INFOPLIST_FILE = "safesafe/Info-stage.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1385,7 +1401,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D STAGE";
 				PRODUCT_BUNDLE_IDENTIFIER = "pl.gov.mc.protegosafe-staging";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "protegosafe-staging-dev";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1398,11 +1414,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Stage";
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = 85GAG994R5;
-				INFOPLIST_FILE = safesafe/Info.stage.plist;
+				INFOPLIST_FILE = "safesafe/Info-stage.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1412,7 +1428,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -D STAGE";
 				PRODUCT_BUNDLE_IDENTIFIER = "pl.gov.mc.protegosafe-staging";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "protegosafe-staging-dev";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1425,8 +1441,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = "safesafe/Info-dev.plist";
@@ -1452,8 +1468,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
 				CODE_SIGN_ENTITLEMENTS = "safesafe Dev.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = HU9FKSEQXD;
 				INFOPLIST_FILE = "safesafe/Info-dev.plist";

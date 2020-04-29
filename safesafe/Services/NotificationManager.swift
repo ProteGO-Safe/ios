@@ -9,6 +9,7 @@
 import UIKit
 import UserNotifications
 import Firebase
+import FirebaseMessaging
 import PromiseKit
 
 protocol NotificationManagerProtocol {

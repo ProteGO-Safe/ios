@@ -20,7 +20,7 @@ final class JSBridge: NSObject {
         case bluetoothPermission = 33
         case notificationsPermission = 35
         case opentraceToggle = 36
-        case permissionRejected = 37
+        case clearBluetoothData = 37
     }
     
     enum SendMethod: String, CaseIterable {
@@ -121,8 +121,8 @@ extension JSBridge: WKScriptMessageHandler {
             let object = body as? [String: Any],
             let type = object[Key.type] as? Int,
             let bridgeDataType = BridgeDataType(rawValue: type)
-            else {
-                return
+        else {
+            return
         }
         
         let jsonString = object[Key.data] as? String
@@ -138,6 +138,8 @@ extension JSBridge: WKScriptMessageHandler {
         case .opentraceToggle:
             currentDataType = bridgeDataType
             opentraceToggle(jsonString: jsonString, type: bridgeDataType)
+        case .clearBluetoothData:
+            clearBluetoothData(jsonString: jsonString, type: bridgeDataType)
         default:
             console("Not managed yet", type: .warning)
         }
@@ -149,8 +151,8 @@ extension JSBridge: WKScriptMessageHandler {
             let requestId = requestData[Key.requestId] as? String,
             let type = requestData[Key.type] as? Int,
             let bridgeDataType = BridgeDataType(rawValue: type)
-            else {
-                return
+        else {
+            return
         }
         
         switch bridgeDataType {
@@ -285,23 +287,17 @@ private extension JSBridge {
         
     }
     
-    func permissionRejected(for service: RejectedService) {
-        let response = RejectedServiceResponse(rejectedService: service)
-        
+    func clearBluetoothData(jsonString: String?, type: BridgeDataType) {
         guard
-            let data = try? JSONEncoder().encode(response),
-            let json = String(data: data, encoding: .utf8)
-            else {
-                return
-        }
+            let response: ClearBluetoothDataResponse = jsonString?.jsonDecode(decoder: jsonDecoder),
+            response.clearBluetoothData
+        else { return }
         
-        onBridgeData(type: .permissionRejected, body: json) { ret, error in
-            if let error = error {
-                console(error, type: .error)
-            } else {
-                console(ret)
-            }
-        }
+        AppManager.instance.isBluetraceAllowed = false
+        BluetraceManager.shared.turnOff()
+        BluetraceUtils.removeAllData()
+        
+        console("Bluetooth data cleared")
     }
     
     private func sendAppStateJSON(type: BridgeDataType) {
