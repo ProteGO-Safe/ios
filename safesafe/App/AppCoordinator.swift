@@ -9,6 +9,10 @@
 import UIKit
 import Network
 
+#if !LIVE
+import DBDebugToolkit
+#endif
+
 final class AppCoordinator: CoordinatorType {
     
     private let appManager = AppManager.instance
@@ -36,6 +40,8 @@ final class AppCoordinator: CoordinatorType {
     }
     
     func start() {
+        setupDebugToolkit()
+        
         window.backgroundColor = .white
         window.rootViewController = pwa()
         window.makeKeyAndVisible()
@@ -94,6 +100,13 @@ final class AppCoordinator: CoordinatorType {
     
     private func removeUIApplicationObservers() {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func setupDebugToolkit() {
+        #if !LIVE        
+        DBDebugToolkit.setup()
+        DBDebugToolkit.add(CustomActions.bluetraceDBDumpAction(window: window))
+        #endif
     }
     
     @objc
