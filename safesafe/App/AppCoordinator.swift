@@ -105,7 +105,7 @@ final class AppCoordinator: CoordinatorType {
     private func setupDebugToolkit() {
         #if !LIVE        
         DBDebugToolkit.setup()
-        DBDebugToolkit.add(CustomActions.bluetraceDBDumpAction(window: window))
+        DBDebugToolkit.add(DBCustomActionFactory.makeBluetraceDBDumpAction(window: window))
         #endif
     }
     

@@ -30,21 +30,7 @@ final class DatabaseDump {
 
     }
     
-    private enum DBError: Error {
-        case fetchingRecords
-        case fetchingEvents
-    }
-    
-    private enum JSONError: Error {
-        case serializingData
-    }
-    
-    private enum FileError: Error {
-        case locatingDictionary
-        case writingToFile
-    }
-    
-    func toJSON(result: @escaping (Result<URL, Error>) -> ()) {
+    func toJSON(token: String, result: @escaping (Result<URL, Error>) -> ()) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             result(.failure(InternalError.nilValue))
             return
@@ -57,25 +43,25 @@ final class DatabaseDump {
         managedContext.perform { [unowned self] in
             guard let records = try? recordsFetchRequest.execute() else {
                 Logger.DLog("Error fetching records")
-                return result(.failure(DBError.fetchingRecords))
+                return result(.failure(InternalError.databaseFetchingRecords))
             }
 
             guard let events = try? eventsFetchRequest.execute() else {
                 Logger.DLog("Error fetching events")
-                return result(.failure(DBError.fetchingEvents))
+                return result(.failure(InternalError.databaseFetchingEvents))
             }
 
-            let data = UploadFileData(token: "#SOME_UPLOAD_TOKEN~#", records: records, events: events)
+            let data = UploadFileData(token: token, records: records, events: events)
 
             let encoder = JSONEncoder()
             guard let json = try? encoder.encode(data) else {
                 Logger.DLog("Error serializing data")
-                return result(.failure(JSONError.serializingData))
+                return result(.failure(InternalError.jsonSerializingData))
             }
 
             guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
                 Logger.DLog("Error locating user documents directory")
-                return result(.failure(FileError.locatingDictionary))
+                return result(.failure(InternalError.locatingDictionary))
             }
 
             let fileURL = directory.appendingPathComponent(self.fileName)
@@ -85,7 +71,7 @@ final class DatabaseDump {
                 result(.success(fileURL))
             } catch {
                 Logger.DLog("Error writing to file")
-                return result(.failure(FileError.writingToFile))
+                return result(.failure(InternalError.writingToFile))
             }
             
         }

@@ -10,13 +10,14 @@ import UIKit
 #if !LIVE
     import DBDebugToolkit
 #endif
-final class CustomActions {
+
+final class DBCustomActionFactory {
 
     private static let dbDump = DatabaseDump()
     
-    static func bluetraceDBDumpAction(window: UIWindow) -> DBCustomAction {
+    static func makeBluetraceDBDumpAction(window: UIWindow) -> DBCustomAction {
         return DBCustomAction(name: "Blue Trace JSON") {
-            dbDump.toJSON { result in
+            dbDump.toJSON(token: "SOME_UPLOAD_TOKEN") { result in
                 do {
                     let url = try result.get()
                     DispatchQueue.main.async {
