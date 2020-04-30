@@ -40,6 +40,10 @@ safesafe/resources/Stage/GoogleService-Info.plist
 safesafe/resources/Dev/Config-dev.plist
 safesafe/resources/Stage/Config-stage.plist
 
+## Xcodegen
+*.xcodeproj
+*.xcworkspace
+
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace
