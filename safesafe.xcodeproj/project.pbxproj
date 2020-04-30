@@ -690,7 +690,6 @@
 				D5B207E224486E5C0083FCEC /* Embed App Extensions */,
 				D5FA09BE244EF9220042A702 /* Custom sims */,
 				5F7907AF8667776B11F003F1 /* [CP] Embed Pods Frameworks */,
-				D5F5BC7F2452E63C008FD0F1 /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -889,24 +888,6 @@
 			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		D5F5BC7E2452E614008FD0F1 /* Crashlytics */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = Crashlytics;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
-		};
-		D5F5BC7F2452E63C008FD0F1 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
