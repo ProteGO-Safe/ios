@@ -15,9 +15,20 @@ targets:
     platform: iOS
     deploymentTarget: "12.1"
     sources: 
-      - safesafe
-      - "safesafe Live.entitlements"
-      - "safesafe Dev.entitlements"
+      - path: safesafe
+        excludes: [Resources/Live, Resources/Stage]
+      - ["safesafe Live.entitlements", "safesafe Dev.entitlements"]
+      - path: Submodules/opentrace-ios/OpenTrace/Constants
+        group: OpenTrace
+        includes: PushNotificationConstants.swift
+      - path: Submodules/opentrace-ios/OpenTrace/Utils
+        group: OpenTrace
+        includes: [FirebaseAPIs.swift, PlistHelper.swift]
+      - path: Submodules/opentrace-ios/OpenTrace/Bluetrace
+        group: OpenTrace
+        excludes: [BluetraceConfig.swift, BluetraceManager.swift, CentralController.swift]
+      - path: "Submodules/opentrace-ios/OpenTrace/Power saver/PogoInstructionsViewController.swift"
+        group: OpenTrace/PowerSaver
     postBuildScripts:
       - script: "${PODS_ROOT}/FirebaseCrashlytics/run"
         name: "Crashlytics"
@@ -27,9 +38,20 @@ targets:
     platform: iOS
     deploymentTarget: "12.1"
     sources: 
-      - safesafe
-      - "safesafe Live.entitlements"
-      - "safesafe Dev.entitlements"
+      - path: safesafe
+        excludes: [Resources/Dev, Resources/Live]
+      - ["safesafe Live.entitlements", "safesafe Dev.entitlements"]
+      - path: Submodules/opentrace-ios/OpenTrace/Constants
+        group: OpenTrace
+        includes: PushNotificationConstants.swift
+      - path: Submodules/opentrace-ios/OpenTrace/Utils
+        group: OpenTrace
+        includes: [FirebaseAPIs.swift, PlistHelper.swift]
+      - path: Submodules/opentrace-ios/OpenTrace/Bluetrace
+        group: OpenTrace
+        excludes: [BluetraceConfig.swift, BluetraceManager.swift, CentralController.swift]
+      - path: "Submodules/opentrace-ios/OpenTrace/Power saver/PogoInstructionsViewController.swift"
+        group: OpenTrace/PowerSaver
     postBuildScripts:
       - script: "${PODS_ROOT}/FirebaseCrashlytics/run"
         name: "Crashlytics"
@@ -39,9 +61,20 @@ targets:
     platform: iOS
     deploymentTarget: "12.1"
     sources: 
-      - safesafe
-      - "safesafe Live.entitlements"
-      - "safesafe Dev.entitlements"
+      - path: safesafe
+        excludes: [Resources/Dev, Resources/Stage]
+      - ["safesafe Live.entitlements", "safesafe Dev.entitlements"]
+      - path: Submodules/opentrace-ios/OpenTrace/Constants
+        group: OpenTrace
+        includes: PushNotificationConstants.swift
+      - path: Submodules/opentrace-ios/OpenTrace/Utils
+        group: OpenTrace
+        includes: [FirebaseAPIs.swift, PlistHelper.swift]
+      - path: Submodules/opentrace-ios/OpenTrace/Bluetrace
+        group: OpenTrace
+        excludes: [BluetraceConfig.swift, BluetraceManager.swift, CentralController.swift]
+      - path: "Submodules/opentrace-ios/OpenTrace/Power saver/PogoInstructionsViewController.swift"
+        group: OpenTrace/PowerSaver
     postBuildScripts:
       - script:
           custom_sim=`xcrun simctl list | grep 'Custom Simulators' | awk -F'[()]' '{print $2}'`
