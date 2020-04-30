@@ -29,9 +29,6 @@ targets:
         excludes: [BluetraceConfig.swift, BluetraceManager.swift, CentralController.swift]
       - path: "Submodules/opentrace-ios/OpenTrace/Power saver/PogoInstructionsViewController.swift"
         group: OpenTrace/PowerSaver
-    postBuildScripts:
-      - script: "${PODS_ROOT}/FirebaseCrashlytics/run"
-        name: "Crashlytics"
 
   safesafe Stage:
     type: application
@@ -52,9 +49,6 @@ targets:
         excludes: [BluetraceConfig.swift, BluetraceManager.swift, CentralController.swift]
       - path: "Submodules/opentrace-ios/OpenTrace/Power saver/PogoInstructionsViewController.swift"
         group: OpenTrace/PowerSaver
-    postBuildScripts:
-      - script: "${PODS_ROOT}/FirebaseCrashlytics/run"
-        name: "Crashlytics"
 
   safesafe Live:
     type: application
@@ -82,5 +76,3 @@ targets:
           /bin/sh multipleSimulatorsStartup.sh
           fi
         name: "Custom sims"
-      - script: "${PODS_ROOT}/FirebaseCrashlytics/run"
-        name: "Crashlytics"
