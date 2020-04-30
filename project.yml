@@ -5,10 +5,43 @@ include:
   - XcodeGenConfig/stage.yml
   - XcodeGenConfig/live.yml
 
+configs:
+  Dev: debug
+  Stage: release
+  Live: release
+
 settings:
   CODE_SIGN_STYLE: Manual
   MARKETING_VERSION: "3.0.0"
   CURRENT_PROJECT_VERSION: 40
+
+schemes:
+  safesafe Dev:
+    build: 
+      targets: 
+        safesafe Dev: all
+    run:
+      config: Dev
+    archive:
+      config: Dev
+
+  safesafe Stage:
+    build: 
+      targets: 
+        safesafe Stage: all
+    run:
+      config: Stage
+    archive:
+      config: Stage
+
+  safesafe Live:
+    build: 
+      targets: 
+        safesafe Live: all
+    run:
+      config: Live
+    archive:
+      config: Live
 
 targets:
   safesafe Dev:
