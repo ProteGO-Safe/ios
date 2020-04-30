@@ -9,13 +9,18 @@
 import Foundation
 
 final class ConfigManager {
-    static let `default` = ConfigManager(plistName: "Config")
+    
+    #if DEV
+    static private let configPlistName = "Config-dev"
+    #elseif STAGE
+    static private let configPlistName = "Config-stage"
+    #elseif LIVE
+    static private let configPlistName = "Config-live"
+    #endif
+    
+    static let `default` = ConfigManager(plistName: configPlistName)
     
     private enum Key {
-        static let dev = "Dev"
-        static let live = "Live"
-        static let staging = "Staging"
-        
         // Bluetooth settings
         static let bluetooth = "Bluetooth" // Dictionary
         static let serviceUUID = "SERVICE_UUID" // String
@@ -39,22 +44,10 @@ final class ConfigManager {
             let path = Bundle.main.path(forResource: plistName, ofType: "plist"),
             let plist = NSDictionary(contentsOfFile: path) as? [String: Any]
         else {
-                fatalError("Can't find \(plistName).plist")
+            fatalError("Can't find \(plistName).plist")
         }
         
-        #if DEV
-        let mainKey: String = Key.dev
-        #elseif STAGE
-        let mainKey: String = Key.staging
-        #elseif LIVE
-        let mainKey: String = Key.live
-        #endif
-        
-        guard let settings = plist[mainKey] as? [String: Any] else {
-            fatalError("No configuration settings for \(mainKey)")
-        }
-        
-        self.settings = settings
+        settings = plist
     }
     
     private func value<T>(for key: String, dictionary: [String: Any]) -> T {
@@ -64,6 +57,7 @@ final class ConfigManager {
         
         return dictValue
     }
+    
 }
 
 // Bluetooth

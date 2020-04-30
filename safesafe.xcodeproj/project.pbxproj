@@ -19,9 +19,9 @@
 		9DD1365924521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */; };
 		9DD1365A24521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */; };
 		9DD1365B24521C2900A9AC2F /* RejectedServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */; };
-		9DD833D124563C6E00C2D920 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DD833D024563C6E00C2D920 /* Config.plist */; };
-		9DD833D224563C6E00C2D920 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DD833D024563C6E00C2D920 /* Config.plist */; };
-		9DD833D324563C6E00C2D920 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DD833D024563C6E00C2D920 /* Config.plist */; };
+		B341A240245A3C7200334344 /* Config-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = B341A23F245A3C7200334344 /* Config-dev.plist */; };
+		B341A242245A3EED00334344 /* Config-live.plist in Resources */ = {isa = PBXBuildFile; fileRef = B341A241245A3EED00334344 /* Config-live.plist */; };
+		B341A244245A3F0400334344 /* Config-stage.plist in Resources */ = {isa = PBXBuildFile; fileRef = B341A243245A3F0400334344 /* Config-stage.plist */; };
 		B376C7762458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B376C7752458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift */; };
 		B376C7772458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B376C7752458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift */; };
 		B376C7782458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B376C7752458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift */; };
@@ -222,7 +222,9 @@
 		82ED89322448432200305D4B /* safesafe Live.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "safesafe Live.entitlements"; sourceTree = "<group>"; };
 		9DD136542452193900A9AC2F /* BluetraceManager+CurrentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BluetraceManager+CurrentState.swift"; sourceTree = "<group>"; };
 		9DD1365824521C2900A9AC2F /* RejectedServiceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectedServiceResponse.swift; sourceTree = "<group>"; };
-		9DD833D024563C6E00C2D920 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		B341A23F245A3C7200334344 /* Config-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Config-dev.plist"; sourceTree = "<group>"; };
+		B341A241245A3EED00334344 /* Config-live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Config-live.plist"; sourceTree = "<group>"; };
+		B341A243245A3F0400334344 /* Config-stage.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Config-stage.plist"; sourceTree = "<group>"; };
 		B376C7752458E5FB006B7EE7 /* ClearBluetoothDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearBluetoothDataResponse.swift; sourceTree = "<group>"; };
 		B376C7792458ED59006B7EE7 /* BluetraceUtils+RemoveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BluetraceUtils+RemoveData.swift"; sourceTree = "<group>"; };
 		B3A89612245252790091262B /* Result+Void.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Result+Void.swift"; sourceTree = "<group>"; };
@@ -351,7 +353,6 @@
 		82ED89332448443700305D4B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9DD833D024563C6E00C2D920 /* Config.plist */,
 				D5308640243EF87000FCA5DD /* Assets.xcassets */,
 				D5308642243EF87000FCA5DD /* LaunchScreen.storyboard */,
 				D5A3808024519B8D005E5E72 /* Stage */,
@@ -633,6 +634,7 @@
 		D5A3808024519B8D005E5E72 /* Stage */ = {
 			isa = PBXGroup;
 			children = (
+				B341A243245A3F0400334344 /* Config-stage.plist */,
 				D5A3808124519F29005E5E72 /* GoogleService-Info.plist */,
 			);
 			path = Stage;
@@ -655,6 +657,7 @@
 		D5B207F724499A830083FCEC /* Live */ = {
 			isa = PBXGroup;
 			children = (
+				B341A241245A3EED00334344 /* Config-live.plist */,
 				D5B207F824499A830083FCEC /* GoogleService-Info.plist */,
 			);
 			path = Live;
@@ -663,6 +666,7 @@
 		D5B207F924499A830083FCEC /* Dev */ = {
 			isa = PBXGroup;
 			children = (
+				B341A23F245A3C7200334344 /* Config-dev.plist */,
 				D5B207FA24499A830083FCEC /* GoogleService-Info.plist */,
 			);
 			path = Dev;
@@ -784,7 +788,7 @@
 				D5308644243EF87000FCA5DD /* LaunchScreen.storyboard in Resources */,
 				D5B207FB24499A830083FCEC /* GoogleService-Info.plist in Resources */,
 				D5FA09B9244EF82E0042A702 /* SimulatorsList.txt in Resources */,
-				9DD833D124563C6E00C2D920 /* Config.plist in Resources */,
+				B341A242245A3EED00334344 /* Config-live.plist in Resources */,
 				D5A380862451A1CA005E5E72 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -794,10 +798,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5A3807524519A7E005E5E72 /* multipleSimulatorsStartup.sh in Resources */,
+				B341A244245A3F0400334344 /* Config-stage.plist in Resources */,
 				D5A3807624519A7E005E5E72 /* LaunchScreen.storyboard in Resources */,
 				D5A3807924519A7E005E5E72 /* SimulatorsList.txt in Resources */,
 				D5A3808224519F29005E5E72 /* GoogleService-Info.plist in Resources */,
-				9DD833D324563C6E00C2D920 /* Config.plist in Resources */,
 				D5A380842451A1C0005E5E72 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -810,7 +814,7 @@
 				D5B207BC24471AA90083FCEC /* LaunchScreen.storyboard in Resources */,
 				D5B207FE24499A830083FCEC /* GoogleService-Info.plist in Resources */,
 				D5FA09BA244EF82E0042A702 /* SimulatorsList.txt in Resources */,
-				9DD833D224563C6E00C2D920 /* Config.plist in Resources */,
+				B341A240245A3C7200334344 /* Config-dev.plist in Resources */,
 				D5A380852451A1CA005E5E72 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
