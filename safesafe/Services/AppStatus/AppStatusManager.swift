@@ -48,7 +48,7 @@ final class AppStatusManager: AppStatusManagerProtocol {
                     isNotificationEnabled: notificationStatus == .authorized,
                     isBluetoothServiceOn: self.isBluetoothServiceOn)
                 ))
-            }.catch { error in6
+            }.catch { error in
                 console(error, type: .error)
                 seal.reject(error)
             }
