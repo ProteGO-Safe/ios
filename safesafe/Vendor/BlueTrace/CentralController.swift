@@ -58,6 +58,8 @@ class CentralController: NSObject {
         guard central != nil else {
             return
         }
+        timerForScanning?.invalidate()
+
         central?.stopScan()
         central = nil
     }
