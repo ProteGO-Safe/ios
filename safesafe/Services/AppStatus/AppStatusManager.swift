@@ -38,12 +38,17 @@ final class AppStatusManager: AppStatusManagerProtocol {
             firstly {
                 when(fulfilled: Permissions.instance.state(for: .notifications), Permissions.instance.state(for: .bluetooth))
             }.done { notificationStatus, bluetoothStatus in
+                let isBluetoothOn = bluetoothStatus == .authorized
+                if !isBluetoothOn {
+                    AppManager.instance.isBluetraceAllowed = false
+                    self.bluetraceManager.turnOff()
+                }
                 seal.fulfill(AppStatus(servicesStatus: .init(
-                    isBluetoothOn: bluetoothStatus == .authorized,
+                    isBluetoothOn: isBluetoothOn,
                     isNotificationEnabled: notificationStatus == .authorized,
                     isBluetoothServiceOn: self.isBluetoothServiceOn)
                 ))
-            }.catch { error in
+            }.catch { error in6
                 console(error, type: .error)
                 seal.reject(error)
             }
