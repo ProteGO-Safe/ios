@@ -50,6 +50,8 @@ extension PWAViewController: PWAViewModelDelegate {
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = controler
         let webKitView = WKWebView(frame: .zero, configuration: configuration)
+        webKitView.allowsBackForwardNavigationGestures = false
+        webKitView.allowsLinkPreview = false
         if #available(iOS 11.0, *) {
             webKitView.scrollView.contentInsetAdjustmentBehavior = .never
         }
