@@ -14,8 +14,8 @@ final class JSBridge: NSObject {
     static let shared = JSBridge()
     
     enum BridgeDataType: Int {
-        case notification = 1
-        case userId = 2
+        case dailyTopicUnsubscribe = 1
+        case notification = 2
         case appStatus = 31
         case bluetoothPermission = 33
         case notificationsPermission = 35
@@ -127,7 +127,7 @@ extension JSBridge: WKScriptMessageHandler {
         
         let jsonString = object[Key.data] as? String
         switch bridgeDataType {
-        case .notification:
+        case .dailyTopicUnsubscribe:
             unsubscribeFromTopic(jsonString: jsonString, type: bridgeDataType)
         case .bluetoothPermission:
             currentDataType = bridgeDataType
