@@ -17,14 +17,6 @@ def pods_definition
 
 end
 
-target 'safesafe Live' do
-  pods_definition
-end
-
-target 'safesafe Dev' do
-  pods_definition
-end
-
-target 'safesafe Stage' do
+target 'safesafe' do
   pods_definition
 end
