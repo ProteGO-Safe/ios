@@ -20,7 +20,7 @@ extension String {
             let model = try decoder.decode(T.self, from: data)
             return model
         } catch {
-            Logger.DLog(error.localizedDescription)
+            console(error)
             return nil
         }
     }
