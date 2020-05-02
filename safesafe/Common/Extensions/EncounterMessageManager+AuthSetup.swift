@@ -11,7 +11,6 @@ extension EncounterMessageManager {
         LoginManager().signIn { result in
             switch result {
             case .success:
-                EncounterMessageManager.shared.functions = Functions.functions(region: FirebaseConfig.functionsRegion)
                 EncounterMessageManager.shared.setup()
                 
             case .failure(let error):
