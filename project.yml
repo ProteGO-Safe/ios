@@ -20,8 +20,8 @@ targets:
       Stage: safesafe/Resources/Stage/stage.xcconfig
       Live: safesafe/Resources/Live/live.xcconfig
     preBuildScripts:
-      - name: IncludeGooglePlists
-        script: ls
+      - name: CopyGooglePlist
+        path: Scripts/CopyGooglePlist.sh 
     sources: 
       - safesafe
       - ["safesafe Live.entitlements", "safesafe Dev.entitlements"]
