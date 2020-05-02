@@ -62,7 +62,8 @@ targets:
             BluetraceManager.swift,
             BlueTraceLocalNotifications.swift,
             CentralController.swift,
-            EncounterMessageManager.swift
+            EncounterMessageManager.swift,
+            Protocol/v2/BluetraceV2.swift
         ]
 
   safesafe Stage:
@@ -83,7 +84,8 @@ targets:
             BluetraceManager.swift,
             BlueTraceLocalNotifications.swift,
             CentralController.swift,
-            EncounterMessageManager.swift
+            EncounterMessageManager.swift,
+            Protocol/v2/BluetraceV2.swift
         ]
 
   safesafe Live:
@@ -104,7 +106,8 @@ targets:
             BluetraceManager.swift,
             BlueTraceLocalNotifications.swift,
             CentralController.swift,
-            EncounterMessageManager.swift
+            EncounterMessageManager.swift,
+            Protocol/v2/BluetraceV2.swift
         ]
     postBuildScripts:
       - script:

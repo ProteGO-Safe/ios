@@ -157,6 +157,29 @@ class EncounterMessageManager {
             onComplete?(nil, (tempIdsInBase64, Date(timeIntervalSince1970: bmRefreshTime)))
         }
     }
+    
+    func getAdvtPayload(_ completion:  @escaping (Data?) -> Void) {
+        getTempId { tempID in
+            guard let tempID = tempID else {
+                completion(nil)
+                return
+            }
+            
+            let peripheralCharStruct = PeripheralCharacteristicsDataV2(mp: DeviceInfo.getModel(),
+                                                                       id: tempID,
+                                                                       o: BluetraceConfig.OrgID,
+                                                                       v: BluetraceConfig.ProtocolVersion)
+            do {
+                let encodedPeriCharStruct = try JSONEncoder().encode(peripheralCharStruct)
+                UserDefaults.standard.set(encodedPeriCharStruct, forKey: self.userDefaultsAdvtKey)
+                completion(encodedPeriCharStruct)
+            } catch {
+                console("Error: \(error)")
+            }
+
+            completion(nil)
+        }
+    }
 
     func setAdvtPayloadIntoUserDefaultsv2(_ response: (tempIds: [[String: Any]], refreshDate: Date)) -> Data? {
         var tempIDs = response.tempIds
