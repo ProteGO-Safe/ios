@@ -5,8 +5,8 @@ LIVE_PATH=${PROJECT_DIR}/${TARGET_NAME}/Resources/Live/GoogleService-Info-Live.p
 DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist
 
 case "${CONFIGURATION}" in
-    "Dev")   cp -r "${DEV_PATH}" "${DESTINATION}";;
-    "Stage") cp -r "${STAGE_PATH}" "${DESTINATION}";;
-    "Live")  cp -r "${LIVE_PATH}" "${DESTINATION}";;
+    "Dev")                cp -r "${DEV_PATH}" "${DESTINATION}";;
+    "Stage"|"StageDebug") cp -r "${STAGE_PATH}" "${DESTINATION}";;
+    "Live"|"LiveDebug")   cp -r "${LIVE_PATH}" "${DESTINATION}";;
     *) ;;
 esac

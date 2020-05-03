@@ -2,13 +2,41 @@ name: safesafe
 
 configs:
   Dev: debug
+  StageDebug: debug
   Stage: release
+  LiveDebug: debug
   Live: release
 
 settings:
   CODE_SIGN_STYLE: Manual
   MARKETING_VERSION: "3.0.0"
   CURRENT_PROJECT_VERSION: 40
+
+schemes:
+  safesafe Dev:
+    build:
+      targets: 
+        safesafe: all
+    run:
+      config: Dev
+
+  safesafe Stage:
+    build:
+      targets: 
+        safesafe: all
+    run: 
+      config: StageDebug
+    archive:
+      config: Stage
+
+  safesafe Live:
+    build:
+      targets:
+        safesafe: all
+    run:
+      config: LiveDebug
+    archive:
+      config: Live
 
 targets:
   safesafe:
@@ -17,7 +45,9 @@ targets:
     deploymentTarget: "12.1"
     configFiles:
       Dev: safesafe/Resources/Dev/dev.xcconfig
+      StageDebug: safesafe/Resources/Stage/stageDebug.xcconfig
       Stage: safesafe/Resources/Stage/stage.xcconfig
+      LiveDebug: safesafe/Resources/Live/liveDebug.xcconfig
       Live: safesafe/Resources/Live/live.xcconfig
     sources: 
       - safesafe
@@ -38,10 +68,3 @@ targets:
     preBuildScripts:
       - name: CopyGooglePlist
         path: Scripts/CopyGooglePlist.sh 
-    postBuildScripts:
-      - script:
-          custom_sim=`xcrun simctl list | grep 'Custom Simulators' | awk -F'[()]' '{print $2}'`
-          if [ ! -z "${custom_sim}" ] && [ "${TARGET_DEVICE_IDENTIFIER}" = "${custom_sim}" ]; then
-          /bin/sh multipleSimulatorsStartup.sh
-          fi
-        name: "Custom sims"
