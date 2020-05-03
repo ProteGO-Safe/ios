@@ -19,21 +19,29 @@ targets:
       Dev: safesafe/Resources/Dev/dev.xcconfig
       Stage: safesafe/Resources/Stage/stage.xcconfig
       Live: safesafe/Resources/Live/live.xcconfig
-    preBuildScripts:
-      - name: CopyGooglePlist
-        path: Scripts/CopyGooglePlist.sh 
     sources: 
       - safesafe
       - ["safesafe Live.entitlements", "safesafe Dev.entitlements"]
-      - path: Submodules/opentrace-ios/OpenTrace/Constants
-        group: OpenTrace
-        includes: PushNotificationConstants.swift
       - path: Submodules/opentrace-ios/OpenTrace/Utils
         group: OpenTrace
-        includes: [FirebaseAPIs.swift, PlistHelper.swift]
+        includes: [FirebaseAPIs.swift]
       - path: Submodules/opentrace-ios/OpenTrace/Bluetrace
         group: OpenTrace
-        excludes: [BluetraceConfig.swift, BluetraceManager.swift, CentralController.swift]
-      - path: "Submodules/opentrace-ios/OpenTrace/Power saver/PogoInstructionsViewController.swift"
-        group: OpenTrace/PowerSaver
-      - path: safesafe/Resources
+        excludes: [
+            BluetraceConfig.swift,
+            BluetraceManager.swift,
+            BlueTraceLocalNotifications.swift,
+            CentralController.swift,
+            EncounterMessageManager.swift,
+            Protocol/v2/BluetraceV2.swift
+        ]
+    preBuildScripts:
+      - name: CopyGooglePlist
+        path: Scripts/CopyGooglePlist.sh 
+    postBuildScripts:
+      - script:
+          custom_sim=`xcrun simctl list | grep 'Custom Simulators' | awk -F'[()]' '{print $2}'`
+          if [ ! -z "${custom_sim}" ] && [ "${TARGET_DEVICE_IDENTIFIER}" = "${custom_sim}" ]; then
+          /bin/sh multipleSimulatorsStartup.sh
+          fi
+        name: "Custom sims"

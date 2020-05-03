@@ -12,11 +12,16 @@ extension String {
     
     func jsonDecode<T: Codable>(decoder: JSONDecoder? = nil) -> T? {
         let decoder = decoder ?? JSONDecoder()
-        guard
-            let data = self.data(using: .utf8),
-            let model = try? decoder.decode(T.self, from: data)
-        else { return nil }
+        guard let data = self.data(using: .utf8) else {
+            return nil
+        }
         
-        return model
+        do {
+            let model = try decoder.decode(T.self, from: data)
+            return model
+        } catch {
+            console(error)
+            return nil
+        }
     }
 }
