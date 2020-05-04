@@ -1,0 +1,9 @@
+#include "Pods/Target Support Files/Pods-safesafe/Pods-safesafe.stagedebug.xcconfig"
+
+INFOPLIST_FILE = safesafe/Info-stage.plist
+PRODUCT_BUNDLE_IDENTIFIER = se.sigmaconnectivity.protegosafe
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon-Stage
+DEVELOPMENT_TEAM = HU9FKSEQXD
+CODE_SIGN_ENTITLEMENTS = safesafe Dev.entitlements
+PROVISIONING_PROFILE_SPECIFIER = protegosafe-development
+OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS -D STAGE

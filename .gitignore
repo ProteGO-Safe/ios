@@ -33,9 +33,9 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 
-safesafe/resources/Dev/GoogleService-Info.plist
-safesafe/resources/Live/GoogleService-Info.plist
-safesafe/resources/Stage/GoogleService-Info.plist
+safesafe/resources/Dev/GoogleService-Info-Dev.plist
+safesafe/resources/Live/GoogleService-Info-Live.plist
+safesafe/resources/Stage/GoogleService-Info-Stage.plist
 
 safesafe/resources/Dev/Config-dev.plist
 safesafe/resources/Stage/Config-stage.plist

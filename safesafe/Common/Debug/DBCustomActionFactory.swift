@@ -8,8 +8,7 @@
 import UIKit
 
 #if !LIVE
-    import DBDebugToolkit
-#endif
+import DBDebugToolkit
 
 final class DBCustomActionFactory {
 
@@ -31,3 +30,4 @@ final class DBCustomActionFactory {
         }
     }
 }
+#endif

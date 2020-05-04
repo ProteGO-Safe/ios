@@ -1,13 +1,10 @@
 name: safesafe
 
-include:
-  - XcodeGenConfig/dev.yml
-  - XcodeGenConfig/stage.yml
-  - XcodeGenConfig/live.yml
-
 configs:
   Dev: debug
+  StageDebug: debug
   Stage: release
+  LiveDebug: debug
   Live: release
 
 settings:
@@ -17,40 +14,43 @@ settings:
 
 schemes:
   safesafe Dev:
-    build: 
+    build:
       targets: 
-        safesafe Dev: all
+        safesafe: all
     run:
-      config: Dev
-    archive:
       config: Dev
 
   safesafe Stage:
-    build: 
+    build:
       targets: 
-        safesafe Stage: all
-    run:
-      config: Stage
+        safesafe: all
+    run: 
+      config: StageDebug
     archive:
       config: Stage
 
   safesafe Live:
-    build: 
-      targets: 
-        safesafe Live: all
+    build:
+      targets:
+        safesafe: all
     run:
-      config: Live
+      config: LiveDebug
     archive:
       config: Live
 
 targets:
-  safesafe Dev:
+  safesafe:
     type: application
     platform: iOS
     deploymentTarget: "12.1"
+    configFiles:
+      Dev: safesafe/Resources/Dev/dev.xcconfig
+      StageDebug: safesafe/Resources/Stage/stageDebug.xcconfig
+      Stage: safesafe/Resources/Stage/stage.xcconfig
+      LiveDebug: safesafe/Resources/Live/liveDebug.xcconfig
+      Live: safesafe/Resources/Live/live.xcconfig
     sources: 
-      - path: safesafe
-        excludes: [Resources/Live, Resources/Stage]
+      - safesafe
       - ["safesafe Live.entitlements", "safesafe Dev.entitlements"]
       - path: Submodules/opentrace-ios/OpenTrace/Utils
         group: OpenTrace
@@ -65,54 +65,6 @@ targets:
             EncounterMessageManager.swift,
             Protocol/v2/BluetraceV2.swift
         ]
-
-  safesafe Stage:
-    type: application
-    platform: iOS
-    deploymentTarget: "12.1"
-    sources: 
-      - path: safesafe
-        excludes: [Resources/Dev, Resources/Live]
-      - ["safesafe Live.entitlements", "safesafe Dev.entitlements"]
-      - path: Submodules/opentrace-ios/OpenTrace/Utils
-        group: OpenTrace
-        includes: [FirebaseAPIs.swift]
-      - path: Submodules/opentrace-ios/OpenTrace/Bluetrace
-        group: OpenTrace
-        excludes: [
-            BluetraceConfig.swift,
-            BluetraceManager.swift,
-            BlueTraceLocalNotifications.swift,
-            CentralController.swift,
-            EncounterMessageManager.swift,
-            Protocol/v2/BluetraceV2.swift
-        ]
-
-  safesafe Live:
-    type: application
-    platform: iOS
-    deploymentTarget: "12.1"
-    sources: 
-      - path: safesafe
-        excludes: [Resources/Dev, Resources/Stage]
-      - ["safesafe Live.entitlements", "safesafe Dev.entitlements"]
-      - path: Submodules/opentrace-ios/OpenTrace/Utils
-        group: OpenTrace
-        includes: [FirebaseAPIs.swift]
-      - path: Submodules/opentrace-ios/OpenTrace/Bluetrace
-        group: OpenTrace
-        excludes: [
-            BluetraceConfig.swift,
-            BluetraceManager.swift,
-            BlueTraceLocalNotifications.swift,
-            CentralController.swift,
-            EncounterMessageManager.swift,
-            Protocol/v2/BluetraceV2.swift
-        ]
-    postBuildScripts:
-      - script:
-          custom_sim=`xcrun simctl list | grep 'Custom Simulators' | awk -F'[()]' '{print $2}'`
-          if [ ! -z "${custom_sim}" ] && [ "${TARGET_DEVICE_IDENTIFIER}" = "${custom_sim}" ]; then
-          /bin/sh multipleSimulatorsStartup.sh
-          fi
-        name: "Custom sims"
+    preBuildScripts:
+      - name: CopyGooglePlist
+        path: Scripts/CopyGooglePlist.sh 
