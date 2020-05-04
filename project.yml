@@ -43,6 +43,8 @@ targets:
     type: application
     platform: iOS
     deploymentTarget: "12.1"
+    settings:
+        TARGETED_DEVICE_FAMILY: 1
     configFiles:
       Dev: safesafe/Resources/Dev/dev.xcconfig
       StageDebug: safesafe/Resources/Stage/stageDebug.xcconfig
