@@ -10,7 +10,7 @@ configs:
 settings:
   CODE_SIGN_STYLE: Manual
   MARKETING_VERSION: "3.0.2"
-  CURRENT_PROJECT_VERSION: 56
+  CURRENT_PROJECT_VERSION: 57
 
 schemes:
   safesafe Dev:
