@@ -1,0 +1,70 @@
+name: safesafe
+
+configs:
+  Dev: debug
+  StageDebug: debug
+  Stage: release
+  LiveDebug: debug
+  Live: release
+
+settings:
+  CODE_SIGN_STYLE: Manual
+  MARKETING_VERSION: "3.0.2"
+  CURRENT_PROJECT_VERSION: 56
+
+schemes:
+  safesafe Dev:
+    build:
+      targets: 
+        safesafe: all
+    run:
+      config: Dev
+
+  safesafe Stage:
+    build:
+      targets: 
+        safesafe: all
+    run: 
+      config: StageDebug
+    archive:
+      config: Stage
+
+  safesafe Live:
+    build:
+      targets:
+        safesafe: all
+    run:
+      config: LiveDebug
+    archive:
+      config: Live
+
+targets:
+  safesafe:
+    type: application
+    platform: iOS
+    deploymentTarget: "12.1"
+    configFiles:
+      Dev: safesafe/Resources/Dev/dev.xcconfig
+      StageDebug: safesafe/Resources/Stage/stageDebug.xcconfig
+      Stage: safesafe/Resources/Stage/stage.xcconfig
+      LiveDebug: safesafe/Resources/Live/liveDebug.xcconfig
+      Live: safesafe/Resources/Live/live.xcconfig
+    sources: 
+      - safesafe
+      - ["safesafe Live.entitlements", "safesafe Dev.entitlements"]
+      - path: Submodules/opentrace-ios/OpenTrace/Utils
+        group: OpenTrace
+        includes: [FirebaseAPIs.swift]
+      - path: Submodules/opentrace-ios/OpenTrace/Bluetrace
+        group: OpenTrace
+        excludes: [
+            BluetraceConfig.swift,
+            BluetraceManager.swift,
+            BlueTraceLocalNotifications.swift,
+            CentralController.swift,
+            EncounterMessageManager.swift,
+            Protocol/v2/BluetraceV2.swift
+        ]
+    preBuildScripts:
+      - name: CopyGooglePlist
+        path: Scripts/CopyGooglePlist.sh 

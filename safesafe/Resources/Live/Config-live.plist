@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Bluetooth</key>
+	<dict>
+		<key>SERVICE_UUID</key>
+		<string>6E9E7830-F4C7-4717-B0D8-525D30181121</string>
+		<key>V2_CHARACTERISTIC_ID</key>
+		<string>8FBFDF09-5EB4-4F68-AC16-6CD2275D07CA</string>
+		<key>ORG_ID</key>
+		<string>PL_PGS</string>
+		<key>PROTOCOL_VERSION</key>
+		<integer>2</integer>
+		<key>CENTRAL_SCAN_INTERVAL</key>
+		<integer>60</integer>
+		<key>CENTRAL_SCAN_DURATION</key>
+		<integer>10</integer>
+		<key>DATA_EXPIRATION_DAYS</key>
+		<string>-21</string>
+	</dict>
+	<key>PWA</key>
+	<dict>
+		<key>SCHEME</key>
+		<string>https</string>
+		<key>HOST</key>
+		<string>safesafe.app</string>
+	</dict>
+</dict>
+</plist>
