@@ -1,6 +1,6 @@
 # ProteGO Safe
 
-![ProteGO Safe logo](https://github.com/SafeSafe-app/ios/blob/feature/PSAFE-579/ghImages/logo.png)
+![ProteGO Safe logo](./ghImages/logo.png)
 
 ProteGO Safe is a publicly open reference implementation of OpenTrace.
 
