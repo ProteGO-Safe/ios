@@ -6,16 +6,17 @@ def pods_definition
   use_frameworks!
 
   pod 'SnapKit', '5.0.1'
+  pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
+  pod 'Firebase/Functions'
   pod 'Firebase/Messaging'
+  pod 'Firebase/Auth'
   pod 'PromiseKit', '~> 6.8'
+  
+  pod 'DBDebugToolkit', :configurations => ['Dev', 'Stage', 'StageDebug', 'LiveDebug']
 
 end
 
-target 'safesafe Live' do
-  pods_definition
-end
-
-target 'safesafe Dev' do
+target 'safesafe' do
   pods_definition
 end
