@@ -12,17 +12,11 @@ def pods_definition
   pod 'Firebase/Messaging'
   pod 'Firebase/Auth'
   pod 'PromiseKit', '~> 6.8'
+  
+  pod 'DBDebugToolkit', :configurations => ['Dev', 'Stage', 'StageDebug', 'LiveDebug']
 
 end
 
-target 'safesafe Live' do
-  pods_definition
-end
-
-target 'safesafe Dev' do
-  pods_definition
-end
-
-target 'safesafe Stage' do
+target 'safesafe' do
   pods_definition
 end
