@@ -104,6 +104,7 @@ final class JSBridge: NSObject {
             let data = try JSONEncoder().encode(encodable)
             return String(data: data, encoding: .utf8)
         } catch {
+            console(error)
             return nil
         }
     }
