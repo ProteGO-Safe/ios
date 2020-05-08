@@ -13,7 +13,7 @@ def pods_definition
   pod 'Firebase/Auth'
   pod 'PromiseKit', '~> 6.8'
   
-  pod 'DBDebugToolkit', :configurations => ['Dev', 'Stage', 'StageDebug', 'LiveDebug']
+  pod 'DBDebugToolkit', :configurations => ['Dev', 'DevDist', 'Stage', 'StageDebug', 'LiveDebug', 'LiveAdhoc']
 
 end
 

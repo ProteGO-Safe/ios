@@ -2,10 +2,12 @@ name: safesafe
 
 configs:
   Dev: debug
+  DevDist: release
   StageDebug: debug
   Stage: release
   LiveDebug: debug
   Live: release
+  LiveAdhoc: release #That's a build with Live PWA URL but with debug console
 
 settings:
   CODE_SIGN_STYLE: Manual
@@ -47,9 +49,11 @@ targets:
         TARGETED_DEVICE_FAMILY: 1
     configFiles:
       Dev: safesafe/Resources/Dev/dev.xcconfig
+      DevDist: safesafe/Resources/Dev/devDist.xcconfig
       StageDebug: safesafe/Resources/Stage/stageDebug.xcconfig
       Stage: safesafe/Resources/Stage/stage.xcconfig
       LiveDebug: safesafe/Resources/Live/liveDebug.xcconfig
+      LiveAdhoc: safesafe/Resources/Live/liveAdhoc.xcconfig
       Live: safesafe/Resources/Live/live.xcconfig
     sources: 
       - safesafe
