@@ -21,6 +21,7 @@ final class JSBridge: NSObject {
         case notificationsPermission = 35
         case opentraceToggle = 36
         case clearBluetoothData = 37
+        case manageHistoricData = 43
     }
     
     enum SendMethod: String, CaseIterable {
@@ -97,6 +98,17 @@ final class JSBridge: NSObject {
             webView.evaluateJavaScript(method, completionHandler: completion)
         }
     }
+    
+    private func encodeToJSON<T>(_ encodable: T) -> String? where T: Encodable {
+        do {
+            let data = try JSONEncoder().encode(encodable)
+            return String(data: data, encoding: .utf8)
+        } catch {
+            console(error)
+            return nil
+        }
+    }
+    
 }
 
 extension JSBridge: WKScriptMessageHandler {
@@ -140,6 +152,8 @@ extension JSBridge: WKScriptMessageHandler {
             opentraceToggle(jsonString: jsonString, type: bridgeDataType)
         case .clearBluetoothData:
             clearBluetoothData(jsonString: jsonString, type: bridgeDataType)
+        case .manageHistoricData:
+            manageHistoricData(jsonString: jsonString, type: bridgeDataType)
         default:
             console("Not managed yet", type: .warning)
         }
@@ -298,6 +312,20 @@ private extension JSBridge {
         BluetraceUtils.removeAllData()
         
         console("Bluetooth data cleared")
+    }
+    
+    func manageHistoricData(jsonString: String?, type: BridgeDataType) {
+        guard let request: ManageHistoricDataRequest = jsonString?.jsonDecode() else {
+            return
+        }
+        
+        // [PSAFE-745]: Finish onBridgeData when appropriate service is implemented
+        // Service should return a ManageHistoricDataResponse object
+        //
+        
+//        if let json = encodeToJSON(<ManageHistoricDataResponse here>) {
+//            onBridgeData(type: type, body: json)
+//        }
     }
     
     private func sendAppStateJSON(type: BridgeDataType) {
