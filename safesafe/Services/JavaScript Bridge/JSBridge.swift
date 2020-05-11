@@ -19,6 +19,7 @@ final class JSBridge: NSObject {
         case appStatus = 31
         case notificationsPermission = 35
         case clearBluetoothData = 37
+        case manageHistoricData = 43
     }
     
     enum SendMethod: String, CaseIterable {
@@ -94,6 +95,17 @@ final class JSBridge: NSObject {
             webView.evaluateJavaScript(method, completionHandler: completion)
         }
     }
+    
+    private func encodeToJSON<T>(_ encodable: T) -> String? where T: Encodable {
+        do {
+            let data = try JSONEncoder().encode(encodable)
+            return String(data: data, encoding: .utf8)
+        } catch {
+            console(error)
+            return nil
+        }
+    }
+    
 }
 
 extension JSBridge: WKScriptMessageHandler {
