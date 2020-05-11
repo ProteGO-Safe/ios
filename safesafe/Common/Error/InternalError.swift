@@ -20,10 +20,6 @@ enum InternalError: Error {
     // AppManagerStatus
     case serializationFailed
     
-    // Database
-    case databaseFetchingRecords
-    case databaseFetchingEvents
-    
     // JSON
     case jsonSerializingData
     

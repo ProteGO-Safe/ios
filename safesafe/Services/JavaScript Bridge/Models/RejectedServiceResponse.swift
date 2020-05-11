@@ -10,7 +10,6 @@ import Foundation
 
 enum RejectedService: String, Codable {
     
-    case bluetooth
     case notification
     
 }

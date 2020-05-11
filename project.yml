@@ -54,19 +54,6 @@ targets:
     sources: 
       - safesafe
       - ["safesafe Live.entitlements", "safesafe Dev.entitlements"]
-      - path: Submodules/opentrace-ios/OpenTrace/Utils
-        group: OpenTrace
-        includes: [FirebaseAPIs.swift]
-      - path: Submodules/opentrace-ios/OpenTrace/Bluetrace
-        group: OpenTrace
-        excludes: [
-            BluetraceConfig.swift,
-            BluetraceManager.swift,
-            BlueTraceLocalNotifications.swift,
-            CentralController.swift,
-            EncounterMessageManager.swift,
-            Protocol/v2/BluetraceV2.swift
-        ]
     preBuildScripts:
       - name: CopyGooglePlist
         path: Scripts/CopyGooglePlist.sh 
