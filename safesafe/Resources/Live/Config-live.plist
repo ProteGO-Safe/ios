@@ -17,7 +17,7 @@
 		<key>CENTRAL_SCAN_DURATION</key>
 		<integer>10</integer>
 		<key>DATA_EXPIRATION_DAYS</key>
-		<string>-14</string>
+		<integer>-14</integer>
 	</dict>
 	<key>PWA</key>
 	<dict>

@@ -121,6 +121,7 @@ final class AppCoordinator: CoordinatorType {
     
     @objc
     private func applicationWillEnterForeground(notification: Notification) {
+        BluetraceUtils.removeData21DaysOld()
         pogoMM.stopAllMotion()
     }
     
