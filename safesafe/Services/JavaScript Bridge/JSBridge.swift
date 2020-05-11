@@ -17,9 +17,7 @@ final class JSBridge: NSObject {
         case dailyTopicUnsubscribe = 1
         case notification = 2
         case appStatus = 31
-        case bluetoothPermission = 33
         case notificationsPermission = 35
-        case opentraceToggle = 36
         case clearBluetoothData = 37
         case manageHistoricData = 43
     }
@@ -60,7 +58,6 @@ final class JSBridge: NSObject {
     }
     
     private var appStatusManager: AppStatusManagerProtocol = AppStatusManager(
-        bluetraceManager: BluetraceManager.shared,
         notificationManager: NotificationManager.shared
     )
     
@@ -141,19 +138,9 @@ extension JSBridge: WKScriptMessageHandler {
         switch bridgeDataType {
         case .dailyTopicUnsubscribe:
             unsubscribeFromTopic(jsonString: jsonString, type: bridgeDataType)
-        case .bluetoothPermission:
-            currentDataType = bridgeDataType
-            bluetoothPermission(jsonString: jsonString, type: bridgeDataType)
         case .notificationsPermission:
             currentDataType = bridgeDataType
             notificationsPermission(jsonString: jsonString, type: bridgeDataType)
-        case .opentraceToggle:
-            currentDataType = bridgeDataType
-            opentraceToggle(jsonString: jsonString, type: bridgeDataType)
-        case .clearBluetoothData:
-            clearBluetoothData(jsonString: jsonString, type: bridgeDataType)
-        case .manageHistoricData:
-            manageHistoricData(jsonString: jsonString, type: bridgeDataType)
         default:
             console("Not managed yet", type: .warning)
         }
@@ -215,36 +202,6 @@ private extension JSBridge {
         NotificationManager.shared.unsubscribeFromDailyTopic(timestamp: model.timestamp)
     }
     
-    func bluetoothPermission(jsonString: String?, type: BridgeDataType) {
-        Permissions.instance.state(for: .bluetooth)
-            .then { state -> Promise<Permissions.State> in
-                switch state {
-                case .neverAsked:
-                    return Permissions.instance.state(for: .bluetooth, shouldAsk: true)
-                case .authorized:
-                    return Promise.value(state)
-                case .rejected:
-                    guard let rootViewController = self.webView?.window?.rootViewController else {
-                        throw InternalError.nilValue
-                    }
-                    return Permissions.instance.settingsAlert(for: .bluetooth, on: rootViewController).map { _ in Permissions.State.unknown }
-                default:
-                    return Promise.value(.unknown)
-                }
-        }
-        .done { state in
-            if state == .rejected {
-                BluetraceManager.shared.turnOff()
-                self.sendAppStateJSON(type: type)
-            }
-            
-            self.sendAppStateJSON(type: type)
-        }
-        .catch { error in
-            assertionFailure(error.localizedDescription)
-        }
-    }
-    
     func notificationsPermission(jsonString: String?, type: BridgeDataType) {
         Permissions.instance.state(for: .notifications)
             .then { state -> Promise<Permissions.State> in
@@ -279,55 +236,7 @@ private extension JSBridge {
         }
     }
     
-    func opentraceToggle(jsonString: String?, type: BridgeDataType) {
-        // turn on / off BlueTrace peripheral and central
-        guard let model: OpentraceToggleResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
-        
-        Permissions.instance.state(for: .bluetooth, shouldAsk: model.enableBtService)
-            .done { state in
-                if state == .authorized && model.enableBtService {
-                    AppManager.instance.isBluetraceAllowed = true
-                    BluetraceManager.shared.turnOn()
-                    EncounterMessageManager.shared.authSetup()
-                } else {
-                    AppManager.instance.isBluetraceAllowed = false
-                    BluetraceManager.shared.turnOff()
-                }
-        }
-        .ensure {
-            self.sendAppStateJSON(type: type)
-        }
-        .catch {_ in}
-        
-    }
-    
-    func clearBluetoothData(jsonString: String?, type: BridgeDataType) {
-        guard
-            let response: ClearBluetoothDataResponse = jsonString?.jsonDecode(decoder: jsonDecoder),
-            response.clearBluetoothData
-        else { return }
-        
-        AppManager.instance.isBluetraceAllowed = false
-        BluetraceManager.shared.turnOff()
-        BluetraceUtils.removeAllData()
-        
-        console("Bluetooth data cleared")
-    }
-    
-    func manageHistoricData(jsonString: String?, type: BridgeDataType) {
-        guard let request: ManageHistoricDataRequest = jsonString?.jsonDecode() else {
-            return
-        }
-        
-        // [PSAFE-745]: Finish onBridgeData when appropriate service is implemented
-        // Service should return a ManageHistoricDataResponse object
-        //
-        
-//        if let json = encodeToJSON(<ManageHistoricDataResponse here>) {
-//            onBridgeData(type: type, body: json)
-//        }
-    }
-    
+
     private func sendAppStateJSON(type: BridgeDataType) {
         appStatusManager.appStatusJson
             .done { json in

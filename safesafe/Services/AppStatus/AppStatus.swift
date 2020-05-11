@@ -17,17 +17,13 @@ struct AppStatus: Codable {
         let isLocationEnabled = true
         let isBatteryOptimizationOn = true
         
-        var isBluetoothOn: Bool
         var isNotificationEnabled: Bool
-        var isBluetoothServiceOn: Bool
         
         private enum CodingKeys: String, CodingKey {
             case isBluetoothSupported = "isBtSupported"
             case isLocationEnabled
             case isBatteryOptimizationOn
-            case isBluetoothOn = "isBtOn"
             case isNotificationEnabled
-            case isBluetoothServiceOn = "isBtServiceOn"
         }
     }
     
