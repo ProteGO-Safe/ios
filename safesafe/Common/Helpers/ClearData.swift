@@ -17,7 +17,7 @@ final class ClearData {
     }
     
     private func deleteTracerData() {
-        let preffix = "tracer"
+        let prefix = "tracer"
         let fileManager = FileManager.default
         do {
             let applicationSupport = try fileManager.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
