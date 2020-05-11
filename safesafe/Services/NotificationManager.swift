@@ -15,7 +15,6 @@ import PromiseKit
 protocol NotificationManagerProtocol {
     func registerForRemoteNotifications() -> Guarantee<Bool>
     func currentStatus() -> Guarantee<UNAuthorizationStatus>
-    func configure()
     func clearBadgeNumber()
     func update(token: Data)
     func unsubscribeFromDailyTopic(timestamp: TimeInterval)
@@ -130,10 +129,6 @@ extension NotificationManager: NotificationManagerProtocol {
                 fulfill(true)
             }
         }
-    }
-    
-    func configure() {
-        FirebaseApp.configure()
     }
     
     func update(token: Data) {

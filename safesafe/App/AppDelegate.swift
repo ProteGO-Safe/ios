@@ -16,13 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    private let notificationManager = NotificationManager.shared
-    
     private var appCoordinator: AppCoordinator?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        notificationManager.configure()
         
         if #available(iOS 13.0, *) {} else {
             window = UIWindow(frame: UIScreen.main.bounds)
@@ -56,12 +52,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for i in 0..<deviceToken.count {
             token = token + String(format: "%02.2hhx", arguments: [deviceToken[i]])
         }
-        print(token)
-        notificationManager.update(token: deviceToken)
+        console(token)
+        NotificationManager.shared.update(token: deviceToken)
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        notificationManager.clearBadgeNumber()
+        NotificationManager.shared.clearBadgeNumber()
         
     }
 }

@@ -6,6 +6,7 @@
 //  Copyright © 2020 Lukasz szyszkowski. All rights reserved.
 //
 
+import Firebase
 import UIKit
 import Network
 
@@ -18,6 +19,7 @@ final class AppCoordinator: CoordinatorType {
     private let appManager = AppManager.instance
     private let window: UIWindow
     private let monitor = NWPathMonitor()
+    private let clearData = ClearData()
     private var noInternetAlert: UIAlertController?
 
     required init() {
@@ -34,6 +36,10 @@ final class AppCoordinator: CoordinatorType {
     }
     
     func start() {
+        setupDebugToolkit()
+        FirebaseApp.configure()
+        clearData.clear()
+        
         window.backgroundColor = .white
         window.rootViewController = pwa()
         window.makeKeyAndVisible()
@@ -54,6 +60,12 @@ final class AppCoordinator: CoordinatorType {
         let viewModel = PWAViewModel()
         let navigationController = NavigationController(rootViewController: PWAViewController(viewModel: viewModel))
         return navigationController
+    }
+    
+    private func setupDebugToolkit() {
+        #if !LIVE
+        DBDebugToolkit.setup()
+        #endif
     }
     
     private func showInternetAlert() {
