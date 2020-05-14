@@ -1,5 +1,5 @@
 //
-//  ExposureManager.swift
+//  ExposureService.swift
 //  safesafe
 //
 //  Created by Rafał Małczyński on 13/05/2020.
@@ -7,7 +7,7 @@
 
 import ExposureNotification
 
-protocol ExposureManagerProtocol {
+protocol ExposureServiceProtocol {
     
     var isExposureNotificationAuthorized: Bool { get }
     var isExposureNotificationEnabled: Bool { get }
@@ -18,7 +18,7 @@ protocol ExposureManagerProtocol {
     
 }
 
-final class ExposureManager: ExposureManagerProtocol {
+final class ExposureService: ExposureServiceProtocol {
     
     // MARK: - Properties
     
