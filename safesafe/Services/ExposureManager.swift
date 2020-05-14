@@ -34,6 +34,15 @@ final class ExposureManager: ExposureManagerProtocol {
         exposureManager.exposureNotificationEnabled
     }
     
+    private var nextDiagnosisKeyIndex: Int {
+        get {
+            StoredDefaults.standard.get(key: .nextDiagnosisKeyIndex) ?? 0
+        }
+        set {
+            StoredDefaults.standard.set(value: newValue, key: .nextDiagnosisKeyIndex)
+        }
+    }
+    
     // MARK: - Life Cycle
     
     init(exposureManager: ENManager) {
@@ -67,7 +76,31 @@ final class ExposureManager: ExposureManagerProtocol {
     }
     
     func detectExposures(_ completion: @escaping (Result<Void, Error>) -> Void) {
+        guard !isCurrentlyDetectingExposures else {
+            return
+        }
+        isCurrentlyDetectingExposures = true
         
+        // TODO: Should ask KeysService for configuration and keys here
+        var serviceClosure: (Result<(ENExposureConfiguration, [URL]), Error>) -> Void
+        
+        serviceClosure = { result in
+            switch result {
+            case let .failure(error):
+                print(error) // TODO: Error handling
+                
+            case let .success(configuration, urls):
+                print()
+            }
+        }
     }
     
+    // MARK: - Private methods
+    
+//    private func
+    
+}
+
+extension StoredDefaults.Key {
+    static let nextDiagnosisKeyIndex = StoredDefaults.Key("nextDiagnosisKeyIndex")
 }
