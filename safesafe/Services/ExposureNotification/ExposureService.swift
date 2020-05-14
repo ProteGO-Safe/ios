@@ -23,6 +23,7 @@ final class ExposureService: ExposureServiceProtocol {
     // MARK: - Properties
     
     private let exposureManager: ENManager
+    private let keysService: TemporaryExposureKeysServiceProtocol
     
     private var isCurrentlyDetectingExposures = false
     
@@ -34,19 +35,14 @@ final class ExposureService: ExposureServiceProtocol {
         exposureManager.exposureNotificationEnabled
     }
     
-    private var nextDiagnosisKeyIndex: Int {
-        get {
-            StoredDefaults.standard.get(key: .nextDiagnosisKeyIndex) ?? 0
-        }
-        set {
-            StoredDefaults.standard.set(value: newValue, key: .nextDiagnosisKeyIndex)
-        }
-    }
-    
     // MARK: - Life Cycle
     
-    init(exposureManager: ENManager) {
+    init(
+        exposureManager: ENManager,
+        keysService: TemporaryExposureKeysServiceProtocol
+    ) {
         self.exposureManager = exposureManager
+        self.keysService = keysService
         
         self.exposureManager.activate { error in
             // TODO: Error handling
@@ -81,26 +77,53 @@ final class ExposureService: ExposureServiceProtocol {
         }
         isCurrentlyDetectingExposures = true
         
-        // TODO: Should ask KeysService for configuration and keys here
+        // TODO: Should ask KeysService for configuration and key urls here
         var serviceClosure: (Result<(ENExposureConfiguration, [URL]), Error>) -> Void
         
-        serviceClosure = { result in
+        serviceClosure = { [weak self] result in
             switch result {
             case let .failure(error):
-                print(error) // TODO: Error handling
+                self?.endExposureSession(with: .failure(error))
+                completion(.failure(error))
                 
-            case let .success(configuration, urls):
-                print()
+            case let .success((configuration, urls)):
+                self?.exposureManager.detectExposures(configuration: configuration, diagnosisKeyURLs: urls) { summary, error in
+                    guard let summary = summary, error == nil else {
+                        self?.endExposureSession(with: .failure(error!))
+                        completion(.failure(error!))
+                        return
+                    }
+                    
+                    self?.getExposureInfo(from: summary, completion)
+                }
             }
         }
     }
     
     // MARK: - Private methods
     
-//    private func
+    private func getExposureInfo(
+        from summary: ENExposureDetectionSummary,
+        _ completion: @escaping (Result<Void, Error>) -> Void
+    ) {
+        let userExplanation = "Some explanation for the user, that their exposure details are being reveled to the app"
+        
+        exposureManager.getExposureInfo(summary: summary, userExplanation: userExplanation) { [weak self] exposureInfo, error in
+            guard let info = exposureInfo, error == nil else {
+                self?.endExposureSession(with: .failure(error!))
+                completion(.failure(error!))
+                return
+            }
+            
+            // Map ENExposureInfo to some domain model - to discuss
+            self?.endExposureSession(with: .success)
+            completion(.success)
+        }
+    }
     
-}
-
-extension StoredDefaults.Key {
-    static let nextDiagnosisKeyIndex = StoredDefaults.Key("nextDiagnosisKeyIndex")
+    // TODO: Some other successful result should be here - to discuss (probably `[Exposure]` like in Apple's sample)
+    private func endExposureSession(with result: Result<Void, Error>) {
+        
+    }
+    
 }

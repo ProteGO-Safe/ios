@@ -16,16 +16,16 @@ final class TemporaryExposureKeysService: TemporaryExposureKeysServiceProtocol {
     
     // MARK: - Properties
     
-    private let exposureManager: ExposureManagerProtocol
-    private let deviceCheckServiceProtocol: DeviceCheckServiceProtocol
+    private let exposureService: ExposureServiceProtocol
+    private let deviceCheckServiceProtocol: DCDeviceProtocol
     
     // MARK: - Life Cycle
     
     init(
-        with exposureManager: ExposureManagerProtocol,
-        deviceCheckServiceProtocol: DeviceCheckServiceProtocol
+        with exposureService: ExposureServiceProtocol,
+        deviceCheckServiceProtocol: DCDeviceProtocol
     ) {
-        self.exposureManager = exposureManager
+        self.exposureService = exposureService
         self.deviceCheckServiceProtocol = deviceCheckServiceProtocol
     }
     
