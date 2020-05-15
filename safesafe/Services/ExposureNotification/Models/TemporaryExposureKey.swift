@@ -5,6 +5,7 @@
 
 import ExposureNotification
 
+@available(iOS 13.5, *)
 struct TemporaryExposureKey: Encodable {
     
     let keyData: Data
