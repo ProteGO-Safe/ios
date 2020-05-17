@@ -7,4 +7,3 @@ DEVELOPMENT_TEAM = 85GAG994R5
 CODE_SIGN_ENTITLEMENTS = safesafe/Resources/Stage/safesafe Stage.entitlements
 PROVISIONING_PROFILE_SPECIFIER = protegosafe-staging-dev
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS -D STAGE
-
