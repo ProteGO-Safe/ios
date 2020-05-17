@@ -14,12 +14,14 @@ final class Permissions {
     
     static let instance = Permissions()
     
-    private let bluetooth: PermissionType = BluetoothPermission()
     private let notifications: PermissionType = NotificationsPermission()
+    private let exposureNotifiaction: PermissionType = ExposureNotificationPermission()
+    private var exposureNotifiactionBluetooth: PermissionType?
     
     enum Permission {
         case bluetooth
         case notifications
+        case exposureNotification
     }
     
     enum State {
@@ -33,8 +35,9 @@ final class Permissions {
     enum AlertAction {
         case cancel
         case settings
+        case skip
     }
-        
+    
     private init() {}
     
     
@@ -46,9 +49,17 @@ final class Permissions {
     func state(for permission: Permission, shouldAsk: Bool = false) -> Promise<State> {
         switch permission {
         case .bluetooth:
-            return bluetooth.state(shouldAsk: shouldAsk)
+            if #available(iOS 13.5, *) {
+                let permission = ExposureNotificationBluetoothPermission()
+                self.exposureNotifiactionBluetooth = permission
+                return permission.state(shouldAsk: shouldAsk)
+            } else {
+                return .value(.cantUse)
+            }
         case .notifications:
             return notifications.state(shouldAsk: shouldAsk)
+        case .exposureNotification:
+            return exposureNotifiaction.state(shouldAsk: shouldAsk)
         }
     }
     
@@ -79,12 +90,52 @@ final class Permissions {
         }
     }
     
+    func choiceAlert(for permission: Permission, on viewController: UIViewController) -> Promise<AlertAction> {
+        return Promise { seal in
+            let (title, body) = self.choiceAlertCopy(for: permission)
+            let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Pomiń", style: .cancel) { _ in
+                seal.fulfill(.skip)
+            }
+            let settingsAction = UIAlertAction(title: "Ustawienia", style: .default) { _ in
+                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                    return seal.fulfill(.settings)
+                }
+                
+                if UIApplication.shared.canOpenURL(settingsUrl) {
+                    UIApplication.shared.open(settingsUrl, completionHandler: nil)
+                }
+                
+                seal.fulfill(.settings)
+            }
+            alert.addAction(cancelAction)
+            alert.addAction(settingsAction)
+            
+            DispatchQueue.main.async {
+                viewController.present(alert, animated: true)
+            }
+        }
+    }
+   
+    private func choiceAlertCopy(for permission: Permission) -> (title: String, body: String) {
+        switch permission {
+        case .exposureNotification:
+            return (title: "Exposure Notification", body: "[ENA] Wyłączony COV. Przejdź do ustawień Prywtność -> Zdrowie lub pomiń")
+        case .bluetooth:
+            return (title: "Bluetooth", body: "[ENA] Wyłączony BT. Przejdź do ustawień BT lub pomiń")
+        default:
+            return (title: "", body: "")
+        }
+    }
+    
     private func alertCopy(for permission: Permission) -> (title: String, body: String) {
         switch permission {
         case .bluetooth:
             return (title: "Włącz bluetooth", body: "Korzystając z modułu Bluetooth dbasz o siebie i bliskich. Włącz go w ustawieniach, żeby aplikacja mogła ostrzegać Cię o zagrożeniach.")
         case .notifications:
             return (title: "Włącz powiadomienia", body: "Do prawidłowego działania aplikacji potrzebna jest Twoja zgoda na wyświetlanie powiadomień. Włącz powiadomienia i pozwól ProteGO Safe wspierać ochronę zdrowia każdego z nas.")
+        case .exposureNotification:
+            return (title: "COVID TITLE", body: "COVID MESSAGE")
         }
     }
 }

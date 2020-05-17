@@ -4,6 +4,6 @@ INFOPLIST_FILE = safesafe/Info-dev.plist
 PRODUCT_BUNDLE_IDENTIFIER = se.sigmaconnectivity.protegosafe
 ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon-Dev
 DEVELOPMENT_TEAM = HU9FKSEQXD
-CODE_SIGN_ENTITLEMENTS = safesafe Dev.entitlements
+CODE_SIGN_ENTITLEMENTS = safesafe/Resources/Dev/safesafe Dev.entitlements
 PROVISIONING_PROFILE_SPECIFIER = protegosafe-developments
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS -D DEV

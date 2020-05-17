@@ -57,7 +57,6 @@ targets:
       Live: safesafe/Resources/Live/live.xcconfig
     sources: 
       - safesafe
-      - ["safesafe Live.entitlements", "safesafe Dev.entitlements"]
     preBuildScripts:
       - name: CopyGooglePlist
         path: Scripts/CopyGooglePlist.sh 

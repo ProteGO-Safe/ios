@@ -9,26 +9,34 @@
 import Foundation
 import PromiseKit
 
-protocol AppStatusManagerProtocol {
+protocol ServiceStatusManagerProtocol {
     
-    var currentAppStatus: Promise<AppStatus> { get }
-    var appStatusJson: Promise<String> { get }
+    var currentServiceStatus: Promise<ServicesResponse> { get }
+    var serviceStatusJson: Promise<String> { get }
     
 }
 
-final class AppStatusManager: AppStatusManagerProtocol {
+final class ServiceStatusManager: ServiceStatusManagerProtocol {
     
     // MARK: - Properties
     
     private let notificationManager: NotificationManagerProtocol
     
-    var currentAppStatus: Promise<AppStatus> {
-        Promise<AppStatus> { seal in
+    var currentServiceStatus: Promise<ServicesResponse> {
+        Promise { seal in
             
             firstly {
-                when(fulfilled: Permissions.instance.state(for: .notifications), Permissions.instance.state(for: .bluetooth))
-            }.done { notificationStatus, bluetoothStatus in
-                seal.fulfill(AppStatus(servicesStatus: .init(isNotificationEnabled: notificationStatus == .authorized)))
+                when(fulfilled:
+                    Permissions.instance.state(for: .notifications),
+                    Permissions.instance.state(for: .exposureNotification),
+                    Permissions.instance.state(for: .bluetooth)
+                )
+            }.done { notificationStatus, exposureStatus, bluetoothStatus in
+                let status = ServicesResponse.Status(
+                    exposureNotificationStatus: exposureStatus.asJSBridgeStatus,
+                    isBluetoothOn: bluetoothStatus == .authorized,
+                    isNotificationEnabled: notificationStatus == .authorized)
+                seal.fulfill(ServicesResponse(status: status))
             }.catch { error in
                 console(error, type: .error)
                 seal.reject(error)
@@ -36,14 +44,14 @@ final class AppStatusManager: AppStatusManagerProtocol {
         }
     }
     
-    var appStatusJson: Promise<String> {
+    var serviceStatusJson: Promise<String> {
         Promise<String> { [weak self] seal in
             guard let self = self else {
                 seal.reject(InternalError.deinitialized)
                 return
             }
             
-            self.currentAppStatus
+            self.currentServiceStatus
                 .done { status in
                     guard
                         let data = try? JSONEncoder().encode(status),

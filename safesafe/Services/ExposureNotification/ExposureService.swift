@@ -139,7 +139,7 @@ final class ExposureService: ExposureServiceProtocol {
 extension ExposureService: ExposureNotificationManagable {
     func activateManager() -> Promise<Void> {
         guard exposureManager.exposureNotificationStatus == .unknown else {
-            return .value(())
+            return .value
         }
         return Promise { seal in
             self.exposureManager.activate { error in
