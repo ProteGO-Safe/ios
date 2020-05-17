@@ -28,13 +28,13 @@ final class ServiceStatusManager: ServiceStatusManagerProtocol {
             firstly {
                 when(fulfilled:
                     Permissions.instance.state(for: .notifications),
-                    Permissions.instance.state(for: .exposureNotification),
-                    Permissions.instance.state(for: .bluetooth)
+                     ExposureNotificationStatus.status,
+                     ExposureNotificationBluetoothStatus.status
                 )
             }.done { notificationStatus, exposureStatus, bluetoothStatus in
                 let status = ServicesResponse.Status(
-                    exposureNotificationStatus: exposureStatus.asJSBridgeStatus,
-                    isBluetoothOn: bluetoothStatus == .authorized,
+                    exposureNotificationStatus: exposureStatus,
+                    isBluetoothOn: bluetoothStatus,
                     isNotificationEnabled: notificationStatus == .authorized)
                 seal.fulfill(ServicesResponse(status: status))
             }.catch { error in

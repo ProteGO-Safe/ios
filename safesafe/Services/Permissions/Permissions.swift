@@ -16,10 +16,8 @@ final class Permissions {
     
     private let notifications: PermissionType = NotificationsPermission()
     private let exposureNotifiaction: PermissionType = ExposureNotificationPermission()
-    private var exposureNotifiactionBluetooth: PermissionType?
     
     enum Permission {
-        case bluetooth
         case notifications
         case exposureNotification
     }
@@ -48,14 +46,6 @@ final class Permissions {
     /// Default value is `false`
     func state(for permission: Permission, shouldAsk: Bool = false) -> Promise<State> {
         switch permission {
-        case .bluetooth:
-            if #available(iOS 13.5, *) {
-                let permission = ExposureNotificationBluetoothPermission()
-                self.exposureNotifiactionBluetooth = permission
-                return permission.state(shouldAsk: shouldAsk)
-            } else {
-                return .value(.cantUse)
-            }
         case .notifications:
             return notifications.state(shouldAsk: shouldAsk)
         case .exposureNotification:
@@ -121,8 +111,6 @@ final class Permissions {
         switch permission {
         case .exposureNotification:
             return (title: "Exposure Notification", body: "[ENA] Wyłączony COV. Przejdź do ustawień Prywtność -> Zdrowie lub pomiń")
-        case .bluetooth:
-            return (title: "Bluetooth", body: "[ENA] Wyłączony BT. Przejdź do ustawień BT lub pomiń")
         default:
             return (title: "", body: "")
         }
@@ -130,8 +118,6 @@ final class Permissions {
     
     private func alertCopy(for permission: Permission) -> (title: String, body: String) {
         switch permission {
-        case .bluetooth:
-            return (title: "Włącz bluetooth", body: "Korzystając z modułu Bluetooth dbasz o siebie i bliskich. Włącz go w ustawieniach, żeby aplikacja mogła ostrzegać Cię o zagrożeniach.")
         case .notifications:
             return (title: "Włącz powiadomienia", body: "Do prawidłowego działania aplikacji potrzebna jest Twoja zgoda na wyświetlanie powiadomień. Włącz powiadomienia i pozwól ProteGO Safe wspierać ochronę zdrowia każdego z nas.")
         case .exposureNotification:

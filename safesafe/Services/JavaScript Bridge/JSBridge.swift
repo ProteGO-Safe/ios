@@ -40,6 +40,7 @@ final class JSBridge: NSObject {
     }
     
     private weak var webView: WKWebView?
+    private var isServicSetting: Bool = false
     private var exposureNotificationBridge: ExposureNotificationJSProtocol?
     private var currentDataType: BridgeDataType?
     private var notificationPayload: String?
@@ -143,6 +144,7 @@ extension JSBridge: WKScriptMessageHandler {
             currentDataType = bridgeDataType
             notificationsPermission(jsonString: jsonString, type: bridgeDataType)
         case .setServices:
+            currentDataType = bridgeDataType
             servicesPermissions(jsonString: jsonString, type: bridgeDataType)
         default:
             console("Not managed yet", type: .warning)
@@ -209,21 +211,39 @@ private extension JSBridge {
         NotificationManager.shared.unsubscribeFromDailyTopic(timestamp: model.timestamp)
     }
     
+    // This one needs refactoring because it's ugly, it works but it's ugly :P
+    //
     func servicesPermissions(jsonString: String?, type: BridgeDataType) {
+        isServicSetting = true
         guard let model: EnableServicesResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
         
-        exposureNotificationBridge?.enableService(enable: model.enableExposureNotificationService)
-            .then { _ -> Promise<Void> in
-                if model.enableNotification == true {
-                    return Permissions.instance.state(for: .notifications, shouldAsk: true).asVoid()
-                } else {
+        // Manage Notifications
+        if model.enableNotification == true {
+            Permissions.instance.state(for: .notifications, shouldAsk: true).asVoid()
+                .done { [weak self] _ in
+                    self?.sendAppStateJSON(type: .serviceStatus)
+                    self?.isServicSetting = false
+            }
+            .catch { error in console(error, type: .error)}
+            
+            return
+        }
+        
+        // Manage COVID ENA
+        exposureNotificationBridge?.enableBluetooth(enable: model.enableBluetooth)
+            .then { [weak self] _ -> Promise<Void> in
+                guard let exposureNotificationBridge = self?.exposureNotificationBridge else {
                     return .value
                 }
+                return exposureNotificationBridge.enableService(enable: model.enableExposureNotificationService)
         }
         .done { [weak self] _ in
             self?.sendAppStateJSON(type: .serviceStatus)
+            self?.isServicSetting = false
         }
-        .catch { error in console(error, type: .error)}
+        .catch(policy: .allErrors) { error in
+            console(error, type: .error)
+        }
     }
     
     func notificationsPermission(jsonString: String?, type: BridgeDataType) {
@@ -278,11 +298,8 @@ private extension JSBridge {
     
     @objc
     private func applicationWillEnterForeground(notification: Notification) {
-//        guard let type = currentDataType else {
-//            return
-//        }
-//        
-//        sendAppStateJSON(type: type)
+        guard !isServicSetting else { return }
+        sendAppStateJSON(type: .serviceStatus)
     }
 }
 

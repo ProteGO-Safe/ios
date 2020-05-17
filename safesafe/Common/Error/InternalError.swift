@@ -29,4 +29,5 @@ enum InternalError: Error {
     
     // Onboarding
     case waitingForUser
+    case notManagableYet
 }
