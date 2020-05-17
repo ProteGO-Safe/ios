@@ -5,6 +5,7 @@
 
 import Foundation
 
+@available(iOS 13.5, *)
 struct TemporaryExposureKeys: Encodable {
     
     let temporaryExposureKeys: [TemporaryExposureKey]

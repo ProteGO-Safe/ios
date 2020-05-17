@@ -6,20 +6,31 @@
 //
 
 import ExposureNotification
+import PromiseKit
 
+@available(iOS 13.5, *)
 protocol ExposureServiceProtocol {
     
     var isExposureNotificationAuthorized: Bool { get }
     var isExposureNotificationEnabled: Bool { get }
     
-    func setExposureNotificationEnabled(_ setEnabled: Bool)
-    func getDiagnosisKeys(_ completion: @escaping (Result<[ENTemporaryExposureKey], Error>) -> Void)
-    func detectExposures(_ completion: @escaping (Result<Void, Error>) -> Void)
+    func setExposureNotificationEnabled(_ setEnabled: Bool, completion: @escaping (Error?) -> ())
+    func getDiagnosisKeys(_ completion: @escaping (Swift.Result<[ENTemporaryExposureKey], Error>) -> Void)
+    func detectExposures(_ completion: @escaping (Swift.Result<Void, Error>) -> Void)
     
 }
 
+@available(iOS 13.5, *)
+protocol ExposureNotificationManagable: class {
+    func activateManager() -> Promise<Void>
+    func serviceTurnOn() -> Promise<Void>
+    func serviceTurnOff() -> Promise<Void>
+    func authorizationStatus() -> Promise<ENAuthorizationStatus>
+    func status() -> Promise<ENStatus>
+}
+
+@available(iOS 13.5, *)
 final class ExposureService: ExposureServiceProtocol {
-    
     // MARK: - Properties
     
     private let exposureManager: ENManager
@@ -43,10 +54,6 @@ final class ExposureService: ExposureServiceProtocol {
     ) {
         self.exposureManager = exposureManager
         self.keysService = keysService
-        
-        self.exposureManager.activate { error in
-            // TODO: Error handling
-        }
     }
     
     deinit {
@@ -54,14 +61,14 @@ final class ExposureService: ExposureServiceProtocol {
     }
     
     // MARK: - Public methods
-    
-    func setExposureNotificationEnabled(_ setEnabled: Bool) {
+    func setExposureNotificationEnabled(_ setEnabled: Bool, completion: @escaping (Error?) -> ()) {
         exposureManager.setExposureNotificationEnabled(setEnabled) { error in
+            completion(error)
             // TODO: Error handling
         }
     }
     
-    func getDiagnosisKeys(_ completion: @escaping (Result<[ENTemporaryExposureKey], Error>) -> Void) {
+    func getDiagnosisKeys(_ completion: @escaping (Swift.Result<[ENTemporaryExposureKey], Error>) -> Void) {
         exposureManager.getDiagnosisKeys { exposureKeys, error in
             if let error = error {
                 completion(.failure(error))
@@ -71,14 +78,14 @@ final class ExposureService: ExposureServiceProtocol {
         }
     }
     
-    func detectExposures(_ completion: @escaping (Result<Void, Error>) -> Void) {
+    func detectExposures(_ completion: @escaping (Swift.Result<Void, Error>) -> Void) {
         guard !isCurrentlyDetectingExposures else {
             return
         }
         isCurrentlyDetectingExposures = true
         
         // TODO: Should ask KeysService for configuration and key urls here
-        var serviceClosure: (Result<(ENExposureConfiguration, [URL]), Error>) -> Void
+        var serviceClosure: (Swift.Result<(ENExposureConfiguration, [URL]), Error>) -> Void
         
         serviceClosure = { [weak self] result in
             switch result {
@@ -104,7 +111,7 @@ final class ExposureService: ExposureServiceProtocol {
     
     private func getExposureInfo(
         from summary: ENExposureDetectionSummary,
-        _ completion: @escaping (Result<Void, Error>) -> Void
+        _ completion: @escaping (Swift.Result<Void, Error>) -> Void
     ) {
         let userExplanation = "Some explanation for the user, that their exposure details are being reveled to the app"
         
@@ -122,8 +129,58 @@ final class ExposureService: ExposureServiceProtocol {
     }
     
     // TODO: Some other successful result should be here - to discuss (probably `[Exposure]` like in Apple's sample)
-    private func endExposureSession(with result: Result<Void, Error>) {
+    private func endExposureSession(with result: Swift.Result<Void, Error>) {
         
     }
     
+}
+
+@available(iOS 13.5, *)
+extension ExposureService: ExposureNotificationManagable {
+    func activateManager() -> Promise<Void> {
+        guard exposureManager.exposureNotificationStatus == .unknown else {
+            return .value(())
+        }
+        return Promise { seal in
+            self.exposureManager.activate { error in
+                if let error = error {
+                    seal.reject(error)
+                } else {
+                    seal.fulfill(())
+                }
+            }
+        }
+    }
+    
+    func serviceTurnOn() -> Promise<Void> {
+        return Promise { seal in
+            setExposureNotificationEnabled(true) { error in
+                if let error = error {
+                    seal.reject(error)
+                } else {
+                    seal.fulfill(())
+                }
+            }
+        }
+    }
+    
+    func serviceTurnOff() -> Promise<Void> {
+        return Promise { seal in
+            setExposureNotificationEnabled(false) { error in
+                if let error = error {
+                    seal.reject(error)
+                } else {
+                    seal.fulfill(())
+                }
+            }
+        }
+    }
+    
+    func authorizationStatus() -> Promise<ENAuthorizationStatus> {
+        return .value(ENManager.authorizationStatus)
+    }
+    
+    func status() -> Promise<ENStatus> {
+        return .value(exposureManager.exposureNotificationStatus)
+    }
 }

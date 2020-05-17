@@ -12,6 +12,7 @@ protocol TemporaryExposureKeysServiceProtocol {
     
 }
 
+@available(iOS 13.5, *)
 final class TemporaryExposureKeysService: TemporaryExposureKeysServiceProtocol {
     
     // MARK: - Properties
