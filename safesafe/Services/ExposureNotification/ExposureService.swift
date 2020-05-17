@@ -14,7 +14,7 @@ protocol ExposureServiceProtocol {
     var isExposureNotificationAuthorized: Bool { get }
     var isExposureNotificationEnabled: Bool { get }
     
-    func setExposureNotificationEnabled(_ setEnabled: Bool, completion: (Error?) -> ())
+    func setExposureNotificationEnabled(_ setEnabled: Bool, completion: @escaping (Error?) -> ())
     func getDiagnosisKeys(_ completion: @escaping (Swift.Result<[ENTemporaryExposureKey], Error>) -> Void)
     func detectExposures(_ completion: @escaping (Swift.Result<Void, Error>) -> Void)
     
@@ -31,7 +31,6 @@ protocol ExposureNotificationManagable: class {
 
 @available(iOS 13.5, *)
 final class ExposureService: ExposureServiceProtocol {
-    
     // MARK: - Properties
     
     private let exposureManager: ENManager
@@ -62,7 +61,6 @@ final class ExposureService: ExposureServiceProtocol {
     }
     
     // MARK: - Public methods
-    
     func setExposureNotificationEnabled(_ setEnabled: Bool, completion: @escaping (Error?) -> ()) {
         exposureManager.setExposureNotificationEnabled(setEnabled) { error in
             completion(error)

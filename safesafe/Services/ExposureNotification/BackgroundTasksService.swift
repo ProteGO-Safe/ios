@@ -13,7 +13,7 @@ protocol BackgroundTasksServiceProtocol {
     
 }
 
-@available(iOS 13.0, *)
+@available(iOS 13.5, *)
 final class BackgroundTasksService: BackgroundTasksServiceProtocol {
     
     // MARK: - Properties
