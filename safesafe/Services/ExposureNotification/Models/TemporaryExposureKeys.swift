@@ -5,15 +5,25 @@
 
 import Foundation
 
+@available(iOS 13.5, *)
 struct TemporaryExposureKeys: Encodable {
     
+    enum Default {
+        static let regions = ["PL"]
+        static let platform = "ios"
+        static let transmissionRisk = 8 // TODO: verify value
+        static let appPackageName = Bundle.main.bundleIdentifier!
+        static let verificationAuthorityName = "GIS"
+        static let verificationPayload = "PL_PGS" // TODO: verify value
+    }
+    
     let temporaryExposureKeys: [TemporaryExposureKey]
-    let regions = ["PL"]
-    let platform = "ios"
-    let transmissionRisk = 9
-    let appPackageName = Bundle.main.bundleIdentifier
-    let verificationAuthorityName = "GIS"
-    let verificationPayload = "PL_PGS"
+    let regions = Default.regions
+    let platform = Default.platform
+    let transmissionRisk = Default.transmissionRisk
+    let appPackageName = Default.appPackageName
+    let verificationAuthorityName = Default.verificationAuthorityName
+    let verificationPayload = Default.verificationPayload
     let deviceVerificationPayload: String
     
 }

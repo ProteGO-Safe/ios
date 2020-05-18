@@ -4,15 +4,11 @@
 //
 
 import DeviceCheck
+import PromiseKit
 
 protocol DeviceCheckServiceProtocol {
     
-    func generatePayload(
-        using bundleID: String,
-        exposureKeys: [Data],
-        regions: [String],
-        completion: @escaping (Result<String, Error>) -> Void
-    )
+    func generatePayload(bundleID: String, exposureKeys: [Data], regions: [String]) -> Promise<String>
     
 }
 
@@ -30,35 +26,32 @@ final class DeviceCheckService: DeviceCheckServiceProtocol {
     
     // MARK: - ExposureNotification payload generation
     
-    func generatePayload(
-        using bundleID: String,
-        exposureKeys: [Data],
-        regions: [String],
-        completion: @escaping (Result<String, Error>) -> Void
-    ) {
-        guard let transactionID = (bundleID + concatenate(exposureKeys) + concatenate(regions)).sha256() else {
-            completion(.failure(InternalError.deviceCheckTokenGenerationFailed))
-            return
-        }
-        
-        dcDevice.generateToken { token, error in
-            guard let token = token, error == nil else {
-                completion(.failure(error ?? InternalError.deviceCheckTokenGenerationFailed))
+    func generatePayload(bundleID: String, exposureKeys: [Data], regions: [String]) -> Promise<String> {
+        Promise { seal in
+            guard let transactionID = (bundleID + concatenate(exposureKeys) + concatenate(regions)).sha256() else {
+                seal.reject(InternalError.deviceCheckTokenGenerationFailed)
                 return
             }
             
-            let deviceVerification = DeviceVerification(
-                deviceToken: token.base64EncodedString(),
-                transactionId: transactionID,
-                timestamp: Int(Date().timeIntervalSince1970) * 1000
-            )
-            
-            guard let jsonData = try? JSONEncoder().encode(deviceVerification) else {
-                completion(.failure(InternalError.jsonSerializingData))
-                return
+            dcDevice.generateToken { token, error in
+                guard let token = token, error == nil else {
+                    seal.reject(error ?? InternalError.deviceCheckTokenGenerationFailed)
+                    return
+                }
+                
+                let deviceVerification = DeviceVerification(
+                    deviceToken: token.base64EncodedString(),
+                    transactionId: transactionID,
+                    timestamp: Int(Date().timeIntervalSince1970) * 1000
+                )
+                
+                guard let jsonData = try? JSONEncoder().encode(deviceVerification) else {
+                    seal.reject(InternalError.jsonSerializingData)
+                    return
+                }
+                
+                seal.fulfill(jsonData.base64EncodedString())
             }
-            
-            completion(.success(jsonData.base64EncodedString()))
         }
     }
     
