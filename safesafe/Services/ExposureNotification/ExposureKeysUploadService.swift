@@ -1,20 +1,19 @@
 //
-//  TemporaryExposureKeysService.swift
+//  ExposureKeysUploadService.swift
 //  safesafe
 //
 
 import Moya
 import PromiseKit
 
-protocol TemporaryExposureKeysServiceProtocol {
+protocol ExposureKeysUploadServiceProtocol {
     
-//    func get()
     func post() -> Promise<Void>
     
 }
 
 @available(iOS 13.5, *)
-final class TemporaryExposureKeysService: TemporaryExposureKeysServiceProtocol {
+final class ExposureKeysUploadService: ExposureKeysUploadServiceProtocol {
         
     // MARK: - Properties
     

@@ -14,7 +14,6 @@ struct TemporaryExposureKeys: Encodable {
         static let transmissionRisk = 8 // TODO: verify value
         static let appPackageName = Bundle.main.bundleIdentifier!
         static let verificationAuthorityName = "GIS"
-        static let verificationPayload = "PL_PGS" // TODO: verify value
     }
     
     let temporaryExposureKeys: [TemporaryExposureKey]
@@ -23,7 +22,7 @@ struct TemporaryExposureKeys: Encodable {
     let transmissionRisk = Default.transmissionRisk
     let appPackageName = Default.appPackageName
     let verificationAuthorityName = Default.verificationAuthorityName
-    let verificationPayload = Default.verificationPayload
+    let verificationPayload: String
     let deviceVerificationPayload: String
     
 }
