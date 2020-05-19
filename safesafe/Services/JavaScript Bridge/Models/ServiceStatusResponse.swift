@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ServicesResponse: Codable {
+struct ServicesResponse: Codable, JSONRepresentable {
     
     enum CodingKeys: String, CodingKey {
         case status = "servicesStatus"

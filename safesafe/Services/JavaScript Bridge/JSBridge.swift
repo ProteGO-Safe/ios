@@ -16,6 +16,7 @@ final class JSBridge: NSObject {
     enum BridgeDataType: Int {
         case dailyTopicUnsubscribe = 1
         case notification = 2
+        case applicationLifecycle = 11
         case notificationsPermission = 35
         case serviceStatus = 51
         case setServices = 52
@@ -65,6 +66,7 @@ final class JSBridge: NSObject {
     override private init() {
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     func register(webView: WKWebView)  {
@@ -298,8 +300,14 @@ private extension JSBridge {
     
     @objc
     private func applicationWillEnterForeground(notification: Notification) {
-        guard !isServicSetting else { return }
-        sendAppStateJSON(type: .serviceStatus)
+        guard let json = ApplicationLifecycleResponse(appicationState: .willEnterForeground).jsonString else {  return }
+        onBridgeData(type: .applicationLifecycle, body: json)
+    }
+    
+    @objc
+    private func applicationDidEnterBackground(notification: Notification) {
+        guard let json = ApplicationLifecycleResponse(appicationState: .didEnterBackground).jsonString else {  return }
+        onBridgeData(type: .applicationLifecycle, body: json)
     }
 }
 

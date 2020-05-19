@@ -53,12 +53,9 @@ final class ServiceStatusManager: ServiceStatusManagerProtocol {
             
             self.currentServiceStatus
                 .done { status in
-                    guard
-                        let data = try? JSONEncoder().encode(status),
-                        let json = String(data: data, encoding: .utf8)
-                        else {
-                            seal.reject(InternalError.serializationFailed)
-                            return
+                    guard let json = status.jsonString else {
+                        seal.reject(InternalError.serializationFailed)
+                        return
                     }
                     
                     seal.fulfill(json)
