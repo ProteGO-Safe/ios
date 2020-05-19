@@ -7,8 +7,9 @@ import Moya
 
 @available(iOS 13.5, *)
 enum ExposureKeysTarget {
+    case auth(TemporaryExposureKeysAuthData)
+    case post(TemporaryExposureKeysData)
 //    case download
-    case post(TemporaryExposureKeys)
 }
 
 @available(iOS 13.5, *)
@@ -20,6 +21,9 @@ extension ExposureKeysTarget: TargetType {
     
     var path: String {
         switch self {
+        case .auth:
+            return "getAccessToken"
+            
         case .post:
             return "uploadDiagnosisKeys"
         }
@@ -27,7 +31,7 @@ extension ExposureKeysTarget: TargetType {
     
     var method: Method {
         switch self {
-        case .post:
+        case .auth, .post:
             return .post
         }
     }
@@ -38,6 +42,9 @@ extension ExposureKeysTarget: TargetType {
     
     var task: Task {
         switch self {
+        case .auth(let temporaryExposureKeysAuthData):
+            return .requestJSONEncodable(temporaryExposureKeysAuthData)
+            
         case .post(let temporaryExposureKeys):
             return .requestJSONEncodable(temporaryExposureKeys)
         }

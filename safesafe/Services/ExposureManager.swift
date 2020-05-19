@@ -57,13 +57,16 @@ final class ExposureManager: ExposureManagerProtocol {
     }
     
     func getDiagnosisKeys(_ completion: @escaping (Result<[ENTemporaryExposureKey], Error>) -> Void) {
-        exposureManager.getDiagnosisKeys { exposureKeys, error in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(exposureKeys ?? []))
-            }
-        }
+        let key = ENTemporaryExposureKey()
+        completion(.success([key]))
+        
+//        exposureManager.getDiagnosisKeys { exposureKeys, error in
+//            if let error = error {
+//                completion(.failure(error))
+//            } else {
+//                completion(.success(exposureKeys ?? []))
+//            }
+//        }
     }
     
     func detectExposures(_ completion: @escaping (Result<Void, Error>) -> Void) {
