@@ -1,5 +1,5 @@
 //
-//  BackgroundTasksManager.swift
+//  BackgroundTasksService.swift
 //  safesafe
 //
 //  Created by Rafał Małczyński on 13/05/2020.
@@ -7,30 +7,31 @@
 
 import BackgroundTasks
 
-protocol BackgroundTasksManagerProtocol {
+protocol BackgroundTasksServiceProtocol {
     
     func scheduleExposureTask()
     
 }
 
-final class BackgroundTasksManager: BackgroundTasksManagerProtocol {
+@available(iOS 13.5, *)
+final class BackgroundTasksService: BackgroundTasksServiceProtocol {
     
     // MARK: - Properties
     
     private let backgroundTaskID = "protego.safe.backgroundTask.exposure-notification"
-    private let exposureManager: ExposureManagerProtocol
+    private let exposureService: ExposureServiceProtocol
     
     // MARK: - Life Cycle
     
-    init(exposureManager: ExposureManagerProtocol) {
-        self.exposureManager = exposureManager
+    init(exposureService: ExposureServiceProtocol) {
+        self.exposureService = exposureService
         registerExposureTask()
     }
     
     // MARK: - Public methods
     
     func scheduleExposureTask() {
-        guard exposureManager.isExposureNotificationAuthorized else {
+        guard exposureService.isExposureNotificationAuthorized else {
             return
         }
         
@@ -52,18 +53,16 @@ final class BackgroundTasksManager: BackgroundTasksManagerProtocol {
                 // Print some error? This closure may be caused by timed-out background operation
             }
             
-            self?.exposureManager.detectExposures { result in
-                switch result {
-                case .success:
+            self?.exposureService
+                .detectExposures()
+                .done {
                     task.setTaskCompleted(success: true)
-                    
-                case .failure:
+                }.catch {
+                    console($0)
                     task.setTaskCompleted(success: false)
-                    // Again - opportunity to do some error handling. E.g. when user kills EN permissions while task has already been scheduled maybe we could show some popup?
+                }.finally {
+                    self?.scheduleExposureTask()
                 }
-            }
-            
-            self?.scheduleExposureTask()
         }
     }
     

@@ -17,14 +17,14 @@ final class ExposureKeysUploadService: ExposureKeysUploadServiceProtocol {
         
     // MARK: - Properties
     
-    private let exposureManager: ExposureManagerProtocol
+    private let exposureManager: ExposureServiceProtocol
     private let deviceCheckService: DeviceCheckServiceProtocol
     private let exposureKeysProvider: MoyaProvider<ExposureKeysTarget>
     
     // MARK: - Life Cycle
     
     init(
-        with exposureManager: ExposureManagerProtocol,
+        with exposureManager: ExposureServiceProtocol,
         deviceCheckService: DeviceCheckServiceProtocol,
         exposureKeysProvider: MoyaProvider<ExposureKeysTarget>
     ) {
@@ -57,9 +57,9 @@ final class ExposureKeysUploadService: ExposureKeysUploadServiceProtocol {
     
     private func prepareTemporaryExposureKeys(usingAuthCode authCode: String) -> Promise<TemporaryExposureKeys> {
         Promise { seal in
-            exposureManager.getDiagnosisKeys { result in
-                switch result {
-                case .success(let keys):
+            exposureManager
+                .getDiagnosisKeys()
+                .done { keys in
                     firstly { when(fulfilled:
                         self.getToken(usingAuthCode: authCode),
                         self.deviceCheckService.generatePayload(
@@ -76,11 +76,9 @@ final class ExposureKeysUploadService: ExposureKeysUploadServiceProtocol {
                     }.catch {
                         seal.reject($0)
                     }
-                    
-                case .failure(let error):
-                    seal.reject(error)
+                }.catch {
+                    seal.reject($0)
                 }
-            }
         }
     }
     
