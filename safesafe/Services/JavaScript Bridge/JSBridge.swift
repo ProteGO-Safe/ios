@@ -19,7 +19,7 @@ final class JSBridge: NSObject {
         case appStatus = 31
         case notificationsPermission = 35
         case clearBluetoothData = 37
-        case manageHistoricData = 43
+        case uploadTemporaryExposureKeys = 43
     }
     
     enum SendMethod: String, CaseIterable {
@@ -45,6 +45,7 @@ final class JSBridge: NSObject {
     private var notificationPayload: String?
     private var controller: WKUserContentController?
     private let jsonDecoder = JSONDecoder()
+    var exposureKeysUploadService: ExposureKeysUploadServiceProtocol? // TODO: inject service
     
     var contentController: WKUserContentController {
         let controller = self.controller ?? WKUserContentController()
@@ -138,9 +139,14 @@ extension JSBridge: WKScriptMessageHandler {
         switch bridgeDataType {
         case .dailyTopicUnsubscribe:
             unsubscribeFromTopic(jsonString: jsonString, type: bridgeDataType)
+            
         case .notificationsPermission:
             currentDataType = bridgeDataType
             notificationsPermission(jsonString: jsonString, type: bridgeDataType)
+            
+        case .uploadTemporaryExposureKeys:
+            uploadTemporaryExposureKeys(jsonString: jsonString)
+            
         default:
             console("Not managed yet", type: .warning)
         }
@@ -236,6 +242,23 @@ private extension JSBridge {
         }
     }
     
+    private func uploadTemporaryExposureKeys(jsonString: String?) {
+        guard let response: UploadTemporaryExposureKeysResponse = jsonString?.jsonDecode(decoder: jsonDecoder)
+        else { return }
+        
+        exposureKeysUploadService?.upload(usingAuthCode: response.pin).done {
+            self.send(.success)
+        }.catch { _ in
+            self.send(.failure)
+        }
+    }
+    
+    private func send(_ status: UploadTemporaryExposureKeysStatus) {
+        guard let result = self.encodeToJSON(UploadTemporaryExposureKeysStatusResult(result: status))
+        else { return }
+        
+        self.onBridgeData(type: .uploadTemporaryExposureKeys, body: result)
+    }
 
     private func sendAppStateJSON(type: BridgeDataType) {
         appStatusManager.appStatusJson
