@@ -47,6 +47,7 @@ targets:
     deploymentTarget: "12.1"
     settings:
         TARGETED_DEVICE_FAMILY: 1
+        SWIFT_OBJC_BRIDGING_HEADER: $(PROJECT_DIR)/safesafe/App/safesafe-Bridging-Header.h
     configFiles:
       Dev: safesafe/Resources/Dev/dev.xcconfig
       DevDist: safesafe/Resources/Dev/devDist.xcconfig

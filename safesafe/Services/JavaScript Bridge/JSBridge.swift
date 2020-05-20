@@ -18,6 +18,8 @@ final class JSBridge: NSObject {
         case notification = 2
         case applicationLifecycle = 11
         case notificationsPermission = 35
+        case clearBluetoothData = 37
+        case uploadTemporaryExposureKeys = 43
         case serviceStatus = 51
         case setServices = 52
     }
@@ -47,6 +49,7 @@ final class JSBridge: NSObject {
     private var notificationPayload: String?
     private var controller: WKUserContentController?
     private let jsonDecoder = JSONDecoder()
+    var exposureKeysUploadService: ExposureKeysUploadServiceProtocol? // TODO: inject service
     
     var contentController: WKUserContentController {
         let controller = self.controller ?? WKUserContentController()
@@ -142,9 +145,14 @@ extension JSBridge: WKScriptMessageHandler {
         switch bridgeDataType {
         case .dailyTopicUnsubscribe:
             unsubscribeFromTopic(jsonString: jsonString, type: bridgeDataType)
+            
         case .notificationsPermission:
             currentDataType = bridgeDataType
             notificationsPermission(jsonString: jsonString, type: bridgeDataType)
+            
+        case .uploadTemporaryExposureKeys:
+            uploadTemporaryExposureKeys(jsonString: jsonString)
+            
         case .setServices:
             currentDataType = bridgeDataType
             servicesPermissions(jsonString: jsonString, type: bridgeDataType)
@@ -232,13 +240,7 @@ private extension JSBridge {
         }
         
         // Manage COVID ENA
-        exposureNotificationBridge?.enableBluetooth(enable: model.enableBluetooth)
-            .then { [weak self] _ -> Promise<Void> in
-                guard let exposureNotificationBridge = self?.exposureNotificationBridge else {
-                    return .value
-                }
-                return exposureNotificationBridge.enableService(enable: model.enableExposureNotificationService)
-        }
+        exposureNotificationBridge?.enableService(enable: model.enableExposureNotificationService)
         .done { [weak self] _ in
             self?.sendAppStateJSON(type: .serviceStatus)
             self?.isServicSetting = false
@@ -282,6 +284,23 @@ private extension JSBridge {
         }
     }
     
+    private func uploadTemporaryExposureKeys(jsonString: String?) {
+        guard let response: UploadTemporaryExposureKeysResponse = jsonString?.jsonDecode(decoder: jsonDecoder)
+        else { return }
+        
+        exposureKeysUploadService?.upload(usingAuthCode: response.pin).done {
+            self.send(.success)
+        }.catch { _ in
+            self.send(.failure)
+        }
+    }
+    
+    private func send(_ status: UploadTemporaryExposureKeysStatus) {
+        guard let result = self.encodeToJSON(UploadTemporaryExposureKeysStatusResult(result: status))
+        else { return }
+        
+        self.onBridgeData(type: .uploadTemporaryExposureKeys, body: result)
+    }
 
     
     private func sendAppStateJSON(type: BridgeDataType) {

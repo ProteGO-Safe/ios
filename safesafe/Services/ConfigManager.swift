@@ -27,6 +27,10 @@ final class ConfigManager {
         static let pwa = "PWA" // Dictionary
         static let host = "HOST" // String
         static let scheme = "SCHEME" // String
+        
+        // Exposure Notification
+        static let exposureNotification = "EXPOSURE_NOTIFICATION" // Dictionary
+        static let enBaseURL = "EN_BASE_URL" // String
      }
     
     private let settings: [String: Any]
@@ -69,4 +73,21 @@ extension ConfigManager {
     var pwaScheme: String {
         return value(for: Key.scheme, dictionary: pwaSettings)
     }
+}
+
+// Exposure Notification
+extension ConfigManager {
+    
+    private var enSettings: [String: Any] {
+        guard let dictionary = settings[Key.exposureNotification] as? [String: Any] else {
+            fatalError("Can't read \(Key.exposureNotification) from plist")
+        }
+        
+        return dictionary
+    }
+    
+    var enBaseURL: String {
+        return value(for: Key.enBaseURL, dictionary: enSettings)
+    }
+    
 }
