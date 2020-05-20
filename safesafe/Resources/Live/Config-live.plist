@@ -2,6 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>EXPOSURE_NOTIFICATION</key>
+	<dict>
+		<key>EN_BASE_URL</key>
+		<string>TBA</string>
+	</dict>
 	<key>PWA</key>
 	<dict>
 		<key>SCHEME</key>

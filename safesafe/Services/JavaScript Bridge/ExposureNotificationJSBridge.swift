@@ -11,16 +11,15 @@ import ExposureNotification
 
 protocol ExposureNotificationJSProtocol: class {
     func enableService(enable: Bool?) -> Promise<Void>
-    func enableBluetooth(enable: Bool?) -> Promise<Void>
 }
 
 @available(iOS 13.5, *)
 final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
     
-    private weak var manager: ExposureNotificationManagable?
+    private weak var manager: ExposureServiceProtocol?
     private weak var viewController: UIViewController?
 
-    init(manager: ExposureNotificationManagable, viewController: UIViewController) {
+    init(manager: ExposureServiceProtocol, viewController: UIViewController) {
         self.manager = manager
         self.viewController = viewController
     }
@@ -29,7 +28,7 @@ final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
         guard let manager = manager, let enable = enable else {
             return .value
         }
-        return (enable ? turnOnService() : manager.serviceTurnOff())
+        return (enable ? turnOnService() : manager.setExposureNotificationEnabled(false))
             .recover { error -> Guarantee<()> in
                 guard let error = error as? ENError else {
                     return .value
@@ -54,7 +53,7 @@ final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
     
     private func turnOnService() -> Promise<Void> {
         guard let manager = manager else {  return .value }
-        return  manager.serviceTurnOn()
+        return  manager.setExposureNotificationEnabled(true)
             .recover { [viewController] error -> Promise<Void> in
                 if let error = error as? ENError {
                     switch error.code {
@@ -71,27 +70,6 @@ final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
                 } else {
                     return .value
                 }
-        }
-    }
-}
-
-@available(iOS 13.5, *)
-extension ExposureNotificationJSBridge {
-    func enableBluetooth(enable: Bool?) -> Promise<Void> {
-        guard let manager = manager, let viewController = viewController, enable == true else {
-            return .value
-        }
-        
-        return manager.status()
-            .then { status -> Promise<Permissions.AlertAction> in
-                if status == .bluetoothOff {
-                    return .value(.skip)
-                } else {
-                    return Permissions.instance.choiceAlert(for: .exposureNotification, on: viewController)
-                }
-        }
-        .then { action -> Promise<Void> in
-            return .value
         }
     }
 }

@@ -30,4 +30,8 @@ enum InternalError: Error {
     // Onboarding
     case waitingForUser
     case notManagableYet
+    
+    // DeviceCheck
+    case deviceCheckTokenGenerationFailed
+    
 }

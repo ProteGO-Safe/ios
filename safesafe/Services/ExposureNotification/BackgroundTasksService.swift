@@ -53,18 +53,16 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
                 // Print some error? This closure may be caused by timed-out background operation
             }
             
-            self?.exposureService.detectExposures { result in
-                switch result {
-                case .success:
+            self?.exposureService
+                .detectExposures()
+                .done {
                     task.setTaskCompleted(success: true)
-                    
-                case .failure:
+                }.catch {
+                    console($0)
                     task.setTaskCompleted(success: false)
-                    // Again - opportunity to do some error handling. E.g. when user kills EN permissions while task has already been scheduled maybe we could show some popup?
+                }.finally {
+                    self?.scheduleExposureTask()
                 }
-            }
-            
-            self?.scheduleExposureTask()
         }
     }
     
