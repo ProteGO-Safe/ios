@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.2.0)
   - DBDebugToolkit (0.5.0)
   - Firebase/Analytics (6.23.0):
     - Firebase/Core
@@ -109,6 +110,10 @@ PODS:
   - GoogleUtilities/UserDefaults (6.6.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.4.0)
+  - Moya (14.0.0):
+    - Moya/Core (= 14.0.0)
+  - Moya/Core (14.0.0):
+    - Alamofire (~> 5.0)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
     - nanopb/encode (= 0.3.9011)
@@ -134,11 +139,13 @@ DEPENDENCIES:
   - Firebase/Crashlytics
   - Firebase/Functions
   - Firebase/Messaging
+  - Moya (~> 14.0)
   - PromiseKit (~> 6.8)
   - SnapKit (= 5.0.1)
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - DBDebugToolkit
     - Firebase
     - FirebaseAnalytics
@@ -158,6 +165,7 @@ SPEC REPOS:
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
     - GTMSessionFetcher
+    - Moya
     - nanopb
     - PromiseKit
     - PromisesObjC
@@ -165,6 +173,7 @@ SPEC REPOS:
     - SnapKit
 
 SPEC CHECKSUMS:
+  Alamofire: c1ca147559e730bfb2182c8c7aafbdd90a867987
   DBDebugToolkit: c04bb6f618051d3de447a4b4323f37826116cfed
   Firebase: 585ae467b3edda6a5444e788fda6888f024d8d6f
   FirebaseAnalytics: 558f7a03d19de451093032c806f39d5f9dff096e
@@ -184,12 +193,13 @@ SPEC CHECKSUMS:
   GoogleDataTransportCCTSupport: 0f39025e8cf51f168711bd3fb773938d7e62ddb5
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
+  Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 9523ccf7f6be20720eacca7ce2156eadfd00d087
+PODFILE CHECKSUM: de657aed40ea6c341e522a1321bc9bdf2669a3c0
 
 COCOAPODS: 1.9.1
