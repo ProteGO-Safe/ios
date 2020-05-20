@@ -12,6 +12,7 @@ def pods_definition
   pod 'Firebase/Messaging'
   pod 'Firebase/Auth'
   pod 'PromiseKit', '~> 6.8'
+  pod 'Moya', '~> 14.0'
   
   pod 'DBDebugToolkit', :configurations => ['Dev', 'DevDist', 'Stage', 'StageDebug', 'LiveDebug', 'LiveAdhoc']
 
