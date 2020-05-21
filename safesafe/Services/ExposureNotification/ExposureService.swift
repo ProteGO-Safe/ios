@@ -28,6 +28,7 @@ final class ExposureService: ExposureServiceProtocol {
     
     private let exposureManager: ENManager
     private let diagnosisKeysService: DiagnosisKeysDownloadServiceProtocol
+    private let configurationService: RemoteConfigProtocol
     
     private var isCurrentlyDetectingExposures = false
     
@@ -43,10 +44,12 @@ final class ExposureService: ExposureServiceProtocol {
     
     init(
         exposureManager: ENManager,
-        diagnosisKeysService: DiagnosisKeysDownloadServiceProtocol
+        diagnosisKeysService: DiagnosisKeysDownloadServiceProtocol,
+        configurationService: RemoteConfigProtocol
     ) {
         self.exposureManager = exposureManager
         self.diagnosisKeysService = diagnosisKeysService
+        self.configurationService = configurationService
     }
     
     deinit {
@@ -102,62 +105,80 @@ final class ExposureService: ExposureServiceProtocol {
     }
     
     func detectExposures() -> Promise<Void> {
-        guard !isCurrentlyDetectingExposures else {
-            return .value
-        }
-        isCurrentlyDetectingExposures = true
-        
-        // TODO: Should ask KeysService for configuration and key urls here
-        var serviceClosure: (Swift.Result<(ENExposureConfiguration, [URL]), Error>) -> Void
-        
-        serviceClosure = { [weak self] result in
-            switch result {
-            case let .failure(error):
-                self?.endExposureSession(with: .failure(error))
-                //completion(.failure(error))
-                
-            case let .success((configuration, urls)):
-                self?.exposureManager.detectExposures(configuration: configuration, diagnosisKeyURLs: urls) { summary, error in
-                    guard let summary = summary, error == nil else {
-                        self?.endExposureSession(with: .failure(error!))
-                        //completion(.failure(error!))
-                        return
-                    }
-                    
-                    //self?.getExposureInfo(from: summary, completion)
-                }
+        Promise { seal in
+            firstly { when(fulfilled:
+                makeExposureConfiguration(),
+                diagnosisKeysService.download()
+            )}
+            .then { configuration, keys in
+                self.detectExposures(for: configuration, keys: keys)
             }
-            
+            .done { summary in
+                self.getExposureInfo(from: summary)
+                    .done {
+                        seal.fulfill(())
+                    }
+                    .catch {
+                        seal.reject($0)
+                    }
+            }
+            .catch {
+                seal.reject($0)
+            }
         }
-        
-        // TODO: Implement proper logic when KeysService is finished
-        return Promise()
     }
     
     // MARK: - Private methods
     
-    private func getExposureInfo(
-        from summary: ENExposureDetectionSummary,
-        _ completion: @escaping (Swift.Result<Void, Error>) -> Void
-    ) {
-        let userExplanation = "Some explanation for the user, that their exposure details are being reveled to the app"
-        
-        exposureManager.getExposureInfo(summary: summary, userExplanation: userExplanation) { [weak self] exposureInfo, error in
-            guard let info = exposureInfo, error == nil else {
-                self?.endExposureSession(with: .failure(error!))
-                completion(.failure(error!))
-                return
+    private func detectExposures(for configuration: ENExposureConfiguration, keys: [URL]) -> Promise<ENExposureDetectionSummary> {
+        Promise { seal in
+            exposureManager.detectExposures(configuration: configuration, diagnosisKeyURLs: keys) { summary, error in
+                guard let summary = summary, error == nil else {
+                    seal.reject(error!)
+                    return
+                }
+                seal.fulfill(summary)
             }
-            
-            // Map ENExposureInfo to some domain model - to discuss
-            self?.endExposureSession(with: .success)
-            completion(.success)
         }
     }
     
-    // TODO: Some other successful result should be here - to discuss (probably `[Exposure]` like in Apple's sample)
-    private func endExposureSession(with result: Swift.Result<Void, Error>) {
-        
+    private func getExposureInfo(from summary: ENExposureDetectionSummary) -> Promise<Void> {
+        Promise { seal in
+            let userExplanation = "Some explanation for the user, that their exposure details are being reveled to the app"
+            
+            exposureManager.getExposureInfo(summary: summary, userExplanation: userExplanation) { [weak self] exposureInfo, error in
+                guard let info = exposureInfo, error == nil else {
+                    seal.reject(error!)
+                    return
+                }
+                
+                // TODO: Map/filter info items to get appropriate information - waiting for decision
+                
+                // Map ENExposureInfo to some domain model - to discuss
+                //seal.fulfill(())
+            }
+        }
+    }
+    
+    private func makeExposureConfiguration() -> Promise<ENExposureConfiguration> {
+        Promise { seal in
+            configurationService.configuration()
+                .done { response in
+                    let configuration = ENExposureConfiguration()
+                    configuration.attenuationLevelValues = response.exposure.attenuationScores.map { NSNumber(integerLiteral: $0) }
+                    configuration.attenuationWeight = Double(response.exposure.attenuationWeigh)
+                    configuration.daysSinceLastExposureLevelValues = response.exposure.daysSinceLastExposureScores.map { NSNumber(integerLiteral: $0) }
+                    configuration.daysSinceLastExposureWeight = Double(response.exposure.daysSinceLastExposureWeight)
+                    configuration.durationLevelValues = response.exposure.durationScores.map { NSNumber(integerLiteral: $0) }
+                    configuration.durationWeight = Double(response.exposure.daysSinceLastExposureWeight)
+                    configuration.transmissionRiskLevelValues = response.exposure.transmissionRiskScores.map { NSNumber(integerLiteral: $0) }
+                    configuration.transmissionRiskWeight = Double(response.exposure.transmissionRiskWeight)
+                    seal.fulfill(configuration)
+                }
+                .catch {
+                    seal.reject($0)
+                }
+        }
     }
     
 }
