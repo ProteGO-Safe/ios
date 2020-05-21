@@ -1,19 +1,19 @@
 //
-//  ExposureKeysUploadService.swift
+//  DiagnosisKeysUploadService.swift
 //  safesafe
 //
 
 import Moya
 import PromiseKit
 
-protocol ExposureKeysUploadServiceProtocol {
+protocol DiagnosisKeysUploadServiceProtocol {
     
     func upload(usingAuthCode authCode: String) -> Promise<Void>
     
 }
 
 @available(iOS 13.5, *)
-final class ExposureKeysUploadService: ExposureKeysUploadServiceProtocol {
+final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
         
     // MARK: - Properties
     
@@ -92,7 +92,7 @@ final class ExposureKeysUploadService: ExposureKeysUploadServiceProtocol {
                 switch result {
                 case .success(let response):
                     do {
-                        let token = try response.map(TemporaryExposureKeysAuthResponse.self).result
+                        let token = try response.map(TemporaryExposureKeysAuthResponse.self).result.accessToken
                         seal.fulfill(token)
                     } catch {
                         seal.reject(error)

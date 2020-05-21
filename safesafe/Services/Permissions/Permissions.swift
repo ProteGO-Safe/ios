@@ -7,18 +7,15 @@
 //
 
 import Foundation
-import CoreBluetooth
 import PromiseKit
 
 final class Permissions {
     
     static let instance = Permissions()
     
-    private let bluetooth: PermissionType = BluetoothPermission()
     private let notifications: PermissionType = NotificationsPermission()
     
     enum Permission {
-        case bluetooth
         case notifications
     }
     
@@ -45,8 +42,6 @@ final class Permissions {
     /// Default value is `false`
     func state(for permission: Permission, shouldAsk: Bool = false) -> Promise<State> {
         switch permission {
-        case .bluetooth:
-            return bluetooth.state(shouldAsk: shouldAsk)
         case .notifications:
             return notifications.state(shouldAsk: shouldAsk)
         }
@@ -81,8 +76,6 @@ final class Permissions {
     
     private func alertCopy(for permission: Permission) -> (title: String, body: String) {
         switch permission {
-        case .bluetooth:
-            return (title: "Włącz bluetooth", body: "Korzystając z modułu Bluetooth dbasz o siebie i bliskich. Włącz go w ustawieniach, żeby aplikacja mogła ostrzegać Cię o zagrożeniach.")
         case .notifications:
             return (title: "Włącz powiadomienia", body: "Do prawidłowego działania aplikacji potrzebna jest Twoja zgoda na wyświetlanie powiadomień. Włącz powiadomienia i pozwól ProteGO Safe wspierać ochronę zdrowia każdego z nas.")
         }
