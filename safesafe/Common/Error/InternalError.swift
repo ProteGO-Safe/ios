@@ -30,4 +30,8 @@ enum InternalError: Error {
     // DeviceCheck
     case deviceCheckTokenGenerationFailed
     
+    // Remote config
+    case remoteConfigNotExistingKey
+    case remoteActivate
+    case remoteUnknownStatus
 }
