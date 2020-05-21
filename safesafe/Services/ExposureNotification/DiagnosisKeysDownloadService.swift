@@ -8,7 +8,7 @@ import PromiseKit
 protocol DiagnosisKeysDownloadServiceProtocol {
     
     func download() -> Promise<[URL]>
-    func deleteFiles() throws
+    func deleteFiles()
     
 }
 
@@ -31,7 +31,7 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
         }
     }
     
-    func deleteFiles() throws {
+    func deleteFiles() {
         
     }
     
