@@ -26,8 +26,8 @@ final class AppStatusManager: AppStatusManagerProtocol {
         Promise<AppStatus> { seal in
             
             firstly {
-                when(fulfilled: Permissions.instance.state(for: .notifications), Permissions.instance.state(for: .bluetooth))
-            }.done { notificationStatus, bluetoothStatus in
+                Permissions.instance.state(for: .notifications)
+            }.done { notificationStatus in
                 seal.fulfill(AppStatus(servicesStatus: .init(isNotificationEnabled: notificationStatus == .authorized)))
             }.catch { error in
                 console(error, type: .error)
