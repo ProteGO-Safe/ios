@@ -13,7 +13,7 @@ protocol RemoteConfigProtocol {
     func configuration() -> Promise<RemoteConfigurationResponse>
 }
 
-final class RemoteConfiguration {
+final class RemoteConfiguration: RemoteConfigProtocol {
     
     private enum Key: String {
         case diagnosisKeyConfig = "diagnosisKeyDownloadConfiguration"
