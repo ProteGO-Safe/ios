@@ -14,7 +14,6 @@ protocol DiagnosisKeysDownloadServiceProtocol {
     
 }
 
-@available(iOS 13.5, *)
 final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
     
     // MARK: - Constants
