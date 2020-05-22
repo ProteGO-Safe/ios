@@ -30,7 +30,7 @@ final class ConfigManager {
         
         // Exposure Notification
         static let exposureNotification = "EXPOSURE_NOTIFICATION" // Dictionary
-        static let enBaseURL = "EN_BASE_URL" // String EN_STORAGE_URL
+        static let enBaseURL = "EN_BASE_URL" // String
         static let enStorageURL = "EN_STORAGE_URL" // String
      }
     
