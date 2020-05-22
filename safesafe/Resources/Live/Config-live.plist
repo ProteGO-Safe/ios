@@ -4,6 +4,8 @@
 <dict>
 	<key>EXPOSURE_NOTIFICATION</key>
 	<dict>
+		<key>EN_STORAGE_URL</key>
+		<string>gs://safesafe-app-cdn</string>
 		<key>EN_BASE_URL</key>
 		<string>TBA</string>
 	</dict>
