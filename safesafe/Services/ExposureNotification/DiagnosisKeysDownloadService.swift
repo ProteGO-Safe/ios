@@ -100,6 +100,33 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
         }
     }
     
+    private func filter(keyFileNames: [String]) -> [String] {
+        let downloadTimestamp = StoredDefaults.standard.get(key: .diagnosisKeysDownloadTimestamp) ?? 0
+        
+        var names = keyFileNames.filter { name -> Bool in
+            guard
+                let fileName = URL(string: name)?.deletingPathExtension().lastPathComponent,
+                let keyTimestamp = Int(fileName)
+            else { return false }
+            
+            return keyTimestamp > downloadTimestamp
+        }
+        
+        do {
+            let savedFileNames = try fileManager.contentsOfDirectory(
+                at: try getKeysURL(),
+                includingPropertiesForKeys: nil
+            )
+            .map(\.lastPathComponent)
+            
+            names = Array(Set(names).subtracting(savedFileNames))
+        } catch {
+            console(error)
+        }
+        
+        return names
+    }
+    
     func download() -> Promise<[URL]> {
         Promise { seal in
             storageReference.listAll { result, error in
@@ -120,19 +147,8 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                     return
                 }
                 
-                let downloadTimestamp = StoredDefaults.standard.get(key: .diagnosisKeysDownloadTimestamp) ?? 0
-                let itemNames = result.items.filter { item -> Bool in
-                    guard
-                        let itemName = URL(string: item.name)?.deletingPathExtension().lastPathComponent,
-                        let itemTimestamp = Int(itemName)
-                    else { return false }
-                    
-                    return itemTimestamp > downloadTimestamp
-                }
-                .map(\.name)
-                
-                // TODO: filter already downloaded files
-                
+                let itemNames = self.filter(keyFileNames: result.items.map(\.name))
+                                
                 self.downloadFiles(withNames: itemNames, keysDirectoryURL: keysDirectoryURL).done { urls in
                     StoredDefaults.standard.set(value: Int(Date().timeIntervalSince1970), key: .diagnosisKeysDownloadTimestamp)
                     seal.fulfill(urls)
