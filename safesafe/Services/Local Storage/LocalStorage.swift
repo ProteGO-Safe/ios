@@ -80,20 +80,24 @@ final class RealmLocalStorage: LocalStorageProtocol {
 
 extension RealmLocalStorage {
     static func setupEncryption() {
-        guard KeychainService.default.getData(for: .realmEncryption) == nil else { return }
+        guard KeychainService.shared.getData(for: .realmEncryption) == nil else { return }
         
         var keyData = Data(count: 64)
         _ = keyData.withUnsafeMutableBytes {
             SecRandomCopyBytes(kSecRandomDefault, 62, $0.baseAddress!)
         }
         
-        KeychainService.default.set(data: keyData, for: .realmEncryption)
+        KeychainService.shared.set(data: keyData, for: .realmEncryption)
     }
     
     static func defaultConfiguration() throws -> Realm.Configuration {
-        guard let encryptionKey = KeychainService.default.getData(for: .realmEncryption) else {
+        guard let encryptionKey = KeychainService.shared.getData(for: .realmEncryption) else {
             throw InternalError.keychainKeyNotExists
         }
         return Realm.Configuration(encryptionKey: encryptionKey)
     }
+}
+
+extension KeychainService.Key {
+    static let realmEncryption = KeychainService.Key("realmEncryption")
 }

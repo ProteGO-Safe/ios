@@ -9,7 +9,7 @@ import Foundation
 import KeychainAccess
 
 final class KeychainService {
-    static let `default` = KeychainService()
+    static let shared = KeychainService()
     
     private let keychain: Keychain
     
