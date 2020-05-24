@@ -26,6 +26,11 @@ final class AppCoordinator: CoordinatorType {
     
     @available(iOS 13.5, *)
     private lazy var exposureService: ExposureServiceProtocol = self.setupExposureNotificationService()
+    
+    @available(iOS 13.5, *)
+    private lazy var backgroundTaskService: BackgroundTasksServiceProtocol = {
+        BackgroundTasksService(exposureService: exposureService)
+    }()
 
     required init() {
         fatalError("Not implemented")
@@ -95,11 +100,13 @@ final class AppCoordinator: CoordinatorType {
         let remoteConfiguration = RemoteConfiguration()
         let diagnosisKeysDownloadService = DiagnosisKeysDownloadService(with: remoteConfiguration)
         let configurationService = RemoteConfiguration()
+        let storageService = RealmLocalStorage()!
         
         return ExposureService(
             exposureManager: manager,
             diagnosisKeysService: diagnosisKeysDownloadService,
-            configurationService: configurationService
+            configurationService: configurationService,
+            storageService: storageService
         )
     }
 }

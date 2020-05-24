@@ -10,22 +10,24 @@ import PromiseKit
 import ExposureNotification
 
 protocol ExposureNotificationJSProtocol: class {
+    
     func enableService(enable: Bool) -> Promise<Void>
+    
 }
 
 @available(iOS 13.5, *)
 final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
     
-    private weak var manager: ExposureServiceProtocol?
+    private weak var exposureService: ExposureServiceProtocol?
     private weak var viewController: UIViewController?
 
     init(manager: ExposureServiceProtocol, viewController: UIViewController) {
-        self.manager = manager
+        self.exposureService = manager
         self.viewController = viewController
     }
     
     func enableService(enable: Bool) -> Promise<Void> {
-        guard let manager = manager else {
+        guard let manager = exposureService else {
             return .value
         }
         return (enable ? turnOnService() : manager.setExposureNotificationEnabled(false))
@@ -52,7 +54,7 @@ final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
     }
     
     private func turnOnService() -> Promise<Void> {
-        guard let manager = manager else {  return .value }
+        guard let manager = exposureService else {  return .value }
         return  manager.setExposureNotificationEnabled(true)
             .recover { [viewController] error -> Promise<Void> in
                 if let error = error as? ENError {
