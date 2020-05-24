@@ -10,7 +10,7 @@ import PromiseKit
 import ExposureNotification
 
 protocol ExposureNotificationJSProtocol: class {
-    func enableService(enable: Bool?) -> Promise<Void>
+    func enableService(enable: Bool) -> Promise<Void>
 }
 
 @available(iOS 13.5, *)
@@ -24,8 +24,8 @@ final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
         self.viewController = viewController
     }
     
-    func enableService(enable: Bool?) -> Promise<Void> {
-        guard let manager = manager, let enable = enable else {
+    func enableService(enable: Bool) -> Promise<Void> {
+        guard let manager = manager else {
             return .value
         }
         return (enable ? turnOnService() : manager.setExposureNotificationEnabled(false))
@@ -58,7 +58,7 @@ final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
                 if let error = error as? ENError {
                     switch error.code {
                     case .notAuthorized:
-                        guard let viewController = viewController else { return .value }
+                        guard let viewController = viewController else { return .init(error: InternalError.nilValue) }
                         return Permissions.instance.choiceAlert(for: .exposureNotification, on: viewController)
                             .then { action -> Promise<Void> in
                                 guard action == .skip else {  return .init(error: PMKError.cancelled) }

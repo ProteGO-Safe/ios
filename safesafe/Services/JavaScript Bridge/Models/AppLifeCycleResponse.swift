@@ -13,9 +13,9 @@ struct ApplicationLifecycleResponse: Codable, JSONRepresentable {
         case appicationState = "appState"
     }
     
-    let appicationState: LifecycleSate
+    let appicationState: LifecycleState
     
-    enum LifecycleSate: Int, Codable {
+    enum LifecycleState: Int, Codable {
         case willEnterForeground = 1
         case didEnterBackground = 2
     }

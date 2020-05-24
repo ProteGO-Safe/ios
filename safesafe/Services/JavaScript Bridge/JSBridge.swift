@@ -240,7 +240,7 @@ private extension JSBridge {
         }
         
         // Manage COVID ENA
-     exposureNotificationBridge?.enableService(enable: model.enableExposureNotificationService)
+     exposureNotificationBridge?.enableService(enable: model.enableExposureNotificationService ?? false)
             .done { [weak self] _ in
             self?.sendAppStateJSON(type: .serviceStatus)
             self?.isServicSetting = false
