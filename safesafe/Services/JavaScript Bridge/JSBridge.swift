@@ -48,7 +48,7 @@ final class JSBridge: NSObject {
     private var notificationPayload: String?
     private var controller: WKUserContentController?
     private let jsonDecoder = JSONDecoder()
-    var exposureKeysUploadService: ExposureKeysUploadServiceProtocol? // TODO: inject service
+    var exposureKeysUploadService: DiagnosisKeysUploadServiceProtocol? // TODO: inject service
     
     var contentController: WKUserContentController {
         let controller = self.controller ?? WKUserContentController()
