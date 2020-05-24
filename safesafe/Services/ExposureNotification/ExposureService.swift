@@ -24,6 +24,10 @@ protocol ExposureServiceProtocol: class {
 @available(iOS 13.5, *)
 final class ExposureService: ExposureServiceProtocol {
     
+    enum Constants {
+        static let exposureInfoFullRangeRiskKey = "totalRiskScoreFullRange"
+    }
+    
     // MARK: - Properties
     
     private let exposureManager: ENManager
@@ -158,7 +162,7 @@ final class ExposureService: ExposureServiceProtocol {
                 }
                 
                 info.compactMap { info -> Exposure? in
-                    guard let risk = info.metadata?["totalRiskScoreFullRange"] as? Int else {
+                    guard let risk = info.metadata?[Constants.exposureInfoFullRangeRiskKey] as? Int else {
                         return nil
                     }
                     
