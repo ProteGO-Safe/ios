@@ -31,6 +31,7 @@ final class ConfigManager {
         // Exposure Notification
         static let exposureNotification = "EXPOSURE_NOTIFICATION" // Dictionary
         static let enBaseURL = "EN_BASE_URL" // String
+        static let enStorageURL = "EN_STORAGE_URL" // String
      }
     
     private let settings: [String: Any]
@@ -88,6 +89,10 @@ extension ConfigManager {
     
     var enBaseURL: String {
         return value(for: Key.enBaseURL, dictionary: enSettings)
+    }
+    
+    var enStorageURL: String {
+        return value(for: Key.enStorageURL, dictionary: enSettings)
     }
     
 }
