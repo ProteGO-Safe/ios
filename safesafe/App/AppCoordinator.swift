@@ -9,6 +9,8 @@
 import Firebase
 import UIKit
 import Network
+import DeviceCheck
+import ExposureNotification
 
 #if !LIVE
 import DBDebugToolkit
@@ -21,6 +23,9 @@ final class AppCoordinator: CoordinatorType {
     private let monitor = NWPathMonitor()
     private let clearData = ClearData()
     private var noInternetAlert: UIAlertController?
+    
+    @available(iOS 13.5, *)
+    private lazy var exposureService: ExposureServiceProtocol = self.setupExposureNotificationService()
 
     required init() {
         fatalError("Not implemented")
@@ -40,9 +45,14 @@ final class AppCoordinator: CoordinatorType {
         FirebaseApp.configure()
         clearData.clear()
         
+        let rootViewController = pwa()
         window.backgroundColor = .white
-        window.rootViewController = pwa()
+        window.rootViewController = rootViewController
         window.makeKeyAndVisible()
+        
+        if #available(iOS 13.5, *) {
+            JSBridge.shared.register(exposureNotificationManager: ExposureNotificationJSBridge(manager: exposureService, viewController: rootViewController))
+        }
         
         monitor.pathUpdateHandler = { [weak self] path in
             DispatchQueue.main.async {
@@ -75,5 +85,13 @@ final class AppCoordinator: CoordinatorType {
         window.rootViewController?.present(noInternetAlert, animated: true)
         
         self.noInternetAlert = noInternetAlert
+    }
+    
+    @available(iOS 13.5, *)
+    private func setupExposureNotificationService() -> ExposureServiceProtocol {
+        let manager = ENManager()
+        let remoteConfiguration = RemoteConfiguration()
+        let diagnosisKeysDownloadService = DiagnosisKeysDownloadService(with: remoteConfiguration)
+        return ExposureService(exposureManager: manager, diagnosisKeysService: diagnosisKeysDownloadService)
     }
 }

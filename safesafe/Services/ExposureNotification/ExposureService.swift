@@ -9,12 +9,12 @@ import ExposureNotification
 import PromiseKit
 
 @available(iOS 13.5, *)
-protocol ExposureServiceProtocol {
+protocol ExposureServiceProtocol: class {
     
     var isExposureNotificationAuthorized: Bool { get }
     var isExposureNotificationEnabled: Bool { get }
     
-    func activateManager() -> Promise<Void>
+    func activateManager() -> Promise<ENStatus>
     func setExposureNotificationEnabled(_ setEnabled: Bool) -> Promise<Void>
     func getDiagnosisKeys() -> Promise<[ENTemporaryExposureKey]>
     func detectExposures() -> Promise<Void>
@@ -49,7 +49,11 @@ final class ExposureService: ExposureServiceProtocol {
     ) {
         self.exposureManager = exposureManager
         self.diagnosisKeysService = diagnosisKeysService
+<<<<<<< HEAD
         self.configurationService = configurationService
+=======
+        activateManager()
+>>>>>>> development-no-opentrace
     }
     
     deinit {
@@ -58,17 +62,21 @@ final class ExposureService: ExposureServiceProtocol {
     
     // MARK: - Public methods
     
-    func activateManager() -> Promise<Void> {
+    @discardableResult
+    func activateManager() -> Promise<ENStatus> {
         guard exposureManager.exposureNotificationStatus == .unknown else {
-            return .value
+            return .value(exposureManager.exposureNotificationStatus)
         }
         
         return Promise { [weak self] seal in
-            self?.exposureManager.activate { error in
+            guard let self = self else {
+                return seal.reject(InternalError.deinitialized)
+            }
+            self.exposureManager.activate { error in
                 if let error = error {
                     seal.reject(error)
                 } else {
-                    seal.fulfill(())
+                    seal.fulfill(self.exposureManager.exposureNotificationStatus)
                 }
             }
         }
