@@ -25,7 +25,7 @@ final class AppCoordinator: CoordinatorType {
     private var noInternetAlert: UIAlertController?
     
     @available(iOS 13.5, *)
-    private lazy var exposureService: ExposureService = self.setupExposureNotificationService()
+    private lazy var exposureService: ExposureServiceProtocol = self.setupExposureNotificationService()
 
     required init() {
         fatalError("Not implemented")
@@ -88,7 +88,7 @@ final class AppCoordinator: CoordinatorType {
     }
     
     @available(iOS 13.5, *)
-    private func setupExposureNotificationService() -> ExposureService {
+    private func setupExposureNotificationService() -> ExposureServiceProtocol {
         let manager = ENManager()
         let remoteConfiguration = RemoteConfiguration()
         let diagnosisKeysDownloadService = DiagnosisKeysDownloadService(with: remoteConfiguration)
