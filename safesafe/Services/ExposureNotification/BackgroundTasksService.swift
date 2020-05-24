@@ -50,16 +50,16 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
     private func registerExposureTask() {
         BGTaskScheduler.shared.register(forTaskWithIdentifier: backgroundTaskID, using: .main) { [weak self] task in
             task.expirationHandler = {
-                // Print some error? This closure may be caused by timed-out background operation
+                console("Task timed out", type: .warning)
             }
             
             self?.exposureService
                 .detectExposures()
-                .done {
+                .done { exposures in
                     task.setTaskCompleted(success: true)
                 }.catch {
                     console($0)
-                    task.setTaskCompleted(success: false)
+                    task.setTaskCompleted(success: true)
                 }.finally {
                     self?.scheduleExposureTask()
                 }
