@@ -157,10 +157,19 @@ final class ExposureService: ExposureServiceProtocol {
                     return
                 }
                 
-                // TODO: Map/filter info items to get appropriate information - waiting for decision
-                
-                // Map ENExposureInfo to some domain model - to discuss
-                //seal.fulfill(())
+                info.compactMap { info -> Exposure? in
+                    guard let risk = info.metadata?["totalRiskScoreFullRange"] as? Int else {
+                        return nil
+                    }
+                    
+                    return Exposure(
+                        timestamp: info.date.timeIntervalSince1970,
+                        risk: risk,
+                        duration: info.duration
+                    )
+                }
+                // TODO: Store those models
+                seal.fulfill(())
             }
         }
     }
