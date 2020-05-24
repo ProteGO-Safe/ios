@@ -49,11 +49,8 @@ final class ExposureService: ExposureServiceProtocol {
     ) {
         self.exposureManager = exposureManager
         self.diagnosisKeysService = diagnosisKeysService
-<<<<<<< HEAD
         self.configurationService = configurationService
-=======
         activateManager()
->>>>>>> development-no-opentrace
     }
     
     deinit {

@@ -92,6 +92,12 @@ final class AppCoordinator: CoordinatorType {
         let manager = ENManager()
         let remoteConfiguration = RemoteConfiguration()
         let diagnosisKeysDownloadService = DiagnosisKeysDownloadService(with: remoteConfiguration)
-        return ExposureService(exposureManager: manager, diagnosisKeysService: diagnosisKeysDownloadService)
+        let configurationService = RemoteConfiguration()
+        
+        return ExposureService(
+            exposureManager: manager,
+            diagnosisKeysService: diagnosisKeysDownloadService,
+            configurationService: configurationService
+        )
     }
 }
