@@ -27,6 +27,10 @@ enum InternalError: Error {
     case locatingDictionary
     case writingToFile
     
+    // Onboarding
+    case waitingForUser
+    case notManagableYet
+    
     // DeviceCheck
     case deviceCheckTokenGenerationFailed
     

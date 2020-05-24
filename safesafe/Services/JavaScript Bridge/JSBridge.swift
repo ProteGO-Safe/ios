@@ -16,8 +16,10 @@ final class JSBridge: NSObject {
     enum BridgeDataType: Int {
         case dailyTopicUnsubscribe = 1
         case notification = 2
-        case appStatus = 31
+        case applicationLifecycle = 11
         case notificationsPermission = 35
+        case serviceStatus = 51
+        case setServices = 52
         case clearBluetoothData = 37
         case uploadTemporaryExposureKeys = 43
     }
@@ -41,6 +43,8 @@ final class JSBridge: NSObject {
     }
     
     private weak var webView: WKWebView?
+    private var isServicSetting: Bool = false
+    private var exposureNotificationBridge: ExposureNotificationJSProtocol?
     private var currentDataType: BridgeDataType?
     private var notificationPayload: String?
     private var controller: WKUserContentController?
@@ -58,21 +62,22 @@ final class JSBridge: NSObject {
         return controller
     }
     
-    private var appStatusManager: AppStatusManagerProtocol = AppStatusManager(
+    private var serviceStatusManager: ServiceStatusManagerProtocol = ServiceStatusManager(
         notificationManager: NotificationManager.shared
     )
     
     override private init() {
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     func register(webView: WKWebView)  {
         self.webView = webView
     }
     
-    func storePayload(_ payload: Any) {
-        
+    func register(exposureNotificationManager: ExposureNotificationJSProtocol) {
+        self.exposureNotificationBridge = exposureNotificationManager
     }
     
     func bridgeDataResponse(type: BridgeDataType, body: String, requestId: String, completion: ((Any?, Error?) -> ())? = nil) {
@@ -82,6 +87,7 @@ final class JSBridge: NSObject {
                 return
             }
             let method = "\(SendMethod.bridgeDataResponse.rawValue)('\(body)','\(type.rawValue)','\(requestId)')"
+            console(method)
             webView.evaluateJavaScript(method, completionHandler: completion)
         }
     }
@@ -143,10 +149,13 @@ extension JSBridge: WKScriptMessageHandler {
         case .notificationsPermission:
             currentDataType = bridgeDataType
             notificationsPermission(jsonString: jsonString, type: bridgeDataType)
-            
+
         case .uploadTemporaryExposureKeys:
             uploadTemporaryExposureKeys(jsonString: jsonString)
             
+        case .setServices:
+            currentDataType = bridgeDataType
+            servicesPermissions(jsonString: jsonString, type: bridgeDataType)
         default:
             console("Not managed yet", type: .warning)
         }
@@ -165,8 +174,8 @@ extension JSBridge: WKScriptMessageHandler {
         switch bridgeDataType {
         case .notification:
             notificationGetBridgeDataResponse(requestID: requestId)
-        case .appStatus:
-            appStatusGetBridgeDataResponse(requestID: requestId)
+        case .serviceStatus:
+            serviceStatusGetBridgeDataResponse(requestID: requestId)
         default:
             return
         }
@@ -189,10 +198,14 @@ private extension JSBridge {
         }
     }
     
-    func appStatusGetBridgeDataResponse(requestID: String) {
-        appStatusManager.appStatusJson
+    func serviceStatusGetBridgeDataResponse(requestID: String) {
+        serviceStatusManager.serviceStatusJson
             .done { [weak self] json in
-                self?.bridgeDataResponse(type: .appStatus, body: json, requestId: requestID)
+                self?.bridgeDataResponse(type: .serviceStatus, body: json, requestId: requestID) { _ ,error in
+                    if let error = error {
+                        console(error, type: .error)
+                    }
+                }
         }.catch { error in
             console(error, type: .error)
         }
@@ -206,6 +219,35 @@ private extension JSBridge {
         guard let model: SurveyFinishedResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
         
         NotificationManager.shared.unsubscribeFromDailyTopic(timestamp: model.timestamp)
+    }
+    
+    // This one needs refactoring because it's ugly, it works but it's ugly :P
+    //
+    func servicesPermissions(jsonString: String?, type: BridgeDataType) {
+        isServicSetting = true
+        guard let model: EnableServicesResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
+        
+        // Manage Notifications
+        if model.enableNotification == true {
+            Permissions.instance.state(for: .notifications, shouldAsk: true).asVoid()
+                .done { [weak self] _ in
+                    self?.sendAppStateJSON(type: .serviceStatus)
+                    self?.isServicSetting = false
+            }
+            .catch { error in console(error, type: .error)}
+            
+            return
+        }
+        
+        // Manage COVID ENA
+     exposureNotificationBridge?.enableService(enable: model.enableExposureNotificationService ?? false)
+            .done { [weak self] _ in
+            self?.sendAppStateJSON(type: .serviceStatus)
+            self?.isServicSetting = false
+        }
+        .catch(policy: .allErrors) { error in
+            console(error, type: .error)
+        }
     }
     
     func notificationsPermission(jsonString: String?, type: BridgeDataType) {
@@ -260,8 +302,9 @@ private extension JSBridge {
         self.onBridgeData(type: .uploadTemporaryExposureKeys, body: result)
     }
 
+    
     private func sendAppStateJSON(type: BridgeDataType) {
-        appStatusManager.appStatusJson
+        serviceStatusManager.serviceStatusJson
             .done { json in
                 console(json)
                 self.onBridgeData(type: type, body: json)
@@ -275,11 +318,15 @@ private extension JSBridge {
     }
     
     @objc
-    private func applicationDidBecomeActive(notification: Notification) {
-        guard let type = currentDataType else {
-            return
-        }
-        
-        sendAppStateJSON(type: type)
+    private func applicationWillEnterForeground(notification: Notification) {
+        guard let json = ApplicationLifecycleResponse(appicationState: .willEnterForeground).jsonString else {  return }
+        onBridgeData(type: .applicationLifecycle, body: json)
+    }
+    
+    @objc
+    private func applicationDidEnterBackground(notification: Notification) {
+        guard let json = ApplicationLifecycleResponse(appicationState: .didEnterBackground).jsonString else {  return }
+        onBridgeData(type: .applicationLifecycle, body: json)
     }
 }
+
