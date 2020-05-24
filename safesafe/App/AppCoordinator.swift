@@ -9,8 +9,6 @@
 import Firebase
 import UIKit
 import Network
-import DeviceCheck
-import ExposureNotification
 
 #if !LIVE
 import DBDebugToolkit
@@ -18,14 +16,12 @@ import DBDebugToolkit
 
 final class AppCoordinator: CoordinatorType {
     
+    private let dependencyContainer = DependencyContainer()
     private let appManager = AppManager.instance
     private let window: UIWindow
     private let monitor = NWPathMonitor()
     private let clearData = ClearData()
     private var noInternetAlert: UIAlertController?
-    
-    @available(iOS 13.5, *)
-    private lazy var exposureService: ExposureServiceProtocol = self.setupExposureNotificationService()
 
     required init() {
         fatalError("Not implemented")
@@ -47,13 +43,13 @@ final class AppCoordinator: CoordinatorType {
         FirebaseApp.configure()
         clearData.clear()
         
-        let rootViewController = pwa()
+        let rootViewController = makeRootViewController()
         window.backgroundColor = .white
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         
         if #available(iOS 13.5, *) {
-            JSBridge.shared.register(exposureNotificationManager: ExposureNotificationJSBridge(manager: exposureService, viewController: rootViewController))
+            configureJSBridge(with: rootViewController)
         }
         
         monitor.pathUpdateHandler = { [weak self] path in
@@ -68,10 +64,9 @@ final class AppCoordinator: CoordinatorType {
         monitor.start(queue: DispatchQueue.global(qos: .background))
     }
     
-    private func pwa() -> UIViewController {
-        let viewModel = PWAViewModel()
-        let navigationController = NavigationController(rootViewController: PWAViewController(viewModel: viewModel))
-        return navigationController
+    private func makeRootViewController() -> UIViewController {
+        let factory: PWAViewControllerFactory = dependencyContainer
+        return NavigationController(rootViewController: factory.makePWAViewController())
     }
     
     private func setupDebugToolkit() {
@@ -90,16 +85,13 @@ final class AppCoordinator: CoordinatorType {
     }
     
     @available(iOS 13.5, *)
-    private func setupExposureNotificationService() -> ExposureServiceProtocol {
-        let manager = ENManager()
-        let remoteConfiguration = RemoteConfiguration()
-        let diagnosisKeysDownloadService = DiagnosisKeysDownloadService(with: remoteConfiguration)
-        let configurationService = RemoteConfiguration()
+    private func configureJSBridge(with viewController: UIViewController) {
+        let factory: ExposureNotificationJSBridgeFactory = dependencyContainer
         
-        return ExposureService(
-            exposureManager: manager,
-            diagnosisKeysService: diagnosisKeysDownloadService,
-            configurationService: configurationService
+        dependencyContainer.jsBridge.registerExposureNotification(
+            with: factory.makeExposureNotificationJSBridge(with: viewController),
+            diagnosisKeysUploadService: dependencyContainer.diagnosisKeysUploadService
         )
     }
+    
 }
