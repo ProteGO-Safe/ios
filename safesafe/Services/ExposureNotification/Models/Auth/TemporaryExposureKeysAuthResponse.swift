@@ -6,5 +6,11 @@
 import Foundation
 
 struct TemporaryExposureKeysAuthResponse: Decodable {
-    let result: String
+    
+    struct TemporaryExposureKeysToken: Decodable {
+        let accessToken: String
+    }
+    
+    let result: TemporaryExposureKeysToken
+    
 }

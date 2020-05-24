@@ -27,11 +27,15 @@ enum InternalError: Error {
     case locatingDictionary
     case writingToFile
     
-    // DeviceCheck
-    case deviceCheckTokenGenerationFailed
-    
-    
     // Onboarding
     case waitingForUser
     case notManagableYet
+    
+    // DeviceCheck
+    case deviceCheckTokenGenerationFailed
+    
+    // Remote config
+    case remoteConfigNotExistingKey
+    case remoteActivate
+    case remoteUnknownStatus
 }

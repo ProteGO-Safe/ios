@@ -18,10 +18,10 @@ final class JSBridge: NSObject {
         case notification = 2
         case applicationLifecycle = 11
         case notificationsPermission = 35
-        case clearBluetoothData = 37
-        case uploadTemporaryExposureKeys = 43
         case serviceStatus = 51
         case setServices = 52
+        case clearBluetoothData = 37
+        case uploadTemporaryExposureKeys = 43
     }
     
     enum SendMethod: String, CaseIterable {
@@ -49,7 +49,7 @@ final class JSBridge: NSObject {
     private var notificationPayload: String?
     private var controller: WKUserContentController?
     private let jsonDecoder = JSONDecoder()
-    var exposureKeysUploadService: ExposureKeysUploadServiceProtocol? // TODO: inject service
+    var exposureKeysUploadService: DiagnosisKeysUploadServiceProtocol? // TODO: inject service
     
     var contentController: WKUserContentController {
         let controller = self.controller ?? WKUserContentController()
@@ -149,7 +149,7 @@ extension JSBridge: WKScriptMessageHandler {
         case .notificationsPermission:
             currentDataType = bridgeDataType
             notificationsPermission(jsonString: jsonString, type: bridgeDataType)
-            
+
         case .uploadTemporaryExposureKeys:
             uploadTemporaryExposureKeys(jsonString: jsonString)
             
@@ -240,8 +240,8 @@ private extension JSBridge {
         }
         
         // Manage COVID ENA
-        exposureNotificationBridge?.enableService(enable: model.enableExposureNotificationService)
-        .done { [weak self] _ in
+     exposureNotificationBridge?.enableService(enable: model.enableExposureNotificationService)
+            .done { [weak self] _ in
             self?.sendAppStateJSON(type: .serviceStatus)
             self?.isServicSetting = false
         }

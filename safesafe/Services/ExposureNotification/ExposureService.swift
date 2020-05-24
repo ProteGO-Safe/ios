@@ -23,10 +23,11 @@ protocol ExposureServiceProtocol: class {
 
 @available(iOS 13.5, *)
 final class ExposureService: ExposureServiceProtocol {
+    
     // MARK: - Properties
     
     private let exposureManager: ENManager
-    private let keysService: TemporaryExposureKeysServiceProtocol
+    private let diagnosisKeysService: DiagnosisKeysDownloadServiceProtocol
     
     private var isCurrentlyDetectingExposures = false
     
@@ -42,10 +43,10 @@ final class ExposureService: ExposureServiceProtocol {
     
     init(
         exposureManager: ENManager,
-        keysService: TemporaryExposureKeysServiceProtocol
+        diagnosisKeysService: DiagnosisKeysDownloadServiceProtocol
     ) {
         self.exposureManager = exposureManager
-        self.keysService = keysService
+        self.diagnosisKeysService = diagnosisKeysService
     }
     
     deinit {
@@ -84,13 +85,19 @@ final class ExposureService: ExposureServiceProtocol {
     
     func getDiagnosisKeys() -> Promise<[ENTemporaryExposureKey]> {
         Promise { [weak self] seal in
-            self?.exposureManager.getDiagnosisKeys { exposureKeys, error in
+            let completion: ENGetDiagnosisKeysHandler = { exposureKeys, error in
                 if let error = error {
                     seal.reject(error)
                 } else {
                     seal.fulfill(exposureKeys ?? [])
                 }
             }
+            
+            #if DEV || STAGE
+            self?.exposureManager.getTestDiagnosisKeys(completionHandler: completion)
+            #else
+            self?.exposureManager.getDiagnosisKeys(completionHandler: completion)
+            #endif
         }
     }
     

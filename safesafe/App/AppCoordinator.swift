@@ -90,7 +90,8 @@ final class AppCoordinator: CoordinatorType {
     @available(iOS 13.5, *)
     private func setupExposureNotificationService() -> ExposureService {
         let manager = ENManager()
-        let temporaryKeysService = TemporaryExposureKeysService(with: DCDevice.current)
-        return ExposureService(exposureManager: manager, keysService: temporaryKeysService)
+        let remoteConfiguration = RemoteConfiguration()
+        let diagnosisKeysDownloadService = DiagnosisKeysDownloadService(with: remoteConfiguration)
+        return ExposureService(exposureManager: manager, diagnosisKeysService: diagnosisKeysDownloadService)
     }
 }
