@@ -14,9 +14,11 @@ final class Permissions {
     static let instance = Permissions()
     
     private let notifications: PermissionType = NotificationsPermission()
+    private let exposureNotifiaction: PermissionType = ExposureNotificationPermission()
     
     enum Permission {
         case notifications
+        case exposureNotification
     }
     
     enum State {
@@ -30,8 +32,9 @@ final class Permissions {
     enum AlertAction {
         case cancel
         case settings
+        case skip
     }
-        
+    
     private init() {}
     
     
@@ -44,6 +47,8 @@ final class Permissions {
         switch permission {
         case .notifications:
             return notifications.state(shouldAsk: shouldAsk)
+        case .exposureNotification:
+            return exposureNotifiaction.state(shouldAsk: shouldAsk)
         }
     }
     
@@ -74,10 +79,48 @@ final class Permissions {
         }
     }
     
+    func choiceAlert(for permission: Permission, on viewController: UIViewController) -> Promise<AlertAction> {
+        return Promise { seal in
+            let (title, body) = self.choiceAlertCopy(for: permission)
+            let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Pomiń", style: .cancel) { _ in
+                seal.fulfill(.skip)
+            }
+            let settingsAction = UIAlertAction(title: "Ustawienia", style: .default) { _ in
+                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                    return seal.fulfill(.settings)
+                }
+                
+                if UIApplication.shared.canOpenURL(settingsUrl) {
+                    UIApplication.shared.open(settingsUrl, completionHandler: nil)
+                }
+                
+                seal.fulfill(.settings)
+            }
+            alert.addAction(cancelAction)
+            alert.addAction(settingsAction)
+            
+            DispatchQueue.main.async {
+                viewController.present(alert, animated: true)
+            }
+        }
+    }
+   
+    private func choiceAlertCopy(for permission: Permission) -> (title: String, body: String) {
+        switch permission {
+        case .exposureNotification:
+            return (title: "Exposure Notification", body: "[ENA] Wyłączony COV. Przejdź do ustawień Prywtność -> Zdrowie lub pomiń")
+        default:
+            return (title: "", body: "")
+        }
+    }
+    
     private func alertCopy(for permission: Permission) -> (title: String, body: String) {
         switch permission {
         case .notifications:
             return (title: "Włącz powiadomienia", body: "Do prawidłowego działania aplikacji potrzebna jest Twoja zgoda na wyświetlanie powiadomień. Włącz powiadomienia i pozwól ProteGO Safe wspierać ochronę zdrowia każdego z nas.")
+        case .exposureNotification:
+            return (title: "COVID TITLE", body: "COVID MESSAGE")
         }
     }
 }

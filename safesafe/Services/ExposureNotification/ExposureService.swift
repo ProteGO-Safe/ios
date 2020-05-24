@@ -9,7 +9,7 @@ import ExposureNotification
 import PromiseKit
 
 @available(iOS 13.5, *)
-protocol ExposureServiceProtocol {
+protocol ExposureServiceProtocol: class {
     
     var isExposureNotificationAuthorized: Bool { get }
     var isExposureNotificationEnabled: Bool { get }
