@@ -32,6 +32,8 @@ final class AppCoordinator: CoordinatorType {
     }
     
     init?(appWindow: UIWindow?) {
+        RealmLocalStorage.setupEncryption()
+        
         guard let window = appWindow else {
             fatalError("Window doesn't exists")
         }
@@ -41,6 +43,14 @@ final class AppCoordinator: CoordinatorType {
     }
     
     func start() {
+        let localStorage: LocalStorageProtocol? = RealmLocalStorage()
+        let obj = TestObject()
+        obj.riskScore = 100
+        obj.duration = 12345
+        localStorage?.append(obj)
+        let list: [TestObject] = localStorage?.fetch() ?? []
+        console(list)
+        
         setupDebugToolkit()
         FirebaseApp.configure()
         clearData.clear()
@@ -100,4 +110,8 @@ final class AppCoordinator: CoordinatorType {
             configurationService: configurationService
         )
     }
+}
+
+extension KeychainService.Key {
+    static let realmEncryption = KeychainService.Key("realmEncryption")
 }

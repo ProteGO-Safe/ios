@@ -132,6 +132,7 @@ PODS:
   - GoogleUtilities/UserDefaults (6.6.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.4.0)
+  - KeychainAccess (4.2.0)
   - Moya (14.0.0):
     - Moya/Core (= 14.0.0)
   - Moya/Core (14.0.0):
@@ -152,6 +153,11 @@ PODS:
     - PromiseKit/CorePromise
   - PromisesObjC (1.2.8)
   - Protobuf (3.11.4)
+  - Realm (5.0.0):
+    - Realm/Headers (= 5.0.0)
+  - Realm/Headers (5.0.0)
+  - RealmSwift (5.0.0):
+    - Realm (= 5.0.0)
   - SnapKit (5.0.1)
   - ZIPFoundation (0.9.11)
 
@@ -164,8 +170,10 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/RemoteConfig
   - Firebase/Storage
+  - KeychainAccess (~> 4.2.0)
   - Moya (~> 14.0)
   - PromiseKit (~> 6.8)
+  - RealmSwift (~> 5.0.0)
   - SnapKit (= 5.0.1)
   - ZIPFoundation (~> 0.9)
 
@@ -194,11 +202,14 @@ SPEC REPOS:
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
     - GTMSessionFetcher
+    - KeychainAccess
     - Moya
     - nanopb
     - PromiseKit
     - PromisesObjC
     - Protobuf
+    - Realm
+    - RealmSwift
     - SnapKit
     - ZIPFoundation
 
@@ -226,14 +237,17 @@ SPEC CHECKSUMS:
   GoogleDataTransportCCTSupport: 0f39025e8cf51f168711bd3fb773938d7e62ddb5
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
+  KeychainAccess: 3f760109aa99b05d0f231e28b22642da7153e38a
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
+  Realm: 76066d333de26f97e9caedaa85ee3ff4a62ca265
+  RealmSwift: c1bdff09b422569dc6881410d9ccf712bcdb79b0
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: 717f065833e797f1e1909ca5d39722fa1edf93bb
+PODFILE CHECKSUM: 44c65dd427d42592f20054a76af164d1b5a2ab51
 
 COCOAPODS: 1.9.1

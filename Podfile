@@ -16,6 +16,8 @@ def pods_definition
   pod 'PromiseKit', '~> 6.8'
   pod 'Moya', '~> 14.0'
   pod 'ZIPFoundation', '~> 0.9'
+  pod 'RealmSwift', '~> 5.0.0'
+  pod 'KeychainAccess', '~> 4.2.0'
   
   pod 'DBDebugToolkit', :configurations => ['Dev', 'DevDist', 'Stage', 'StageDebug', 'LiveDebug', 'LiveAdhoc']
 
