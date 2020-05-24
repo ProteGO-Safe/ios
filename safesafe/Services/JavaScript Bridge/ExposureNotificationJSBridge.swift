@@ -12,25 +12,36 @@ import ExposureNotification
 protocol ExposureNotificationJSProtocol: class {
     
     func enableService(enable: Bool) -> Promise<Void>
+    func getExposureSummary() -> Promise<ExposureInfoSummary>
     
 }
 
 @available(iOS 13.5, *)
 final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
     
-    private weak var exposureService: ExposureServiceProtocol?
+    // MARK: - Properties
+    
+    private let exposureService: ExposureServiceProtocol
+    private let exposureSummaryService: ExposureSummaryServiceProtocol
+    
     private weak var viewController: UIViewController?
+    
+    // MARK: - Life Cycle
 
-    init(manager: ExposureServiceProtocol, viewController: UIViewController) {
-        self.exposureService = manager
+    init(
+        exposureService: ExposureServiceProtocol,
+        exposureSummaryService: ExposureSummaryServiceProtocol,
+        viewController: UIViewController
+    ) {
+        self.exposureService = exposureService
+        self.exposureSummaryService = exposureSummaryService
         self.viewController = viewController
     }
     
+    // MARK: - Public methods
+    
     func enableService(enable: Bool) -> Promise<Void> {
-        guard let manager = exposureService else {
-            return .value
-        }
-        return (enable ? turnOnService() : manager.setExposureNotificationEnabled(false))
+        (enable ? turnOnService() : exposureService.setExposureNotificationEnabled(false))
             .recover { error -> Guarantee<()> in
                 guard let error = error as? ENError else {
                     return .value
@@ -53,9 +64,23 @@ final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
         }
     }
     
+    func getExposureSummary() -> Promise<ExposureInfoSummary> {
+        Promise { seal in
+            firstly {
+                when(fulfilled: [exposureService.detectExposures()])
+            }.done { _ in
+                let daySummaries = self.exposureSummaryService.getExposureSummary()
+                seal.fulfill(ExposureInfoSummary(exposureNotificationStatistics: daySummaries))
+            }.catch {
+                seal.reject($0)
+            }
+        }
+    }
+    
+    // MARK: - Private methods
+    
     private func turnOnService() -> Promise<Void> {
-        guard let manager = exposureService else {  return .value }
-        return  manager.setExposureNotificationEnabled(true)
+        return  exposureService.setExposureNotificationEnabled(true)
             .recover { [viewController] error -> Promise<Void> in
                 if let error = error as? ENError {
                     switch error.code {

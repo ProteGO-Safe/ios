@@ -31,6 +31,8 @@ final class AppCoordinator: CoordinatorType {
     private lazy var backgroundTaskService: BackgroundTasksServiceProtocol = {
         BackgroundTasksService(exposureService: exposureService)
     }()
+    
+    private let storageService = RealmLocalStorage()!
 
     required init() {
         fatalError("Not implemented")
@@ -58,7 +60,12 @@ final class AppCoordinator: CoordinatorType {
         window.makeKeyAndVisible()
         
         if #available(iOS 13.5, *) {
-            JSBridge.shared.register(exposureNotificationManager: ExposureNotificationJSBridge(manager: exposureService, viewController: rootViewController))
+            let exposureBridge = ExposureNotificationJSBridge(
+                exposureService: exposureService,
+                exposureSummaryService: ExposureSummaryService(storageService: storageService),
+                viewController: rootViewController
+            )
+            JSBridge.shared.register(exposureNotificationManager: exposureBridge)
         }
         
         monitor.pathUpdateHandler = { [weak self] path in
@@ -100,7 +107,6 @@ final class AppCoordinator: CoordinatorType {
         let remoteConfiguration = RemoteConfiguration()
         let diagnosisKeysDownloadService = DiagnosisKeysDownloadService(with: remoteConfiguration)
         let configurationService = RemoteConfiguration()
-        let storageService = RealmLocalStorage()!
         
         return ExposureService(
             exposureManager: manager,
