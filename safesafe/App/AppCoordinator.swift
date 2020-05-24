@@ -32,6 +32,8 @@ final class AppCoordinator: CoordinatorType {
     }
     
     init?(appWindow: UIWindow?) {
+        RealmLocalStorage.setupEncryption()
+        
         guard let window = appWindow else {
             fatalError("Window doesn't exists")
         }

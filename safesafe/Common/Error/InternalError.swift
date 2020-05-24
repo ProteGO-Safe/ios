@@ -38,4 +38,10 @@ enum InternalError: Error {
     case remoteConfigNotExistingKey
     case remoteActivate
     case remoteUnknownStatus
+    
+    // Type casting
+    case invalidDataType
+    
+    // Keychain
+    case keychainKeyNotExists
 }
