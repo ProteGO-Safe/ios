@@ -16,14 +16,8 @@ protocol ExposureSummaryServiceProtocol {
 final class ExposureSummaryService: ExposureSummaryServiceProtocol {
     
     private enum Constants {
-        static let exposureDurationBoundaryMinutes = 16.0
-        static let exposureDurationBoundarySeconds = Constants.exposureDurationBoundaryMinutes * 60
         static let dataExpirationDays = 14.0
         static let dataExpirationSeconds = Constants.dataExpirationDays * 86400
-        static let minRiskScore = 0.0
-        static let maxRiskScore = 4096.0
-        static let minNormalizedRiskScore = 1.0
-        static let maxNormalizedRiskScore = 8.0
     }
     
     // MARK: - Properties
