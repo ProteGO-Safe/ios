@@ -17,7 +17,7 @@ protocol ExposureServiceProtocol: class {
     func activateManager() -> Promise<ENStatus>
     func setExposureNotificationEnabled(_ setEnabled: Bool) -> Promise<Void>
     func getDiagnosisKeys() -> Promise<[ENTemporaryExposureKey]>
-    func detectExposures() -> Promise<Void>
+    func detectExposures() -> Promise<[Exposure]>
     
 }
 
@@ -33,6 +33,7 @@ final class ExposureService: ExposureServiceProtocol {
     private let exposureManager: ENManager
     private let diagnosisKeysService: DiagnosisKeysDownloadServiceProtocol
     private let configurationService: RemoteConfigProtocol
+    private let storageService: LocalStorageProtocol
     
     private var isCurrentlyDetectingExposures = false
     
@@ -49,11 +50,14 @@ final class ExposureService: ExposureServiceProtocol {
     init(
         exposureManager: ENManager,
         diagnosisKeysService: DiagnosisKeysDownloadServiceProtocol,
-        configurationService: RemoteConfigProtocol
+        configurationService: RemoteConfigProtocol,
+        storageService: LocalStorageProtocol
     ) {
         self.exposureManager = exposureManager
         self.diagnosisKeysService = diagnosisKeysService
         self.configurationService = configurationService
+        self.storageService = storageService
+        
         activateManager()
     }
     
@@ -113,7 +117,7 @@ final class ExposureService: ExposureServiceProtocol {
         }
     }
     
-    func detectExposures() -> Promise<Void> {
+    func detectExposures() -> Promise<[Exposure]> {
         Promise { seal in
             firstly { when(fulfilled:
                 makeExposureConfiguration(),
@@ -125,7 +129,8 @@ final class ExposureService: ExposureServiceProtocol {
             .done { summary in
                 self.getExposureInfo(from: summary)
                     .done {
-                        seal.fulfill(())
+                        self.storageService.append($0)
+                        seal.fulfill($0)
                     }
                     .catch {
                         seal.reject($0)
@@ -151,17 +156,17 @@ final class ExposureService: ExposureServiceProtocol {
         }
     }
     
-    private func getExposureInfo(from summary: ENExposureDetectionSummary) -> Promise<Void> {
+    private func getExposureInfo(from summary: ENExposureDetectionSummary) -> Promise<[Exposure]> {
         Promise { seal in
             let userExplanation = "Some explanation for the user, that their exposure details are being reveled to the app"
             
-            exposureManager.getExposureInfo(summary: summary, userExplanation: userExplanation) { [weak self] exposureInfo, error in
+            exposureManager.getExposureInfo(summary: summary, userExplanation: userExplanation) { exposureInfo, error in
                 guard let info = exposureInfo, error == nil else {
                     seal.reject(error!)
                     return
                 }
                 
-                info.compactMap { info -> Exposure? in
+                let exposures = info.compactMap { info -> Exposure? in
                     guard let risk = info.metadata?[Constants.exposureInfoFullRangeRiskKey] as? Int else {
                         return nil
                     }
@@ -169,11 +174,11 @@ final class ExposureService: ExposureServiceProtocol {
                     return Exposure(
                         timestamp: info.date.timeIntervalSince1970,
                         risk: risk,
-                        duration: info.duration
+                        duration: info.duration * 60
                     )
                 }
-                // TODO: Store those models
-                seal.fulfill(())
+                
+                seal.fulfill(exposures)
             }
         }
     }

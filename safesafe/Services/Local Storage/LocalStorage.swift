@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-protocol LocalStorable {}
+protocol LocalStorable: Object {}
 
 protocol LocalStorageProtocol {
     func append<T: LocalStorable>(_ object: T, completion: ((Result<Void, Error>) -> ())?)
