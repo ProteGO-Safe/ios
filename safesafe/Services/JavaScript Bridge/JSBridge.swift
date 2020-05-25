@@ -228,18 +228,18 @@ private extension JSBridge {
     }
     
     func exposureListGetBridgeDataResponse(requestID: String) {
-//        exposureNotificationBridge?.getExposureSummary()
-//            .done { [weak self] summary in
-//                if let body = self?.encodeToJSON(summary) {
-//                    self?.bridgeDataResponse(type: .exposureList, body: body, requestId: requestID) { _, error in
-//                        if let error = error {
-//                            console(error, type: .error)
-//                        }
-//                    }
-//                }
-//            }.catch {
-//                console($0, type: .error)
-//            }
+        exposureNotificationBridge?.getExposureSummary()
+            .done { [weak self] summary in
+                if let body = self?.encodeToJSON(summary) {
+                    self?.bridgeDataResponse(type: .exposureList, body: body, requestId: requestID) { _, error in
+                        if let error = error {
+                            console(error, type: .error)
+                        }
+                    }
+                }
+            }.catch {
+                console($0, type: .error)
+            }
     }
     
 }
@@ -314,18 +314,18 @@ private extension JSBridge {
     }
     
     func sendExposureList() {
-//        exposureNotificationBridge?.getExposureSummary()
-//            .done { [weak self] summary in
-//                if let body = self?.encodeToJSON(summary) {
-//                    self?.onBridgeData(type: .exposureList, body: body) { _, error in
-//                        if let error = error {
-//                            console(error, type: .error)
-//                        }
-//                    }
-//                }
-//            }.catch {
-//                console($0, type: .error)
-//            }
+        exposureNotificationBridge?.getExposureSummary()
+            .done { [weak self] summary in
+                if let body = self?.encodeToJSON(summary) {
+                    self?.onBridgeData(type: .exposureList, body: body) { _, error in
+                        if let error = error {
+                            console(error, type: .error)
+                        }
+                    }
+                }
+            }.catch {
+                console($0, type: .error)
+            }
     }
     
     func uploadTemporaryExposureKeys(jsonString: String?) {

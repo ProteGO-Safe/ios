@@ -12,7 +12,7 @@ import ExposureNotification
 protocol ExposureNotificationJSProtocol: class {
     
     func enableService(enable: Bool) -> Promise<Void>
-//    func getExposureSummary() -> Promise<ExposureInfoSummary>
+    func getExposureSummary() -> Promise<ExposureSummary>
 
 }
 
@@ -66,18 +66,17 @@ final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
         }
     }
     
-//    func getExposureSummary() -> Promise<ExposureInfoSummary> {
-//        Promise { seal in
-//            firstly {
-//                when(fulfilled: [exposureService.detectExposures()])
-//            }.done { _ in
-//                let daySummaries = self.exposureSummaryService.getExposureSummary()
-//                seal.fulfill(ExposureInfoSummary(exposureNotificationStatistics: daySummaries))
-//            }.catch {
-//                seal.reject($0)
-//            }
-//        }
-//    }
+    func getExposureSummary() -> Promise<ExposureSummary> {
+        Promise { seal in
+            firstly {
+                when(fulfilled: [exposureService.detectExposures()])
+            }.done { _ in
+                seal.fulfill(self.exposureSummaryService.getExposureSummary())
+            }.catch {
+                seal.reject($0)
+            }
+        }
+    }
     
     // MARK: - Private methods
     
