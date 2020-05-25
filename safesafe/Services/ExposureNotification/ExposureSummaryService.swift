@@ -68,7 +68,7 @@ final class ExposureSummaryService: ExposureSummaryServiceProtocol {
                 expiredExposures.append(exposure)
             }
         }
-        // TODO: Remove expiredExposures from realm
+        storageService.remove(expiredExposures, completion: nil)
 
         return exposures
     }

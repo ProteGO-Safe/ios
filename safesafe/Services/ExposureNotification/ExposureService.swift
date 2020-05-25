@@ -176,7 +176,7 @@ final class ExposureService: ExposureServiceProtocol {
                         risk: risk,
                         duration: info.duration * 60,
                         attenuationDurations: info.attenuationDurations.compactMap { Int(truncating: $0) },
-                        attenuationValue: info.attenuationValue,
+                        attenuationValue: Int(info.attenuationValue),
                         date: info.date
                     )
                 }

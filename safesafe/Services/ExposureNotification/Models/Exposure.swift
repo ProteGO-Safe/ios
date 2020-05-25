@@ -10,7 +10,7 @@ import RealmSwift
 
 final class Exposure: Object, LocalStorable {
     
-    @objc dynamic var id = UUID()
+    @objc dynamic var id = UUID().uuidString
     
     /// Total calculated risk, range is 0-4096
     @objc dynamic var risk: Int = .zero
@@ -22,7 +22,7 @@ final class Exposure: Object, LocalStorable {
     let attenuationDurations = List<Int>()
     
     /// Signal strength of peer device
-    @objc dynamic var attenuationValue: UInt8 = .zero
+    @objc dynamic var attenuationValue: Int = .zero
     
     /// Date of exposure
     @objc dynamic var date: Date = Date()
@@ -31,7 +31,7 @@ final class Exposure: Object, LocalStorable {
         risk: Int,
         duration: Double,
         attenuationDurations: [Int],
-        attenuationValue: UInt8,
+        attenuationValue: Int,
         date: Date
     ) {
         self.init()

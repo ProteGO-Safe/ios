@@ -52,20 +52,6 @@ final class AppCoordinator: CoordinatorType {
             configureJSBridge(with: rootViewController)
         }
         
-        if #available(iOS 13.5, *) {
-//            dependencyContainer.exposureService.getDiagnosisKeys().done { keys in
-//                let asd = 123
-//            }
-            dependencyContainer.diagnosisKeysUploadService.upload(usingAuthCode: "JNWKBI").done {
-                let asd = 123
-            }.catch { error in
-                let asd = 123
-            }
-//            dependencyContainer.exposureService.detectExposures().done { exposures in
-//                let asd = 123
-//            }
-        }
-        
         monitor.pathUpdateHandler = { [weak self] path in
             DispatchQueue.main.async {
                 if path.status == .satisfied {
@@ -76,6 +62,10 @@ final class AppCoordinator: CoordinatorType {
             }
         }
         monitor.start(queue: DispatchQueue.global(qos: .background))
+        
+        if #available(iOS 13.5, *) {
+            dependencyContainer.backgroundTaskService.scheduleExposureTask()
+        }
     }
     
     private func makeRootViewController() -> UIViewController {
