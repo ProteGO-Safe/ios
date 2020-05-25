@@ -11,13 +11,13 @@ import RealmSwift
 final class Exposure: Object, LocalStorable {
     
     /// Epoch time in seconds
-    @objc dynamic var timestamp: Double
+    @objc dynamic var timestamp: Double = 0
     
     /// Total calculated risk, range is 0-4096
-    @objc dynamic var risk: Int
+    @objc dynamic var risk: Int = 0
     
     /// Exposure duration in seconds
-    @objc dynamic var duration: Double
+    @objc dynamic var duration: Double = 0
     
     init(
         timestamp: Double,
@@ -29,8 +29,6 @@ final class Exposure: Object, LocalStorable {
         self.duration = duration
     }
     
-    required init() {
-        fatalError("init() has not been implemented")
-    }
+    required init() { }
     
 }
