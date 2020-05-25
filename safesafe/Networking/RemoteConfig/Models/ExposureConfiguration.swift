@@ -17,4 +17,5 @@ struct ExposureConfiguration: Decodable {
     let daysSinceLastExposureScores: [Int]
     let durationScores: [Int]
     let transmissionRiskScores: [Int]
+    let durationAtAttenuationThresholds: [Int]
 }

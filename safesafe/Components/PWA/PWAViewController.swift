@@ -46,7 +46,7 @@ extension PWAViewController: PWAViewModelDelegate {
         webKitView?.load(URLRequest(url: url))
     }
     
-    func configureWebKit(controler: WKUserContentController) {
+    func configureWebKit(controler: WKUserContentController, completion: (WKWebView) -> Void) {
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = controler
         let webKitView = WKWebView(frame: .zero, configuration: configuration)
@@ -59,7 +59,7 @@ extension PWAViewController: PWAViewModelDelegate {
         webKitView.navigationDelegate = self
         
         add(subview: webKitView)
-        JSBridge.shared.register(webView: webKitView)
+        completion(webKitView)
         
         self.webKitView = webKitView
     }

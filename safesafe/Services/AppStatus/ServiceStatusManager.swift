@@ -21,6 +21,7 @@ final class ServiceStatusManager: ServiceStatusManagerProtocol {
     // MARK: - Properties
     
     private let notificationManager: NotificationManagerProtocol
+    private let exposureNotificationStatus: ExposureNotificationStatusProtocol
     
     var currentServiceStatus: Promise<ServicesResponse> {
         Promise { seal in
@@ -28,8 +29,8 @@ final class ServiceStatusManager: ServiceStatusManagerProtocol {
             firstly {
                 when(fulfilled:
                     Permissions.instance.state(for: .notifications),
-                     ExposureNotificationStatus.status,
-                     ExposureNotificationBluetoothStatus.status
+                     exposureNotificationStatus.status,
+                     exposureNotificationStatus.isBluetoothOn
                 )
             }.done { notificationStatus, exposureStatus, bluetoothStatus in
                 let status = ServicesResponse.Status(
@@ -67,7 +68,11 @@ final class ServiceStatusManager: ServiceStatusManagerProtocol {
     
     // MARK: - Life Cycle
     
-    init(  notificationManager: NotificationManagerProtocol) {
+    init(
+        notificationManager: NotificationManagerProtocol,
+        exposureNotificationStatus: ExposureNotificationStatusProtocol
+    ) {
         self.notificationManager = notificationManager
+        self.exposureNotificationStatus = exposureNotificationStatus
     }
 }

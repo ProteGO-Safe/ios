@@ -13,7 +13,7 @@ lane :adhocs do |options|
 end
 
 lane :stage_adhoc do |options|
-	build_adhoc(configuration_name: "StageDebug", scheme_name: "safesafe Stage", name_suffix: "Stage-DebugConsole", firebase_distribution: true, version_bump:options[:version_bump])
+	build_adhoc(configuration_name: "Stage", scheme_name: "safesafe Stage", name_suffix: "Stage", firebase_distribution: true, version_bump:options[:version_bump])
 end
 
 lane :dev_adhoc do |options|
@@ -24,8 +24,7 @@ end
 
 private_lane :build_adhoc do |options|
 	xcodegen(
-		spec: ENV["PROJECT_YML"],
-		project: ENV["PROJECT"]
+		spec: ENV["PROJECT_YML"]
 	)
 	cocoapods
 

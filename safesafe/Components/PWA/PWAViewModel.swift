@@ -11,16 +11,27 @@ import WebKit.WKUserContentController
 
 protocol PWAViewModelDelegate: class {
     func load(url: URL)
-    func configureWebKit(controler: WKUserContentController)
+    func configureWebKit(controler: WKUserContentController, completion: (WKWebView) -> Void)
 }
 
 final class PWAViewModel: ViewModelType {
+    
+    // MARK: - Constants
     
     private enum Constants {
         static var pwaURL: URL = .build(scheme: ConfigManager.default.pwaScheme, host:ConfigManager.default.pwaHost)!
     }
     
+    // MARK: - Properties
+    
+    private let jsBridge: JSBridge
     weak var delegate: PWAViewModelDelegate?
+    
+    // MARK: - Life Cycle
+    
+    init(with jsBridge: JSBridge) {
+        self.jsBridge = jsBridge
+    }
     
     /// Manage custom actions for schemes defined in  URLAction
     /// - Parameter url: WebKit navigation URL
@@ -63,7 +74,9 @@ extension PWAViewModel {
     
     func onViewDidLoad(setupFinished: Bool) {
         if setupFinished {
-            delegate?.configureWebKit(controler: JSBridge.shared.contentController)
+            delegate?.configureWebKit(controler: jsBridge.contentController) { webKitView in
+                jsBridge.register(webView: webKitView)
+            }
         }
     }
 }

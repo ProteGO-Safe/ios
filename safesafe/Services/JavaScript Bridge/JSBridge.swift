@@ -10,8 +10,8 @@ import WebKit
 import PromiseKit
 
 final class JSBridge: NSObject {
-    
-    static let shared = JSBridge()
+        
+    // MARK: - Constants
     
     enum BridgeDataType: Int {
         case dailyTopicUnsubscribe = 1
@@ -43,14 +43,19 @@ final class JSBridge: NSObject {
         static let type = "type"
     }
     
-    private weak var webView: WKWebView?
-    private var isServicSetting: Bool = false
+    // MARK: - Properties
+    
+    private let jsonDecoder = JSONDecoder()
+    private let serviceStatusManager: ServiceStatusManagerProtocol
     private var exposureNotificationBridge: ExposureNotificationJSProtocol?
+    private var diagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol?
+    
+    private var isServicSetting: Bool = false
     private var currentDataType: BridgeDataType?
     private var notificationPayload: String?
+    
+    private weak var webView: WKWebView?
     private var controller: WKUserContentController?
-    private let jsonDecoder = JSONDecoder()
-    var exposureKeysUploadService: DiagnosisKeysUploadServiceProtocol? // TODO: inject service
     
     var contentController: WKUserContentController {
         let controller = self.controller ?? WKUserContentController()
@@ -63,22 +68,27 @@ final class JSBridge: NSObject {
         return controller
     }
     
-    private var serviceStatusManager: ServiceStatusManagerProtocol = ServiceStatusManager(
-        notificationManager: NotificationManager.shared
-    )
+    // MARK: - Lifecycle
     
-    override private init() {
+    init(with serviceStatusManager: ServiceStatusManagerProtocol) {
+        self.serviceStatusManager = serviceStatusManager
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        
+        
+        registerForAppLifecycleNotifications()
     }
     
     func register(webView: WKWebView)  {
         self.webView = webView
     }
     
-    func register(exposureNotificationManager: ExposureNotificationJSProtocol) {
-        self.exposureNotificationBridge = exposureNotificationManager
+    @available(iOS 13.5, *)
+    func registerExposureNotification(
+        with exposureNotificationBridge: ExposureNotificationJSProtocol,
+        diagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol
+    ) {
+        self.exposureNotificationBridge = exposureNotificationBridge
+        self.diagnosisKeysUploadService = diagnosisKeysUploadService
     }
     
     func bridgeDataResponse(type: BridgeDataType, body: String, requestId: String, completion: ((Any?, Error?) -> ())? = nil) {
@@ -250,24 +260,21 @@ private extension JSBridge {
         
         // Manage Notifications
         if model.enableNotification == true {
-            Permissions.instance.state(for: .notifications, shouldAsk: true).asVoid()
-                .done { [weak self] _ in
-                    self?.sendAppStateJSON(type: .serviceStatus)
-                    self?.isServicSetting = false
-            }
-            .catch { error in console(error, type: .error)}
-            
+            isServicSetting = false
+            notificationsPermission(jsonString: jsonString, type: type)
             return
         }
         
         // Manage COVID ENA
-     exposureNotificationBridge?.enableService(enable: model.enableExposureNotificationService ?? false)
-            .done { [weak self] _ in
-            self?.sendAppStateJSON(type: .serviceStatus)
-            self?.isServicSetting = false
-        }
-        .catch(policy: .allErrors) { error in
-            console(error, type: .error)
+        if let enableExposureNotification = model.enableExposureNotificationService {
+            exposureNotificationBridge?.enableService(enable: enableExposureNotification)
+                .done { [weak self] _ in
+                    self?.sendAppStateJSON(type: .serviceStatus)
+                    self?.isServicSetting = false
+            }
+            .catch(policy: .allErrors) { error in
+                console(error, type: .error)
+            }
         }
     }
     
@@ -298,7 +305,8 @@ private extension JSBridge {
                 }
             }
             
-            self.sendAppStateJSON(type: type)
+            self.sendAppStateJSON(type: .serviceStatus)
+            self.isServicSetting = false
         }
         .catch { error in
             assertionFailure(error.localizedDescription)
@@ -320,18 +328,18 @@ private extension JSBridge {
             }
     }
     
-    private func uploadTemporaryExposureKeys(jsonString: String?) {
+    func uploadTemporaryExposureKeys(jsonString: String?) {
         guard let response: UploadTemporaryExposureKeysResponse = jsonString?.jsonDecode(decoder: jsonDecoder)
         else { return }
         
-        exposureKeysUploadService?.upload(usingAuthCode: response.pin).done {
+        diagnosisKeysUploadService?.upload(usingAuthCode: response.pin).done {
             self.send(.success)
         }.catch { _ in
             self.send(.failure)
         }
     }
     
-    private func send(_ status: UploadTemporaryExposureKeysStatus) {
+    func send(_ status: UploadTemporaryExposureKeysStatus) {
         guard let result = self.encodeToJSON(UploadTemporaryExposureKeysStatusResult(result: status))
         else { return }
         
@@ -339,7 +347,7 @@ private extension JSBridge {
     }
 
     
-    private func sendAppStateJSON(type: BridgeDataType) {
+    func sendAppStateJSON(type: BridgeDataType) {
         serviceStatusManager.serviceStatusJson
             .done { json in
                 console(json)
@@ -353,16 +361,37 @@ private extension JSBridge {
         }
     }
     
-    @objc
-    private func applicationWillEnterForeground(notification: Notification) {
+    
+}
+
+// MARK: - App Lifecycle Notifications
+
+private extension JSBridge {
+    
+    func registerForAppLifecycleNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applicationWillEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applicationDidEnterBackground),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: nil
+        )
+    }
+    
+    @objc func applicationWillEnterForeground(notification: Notification) {
         guard let json = ApplicationLifecycleResponse(appicationState: .willEnterForeground).jsonString else {  return }
         onBridgeData(type: .applicationLifecycle, body: json)
     }
     
-    @objc
-    private func applicationDidEnterBackground(notification: Notification) {
+    @objc func applicationDidEnterBackground(notification: Notification) {
         guard let json = ApplicationLifecycleResponse(appicationState: .didEnterBackground).jsonString else {  return }
         onBridgeData(type: .applicationLifecycle, body: json)
     }
+    
 }
-

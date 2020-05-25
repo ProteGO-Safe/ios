@@ -26,6 +26,7 @@ final class ExposureService: ExposureServiceProtocol {
     
     enum Constants {
         static let exposureInfoFullRangeRiskKey = "totalRiskScoreFullRange"
+        static let attenuationDurationThresholdsKey = "attenuationDurationThresholds"
     }
     
     // MARK: - Properties
@@ -196,6 +197,7 @@ final class ExposureService: ExposureServiceProtocol {
                     configuration.durationWeight = Double(response.exposure.daysSinceLastExposureWeight)
                     configuration.transmissionRiskLevelValues = response.exposure.transmissionRiskScores.map { NSNumber(integerLiteral: $0) }
                     configuration.transmissionRiskWeight = Double(response.exposure.transmissionRiskWeight)
+                    configuration.metadata = [Constants.attenuationDurationThresholdsKey: response.exposure.durationAtAttenuationThresholds]
                     seal.fulfill(configuration)
                 }
                 .catch {
@@ -203,5 +205,27 @@ final class ExposureService: ExposureServiceProtocol {
                 }
         }
     }
+}
+
+@available(iOS 13.5, *)
+extension ExposureService: ExposureNotificationStatusProtocol {
+    var status: Promise<ServicesResponse.Status.ExposureNotificationStatus> {
+        return activateManager().map {
+            if ENManager.authorizationStatus != .authorized {
+                return .off
+            } else {
+                switch $0 {
+                case .active: return .on
+                case .bluetoothOff, .disabled: return .off
+                default: return .restricted
+                }
+            }
+        }
+    }
     
+    var isBluetoothOn: Promise<Bool> {
+        return activateManager().map {
+            $0 != .bluetoothOff && $0 != .restricted
+        }
+    }
 }
