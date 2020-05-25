@@ -19,6 +19,7 @@ final class Permissions {
     enum Permission {
         case notifications
         case exposureNotification
+        case bluetooth
     }
     
     enum State {
@@ -49,6 +50,7 @@ final class Permissions {
             return notifications.state(shouldAsk: shouldAsk)
         case .exposureNotification:
             return exposureNotifiaction.state(shouldAsk: shouldAsk)
+        default: return .value(.unknown)
         }
     }
     
@@ -109,7 +111,9 @@ final class Permissions {
     private func choiceAlertCopy(for permission: Permission) -> (title: String, body: String) {
         switch permission {
         case .exposureNotification:
-            return (title: "Exposure Notification", body: "[ENA] Wyłączony COV. Przejdź do ustawień Prywtność -> Zdrowie lub pomiń")
+            return (title: "Moduł monitorowania ryzyka", body: "Moduł monitorowania ryzyka jest wyłączony. Przejdź do ustawień, żeby go włączyć. Po włączeniu aplikacja poinformuje Cię jeżeli wykryje ryzyko kontaktu z osoba chora na COVID-19.")
+        case .bluetooth:
+            return (title: "Moduł Bluetooth", body: "Moduł bluetooth potrzebny do działania Modułu monitorowania ryzyka jest wyłączony. Przejdź do ustawień, aby go włączyć.")
         default:
             return (title: "", body: "")
         }
@@ -121,6 +125,8 @@ final class Permissions {
             return (title: "Włącz powiadomienia", body: "Do prawidłowego działania aplikacji potrzebna jest Twoja zgoda na wyświetlanie powiadomień. Włącz powiadomienia i pozwól ProteGO Safe wspierać ochronę zdrowia każdego z nas.")
         case .exposureNotification:
             return (title: "COVID TITLE", body: "COVID MESSAGE")
+        case .bluetooth:
+            return (title: "BLUETOOTH TITLE", body: "BLUETOOTH MESSAGE")
         }
     }
 }

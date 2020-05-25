@@ -18,6 +18,8 @@ final class ConfigManager {
     static private let configPlistName = "Config-live"
     #elseif LIVE_ADHOC
     static private let configPlistName = "Config-live"
+    #elseif LIVE_DEBUG
+    static private let configPlistName = "Config-live"
     #endif
     
     static let `default` = ConfigManager(plistName: configPlistName)

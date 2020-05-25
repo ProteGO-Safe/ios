@@ -239,24 +239,21 @@ private extension JSBridge {
         
         // Manage Notifications
         if model.enableNotification == true {
-            Permissions.instance.state(for: .notifications, shouldAsk: true).asVoid()
-                .done { [weak self] _ in
-                    self?.sendAppStateJSON(type: .serviceStatus)
-                    self?.isServicSetting = false
-            }
-            .catch { error in console(error, type: .error)}
-            
+            isServicSetting = false
+            notificationsPermission(jsonString: jsonString, type: type)
             return
         }
         
         // Manage COVID ENA
-     exposureNotificationBridge?.enableService(enable: model.enableExposureNotificationService ?? false)
-            .done { [weak self] _ in
-            self?.sendAppStateJSON(type: .serviceStatus)
-            self?.isServicSetting = false
-        }
-        .catch(policy: .allErrors) { error in
-            console(error, type: .error)
+        if let enableExposureNotification = model.enableExposureNotificationService {
+            exposureNotificationBridge?.enableService(enable: enableExposureNotification)
+                .done { [weak self] _ in
+                    self?.sendAppStateJSON(type: .serviceStatus)
+                    self?.isServicSetting = false
+            }
+            .catch(policy: .allErrors) { error in
+                console(error, type: .error)
+            }
         }
     }
     
@@ -287,7 +284,8 @@ private extension JSBridge {
                 }
             }
             
-            self.sendAppStateJSON(type: type)
+            self.sendAppStateJSON(type: .serviceStatus)
+            self.isServicSetting = false
         }
         .catch { error in
             assertionFailure(error.localizedDescription)

@@ -16,7 +16,7 @@ protocol ExposureNotificationJSBridgeFactory {
 extension DependencyContainer: ExposureNotificationJSBridgeFactory {
     
     func makeExposureNotificationJSBridge(with viewController: UIViewController) -> ExposureNotificationJSProtocol {
-        return ExposureNotificationJSBridge(manager: exposureService, viewController: viewController)
+        return ExposureNotificationJSBridge(exposureService: exposureService, exposureStatus: exposureService, viewController: viewController)
     }
     
 }
