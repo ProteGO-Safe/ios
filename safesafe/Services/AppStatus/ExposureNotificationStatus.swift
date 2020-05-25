@@ -2,43 +2,49 @@
 //  ExposureNotificationStatus.swift
 //  safesafe
 //
-//  Created by Lukasz szyszkowski on 17/05/2020.
+//  Created by Lukasz szyszkowski on 25/05/2020.
 //
 
 import Foundation
-import ExposureNotification
 import PromiseKit
+import ExposureNotification
 
-
-final class ExposureNotificationStatus {
+@available(iOS 13.5, *)
+final class ExposureNotificationStatus: ExposureNotificationStatusProtocol {
     
-    @available(iOS 13.5, *)
-    private static var manager: ENManager?
+    private let service: ExposureServiceProtocol
     
-    static var status: Promise<ServicesResponse.Status.ExposureNotificationStatus> {
-        if #available(iOS 13.5, *) {
-            manager = ENManager()
-            return Promise { seal in
-                manager?.activate(completionHandler: { _ in
-                    guard let manager = manager else {
-                        return seal.reject(InternalError.deinitialized)
+    init(service: ExposureServiceProtocol) {
+        self.service = service
+    }
+    
+    var status: Promise<ServicesResponse.Status.ExposureNotificationStatus> {
+        return service.activateManager()
+            .map {
+                if ENManager.authorizationStatus != .authorized {
+                    return .off
+                } else {
+                    switch $0 {
+                    case .active: return .on
+                    case .bluetoothOff, .disabled: return .off
+                    default: return .restricted
                     }
-                    
-                    if ENManager.authorizationStatus != .authorized {
-                        seal.fulfill(.off)
-                    } else {
-                        switch manager.exposureNotificationStatus {
-                        case .active: seal.fulfill(.on)
-                        case .bluetoothOff, .disabled: seal.fulfill(.off)
-                        default: seal.fulfill(.restricted)
-                        }
-                    }
-                    
-                    manager.invalidate()
-                })
-            }
-        } else {
-            return .value(.restricted)
+                }
         }
     }
+    
+    var isBluetoothOn: Promise<Bool> {
+        return service.activateManager()
+            .map {
+                switch $0 {
+                case .bluetoothOff: return false
+                default: return true
+                }
+        }
+    }
+}
+
+final class ExposureNotificationStatusMock: ExposureNotificationStatusProtocol {
+    var status: Promise<ServicesResponse.Status.ExposureNotificationStatus> = .value(.off)
+    var isBluetoothOn: Promise<Bool> = .value(false)
 }

@@ -245,13 +245,15 @@ private extension JSBridge {
         }
         
         // Manage COVID ENA
-     exposureNotificationBridge?.enableService(enable: model.enableExposureNotificationService ?? false)
-            .done { [weak self] _ in
-            self?.sendAppStateJSON(type: .serviceStatus)
-            self?.isServicSetting = false
-        }
-        .catch(policy: .allErrors) { error in
-            console(error, type: .error)
+        if let enableExposureNotification = model.enableExposureNotificationService {
+            exposureNotificationBridge?.enableService(enable: enableExposureNotification)
+                .done { [weak self] _ in
+                    self?.sendAppStateJSON(type: .serviceStatus)
+                    self?.isServicSetting = false
+            }
+            .catch(policy: .allErrors) { error in
+                console(error, type: .error)
+            }
         }
     }
     
