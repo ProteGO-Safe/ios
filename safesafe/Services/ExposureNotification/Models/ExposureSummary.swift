@@ -22,4 +22,23 @@ struct ExposureSummary: Encodable {
     
 }
 
-
+extension ExposureSummary {
+ 
+    /// Creates `ExposureSummary` based on values of `totalRiskScoreFullRange` from range 0-4096
+    init?(fromFullRangeScore score: Int) {
+        switch score {
+        case 0...1499:
+            self.riskLevel = .low
+            
+        case 1500...2999:
+            self.riskLevel = .medium
+            
+        case 3000...4096:
+            self.riskLevel = .high
+            
+        default:
+            return nil
+        }
+    }
+    
+}
