@@ -10,8 +10,7 @@ import RealmSwift
 
 final class Exposure: Object, LocalStorable {
     
-    /// Epoch time in seconds
-    @objc dynamic var timestamp: Double = .zero
+    @objc dynamic var id = UUID()
     
     /// Total calculated risk, range is 0-4096
     @objc dynamic var risk: Int = .zero
@@ -19,11 +18,29 @@ final class Exposure: Object, LocalStorable {
     /// Exposure duration in seconds
     @objc dynamic var duration: Double = .zero
     
-    convenience init(timestamp: Double, risk: Int, duration: Double) {
+    /// Array of durations at certain attenuations
+    let attenuationDurations = List<Int>()
+    
+    /// Signal strength of peer device
+    @objc dynamic var attenuationValue: UInt8 = .zero
+    
+    /// Date of exposure
+    @objc dynamic var date: Date = Date()
+    
+    convenience init(
+        risk: Int,
+        duration: Double,
+        attenuationDurations: [Int],
+        attenuationValue: UInt8,
+        date: Date
+    ) {
         self.init()
-        self.timestamp = timestamp
         self.risk = risk
         self.duration = duration
+        self.attenuationValue = attenuationValue
+        self.date = date
+        
+        self.attenuationDurations.append(objectsIn: attenuationDurations)
     }
     
 }
