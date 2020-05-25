@@ -229,13 +229,8 @@ private extension JSBridge {
         
         // Manage Notifications
         if model.enableNotification == true {
-            Permissions.instance.state(for: .notifications, shouldAsk: true).asVoid()
-                .done { [weak self] _ in
-                    self?.sendAppStateJSON(type: .serviceStatus)
-                    self?.isServicSetting = false
-            }
-            .catch { error in console(error, type: .error)}
-            
+            isServicSetting = false
+            notificationsPermission(jsonString: jsonString, type: type)
             return
         }
         
@@ -277,7 +272,8 @@ private extension JSBridge {
                 }
             }
             
-            self.sendAppStateJSON(type: type)
+            self.sendAppStateJSON(type: .serviceStatus)
+            self.isServicSetting = false
         }
         .catch { error in
             assertionFailure(error.localizedDescription)
