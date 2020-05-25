@@ -22,11 +22,6 @@ final class AppCoordinator: CoordinatorType {
     private let monitor = NWPathMonitor()
     private let clearData = ClearData()
     private var noInternetAlert: UIAlertController?
-    
-    @available(iOS 13.5, *)
-    private lazy var backgroundTaskService: BackgroundTasksServiceProtocol = {
-        BackgroundTasksService(exposureService: exposureService)
-    }()
 
     required init() {
         fatalError("Not implemented")
