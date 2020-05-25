@@ -26,6 +26,7 @@ final class ExposureService: ExposureServiceProtocol {
     
     enum Constants {
         static let exposureInfoFullRangeRiskKey = "totalRiskScoreFullRange"
+        static let attenuationDurationThresholdsKey = "attenuationDurationThresholds"
     }
     
     // MARK: - Properties
@@ -196,6 +197,7 @@ final class ExposureService: ExposureServiceProtocol {
                     configuration.durationWeight = Double(response.exposure.daysSinceLastExposureWeight)
                     configuration.transmissionRiskLevelValues = response.exposure.transmissionRiskScores.map { NSNumber(integerLiteral: $0) }
                     configuration.transmissionRiskWeight = Double(response.exposure.transmissionRiskWeight)
+                    configuration.metadata = [Constants.attenuationDurationThresholdsKey: response.exposure.durationAtAttenuationThresholds]
                     seal.fulfill(configuration)
                 }
                 .catch {
