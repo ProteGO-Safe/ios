@@ -62,6 +62,10 @@ final class AppCoordinator: CoordinatorType {
             }
         }
         monitor.start(queue: DispatchQueue.global(qos: .background))
+        
+        if #available(iOS 13.5, *) {
+            dependencyContainer.backgroundTaskService.scheduleExposureTask()
+        }
     }
     
     private func makeRootViewController() -> UIViewController {

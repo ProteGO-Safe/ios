@@ -14,6 +14,8 @@ protocol LocalStorageProtocol {
     func append<T: LocalStorable>(_ object: T, completion: ((Result<Void, Error>) -> ())?)
     func append<T: LocalStorable>(_ objects: [T], completion: ((Result<Void, Error>) -> ())?)
     func fetch<T: LocalStorable>() -> Array<T>
+    func remove<T: LocalStorable>(_ object: T, completion: ((Result<Void, Error>) -> ())?)
+    func remove<T: LocalStorable>(_ objects: [T], completion: ((Result<Void, Error>) -> ())?)
 }
 
 extension LocalStorageProtocol {
@@ -74,6 +76,28 @@ final class RealmLocalStorage: LocalStorageProtocol {
             fatalError()
         }
         return realm.objects(type).compactMap { $0 as? T }
+    }
+    
+    func remove<T: LocalStorable>(_ object: T, completion: ((Result<Void, Error>) -> ())? = nil) {
+        do {
+            try realm.write {
+                realm.delete(object)
+            }
+            completion?(.success)
+        } catch {
+            completion?(.failure(error))
+        }
+    }
+    
+    func remove<T: LocalStorable>(_ objects: [T], completion: ((Result<Void, Error>) -> ())? = nil) {
+        do {
+            try realm.write {
+                realm.delete(objects)
+            }
+            completion?(.success)
+        } catch {
+            completion?(.failure(error))
+        }
     }
     
 }

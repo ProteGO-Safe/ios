@@ -17,7 +17,9 @@ struct TemporaryExposureKey: Encodable {
         self.key = key.keyData
         rollingPeriod = key.rollingPeriod
         rollingStartNumber = key.rollingStartNumber
-        transmissionRisk = key.transmissionRiskLevel
+        
+        // As requested, it should be `8` for now
+        transmissionRisk = 8//key.transmissionRiskLevel
     }
     
 }

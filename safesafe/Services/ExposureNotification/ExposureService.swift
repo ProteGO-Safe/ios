@@ -173,9 +173,11 @@ final class ExposureService: ExposureServiceProtocol {
                     }
                     
                     return Exposure(
-                        timestamp: info.date.timeIntervalSince1970,
                         risk: risk,
-                        duration: info.duration * 60
+                        duration: info.duration * 60,
+                        attenuationDurations: info.attenuationDurations.compactMap { Int(truncating: $0) },
+                        attenuationValue: Int(info.attenuationValue),
+                        date: info.date
                     )
                 }
                 

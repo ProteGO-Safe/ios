@@ -22,6 +22,7 @@ final class JSBridge: NSObject {
         case setServices = 52
         case clearBluetoothData = 37
         case uploadTemporaryExposureKeys = 43
+        case exposureList = 61
     }
     
     enum SendMethod: String, CaseIterable {
@@ -184,8 +185,13 @@ extension JSBridge: WKScriptMessageHandler {
         switch bridgeDataType {
         case .notification:
             notificationGetBridgeDataResponse(requestID: requestId)
+            
         case .serviceStatus:
             serviceStatusGetBridgeDataResponse(requestID: requestId)
+            
+        case .exposureList:
+            exposureListGetBridgeDataResponse(requestID: requestId)
+            
         default:
             return
         }
@@ -219,6 +225,21 @@ private extension JSBridge {
         }.catch { error in
             console(error, type: .error)
         }
+    }
+    
+    func exposureListGetBridgeDataResponse(requestID: String) {
+        exposureNotificationBridge?.getExposureSummary()
+            .done { [weak self] summary in
+                if let body = self?.encodeToJSON(summary) {
+                    self?.bridgeDataResponse(type: .exposureList, body: body, requestId: requestID) { _, error in
+                        if let error = error {
+                            console(error, type: .error)
+                        }
+                    }
+                }
+            }.catch {
+                console($0, type: .error)
+            }
     }
     
 }
@@ -290,6 +311,21 @@ private extension JSBridge {
         .catch { error in
             assertionFailure(error.localizedDescription)
         }
+    }
+    
+    func sendExposureList() {
+        exposureNotificationBridge?.getExposureSummary()
+            .done { [weak self] summary in
+                if let body = self?.encodeToJSON(summary) {
+                    self?.onBridgeData(type: .exposureList, body: body) { _, error in
+                        if let error = error {
+                            console(error, type: .error)
+                        }
+                    }
+                }
+            }.catch {
+                console($0, type: .error)
+            }
     }
     
     func uploadTemporaryExposureKeys(jsonString: String?) {

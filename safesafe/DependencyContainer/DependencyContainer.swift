@@ -29,10 +29,16 @@ final class DependencyContainer {
         storageService: realmLocalStorage!
     )
     
+    @available(iOS 13.5, *)
+    lazy var exposureSummaryService: ExposureSummaryServiceProtocol = ExposureSummaryService(
+        storageService: realmLocalStorage!
+    )
+    
     lazy var jsBridge = JSBridge(with: serviceStatusManager)
     lazy var realmLocalStorage = RealmLocalStorage()
     lazy var remoteConfiguration = RemoteConfiguration()
-    lazy var serviceStatusManager:ServiceStatusManagerProtocol = {
+    
+    lazy var serviceStatusManager: ServiceStatusManagerProtocol = {
         if #available(iOS 13.5, *) {
             return ServiceStatusManager(
                 notificationManager: NotificationManager.shared,

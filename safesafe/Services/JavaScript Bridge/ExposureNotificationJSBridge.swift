@@ -10,31 +10,40 @@ import PromiseKit
 import ExposureNotification
 
 protocol ExposureNotificationJSProtocol: class {
+    
     func enableService(enable: Bool) -> Promise<Void>
+    func getExposureSummary() -> Promise<ExposureSummary>
+
 }
 
 @available(iOS 13.5, *)
 final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
     
-    private weak var exposureService: ExposureServiceProtocol?
-    private weak var exposureStatus: ExposureNotificationStatusProtocol?
-    private weak var viewController: UIViewController?
+    // MARK: - Properties
+    
+    private let exposureService: ExposureServiceProtocol
+    private let exposureSummaryService: ExposureSummaryServiceProtocol
+    private let exposureStatus: ExposureNotificationStatusProtocol
+    private var viewController: UIViewController?
+    
+    // MARK: - Life Cycle
 
     init(
         exposureService: ExposureServiceProtocol,
+        exposureSummaryService: ExposureSummaryServiceProtocol,
         exposureStatus: ExposureNotificationStatusProtocol,
         viewController: UIViewController
     ) {
         self.exposureService = exposureService
+        self.exposureSummaryService = exposureSummaryService
         self.exposureStatus = exposureStatus
         self.viewController = viewController
     }
     
+    // MARK: - Public methods
+    
     func enableService(enable: Bool) -> Promise<Void> {
-        guard let manager = exposureService else {
-            return .value
-        }
-        return (enable ? turnOnService() : manager.setExposureNotificationEnabled(false))
+        (enable ? turnOnService() : exposureService.setExposureNotificationEnabled(false))
             .recover { error -> Guarantee<()> in
                 guard let error = error as? ENError else {
                     return .value
@@ -57,13 +66,22 @@ final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
         }
     }
     
+    func getExposureSummary() -> Promise<ExposureSummary> {
+        Promise { seal in
+            firstly {
+                when(fulfilled: [exposureService.detectExposures()])
+            }.done { _ in
+                seal.fulfill(self.exposureSummaryService.getExposureSummary())
+            }.catch {
+                seal.reject($0)
+            }
+        }
+    }
+    
+    // MARK: - Private methods
+    
     private func turnOnService() -> Promise<Void> {
-        guard
-            let manager = exposureService,
-            let exposureStatus = exposureStatus
-            else {  return .value }
-        
-        return  manager.setExposureNotificationEnabled(true)
+        return exposureService.setExposureNotificationEnabled(true)
             .recover { [weak self] error -> Promise<Void> in
                 guard let self = self else {
                     return .init(error: InternalError.deinitialized)
@@ -80,7 +98,7 @@ final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
                     return .value
                 }
         }.then { _ -> Promise<Bool> in
-            return exposureStatus.isBluetoothOn
+            return self.exposureStatus.isBluetoothOn
         }.then {[weak self] isOn -> Promise<Void> in
             guard let self = self else {
                 return .init(error: InternalError.deinitialized)
