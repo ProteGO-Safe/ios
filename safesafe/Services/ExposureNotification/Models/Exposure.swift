@@ -18,29 +18,18 @@ final class Exposure: Object, LocalStorable {
     /// Exposure duration in seconds
     @objc dynamic var duration: Double = .zero
     
-    /// Array of durations at certain attenuations
-    let attenuationDurations = List<Int>()
-    
-    /// Signal strength of peer device
-    @objc dynamic var attenuationValue: Int = .zero
-    
     /// Date of exposure
     @objc dynamic var date: Date = Date()
     
     convenience init(
         risk: Int,
         duration: Double,
-        attenuationDurations: [Int],
-        attenuationValue: Int,
         date: Date
     ) {
         self.init()
         self.risk = risk
         self.duration = duration
-        self.attenuationValue = attenuationValue
         self.date = date
-        
-        self.attenuationDurations.append(objectsIn: attenuationDurations)
     }
     
 }
