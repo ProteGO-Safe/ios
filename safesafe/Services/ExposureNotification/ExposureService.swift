@@ -175,8 +175,6 @@ final class ExposureService: ExposureServiceProtocol {
                     return Exposure(
                         risk: risk,
                         duration: info.duration * 60,
-                        attenuationDurations: info.attenuationDurations.compactMap { Int(truncating: $0) },
-                        attenuationValue: Int(info.attenuationValue),
                         date: info.date
                     )
                 }
@@ -202,8 +200,19 @@ final class ExposureService: ExposureServiceProtocol {
                     configuration.metadata = [Constants.attenuationDurationThresholdsKey: response.exposure.durationAtAttenuationThresholds]
                     seal.fulfill(configuration)
                 }
-                .catch {
-                    seal.reject($0)
+                .recover { _ in
+                    // Default configuration - in case something goes wrong on Firebase side
+                    let configuration = ENExposureConfiguration()
+                    configuration.attenuationLevelValues = [2,5,6,7,8,8,8,8]
+                    configuration.attenuationWeight = 50
+                    configuration.daysSinceLastExposureLevelValues = [7,8,8,8,8,8,8,8]
+                    configuration.daysSinceLastExposureWeight = 50
+                    configuration.durationLevelValues = [0,5,6,7,8,8,8,8]
+                    configuration.durationWeight = 50
+                    configuration.transmissionRiskLevelValues = [8,8,8,8,8,8,8,8]
+                    configuration.transmissionRiskWeight = 50
+                    configuration.metadata = [Constants.attenuationDurationThresholdsKey: [48, 58]]
+                    seal.fulfill(configuration)
                 }
         }
     }
