@@ -9,6 +9,9 @@
 import Foundation
 
 extension URL {
+    
+    static let emptyFilePath = URL(string: "file://")!
+    
     static func build(scheme: String, host: String, port: Int? = nil) -> URL? {
         var components = URLComponents()
         components.host = host

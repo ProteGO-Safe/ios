@@ -6,6 +6,8 @@
 import FirebaseStorage
 import PromiseKit
 import ZIPFoundation
+import Moya
+import Alamofire
 
 protocol DiagnosisKeysDownloadServiceProtocol {
     
@@ -14,41 +16,39 @@ protocol DiagnosisKeysDownloadServiceProtocol {
     
 }
 
+
+@available(iOS 13.5, *)
 final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
-    
-    // MARK: - Constants
-    
-    private enum Directory {
-        static let keys = "DiagnosisKeys"
-    }
     
     // MARK: - Properties
     
     private let remoteConfig: RemoteConfigProtocol
     private let fileManager: FileManager
-    private let storage: Storage
-    private let storageReference: StorageReference
+    private let exposureKeysProvider: MoyaProvider<ExposureKeysTarget>
     
     // MARK: - Life Cycle
     
     init(
         with remoteConfig: RemoteConfigProtocol,
         fileManager: FileManager = FileManager.default,
-        storage: Storage = Storage.storage(url: ConfigManager.default.enStorageURL)
+        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>
     ) {
         self.remoteConfig = remoteConfig
         self.fileManager = fileManager
-        self.storage = storage
-        storageReference = storage.reference()
+        self.exposureKeysProvider = exposureKeysProvider
+    }
+    
+    static func extractTimestamp(name: String) -> String? {
+        let splited = name.split(separator: "-")
+        guard let timestamp = splited.first else {
+            return nil
+        }
+        
+        return String(timestamp)
     }
     
     // MARK: - Diagnosis Keys
-    
-    private func getKeysURL() throws -> URL {
-        let cachesDirectory = try fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        return cachesDirectory.appendingPathComponent(Directory.keys)
-    }
-    
+
     private func downloadFiles(withNames names: [String], keysDirectoryURL: URL) -> Promise<[URL]> {
         Promise { seal in
             let dispatchGroup = DispatchGroup()
@@ -58,32 +58,33 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
             for name in names {
                 dispatchGroup.enter()
                 
-                let fileURL = keysDirectoryURL.appendingPathComponent(name)
-                storageReference.child(name).write(toFile: fileURL) { url, error in
-                    if let error = error {
+                exposureKeysProvider.request(.download(fileName: name, destination: downloadDestination)) { result in
+                    switch result {
+                    case .success:
+                        guard let directoryName = Self.extractTimestamp(name: name) else {
+                            fileURLResults.append(.failure(InternalError.extractingDirectoryName))
+                            return
+                        }
+                        
+                        do {
+                            let unzipDestinationURL = try Directory.getDiagnosisKeysURL().appendingPathComponent(directoryName)
+                            let urls = try self.fileManager.contentsOfDirectory(at: unzipDestinationURL, includingPropertiesForKeys: nil)
+                            fileURLResults.append(.success(urls))
+                        } catch {
+                            fileURLResults.append(.failure(error))
+                        }
+                        
+                    case let .failure(error):
                         fileURLResults.append(.failure(error))
-                        dispatchGroup.leave()
-                        return
                     }
                     
-                    do {
-                        let unzipDestinationDirectory = fileURL.deletingPathExtension().lastPathComponent
-                        let unzipDestinationURL = keysDirectoryURL.appendingPathComponent(unzipDestinationDirectory)
-                        
-                        try self.fileManager.unzipItem(at: fileURL, to: unzipDestinationURL)
-                        console("Diagnosis Key files saved to: \(unzipDestinationURL)")
-
-                        let urls = try self.fileManager.contentsOfDirectory(at: unzipDestinationURL, includingPropertiesForKeys: nil)
-                        fileURLResults.append(.success(urls))
-                        dispatchGroup.leave()
-                    } catch {
-                        fileURLResults.append(.failure(error))
-                        dispatchGroup.leave()
-                    }
+                    dispatchGroup.leave()
                 }
             }
             
             dispatchGroup.notify(queue: .main) {
+                Directory.removeDiagnosisKeysTempDirectory()
+            
                 for result in fileURLResults {
                     switch result {
                     case let .success(urls):
@@ -100,12 +101,34 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
         }
     }
     
-    private func filter(keyFileNames: [String]) -> [String] {
+    private func downloadDestination(temporaryURL: URL, response: HTTPURLResponse) -> (destinationURL: URL, options: DownloadRequest.Options) {
+        guard
+            let suggestedFilename = response.suggestedFilename,
+            let directoryName = DiagnosisKeysDownloadService.extractTimestamp(name: suggestedFilename),
+            let temporaryDirectory = try? Directory.getDiagnosisKeysTempURL()
+        else {
+            return(temporaryURL, [])
+        }
+        
+        do {
+            let unzipDestinationURL = try Directory.getDiagnosisKeysURL().appendingPathComponent(directoryName)
+            
+            try FileManager.default.unzipItem(at: temporaryURL, to: unzipDestinationURL)
+            console("Diagnosis Key files saved to: \(unzipDestinationURL)")
+            
+        } catch { console(error, type: .error) }
+        
+        return(temporaryDirectory, [.removePreviousFile])
+    }
+    
+    private func filter(keyFileNames: [Substring]) -> [String] {
         let downloadTimestamp = StoredDefaults.standard.get(key: .diagnosisKeysDownloadTimestamp) ?? 0
         
-        var names = keyFileNames.filter { name -> Bool in
+        var names = keyFileNames
+            .map { String($0.replacingOccurrences(of: "/", with: "")) }
+            .filter { name -> Bool in
             guard
-                let fileName = URL(string: name)?.deletingPathExtension().lastPathComponent,
+                let fileName = Self.extractTimestamp(name: name),
                 let keyTimestamp = Int(fileName)
             else { return false }
             
@@ -114,7 +137,7 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
         
         do {
             let savedFileNames = try fileManager.contentsOfDirectory(
-                at: try getKeysURL(),
+                at: try Directory.getDiagnosisKeysURL(),
                 includingPropertiesForKeys: nil
             )
             .map(\.lastPathComponent)
@@ -129,31 +152,39 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
     
     func download() -> Promise<[URL]> {
         Promise { seal in
-            storageReference.listAll { result, error in
-                if let error = error {
+            exposureKeysProvider.request(.get) { [weak self] result in
+                guard let self = self else {
+                    seal.reject(InternalError.deinitialized)
+                    return
+                }
+                
+                switch result {
+                case let .success(response):
+                    let filesList = String(bytes: response.data, encoding: .utf8)?.split(separator: "\n") ?? []
+                    
+                    guard let keysDirectoryURL = try? Directory.getDiagnosisKeysURL() else {
+                        seal.reject(InternalError.locatingDictionary)
+                        return
+                    }
+                    
+                    do {
+                        try self.fileManager.createDirectory(at: keysDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+                    } catch {
+                        seal.reject(error)
+                        return
+                    }
+                    
+                    let itemNames = self.filter(keyFileNames: filesList)
+                    
+                    self.downloadFiles(withNames: itemNames, keysDirectoryURL: keysDirectoryURL).done { urls in
+                        StoredDefaults.standard.set(value: Int(Date().timeIntervalSince1970), key: .diagnosisKeysDownloadTimestamp)
+                        seal.fulfill(urls)
+                    }.catch {
+                        seal.reject($0)
+                    }
+                    
+                case let .failure(error):
                     seal.reject(error)
-                    return
-                }
-                
-                guard let keysDirectoryURL = try? self.getKeysURL() else {
-                    seal.reject(InternalError.locatingDictionary)
-                    return
-                }
-                
-                do {
-                    try self.fileManager.createDirectory(at: keysDirectoryURL, withIntermediateDirectories: true, attributes: nil)
-                } catch {
-                    seal.reject(error)
-                    return
-                }
-                
-                let itemNames = self.filter(keyFileNames: result.items.map(\.name))
-                                
-                self.downloadFiles(withNames: itemNames, keysDirectoryURL: keysDirectoryURL).done { urls in
-                    StoredDefaults.standard.set(value: Int(Date().timeIntervalSince1970), key: .diagnosisKeysDownloadTimestamp)
-                    seal.fulfill(urls)
-                }.catch {
-                    seal.reject($0)
                 }
             }
         }
@@ -161,12 +192,11 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
     
     func deleteFiles() {
         do {
-            try fileManager.removeItem(at: try getKeysURL())
+            try fileManager.removeItem(at: try Directory.getDiagnosisKeysURL())
         } catch {
             console(error)
         }
     }
-    
 }
 
 extension StoredDefaults.Key {

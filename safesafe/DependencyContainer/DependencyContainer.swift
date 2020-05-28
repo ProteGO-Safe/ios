@@ -12,7 +12,12 @@ final class DependencyContainer {
     lazy var backgroundTaskService = BackgroundTasksService(exposureService: exposureService)
     
     lazy var deviceCheckService = DeviceCheckService()
-    lazy var diagnosisKeysDownloadService = DiagnosisKeysDownloadService(with: remoteConfiguration)
+    
+    @available(iOS 13.5, *)
+    lazy var diagnosisKeysDownloadService = DiagnosisKeysDownloadService(
+        with: remoteConfiguration,
+        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>()
+    )
     
     @available(iOS 13.5, *)
     lazy var diagnosisKeysUploadService = DiagnosisKeysUploadService(
