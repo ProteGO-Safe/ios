@@ -9,14 +9,21 @@ import Moya
 enum ExposureKeysTarget {
     case auth(TemporaryExposureKeysAuthData)
     case post(TemporaryExposureKeysData)
-//    case download
+    case get
+    case download(fileName: String, destination: DownloadDestination)
 }
 
 @available(iOS 13.5, *)
 extension ExposureKeysTarget: TargetType {
     
     var baseURL: URL {
-        return URL(string: ConfigManager.default.enBaseURL)!
+        switch self {
+        case .get, .download:
+            return URL(string: ConfigManager.default.enStorageURL)!
+        default:
+            return URL(string: ConfigManager.default.enBaseURL)!
+        }
+        
     }
     
     var path: String {
@@ -26,13 +33,21 @@ extension ExposureKeysTarget: TargetType {
             
         case .post:
             return "uploadDiagnosisKeys"
+            
+        case .get:
+            return "/index.txt"
+            
+        case let .download(fileName, _):
+            return "/\(fileName)"
         }
     }
     
-    var method: Method {
+    var method: Moya.Method {
         switch self {
         case .auth, .post:
             return .post
+        case .get, .download:
+            return .get
         }
     }
     
@@ -47,6 +62,12 @@ extension ExposureKeysTarget: TargetType {
             
         case .post(let temporaryExposureKeys):
             return .requestJSONEncodable(temporaryExposureKeys)
+            
+        case .get:
+            return .requestPlain
+            
+        case let .download(_, destination):
+            return .downloadDestination(destination)
         }
     }
     
@@ -57,5 +78,4 @@ extension ExposureKeysTarget: TargetType {
     var validationType: ValidationType {
         return .successCodes
     }
-    
 }
