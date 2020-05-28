@@ -41,8 +41,6 @@
 	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>telephony</string>
-		<string>bluetooth-le</string>
 		<string>fetch</string>
 		<string>processing</string>
 		<string>remote-notification</string>
@@ -52,6 +50,8 @@
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
+		<string>telephony</string>
+		<string>bluetooth-le</string>
 	</array>
 	<key>UIStatusBarHidden</key>
 	<false/>
