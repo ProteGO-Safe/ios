@@ -6,13 +6,10 @@ def pods_definition
   use_frameworks!
 
   pod 'SnapKit', '5.0.1'
-  pod 'Firebase/Crashlytics'
-  pod 'Firebase/Analytics'
   pod 'Firebase/Functions'
   pod 'Firebase/Messaging'
   pod 'Firebase/Auth'
   pod 'Firebase/RemoteConfig'
-  pod 'Firebase/Storage'
   pod 'PromiseKit', '~> 6.8'
   pod 'Moya', '~> 14.0'
   pod 'ZIPFoundation', '~> 0.9'
@@ -25,18 +22,4 @@ end
 
 target 'safesafe' do
   pods_definition
-end
-
-pre_install do |installer|
-  installer.pod_targets.each do |pod|
-      if (pod.name.downcase.include? "nanopb") || (pod.name.downcase.include? "protobuf")
-          puts "Overriding the static_framework? method for #{pod.name}"
-          def pod.static_framework?;
-              true
-          end
-          def pod.build_as_static_framework?;
-              true
-          end
-      end
-  end
 end
