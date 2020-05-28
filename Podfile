@@ -26,3 +26,17 @@ end
 target 'safesafe' do
   pods_definition
 end
+
+pre_install do |installer|
+  installer.pod_targets.each do |pod|
+      if (pod.name.downcase.include? "nanopb") || (pod.name.downcase.include? "protobuf")
+          puts "Overriding the static_framework? method for #{pod.name}"
+          def pod.static_framework?;
+              true
+          end
+          def pod.build_as_static_framework?;
+              true
+          end
+      end
+  end
+end
