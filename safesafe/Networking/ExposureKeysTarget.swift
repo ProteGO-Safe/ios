@@ -11,7 +11,6 @@ enum ExposureKeysTarget {
     case post(TemporaryExposureKeysData)
     case get
     case download(fileName: String, destination: DownloadDestination)
-//    case download
 }
 
 @available(iOS 13.5, *)
