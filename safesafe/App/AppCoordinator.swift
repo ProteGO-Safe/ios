@@ -74,7 +74,7 @@ final class AppCoordinator: CoordinatorType {
     }
     
     private func setupDebugToolkit() {
-        #if !LIVE
+        #if !LIVE && !STAGE
         DBDebugToolkit.setup()
         #endif
     }
