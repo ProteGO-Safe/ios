@@ -159,7 +159,7 @@ final class ExposureService: ExposureServiceProtocol {
     
     private func getExposureInfo(from summary: ENExposureDetectionSummary) -> Promise<[Exposure]> {
         Promise { seal in
-            let userExplanation = "Some explanation for the user, that their exposure details are being reveled to the app"
+            let userExplanation = "ProteGO Safe analizuje informacje o spotkaniach z innymi urządzeniami."
             
             exposureManager.getExposureInfo(summary: summary, userExplanation: userExplanation) { exposureInfo, error in
                 guard let info = exposureInfo, error == nil else {
