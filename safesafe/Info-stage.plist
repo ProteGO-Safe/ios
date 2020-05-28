@@ -62,7 +62,7 @@
 	</array>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>pl.gov.mc.protegosafe-staging</string>
+		<string>pl.gov.mc.protegosafe.backgroundAnalysis.exposure-notification</string>
 	</array>
 	<key>UIStatusBarHidden</key>
 	<false/>
