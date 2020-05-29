@@ -58,7 +58,7 @@ final class ExposureService: ExposureServiceProtocol {
         self.diagnosisKeysService = diagnosisKeysService
         self.configurationService = configurationService
         self.storageService = storageService
-        
+            
         activateManager()
     }
     
