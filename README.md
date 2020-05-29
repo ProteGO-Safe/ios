@@ -31,7 +31,7 @@ Application is structured based MVVM-C pattern, where presentation (UI) layer is
 * [NotificationManager](safesafe/Services/NotificationManager.swift) - service responsible for managing push notification related activities
 * [StoredDefaults](safesafe/Services/StoredDefaults.swift) - service managing logic related to UserDefaults
 * [ServiceStatusManager](safesafe/Services/AppStatus/ServiceStatusManager.swift) - service that gathers data about statuses of permissions and states of Notifications and Exposure Notification services
-* [BackgroundTaskService](safesafe/Services/ExposureNotification/BackgroundTaskService.swift) - service which is responsible for scheduling backround tasks in the app. Each background task is meant to perform an exposure detection, based on periodically downloaded TEKs
+* [BackgroundTasksService](safesafe/Services/ExposureNotification/BackgroundTasksService.swift) - service which is responsible for scheduling backround tasks in the app. Each background task is meant to perform an exposure detection, based on periodically downloaded TEKs
 * [DiagnosisKeysDownloadService](safesafe/Services/ExposureNotification/DiagnosisKeysDownloadService.swift) - service responsible for downloading TEKs from the server
 * [DiagnosisKeysUploadService](safesafe/Services/ExposureNotification/DiagnosisKeysUploadService.swift) - service responsible for uploading TEKs to the server
 * [ExposureService](safesafe/Services/ExposureNotification/ExposureService.swift) - service responsible for implementing exposure detection part of Exposure Notification API
@@ -65,30 +65,30 @@ To setup the project, proceed with following steps:
 ## ChangeLog
 
 
-4.1.0 (TBD)
+**4.1.0**
 
-Exposure Notification API added
-OpenTrace module fully removed together with all collected data
-
-
-3.0.2
-
-Manage project settings with yml config files - XcodeGen added
-Debug console added for Stage and Dev configs
-Moved anonymous signIn to Firebase on app start
-Added custom Config.plist for every xcode configuration
-Disabled app idle timer
-Pass notification payload to webkit UI
-Fix for refreshing BlueTrace Temp ID
-Fix for deleting data from device
-Add GPL LICENSE file
+- Exposure Notification API added
+- OpenTrace module fully removed together with all collected data
 
 
-3.0.1
+**3.0.2**
 
-Added OpenTrace module for collecting BLE contacts
+- Manage project settings with yml config files - XcodeGen added
+- Debug console added for Stage and Dev configs
+- Moved anonymous signIn to Firebase on app start
+- Added custom Config.plist for every xcode configuration
+- Disabled app idle timer
+- Pass notification payload to webkit UI
+- Fix for refreshing BlueTrace Temp ID
+- Fix for deleting data from device
+- Add GPL LICENSE file
 
 
-2.0.1
+**3.0.1**
 
-Basic version with PWA, and notifications
+- Added OpenTrace module for collecting BLE contacts
+
+
+**2.0.1**
+
+- Basic version with PWA, and notifications
