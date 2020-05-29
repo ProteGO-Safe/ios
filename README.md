@@ -5,7 +5,7 @@
 ## Project overview
 
 This is an iOS application for [ProteGO Safe project](https://github.com/ProteGO-Safe/specs) and it implements two main features:
-* User daily triage - //TODO description to be provided or linked to main documentation//
+* User daily triage
 * Contact tracing - module that is fully based on [Exposure Notification API](https://developer.apple.com/documentation/exposurenotification) provided by Google and Apple and it's goal is to inform people of potential exposure to COVID-19.
 
 Application is structured based MVVM-C pattern, where presentation (UI) layer is almost fully realized with a single UIViewController with a WKWebView that loads a website application called 'PWA' (Progressive Web App). PWA is responsible for GUI, user interaction and 'User daily triage' feature. Website app interacts with native code through the JavaScript bridge.
