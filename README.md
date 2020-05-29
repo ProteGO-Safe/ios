@@ -44,10 +44,10 @@ Application has 3 different environments: Dev, Stage and Live.
 
 Each environment has different configuration files - they are respectively divided in `safesafe/Resources` directory. 
 Each environment uses:
-- <env>.entitlements file
-- Config-<env>.plist file, which contains appropriate PWA links and (legacy) BlueTrace configurations
-- <env>.xcconfig and <env>Dist.xcconfig Xcode config files
-- GoogleService-Info-<env>.plist files (those names are modified in one of build scripts, so that for compilation phase file's name is changed to `GoogleService-Info.plist`)
+- \[env\].entitlements file
+- Config-\[env\].plist file, which contains appropriate PWA links and (legacy) BlueTrace configurations
+- \[env\].xcconfig and \[env\]Dist.xcconfig Xcode config files
+- GoogleService-Info-\[env\].plist files (those names are modified in one of build scripts, so that for compilation phase file's name is changed to `GoogleService-Info.plist`)
 
 There are two build configurations for each environment: debug and release
 
