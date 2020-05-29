@@ -61,6 +61,8 @@ To setup the project, proceed with following steps:
 3. Run `xcodegen generate` to generate .xcodeproj file
 4. Run `pod install` to install necessary dependencies and generate .xcworkspace file
 
+For convenience, there's a `rebuild.sh` script which performs actions mentioned above. Aditionally, it let's you select Xcode that you want to use to open the project (if you have multiple Xcode versions on your machine).
+To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
 
