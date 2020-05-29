@@ -45,6 +45,6 @@ final class ExposureNotificationStatus: ExposureNotificationStatusProtocol {
 }
 
 final class ExposureNotificationStatusMock: ExposureNotificationStatusProtocol {
-    var status: Promise<ServicesResponse.Status.ExposureNotificationStatus> = .value(.off)
+    var status: Promise<ServicesResponse.Status.ExposureNotificationStatus> = .value(.restricted)
     var isBluetoothOn: Promise<Bool> = .value(false)
 }
