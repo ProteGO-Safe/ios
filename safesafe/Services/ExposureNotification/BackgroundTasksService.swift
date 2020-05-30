@@ -18,7 +18,7 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
     
     // MARK: - Properties
     
-    private let backgroundTaskID = "pl.gov.mc.protegosafe.backgroundAnalysis.exposure-notification"
+    private let backgroundTaskID = Bundle.main.bundleIdentifier! + ".backgroundAnalysis.exposure-notification"
     private let exposureService: ExposureServiceProtocol
     
     // MARK: - Life Cycle

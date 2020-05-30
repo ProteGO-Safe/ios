@@ -8,6 +8,7 @@
 import Foundation
 import PromiseKit
 import ExposureNotification
+import UIKit.UIDevice
 
 @available(iOS 13.5, *)
 final class ExposureNotificationStatus: ExposureNotificationStatusProtocol {
@@ -19,6 +20,9 @@ final class ExposureNotificationStatus: ExposureNotificationStatusProtocol {
     }
     
     var status: Promise<ServicesResponse.Status.ExposureNotificationStatus> {
+        guard UIDevice.current.model == "iPhone" else {
+            return .value(.restricted)
+        }
         return service.activateManager()
             .map {
                 if ENManager.authorizationStatus != .authorized {
@@ -34,6 +38,9 @@ final class ExposureNotificationStatus: ExposureNotificationStatusProtocol {
     }
     
     var isBluetoothOn: Promise<Bool> {
+        guard UIDevice.current.model == "iPhone" else {
+            return .value(false)
+        }
         return service.activateManager()
             .map {
                 switch $0 {
