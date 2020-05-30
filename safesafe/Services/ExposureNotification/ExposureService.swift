@@ -167,7 +167,7 @@ final class ExposureService: ExposureServiceProtocol {
                     return
                 }
                 
-                let exposures = info.compactMap { info -> Exposure? in`
+                let exposures = info.compactMap { info -> Exposure? in
                     guard let risk = info.metadata?[Constants.exposureInfoFullRangeRiskKey] as? Int else {
                         return nil
                     }
