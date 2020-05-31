@@ -181,7 +181,10 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                         .compactMap(Int.init)
                         .sorted()
                     
-                    guard let lastTimestamp = timestamps.last, !itemNames.isEmpty else { return }
+                    guard let lastTimestamp = timestamps.last, !itemNames.isEmpty else {
+                        seal.reject(PMKError.cancelled)
+                        return
+                    }
                     
                     self.downloadFiles(withNames: itemNames, keysDirectoryURL: keysDirectoryURL).done { urls in
                         StoredDefaults.standard.set(value: lastTimestamp, key: .diagnosisKeysDownloadTimestamp)
