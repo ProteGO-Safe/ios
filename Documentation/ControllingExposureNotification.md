@@ -20,6 +20,6 @@ Enables users to start and stop broadcasting and scanning, indicate if exposure 
 - Indicate if exposure notifications are enabled.
   - Call **ExposureService.isExposureNotificationEnabled**
 - Disable broadcasting and scanning.
-  -Call **ExposureService.setExposureNotificationEnabled(_)** with `false`
+  - Call **ExposureService.setExposureNotificationEnabled(_)** with `false`
     - Contents of the Exposure Notification Framework database and keys will remain.
     - If the app has been uninstalled by the user, this will be automatically invoked and the database and keys will be wiped from the device.

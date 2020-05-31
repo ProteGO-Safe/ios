@@ -1,7 +1,7 @@
 # Providing Diagnosis Keys
 
 Each new downloaded Diagnosis Key file (please see [Downloading Diagnosis Keys](DownloadingDiagnosisKeys.md) section) is provided for exposure checking. The check is performed by [Exposure Notification API](https://developer.apple.com/documentation/exposurenotification) with Exposure Configuration options that tune the matching algorithm. In order to provide elastic architecture, the exposure configuration is obtained from Firebase RemoteConfig service.
-Periodic fetch of Diagnosis Keys is performed by [BackgroundTaskService](../safesafe/Services/ExposureNotification/BackgrounTasksService.swift) without need of user's interaction in the foreground.
+Periodic fetch of Diagnosis Keys is performed by [BackgroundTaskService](../safesafe/Services/ExposureNotification/BackgroundTasksService.swift) without need of user's interaction in the foreground.
 
 Steps:
 - New Diagnosis Key files that have never been analyzed are downloaded as described in [Downloading Diagnosis Keys](DownloadingDiagnosisKeys.md) section. Diagnosis Key files must be signed appropriately - the matching algorithm only runs on data that has been verified with the public key distributed by the device configuration mechanism. See more [here](https://static.googleusercontent.com/media/www.google.com/pt-BR//covid19/exposurenotifications/pdfs/Exposure-Key-File-Format-and-Verification.pdf).
@@ -14,4 +14,3 @@ Steps:
     - Service function: [DiagnosisKeysDownloadService.download()](../safesafe/Services/ExposureNotification/DiagnosisKeysDownloadService.swift)
   - All sent to analysis Diagnosis Key files are deleted from device internal storage
     - Service function: [DiagnosisKeysDownloadService.deleteFiles()](../safesafe/Services/ExposureNotification/DiagnosisKeysDownloadService.swift)
-  - Diagnosis keys analysis will be performed by [Exposure Notification API](https://developer.apple.com/documentation/exposurenotification), after which application will [receive](ReceivingExposuresInformation.md) a broadcast message in case any exposure is detected
