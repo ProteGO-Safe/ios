@@ -176,9 +176,18 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                     }
                     
                     let itemNames = self.filter(keyFileNames: filesList)
+                    let timestamps = itemNames
+                        .compactMap(Self.extractTimestamp)
+                        .compactMap(Int.init)
+                        .sorted()
+                    
+                    guard let lastTimestamp = timestamps.last, !itemNames.isEmpty else {
+                        seal.reject(PMKError.cancelled)
+                        return
+                    }
                     
                     self.downloadFiles(withNames: itemNames, keysDirectoryURL: keysDirectoryURL).done { urls in
-                        StoredDefaults.standard.set(value: Int(Date().timeIntervalSince1970), key: .diagnosisKeysDownloadTimestamp)
+                        StoredDefaults.standard.set(value: lastTimestamp, key: .diagnosisKeysDownloadTimestamp)
                         seal.fulfill(urls)
                     }.catch {
                         seal.reject($0)
