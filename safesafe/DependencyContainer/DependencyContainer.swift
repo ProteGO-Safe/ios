@@ -23,14 +23,8 @@ final class DependencyContainer {
     lazy var diagnosisKeysUploadService = DiagnosisKeysUploadService(
         with: exposureService,
         deviceCheckService: deviceCheckService,
-        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>(plugins: [newtworkLoggerPlugin])
+        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>()
     )
-    
-    private let newtworkLoggerPlugin: NetworkLoggerPlugin = {
-        let plgn = NetworkLoggerPlugin()
-        plgn.configuration.logOptions = .verbose
-        return plgn
-    }()
     
     @available(iOS 13.5, *)
     lazy var exposureService = ExposureService(
