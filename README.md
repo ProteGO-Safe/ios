@@ -19,7 +19,6 @@ App implements contact tracing module that is based on [Exposure Notification AP
 * [Reporting risk level](Documentation/ReportingRiskLevel.md) to the PWA: extract risk scores of saved exposures and calculate risk level, pass risk level to PWA
 * [Removing historical data](Documentation/RemovingHistoricalData.md): remove information about exposures older than 14 days
 
-
 ## Project modules
 
 - App - contains classes related to app's life cycle
