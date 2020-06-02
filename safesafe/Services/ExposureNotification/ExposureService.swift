@@ -59,7 +59,9 @@ final class ExposureService: ExposureServiceProtocol {
         self.configurationService = configurationService
         self.storageService = storageService
         
-        activateManager()
+        if UIDevice.current.model == "iPhone"  {
+            activateManager()
+        }
     }
     
     deinit {
@@ -159,7 +161,7 @@ final class ExposureService: ExposureServiceProtocol {
     
     private func getExposureInfo(from summary: ENExposureDetectionSummary) -> Promise<[Exposure]> {
         Promise { seal in
-            let userExplanation = "Some explanation for the user, that their exposure details are being reveled to the app"
+            let userExplanation = "ProteGO Safe analizuje informacje o spotkaniach z innymi urządzeniami."
             
             exposureManager.getExposureInfo(summary: summary, userExplanation: userExplanation) { exposureInfo, error in
                 guard let info = exposureInfo, error == nil else {
@@ -221,6 +223,8 @@ final class ExposureService: ExposureServiceProtocol {
 @available(iOS 13.5, *)
 extension ExposureService: ExposureNotificationStatusProtocol {
     var status: Promise<ServicesResponse.Status.ExposureNotificationStatus> {
+        guard UIDevice.current.model == "iPhone" else { return .value(.restricted) }
+        
         return activateManager().map {
             if ENManager.authorizationStatus != .authorized {
                 return .off
@@ -235,6 +239,8 @@ extension ExposureService: ExposureNotificationStatusProtocol {
     }
     
     var isBluetoothOn: Promise<Bool> {
+        guard UIDevice.current.model == "iPhone" else { return .value(false) }
+        
         return activateManager().map {
             $0 != .bluetoothOff && $0 != .restricted
         }

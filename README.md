@@ -1,6 +1,6 @@
 # ProteGO Safe iOS App
 
-![Logo](./doc/images/logo.png "ProteGO Safe")
+![Logo](./ghImages/logo.png "ProteGO Safe")
 
 ## Project overview
 
@@ -10,6 +10,14 @@ This is an iOS application for [ProteGO Safe project](https://github.com/ProteGO
 
 Application is structured based MVVM-C pattern, where presentation (UI) layer is almost fully realized with a single UIViewController with a WKWebView that loads a website application called 'PWA' (Progressive Web App). PWA is responsible for GUI, user interaction and 'User daily triage' feature. Website app interacts with native code through the JavaScript bridge.
 
+App implements contact tracing module that is based on [Exposure Notification API](https://developer.apple.com/documentation/exposurenotification) (EN) and we can extract couple of features related to this:
+* [Controlling EN](Documentation/ControllingExposureNotification.md): enable/disable, check if device supports it, check what is its state
+* [Uploading Temporary Exposure Keys](Documentation/UploadingTemporaryExposureKeys.md) (TEKs) of positively diagnosed user verified by the application: authorize user for TEKs upload, get TEKs from EN, add proper verification data (using [DeviceCheck Framework](https://developer.apple.com/documentation/devicecheck)), upload data to the Cloud Server.
+* [Downloading](Documentation/DownloadingDiagnosisKeys.md) periodically files with batch of TEKs of positively diagnosed users (that recently uploaded their TEKs): execute periodic task responsible for downloading recently created .zip files (it fetches list of available files from CDN, selects only not yet analyzed files and downloads only these ones)
+* [Providing files](Documentation/ProvidingDiagnosisKeys.md) to EN API for detecting exposures: get proper configuration for risk calculation (Exposure Configuration), fire EN API with list of downloaded files and configuration, delete analyzed files
+* [Receiving information](Documentation/ReceivingExposuresInformation.md) about detected exposures: register broadcast receiver about exposures, get information about exposures, store part of information (day of exposure, risk score and duration that is in 5 minutes intervals but max 30 minutes)
+* [Reporting risk level](Documentation/ReportingRiskLevel.md) to the PWA: extract risk scores of saved exposures and calculate risk level, pass risk level to PWA
+* [Removing historical data](Documentation/RemovingHistoricalData.md): remove information about exposures older than 14 days
 
 ## Project modules
 

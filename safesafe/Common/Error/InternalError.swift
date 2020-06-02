@@ -26,6 +26,7 @@ enum InternalError: Error {
     // Files & Folders
     case locatingDictionary
     case writingToFile
+    case extractingDirectoryName
     
     // Onboarding
     case waitingForUser

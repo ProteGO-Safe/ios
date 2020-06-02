@@ -6,13 +6,10 @@ def pods_definition
   use_frameworks!
 
   pod 'SnapKit', '5.0.1'
-  pod 'Firebase/Crashlytics'
-  pod 'Firebase/Analytics'
   pod 'Firebase/Functions'
   pod 'Firebase/Messaging'
   pod 'Firebase/Auth'
   pod 'Firebase/RemoteConfig'
-  pod 'Firebase/Storage'
   pod 'PromiseKit', '~> 6.8'
   pod 'Moya', '~> 14.0'
   pod 'ZIPFoundation', '~> 0.9'

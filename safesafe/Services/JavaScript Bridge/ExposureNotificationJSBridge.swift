@@ -67,7 +67,9 @@ final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
     }
     
     func getExposureSummary() -> Promise<ExposureSummary> {
-        Promise { seal in
+        guard UIDevice.current.model == "iPhone" else { return .init(error: PMKError.cancelled) }
+        
+        return Promise { seal in
             firstly {
                 when(fulfilled: [exposureService.detectExposures()])
             }.done { _ in
@@ -97,14 +99,6 @@ final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
                 } else {
                     return .value
                 }
-        }.then { _ -> Promise<Bool> in
-            return self.exposureStatus.isBluetoothOn
-        }.then {[weak self] isOn -> Promise<Void> in
-            guard let self = self else {
-                return .init(error: InternalError.deinitialized)
-            }
-            
-            return isOn ? .value : self.showAlert(for: .bluetooth)
         }
     }
     

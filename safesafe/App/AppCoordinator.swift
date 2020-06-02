@@ -64,6 +64,8 @@ final class AppCoordinator: CoordinatorType {
         monitor.start(queue: DispatchQueue.global(qos: .background))
         
         if #available(iOS 13.5, *) {
+            // Don't register bg task on iPad devices that are not supported by EN
+            guard UIDevice.current.model == "iPhone" else { return }
             dependencyContainer.backgroundTaskService.scheduleExposureTask()
         }
     }
@@ -74,7 +76,7 @@ final class AppCoordinator: CoordinatorType {
     }
     
     private func setupDebugToolkit() {
-        #if !LIVE
+        #if !LIVE && !STAGE
         DBDebugToolkit.setup()
         #endif
     }

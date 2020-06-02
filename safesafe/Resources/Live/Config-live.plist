@@ -5,16 +5,16 @@
 	<key>EXPOSURE_NOTIFICATION</key>
 	<dict>
 		<key>EN_STORAGE_URL</key>
-		<string>gs://safesafe-app-cdn</string>
+		<string>https://exp.safesafe.app/</string>
 		<key>EN_BASE_URL</key>
-		<string>TBA</string>
+		<string>https://europe-west1-safesafe-app.cloudfunctions.net</string>
 	</dict>
 	<key>PWA</key>
 	<dict>
 		<key>SCHEME</key>
 		<string>https</string>
 		<key>HOST</key>
-		<string>safesafe.app</string>
+		<string>v4.safesafe.app</string>
 	</dict>
 </dict>
 </plist>
