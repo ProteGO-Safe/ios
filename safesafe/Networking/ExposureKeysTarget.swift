@@ -20,8 +20,10 @@ extension ExposureKeysTarget: TargetType {
         switch self {
         case .get, .download:
             return URL(string: ConfigManager.default.enStorageURL)!
-        default:
-            return URL(string: ConfigManager.default.enBaseURL)!
+        case .auth:
+            return URL(string: ConfigManager.default.enGatBaseURL)!
+        case .post:
+            return URL(string: ConfigManager.default.enUdkBaseURL)!
         }
         
     }
