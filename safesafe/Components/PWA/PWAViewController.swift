@@ -17,6 +17,9 @@ final class PWAViewController: ViewController<PWAViewModel> {
     }
     
     private var webKitView: WKWebView?
+    
+    var onAppear: (() -> Void)?
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -24,7 +27,11 @@ final class PWAViewController: ViewController<PWAViewModel> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-//        navigationController?.setStatusBar(backgroundColor: Constants.color)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        onAppear?()
     }
     
     override func start() {

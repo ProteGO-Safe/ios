@@ -39,9 +39,8 @@ final class JailbreakService: JailbreakServiceProtocol {
         
         do {
             try "jailbreak_test".write(toFile: "/private/jailbreak.txt", atomically: true, encoding: .utf8)
-        } catch {
             result = true
-        }
+        } catch { }
         
         return result
     }
