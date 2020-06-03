@@ -39,6 +39,7 @@ final class DependencyContainer {
         storageService: realmLocalStorage!
     )
     
+    lazy var jailbreakService: JailbreakServiceProtocol = JailbreakService()
     lazy var jsBridge = JSBridge(with: serviceStatusManager)
     lazy var realmLocalStorage = RealmLocalStorage()
     lazy var remoteConfiguration = RemoteConfiguration()
