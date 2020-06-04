@@ -15,6 +15,7 @@ def pods_definition
   pod 'ZIPFoundation', '~> 0.9'
   pod 'RealmSwift', '~> 5.0.0'
   pod 'KeychainAccess', '~> 4.2.0'
+  pod 'TrustKit', '~> 1.6.5'
   
   pod 'DBDebugToolkit', :configurations => ['Dev', 'DevDist', 'Stage', 'StageDebug', 'LiveDebug', 'LiveAdhoc']
 

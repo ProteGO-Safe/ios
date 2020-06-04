@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import SnapKit
+import TrustKit
 
 final class PWAViewController: ViewController<PWAViewModel> {
     
@@ -79,5 +80,10 @@ extension PWAViewController: WKNavigationDelegate {
         } else {
             decisionHandler(.allow)
         }
+    }
+    
+    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        let validator = TrustKit.sharedInstance().pinningValidator
+        validator.handle(challenge, completionHandler: completionHandler)
     }
 }

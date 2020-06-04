@@ -119,6 +119,7 @@ PODS:
   - RealmSwift (5.0.0):
     - Realm (= 5.0.0)
   - SnapKit (5.0.1)
+  - TrustKit (1.6.5)
   - ZIPFoundation (0.9.11)
 
 DEPENDENCIES:
@@ -132,6 +133,7 @@ DEPENDENCIES:
   - PromiseKit (~> 6.8)
   - RealmSwift (~> 5.0.0)
   - SnapKit (= 5.0.1)
+  - TrustKit (~> 1.6.5)
   - ZIPFoundation (~> 0.9)
 
 SPEC REPOS:
@@ -164,6 +166,7 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - SnapKit
+    - TrustKit
     - ZIPFoundation
 
 SPEC CHECKSUMS:
@@ -195,8 +198,9 @@ SPEC CHECKSUMS:
   Realm: 76066d333de26f97e9caedaa85ee3ff4a62ca265
   RealmSwift: c1bdff09b422569dc6881410d9ccf712bcdb79b0
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  TrustKit: 073855e3adecd317417bda4ac9e9ac54a2e3b9f2
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: 6c080a95149c8b9afcea72075057a8256f87afa2
+PODFILE CHECKSUM: 1ad9a7d5f7d8b0015484f9c7d0183728f81cc46e
 
 COCOAPODS: 1.9.1
