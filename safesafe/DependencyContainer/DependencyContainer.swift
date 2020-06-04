@@ -23,7 +23,7 @@ final class DependencyContainer {
     lazy var diagnosisKeysUploadService = DiagnosisKeysUploadService(
         with: exposureService,
         deviceCheckService: deviceCheckService,
-        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>()
+        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>(session: CustomSession.defaultSession())
     )
     
     @available(iOS 13.5, *)
