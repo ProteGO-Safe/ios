@@ -51,12 +51,13 @@ final class PWAViewController: ViewController<PWAViewModel> {
 
 extension PWAViewController: PWAViewModelDelegate {
     func load(url: URL) {
-        webKitView?.load(URLRequest(url: url))
+        webKitView?.load(URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData))
     }
     
     func configureWebKit(controler: WKUserContentController, completion: (WKWebView) -> Void) {
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = controler
+        configuration.websiteDataStore = WKWebsiteDataStore.default()
         let webKitView = WKWebView(frame: .zero, configuration: configuration)
         webKitView.allowsBackForwardNavigationGestures = false
         webKitView.allowsLinkPreview = false
