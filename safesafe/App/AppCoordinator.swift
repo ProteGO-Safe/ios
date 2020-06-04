@@ -21,7 +21,9 @@ final class AppCoordinator: CoordinatorType {
     private let window: UIWindow
     private let monitor = NWPathMonitor()
     private let clearData = ClearData()
+    
     private var noInternetAlert: UIAlertController?
+    private var jailbreakAlert: UIAlertController?
 
     required init() {
         fatalError("Not implemented")
@@ -72,13 +74,38 @@ final class AppCoordinator: CoordinatorType {
     
     private func makeRootViewController() -> UIViewController {
         let factory: PWAViewControllerFactory = dependencyContainer
-        return NavigationController(rootViewController: factory.makePWAViewController())
+        let viewController = factory.makePWAViewController()
+        
+        viewController.onAppear = { [weak self] in
+            if self?.dependencyContainer.jailbreakService.isJailbroken == true {
+                self?.showJailbreakAlert()
+            }
+        }
+        
+        return NavigationController(rootViewController: viewController)
     }
     
     private func setupDebugToolkit() {
         #if !LIVE && !STAGE
         DBDebugToolkit.setup()
         #endif
+    }
+    
+    private func showJailbreakAlert() {
+        let alert = UIAlertController(
+            title: nil,
+            message: """
+            Korzystasz z niezweryfikowanego urządzenia - bezpieczeństwo przesyłanych danych może być niższe. \
+            Upewnij się, że używasz najnowszej, oficjalnej wersji systemu operacyjnego i w bezpieczny sposób łączysz się z Internetem. \
+            Unikaj publicznie dostępnych sieci i korzystaj z własnej transmisji danych jeśli masz taką możliwość. \
+            Nieautoryzowane konfiguracje ustawień telefonu mogą wpłynąć na wynik działania aplikacji oraz na bezpieczeństwo Twoich danych.
+            """,
+            preferredStyle: .alert
+        )
+        alert.addAction(.init(title: "Rozumiem", style: .default))
+        self.jailbreakAlert = alert
+        
+        window.rootViewController?.present(alert, animated: true)
     }
     
     private func showInternetAlert() {
