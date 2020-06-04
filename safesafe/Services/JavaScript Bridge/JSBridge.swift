@@ -169,8 +169,6 @@ extension JSBridge: WKScriptMessageHandler {
             servicesPermissions(jsonString: jsonString, type: bridgeDataType)
         case .clearData:
             RealmLocalStorage.clearAll()
-            WebCacheCleaner.clean()
-            webView?.reload()
         default:
             console("Not managed yet", type: .warning)
         }
