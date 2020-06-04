@@ -168,6 +168,7 @@ extension JSBridge: WKScriptMessageHandler {
             currentDataType = bridgeDataType
             servicesPermissions(jsonString: jsonString, type: bridgeDataType)
         case .clearData:
+            RealmLocalStorage.clearAll()
             WebCacheCleaner.clean()
             webView?.reload()
         default:
