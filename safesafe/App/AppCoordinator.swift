@@ -16,7 +16,7 @@ import DBDebugToolkit
 
 final class AppCoordinator: CoordinatorType {
     
-    private let dependencyContainer = DependencyContainer()
+    private let dependencyContainer: DependencyContainer
     private let appManager = AppManager.instance
     private let window: UIWindow
     private let monitor = NWPathMonitor()
@@ -29,7 +29,8 @@ final class AppCoordinator: CoordinatorType {
         fatalError("Not implemented")
     }
     
-    init?(appWindow: UIWindow?) {
+    init?(appWindow: UIWindow?, dependencyContainer: DependencyContainer) {
+        self.dependencyContainer = dependencyContainer
         RealmLocalStorage.setupEncryption()
         
         guard let window = appWindow else {
