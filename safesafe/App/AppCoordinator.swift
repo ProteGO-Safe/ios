@@ -9,6 +9,7 @@
 import Firebase
 import UIKit
 import Network
+import Siren
 
 #if !LIVE
 import DBDebugToolkit
@@ -51,6 +52,8 @@ final class AppCoordinator: CoordinatorType {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         
+        updateReminder()
+        
         if #available(iOS 13.5, *) {
             configureJSBridge(with: rootViewController)
         }
@@ -71,6 +74,16 @@ final class AppCoordinator: CoordinatorType {
             guard UIDevice.current.model == "iPhone" else { return }
             dependencyContainer.backgroundTaskService.scheduleExposureTask()
         }
+    }
+    
+    private func updateReminder() {
+        let siren = Siren.shared
+        siren.rulesManager = RulesManager(globalRules: .annoying)
+        siren.presentationManager = PresentationManager(
+            alertMessage: "Dostępna jest nowsza wersja aplikacji. Zaktualizuj aplikację ProteGO Safe aby korzystać z pełni funkcjonalności.",
+            forceLanguageLocalization: .polish
+        )
+        siren.wail()
     }
     
     private func makeRootViewController() -> UIViewController {

@@ -118,6 +118,7 @@ PODS:
   - Realm/Headers (5.0.0)
   - RealmSwift (5.0.0):
     - Realm (= 5.0.0)
+  - Siren (5.4.0)
   - SnapKit (5.0.1)
   - TrustKit (1.6.5)
   - ZIPFoundation (0.9.11)
@@ -132,6 +133,7 @@ DEPENDENCIES:
   - Moya (~> 14.0)
   - PromiseKit (~> 6.8)
   - RealmSwift (~> 5.0.0)
+  - Siren (~> 5.4.0)
   - SnapKit (= 5.0.1)
   - TrustKit (~> 1.6.5)
   - ZIPFoundation (~> 0.9)
@@ -165,6 +167,7 @@ SPEC REPOS:
     - Protobuf
     - Realm
     - RealmSwift
+    - Siren
     - SnapKit
     - TrustKit
     - ZIPFoundation
@@ -197,10 +200,11 @@ SPEC CHECKSUMS:
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
   Realm: 76066d333de26f97e9caedaa85ee3ff4a62ca265
   RealmSwift: c1bdff09b422569dc6881410d9ccf712bcdb79b0
+  Siren: 9df16ed5278cfaad7ea034f3d2206e4f6983e9b8
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   TrustKit: 073855e3adecd317417bda4ac9e9ac54a2e3b9f2
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: 1ad9a7d5f7d8b0015484f9c7d0183728f81cc46e
+PODFILE CHECKSUM: 51b2b0c4aaf61fa0170cd61ac17eb242efc134fa
 
 COCOAPODS: 1.9.1
