@@ -83,6 +83,7 @@
 	<array>
 		<string>armv7</string>
 		<string>bluetooth-le</string>
+		<string>telephony</string>
 	</array>
 	<key>UIStatusBarHidden</key>
 	<false/>
