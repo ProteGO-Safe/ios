@@ -149,12 +149,13 @@ final class ExposureService: ExposureServiceProtocol {
     
     private func detectExposures(for configuration: ENExposureConfiguration, keys: [URL]) -> Promise<ENExposureDetectionSummary> {
         Promise { seal in
-            exposureManager.detectExposures(configuration: configuration, diagnosisKeyURLs: keys) { summary, error in
+            exposureManager.detectExposures(configuration: configuration, diagnosisKeyURLs: keys) { [weak self] summary, error in
                 guard let summary = summary, error == nil else {
                     seal.reject(error!)
                     return
                 }
                 seal.fulfill(summary)
+                self?.diagnosisKeysService.deleteFiles()
             }
         }
     }

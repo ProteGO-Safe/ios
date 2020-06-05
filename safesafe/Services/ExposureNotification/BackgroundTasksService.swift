@@ -25,7 +25,6 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
     
     init(exposureService: ExposureServiceProtocol) {
         self.exposureService = exposureService
-        registerExposureTask()
     }
     
     // MARK: - Public methods
@@ -47,7 +46,7 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
     
     // MARK: - Private methods
     
-    private func registerExposureTask() {
+    func registerExposureTask() {
         BGTaskScheduler.shared.register(forTaskWithIdentifier: backgroundTaskID, using: .main) { [weak self] task in
             task.expirationHandler = {
                 console("Task timed out", type: .warning)

@@ -5,6 +5,7 @@
 
 import ExposureNotification
 import Moya
+import FirebaseRemoteConfig
 
 final class DependencyContainer {
     
@@ -42,7 +43,12 @@ final class DependencyContainer {
     lazy var jailbreakService: JailbreakServiceProtocol = JailbreakService()
     lazy var jsBridge = JSBridge(with: serviceStatusManager)
     lazy var realmLocalStorage = RealmLocalStorage()
-    lazy var remoteConfiguration = RemoteConfiguration()
+    lazy var remoteConfigSetting: RemoteConfigSettings = {
+        let settings = RemoteConfigSettings()
+        settings.fetchTimeout = 10
+        return settings
+    }()
+    lazy var remoteConfiguration = RemoteConfiguration(settings: remoteConfigSetting)
     
     lazy var serviceStatusManager: ServiceStatusManagerProtocol = {
         if #available(iOS 13.5, *) {

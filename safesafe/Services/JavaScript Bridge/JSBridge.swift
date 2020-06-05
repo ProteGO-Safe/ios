@@ -20,7 +20,7 @@ final class JSBridge: NSObject {
         case notificationsPermission = 35
         case serviceStatus = 51
         case setServices = 52
-        case clearBluetoothData = 37
+        case clearData = 37
         case uploadTemporaryExposureKeys = 43
         case exposureList = 61
     }
@@ -167,6 +167,8 @@ extension JSBridge: WKScriptMessageHandler {
         case .setServices:
             currentDataType = bridgeDataType
             servicesPermissions(jsonString: jsonString, type: bridgeDataType)
+        case .clearData:
+            RealmLocalStorage.clearAll()
         default:
             console("Not managed yet", type: .warning)
         }

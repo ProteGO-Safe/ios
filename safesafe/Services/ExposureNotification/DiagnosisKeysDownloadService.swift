@@ -113,6 +113,7 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
             let unzipDestinationURL = try Directory.getDiagnosisKeysURL().appendingPathComponent(directoryName)
             
             try FileManager.default.unzipItem(at: temporaryURL, to: unzipDestinationURL)
+            renameAll(directoryName, dirPath: unzipDestinationURL)
             console("Diagnosis Key files saved to: \(unzipDestinationURL)")
             
         } catch {
@@ -120,6 +121,18 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
         }
         
         return(temporaryDirectory, [.removePreviousFile])
+    }
+    
+    private func renameAll(_ filename: String, dirPath: URL) {
+        do {
+            for file in try fileManager.contentsOfDirectory(atPath: dirPath.path) {
+                let originalPath = dirPath.appendingPathComponent(file)
+                let newPath = dirPath.appendingPathComponent("\(filename).\(originalPath.pathExtension)")
+                try fileManager.moveItem(at: originalPath, to: newPath)
+            }
+        } catch {
+            console(error, type: .error)
+        }
     }
     
     private func filter(keyFileNames: [Substring]) -> [String] {

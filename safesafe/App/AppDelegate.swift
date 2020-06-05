@@ -17,15 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     private var appCoordinator: AppCoordinator?
+    let dependencyContainer = DependencyContainer()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         if #available(iOS 13.0, *) {} else {
             window = UIWindow(frame: UIScreen.main.bounds)
-            appCoordinator = AppCoordinator(appWindow: window)
+            appCoordinator = AppCoordinator(appWindow: window, dependencyContainer: dependencyContainer)
             appCoordinator?.start()
         }
         
+        if #available(iOS 13.5, *) {
+            dependencyContainer.backgroundTaskService.registerExposureTask()
+        }
         StoredDefaults.standard.set(value: true, key: .isFirstRun)
         
         return true
