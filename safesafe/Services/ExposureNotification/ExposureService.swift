@@ -34,7 +34,7 @@ final class ExposureService: ExposureServiceProtocol {
     private let exposureManager: ENManager
     private let diagnosisKeysService: DiagnosisKeysDownloadServiceProtocol
     private let configurationService: RemoteConfigProtocol
-    private let storageService: LocalStorageProtocol
+    private let storageService: LocalStorageProtocol?
     
     private var isCurrentlyDetectingExposures = false
     
@@ -52,7 +52,7 @@ final class ExposureService: ExposureServiceProtocol {
         exposureManager: ENManager,
         diagnosisKeysService: DiagnosisKeysDownloadServiceProtocol,
         configurationService: RemoteConfigProtocol,
-        storageService: LocalStorageProtocol
+        storageService: LocalStorageProtocol?
     ) {
         self.exposureManager = exposureManager
         self.diagnosisKeysService = diagnosisKeysService
@@ -132,7 +132,7 @@ final class ExposureService: ExposureServiceProtocol {
             .done { summary in
                 self.getExposureInfo(from: summary)
                     .done {
-                        self.storageService.append($0)
+                        self.storageService?.append($0)
                         seal.fulfill($0)
                     }
                     .catch {
