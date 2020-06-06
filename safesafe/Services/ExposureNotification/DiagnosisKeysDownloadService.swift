@@ -88,6 +88,11 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                     switch result {
                     case let .success(urls):
                         fileURLs.append(contentsOf: urls)
+                    /*
+                         Discussion:
+                         there is some small possibility, that one or more entries in CDN //index.txt could be "dead link". It was therfore considered that in this kind of situation we omit `.failure` case and continue urls collecting.
+                         That's because current code configuration will not analyze Diagnosis Keys in case of `.failure`. It's not perfect solution but we decided that is least dangerous in  case of analyze of Diagnosis Keys.
+                    */
                     case .failure: continue
                     }
                 }
