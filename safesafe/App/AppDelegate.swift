@@ -64,7 +64,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         NotificationManager.shared.clearBadgeNumber()
-        
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        HiderController.shared.show()
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        HiderController.shared.hide()
     }
 }
 
