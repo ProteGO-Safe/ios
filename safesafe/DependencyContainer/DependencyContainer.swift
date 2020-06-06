@@ -32,12 +32,12 @@ final class DependencyContainer {
         exposureManager: ENManager(),
         diagnosisKeysService: diagnosisKeysDownloadService,
         configurationService: remoteConfiguration,
-        storageService: realmLocalStorage!
+        storageService: realmLocalStorage
     )
     
     @available(iOS 13.5, *)
     lazy var exposureSummaryService: ExposureSummaryServiceProtocol = ExposureSummaryService(
-        storageService: realmLocalStorage!
+        storageService: realmLocalStorage
     )
     
     lazy var jailbreakService: JailbreakServiceProtocol = JailbreakService()

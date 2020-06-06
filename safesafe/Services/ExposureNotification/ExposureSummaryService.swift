@@ -22,11 +22,11 @@ final class ExposureSummaryService: ExposureSummaryServiceProtocol {
     
     // MARK: - Properties
     
-    private let storageService: LocalStorageProtocol
+    private let storageService: LocalStorageProtocol?
     
     // MARK: - Lice Cycle
     
-    init(storageService: LocalStorageProtocol) {
+    init(storageService: LocalStorageProtocol?) {
         self.storageService = storageService
     }
     
@@ -50,8 +50,7 @@ final class ExposureSummaryService: ExposureSummaryServiceProtocol {
     /// Removes expired data from local storage.
     /// Returns exposures sorted by timestamp.
     private func getSanitizedExposures() -> [Exposure] {
-        var exposures: [Exposure] = storageService.fetch()
-            .sorted(by: { $0.date < $1.date })
+        var exposures: [Exposure] = (storageService?.fetch() ?? []).sorted(by: { $0.date < $1.date })
 
         let expirationBoundary = Date(timeIntervalSince1970: Date().timeIntervalSince1970 - Double(Constants.dataExpirationSeconds))
         var expiredExposures = [Exposure]()
@@ -62,7 +61,7 @@ final class ExposureSummaryService: ExposureSummaryServiceProtocol {
                 expiredExposures.append(exposure)
             }
         }
-        storageService.remove(expiredExposures, completion: nil)
+        storageService?.remove(expiredExposures, completion: nil)
 
         return exposures
     }

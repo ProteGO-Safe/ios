@@ -6,7 +6,6 @@
 //  Copyright © 2020 Lukasz szyszkowski. All rights reserved.
 //
 
-import Firebase
 import UIKit
 import Network
 import Siren
@@ -44,7 +43,6 @@ final class AppCoordinator: CoordinatorType {
     
     func start() {
         setupDebugToolkit()
-        FirebaseApp.configure()
         clearData.clear()
         
         let rootViewController = makeRootViewController()

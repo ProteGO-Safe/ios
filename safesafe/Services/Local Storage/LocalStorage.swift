@@ -36,8 +36,11 @@ final class RealmLocalStorage: LocalStorageProtocol {
     private let realm: Realm
     
     required init?(_ realm: Realm? = nil) {
-        do { self.realm = try realm ?? Realm(configuration: RealmLocalStorage.defaultConfiguration()) }
-        catch { return nil }
+        do {
+            self.realm = try realm ?? Realm(configuration: RealmLocalStorage.defaultConfiguration())
+        } catch {
+            return nil
+        }
     }
     
     func append<T: LocalStorable>(_ object: T, completion: ((Result<Void, Error>) -> ())? = nil) {

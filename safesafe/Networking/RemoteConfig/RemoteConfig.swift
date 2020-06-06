@@ -21,13 +21,10 @@ final class RemoteConfiguration: RemoteConfigProtocol {
     }
         
     private let decoder = JSONDecoder()
-    private let remoteConfig: RemoteConfig
+    private let settings: RemoteConfigSettings?
     
     init(settings: RemoteConfigSettings? = nil) {
-        self.remoteConfig = RemoteConfig.remoteConfig()
-        if let settings = settings {
-            self.remoteConfig.configSettings = settings
-        }
+        self.settings = settings
     }
     
     func configuration() -> Promise<RemoteConfigurationResponse> {
@@ -46,8 +43,11 @@ final class RemoteConfiguration: RemoteConfigProtocol {
     }
     
     private func fetchConfiguration() -> Promise<RemoteConfigurationResponse> {
+        if let settings = settings {
+            RemoteConfig.remoteConfig().configSettings = settings
+        }
         return Promise { seal in
-                   remoteConfig.fetchAndActivate { [weak self] status, error in
+                   RemoteConfig.remoteConfig().fetchAndActivate { [weak self] status, error in
                        guard let self = self else {
                            seal.reject(InternalError.deinitialized)
                            return
@@ -76,7 +76,7 @@ final class RemoteConfiguration: RemoteConfigProtocol {
     }
     
   private func decodeConfiguartion<T: Decodable>(key: Key) throws -> T {
-        guard let jsonValue = remoteConfig[key.rawValue].jsonValue else {
+        guard let jsonValue = RemoteConfig.remoteConfig()[key.rawValue].jsonValue else {
             throw InternalError.remoteConfigNotExistingKey
         }
         let data = try JSONSerialization.data(withJSONObject: jsonValue, options: [])

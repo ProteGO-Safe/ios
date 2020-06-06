@@ -88,10 +88,12 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                     switch result {
                     case let .success(urls):
                         fileURLs.append(contentsOf: urls)
-                        
-                    case let .failure(error):
-                        seal.reject(error)
-                        return
+                    /*
+                         Discussion:
+                         there is some small possibility, that one or more entries in CDN //index.txt could be "dead link". It was therfore considered that in this kind of situation we omit `.failure` case and continue urls collecting.
+                         That's because current code configuration will not analyze Diagnosis Keys in case of `.failure`. It's not perfect solution but we decided that is least dangerous in  case of analyze of Diagnosis Keys.
+                    */
+                    case .failure: continue
                     }
                 }
                 
@@ -104,9 +106,10 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
         guard
             let suggestedFilename = response.suggestedFilename,
             let directoryName = DiagnosisKeysDownloadService.extractTimestamp(name: suggestedFilename),
-            let temporaryDirectory = try? Directory.getDiagnosisKeysTempURL()
+            let temporaryDirectory = try? Directory.getDiagnosisKeysTempURL(),
+            (200...299).contains(response.statusCode)
         else {
-            return(temporaryURL, [])
+            return(temporaryURL, [.removePreviousFile])
         }
         
         do {
@@ -189,18 +192,22 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                     }
                     
                     let itemNames = self.filter(keyFileNames: filesList)
-                    let timestamps = itemNames
-                        .compactMap(Self.extractTimestamp)
-                        .compactMap(Int.init)
-                        .sorted()
-                    
-                    guard let lastTimestamp = timestamps.last, !itemNames.isEmpty else {
+                    guard !itemNames.isEmpty else {
                         seal.reject(PMKError.cancelled)
                         return
                     }
                     
                     self.downloadFiles(withNames: itemNames, keysDirectoryURL: keysDirectoryURL).done { urls in
-                        StoredDefaults.standard.set(value: lastTimestamp, key: .diagnosisKeysDownloadTimestamp)
+                        let timestamps =  urls.map { $0.lastPathComponent }
+                            .compactMap { $0.split(separator: ".").first }
+                            .map { String($0) }
+                            .compactMap(Int.init)
+                            .sorted()
+                        
+                        if let lastTimestamp = timestamps.last {
+                            StoredDefaults.standard.set(value: lastTimestamp, key: .diagnosisKeysDownloadTimestamp)
+                        }
+    
                         seal.fulfill(urls)
                     }.catch {
                         seal.reject($0)
