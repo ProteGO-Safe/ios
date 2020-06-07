@@ -217,7 +217,7 @@ private extension JSBridge {
     }
     
     func serviceStatusGetBridgeDataResponse(requestID: String) {
-        serviceStatusManager.serviceStatusJson
+        serviceStatusManager.serviceStatusJson(delay: .zero)
             .done { [weak self] json in
                 self?.bridgeDataResponse(type: .serviceStatus, body: json, requestId: requestID) { _ ,error in
                     if let error = error {
@@ -350,7 +350,7 @@ private extension JSBridge {
 
     
     func sendAppStateJSON(type: BridgeDataType) {
-        serviceStatusManager.serviceStatusJson
+        serviceStatusManager.serviceStatusJson(delay: .zero)
             .done { json in
                 console(json)
                 self.onBridgeData(type: type, body: json)
@@ -387,6 +387,7 @@ private extension JSBridge {
     }
     
     @objc func applicationWillEnterForeground(notification: Notification) {
+        sendAppStateJSON(type: .serviceStatus)
         guard let json = ApplicationLifecycleResponse(appicationState: .willEnterForeground).jsonString else {  return }
         onBridgeData(type: .applicationLifecycle, body: json)
     }
