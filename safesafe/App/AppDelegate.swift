@@ -23,15 +23,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
+        if #available(iOS 13.5, *) {
+            dependencyContainer.backgroundTaskService.registerExposureTask()
+        }
+        
         if #available(iOS 13.0, *) {} else {
             window = UIWindow(frame: UIScreen.main.bounds)
             appCoordinator = AppCoordinator(appWindow: window, dependencyContainer: dependencyContainer)
             appCoordinator?.start()
         }
         
-        if #available(iOS 13.5, *) {
-            dependencyContainer.backgroundTaskService.registerExposureTask()
-        }
         StoredDefaults.standard.set(value: true, key: .isFirstRun)
         
         return true
