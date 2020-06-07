@@ -365,36 +365,3 @@ private extension JSBridge {
     
     
 }
-
-// MARK: - App Lifecycle Notifications
-
-private extension JSBridge {
-    
-    func registerForAppLifecycleNotifications() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(applicationWillEnterForeground),
-            name: UIApplication.willEnterForegroundNotification,
-            object: nil
-        )
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(applicationDidEnterBackground),
-            name: UIApplication.didEnterBackgroundNotification,
-            object: nil
-        )
-    }
-    
-    @objc func applicationWillEnterForeground(notification: Notification) {
-        sendAppStateJSON(type: .serviceStatus)
-        guard let json = ApplicationLifecycleResponse(appicationState: .willEnterForeground).jsonString else {  return }
-        onBridgeData(type: .applicationLifecycle, body: json)
-    }
-    
-    @objc func applicationDidEnterBackground(notification: Notification) {
-        guard let json = ApplicationLifecycleResponse(appicationState: .didEnterBackground).jsonString else {  return }
-        onBridgeData(type: .applicationLifecycle, body: json)
-    }
-    
-}
