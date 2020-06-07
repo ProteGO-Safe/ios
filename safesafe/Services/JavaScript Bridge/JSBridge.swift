@@ -74,7 +74,6 @@ final class JSBridge: NSObject {
         self.serviceStatusManager = serviceStatusManager
         super.init()
         
-        
         registerForAppLifecycleNotifications()
     }
     
@@ -363,5 +362,20 @@ private extension JSBridge {
         }
     }
     
+}
+
+private extension JSBridge {
     
+    func registerForAppLifecycleNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applicationWillEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
+    }
+    
+    @objc func applicationWillEnterForeground(notification: Notification) {
+        sendAppStateJSON(type: .serviceStatus)
+    }
 }
