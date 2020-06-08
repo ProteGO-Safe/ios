@@ -7,19 +7,19 @@
 //
 
 import Foundation
-import CoreBluetooth
 import PromiseKit
 
 final class Permissions {
     
     static let instance = Permissions()
     
-    private let bluetooth: PermissionType = BluetoothPermission()
     private let notifications: PermissionType = NotificationsPermission()
+    private let exposureNotifiaction: PermissionType = ExposureNotificationPermission()
     
     enum Permission {
-        case bluetooth
         case notifications
+        case exposureNotification
+        case bluetooth
     }
     
     enum State {
@@ -33,8 +33,9 @@ final class Permissions {
     enum AlertAction {
         case cancel
         case settings
+        case skip
     }
-        
+    
     private init() {}
     
     
@@ -45,10 +46,11 @@ final class Permissions {
     /// Default value is `false`
     func state(for permission: Permission, shouldAsk: Bool = false) -> Promise<State> {
         switch permission {
-        case .bluetooth:
-            return bluetooth.state(shouldAsk: shouldAsk)
         case .notifications:
             return notifications.state(shouldAsk: shouldAsk)
+        case .exposureNotification:
+            return exposureNotifiaction.state(shouldAsk: shouldAsk)
+        default: return .value(.unknown)
         }
     }
     
@@ -79,12 +81,52 @@ final class Permissions {
         }
     }
     
+    func choiceAlert(for permission: Permission, on viewController: UIViewController) -> Promise<AlertAction> {
+        return Promise { seal in
+            let (title, body) = self.choiceAlertCopy(for: permission)
+            let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Pomiń", style: .cancel) { _ in
+                seal.fulfill(.skip)
+            }
+            let settingsAction = UIAlertAction(title: "Ustawienia", style: .default) { _ in
+                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                    return seal.fulfill(.settings)
+                }
+                
+                if UIApplication.shared.canOpenURL(settingsUrl) {
+                    UIApplication.shared.open(settingsUrl, completionHandler: nil)
+                }
+                
+                seal.fulfill(.settings)
+            }
+            alert.addAction(cancelAction)
+            alert.addAction(settingsAction)
+            
+            DispatchQueue.main.async {
+                viewController.present(alert, animated: true)
+            }
+        }
+    }
+   
+    private func choiceAlertCopy(for permission: Permission) -> (title: String, body: String) {
+        switch permission {
+        case .exposureNotification:
+            return (title: "Moduł monitorowania ryzyka", body: "Moduł monitorowania ryzyka jest wyłączony. Przejdź do ustawień, żeby go włączyć. Po włączeniu aplikacja poinformuje Cię jeżeli wykryje ryzyko kontaktu z osoba chora na COVID-19.")
+        case .bluetooth:
+            return (title: "Moduł Bluetooth", body: "Moduł bluetooth potrzebny do działania Modułu monitorowania ryzyka jest wyłączony. Przejdź do ustawień, aby go włączyć.")
+        default:
+            return (title: "", body: "")
+        }
+    }
+    
     private func alertCopy(for permission: Permission) -> (title: String, body: String) {
         switch permission {
-        case .bluetooth:
-            return (title: "Włącz bluetooth", body: "Korzystając z modułu Bluetooth dbasz o siebie i bliskich. Włącz go w ustawieniach, żeby aplikacja mogła ostrzegać Cię o zagrożeniach.")
         case .notifications:
             return (title: "Włącz powiadomienia", body: "Do prawidłowego działania aplikacji potrzebna jest Twoja zgoda na wyświetlanie powiadomień. Włącz powiadomienia i pozwól ProteGO Safe wspierać ochronę zdrowia każdego z nas.")
+        case .exposureNotification:
+            return (title: "COVID TITLE", body: "COVID MESSAGE")
+        case .bluetooth:
+            return (title: "BLUETOOTH TITLE", body: "BLUETOOTH MESSAGE")
         }
     }
 }

@@ -13,6 +13,7 @@ enum InternalError: Error {
     // Common
     case deinitialized
     case nilValue
+    case timeout
     
     // Login
     case signInFailed
@@ -20,14 +21,29 @@ enum InternalError: Error {
     // AppManagerStatus
     case serializationFailed
     
-    // Database
-    case databaseFetchingRecords
-    case databaseFetchingEvents
-    
     // JSON
     case jsonSerializingData
     
     // Files & Folders
     case locatingDictionary
     case writingToFile
+    case extractingDirectoryName
+    
+    // Onboarding
+    case waitingForUser
+    case notManagableYet
+    
+    // DeviceCheck
+    case deviceCheckTokenGenerationFailed
+    
+    // Remote config
+    case remoteConfigNotExistingKey
+    case remoteActivate
+    case remoteUnknownStatus
+    
+    // Type casting
+    case invalidDataType
+    
+    // Keychain
+    case keychainKeyNotExists
 }

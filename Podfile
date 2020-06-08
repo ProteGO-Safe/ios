@@ -6,14 +6,19 @@ def pods_definition
   use_frameworks!
 
   pod 'SnapKit', '5.0.1'
-  pod 'Firebase/Crashlytics'
-  pod 'Firebase/Analytics'
   pod 'Firebase/Functions'
   pod 'Firebase/Messaging'
   pod 'Firebase/Auth'
+  pod 'Firebase/RemoteConfig'
   pod 'PromiseKit', '~> 6.8'
+  pod 'Moya', '~> 14.0'
+  pod 'ZIPFoundation', '~> 0.9'
+  pod 'RealmSwift', '~> 5.0.0'
+  pod 'KeychainAccess', '~> 4.2.0'
+  pod 'TrustKit', '~> 1.6.5'
+  pod 'Siren', '~> 5.4.0'
   
-  pod 'DBDebugToolkit', :configurations => ['Dev', 'Stage', 'StageDebug', 'LiveDebug']
+  pod 'DBDebugToolkit', :configurations => ['Dev', 'DevDist', 'Stage', 'StageDebug', 'LiveDebug', 'LiveAdhoc']
 
 end
 

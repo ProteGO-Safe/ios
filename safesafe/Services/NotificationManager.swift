@@ -15,7 +15,6 @@ import PromiseKit
 protocol NotificationManagerProtocol {
     func registerForRemoteNotifications() -> Guarantee<Bool>
     func currentStatus() -> Guarantee<UNAuthorizationStatus>
-    func configure()
     func clearBadgeNumber()
     func update(token: Data)
     func unsubscribeFromDailyTopic(timestamp: TimeInterval)
@@ -55,6 +54,10 @@ final class NotificationManager: NSObject {
                 return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
                 #elseif STAGE
                 return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
+                #elseif LIVE_ADHOC
+                return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
+                #elseif LIVE_DEBUG
+                return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
                 #elseif LIVE
                 return [Topic.generalPrefix]
                 #endif
@@ -75,6 +78,12 @@ final class NotificationManager: NSObject {
                 }
                 let formatted = dateFormatter.string(from: date)
                 #if DEV
+                topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
+                #elseif STAGE
+                topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
+                #elseif LIVE_ADHOC
+                topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
+                #elseif LIVE_DEBUG
                 topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
                 #elseif LIVE
                 topics.append("\(Topic.dailyPrefix)\(formatted)")
@@ -126,10 +135,6 @@ extension NotificationManager: NotificationManagerProtocol {
         }
     }
     
-    func configure() {
-        FirebaseApp.configure()
-    }
-    
     func update(token: Data) {
         Messaging.messaging().apnsToken = token
         subscribeTopics()
@@ -149,6 +154,10 @@ extension NotificationManager: NotificationManagerProtocol {
         #if DEV
         let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
         #elseif STAGE
+        let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
+        #elseif LIVE_ADHOC
+        let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
+        #elseif LIVE_DEBUG
         let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
         #elseif LIVE
         let topic = "\(Topic.dailyPrefix)\(formatted)"

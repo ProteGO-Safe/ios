@@ -8,6 +8,7 @@
 
 import UIKit
 import Network
+import Siren
 
 #if !LIVE
 import DBDebugToolkit
@@ -15,71 +16,108 @@ import DBDebugToolkit
 
 final class AppCoordinator: CoordinatorType {
     
+    private let dependencyContainer: DependencyContainer
     private let appManager = AppManager.instance
     private let window: UIWindow
     private let monitor = NWPathMonitor()
+    private let clearData = ClearData()
+    
     private var noInternetAlert: UIAlertController?
-    private let pogoMM: PogoMotionManager
-    
-    deinit {
-        removeUIApplicationObservers()
-    }
-    
+    private var jailbreakAlert: UIAlertController?
+
     required init() {
         fatalError("Not implemented")
     }
     
-    init?(appWindow: UIWindow?) {
+    init?(appWindow: UIWindow?, dependencyContainer: DependencyContainer) {
+        self.dependencyContainer = dependencyContainer
+        RealmLocalStorage.setupEncryption()
+        
         guard let window = appWindow else {
             fatalError("Window doesn't exists")
         }
         
         UIApplication.shared.isIdleTimerDisabled = true
-        pogoMM = PogoMotionManager(window: window)
         self.window = window
     }
     
     func start() {
         setupDebugToolkit()
+        clearData.clear()
         
+        let rootViewController = makeRootViewController()
         window.backgroundColor = .white
-        window.rootViewController = pwa()
+        window.rootViewController = rootViewController
         window.makeKeyAndVisible()
+        
+        updateReminder()
+        
+        if #available(iOS 13.5, *) {
+            configureJSBridge(with: rootViewController)
+        }
         
         monitor.pathUpdateHandler = { [weak self] path in
             DispatchQueue.main.async {
                 if path.status == .satisfied {
                     self?.noInternetAlert?.dismiss(animated: false)
-                    self?.startBluetraceIfNeeded()
-                    self?.signInIfNeeded()
                 } else {
                     self?.showInternetAlert()
                 }
             }
         }
         monitor.start(queue: DispatchQueue.global(qos: .background))
-        addUIApplicationObservers()
-    }
-    
-    private func pwa() -> UIViewController {
-        let viewModel = PWAViewModel()
-        let navigationController = NavigationController(rootViewController: PWAViewController(viewModel: viewModel))
-        return navigationController
-    }
-    
-    private func startBluetraceIfNeeded() {
-        guard appManager.isBluetraceAllowed else { return }
         
-        BluetraceManager.shared.turnOn()
-        EncounterMessageManager.shared.authSetup()
+        if #available(iOS 13.5, *) {
+            // Don't register bg task on iPad devices that are not supported by EN
+            guard UIDevice.current.model == "iPhone" else { return }
+            dependencyContainer.backgroundTaskService.scheduleExposureTask()
+        }
     }
     
-    private func signInIfNeeded() {
-        LoginManager().signIn { result in
-            if case let .failure(error) = result {
-                console(error, type: .error)
+    private func updateReminder() {
+        let siren = Siren.shared
+        siren.rulesManager = RulesManager(globalRules: .annoying)
+        siren.presentationManager = PresentationManager(
+            alertMessage: "Dostępna jest nowsza wersja aplikacji. Zaktualizuj aplikację ProteGO Safe aby korzystać z pełni funkcjonalności.",
+            forceLanguageLocalization: .polish
+        )
+        siren.wail()
+    }
+    
+    private func makeRootViewController() -> UIViewController {
+        let factory: PWAViewControllerFactory = dependencyContainer
+        let viewController = factory.makePWAViewController()
+        
+        viewController.onAppear = { [weak self] in
+            if self?.dependencyContainer.jailbreakService.isJailbroken == true {
+                self?.showJailbreakAlert()
             }
         }
+        
+        return NavigationController(rootViewController: viewController)
+    }
+    
+    private func setupDebugToolkit() {
+        #if !LIVE && !STAGE
+        DBDebugToolkit.setup()
+        #endif
+    }
+    
+    private func showJailbreakAlert() {
+        let alert = UIAlertController(
+            title: nil,
+            message: """
+            Korzystasz z niezweryfikowanego urządzenia - bezpieczeństwo przesyłanych danych może być niższe. \
+            Upewnij się, że używasz najnowszej, oficjalnej wersji systemu operacyjnego i w bezpieczny sposób łączysz się z Internetem. \
+            Unikaj publicznie dostępnych sieci i korzystaj z własnej transmisji danych jeśli masz taką możliwość. \
+            Nieautoryzowane konfiguracje ustawień telefonu mogą wpłynąć na wynik działania aplikacji oraz na bezpieczeństwo Twoich danych.
+            """,
+            preferredStyle: .alert
+        )
+        alert.addAction(.init(title: "Rozumiem", style: .default))
+        self.jailbreakAlert = alert
+        
+        window.rootViewController?.present(alert, animated: true)
     }
     
     private func showInternetAlert() {
@@ -91,41 +129,14 @@ final class AppCoordinator: CoordinatorType {
         self.noInternetAlert = noInternetAlert
     }
     
-    private func addUIApplicationObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(appicationDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillTerminate), name: UIApplication.willTerminateNotification, object: nil)
+    @available(iOS 13.5, *)
+    private func configureJSBridge(with viewController: UIViewController) {
+        let factory: ExposureNotificationJSBridgeFactory = dependencyContainer
+        
+        dependencyContainer.jsBridge.registerExposureNotification(
+            with: factory.makeExposureNotificationJSBridge(with: viewController),
+            diagnosisKeysUploadService: dependencyContainer.diagnosisKeysUploadService
+        )
     }
     
-    private func removeUIApplicationObservers() {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    private func setupDebugToolkit() {
-        #if !LIVE        
-        DBDebugToolkit.setup()
-        DBDebugToolkit.add(DBCustomActionFactory.makeBluetraceDBDumpAction(window: window))
-        #endif
-    }
-    
-    @objc
-    private func applicationDidBecomeActive(notification: Notification) {
-        pogoMM.startAccelerometerUpdates()
-    }
-    
-    @objc
-    private func appicationDidEnterBackground(notification: Notification) {
-        pogoMM.stopAllMotion()
-    }
-    
-    @objc
-    private func applicationWillEnterForeground(notification: Notification) {
-        pogoMM.stopAllMotion()
-    }
-    
-    @objc
-    private func applicationWillTerminate(notification: Notification) {
-        pogoMM.stopAllMotion()
-    }
 }

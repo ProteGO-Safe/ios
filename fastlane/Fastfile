@@ -1,0 +1,85 @@
+require 'yaml'
+
+before_all do |lane, options|
+  ENV["PROJECT_YML"] = "project.yml"
+  ENV["PROJECT"] = "safesafe.xcodeproj"
+  ENV["PRODUCT_NAME"] = "ProteGO Safe"
+  ENV["OUTPUT_DIR"] = "build/"
+end
+
+lane :adhocs do |options|
+	stage_adhoc(options)
+	dev_adhoc(options)
+end
+
+lane :stage_adhoc do |options|
+	build_adhoc(configuration_name: "Stage", scheme_name: "safesafe Stage", name_suffix: "Stage", firebase_distribution: true, version_bump:options[:version_bump])
+end
+
+lane :dev_adhoc do |options|
+	build_adhoc(configuration_name: "Dev", scheme_name: "safesafe Dev", name_suffix: "Dev-DebugConsole", firebase_distribution: true, version_bump:options[:version_bump])
+end
+
+# Private lanes
+
+private_lane :build_adhoc do |options|
+	xcodegen(
+		spec: ENV["PROJECT_YML"]
+	)
+	cocoapods
+
+	# This version bumping works only for local projects, don't use it on CI/CD
+	#
+	if options[:version_bump]
+		increment_build_number(
+			build_number: bump_build_number
+		)
+	end
+
+	build_app(
+		scheme: options[:scheme_name],
+		configuration: options[:configuration_name],
+		output_name: filename(name_suffix: options[:name_suffix], configuration: options[:configuration_name]),
+		output_directory: "#{ENV["OUTPUT_DIR"]}#{options[:configuration_name]}", 
+		destination: "generic/platform=iOS",
+		export_options: {
+			method: "ad-hoc",
+			provisioningProfiles: {
+				"se.sigmaconnectivity.protegosafe" => "protegosafe-adhoc",
+				"pl.gov.mc.protegosafe" => "protegosafe-adhoc",
+				"pl.gov.mc.protegosafe-staging" => "protegosafe-staging-adhoc"
+			}
+		}
+	)
+	if options[:firebase_distribution]
+		secrets = secrets(configuration: options[:configuration_name])
+		firebase_app_distribution(
+			app: secrets["firebase"]["app_id"],
+			testers: secrets["firebase"]["testers"]
+		)
+	end
+end
+
+private_lane :secrets do |options|
+	secrets = YAML.load_file('fastlane_secrets.yml')
+	secrets[options[:configuration].downcase]
+end
+
+private_lane :bump_build_number do |options|
+	info = YAML.load_file('build_info.yml')
+	build_number = info["build_number"] + 1
+	info["build_number"] = build_number
+	File.open("build_info.yml", "w") { |file| file.write(info.to_yaml) }
+	build_number
+end
+
+private_lane :filename do |options|
+	get_build_number
+	get_version_number(
+		xcodeproj: ENV["PROJECT"],
+		configuration: options[:configuration]
+	)
+	build_number = lane_context[SharedValues::BUILD_NUMBER] 
+	version_number = lane_context[SharedValues::VERSION_NUMBER]
+	"#{ENV["PRODUCT_NAME"]} #{options[:name_suffix]} #{version_number} (#{build_number})"
+end

@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import SnapKit
+import TrustKit
 
 final class PWAViewController: ViewController<PWAViewModel> {
     
@@ -17,6 +18,9 @@ final class PWAViewController: ViewController<PWAViewModel> {
     }
     
     private var webKitView: WKWebView?
+    
+    var onAppear: (() -> Void)?
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -24,7 +28,11 @@ final class PWAViewController: ViewController<PWAViewModel> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-//        navigationController?.setStatusBar(backgroundColor: Constants.color)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        onAppear?()
     }
     
     override func start() {
@@ -43,12 +51,13 @@ final class PWAViewController: ViewController<PWAViewModel> {
 
 extension PWAViewController: PWAViewModelDelegate {
     func load(url: URL) {
-        webKitView?.load(URLRequest(url: url))
+        webKitView?.load(URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData))
     }
     
-    func configureWebKit(controler: WKUserContentController) {
+    func configureWebKit(controler: WKUserContentController, completion: (WKWebView) -> Void) {
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = controler
+        configuration.websiteDataStore = WKWebsiteDataStore.default()
         let webKitView = WKWebView(frame: .zero, configuration: configuration)
         webKitView.allowsBackForwardNavigationGestures = false
         webKitView.allowsLinkPreview = false
@@ -59,7 +68,7 @@ extension PWAViewController: PWAViewModelDelegate {
         webKitView.navigationDelegate = self
         
         add(subview: webKitView)
-        JSBridge.shared.register(webView: webKitView)
+        completion(webKitView)
         
         self.webKitView = webKitView
     }
@@ -72,5 +81,10 @@ extension PWAViewController: WKNavigationDelegate {
         } else {
             decisionHandler(.allow)
         }
+    }
+    
+    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        let validator = TrustKit.sharedInstance().pinningValidator
+        validator.handle(challenge, completionHandler: completionHandler)
     }
 }

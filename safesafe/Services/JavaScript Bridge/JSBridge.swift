@@ -10,17 +10,19 @@ import WebKit
 import PromiseKit
 
 final class JSBridge: NSObject {
-    
-    static let shared = JSBridge()
+        
+    // MARK: - Constants
     
     enum BridgeDataType: Int {
         case dailyTopicUnsubscribe = 1
         case notification = 2
-        case appStatus = 31
-        case bluetoothPermission = 33
+        case applicationLifecycle = 11
         case notificationsPermission = 35
-        case opentraceToggle = 36
-        case clearBluetoothData = 37
+        case serviceStatus = 51
+        case setServices = 52
+        case clearData = 37
+        case uploadTemporaryExposureKeys = 43
+        case exposureList = 61
     }
     
     enum SendMethod: String, CaseIterable {
@@ -41,11 +43,19 @@ final class JSBridge: NSObject {
         static let type = "type"
     }
     
-    private weak var webView: WKWebView?
+    // MARK: - Properties
+    
+    private let jsonDecoder = JSONDecoder()
+    private let serviceStatusManager: ServiceStatusManagerProtocol
+    private var exposureNotificationBridge: ExposureNotificationJSProtocol?
+    private var diagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol?
+    
+    private var isServicSetting: Bool = false
     private var currentDataType: BridgeDataType?
     private var notificationPayload: String?
+    
+    private weak var webView: WKWebView?
     private var controller: WKUserContentController?
-    private let jsonDecoder = JSONDecoder()
     
     var contentController: WKUserContentController {
         let controller = self.controller ?? WKUserContentController()
@@ -58,22 +68,27 @@ final class JSBridge: NSObject {
         return controller
     }
     
-    private var appStatusManager: AppStatusManagerProtocol = AppStatusManager(
-        bluetraceManager: BluetraceManager.shared,
-        notificationManager: NotificationManager.shared
-    )
+    // MARK: - Lifecycle
     
-    override private init() {
+    init(with serviceStatusManager: ServiceStatusManagerProtocol) {
+        self.serviceStatusManager = serviceStatusManager
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        
+        
+        registerForAppLifecycleNotifications()
     }
     
     func register(webView: WKWebView)  {
         self.webView = webView
     }
     
-    func storePayload(_ payload: Any) {
-        
+    @available(iOS 13.5, *)
+    func registerExposureNotification(
+        with exposureNotificationBridge: ExposureNotificationJSProtocol,
+        diagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol
+    ) {
+        self.exposureNotificationBridge = exposureNotificationBridge
+        self.diagnosisKeysUploadService = diagnosisKeysUploadService
     }
     
     func bridgeDataResponse(type: BridgeDataType, body: String, requestId: String, completion: ((Any?, Error?) -> ())? = nil) {
@@ -83,6 +98,7 @@ final class JSBridge: NSObject {
                 return
             }
             let method = "\(SendMethod.bridgeDataResponse.rawValue)('\(body)','\(type.rawValue)','\(requestId)')"
+            console(method)
             webView.evaluateJavaScript(method, completionHandler: completion)
         }
     }
@@ -97,6 +113,17 @@ final class JSBridge: NSObject {
             webView.evaluateJavaScript(method, completionHandler: completion)
         }
     }
+    
+    private func encodeToJSON<T>(_ encodable: T) -> String? where T: Encodable {
+        do {
+            let data = try JSONEncoder().encode(encodable)
+            return String(data: data, encoding: .utf8)
+        } catch {
+            console(error)
+            return nil
+        }
+    }
+    
 }
 
 extension JSBridge: WKScriptMessageHandler {
@@ -129,17 +156,19 @@ extension JSBridge: WKScriptMessageHandler {
         switch bridgeDataType {
         case .dailyTopicUnsubscribe:
             unsubscribeFromTopic(jsonString: jsonString, type: bridgeDataType)
-        case .bluetoothPermission:
-            currentDataType = bridgeDataType
-            bluetoothPermission(jsonString: jsonString, type: bridgeDataType)
+            
         case .notificationsPermission:
             currentDataType = bridgeDataType
             notificationsPermission(jsonString: jsonString, type: bridgeDataType)
-        case .opentraceToggle:
+
+        case .uploadTemporaryExposureKeys:
+            uploadTemporaryExposureKeys(jsonString: jsonString)
+            
+        case .setServices:
             currentDataType = bridgeDataType
-            opentraceToggle(jsonString: jsonString, type: bridgeDataType)
-        case .clearBluetoothData:
-            clearBluetoothData(jsonString: jsonString, type: bridgeDataType)
+            servicesPermissions(jsonString: jsonString, type: bridgeDataType)
+        case .clearData:
+            RealmLocalStorage.clearAll()
         default:
             console("Not managed yet", type: .warning)
         }
@@ -158,8 +187,13 @@ extension JSBridge: WKScriptMessageHandler {
         switch bridgeDataType {
         case .notification:
             notificationGetBridgeDataResponse(requestID: requestId)
-        case .appStatus:
-            appStatusGetBridgeDataResponse(requestID: requestId)
+            
+        case .serviceStatus:
+            serviceStatusGetBridgeDataResponse(requestID: requestId)
+            
+        case .exposureList:
+            exposureListGetBridgeDataResponse(requestID: requestId)
+            
         default:
             return
         }
@@ -182,13 +216,32 @@ private extension JSBridge {
         }
     }
     
-    func appStatusGetBridgeDataResponse(requestID: String) {
-        appStatusManager.appStatusJson
+    func serviceStatusGetBridgeDataResponse(requestID: String) {
+        serviceStatusManager.serviceStatusJson
             .done { [weak self] json in
-                self?.bridgeDataResponse(type: .appStatus, body: json, requestId: requestID)
+                self?.bridgeDataResponse(type: .serviceStatus, body: json, requestId: requestID) { _ ,error in
+                    if let error = error {
+                        console(error, type: .error)
+                    }
+                }
         }.catch { error in
             console(error, type: .error)
         }
+    }
+    
+    func exposureListGetBridgeDataResponse(requestID: String) {
+        exposureNotificationBridge?.getExposureSummary()
+            .done { [weak self] summary in
+                if let body = self?.encodeToJSON(summary) {
+                    self?.bridgeDataResponse(type: .exposureList, body: body, requestId: requestID) { _, error in
+                        if let error = error {
+                            console(error, type: .error)
+                        }
+                    }
+                }
+            }.catch {
+                console($0, type: .error)
+            }
     }
     
 }
@@ -201,33 +254,29 @@ private extension JSBridge {
         NotificationManager.shared.unsubscribeFromDailyTopic(timestamp: model.timestamp)
     }
     
-    func bluetoothPermission(jsonString: String?, type: BridgeDataType) {
-        Permissions.instance.state(for: .bluetooth)
-            .then { state -> Promise<Permissions.State> in
-                switch state {
-                case .neverAsked:
-                    return Permissions.instance.state(for: .bluetooth, shouldAsk: true)
-                case .authorized:
-                    return Promise.value(state)
-                case .rejected:
-                    guard let rootViewController = self.webView?.window?.rootViewController else {
-                        throw InternalError.nilValue
-                    }
-                    return Permissions.instance.settingsAlert(for: .bluetooth, on: rootViewController).map { _ in Permissions.State.unknown }
-                default:
-                    return Promise.value(.unknown)
-                }
+    // This one needs refactoring because it's ugly, it works but it's ugly :P
+    //
+    func servicesPermissions(jsonString: String?, type: BridgeDataType) {
+        isServicSetting = true
+        guard let model: EnableServicesResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
+        
+        // Manage Notifications
+        if model.enableNotification == true {
+            isServicSetting = false
+            notificationsPermission(jsonString: jsonString, type: type)
+            return
         }
-        .done { state in
-            if state == .rejected {
-                BluetraceManager.shared.turnOff()
-                self.sendAppStateJSON(type: type)
+        
+        // Manage COVID ENA
+        if let enableExposureNotification = model.enableExposureNotificationService {
+            exposureNotificationBridge?.enableService(enable: enableExposureNotification)
+                .done { [weak self] _ in
+                    self?.sendAppStateJSON(type: .serviceStatus)
+                    self?.isServicSetting = false
             }
-            
-            self.sendAppStateJSON(type: type)
-        }
-        .catch { error in
-            assertionFailure(error.localizedDescription)
+            .catch(policy: .allErrors) { error in
+                console(error, type: .error)
+            }
         }
     }
     
@@ -258,50 +307,50 @@ private extension JSBridge {
                 }
             }
             
-            self.sendAppStateJSON(type: type)
+            self.sendAppStateJSON(type: .serviceStatus)
+            self.isServicSetting = false
         }
         .catch { error in
             assertionFailure(error.localizedDescription)
         }
     }
     
-    func opentraceToggle(jsonString: String?, type: BridgeDataType) {
-        // turn on / off BlueTrace peripheral and central
-        guard let model: OpentraceToggleResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
-        
-        Permissions.instance.state(for: .bluetooth, shouldAsk: model.enableBtService)
-            .done { state in
-                if state == .authorized && model.enableBtService {
-                    AppManager.instance.isBluetraceAllowed = true
-                    BluetraceManager.shared.turnOn()
-                    EncounterMessageManager.shared.authSetup()
-                } else {
-                    AppManager.instance.isBluetraceAllowed = false
-                    BluetraceManager.shared.turnOff()
+    func sendExposureList() {
+        exposureNotificationBridge?.getExposureSummary()
+            .done { [weak self] summary in
+                if let body = self?.encodeToJSON(summary) {
+                    self?.onBridgeData(type: .exposureList, body: body) { _, error in
+                        if let error = error {
+                            console(error, type: .error)
+                        }
+                    }
                 }
-        }
-        .ensure {
-            self.sendAppStateJSON(type: type)
-        }
-        .catch {_ in}
-        
+            }.catch {
+                console($0, type: .error)
+            }
     }
     
-    func clearBluetoothData(jsonString: String?, type: BridgeDataType) {
-        guard
-            let response: ClearBluetoothDataResponse = jsonString?.jsonDecode(decoder: jsonDecoder),
-            response.clearBluetoothData
+    func uploadTemporaryExposureKeys(jsonString: String?) {
+        guard let response: UploadTemporaryExposureKeysResponse = jsonString?.jsonDecode(decoder: jsonDecoder)
         else { return }
         
-        AppManager.instance.isBluetraceAllowed = false
-        BluetraceManager.shared.turnOff()
-        BluetraceUtils.removeAllData()
-        
-        console("Bluetooth data cleared")
+        diagnosisKeysUploadService?.upload(usingAuthCode: response.pin).done {
+            self.send(.success)
+        }.catch { _ in
+            self.send(.failure)
+        }
     }
     
-    private func sendAppStateJSON(type: BridgeDataType) {
-        appStatusManager.appStatusJson
+    func send(_ status: UploadTemporaryExposureKeysStatus) {
+        guard let result = self.encodeToJSON(UploadTemporaryExposureKeysStatusResult(result: status))
+        else { return }
+        
+        self.onBridgeData(type: .uploadTemporaryExposureKeys, body: result)
+    }
+
+    
+    func sendAppStateJSON(type: BridgeDataType) {
+        serviceStatusManager.serviceStatusJson
             .done { json in
                 console(json)
                 self.onBridgeData(type: type, body: json)
@@ -314,12 +363,37 @@ private extension JSBridge {
         }
     }
     
-    @objc
-    private func applicationDidBecomeActive(notification: Notification) {
-        guard let type = currentDataType else {
-            return
-        }
+    
+}
+
+// MARK: - App Lifecycle Notifications
+
+private extension JSBridge {
+    
+    func registerForAppLifecycleNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applicationWillEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
         
-        sendAppStateJSON(type: type)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applicationDidEnterBackground),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: nil
+        )
     }
+    
+    @objc func applicationWillEnterForeground(notification: Notification) {
+        guard let json = ApplicationLifecycleResponse(appicationState: .willEnterForeground).jsonString else {  return }
+        onBridgeData(type: .applicationLifecycle, body: json)
+    }
+    
+    @objc func applicationDidEnterBackground(notification: Notification) {
+        guard let json = ApplicationLifecycleResponse(appicationState: .didEnterBackground).jsonString else {  return }
+        onBridgeData(type: .applicationLifecycle, body: json)
+    }
+    
 }

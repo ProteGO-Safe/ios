@@ -16,25 +16,25 @@ final class ConfigManager {
     static private let configPlistName = "Config-stage"
     #elseif LIVE
     static private let configPlistName = "Config-live"
+    #elseif LIVE_ADHOC
+    static private let configPlistName = "Config-live"
+    #elseif LIVE_DEBUG
+    static private let configPlistName = "Config-live"
     #endif
     
     static let `default` = ConfigManager(plistName: configPlistName)
     
     private enum Key {
-        // Bluetooth settings
-        static let bluetooth = "Bluetooth" // Dictionary
-        static let serviceUUID = "SERVICE_UUID" // String
-        static let v2CharacteristicId = "V2_CHARACTERISTIC_ID" // String
-        static let orgId = "ORG_ID" // String
-        static let protocolVersion = "PROTOCOL_VERSION" // Int
-        static let centralScanInterval = "CENTRAL_SCAN_INTERVAL" // Int
-        static let centralScanDuration = "CENTRAL_SCAN_DURATION" // Int
-        static let dataExpirationDays = "DATA_EXPIRATION_DAYS" // Int
-        
         // PWA Settings
         static let pwa = "PWA" // Dictionary
         static let host = "HOST" // String
         static let scheme = "SCHEME" // String
+        
+        // Exposure Notification
+        static let exposureNotification = "EXPOSURE_NOTIFICATION" // Dictionary
+        static let enGatBaseURL = "EN_GAT_BASE_URL" // String
+        static let enUdkBaseURL = "EN_UDK_BASE_URL" // String
+        static let enStorageURL = "EN_STORAGE_URL" // String
      }
     
     private let settings: [String: Any]
@@ -60,45 +60,6 @@ final class ConfigManager {
     
 }
 
-// Bluetooth
-extension ConfigManager {
-    private var bluetoothSettings: [String: Any] {
-        guard let dictionary = settings[Key.bluetooth] as? [String: Any] else {
-            fatalError("Can't read \(Key.bluetooth) from plist")
-        }
-        
-        return dictionary
-    }
-    
-    var serviceUUID: String {
-        return value(for: Key.serviceUUID, dictionary: bluetoothSettings)
-    }
-    
-    var v2CharacteristicId: String {
-         return value(for: Key.v2CharacteristicId, dictionary: bluetoothSettings)
-    }
-    
-    var orgId: String {
-        return value(for: Key.orgId, dictionary: bluetoothSettings)
-    }
-    
-    var protocolVersion: Int {
-        return value(for: Key.protocolVersion, dictionary: bluetoothSettings)
-    }
-    
-    var centralScanInterval: Int {
-        return value(for: Key.centralScanInterval, dictionary: bluetoothSettings)
-    }
-    
-    var centralScanDuration: Int {
-        return value(for: Key.centralScanDuration, dictionary: bluetoothSettings)
-    }
-    
-    var dataExpirationDays: Int {
-        return value(for: Key.dataExpirationDays, dictionary: bluetoothSettings)
-    }
-}
-
 // PWA
 extension ConfigManager {
     private var pwaSettings: [String: Any] {
@@ -116,4 +77,29 @@ extension ConfigManager {
     var pwaScheme: String {
         return value(for: Key.scheme, dictionary: pwaSettings)
     }
+}
+
+// Exposure Notification
+extension ConfigManager {
+    
+    private var enSettings: [String: Any] {
+        guard let dictionary = settings[Key.exposureNotification] as? [String: Any] else {
+            fatalError("Can't read \(Key.exposureNotification) from plist")
+        }
+        
+        return dictionary
+    }
+    
+    var enGatBaseURL: String {
+        return value(for: Key.enGatBaseURL, dictionary: enSettings)
+    }
+    
+    var enUdkBaseURL: String {
+        return value(for: Key.enUdkBaseURL, dictionary: enSettings)
+    }
+    
+    var enStorageURL: String {
+        return value(for: Key.enStorageURL, dictionary: enSettings)
+    }
+    
 }
