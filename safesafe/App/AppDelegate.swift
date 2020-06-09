@@ -24,18 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         if #available(iOS 13.5, *) {
+            dependencyContainer.backgroundTaskService.registerExposureTask()
             DiagnosisKeysDownloadService.setupStartTimestampIfNeeded()
         }
-        
+ 
         if #available(iOS 13.0, *) {} else {
             window = UIWindow(frame: UIScreen.main.bounds)
             appCoordinator = AppCoordinator(appWindow: window, dependencyContainer: dependencyContainer)
             appCoordinator?.start()
         }
         
-        if #available(iOS 13.5, *) {
-            dependencyContainer.backgroundTaskService.registerExposureTask()
-        }
         StoredDefaults.standard.set(value: true, key: .isFirstRun)
         
         return true

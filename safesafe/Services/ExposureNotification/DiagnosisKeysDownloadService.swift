@@ -209,10 +209,6 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                     }
                     
                     let itemNames = self.filter(keyFileNames: filesList)
-                    guard !itemNames.isEmpty else {
-                        seal.reject(PMKError.cancelled)
-                        return
-                    }
                     
                     self.downloadFiles(withNames: itemNames, keysDirectoryURL: keysDirectoryURL).done { urls in
                         let timestamps =  urls.map { $0.lastPathComponent }

@@ -11,8 +11,8 @@ import PromiseKit
 
 protocol ServiceStatusManagerProtocol {
     
-    var currentServiceStatus: Promise<ServicesResponse> { get }
-    var serviceStatusJson: Promise<String> { get }
+    func currentServiceStatus(delay: TimeInterval) -> Promise<ServicesResponse>
+    func serviceStatusJson(delay: TimeInterval) -> Promise<String>
     
 }
 
@@ -23,14 +23,14 @@ final class ServiceStatusManager: ServiceStatusManagerProtocol {
     private let notificationManager: NotificationManagerProtocol
     private let exposureNotificationStatus: ExposureNotificationStatusProtocol
     
-    var currentServiceStatus: Promise<ServicesResponse> {
+    func currentServiceStatus(delay: TimeInterval) -> Promise<ServicesResponse> {
         Promise { seal in
             
             firstly {
                 when(fulfilled:
                     Permissions.instance.state(for: .notifications),
                      exposureNotificationStatus.status,
-                     exposureNotificationStatus.isBluetoothOn
+                     exposureNotificationStatus.isBluetoothOn(delay: delay)
                 )
             }.done { notificationStatus, exposureStatus, bluetoothStatus in
                 let status = ServicesResponse.Status(
@@ -45,20 +45,20 @@ final class ServiceStatusManager: ServiceStatusManagerProtocol {
         }
     }
     
-    var serviceStatusJson: Promise<String> {
+    func serviceStatusJson(delay: TimeInterval) -> Promise<String> {
         Promise<String> { [weak self] seal in
             guard let self = self else {
                 seal.reject(InternalError.deinitialized)
                 return
             }
             
-            self.currentServiceStatus
+            self.currentServiceStatus(delay: delay)
                 .done { status in
                     guard let json = status.jsonString else {
                         seal.reject(InternalError.serializationFailed)
                         return
                     }
-                    
+                    console(json)
                     seal.fulfill(json)
             }.catch { error in
                 seal.reject(error)
