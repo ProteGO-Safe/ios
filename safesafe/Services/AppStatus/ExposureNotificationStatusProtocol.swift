@@ -10,5 +10,5 @@ import PromiseKit
 
 protocol ExposureNotificationStatusProtocol: class {
     var status: Promise<ServicesResponse.Status.ExposureNotificationStatus> { get }
-    var isBluetoothOn: Promise<Bool> { get }
+    func isBluetoothOn(delay: TimeInterval) -> Promise<Bool>
 }

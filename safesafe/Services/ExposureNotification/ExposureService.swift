@@ -35,7 +35,7 @@ final class ExposureService: ExposureServiceProtocol {
     private let diagnosisKeysService: DiagnosisKeysDownloadServiceProtocol
     private let configurationService: RemoteConfigProtocol
     private let storageService: LocalStorageProtocol?
-    
+
     private var isCurrentlyDetectingExposures = false
     
     var isExposureNotificationAuthorized: Bool {
@@ -58,7 +58,7 @@ final class ExposureService: ExposureServiceProtocol {
         self.diagnosisKeysService = diagnosisKeysService
         self.configurationService = configurationService
         self.storageService = storageService
-        
+
         if UIDevice.current.model == "iPhone"  {
             activateManager()
         }
@@ -239,11 +239,18 @@ extension ExposureService: ExposureNotificationStatusProtocol {
         }
     }
     
-    var isBluetoothOn: Promise<Bool> {
+    func isBluetoothOn(delay: TimeInterval) -> Promise<Bool> {
         guard UIDevice.current.model == "iPhone" else { return .value(false) }
         
-        return activateManager().map {
-            $0 != .bluetoothOff && $0 != .restricted
+        if delay == .zero {
+            return activateManager().map { $0 != .bluetoothOff }
         }
+        
+        // Discussion: this is a workaround, because `exposureManager.exposureNotificationStatus` returns `.disabled` on first check
+        // and a moment later status is updated to `.bluetoothOff` (if BT is off in system settings). So we use short delay to manage this issue.
+        return after(seconds: delay)
+            .then { _ -> Promise<ENStatus> in
+                self.activateManager()
+        }.map { $0 != .bluetoothOff }
     }
 }

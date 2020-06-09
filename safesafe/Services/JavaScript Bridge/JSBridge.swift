@@ -74,7 +74,6 @@ final class JSBridge: NSObject {
         self.serviceStatusManager = serviceStatusManager
         super.init()
         
-        
         registerForAppLifecycleNotifications()
     }
     
@@ -217,7 +216,7 @@ private extension JSBridge {
     }
     
     func serviceStatusGetBridgeDataResponse(requestID: String) {
-        serviceStatusManager.serviceStatusJson
+        serviceStatusManager.serviceStatusJson(delay: .zero)
             .done { [weak self] json in
                 self?.bridgeDataResponse(type: .serviceStatus, body: json, requestId: requestID) { _ ,error in
                     if let error = error {
@@ -350,7 +349,7 @@ private extension JSBridge {
 
     
     func sendAppStateJSON(type: BridgeDataType) {
-        serviceStatusManager.serviceStatusJson
+        serviceStatusManager.serviceStatusJson(delay: .zero)
             .done { json in
                 console(json)
                 self.onBridgeData(type: type, body: json)
@@ -363,10 +362,7 @@ private extension JSBridge {
         }
     }
     
-    
 }
-
-// MARK: - App Lifecycle Notifications
 
 private extension JSBridge {
     
@@ -377,23 +373,9 @@ private extension JSBridge {
             name: UIApplication.willEnterForegroundNotification,
             object: nil
         )
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(applicationDidEnterBackground),
-            name: UIApplication.didEnterBackgroundNotification,
-            object: nil
-        )
     }
     
     @objc func applicationWillEnterForeground(notification: Notification) {
-        guard let json = ApplicationLifecycleResponse(appicationState: .willEnterForeground).jsonString else {  return }
-        onBridgeData(type: .applicationLifecycle, body: json)
+        sendAppStateJSON(type: .serviceStatus)
     }
-    
-    @objc func applicationDidEnterBackground(notification: Notification) {
-        guard let json = ApplicationLifecycleResponse(appicationState: .didEnterBackground).jsonString else {  return }
-        onBridgeData(type: .applicationLifecycle, body: json)
-    }
-    
 }

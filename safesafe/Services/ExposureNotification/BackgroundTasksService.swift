@@ -6,6 +6,7 @@
 //
 
 import BackgroundTasks
+import UIKit.UIDevice
 
 protocol BackgroundTasksServiceProtocol {
     
@@ -30,9 +31,7 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
     // MARK: - Public methods
     
     func scheduleExposureTask() {
-        guard exposureService.isExposureNotificationAuthorized else {
-            return
-        }
+        guard UIDevice.current.model == "iPhone" else {  return }
         
         let taskRequest = BGProcessingTaskRequest(identifier: backgroundTaskID)
         taskRequest.requiresNetworkConnectivity = true
@@ -48,6 +47,10 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
     
     func registerExposureTask() {
         BGTaskScheduler.shared.register(forTaskWithIdentifier: backgroundTaskID, using: .main) { [weak self] task in
+            guard self?.exposureService.isExposureNotificationAuthorized == true else {
+                task.setTaskCompleted(success: true)
+                return
+            }
             task.expirationHandler = {
                 console("Task timed out", type: .warning)
             }
@@ -64,5 +67,4 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
                 }
         }
     }
-    
 }
