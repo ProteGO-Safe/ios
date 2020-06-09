@@ -37,7 +37,7 @@ final class ExposureNotificationStatus: ExposureNotificationStatusProtocol {
         }
     }
     
-    var isBluetoothOn: Promise<Bool> {
+    func isBluetoothOn(delay: TimeInterval) -> Promise<Bool> {
         guard UIDevice.current.model == "iPhone" else {
             return .value(false)
         }
@@ -53,5 +53,5 @@ final class ExposureNotificationStatus: ExposureNotificationStatusProtocol {
 
 final class ExposureNotificationStatusMock: ExposureNotificationStatusProtocol {
     var status: Promise<ServicesResponse.Status.ExposureNotificationStatus> = .value(.restricted)
-    var isBluetoothOn: Promise<Bool> = .value(false)
+    func isBluetoothOn(delay: TimeInterval) -> Promise<Bool> {  .value(false) }
 }

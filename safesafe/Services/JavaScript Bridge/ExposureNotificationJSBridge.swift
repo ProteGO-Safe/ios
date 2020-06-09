@@ -100,6 +100,15 @@ final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
                     return .value
                 }
         }
+        .then { _ -> Promise<Bool> in
+            return self.exposureStatus.isBluetoothOn(delay: 0.2)
+        }.then {[weak self] isOn -> Promise<Void> in
+            guard let self = self else {
+                return .init(error: InternalError.deinitialized)
+            }
+            console("Bluetooth is on: \(isOn)")
+            return isOn ? .value : self.showAlert(for: .bluetooth)
+        }
     }
     
     private func showAlert(for permission: Permissions.Permission) -> Promise<Void> {

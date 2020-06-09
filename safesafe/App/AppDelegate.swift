@@ -23,15 +23,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
+        if #available(iOS 13.5, *) {
+            dependencyContainer.backgroundTaskService.registerExposureTask()
+            DiagnosisKeysDownloadService.setupStartTimestampIfNeeded()
+        }
+ 
         if #available(iOS 13.0, *) {} else {
             window = UIWindow(frame: UIScreen.main.bounds)
             appCoordinator = AppCoordinator(appWindow: window, dependencyContainer: dependencyContainer)
             appCoordinator?.start()
         }
         
-        if #available(iOS 13.5, *) {
-            dependencyContainer.backgroundTaskService.registerExposureTask()
-        }
         StoredDefaults.standard.set(value: true, key: .isFirstRun)
         
         return true
@@ -64,7 +66,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         NotificationManager.shared.clearBadgeNumber()
-        
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        HiderController.shared.show()
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        HiderController.shared.hide()
     }
 }
 
