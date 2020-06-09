@@ -12,13 +12,23 @@ protocol DiagnosisKeysDownloadServiceProtocol {
     
     func download() -> Promise<[URL]>
     func deleteFiles()
-    
+    static func setupStartTimestampIfNeeded()
 }
 
 
 @available(iOS 13.5, *)
 final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
     
+    private enum Constants {
+        #if LIVE || LIVE_DEBUG
+        static let initialTimestamp = 0
+        #elseif STAGE
+        static let initialTimestamp = 1591272000
+        #else
+        static let initialTimestamp = 0
+        #endif
+    }
+
     // MARK: - Properties
     
     private let remoteConfig: RemoteConfigProtocol
@@ -35,6 +45,13 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
         self.remoteConfig = remoteConfig
         self.fileManager = fileManager
         self.exposureKeysProvider = exposureKeysProvider
+    }
+    
+    static func setupStartTimestampIfNeeded() {
+        let downloadTimestamp = StoredDefaults.standard.get(key: .diagnosisKeysDownloadTimestamp) ?? 0
+        if downloadTimestamp == 0 {
+            StoredDefaults.standard.set(value: Constants.initialTimestamp, key: .diagnosisKeysDownloadTimestamp)
+        }
     }
     
     static func extractTimestamp(name: String) -> String? {

@@ -25,8 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if #available(iOS 13.5, *) {
             dependencyContainer.backgroundTaskService.registerExposureTask()
+            DiagnosisKeysDownloadService.setupStartTimestampIfNeeded()
         }
-        
+ 
         if #available(iOS 13.0, *) {} else {
             window = UIWindow(frame: UIScreen.main.bounds)
             appCoordinator = AppCoordinator(appWindow: window, dependencyContainer: dependencyContainer)
