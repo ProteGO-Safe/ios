@@ -23,6 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
+        if #available(iOS 13.5, *) {
+            DiagnosisKeysDownloadService.setupStartTimestampIfNeeded()
+        }
+        
         if #available(iOS 13.0, *) {} else {
             window = UIWindow(frame: UIScreen.main.bounds)
             appCoordinator = AppCoordinator(appWindow: window, dependencyContainer: dependencyContainer)
