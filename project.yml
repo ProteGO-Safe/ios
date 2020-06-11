@@ -12,7 +12,7 @@ configs:
 settings:
   CODE_SIGN_STYLE: Manual
   MARKETING_VERSION: "4.2.0"
-  CURRENT_PROJECT_VERSION: 241
+  CURRENT_PROJECT_VERSION: 242
 
 schemes:
   safesafe Dev:
@@ -60,6 +60,7 @@ targets:
       - path: safesafe
         name: "safesafe"
         excludes:
+          - "Resources/pwa"
           - "Resources/Dev/Config-dev.plist"
           - "Resources/Stage/Config-stage.plist"
           - "Resources/Live/Config-live.plist"
@@ -69,6 +70,8 @@ targets:
           - "Info-dev.plist"
           - "Info-stage.plist"
           - "Info-live.plist"
+      - path: safesafe/Resources/pwa
+        type: folder
     preBuildScripts:
       - name: CopyGooglePlist
         path: Scripts/CopyGooglePlist.sh
