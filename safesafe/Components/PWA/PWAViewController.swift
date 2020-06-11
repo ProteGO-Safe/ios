@@ -51,6 +51,7 @@ final class PWAViewController: ViewController<PWAViewModel> {
 
 extension PWAViewController: PWAViewModelDelegate {
     func load(url: URL) {
+        webKitView?.loadFileURL(url, allowingReadAccessTo: url)
         webKitView?.load(URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData))
     }
     
@@ -81,10 +82,5 @@ extension PWAViewController: WKNavigationDelegate {
         } else {
             decisionHandler(.allow)
         }
-    }
-    
-    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        let validator = TrustKit.sharedInstance().pinningValidator
-        validator.handle(challenge, completionHandler: completionHandler)
     }
 }

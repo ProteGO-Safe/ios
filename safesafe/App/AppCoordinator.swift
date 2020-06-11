@@ -65,7 +65,7 @@ final class AppCoordinator: CoordinatorType {
                 }
             }
         }
-        monitor.start(queue: DispatchQueue.global(qos: .background))
+//        monitor.start(queue: DispatchQueue.global(qos: .background))
         
         if #available(iOS 13.5, *) {
             // Don't register bg task on iPad devices that are not supported by EN

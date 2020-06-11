@@ -134,8 +134,6 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
             
             try FileManager.default.unzipItem(at: temporaryURL, to: unzipDestinationURL)
             renameAll(directoryName, dirPath: unzipDestinationURL)
-            console("Diagnosis Key files saved to: \(unzipDestinationURL)")
-            
         } catch {
             console(error, type: .error)
         }

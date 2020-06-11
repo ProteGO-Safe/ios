@@ -19,6 +19,10 @@ final class PWAViewModel: ViewModelType {
     // MARK: - Constants
     
     private enum Constants {
+        static var pwaLocalDirectoryName = "pwa"
+        static var pwaLocalIndexName = "index.html"
+        static var pwaLocalDirectoryURL = Bundle.main.bundleURL.appendingPathComponent(Self.pwaLocalDirectoryName)
+        static var pwaLocalURL = Self.pwaLocalDirectoryURL.appendingPathComponent(Self.pwaLocalIndexName)
         static var pwaURL: URL = .build(scheme: ConfigManager.default.pwaScheme, host:ConfigManager.default.pwaHost)!
     }
     
@@ -52,7 +56,7 @@ final class PWAViewModel: ViewModelType {
     /// defined in Config.plist
     /// - Parameter url: WebKit navigation URL
     func openExternallyIfNeeded(url: URL?) -> Bool {
-        guard let url = url, !url.isHostEqual(to: ConfigManager.default.pwaHost) else {
+        guard let url = url, !url.isHostEqual(to: Constants.pwaLocalDirectoryURL) else {
             return false
         }
         
@@ -69,7 +73,7 @@ extension PWAViewModel {
             return
         }
         
-        delegate?.load(url: Constants.pwaURL)
+        delegate?.load(url: Constants.pwaLocalURL)
     }
     
     func onViewDidLoad(setupFinished: Bool) {

@@ -149,6 +149,7 @@ final class ExposureService: ExposureServiceProtocol {
     
     private func detectExposures(for configuration: ENExposureConfiguration, keys: [URL]) -> Promise<ENExposureDetectionSummary> {
         Promise { seal in
+            console("🔑 Keys count: \(Int(keys.count/2))")
             exposureManager.detectExposures(configuration: configuration, diagnosisKeyURLs: keys) { [weak self] summary, error in
                 guard let summary = summary, error == nil else {
                     seal.reject(error!)
