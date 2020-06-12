@@ -14,7 +14,7 @@ struct ExposureSummary: Encodable {
      
      Value is calculated based on **totalRiskScoreFullRange** from `ENExposureInfo`.
      Risk score equals:
-     - 1, when `totalRiskScoreFullRange` is in `0-1499`
+     - 1, when `totalRiskScoreFullRange` is in `1-1499`
      - 2, when `totalRiskScoreFullRange` is in `1500-2999`
      - 3, when `totalRiskScoreFullRange` is in `3000-4096`
      */
@@ -25,19 +25,19 @@ struct ExposureSummary: Encodable {
 extension ExposureSummary {
  
     /// Creates `ExposureSummary` based on values of `totalRiskScoreFullRange` from range 0-4096
-    init?(fromFullRangeScore score: Int) {
+    init(fromFullRangeScore score: Int) {
         switch score {
-        case 0...1499:
+        case 1...1499:
             self.riskLevel = .low
             
         case 1500...2999:
             self.riskLevel = .medium
             
-        case 3000...4096:
+        case 3000...:
             self.riskLevel = .high
             
         default:
-            return nil
+            self.riskLevel = .none
         }
     }
     
