@@ -39,10 +39,10 @@ final class ExposureSummaryService: ExposureSummaryServiceProtocol {
             .first?
             .risk
         else {
-            return ExposureSummary(riskLevel: .low)
+            return ExposureSummary(riskLevel: .none)
         }
         
-        return ExposureSummary(fromFullRangeScore: highestRisk) ?? ExposureSummary(riskLevel: .low)
+        return ExposureSummary(fromFullRangeScore: highestRisk)
     }
     
     // MARK: - Private methods
