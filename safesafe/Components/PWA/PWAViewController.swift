@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 import SnapKit
 import TrustKit
+import PromiseKit
 
 final class PWAViewController: ViewController<PWAViewModel> {
     
@@ -50,15 +51,17 @@ final class PWAViewController: ViewController<PWAViewModel> {
 }
 
 extension PWAViewController: PWAViewModelDelegate {
-    func load(url: URL) {
-        webKitView?.loadFileURL(url, allowingReadAccessTo: url)
-        webKitView?.load(URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData))
+    func load(url: URL, scope: LoadScope) {
+        if case .offline = scope {
+            webKitView?.loadFileURL(url, allowingReadAccessTo: url)
+        }
+        
+        webKitView?.load(URLRequest(url: url))
     }
     
     func configureWebKit(controler: WKUserContentController, completion: (WKWebView) -> Void) {
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = controler
-        configuration.websiteDataStore = WKWebsiteDataStore.default()
         let webKitView = WKWebView(frame: .zero, configuration: configuration)
         webKitView.allowsBackForwardNavigationGestures = false
         webKitView.allowsLinkPreview = false
@@ -73,6 +76,52 @@ extension PWAViewController: PWAViewModelDelegate {
         
         self.webKitView = webKitView
     }
+    
+    func checkStorage() {
+        webKitView?.evaluateJavaScript("localStorage.getItem('persist:root');") { [weak self] result, error in
+            guard let data = result as? String else {
+                self?.viewModel.webViewStorage(storage: .failure(InternalError.invalidDataType))
+                return
+            }
+            console(self?.webKitView?.url)
+            console(data)
+        }
+    }
+    
+    func fetchStorage() {
+        webKitView?.evaluateJavaScript("localStorage.getItem('persist:root');") { [weak self] result, error in
+            guard let data = result as? String else {
+                self?.viewModel.webViewStorage(storage: .failure(InternalError.invalidDataType))
+                return
+            }
+        
+            if let error = error {
+                self?.viewModel.webViewStorage(storage: .failure(error))
+            } else {
+                self?.viewModel.webViewStorage(storage: .success(data))
+            }
+        }
+    }
+    
+    func setStorage(data: String) {
+        WebCacheCleaner.clean()
+            .then {
+                after(seconds: 2)
+        }
+        .done {
+            
+            let method = "localStorage.setItem('persist:root','\(data)');"
+            self.webKitView?.evaluateJavaScript(method) { [weak self] result, error in
+                if let error = error {
+                    console(error, type: .error)
+                }
+                self?.webKitView?.reload()
+            }
+        }
+        .catch {
+            console($0, type: .error)
+        }
+    }
 }
 
 extension PWAViewController: WKNavigationDelegate {
@@ -83,4 +132,9 @@ extension PWAViewController: WKNavigationDelegate {
             decisionHandler(.allow)
         }
     }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        viewModel.webViewFinishedLoad(navigation)
+    }
+    
 }
