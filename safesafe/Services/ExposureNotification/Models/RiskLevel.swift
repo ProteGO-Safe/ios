@@ -6,6 +6,7 @@
 //
 
 enum RiskLevel: Int, Encodable {
+    case none = 0
     case low = 1
     case medium = 2
     case high = 3
