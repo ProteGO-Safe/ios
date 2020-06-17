@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        NetworkMonitoring.shared.start() // initialize network monitoring observation
         
         if #available(iOS 13.5, *) {
             dependencyContainer.backgroundTaskService.registerExposureTask()
