@@ -17,10 +17,8 @@ enum LoadScope {
 
 protocol PWAViewModelDelegate: class {
     func load(url: URL, scope: LoadScope)
+    func reload()
     func configureWebKit(controler: WKUserContentController, completion: (WKWebView) -> Void)
-    func fetchStorage()
-    func setStorage(data: String)
-    func checkStorage()
 }
 
 final class PWAViewModel: ViewModelType {
@@ -29,26 +27,23 @@ final class PWAViewModel: ViewModelType {
     
     private enum Constants {
         static var pwaMigrationVersion = 1
-        static var pwaV3OnlineURL: URL = .build(scheme: "https", host: "safesafe.app")!
-        static var pwaV4OnlineURL: URL = .build(scheme: "https", host: "v4.safesafe.app")!
         static var pwaLocalDirectoryName = "pwa"
         static var pwaLocalIndexName = "index.html"
         static var pwaLocalDirectoryURL = Bundle.main.bundleURL.appendingPathComponent(Self.pwaLocalDirectoryName)
         static var pwaLocalURL = Self.pwaLocalDirectoryURL.appendingPathComponent(Self.pwaLocalIndexName)
-        static var pwaURL: URL = .build(scheme: ConfigManager.default.pwaScheme, host:ConfigManager.default.pwaHost)!
     }
     
     // MARK: - Properties
     
     private let jsBridge: JSBridge
-    private var localStorageData: String?
-    private var openExternallyEnabled = false
+    private let migrationManager: MigrationProtocol
     weak var delegate: PWAViewModelDelegate?
     
     // MARK: - Life Cycle
     
-    init(with jsBridge: JSBridge) {
+    init(with jsBridge: JSBridge, migrationManager: MigrationProtocol = LocalStorageMigration()) {
         self.jsBridge = jsBridge
+        self.migrationManager = migrationManager
     }
     
     /// Manage custom actions for schemes defined in  URLAction
@@ -70,7 +65,7 @@ final class PWAViewModel: ViewModelType {
     /// defined in Config.plist
     /// - Parameter url: WebKit navigation URL
     func openExternallyIfNeeded(url: URL?) -> Bool {
-        guard let url = url, !url.isHostEqual(to: Constants.pwaLocalDirectoryURL), openExternallyEnabled else {
+        guard let url = url, !url.isHostEqual(to: Constants.pwaLocalDirectoryURL) else {
             return false
         }
         
@@ -78,35 +73,7 @@ final class PWAViewModel: ViewModelType {
         
         return true
     }
-    
-    func webViewFinishedLoad(_ navigation: WKNavigation) {
-        if let pwaMigrationVersion: Int? = StoredDefaults.standard.get(key: .pwaMigration), pwaMigrationVersion == nil, localStorageData == nil {
-            // do PWA migration
-            delegate?.fetchStorage()
-        } else if let data = localStorageData {
-            // got data, let's migrate!
-            delegate?.setStorage(data: data)
-            localStorageData = nil
-            StoredDefaults.standard.set(value: Constants.pwaMigrationVersion, key: .pwaMigration)
-        } else {
-            delegate?.checkStorage()
-        }
-    }
-    
-    func webViewStorage(storage: Result<String, Error>) {
-        if case .success(let data) = storage {
-            localStorageData = data
-        }
-        openExternallyEnabled = true
-        delegate?.load(url: Constants.pwaLocalURL, scope: .offline)
-    }
-    
-    private func isPWAV3() -> Bool {
-        return UserDefaults.standard.value(forKey: "BROADCAST_MSG") != nil ||
-            UserDefaults.standard.value(forKey: "BROAD_MSG_ARRAY") != nil ||
-            UserDefaults.standard.value(forKey: "ADVT_DATA") != nil ||
-            UserDefaults.standard.value(forKey: "ADVT_EXPIRY") != nil
-    }
+     
 }
 
 // VC Life Cycle
@@ -115,19 +82,13 @@ extension PWAViewModel {
         guard layoutFinished else {
             return
         }
-        
-        if let pwaMigrationVersion: Int? = StoredDefaults.standard.get(key: .pwaMigration), pwaMigrationVersion != nil {
-            openExternallyEnabled = true
-            delegate?.load(url: Constants.pwaLocalURL, scope: .offline)
-        } else {
-            // Load correct pwa URL
-            if isPWAV3() {
-                delegate?.load(url: Constants.pwaV3OnlineURL, scope: .online)
-            } else {
-                delegate?.load(url: Constants.pwaV4OnlineURL, scope: .online)
-            }
+
+        migrationManager.migrate { result in
+             delegate?.load(url: Constants.pwaLocalURL, scope: .offline)
+//            if case .success(let isMigrated) = result, isMigrated {
+//                 delegate?.load(url: Constants.pwaLocalURL, scope: .offline)
+//            }
         }
-        
     }
     
     func onViewDidLoad(setupFinished: Bool) {
