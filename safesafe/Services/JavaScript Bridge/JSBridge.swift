@@ -11,7 +11,7 @@ import PromiseKit
 import Network
 
 final class JSBridge: NSObject {
-        
+    
     // MARK: - Constants
     
     enum BridgeDataType: Int {
@@ -147,8 +147,8 @@ extension JSBridge: WKScriptMessageHandler {
             let object = body as? [String: Any],
             let type = object[Key.type] as? Int,
             let bridgeDataType = BridgeDataType(rawValue: type)
-        else {
-            return
+            else {
+                return
         }
         
         let jsonString = object[Key.data] as? String
@@ -159,7 +159,7 @@ extension JSBridge: WKScriptMessageHandler {
         case .notificationsPermission:
             currentDataType = bridgeDataType
             notificationsPermission(jsonString: jsonString, type: bridgeDataType)
-
+            
         case .uploadTemporaryExposureKeys:
             uploadTemporaryExposureKeys(jsonString: jsonString)
             
@@ -179,8 +179,8 @@ extension JSBridge: WKScriptMessageHandler {
             let requestId = requestData[Key.requestId] as? String,
             let type = requestData[Key.type] as? Int,
             let bridgeDataType = BridgeDataType(rawValue: type)
-        else {
-            return
+            else {
+                return
         }
         
         switch bridgeDataType {
@@ -238,9 +238,9 @@ private extension JSBridge {
                         }
                     }
                 }
-            }.catch {
-                console($0, type: .error)
-            }
+        }.catch {
+            console($0, type: .error)
+        }
     }
     
 }
@@ -358,11 +358,11 @@ private extension JSBridge {
     
     func send(_ status: UploadTemporaryExposureKeysStatus) {
         guard let result = self.encodeToJSON(UploadTemporaryExposureKeysStatusResult(result: status))
-        else { return }
+            else { return }
         
         self.onBridgeData(type: .uploadTemporaryExposureKeys, body: result)
     }
-
+    
     
     func sendAppStateJSON(type: BridgeDataType) {
         serviceStatusManager.serviceStatusJson(delay: .zero)
@@ -400,9 +400,16 @@ private extension JSBridge {
     
     @objc func applicationWillEnterForeground(notification: Notification) {
         sendAppStateJSON(type: .serviceStatus)
+        guard let data = ApplicationLifecycleResponse(appicationState: .willEnterForeground).jsonString else {
+            return
+        }
+        onBridgeData(type: .applicationLifecycle, body: data)
     }
     
     @objc func applicationDidEnterBackground(notification: Notification) {
-        
+        guard let data = ApplicationLifecycleResponse(appicationState: .didEnterBackground).jsonString else {
+            return
+        }
+        onBridgeData(type: .applicationLifecycle, body: data)
     }
 }

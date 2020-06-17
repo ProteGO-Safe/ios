@@ -21,7 +21,7 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
     
     private enum Constants {
         #if LIVE || LIVE_DEBUG
-        static let initialTimestamp = 0
+        static let initialTimestamp = 1591660800
         #elseif STAGE
         static let initialTimestamp = 1591272000
         #else
