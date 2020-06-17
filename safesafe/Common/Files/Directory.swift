@@ -13,6 +13,14 @@ final class Directory {
         static let keysTempDirectoryName = "DiagnosisKeysTemporary"
     }
     
+    static func webkitLocalStorage() throws -> URL {
+        let libraryDirectory = try FileManager.default.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        return libraryDirectory.appendingPathComponent("WebKit")
+            .appendingPathComponent("WebsiteData")
+            .appendingPathComponent("LocalStorage")
+    }
+    
+    
     static func getDiagnosisKeysURL() throws -> URL {
         let cachesDirectory = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         return cachesDirectory.appendingPathComponent(Constants.keysDirectoryName)
