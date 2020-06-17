@@ -8,6 +8,7 @@
 
 import WebKit
 import PromiseKit
+import Network
 
 final class JSBridge: NSObject {
     
@@ -73,7 +74,6 @@ final class JSBridge: NSObject {
     init(with serviceStatusManager: ServiceStatusManagerProtocol) {
         self.serviceStatusManager = serviceStatusManager
         super.init()
-        
         registerForAppLifecycleNotifications()
     }
     
@@ -324,14 +324,30 @@ private extension JSBridge {
                         }
                     }
                 }
-        }.catch {
-            console($0, type: .error)
+            }.catch {
+                console($0, type: .error)
         }
     }
     
     func uploadTemporaryExposureKeys(jsonString: String?) {
         guard let response: UploadTemporaryExposureKeysResponse = jsonString?.jsonDecode(decoder: jsonDecoder)
             else { return }
+        
+        guard NetworkMonitoring.shared.isInternetAvailable else {
+            if let rootViewController = self.webView?.window?.rootViewController {
+                NetworkMonitoring.shared.showInternetAlert(in: rootViewController) { [weak self] action in
+                    switch action {
+                    case .cancel:
+                        self?.send(.other)
+                    case .retry:
+                        self?.uploadTemporaryExposureKeys(jsonString: jsonString)
+                    }
+                }
+            } else {
+                send(.other)
+            }
+            return
+        }
         
         diagnosisKeysUploadService?.upload(usingAuthCode: response.pin).done {
             self.send(.success)

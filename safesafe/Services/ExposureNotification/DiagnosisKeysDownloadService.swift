@@ -183,7 +183,8 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
     }
     
     func download() -> Promise<[URL]> {
-        Promise { seal in
+        guard NetworkMonitoring.shared.isInternetAvailable else { return .value([]) }
+        return Promise { seal in
             exposureKeysProvider.request(.get) { [weak self] result in
                 guard let self = self else {
                     seal.reject(InternalError.deinitialized)
