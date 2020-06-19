@@ -5,6 +5,7 @@
 
 import Moya
 import PromiseKit
+import ExposureNotification
 
 protocol DiagnosisKeysUploadServiceProtocol {
     
@@ -59,26 +60,27 @@ final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
         Promise { seal in
             exposureManager
                 .getDiagnosisKeys()
+                .filterValues(discardOldKeys)
                 .done { keys in
                     firstly { when(fulfilled:
                         self.getToken(usingAuthCode: authCode),
-                        self.deviceCheckService.generatePayload(
-                            bundleID: TemporaryExposureKeys.Default.appPackageName,
-                            exposureKeys: keys.map({ $0.keyData }),
-                            regions: TemporaryExposureKeys.Default.regions
+                                   self.deviceCheckService.generatePayload(
+                                    bundleID: TemporaryExposureKeys.Default.appPackageName,
+                                    exposureKeys: keys.map({ $0.keyData }),
+                                    regions: TemporaryExposureKeys.Default.regions
                         )
-                    )}.done { token, payload in
-                        seal.fulfill(TemporaryExposureKeys(
-                            temporaryExposureKeys: keys.map({ TemporaryExposureKey($0) }),
-                            verificationPayload: token,
-                            deviceVerificationPayload: payload
-                        ))
+                        )}.done { token, payload in
+                            seal.fulfill(TemporaryExposureKeys(
+                                temporaryExposureKeys: keys.map({ TemporaryExposureKey($0) }),
+                                verificationPayload: token,
+                                deviceVerificationPayload: payload
+                            ))
                     }.catch {
                         seal.reject($0)
                     }
-                }.catch {
-                    seal.reject($0)
-                }
+            }.catch {
+                seal.reject($0)
+            }
         }
     }
     
@@ -105,4 +107,10 @@ final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
         }
     }
     
+    private func discardOldKeys(key: ENTemporaryExposureKey) -> Bool {
+        let startOfDay = UInt32(Calendar.current.startOfDay(for: Date()).timeIntervalSince1970)
+        let valid = (key.rollingStartNumber * 600) > (startOfDay - 14 * 86400)
+        if !valid { console(">>> Discarded Key> Rolling Start Number: \(key.rollingStartNumber), Rolling Period: \(key.rollingPeriod)", type: .warning) }
+        return valid
+    }
 }
