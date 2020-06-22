@@ -21,7 +21,7 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
     
     private enum Constants {
         #if LIVE || LIVE_DEBUG
-        static let initialTimestamp = 0
+        static let initialTimestamp = 1591660800
         #elseif STAGE
         static let initialTimestamp = 1591272000
         #else
@@ -134,8 +134,6 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
             
             try FileManager.default.unzipItem(at: temporaryURL, to: unzipDestinationURL)
             renameAll(directoryName, dirPath: unzipDestinationURL)
-            console("Diagnosis Key files saved to: \(unzipDestinationURL)")
-            
         } catch {
             console(error, type: .error)
         }
@@ -185,7 +183,8 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
     }
     
     func download() -> Promise<[URL]> {
-        Promise { seal in
+        guard NetworkMonitoring.shared.isInternetAvailable else { return .value([]) }
+        return Promise { seal in
             exposureKeysProvider.request(.get) { [weak self] result in
                 guard let self = self else {
                     seal.reject(InternalError.deinitialized)

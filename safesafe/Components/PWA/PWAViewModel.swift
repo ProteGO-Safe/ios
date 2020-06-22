@@ -8,9 +8,16 @@
 
 import Foundation
 import WebKit.WKUserContentController
+import WebKit.WKNavigation
+
+enum LoadScope {
+    case offline
+    case online
+}
 
 protocol PWAViewModelDelegate: class {
-    func load(url: URL)
+    func load(url: URL, scope: LoadScope)
+    func reload()
     func configureWebKit(controler: WKUserContentController, completion: (WKWebView) -> Void)
 }
 
@@ -19,18 +26,24 @@ final class PWAViewModel: ViewModelType {
     // MARK: - Constants
     
     private enum Constants {
-        static var pwaURL: URL = .build(scheme: ConfigManager.default.pwaScheme, host:ConfigManager.default.pwaHost)!
+        static var pwaMigrationVersion = 1
+        static var pwaLocalDirectoryName = "pwa"
+        static var pwaLocalIndexName = "index.html"
+        static var pwaLocalDirectoryURL = Bundle.main.bundleURL.appendingPathComponent(Self.pwaLocalDirectoryName)
+        static var pwaLocalURL = Self.pwaLocalDirectoryURL.appendingPathComponent(Self.pwaLocalIndexName)
     }
     
     // MARK: - Properties
     
     private let jsBridge: JSBridge
+    private let migrationManager: MigrationProtocol
     weak var delegate: PWAViewModelDelegate?
     
     // MARK: - Life Cycle
     
-    init(with jsBridge: JSBridge) {
+    init(with jsBridge: JSBridge, migrationManager: MigrationProtocol = LocalStorageMigration()) {
         self.jsBridge = jsBridge
+        self.migrationManager = migrationManager
     }
     
     /// Manage custom actions for schemes defined in  URLAction
@@ -52,7 +65,7 @@ final class PWAViewModel: ViewModelType {
     /// defined in Config.plist
     /// - Parameter url: WebKit navigation URL
     func openExternallyIfNeeded(url: URL?) -> Bool {
-        guard let url = url, !url.isHostEqual(to: ConfigManager.default.pwaHost) else {
+        guard let url = url, !url.isHostEqual(to: Constants.pwaLocalDirectoryURL) else {
             return false
         }
         
@@ -60,6 +73,7 @@ final class PWAViewModel: ViewModelType {
         
         return true
     }
+     
 }
 
 // VC Life Cycle
@@ -68,8 +82,10 @@ extension PWAViewModel {
         guard layoutFinished else {
             return
         }
-        
-        delegate?.load(url: Constants.pwaURL)
+
+        migrationManager.migrate { result in
+             delegate?.load(url: Constants.pwaLocalURL, scope: .offline)
+        }
     }
     
     func onViewDidLoad(setupFinished: Bool) {
@@ -79,4 +95,8 @@ extension PWAViewModel {
             }
         }
     }
+}
+
+extension StoredDefaults.Key {
+    static let pwaMigration = StoredDefaults.Key("pwaMigrationKey")
 }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Network
 import Siren
 
 #if !LIVE
@@ -19,7 +18,6 @@ final class AppCoordinator: CoordinatorType {
     private let dependencyContainer: DependencyContainer
     private let appManager = AppManager.instance
     private let window: UIWindow
-    private let monitor = NWPathMonitor()
     private let clearData = ClearData()
     
     private var noInternetAlert: UIAlertController?
@@ -55,17 +53,6 @@ final class AppCoordinator: CoordinatorType {
         if #available(iOS 13.5, *) {
             configureJSBridge(with: rootViewController)
         }
-        
-        monitor.pathUpdateHandler = { [weak self] path in
-            DispatchQueue.main.async {
-                if path.status == .satisfied {
-                    self?.noInternetAlert?.dismiss(animated: false)
-                } else {
-                    self?.showInternetAlert()
-                }
-            }
-        }
-        monitor.start(queue: DispatchQueue.global(qos: .background))
         
         if #available(iOS 13.5, *) {
             // Don't register bg task on iPad devices that are not supported by EN

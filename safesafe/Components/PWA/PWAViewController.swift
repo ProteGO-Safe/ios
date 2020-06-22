@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 import SnapKit
 import TrustKit
+import PromiseKit
 
 final class PWAViewController: ViewController<PWAViewModel> {
     
@@ -50,14 +51,17 @@ final class PWAViewController: ViewController<PWAViewModel> {
 }
 
 extension PWAViewController: PWAViewModelDelegate {
-    func load(url: URL) {
-        webKitView?.load(URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData))
+    func load(url: URL, scope: LoadScope) {
+        if case .offline = scope {
+            webKitView?.loadFileURL(url, allowingReadAccessTo: url)
+        }
+        
+        webKitView?.load(URLRequest(url: url))
     }
     
     func configureWebKit(controler: WKUserContentController, completion: (WKWebView) -> Void) {
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = controler
-        configuration.websiteDataStore = WKWebsiteDataStore.default()
         let webKitView = WKWebView(frame: .zero, configuration: configuration)
         webKitView.allowsBackForwardNavigationGestures = false
         webKitView.allowsLinkPreview = false
@@ -72,6 +76,10 @@ extension PWAViewController: PWAViewModelDelegate {
         
         self.webKitView = webKitView
     }
+
+    func reload() {
+        webKitView?.reload()
+    }
 }
 
 extension PWAViewController: WKNavigationDelegate {
@@ -81,10 +89,5 @@ extension PWAViewController: WKNavigationDelegate {
         } else {
             decisionHandler(.allow)
         }
-    }
-    
-    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        let validator = TrustKit.sharedInstance().pinningValidator
-        validator.handle(challenge, completionHandler: completionHandler)
     }
 }

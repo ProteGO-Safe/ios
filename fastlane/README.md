@@ -20,6 +20,21 @@ or alternatively using `brew cask install fastlane`
 fastlane adhocs
 ```
 
+### uats
+```
+fastlane uats
+```
+
+### live_appstore
+```
+fastlane live_appstore
+```
+
+### stage_appstore
+```
+fastlane stage_appstore
+```
+
 ### stage_adhoc
 ```
 fastlane stage_adhoc
