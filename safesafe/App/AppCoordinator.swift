@@ -35,7 +35,6 @@ final class AppCoordinator: CoordinatorType {
             fatalError("Window doesn't exists")
         }
         
-        UIApplication.shared.isIdleTimerDisabled = true
         self.window = window
     }
     
