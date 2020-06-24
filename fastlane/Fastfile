@@ -12,8 +12,22 @@ lane :adhocs do |options|
 	dev_adhoc(options)
 end
 
+lane :uats do |options|
+	live_appstore(options)
+	stage_adhoc(options)
+	stage_appstore(options)
+end
+
+lane :live_appstore do |options|
+	build_appstore(configuration_name: "Live", scheme_name: "safesafe Live", name_suffix: "Prod", version_bump:options[:version_bump])
+end
+
+lane :stage_appstore do |options|
+	build_appstore(configuration_name: "Stage", scheme_name: "safesafe Live", name_suffix: "Stage Appstore", version_bump:options[:version_bump])
+end
+
 lane :stage_adhoc do |options|
-	build_adhoc(configuration_name: "Stage", scheme_name: "safesafe Stage", name_suffix: "Stage", firebase_distribution: true, version_bump:options[:version_bump])
+	build_adhoc(configuration_name: "Stage", scheme_name: "safesafe Stage", name_suffix: "Stage", firebase_distribution: false, version_bump:options[:version_bump])
 end
 
 lane :dev_adhoc do |options|
@@ -58,6 +72,37 @@ private_lane :build_adhoc do |options|
 			testers: secrets["firebase"]["testers"]
 		)
 	end
+end
+
+private_lane :build_appstore do |options|
+	xcodegen(
+		spec: ENV["PROJECT_YML"]
+	)
+	cocoapods
+
+	# This version bumping works only for local projects, don't use it on CI/CD
+	#
+	if options[:version_bump]
+		increment_build_number(
+			build_number: bump_build_number
+		)
+	end
+
+	build_app(
+		scheme: options[:scheme_name],
+		configuration: options[:configuration_name],
+		output_name: filename(name_suffix: options[:name_suffix], configuration: options[:configuration_name]),
+		output_directory: "#{ENV["OUTPUT_DIR"]}#{options[:configuration_name]}", 
+		destination: "generic/platform=iOS",
+		export_options: {
+			method: "app-store",
+			provisioningProfiles: {
+				"se.sigmaconnectivity.protegosafe" => "protegosafe-appstore",
+				"pl.gov.mc.protegosafe" => "protegosafe-appstore",
+				"pl.gov.mc.protegosafe-staging" => "protegosafe-staging-appstore"
+			}
+		}
+	)
 end
 
 private_lane :secrets do |options|

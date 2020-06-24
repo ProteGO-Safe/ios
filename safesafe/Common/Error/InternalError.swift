@@ -13,6 +13,7 @@ enum InternalError: Error {
     // Common
     case deinitialized
     case nilValue
+    case timeout
     
     // Login
     case signInFailed

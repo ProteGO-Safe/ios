@@ -12,13 +12,23 @@ protocol DiagnosisKeysDownloadServiceProtocol {
     
     func download() -> Promise<[URL]>
     func deleteFiles()
-    
+    static func setupStartTimestampIfNeeded()
 }
 
 
 @available(iOS 13.5, *)
 final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
     
+    private enum Constants {
+        #if LIVE || LIVE_DEBUG
+        static let initialTimestamp = 1591660800
+        #elseif STAGE
+        static let initialTimestamp = 1591272000
+        #else
+        static let initialTimestamp = 0
+        #endif
+    }
+
     // MARK: - Properties
     
     private let remoteConfig: RemoteConfigProtocol
@@ -35,6 +45,13 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
         self.remoteConfig = remoteConfig
         self.fileManager = fileManager
         self.exposureKeysProvider = exposureKeysProvider
+    }
+    
+    static func setupStartTimestampIfNeeded() {
+        let downloadTimestamp = StoredDefaults.standard.get(key: .diagnosisKeysDownloadTimestamp) ?? 0
+        if downloadTimestamp == 0 {
+            StoredDefaults.standard.set(value: Constants.initialTimestamp, key: .diagnosisKeysDownloadTimestamp)
+        }
     }
     
     static func extractTimestamp(name: String) -> String? {
@@ -88,10 +105,12 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                     switch result {
                     case let .success(urls):
                         fileURLs.append(contentsOf: urls)
-                        
-                    case let .failure(error):
-                        seal.reject(error)
-                        return
+                    /*
+                         Discussion:
+                         there is some small possibility, that one or more entries in CDN //index.txt could be "dead link". It was therfore considered that in this kind of situation we omit `.failure` case and continue urls collecting.
+                         That's because current code configuration will not analyze Diagnosis Keys in case of `.failure`. It's not perfect solution but we decided that is least dangerous in  case of analyze of Diagnosis Keys.
+                    */
+                    case .failure: continue
                     }
                 }
                 
@@ -104,22 +123,34 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
         guard
             let suggestedFilename = response.suggestedFilename,
             let directoryName = DiagnosisKeysDownloadService.extractTimestamp(name: suggestedFilename),
-            let temporaryDirectory = try? Directory.getDiagnosisKeysTempURL()
+            let temporaryDirectory = try? Directory.getDiagnosisKeysTempURL(),
+            (200...299).contains(response.statusCode)
         else {
-            return(temporaryURL, [])
+            return(temporaryURL, [.removePreviousFile])
         }
         
         do {
             let unzipDestinationURL = try Directory.getDiagnosisKeysURL().appendingPathComponent(directoryName)
             
             try FileManager.default.unzipItem(at: temporaryURL, to: unzipDestinationURL)
-            console("Diagnosis Key files saved to: \(unzipDestinationURL)")
-            
+            renameAll(directoryName, dirPath: unzipDestinationURL)
         } catch {
             console(error, type: .error)
         }
         
         return(temporaryDirectory, [.removePreviousFile])
+    }
+    
+    private func renameAll(_ filename: String, dirPath: URL) {
+        do {
+            for file in try fileManager.contentsOfDirectory(atPath: dirPath.path) {
+                let originalPath = dirPath.appendingPathComponent(file)
+                let newPath = dirPath.appendingPathComponent("\(filename).\(originalPath.pathExtension)")
+                try fileManager.moveItem(at: originalPath, to: newPath)
+            }
+        } catch {
+            console(error, type: .error)
+        }
     }
     
     private func filter(keyFileNames: [Substring]) -> [String] {
@@ -152,7 +183,8 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
     }
     
     func download() -> Promise<[URL]> {
-        Promise { seal in
+        guard NetworkMonitoring.shared.isInternetAvailable else { return .value([]) }
+        return Promise { seal in
             exposureKeysProvider.request(.get) { [weak self] result in
                 guard let self = self else {
                     seal.reject(InternalError.deinitialized)
@@ -176,18 +208,18 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                     }
                     
                     let itemNames = self.filter(keyFileNames: filesList)
-                    let timestamps = itemNames
-                        .compactMap(Self.extractTimestamp)
-                        .compactMap(Int.init)
-                        .sorted()
-                    
-                    guard let lastTimestamp = timestamps.last, !itemNames.isEmpty else {
-                        seal.reject(PMKError.cancelled)
-                        return
-                    }
                     
                     self.downloadFiles(withNames: itemNames, keysDirectoryURL: keysDirectoryURL).done { urls in
-                        StoredDefaults.standard.set(value: lastTimestamp, key: .diagnosisKeysDownloadTimestamp)
+                        let timestamps =  urls.map { $0.lastPathComponent }
+                            .compactMap { $0.split(separator: ".").first }
+                            .map { String($0) }
+                            .compactMap(Int.init)
+                            .sorted()
+                        
+                        if let lastTimestamp = timestamps.last {
+                            StoredDefaults.standard.set(value: lastTimestamp, key: .diagnosisKeysDownloadTimestamp)
+                        }
+    
                         seal.fulfill(urls)
                     }.catch {
                         seal.reject($0)

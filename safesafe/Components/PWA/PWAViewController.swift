@@ -9,6 +9,8 @@
 import UIKit
 import WebKit
 import SnapKit
+import TrustKit
+import PromiseKit
 
 final class PWAViewController: ViewController<PWAViewModel> {
     
@@ -17,6 +19,9 @@ final class PWAViewController: ViewController<PWAViewModel> {
     }
     
     private var webKitView: WKWebView?
+    
+    var onAppear: (() -> Void)?
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -24,7 +29,11 @@ final class PWAViewController: ViewController<PWAViewModel> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-//        navigationController?.setStatusBar(backgroundColor: Constants.color)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        onAppear?()
     }
     
     override func start() {
@@ -42,7 +51,11 @@ final class PWAViewController: ViewController<PWAViewModel> {
 }
 
 extension PWAViewController: PWAViewModelDelegate {
-    func load(url: URL) {
+    func load(url: URL, scope: LoadScope) {
+        if case .offline = scope {
+            webKitView?.loadFileURL(url, allowingReadAccessTo: url)
+        }
+        
         webKitView?.load(URLRequest(url: url))
     }
     
@@ -62,6 +75,10 @@ extension PWAViewController: PWAViewModelDelegate {
         completion(webKitView)
         
         self.webKitView = webKitView
+    }
+
+    func reload() {
+        webKitView?.reload()
     }
 }
 

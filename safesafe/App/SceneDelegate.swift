@@ -11,14 +11,15 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private var appCoordinator: AppCoordinator?
+
     var window: UIWindow?
 
     @available(iOS 13.0, *)
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-        if let windowScene = scene as? UIWindowScene {
+        if let windowScene = scene as? UIWindowScene, let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             window = window ?? UIWindow(windowScene: windowScene)
-            appCoordinator = AppCoordinator(appWindow: window)
+            appCoordinator = AppCoordinator(appWindow: window, dependencyContainer: appDelegate.dependencyContainer)
             appCoordinator?.start()
         }
         
@@ -49,15 +50,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     @available(iOS 13.0, *)
     func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
+        HiderController.shared.hide()
     }
 
     @available(iOS 13.0, *)
     func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
+        HiderController.shared.show(windowScene: window?.windowScene)
     }
 
 }

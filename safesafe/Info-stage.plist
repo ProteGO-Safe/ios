@@ -16,6 +16,28 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>ProteGO Safe Stage</string>
+	<key>TSKConfiguration</key>
+	<dict>
+		<key>TSKPinnedDomains</key>
+		<dict>
+			<key>firebase.com</key>
+			<dict>
+				<key>TSKEnforcePinning</key>
+				<true/>
+				<key>TSKIncludeSubdomains</key>
+				<true/>
+				<key>TSKPublicKeyAlgorithms</key>
+				<array>
+					<string>TSKAlgorithmRsa2048</string>
+				</array>
+				<key>TSKPublicKeyHashes</key>
+				<array>
+					<string>bAXXezeUiUzS0N93QpfratVGiNcHVIKKMfBDjR8S/Ag=</string>
+					<string>3kcNJzkUJ1RqMXJzFX4Zxux5WfETK+uL6Viq9lJNn4o=</string>
+				</array>
+			</dict>
+		</dict>
+	</dict>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
@@ -61,6 +83,7 @@
 	<array>
 		<string>armv7</string>
 		<string>bluetooth-le</string>
+		<string>telephony</string>
 	</array>
 	<key>UIStatusBarHidden</key>
 	<false/>

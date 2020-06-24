@@ -34,8 +34,8 @@ final class ExposureService: ExposureServiceProtocol {
     private let exposureManager: ENManager
     private let diagnosisKeysService: DiagnosisKeysDownloadServiceProtocol
     private let configurationService: RemoteConfigProtocol
-    private let storageService: LocalStorageProtocol
-    
+    private let storageService: LocalStorageProtocol?
+
     private var isCurrentlyDetectingExposures = false
     
     var isExposureNotificationAuthorized: Bool {
@@ -52,13 +52,13 @@ final class ExposureService: ExposureServiceProtocol {
         exposureManager: ENManager,
         diagnosisKeysService: DiagnosisKeysDownloadServiceProtocol,
         configurationService: RemoteConfigProtocol,
-        storageService: LocalStorageProtocol
+        storageService: LocalStorageProtocol?
     ) {
         self.exposureManager = exposureManager
         self.diagnosisKeysService = diagnosisKeysService
         self.configurationService = configurationService
         self.storageService = storageService
-        
+
         if UIDevice.current.model == "iPhone"  {
             activateManager()
         }
@@ -112,7 +112,7 @@ final class ExposureService: ExposureServiceProtocol {
                 }
             }
             
-            #if DEV || STAGE
+            #if DEV
             self?.exposureManager.getTestDiagnosisKeys(completionHandler: completion)
             #else
             self?.exposureManager.getDiagnosisKeys(completionHandler: completion)
@@ -132,7 +132,7 @@ final class ExposureService: ExposureServiceProtocol {
             .done { summary in
                 self.getExposureInfo(from: summary)
                     .done {
-                        self.storageService.append($0)
+                        self.storageService?.append($0)
                         seal.fulfill($0)
                     }
                     .catch {
@@ -149,12 +149,14 @@ final class ExposureService: ExposureServiceProtocol {
     
     private func detectExposures(for configuration: ENExposureConfiguration, keys: [URL]) -> Promise<ENExposureDetectionSummary> {
         Promise { seal in
-            exposureManager.detectExposures(configuration: configuration, diagnosisKeyURLs: keys) { summary, error in
+            console("🔑 Keys count: \(Int(keys.count/2))")
+            exposureManager.detectExposures(configuration: configuration, diagnosisKeyURLs: keys) { [weak self] summary, error in
                 guard let summary = summary, error == nil else {
                     seal.reject(error!)
                     return
                 }
                 seal.fulfill(summary)
+                self?.diagnosisKeysService.deleteFiles()
             }
         }
     }
@@ -238,11 +240,18 @@ extension ExposureService: ExposureNotificationStatusProtocol {
         }
     }
     
-    var isBluetoothOn: Promise<Bool> {
+    func isBluetoothOn(delay: TimeInterval) -> Promise<Bool> {
         guard UIDevice.current.model == "iPhone" else { return .value(false) }
         
-        return activateManager().map {
-            $0 != .bluetoothOff && $0 != .restricted
+        if delay == .zero {
+            return activateManager().map { $0 != .bluetoothOff }
         }
+        
+        // Discussion: this is a workaround, because `exposureManager.exposureNotificationStatus` returns `.disabled` on first check
+        // and a moment later status is updated to `.bluetoothOff` (if BT is off in system settings). So we use short delay to manage this issue.
+        return after(seconds: delay)
+            .then { _ -> Promise<ENStatus> in
+                self.activateManager()
+        }.map { $0 != .bluetoothOff }
     }
 }

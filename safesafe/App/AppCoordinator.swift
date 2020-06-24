@@ -6,9 +6,8 @@
 //  Copyright © 2020 Lukasz szyszkowski. All rights reserved.
 //
 
-import Firebase
 import UIKit
-import Network
+import Siren
 
 #if !LIVE
 import DBDebugToolkit
@@ -16,18 +15,20 @@ import DBDebugToolkit
 
 final class AppCoordinator: CoordinatorType {
     
-    private let dependencyContainer = DependencyContainer()
+    private let dependencyContainer: DependencyContainer
     private let appManager = AppManager.instance
     private let window: UIWindow
-    private let monitor = NWPathMonitor()
     private let clearData = ClearData()
+    
     private var noInternetAlert: UIAlertController?
+    private var jailbreakAlert: UIAlertController?
 
     required init() {
         fatalError("Not implemented")
     }
     
-    init?(appWindow: UIWindow?) {
+    init?(appWindow: UIWindow?, dependencyContainer: DependencyContainer) {
+        self.dependencyContainer = dependencyContainer
         RealmLocalStorage.setupEncryption()
         
         guard let window = appWindow else {
@@ -40,7 +41,6 @@ final class AppCoordinator: CoordinatorType {
     
     func start() {
         setupDebugToolkit()
-        FirebaseApp.configure()
         clearData.clear()
         
         let rootViewController = makeRootViewController()
@@ -48,20 +48,11 @@ final class AppCoordinator: CoordinatorType {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         
+        updateReminder()
+        
         if #available(iOS 13.5, *) {
             configureJSBridge(with: rootViewController)
         }
-        
-        monitor.pathUpdateHandler = { [weak self] path in
-            DispatchQueue.main.async {
-                if path.status == .satisfied {
-                    self?.noInternetAlert?.dismiss(animated: false)
-                } else {
-                    self?.showInternetAlert()
-                }
-            }
-        }
-        monitor.start(queue: DispatchQueue.global(qos: .background))
         
         if #available(iOS 13.5, *) {
             // Don't register bg task on iPad devices that are not supported by EN
@@ -70,15 +61,50 @@ final class AppCoordinator: CoordinatorType {
         }
     }
     
+    private func updateReminder() {
+        let siren = Siren.shared
+        siren.rulesManager = RulesManager(globalRules: .annoying)
+        siren.presentationManager = PresentationManager(
+            alertMessage: "Dostępna jest nowsza wersja aplikacji. Zaktualizuj aplikację ProteGO Safe aby korzystać z pełni funkcjonalności.",
+            forceLanguageLocalization: .polish
+        )
+        siren.wail()
+    }
+    
     private func makeRootViewController() -> UIViewController {
         let factory: PWAViewControllerFactory = dependencyContainer
-        return NavigationController(rootViewController: factory.makePWAViewController())
+        let viewController = factory.makePWAViewController()
+        
+        viewController.onAppear = { [weak self] in
+            if self?.dependencyContainer.jailbreakService.isJailbroken == true {
+                self?.showJailbreakAlert()
+            }
+        }
+        
+        return NavigationController(rootViewController: viewController)
     }
     
     private func setupDebugToolkit() {
         #if !LIVE && !STAGE
         DBDebugToolkit.setup()
         #endif
+    }
+    
+    private func showJailbreakAlert() {
+        let alert = UIAlertController(
+            title: nil,
+            message: """
+            Korzystasz z niezweryfikowanego urządzenia - bezpieczeństwo przesyłanych danych może być niższe. \
+            Upewnij się, że używasz najnowszej, oficjalnej wersji systemu operacyjnego i w bezpieczny sposób łączysz się z Internetem. \
+            Unikaj publicznie dostępnych sieci i korzystaj z własnej transmisji danych jeśli masz taką możliwość. \
+            Nieautoryzowane konfiguracje ustawień telefonu mogą wpłynąć na wynik działania aplikacji oraz na bezpieczeństwo Twoich danych.
+            """,
+            preferredStyle: .alert
+        )
+        alert.addAction(.init(title: "Rozumiem", style: .default))
+        self.jailbreakAlert = alert
+        
+        window.rootViewController?.present(alert, animated: true)
     }
     
     private func showInternetAlert() {

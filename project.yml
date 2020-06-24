@@ -11,8 +11,8 @@ configs:
 
 settings:
   CODE_SIGN_STYLE: Manual
-  MARKETING_VERSION: "4.1.0"
-  CURRENT_PROJECT_VERSION: 182
+  MARKETING_VERSION: "4.2.0"
+  CURRENT_PROJECT_VERSION: 297
 
 schemes:
   safesafe Dev:
@@ -57,7 +57,23 @@ targets:
       LiveAdhoc: safesafe/Resources/Live/liveAdhoc.xcconfig
       Live: safesafe/Resources/Live/live.xcconfig
     sources: 
-      - safesafe
+      - path: safesafe
+        name: "safesafe"
+        excludes:
+          - "Resources/pwa"
+          - "Resources/Dev/Config-dev.plist"
+          - "Resources/Stage/Config-stage.plist"
+          - "Resources/Live/Config-live.plist"
+          - "Resources/Dev/GoogleService-Info-Dev.plist"
+          - "Resources/Stage/GoogleService-Info-Stage.plist"
+          - "Resources/Live/GoogleService-Info-Live.plist"
+          - "Info-dev.plist"
+          - "Info-stage.plist"
+          - "Info-live.plist"
+      - path: safesafe/Resources/pwa
+        type: folder
     preBuildScripts:
       - name: CopyGooglePlist
-        path: Scripts/CopyGooglePlist.sh 
+        path: Scripts/CopyGooglePlist.sh
+      - name: CopyConfigPlist
+        path: Scripts/CopyConfigPlist.sh 

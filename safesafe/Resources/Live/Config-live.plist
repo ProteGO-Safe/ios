@@ -6,8 +6,10 @@
 	<dict>
 		<key>EN_STORAGE_URL</key>
 		<string>https://exp.safesafe.app/</string>
-		<key>EN_BASE_URL</key>
-		<string>https://europe-west1-safesafe-app.cloudfunctions.net</string>
+		<key>EN_GAT_BASE_URL</key>
+		<string>https://gat.safesafe.app/</string>
+		<key>EN_UDK_BASE_URL</key>
+		<string>https://udk.safesafe.app/</string>
 	</dict>
 	<key>PWA</key>
 	<dict>

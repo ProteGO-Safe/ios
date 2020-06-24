@@ -5,6 +5,7 @@
 
 import ExposureNotification
 import Moya
+import FirebaseRemoteConfig
 
 final class DependencyContainer {
     
@@ -23,7 +24,7 @@ final class DependencyContainer {
     lazy var diagnosisKeysUploadService = DiagnosisKeysUploadService(
         with: exposureService,
         deviceCheckService: deviceCheckService,
-        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>()
+        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>(session: CustomSession.defaultSession())
     )
     
     @available(iOS 13.5, *)
@@ -31,17 +32,23 @@ final class DependencyContainer {
         exposureManager: ENManager(),
         diagnosisKeysService: diagnosisKeysDownloadService,
         configurationService: remoteConfiguration,
-        storageService: realmLocalStorage!
+        storageService: realmLocalStorage
     )
     
     @available(iOS 13.5, *)
     lazy var exposureSummaryService: ExposureSummaryServiceProtocol = ExposureSummaryService(
-        storageService: realmLocalStorage!
+        storageService: realmLocalStorage
     )
     
+    lazy var jailbreakService: JailbreakServiceProtocol = JailbreakService()
     lazy var jsBridge = JSBridge(with: serviceStatusManager)
     lazy var realmLocalStorage = RealmLocalStorage()
-    lazy var remoteConfiguration = RemoteConfiguration()
+    lazy var remoteConfigSetting: RemoteConfigSettings = {
+        let settings = RemoteConfigSettings()
+        settings.fetchTimeout = 10
+        return settings
+    }()
+    lazy var remoteConfiguration = RemoteConfiguration(settings: remoteConfigSetting)
     
     lazy var serviceStatusManager: ServiceStatusManagerProtocol = {
         if #available(iOS 13.5, *) {

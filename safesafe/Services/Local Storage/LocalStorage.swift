@@ -16,6 +16,7 @@ protocol LocalStorageProtocol {
     func fetch<T: LocalStorable>() -> Array<T>
     func remove<T: LocalStorable>(_ object: T, completion: ((Result<Void, Error>) -> ())?)
     func remove<T: LocalStorable>(_ objects: [T], completion: ((Result<Void, Error>) -> ())?)
+    static func clearAll()
 }
 
 extension LocalStorageProtocol {
@@ -35,8 +36,11 @@ final class RealmLocalStorage: LocalStorageProtocol {
     private let realm: Realm
     
     required init?(_ realm: Realm? = nil) {
-        do { self.realm = try realm ?? Realm(configuration: RealmLocalStorage.defaultConfiguration()) }
-        catch { return nil }
+        do {
+            self.realm = try realm ?? Realm(configuration: RealmLocalStorage.defaultConfiguration())
+        } catch {
+            return nil
+        }
     }
     
     func append<T: LocalStorable>(_ object: T, completion: ((Result<Void, Error>) -> ())? = nil) {
@@ -100,6 +104,16 @@ final class RealmLocalStorage: LocalStorageProtocol {
         }
     }
     
+    static func clearAll() {
+        do {
+            let realm = try Realm(configuration: defaultConfiguration())
+            try realm.write {
+                realm.deleteAll()
+            }
+        } catch {
+            console(error, type: .error)
+        }
+    }
 }
 
 extension RealmLocalStorage {

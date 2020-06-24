@@ -46,6 +46,28 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>TSKConfiguration</key>
+	<dict>
+		<key>TSKPinnedDomains</key>
+		<dict>
+			<key>firebase.com</key>
+			<dict>
+				<key>TSKEnforcePinning</key>
+				<true/>
+				<key>TSKIncludeSubdomains</key>
+				<true/>
+				<key>TSKPublicKeyAlgorithms</key>
+				<array>
+					<string>TSKAlgorithmRsa2048</string>
+				</array>
+				<key>TSKPublicKeyHashes</key>
+				<array>
+					<string>bAXXezeUiUzS0N93QpfratVGiNcHVIKKMfBDjR8S/Ag=</string>
+					<string>3kcNJzkUJ1RqMXJzFX4Zxux5WfETK+uL6Viq9lJNn4o=</string>
+				</array>
+			</dict>
+		</dict>
+	</dict>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

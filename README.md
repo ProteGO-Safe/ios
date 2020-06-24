@@ -74,11 +74,23 @@ To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
 
+**4.2.0**
 
-**4.1.0**
+- Removed online PWA
+- Added PWA as a part of app code (offline)
+- Bug fixes
 
-- Exposure Notification API added
-- OpenTrace module fully removed together with all collected data
+**4.1.1**
+
+- Added Exposure Notification API
+- Added Background Download Task For Exposure Notification
+- Added Support For Exposure Notification Incompatible Devices
+- Added Content Hider for App Switcher
+- Added Open Trace Stored Data Remover
+- Simplified Onboarding
+- Simplified Assesment Risk Test
+- Icreased App Security
+- Removed Open Trace Code
 
 
 **3.0.2**

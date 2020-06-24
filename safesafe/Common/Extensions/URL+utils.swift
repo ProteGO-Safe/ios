@@ -21,11 +21,7 @@ extension URL {
         return components.url
     }
     
-    func isHostEqual(to otherHost: String) -> Bool {
-        guard let host = self.host else {
-            return false
-        }
-        
-        return host == otherHost
+    func isHostEqual(to otherHost: URL) -> Bool {
+        return self.path.hasPrefix(otherHost.path)
     }
 }
