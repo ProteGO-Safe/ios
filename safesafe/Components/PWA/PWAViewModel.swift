@@ -85,9 +85,6 @@ extension PWAViewModel {
 
         migrationManager.migrate { result in
              delegate?.load(url: Constants.pwaLocalURL, scope: .offline)
-//            if case .success(let isMigrated) = result, isMigrated {
-//                 delegate?.load(url: Constants.pwaLocalURL, scope: .offline)
-//            }
         }
     }
     
