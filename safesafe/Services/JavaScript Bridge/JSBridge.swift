@@ -333,26 +333,15 @@ private extension JSBridge {
         guard let response: UploadTemporaryExposureKeysResponse = jsonString?.jsonDecode(decoder: jsonDecoder)
             else { return }
         
-        guard NetworkMonitoring.shared.isInternetAvailable else {
-            if let rootViewController = self.webView?.window?.rootViewController {
-                NetworkMonitoring.shared.showInternetAlert(in: rootViewController) { [weak self] action in
-                    switch action {
-                    case .cancel:
-                        self?.send(.other)
-                    case .retry:
-                        self?.uploadTemporaryExposureKeys(jsonString: jsonString)
-                    }
-                }
-            } else {
-                send(.other)
-            }
-            return
-        }
-        
         diagnosisKeysUploadService?.upload(usingAuthCode: response.pin).done {
             self.send(.success)
-        }.catch { _ in
-            self.send(.failure)
+        }.catch { error in
+            if !(error is InternalError) {
+                self.send(.failure)
+            } else {
+                 self.send(.other)
+            }
+           
         }
     }
     

@@ -46,4 +46,9 @@ enum InternalError: Error {
     
     // Keychain
     case keychainKeyNotExists
+    
+    // Networking
+    case cantMakeRequest
+    case noInternet
+    
 }

@@ -19,7 +19,6 @@ final class AppCoordinator: CoordinatorType {
     private let appManager = AppManager.instance
     private let window: UIWindow
     private let clearData = ClearData()
-    
     private var noInternetAlert: UIAlertController?
     private var jailbreakAlert: UIAlertController?
 
