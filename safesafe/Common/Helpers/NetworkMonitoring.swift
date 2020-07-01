@@ -11,11 +11,6 @@ import Network
 final class NetworkMonitoring {
     static let shared = NetworkMonitoring()
     
-    enum AlertAction {
-        case retry
-        case cancel
-    }
-    
     var isInternetAvailable: Bool {
         return networkPath.currentPath.status == .satisfied
     }
