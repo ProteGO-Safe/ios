@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 4.2.1
 
-- Added manage for large Diagnosis Keys - batching
+- Manage large Diagnosis Keys batches
 - Refactored keys upload process
 - Bug fixes
 
