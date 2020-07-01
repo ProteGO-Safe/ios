@@ -7,25 +7,6 @@
 
 import UIKit
 
-enum AlertType {
-    case noInternet
-    case uploadGeneral
-}
-
-enum AlertAction {
-    case cancel
-    case retry
-    
-    var title: String {
-        switch self {
-        case .cancel:
-            return "Anuluj"
-        case .retry:
-            return "Ponów"
-        }
-    }
-}
-
 protocol AlertManager {
     var viewController: UIViewController? { get }
     func register(viewController: UIViewController)

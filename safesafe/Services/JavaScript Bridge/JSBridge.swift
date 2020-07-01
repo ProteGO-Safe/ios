@@ -339,9 +339,9 @@ private extension JSBridge {
             if !(error is InternalError) {
                 self.send(.failure)
             } else {
-                 self.send(.other)
+                self.send(.other)
             }
-           
+            
         }
     }
     
