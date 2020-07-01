@@ -10,7 +10,7 @@ import UIKit
 final class NetworkingAlertManager: AlertManager {
     private(set) var viewController: UIViewController?
     
-    func show(type: AlertType, result: @escaping (AlertAction) -> ()) {
+    func show(type: AlertType, result: @escaping (AlertAction) -> Void) {
         guard let viewController = presentingViewController() else {
             return
         }
