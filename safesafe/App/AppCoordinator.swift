@@ -135,16 +135,7 @@ final class AppCoordinator: CoordinatorType {
     
     @objc
     private func screenCaptureDidChange(notification: Notification) {
-        var isMainScreenMirrored = false
-        let screens = UIScreen.screens
-        for screen in screens {
-            if let mirroredScreen = screen.mirrored, mirroredScreen == UIScreen.main {
-                isMainScreenMirrored = true
-                break
-            }
-        }
-        
-        guard !isMainScreenMirrored  else { return }
+        guard UIScreen.screens.first(where: { $0.mirrored == UIScreen.main }).map ({ _ in true }) ?? false else { return }
         
         if #available(iOS 13.0, *) {
             UIScreen.main.isCaptured ? HiderController.shared.show(windowScene: window.windowScene) : HiderController.shared.hide()
