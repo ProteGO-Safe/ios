@@ -20,7 +20,7 @@
 	<dict>
 		<key>TSKPinnedDomains</key>
 		<dict>
-			<key>firebase.com</key>
+			<key>safesafe.app</key>
 			<dict>
 				<key>TSKEnforcePinning</key>
 				<true/>
@@ -72,6 +72,8 @@
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
