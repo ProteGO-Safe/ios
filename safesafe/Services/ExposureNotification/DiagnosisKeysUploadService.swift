@@ -13,6 +13,12 @@ protocol DiagnosisKeysUploadServiceProtocol {
     
 }
 
+enum UploadError: Error {
+    case noInternet(shouldRetry: Bool)
+    case general(shouldRetry: Bool, code: Int)
+    case unknown(Error)
+}
+
 @available(iOS 13.5, *)
 final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
         
@@ -20,7 +26,7 @@ final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
     
     private let exposureManager: ExposureServiceProtocol
     private let deviceCheckService: DeviceCheckServiceProtocol
-    private let exposureKeysProvider: MoyaProvider<ExposureKeysTarget>
+    private let renewableRequest: RenewableRequest<ExposureKeysTarget>
     
     // MARK: - Life Cycle
     
@@ -31,79 +37,67 @@ final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
     ) {
         self.exposureManager = exposureManager
         self.deviceCheckService = deviceCheckService
-        self.exposureKeysProvider = exposureKeysProvider
+        self.renewableRequest = .init(provider: exposureKeysProvider, alertManager: NetworkingAlertManager())
     }
     
     // MARK: - Exposure Keys
     
     func upload(usingAuthCode authCode: String) -> Promise<Void> {
-        Promise { seal in
-            prepareTemporaryExposureKeys(usingAuthCode: authCode).done { keys in
-                let keysData = TemporaryExposureKeysData(data: keys)
-                
-                self.exposureKeysProvider.request(.post(keysData)) { result in
-                    switch result {
-                    case .success:
-                        seal.fulfill(())
-
-                    case .failure(let error):
-                        seal.reject(error)
-                    }
-                }
-            }.catch {
-                seal.reject($0)
-            }
+        var diagnosisKeys: [ENTemporaryExposureKey] = []
+        var uploadPayload: String = ""
+        return getDiagnosisKeys()
+            .then { keys -> Promise<String> in
+                diagnosisKeys = keys
+                return self.getPayload(keys: diagnosisKeys)
+        }
+        .then { payload -> Promise<String> in
+            uploadPayload = payload
+            return self.getToken(usingAuthCode: authCode)
+        }
+        .then { token -> Promise<Moya.Response> in
+            let data = TemporaryExposureKeys(
+                temporaryExposureKeys: diagnosisKeys.map({ TemporaryExposureKey($0) }),
+                verificationPayload: token,
+                deviceVerificationPayload: uploadPayload
+            )
+            let keysData = TemporaryExposureKeysData(data: data)
+            
+            return self.renewableRequest.make(target: .post(keysData))
+        }
+        .asVoid()
+    }
+    
+    private func getDiagnosisKeys(filtered: Bool = true) -> Promise<[ENTemporaryExposureKey]> {
+        if filtered {
+            return exposureManager
+                .getDiagnosisKeys()
+                .filterValues(discardOldKeys)
+        } else {
+            return exposureManager
+                .getDiagnosisKeys()
         }
     }
     
-    private func prepareTemporaryExposureKeys(usingAuthCode authCode: String) -> Promise<TemporaryExposureKeys> {
-        Promise { seal in
-            exposureManager
-                .getDiagnosisKeys()
-                .filterValues(discardOldKeys)
-                .done { keys in
-                    firstly { when(fulfilled:
-                        self.getToken(usingAuthCode: authCode),
-                                   self.deviceCheckService.generatePayload(
-                                    bundleID: TemporaryExposureKeys.Default.appPackageName,
-                                    exposureKeys: keys.map({ $0.keyData }),
-                                    regions: TemporaryExposureKeys.Default.regions
-                        )
-                        )}.done { token, payload in
-                            seal.fulfill(TemporaryExposureKeys(
-                                temporaryExposureKeys: keys.map({ TemporaryExposureKey($0) }),
-                                verificationPayload: token,
-                                deviceVerificationPayload: payload
-                            ))
-                    }.catch {
-                        seal.reject($0)
-                    }
-            }.catch {
-                seal.reject($0)
-            }
-        }
+    private func getPayload(keys: [ENTemporaryExposureKey]) -> Promise<String> {
+        return self.deviceCheckService.generatePayload(
+            bundleID: TemporaryExposureKeys.Default.appPackageName,
+            exposureKeys: keys.map({ $0.keyData }),
+            regions: TemporaryExposureKeys.Default.regions
+        )
     }
     
     // MARK: - Auth
     
     private func getToken(usingAuthCode authCode: String) -> Promise<String> {
-        Promise { seal in
-            let data = TemporaryExposureKeysAuthData(code: authCode)
-            
-            exposureKeysProvider.request(.auth(data)) { result in
-                switch result {
-                case .success(let response):
-                    do {
-                        let token = try response.map(TemporaryExposureKeysAuthResponse.self).result.accessToken
-                        seal.fulfill(token)
-                    } catch {
-                        seal.reject(error)
-                    }
-                    
-                case .failure(let error):
-                    seal.reject(error)
+        let data = TemporaryExposureKeysAuthData(code: authCode)
+        return renewableRequest.make(target: .auth(data))
+            .then { response -> Promise<String> in
+                do {
+                    let token = try response.map(TemporaryExposureKeysAuthResponse.self).result.accessToken
+                    return .value(token)
+                } catch {
+                    throw error
                 }
-            }
         }
     }
     

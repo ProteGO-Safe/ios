@@ -20,7 +20,7 @@
 	<dict>
 		<key>TSKPinnedDomains</key>
 		<dict>
-			<key>firebase.com</key>
+			<key>safesafe.app</key>
 			<dict>
 				<key>TSKEnforcePinning</key>
 				<true/>
@@ -32,8 +32,8 @@
 				</array>
 				<key>TSKPublicKeyHashes</key>
 				<array>
-					<string>bAXXezeUiUzS0N93QpfratVGiNcHVIKKMfBDjR8S/Ag=</string>
-					<string>3kcNJzkUJ1RqMXJzFX4Zxux5WfETK+uL6Viq9lJNn4o=</string>
+					<string>LSWuEvDZ3CS5f8fyaJDiYob0mmtqq7NGoqsaIrKxqCU=</string>
+					<string>FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4=</string>
 				</array>
 			</dict>
 		</dict>
