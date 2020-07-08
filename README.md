@@ -75,6 +75,12 @@ To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
 
+**4.2.1**
+
+- Manage large Diagnosis Keys batches
+- Refactored keys upload process
+- Bug fixes
+
 **4.2.0**
 
 - Removed online PWA
