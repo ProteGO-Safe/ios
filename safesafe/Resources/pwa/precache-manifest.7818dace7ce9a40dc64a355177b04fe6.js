@@ -1,31 +1,31 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "927905ee231dd7f54879b467d6c0dd2b",
+    "revision": "664008c434ef3315600b6bcff204bab8",
     "url": "./index.html"
   },
   {
-    "revision": "27e5f940087e0e10b8f0",
+    "revision": "6d2967b373ddde0a8449",
     "url": "./static/css/2.fb8a0bac.chunk.css"
   },
   {
-    "revision": "ec24c0f04ca0b8be525f",
+    "revision": "3f5a9bcac0983b535dac",
     "url": "./static/css/main.dc94683e.chunk.css"
   },
   {
-    "revision": "27e5f940087e0e10b8f0",
-    "url": "./static/js/2.6f40d57d.chunk.js"
+    "revision": "6d2967b373ddde0a8449",
+    "url": "./static/js/2.92693210.chunk.js"
   },
   {
     "revision": "21968521f2ed82ae33d0a85b3c11b74e",
-    "url": "./static/js/2.6f40d57d.chunk.js.LICENSE.txt"
+    "url": "./static/js/2.92693210.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ec24c0f04ca0b8be525f",
-    "url": "./static/js/main.7df5109e.chunk.js"
+    "revision": "3f5a9bcac0983b535dac",
+    "url": "./static/js/main.385ce7ad.chunk.js"
   },
   {
-    "revision": "fe551a0d0a353dab2e43",
-    "url": "./static/js/runtime-main.115a4ed7.js"
+    "revision": "bc5930ccf9738ce88566",
+    "url": "./static/js/runtime-main.71789bde.js"
   },
   {
     "revision": "83177134c04b835d8289eb799144548f",
@@ -190,6 +190,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "e85d9c052c0ac12d77a1ed6be900e918",
     "url": "./static/media/menu-boczne-zle-sie-czuje_BLUE.e85d9c05.svg"
+  },
+  {
+    "revision": "ce491885444b2ecaf2e5d90ee081e5d0",
+    "url": "./static/media/not_supported_logo.ce491885.svg"
   },
   {
     "revision": "2cc22eaf1b55c60073f53547b050b6d1",

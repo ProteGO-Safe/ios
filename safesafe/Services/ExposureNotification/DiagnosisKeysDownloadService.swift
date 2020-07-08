@@ -83,7 +83,7 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                         }
                         
                         do {
-                            let unzipDestinationURL = try Directory.getDiagnosisKeysURL().appendingPathComponent(directoryName)
+                            let unzipDestinationURL = try Directory.getDiagnosisKeysURL().appendingPathComponent(name).deletingPathExtension()
                             let urls = try self.fileManager.contentsOfDirectory(at: unzipDestinationURL, includingPropertiesForKeys: nil)
                             fileURLResults.append(.success(urls))
                         } catch {
@@ -122,7 +122,7 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
     private func downloadDestination(temporaryURL: URL, response: HTTPURLResponse) -> (destinationURL: URL, options: DownloadRequest.Options) {
         guard
             let suggestedFilename = response.suggestedFilename,
-            let directoryName = DiagnosisKeysDownloadService.extractTimestamp(name: suggestedFilename),
+//            let directoryName = DiagnosisKeysDownloadService.extractTimestamp(name: suggestedFilename),
             let temporaryDirectory = try? Directory.getDiagnosisKeysTempURL(),
             (200...299).contains(response.statusCode)
         else {
@@ -130,10 +130,10 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
         }
         
         do {
-            let unzipDestinationURL = try Directory.getDiagnosisKeysURL().appendingPathComponent(directoryName)
+            let unzipDestinationURL = try Directory.getDiagnosisKeysURL().appendingPathComponent(suggestedFilename).deletingPathExtension()
             
             try FileManager.default.unzipItem(at: temporaryURL, to: unzipDestinationURL)
-            renameAll(directoryName, dirPath: unzipDestinationURL)
+            renameAll(suggestedFilename, dirPath: unzipDestinationURL)
         } catch {
             console(error, type: .error)
         }
@@ -145,7 +145,7 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
         do {
             for file in try fileManager.contentsOfDirectory(atPath: dirPath.path) {
                 let originalPath = dirPath.appendingPathComponent(file)
-                let newPath = dirPath.appendingPathComponent("\(filename).\(originalPath.pathExtension)")
+                let newPath = dirPath.appendingPathComponent(filename).deletingPathExtension().appendingPathExtension(originalPath.pathExtension)
                 try fileManager.moveItem(at: originalPath, to: newPath)
             }
         } catch {
@@ -211,7 +211,7 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                     
                     self.downloadFiles(withNames: itemNames, keysDirectoryURL: keysDirectoryURL).done { urls in
                         let timestamps =  urls.map { $0.lastPathComponent }
-                            .compactMap { $0.split(separator: ".").first }
+                            .compactMap { $0.split(separator: "-").first }
                             .map { String($0) }
                             .compactMap(Int.init)
                             .sorted()

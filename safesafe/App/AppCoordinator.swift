@@ -19,10 +19,13 @@ final class AppCoordinator: CoordinatorType {
     private let appManager = AppManager.instance
     private let window: UIWindow
     private let clearData = ClearData()
-    
     private var noInternetAlert: UIAlertController?
     private var jailbreakAlert: UIAlertController?
 
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIScreen.capturedDidChangeNotification, object: nil)
+    }
+    
     required init() {
         fatalError("Not implemented")
     }
@@ -35,11 +38,11 @@ final class AppCoordinator: CoordinatorType {
             fatalError("Window doesn't exists")
         }
         
-        UIApplication.shared.isIdleTimerDisabled = true
         self.window = window
     }
     
     func start() {
+        setupScreenRecording()
         setupDebugToolkit()
         clearData.clear()
         
@@ -90,6 +93,10 @@ final class AppCoordinator: CoordinatorType {
         #endif
     }
     
+    private func setupScreenRecording() {
+        NotificationCenter.default.addObserver(self, selector: #selector(screenCaptureDidChange), name: UIScreen.capturedDidChangeNotification, object: nil)
+    }
+    
     private func showJailbreakAlert() {
         let alert = UIAlertController(
             title: nil,
@@ -126,4 +133,15 @@ final class AppCoordinator: CoordinatorType {
         )
     }
     
+    @objc
+    private func screenCaptureDidChange(notification: Notification) {
+        guard UIScreen.screens.first(where: { $0.mirrored == UIScreen.main }).map ({ _ in true }) ?? false else { return }
+        
+        if #available(iOS 13.0, *) {
+            UIScreen.main.isCaptured ? HiderController.shared.show(windowScene: window.windowScene) : HiderController.shared.hide()
+        } else {
+            UIScreen.main.isCaptured ? HiderController.shared.show() : HiderController.shared.hide()
+        }
+        
+    }
 }
