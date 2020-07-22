@@ -44,7 +44,7 @@ final class ConfigManager {
             let path = Bundle.main.path(forResource: plistName, ofType: "plist"),
             let plist = NSDictionary(contentsOfFile: path) as? [String: Any]
         else {
-            fatalError("Can't find \(plistName).plist")
+            Fatal.execute("Can't find \(plistName).plist")
         }
         
         settings = plist
@@ -52,7 +52,7 @@ final class ConfigManager {
     
     private func value<T>(for key: String, dictionary: [String: Any]) -> T {
         guard let dictValue = dictionary[key] as? T else {
-            fatalError("Can't read value [\(T.self)] for \(key)")
+            Fatal.execute("Can't read value [\(T.self)] for \(key)")
         }
         
         return dictValue
@@ -64,7 +64,7 @@ final class ConfigManager {
 extension ConfigManager {
     private var pwaSettings: [String: Any] {
         guard let dictionary = settings[Key.pwa] as? [String: Any] else {
-            fatalError("Can't read \(Key.pwa) from plist")
+            Fatal.execute("Can't read \(Key.pwa) from plist")
         }
         
         return dictionary
@@ -84,7 +84,7 @@ extension ConfigManager {
     
     private var enSettings: [String: Any] {
         guard let dictionary = settings[Key.exposureNotification] as? [String: Any] else {
-            fatalError("Can't read \(Key.exposureNotification) from plist")
+            Fatal.execute("Can't read \(Key.exposureNotification) from plist")
         }
         
         return dictionary

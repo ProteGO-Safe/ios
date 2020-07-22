@@ -17,9 +17,9 @@ class ViewController<T: ViewModelType>: UIViewController, ViewControllerType {
         viewModel.start()
     }
     required init?(coder: NSCoder) {
-        fatalError("Not implemented")
+        Fatal.execute("Not implemented")
     }
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,15 +56,15 @@ class ViewController<T: ViewModelType>: UIViewController, ViewControllerType {
     }
     
     func start() {
-        fatalError("This method is called after super.init(nibName: nil, bundle: nil) and before viewModel.start(). Please use it for vc initialising job like assignig delegate for view model etc")
+        Fatal.execute("This method is called after super.init(nibName: nil, bundle: nil) and before viewModel.start(). Please use it for vc initialising job like assignig delegate for view model etc")
     }
     
     func setup() {
-        fatalError("This method is called when views are loaded and available. Please use it for setup your views")
+        Fatal.execute("This method is called when views are loaded and available. Please use it for setup your views")
     }
     
     func layout() {
-        fatalError("This method is called after setup() method. Please use it arrange your views with constraints, frames etc")
+        Fatal.execute("This method is called after setup() method. Please use it arrange your views with constraints, frames etc")
     }
     
     func add(subview: UIView, translatesAutoresizingMask: Bool = false) {
