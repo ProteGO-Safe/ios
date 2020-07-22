@@ -21,13 +21,13 @@ final class AppCoordinator: CoordinatorType {
     private let clearData = ClearData()
     private var noInternetAlert: UIAlertController?
     private var jailbreakAlert: UIAlertController?
-
+    
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIScreen.capturedDidChangeNotification, object: nil)
     }
     
     required init() {
-        fatalError("Not implemented")
+        Fatal.execute("Not implemented")
     }
     
     init?(appWindow: UIWindow?, dependencyContainer: DependencyContainer) {
@@ -35,7 +35,7 @@ final class AppCoordinator: CoordinatorType {
         RealmLocalStorage.setupEncryption()
         
         guard let window = appWindow else {
-            fatalError("Window doesn't exists")
+            Fatal.execute("Window doesn't exists")
         }
         
         self.window = window
@@ -135,7 +135,8 @@ final class AppCoordinator: CoordinatorType {
     
     @objc
     private func screenCaptureDidChange(notification: Notification) {
-        guard UIScreen.screens.first(where: { $0.mirrored == UIScreen.main }).map ({ _ in true }) ?? false else { return }
+        let isMirrored = UIScreen.screens.first(where: { $0.mirrored == UIScreen.main }).map ({ _ in true }) ?? false
+        guard !isMirrored else  { return }
         
         if #available(iOS 13.0, *) {
             UIScreen.main.isCaptured ? HiderController.shared.show(windowScene: window.windowScene) : HiderController.shared.hide()
