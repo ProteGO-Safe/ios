@@ -23,7 +23,7 @@
 			<key>safesafe.app</key>
 			<dict>
 				<key>TSKEnforcePinning</key>
-				<true/>
+				<false/>
 				<key>TSKIncludeSubdomains</key>
 				<true/>
 				<key>TSKPublicKeyAlgorithms</key>
@@ -32,8 +32,7 @@
 				</array>
 				<key>TSKPublicKeyHashes</key>
 				<array>
-					<string>LSWuEvDZ3CS5f8fyaJDiYob0mmtqq7NGoqsaIrKxqCU=</string>
-					<string>FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4=</string>
+					<string>nopOJhvRDDCBiANrCZsvoz4YwbGZtr62+ykR90ziMRg=</string>
 				</array>
 			</dict>
 		</dict>
