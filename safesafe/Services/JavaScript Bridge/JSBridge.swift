@@ -138,7 +138,7 @@ extension JSBridge: WKScriptMessageHandler {
         case .getBridgeData:
             getBridgeDataManage(body: message.body)
         default:
-            assertionFailure("Not managed yet \(method)")
+            Assertion.failure("Not managed yet \(method)")
         }
     }
     
@@ -310,7 +310,7 @@ private extension JSBridge {
             self.isServicSetting = false
         }
         .catch { error in
-            assertionFailure(error.localizedDescription)
+            Assertion.failure(error.localizedDescription)
         }
     }
     

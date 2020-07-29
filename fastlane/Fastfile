@@ -13,6 +13,7 @@ lane :adhocs do |options|
 end
 
 lane :uats do |options|
+	# 
 	live_appstore(options)
 	stage_adhoc(options)
 	stage_appstore(options)
@@ -37,11 +38,11 @@ end
 # Private lanes
 
 private_lane :build_adhoc do |options|
+	xcode_select("/Applications/Xcode.app")
 	xcodegen(
 		spec: ENV["PROJECT_YML"]
 	)
 	cocoapods
-
 	# This version bumping works only for local projects, don't use it on CI/CD
 	#
 	if options[:version_bump]
