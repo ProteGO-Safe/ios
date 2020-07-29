@@ -35,9 +35,19 @@ fastlane live_appstore
 fastlane stage_appstore
 ```
 
+### stage_screencast_appstore
+```
+fastlane stage_screencast_appstore
+```
+
 ### stage_adhoc
 ```
 fastlane stage_adhoc
+```
+
+### stage_screencast_adhoc
+```
+fastlane stage_screencast_adhoc
 ```
 
 ### dev_adhoc
