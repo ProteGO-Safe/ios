@@ -7,4 +7,4 @@ DEVELOPMENT_TEAM = 85GAG994R5
 CODE_SIGN_IDENTITY = iPhone Developer
 CODE_SIGN_ENTITLEMENTS = safesafe/Resources/safesafe Debug.entitlements
 PROVISIONING_PROFILE_SPECIFIER = protegosafe-staging-dev
-OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS -D STAGE
+OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS -D STAGE_SCREENCAST
