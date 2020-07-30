@@ -75,6 +75,11 @@ To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
 
+**4.2.2**
+
+- Fix for disabling of screen recording
+- Replaced all fatalError and assertionFailure due to storing full user paths in binary file
+
 **4.2.1**
 
 - Manage large Diagnosis Keys batches
