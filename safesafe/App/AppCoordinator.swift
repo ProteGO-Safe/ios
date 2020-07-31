@@ -9,7 +9,7 @@
 import UIKit
 import Siren
 
-#if !LIVE
+#if !LIVE && !STAGE_SCREENCAST
 import DBDebugToolkit
 #endif
 
@@ -42,7 +42,9 @@ final class AppCoordinator: CoordinatorType {
     }
     
     func start() {
+        #if !STAGE_SCREENCAST
         setupScreenRecording()
+        #endif
         setupDebugToolkit()
         clearData.clear()
         
@@ -88,7 +90,7 @@ final class AppCoordinator: CoordinatorType {
     }
     
     private func setupDebugToolkit() {
-        #if !LIVE && !STAGE
+        #if !LIVE && !STAGE && !STAGE_SCREENCAST
         DBDebugToolkit.setup()
         #endif
     }

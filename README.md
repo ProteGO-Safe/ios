@@ -75,6 +75,12 @@ To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
 
+**4.2.3**
+
+- Passing app version to PWA
+- Updated certificates for pinning
+- Updated Privacy Policy URL in appstore
+
 **4.2.2**
 
 - Fix for disabling of screen recording

@@ -4,6 +4,7 @@ configs:
   Dev: debug
   DevDist: release
   StageDebug: debug
+  StageScreencast: release
   Stage: release
   LiveDebug: debug
   Live: release
@@ -11,8 +12,8 @@ configs:
 
 settings:
   CODE_SIGN_STYLE: Manual
-  MARKETING_VERSION: "4.2.2"
-  CURRENT_PROJECT_VERSION: 327
+  MARKETING_VERSION: "4.2.3"
+  CURRENT_PROJECT_VERSION: 330
 
 schemes:
   safesafe Dev:
@@ -51,6 +52,7 @@ targets:
     configFiles:
       Dev: safesafe/Resources/Dev/dev.xcconfig
       DevDist: safesafe/Resources/Dev/devDist.xcconfig
+      StageScreencast: safesafe/Resources/Stage/stageScreencast.xcconfig
       StageDebug: safesafe/Resources/Stage/stageDebug.xcconfig
       Stage: safesafe/Resources/Stage/stage.xcconfig
       LiveDebug: safesafe/Resources/Live/liveDebug.xcconfig
