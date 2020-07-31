@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.2.2
+
+- Fix for disabling of screen recording
+- Replaced all fatalError and assertionFailure due to storing full user paths in binary file
+
 ## 4.2.1
 
 - Manage large Diagnosis Keys batches
