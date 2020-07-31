@@ -14,9 +14,10 @@ end
 
 lane :uats do |options|
 	# 
-	live_appstore(options)
-	stage_adhoc(options)
+	stage_screencast_appstore(version_bump:true)
 	stage_appstore(options)
+	stage_adhoc(options)
+	live_appstore(options)
 end
 
 lane :live_appstore do |options|
@@ -27,8 +28,16 @@ lane :stage_appstore do |options|
 	build_appstore(configuration_name: "Stage", scheme_name: "safesafe Live", name_suffix: "Stage Appstore", version_bump:options[:version_bump])
 end
 
+lane :stage_screencast_appstore do |options|
+	build_appstore(configuration_name: "StageScreencast", scheme_name: "safesafe Live", name_suffix: "Stage Screen Appstore", version_bump:options[:version_bump])
+end
+
 lane :stage_adhoc do |options|
 	build_adhoc(configuration_name: "Stage", scheme_name: "safesafe Stage", name_suffix: "Stage", firebase_distribution: false, version_bump:options[:version_bump])
+end
+
+lane :stage_screencast_adhoc do |options|
+	build_adhoc(configuration_name: "StageScreencast", scheme_name: "safesafe Stage", name_suffix: "Stage_Screencast_", firebase_distribution: false, version_bump:options[:version_bump])
 end
 
 lane :dev_adhoc do |options|

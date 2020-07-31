@@ -12,7 +12,7 @@ final class ConfigManager {
     
     #if DEV
     static private let configPlistName = "Config-dev"
-    #elseif STAGE
+    #elseif STAGE || STAGE_SCREENCAST
     static private let configPlistName = "Config-stage"
     #elseif LIVE
     static private let configPlistName = "Config-live"

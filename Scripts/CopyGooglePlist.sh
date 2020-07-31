@@ -6,7 +6,7 @@ DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist
 
 case "${CONFIGURATION}" in
     "Dev")                cp -r "${DEV_PATH}" "${DESTINATION}";;
-    "Stage"|"StageDebug") cp -r "${STAGE_PATH}" "${DESTINATION}";;
+    "Stage"|"StageDebug"|"StageScreencast") cp -r "${STAGE_PATH}" "${DESTINATION}";;
     "Live"|"LiveDebug")   cp -r "${LIVE_PATH}" "${DESTINATION}";;
     *) ;;
 esac

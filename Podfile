@@ -18,7 +18,7 @@ def pods_definition
   pod 'TrustKit', '~> 1.6.5'
   pod 'Siren', '~> 5.4.0'
   
-  pod 'DBDebugToolkit', :configurations => ['Dev', 'DevDist', 'Stage', 'StageDebug', 'LiveDebug', 'LiveAdhoc']
+  pod 'DBDebugToolkit', :configurations => ['Dev', 'DevDist', 'Stage', 'StageDebug', 'StageScreencast', 'LiveDebug', 'LiveAdhoc']
 
 end
 

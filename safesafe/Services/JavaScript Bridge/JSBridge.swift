@@ -24,6 +24,7 @@ final class JSBridge: NSObject {
         case clearData = 37
         case uploadTemporaryExposureKeys = 43
         case exposureList = 61
+        case appVersion = 62
     }
     
     enum SendMethod: String, CaseIterable {
@@ -193,6 +194,9 @@ extension JSBridge: WKScriptMessageHandler {
         case .exposureList:
             exposureListGetBridgeDataResponse(requestID: requestId)
             
+        case .appVersion:
+            applicationVersionGetBridgeDataResponse(requestID: requestId)
+            
         default:
             return
         }
@@ -243,6 +247,14 @@ private extension JSBridge {
         }
     }
     
+    func applicationVersionGetBridgeDataResponse(requestID: String) {
+        guard let version = UIApplication.appVersion  else { return }
+        let responseModel = ApplicationVersionResponse(appVersion: version)
+        
+        guard let responseData = encodeToJSON(responseModel) else { return }
+        
+        bridgeDataResponse(type: .appVersion, body: responseData, requestId: requestID)
+    }
 }
 
 // MARK: - onBridgeData handling
