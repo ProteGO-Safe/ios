@@ -58,10 +58,10 @@ final class Permissions {
         return Guarantee { fulfill in
             let (title, body) = self.alertCopy(for: permission)
             let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "Anuluj", style: .cancel) { _ in
+            let cancelAction = UIAlertAction(title: "CANCEL_BUTTON_TITLE".localized(), style: .cancel) { _ in
                 fulfill(.cancel)
             }
-            let settingsAction = UIAlertAction(title: "Ustawienia", style: .default) { _ in
+            let settingsAction = UIAlertAction(title: "SETTINGS_TITLE".localized(), style: .default) { _ in
                 guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                     return fulfill(.settings)
                 }
@@ -85,10 +85,10 @@ final class Permissions {
         return Promise { seal in
             let (title, body) = self.choiceAlertCopy(for: permission)
             let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "Pomiń", style: .cancel) { _ in
+            let cancelAction = UIAlertAction(title: "SKIP_BUTTON_TITLE".localized(), style: .cancel) { _ in
                 seal.fulfill(.skip)
             }
-            let settingsAction = UIAlertAction(title: "Ustawienia", style: .default) { _ in
+            let settingsAction = UIAlertAction(title: "SETTINGS_TITLE".localized(), style: .default) { _ in
                 guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                     return seal.fulfill(.settings)
                 }
@@ -111,9 +111,9 @@ final class Permissions {
     private func choiceAlertCopy(for permission: Permission) -> (title: String, body: String) {
         switch permission {
         case .exposureNotification:
-            return (title: "Moduł monitorowania ryzyka", body: "Moduł monitorowania ryzyka jest wyłączony. Przejdź do ustawień, żeby go włączyć. Po włączeniu aplikacja poinformuje Cię jeżeli wykryje ryzyko kontaktu z osoba chora na COVID-19.")
+            return (title: "EN_MONITORING_OFF_ALERT_TITLE".localized(), body: "EN_MONITORING_OFF_ALERT_TITLE".localized())
         case .bluetooth:
-            return (title: "Moduł Bluetooth", body: "Moduł bluetooth potrzebny do działania Modułu monitorowania ryzyka jest wyłączony. Przejdź do ustawień, aby go włączyć.")
+            return (title: "BT_MODULE_OFF_ALERT_TITLE".localized(), body: "BT_MODULE_OFF_ALERT_MESSAGE".localized())
         default:
             return (title: "", body: "")
         }
@@ -122,7 +122,7 @@ final class Permissions {
     private func alertCopy(for permission: Permission) -> (title: String, body: String) {
         switch permission {
         case .notifications:
-            return (title: "Włącz powiadomienia", body: "Do prawidłowego działania aplikacji potrzebna jest Twoja zgoda na wyświetlanie powiadomień. Włącz powiadomienia i pozwól ProteGO Safe wspierać ochronę zdrowia każdego z nas.")
+            return (title: "APNS_OFF_ALERT_TITLE".localized(), body: "APNS_OFF_ALERT_MESSAGE".localized())
         case .exposureNotification:
             return (title: "COVID TITLE", body: "COVID MESSAGE")
         case .bluetooth:
