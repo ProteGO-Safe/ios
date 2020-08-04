@@ -33,9 +33,9 @@ final class NetworkingAlertManager: AlertManager {
     private func content(type: AlertType) -> (title: String, message: String) {
         switch type {
         case .noInternet:
-            return (title: "Błąd", message: "Brak połączenia z internetem.")
+            return (title: "INTERNET_CONNECTION_ALERT_TITLE".localized(), message: "INTERNET_CONNECTION_ALERT_MESSAGE".localized())
         case .uploadGeneral:
-            return (title: "Błąd", message: "Wystąpił nieoczekiwany błąd.")
+            return (title: "COMMON_ERROR_ALERT_TITLE".localized(), message: "UNKNOWN_ERROR_ALERT_MESSAGE".localized())
         }
     }
     

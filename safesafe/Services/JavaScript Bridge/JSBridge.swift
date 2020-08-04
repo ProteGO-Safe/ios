@@ -168,6 +168,10 @@ extension JSBridge: WKScriptMessageHandler {
         case .setServices:
             currentDataType = bridgeDataType
             servicesPermissions(jsonString: jsonString, type: bridgeDataType)
+            
+        case .systemLanguage:
+            changeLanguage(jsonString: jsonString)
+            
         case .clearData:
             RealmLocalStorage.clearAll()
         default:
@@ -272,6 +276,12 @@ private extension JSBridge {
 
 // MARK: - onBridgeData handling
 private extension JSBridge {
+    func changeLanguage(jsonString: String?) {
+        guard let model: SystemLanguageResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else  { return }
+        
+        LanguageController.default.update(languageCode: model.language)
+    }
+    
     func unsubscribeFromTopic(jsonString: String?, type: BridgeDataType) {
         guard let model: SurveyFinishedResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
         

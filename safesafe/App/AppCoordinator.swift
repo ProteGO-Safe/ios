@@ -70,7 +70,7 @@ final class AppCoordinator: CoordinatorType {
         let siren = Siren.shared
         siren.rulesManager = RulesManager(globalRules: .annoying)
         siren.presentationManager = PresentationManager(
-            alertMessage: "Dostępna jest nowsza wersja aplikacji. Zaktualizuj aplikację ProteGO Safe aby korzystać z pełni funkcjonalności.",
+            alertMessage: "SIREN_ALERT_MESSAGE".localized(),
             forceLanguageLocalization: .polish
         )
         siren.wail()
@@ -102,12 +102,7 @@ final class AppCoordinator: CoordinatorType {
     private func showJailbreakAlert() {
         let alert = UIAlertController(
             title: nil,
-            message: """
-            Korzystasz z niezweryfikowanego urządzenia - bezpieczeństwo przesyłanych danych może być niższe. \
-            Upewnij się, że używasz najnowszej, oficjalnej wersji systemu operacyjnego i w bezpieczny sposób łączysz się z Internetem. \
-            Unikaj publicznie dostępnych sieci i korzystaj z własnej transmisji danych jeśli masz taką możliwość. \
-            Nieautoryzowane konfiguracje ustawień telefonu mogą wpłynąć na wynik działania aplikacji oraz na bezpieczeństwo Twoich danych.
-            """,
+            message: "JAILBREAK_MESSAGE".localized(),
             preferredStyle: .alert
         )
         alert.addAction(.init(title: "Rozumiem", style: .default))
@@ -119,7 +114,7 @@ final class AppCoordinator: CoordinatorType {
     private func showInternetAlert() {
         noInternetAlert?.dismiss(animated: false)
         
-        let noInternetAlert = UIAlertController(title: "Brak połączenia", message: "Brak połączenia z internetem", preferredStyle: .alert)
+        let noInternetAlert = UIAlertController(title: "INTERNET_CONNECTION_ALERT".localized(), message: "INTERNET_CONNECTION_MESSAGE".localized(), preferredStyle: .alert)
         window.rootViewController?.present(noInternetAlert, animated: true)
         
         self.noInternetAlert = noInternetAlert
