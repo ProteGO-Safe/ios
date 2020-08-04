@@ -8,6 +8,7 @@
 
 "EXPOSURE_INFO_EXPLANATION" = "ProteGO Safe analizuje informacje o spotkaniach z innymi urządzeniami.";
 "JAILBREAK_MESSAGE" = "Korzystasz z niezweryfikowanego urządzenia - bezpieczeństwo przesyłanych danych może być niższe.\nUpewnij się, że używasz najnowszej, oficjalnej wersji systemu operacyjnego i w bezpieczny sposób łączysz się z Internetem.\nUnikaj publicznie dostępnych sieci i korzystaj z własnej transmisji danych jeśli masz taką możliwość.\nNieautoryzowane konfiguracje ustawień telefonu mogą wpłynąć na wynik działania aplikacji oraz na bezpieczeństwo Twoich danych.";
+"JAILBREAK_ALERT_BUTTON_TITLE" = "Rozumiem";
 "INTERNET_CONNECTION_ALERT_TITLE" = "Brak połączenia";
 "INTERNET_CONNECTION_ALERT_MESSAGE" = "Brak połączenia z internetem";
 "SIREN_ALERT_MESSAGE" = "Dostępna jest nowsza wersja aplikacji. Zaktualizuj aplikację ProteGO Safe aby korzystać z pełni funkcjonalności.";

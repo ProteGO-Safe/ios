@@ -105,7 +105,7 @@ final class AppCoordinator: CoordinatorType {
             message: "JAILBREAK_MESSAGE".localized(),
             preferredStyle: .alert
         )
-        alert.addAction(.init(title: "Rozumiem", style: .default))
+        alert.addAction(.init(title: "JAILBREAK_ALERT_BUTTON_TITLE".localized(), style: .default))
         self.jailbreakAlert = alert
         
         window.rootViewController?.present(alert, animated: true)
