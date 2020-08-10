@@ -75,6 +75,9 @@ To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
 
+**4.3.0**
+- Updated PWA with multi languages support 
+
 **4.2.3**
 
 - Passing app version to PWA
