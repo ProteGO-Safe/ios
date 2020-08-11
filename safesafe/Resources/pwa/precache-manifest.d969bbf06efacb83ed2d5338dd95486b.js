@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "33d6a3f897471095dba7c2b42376c5b0",
+    "revision": "4369fea5899a1259c0d52f4c04d231ba",
     "url": "./index.html"
   },
   {
-    "revision": "b0e8c93a86bfd8c38593",
+    "revision": "c187be9f68e6dcd91b6b",
     "url": "./static/css/2.fb8a0bac.chunk.css"
   },
   {
-    "revision": "e945e326c726c52a4651",
+    "revision": "cd51a79b845cd96e0e50",
     "url": "./static/css/main.dc94683e.chunk.css"
   },
   {
-    "revision": "b0e8c93a86bfd8c38593",
-    "url": "./static/js/2.90da03c6.chunk.js"
+    "revision": "c187be9f68e6dcd91b6b",
+    "url": "./static/js/2.37af28ff.chunk.js"
   },
   {
     "revision": "21968521f2ed82ae33d0a85b3c11b74e",
-    "url": "./static/js/2.90da03c6.chunk.js.LICENSE.txt"
+    "url": "./static/js/2.37af28ff.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e945e326c726c52a4651",
-    "url": "./static/js/main.8059b1ba.chunk.js"
+    "revision": "cd51a79b845cd96e0e50",
+    "url": "./static/js/main.118de0b0.chunk.js"
   },
   {
     "revision": "bc5930ccf9738ce88566",
@@ -210,10 +210,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "a3776430f669f615c0b350d81754db4f",
     "url": "./static/media/protegosafe_logo_white.a3776430.svg"
-  },
-  {
-    "revision": "05c5b98c105b200b90672d56e5aaee74",
-    "url": "./static/media/przyjazd.05c5b98c.svg"
   },
   {
     "revision": "05e1e10061c44d1bdaf4fc75b7efdc8b",
