@@ -62,6 +62,7 @@ targets:
       - path: safesafe
         name: "safesafe"
         excludes:
+          - "Resources/translations"
           - "Resources/pwa"
           - "Resources/Dev/Config-dev.plist"
           - "Resources/Stage/Config-stage.plist"
@@ -74,7 +75,11 @@ targets:
           - "Info-live.plist"
       - path: safesafe/Resources/pwa
         type: folder
+      - path: safesafe/Resources/translations
+        type: folder
     preBuildScripts:
+      - name: CopyPOEditor
+        path: Scripts/CopyPOEditor.sh
       - name: CopyGooglePlist
         path: Scripts/CopyGooglePlist.sh
       - name: CopyConfigPlist
