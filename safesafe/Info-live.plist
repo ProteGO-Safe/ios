@@ -79,6 +79,7 @@
 	<array>
 		<string>armv7</string>
 		<string>bluetooth-le</string>
+		<string>telephony</string>
 	</array>
 	<key>UIStatusBarHidden</key>
 	<false/>
@@ -95,5 +96,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>ENDeveloperRegion</key>
+	<string>PL</string>
+	<key>ENAPIVersion</key>
+	<string>1</string>
 </dict>
 </plist>

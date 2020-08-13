@@ -80,6 +80,7 @@ To launch it, type `sh rebuild.sh` in your console.
 - Changed telephone number and email
 - Changed text copy on an onboarding view
 - Removed some tips
+- Added properties ENDeveloperRegion and ENAPIVersion to Info.plist for iOS 14
 
 **4.2.3**
 
