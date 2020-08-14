@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d0c0042a3f2737095e8aa3fec71f21f0",
+    "revision": "13c0949d54dc3a88f54d58e700f2222f",
     "url": "./index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/css/2.fb8a0bac.chunk.css"
   },
   {
-    "revision": "297218bb9a1fcfb17f87",
-    "url": "./static/css/main.dc94683e.chunk.css"
+    "revision": "94a1ee0fdc08cdb6cc06",
+    "url": "./static/css/main.2004e42d.chunk.css"
   },
   {
     "revision": "af8d033363dd8dade04b",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/js/2.3e3f79e1.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "297218bb9a1fcfb17f87",
-    "url": "./static/js/main.6941fde3.chunk.js"
+    "revision": "94a1ee0fdc08cdb6cc06",
+    "url": "./static/js/main.ed86a4e0.chunk.js"
   },
   {
     "revision": "bc5930ccf9738ce88566",
@@ -176,8 +176,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/media/menu-boczne-moje-dane_BLUE.7c299515.svg"
   },
   {
-    "revision": "bf8a63cc5b402e87a484458798b40858",
-    "url": "./static/media/menu-boczne-numery-alarm_BLUE.bf8a63cc.svg"
+    "revision": "c59f29dfabdf4909350c85b42eec47ee",
+    "url": "./static/media/menu-boczne-numery-alarm_BLUE.c59f29df.svg"
   },
   {
     "revision": "7682179c84578358106fe1b54daaf250",
