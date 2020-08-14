@@ -145,6 +145,8 @@ extension JSBridge: WKScriptMessageHandler {
     }
     
     private func setBridgeDataManage(body: Any) {
+        console(body)
+        
         guard
             let object = body as? [String: Any],
             let type = object[Key.type] as? Int,
@@ -180,6 +182,8 @@ extension JSBridge: WKScriptMessageHandler {
     }
     
     private func getBridgeDataManage(body: Any) {
+        console(body)
+        
         guard
             let requestData = body as? [String: Any],
             let requestId = requestData[Key.requestId] as? String,
@@ -265,8 +269,7 @@ private extension JSBridge {
     }
     
     func systemLanguageGetBridgeDataResponse(requestID: String) {
-        guard let code = Locale.current.languageCode?.uppercased() else { return }
-        let responseModel = SystemLanguageResponse(language: code)
+        let responseModel = SystemLanguageResponse(language: LanguageController.selected.uppercased())
         
         guard let responseData = encodeToJSON(responseModel) else { return }
         
@@ -279,7 +282,7 @@ private extension JSBridge {
     func changeLanguage(jsonString: String?) {
         guard let model: SystemLanguageResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else  { return }
         
-        LanguageController.default.update(languageCode: model.language)
+        LanguageController.update(languageCode: model.language)
     }
     
     func unsubscribeFromTopic(jsonString: String?, type: BridgeDataType) {

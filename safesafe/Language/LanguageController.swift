@@ -12,25 +12,29 @@ struct LanguageChangeModel {
     let toLanguage: String
 }
 
-final class LanguageController: LanguageControlling {
-    
+enum LanguageController {
     private enum Constants {
         static let defaultLanguage = "pl"
     }
     
-    static let `default` = LanguageController()
+    static let `default` = Constants.defaultLanguage
+    static let selected: String = StoredDefaults.standard.get(key: .selectedLanguage) ?? systemLanguage
     
-    private(set) var language: String = Locale.current.languageCode ?? Constants.defaultLanguage
+    static let systemLanguage = Locale.current.languageCode ?? Constants.defaultLanguage
     
-    private init() {}
-    
-    func update(languageCode: String) {
-        let currentLanguage = language
-        language = languageCode
-        NotificationCenter.default.post(name: .languageDidChange, object: LanguageChangeModel(fromLanguage: currentLanguage, toLanguage: languageCode))
+    static func update(languageCode: String) {
+        let oldLanguage = selected
+        
+        StoredDefaults.standard.set(value: languageCode, key: .selectedLanguage)
+        
+        NotificationCenter.default.post(name: .languageDidChange, object: LanguageChangeModel(fromLanguage: oldLanguage, toLanguage: languageCode))
     }
 }
 
 extension Notification.Name {
     static let languageDidChange = Notification.Name(rawValue: "languageDidChangeNotification")
+}
+
+extension StoredDefaults.Key {
+    static let selectedLanguage = StoredDefaults.Key("selectedLanguage")
 }
