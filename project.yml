@@ -78,8 +78,6 @@ targets:
       - path: safesafe/Resources/translations
         type: folder
     preBuildScripts:
-      - name: CopyPOEditor
-        path: Scripts/CopyPOEditor.sh
       - name: CopyGooglePlist
         path: Scripts/CopyGooglePlist.sh
       - name: CopyConfigPlist
