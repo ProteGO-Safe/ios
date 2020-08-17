@@ -145,8 +145,6 @@ extension JSBridge: WKScriptMessageHandler {
     }
     
     private func setBridgeDataManage(body: Any) {
-        console(body)
-        
         guard
             let object = body as? [String: Any],
             let type = object[Key.type] as? Int,
@@ -182,8 +180,6 @@ extension JSBridge: WKScriptMessageHandler {
     }
     
     private func getBridgeDataManage(body: Any) {
-        console(body)
-        
         guard
             let requestData = body as? [String: Any],
             let requestId = requestData[Key.requestId] as? String,
