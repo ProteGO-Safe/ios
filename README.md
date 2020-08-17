@@ -75,8 +75,16 @@ To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
 
+
 **4.3.0**
 - Updated PWA with multi languages support 
+
+**4.2.4**
+
+- Changed telephone number and email
+- Changed text copy on an onboarding view
+- Removed some tips
+- Added properties ENDeveloperRegion and ENAPIVersion to Info.plist for iOS 14
 
 **4.2.3**
 
