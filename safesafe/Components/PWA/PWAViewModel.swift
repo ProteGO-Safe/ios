@@ -38,6 +38,7 @@ final class PWAViewModel: ViewModelType {
     private let jsBridge: JSBridge
     private let migrationManager: MigrationProtocol
     weak var delegate: PWAViewModelDelegate?
+    var debugTapClosure: (() -> Void)?
     
     // MARK: - Life Cycle
     
@@ -99,4 +100,17 @@ extension PWAViewModel {
 
 extension StoredDefaults.Key {
     static let pwaMigration = StoredDefaults.Key("pwaMigrationKey")
+}
+
+// Debug
+extension PWAViewModel {
+    
+    func debugTapped(_ closure: @escaping (() -> Void)) {
+        debugTapClosure = closure
+    }
+    
+    @objc
+    func debugButtonTapped(sender: UIButton) {
+        debugTapClosure?()
+    }
 }

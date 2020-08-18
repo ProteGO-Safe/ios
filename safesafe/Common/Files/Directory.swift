@@ -11,6 +11,7 @@ final class Directory {
     private enum Constants {
         static let keysDirectoryName = "DiagnosisKeys"
         static let keysTempDirectoryName = "DiagnosisKeysTemporary"
+        static let uploadedPayloads = "UploadedPayloads"
     }
     
     static func webkitLocalStorage() throws -> URL {
@@ -19,7 +20,6 @@ final class Directory {
             .appendingPathComponent("WebsiteData")
             .appendingPathComponent("LocalStorage")
     }
-    
     
     static func getDiagnosisKeysURL() throws -> URL {
         let cachesDirectory = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -37,5 +37,27 @@ final class Directory {
             let directoryURL = cachesDirectory.appendingPathComponent(Constants.keysTempDirectoryName)
             try FileManager.default.removeItem(atPath: directoryURL.path)
         } catch { console(error, type: .error) }
+    }
+    
+    static func uploadedPayloads() throws -> URL {
+        let cachesDirectory = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        let destinationURL = cachesDirectory.appendingPathComponent(Constants.uploadedPayloads)
+        do {
+            try FileManager.default.createDirectory(at: destinationURL, withIntermediateDirectories: true, attributes: nil)
+        } catch {
+            console(error, type: .warning)
+        }
+        return destinationURL
+    }
+    
+    static func uploadedPayloadsTemp() throws -> URL {
+        let tempDir = FileManager.default.temporaryDirectory
+        let destinationURL = tempDir.appendingPathComponent(Constants.uploadedPayloads)
+        do {
+            try FileManager.default.createDirectory(at: destinationURL, withIntermediateDirectories: true, attributes: nil)
+        } catch {
+            console(error, type: .warning)
+        }
+        return destinationURL
     }
 }
