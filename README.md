@@ -19,6 +19,7 @@ App implements contact tracing module that is based on [Exposure Notification AP
 * [Reporting risk level](Documentation/ReportingRiskLevel.md) to the PWA: extract risk scores of saved exposures and calculate risk level, pass risk level to PWA
 * [Removing historical data](Documentation/RemovingHistoricalData.md): remove information about exposures older than 14 days
 
+
 ## Project modules
 
 - App - contains classes related to app's life cycle
@@ -73,6 +74,13 @@ For convenience, there's a `rebuild.sh` script which performs actions mentioned 
 To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
+
+**4.2.4**
+
+- Changed telephone number and email
+- Changed text copy on an onboarding view
+- Removed some tips
+- Added properties ENDeveloperRegion and ENAPIVersion to Info.plist for iOS 14
 
 **4.2.3**
 
