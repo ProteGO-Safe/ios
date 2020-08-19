@@ -44,23 +44,20 @@ final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
     
     func upload(usingAuthCode authCode: String) -> Promise<Void> {
         var diagnosisKeys: [ENTemporaryExposureKey] = []
-        var uploadPayload: String = ""
         return getDiagnosisKeys()
-            .then { keys -> Promise<String> in
-                diagnosisKeys = keys
-                return self.getPayload(keys: diagnosisKeys)
-        }
-        .then { payload -> Promise<String> in
-            uploadPayload = payload
+        .then { keys -> Promise<String> in
+            diagnosisKeys = keys
             return self.getToken(usingAuthCode: authCode)
         }
         .then { token -> Promise<Moya.Response> in
             let data = TemporaryExposureKeys(
                 temporaryExposureKeys: diagnosisKeys.map({ TemporaryExposureKey($0) }),
-                verificationPayload: token,
-                deviceVerificationPayload: uploadPayload
-            )
+                verificationPayload: token            )
             let keysData = TemporaryExposureKeysData(data: data)
+            
+            #if !LIVE
+            File.saveUploadedPayload(keysData)
+            #endif
             
             return self.renewableRequest.make(target: .post(keysData))
         }

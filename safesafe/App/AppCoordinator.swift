@@ -9,10 +9,6 @@
 import UIKit
 import Siren
 
-#if !LIVE && !STAGE_SCREENCAST
-import DBDebugToolkit
-#endif
-
 final class AppCoordinator: CoordinatorType {
     
     private let dependencyContainer: DependencyContainer
@@ -45,7 +41,6 @@ final class AppCoordinator: CoordinatorType {
         #if !STAGE_SCREENCAST
         setupScreenRecording()
         #endif
-        setupDebugToolkit()
         clearData.clear()
         
         let rootViewController = makeRootViewController()
@@ -87,12 +82,6 @@ final class AppCoordinator: CoordinatorType {
         }
         
         return NavigationController(rootViewController: viewController)
-    }
-    
-    private func setupDebugToolkit() {
-        #if !LIVE && !STAGE && !STAGE_SCREENCAST
-        DBDebugToolkit.setup()
-        #endif
     }
     
     private func setupScreenRecording() {
