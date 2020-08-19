@@ -14,10 +14,11 @@ final class DebugViewController: ViewController<DebugViewModel> {
         static let closeButtonInsets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: .zero, right: .zero)
         static let closeButtonSize = CGSize(width: 22.0, height: 22.0)
         static let titleLabelInsets = UIEdgeInsets(top: 20, left: .zero, bottom: .zero, right: .zero)
-        static let titleLabelTitle = "Debug"
         static let defaultStackItemSize = CGSize(width: 150.0, height: 44.0)
         static let mainStackViewInsets = UIEdgeInsets(top: .zero, left: 12.0, bottom: .zero, right: 12.0)
         static let mainStackViewSpacing: CGFloat = 10.0
+        static let stackItemBorderWidth: CGFloat = 1.0
+        static let titleFont: UIFont = .systemFont(ofSize: 18.0, weight: .bold)
     }
     
     private let closeButton = UIButton()
@@ -64,9 +65,9 @@ final class DebugViewController: ViewController<DebugViewModel> {
     private func setupTitleLabel() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textColor = .black
-        titleLabel.font = .systemFont(ofSize: 18.0, weight: .bold)
+        titleLabel.font = Constants.titleFont
         titleLabel.textAlignment = .center
-        titleLabel.text = Constants.titleLabelTitle
+        titleLabel.text = DebugViewModel.Texts.title
         add(subview: titleLabel)
     }
     
@@ -78,13 +79,13 @@ final class DebugViewController: ViewController<DebugViewModel> {
     }
     
     private func setupStackedItems() {
-        stackButton("Share Uploaded Payloads", action: .uploadPayloadsShare)
+        stackButton(DebugViewModel.Texts.shareUploadedPayloadsTitle, action: .uploadPayloadsShare)
     }
     
     private func stackButton(_ title: String, action: DebugAction) {
         let item = DebugStackViewItem(type: .roundedRect)
         item.action = action
-        item.layer.borderWidth = 1.0
+        item.layer.borderWidth = Constants.stackItemBorderWidth
         item.layer.borderColor = UIColor.systemBlue.cgColor
         item.translatesAutoresizingMaskIntoConstraints = false
         item.addTarget(self, action: #selector(stackViewItemmDidTap), for: .touchUpInside)
@@ -99,7 +100,7 @@ final class DebugViewController: ViewController<DebugViewModel> {
         switch byAction {
         case .uploadPayloadsPreview, .uploadPayloadsShare:
             guard viewModel.numberOfPayloads > .zero else {
-                item.setTitle("No Uploaded Payloads Yet", for: .normal)
+                item.setTitle(DebugViewModel.Texts.noUploadedPayloadsTitle, for: .normal)
                 item.isEnabled = false
                 return
             }

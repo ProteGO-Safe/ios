@@ -21,6 +21,12 @@ protocol DebugViewModelDelegate: class {
 final class DebugViewModel: ViewModelType {
     weak var delegate: DebugViewModelDelegate?
     
+    enum Texts {
+        static let title = "Debug"
+        static let noUploadedPayloadsTitle = "No Uploaded Payloads Yet"
+        static let shareUploadedPayloadsTitle = "Share Uploaded Payloads"
+    }
+    
     var numberOfPayloads: Int {
         do {
             let dirContent = try FileManager.default.contentsOfDirectory(atPath: try Directory.uploadedPayloads().path)
