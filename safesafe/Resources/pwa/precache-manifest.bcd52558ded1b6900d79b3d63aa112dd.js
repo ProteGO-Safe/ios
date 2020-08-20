@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5b495918513c68086580fda5dbf8bd0a",
+    "revision": "6d75db31163b1d31b420bb8d1490aab2",
     "url": "./index.html"
   },
   {
-    "revision": "a0b5e7cbe636552c0ed8",
-    "url": "./static/css/2.fb8a0bac.chunk.css"
+    "revision": "64a993f84cb5ed202bb9",
+    "url": "./static/css/2.4056c84d.chunk.css"
   },
   {
-    "revision": "ad8c4d071e23a8c91a9a",
-    "url": "./static/css/main.22415d7a.chunk.css"
+    "revision": "b0c0a1bf708ffef67ce7",
+    "url": "./static/css/main.3f5ec84a.chunk.css"
   },
   {
-    "revision": "a0b5e7cbe636552c0ed8",
-    "url": "./static/js/2.3bc1f781.chunk.js"
+    "revision": "64a993f84cb5ed202bb9",
+    "url": "./static/js/2.7b9cbc2e.chunk.js"
   },
   {
-    "revision": "21968521f2ed82ae33d0a85b3c11b74e",
-    "url": "./static/js/2.3bc1f781.chunk.js.LICENSE.txt"
+    "revision": "4443c957fe3d25aad4638b794d1f7e84",
+    "url": "./static/js/2.7b9cbc2e.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ad8c4d071e23a8c91a9a",
-    "url": "./static/js/main.2c16a45f.chunk.js"
+    "revision": "b0c0a1bf708ffef67ce7",
+    "url": "./static/js/main.c2e5f6f5.chunk.js"
   },
   {
     "revision": "bc5930ccf9738ce88566",
@@ -114,6 +114,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "31a0db43cc183e62ab26489a19c14b6f",
     "url": "./static/media/angle-left.31a0db43.svg"
+  },
+  {
+    "revision": "d2ee292a7539ade03c81d9f9d29e5225",
+    "url": "./static/media/angle-right-blue.d2ee292a.svg"
   },
   {
     "revision": "e7a48e3d30e9db396b4e94ca3a968034",
@@ -238,6 +242,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "ea6532d7b9cda969352affc0cc5a7ffc",
     "url": "./static/media/ca.ea6532d7.svg"
+  },
+  {
+    "revision": "ec94f424c0b152bbb31aa963524f4c0b",
+    "url": "./static/media/calendar.ec94f424.svg"
   },
   {
     "revision": "eaf9c22471a60304940d9acce3f1314d",
@@ -612,10 +620,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/media/la.3d622932.svg"
   },
   {
-    "revision": "e9ae2c18af58e7860f64f2baf4b9db25",
-    "url": "./static/media/language.e9ae2c18.svg"
-  },
-  {
     "revision": "5e6ca7227e00e4baaaa70a01e6b5ae18",
     "url": "./static/media/lb.5e6ca722.svg"
   },
@@ -688,8 +692,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/media/menu-boczne-moje-dane_BLUE.7c299515.svg"
   },
   {
-    "revision": "bf8a63cc5b402e87a484458798b40858",
-    "url": "./static/media/menu-boczne-numery-alarm_BLUE.bf8a63cc.svg"
+    "revision": "c59f29dfabdf4909350c85b42eec47ee",
+    "url": "./static/media/menu-boczne-numery-alarm_BLUE.c59f29df.svg"
   },
   {
     "revision": "7682179c84578358106fe1b54daaf250",
@@ -886,10 +890,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "a3776430f669f615c0b350d81754db4f",
     "url": "./static/media/protegosafe_logo_white.a3776430.svg"
-  },
-  {
-    "revision": "05c5b98c105b200b90672d56e5aaee74",
-    "url": "./static/media/przyjazd.05c5b98c.svg"
   },
   {
     "revision": "33a2122adcb1d83a3ddac036db450d0d",
@@ -1106,6 +1106,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "e80e04132cc080dcc071da5f9e6eccc5",
     "url": "./static/media/ug.e80e0413.svg"
+  },
+  {
+    "revision": "1c23b8c9945e4fab0ad0631cacb0f20e",
+    "url": "./static/media/uk.1c23b8c9.svg"
   },
   {
     "revision": "fa563627097b131b0da1075bbd4a9cba",

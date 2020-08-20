@@ -10,4 +10,7 @@ import Foundation
 enum AlertType {
     case noInternet
     case uploadGeneral
+    case keysAtLeast
+    case keysMax
+    case keysPerDayMax
 }

@@ -51,4 +51,7 @@ enum InternalError: Error {
     case cantMakeRequest
     case noInternet
     
+    // Uplod
+    case uploadValidation
+    
 }

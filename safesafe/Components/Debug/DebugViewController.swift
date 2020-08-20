@@ -79,7 +79,8 @@ final class DebugViewController: ViewController<DebugViewModel> {
     }
     
     private func setupStackedItems() {
-        stackButton(DebugViewModel.Texts.shareUploadedPayloadsTitle, action: .uploadPayloadsShare)
+        stackButton(DebugViewModel.Texts.shareUploadedPayloadsTitle, action: .uploadedPayloadsShare)
+        stackButton(DebugViewModel.Texts.shareLogsTitle, action: .logsShare)
     }
     
     private func stackButton(_ title: String, action: DebugAction) {
@@ -98,13 +99,20 @@ final class DebugViewController: ViewController<DebugViewModel> {
     
     private func decorateStackItemTitle(title: String, item: DebugStackViewItem, byAction: DebugAction) {
         switch byAction {
-        case .uploadPayloadsPreview, .uploadPayloadsShare:
+        case .uploadedPayloadsPreview, .uploadedPayloadsShare:
             guard viewModel.numberOfPayloads > .zero else {
                 item.setTitle(DebugViewModel.Texts.noUploadedPayloadsTitle, for: .normal)
                 item.isEnabled = false
                 return
             }
             item.setTitle("(\(viewModel.numberOfPayloads)) \(title)", for: .normal)
+        case .logsShare:
+            guard viewModel.logExists else {
+                item.setTitle(DebugViewModel.Texts.noLogsTitle, for: .normal)
+                item.isEnabled = false
+                return
+            }
+            item.setTitle(title, for: .normal)
         default:
             item.setTitle(title, for: .normal)
         }
@@ -124,6 +132,11 @@ final class DebugViewController: ViewController<DebugViewModel> {
 
 extension DebugViewController: DebugViewModelDelegate {
     func sharePayloads(fileURL: URL) {
+        let activityController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
+        present(activityController, animated: true)
+    }
+    
+    func shareLogs(fileURL: URL) {
         let activityController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
         present(activityController, animated: true)
     }

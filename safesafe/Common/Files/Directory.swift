@@ -12,6 +12,7 @@ final class Directory {
         static let keysDirectoryName = "DiagnosisKeys"
         static let keysTempDirectoryName = "DiagnosisKeysTemporary"
         static let uploadedPayloads = "UploadedPayloads"
+        static let logs = "Logs"
     }
     
     static func webkitLocalStorage() throws -> URL {
@@ -37,6 +38,17 @@ final class Directory {
             let directoryURL = cachesDirectory.appendingPathComponent(Constants.keysTempDirectoryName)
             try FileManager.default.removeItem(atPath: directoryURL.path)
         } catch { console(error, type: .error) }
+    }
+    
+    static func logs() throws -> URL {
+        let cachesDirectory = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        let destinationURL = cachesDirectory.appendingPathComponent(Constants.logs)
+        do {
+            try FileManager.default.createDirectory(at: destinationURL, withIntermediateDirectories: true, attributes: nil)
+        } catch {
+            console(error, type: .warning)
+        }
+        return destinationURL
     }
     
     static func uploadedPayloads() throws -> URL {
