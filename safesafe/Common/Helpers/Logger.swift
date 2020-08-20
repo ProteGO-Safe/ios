@@ -27,14 +27,40 @@ public final class Logger {
         }
     }
     
+    private static var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd_HH:mm:ss.SSS"
+        
+        return formatter
+    }
+    
     public static func log(_ value: Any?, type: LogType, file: String, function: String, line: Int, fullPath: Bool = false) {
-        #if DEBUG
+        #if !LIVE
+        let formattedMessage = logFormat(value, type: type, file: file, function: function, line: line, fullPath: fullPath)
+        print(formattedMessage)
+        Self.fileLog(formattedMessage)
+        #endif
+    }
+    
+    private static func logFormat(_ value: Any?, type: LogType, file: String, function: String, line: Int, fullPath: Bool = false) -> String {
         var file = file
         if !fullPath {
             file = String(file.split(separator: "/").last ?? "")
         }
-        print("\(type.prefix)[\(file):\(function):\(line)] \(String(describing: value))")
-        #endif
+        
+        return "\(type.prefix)[\(file):\(function):\(line)] \(String(describing: value))"
+    }
+    
+    private static func fileLog(_ message: String) {
+        DispatchQueue.global(qos: .background).async {
+            let datePrefix = "{\(Self.dateFormatter.string(from: Date()))}"
+            let line = "\(datePrefix) \(message)"
+            if #available(iOS 13.0, *) {
+                File.logToFile(line)
+            } else {
+                // Not implemented on earlier versions yet
+            }
+        }
     }
 }
 
