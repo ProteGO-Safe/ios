@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 4.3.0
 - Updated PWA with multi languages support 
+- Added validation for diagnosis keys upload
+- Added debug panel for sharing uploaded payloads and logs
+- Removed device check from uploaded payloads
 
 ## 4.2.4
 
