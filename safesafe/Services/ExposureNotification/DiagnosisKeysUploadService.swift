@@ -121,6 +121,7 @@ final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
     }
     
     private func validateKeysAtLeast(_ keys: [ENTemporaryExposureKey]) -> Promise<[ENTemporaryExposureKey]> {
+        console("keys count: \(keys.count)")
         if keys.count < Validation.keysAtLeast {
             UploadValidationAlertManager().show(type: .keysAtLeast) { _ in }
             return .init(error: InternalError.uploadValidation)
@@ -129,7 +130,8 @@ final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
     }
     
     private func validateKeysMax(_ keys: [ENTemporaryExposureKey]) -> Promise<[ENTemporaryExposureKey]> {
-        if keys.count > Validation.keysAtLeast {
+        console("keys count: \(keys.count)")
+        if keys.count > Validation.keysMax {
             UploadValidationAlertManager().show(type: .keysMax) { _ in }
             return .init(error: InternalError.uploadValidation)
         }
@@ -144,6 +146,7 @@ final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
             return Calendar.current.isDateInToday(date)
         }
         
+        console("keys count: \(todayKeys.count)")
         if todayKeys.count > Validation.keysPerDayMax {
             UploadValidationAlertManager().show(type: .keysPerDayMax) { _ in }
             return .init(error: InternalError.uploadValidation)
