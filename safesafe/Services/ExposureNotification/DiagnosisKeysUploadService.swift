@@ -29,7 +29,7 @@ final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
     }
     
     private enum Validation {
-        static let keysAtLeast = 100
+        static let keysAtLeast = 1
         static let keysMax = 30
         static let keysPerDayMax = 3
     }
