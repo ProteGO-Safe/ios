@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "932e786f7d4cfe249816192b59204194",
+    "revision": "205a18c9ae6532185d6f0b5980545ba2",
     "url": "./index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/css/2.4056c84d.chunk.css"
   },
   {
-    "revision": "520eb103ef79b60f60e4",
-    "url": "./static/css/main.3f5ec84a.chunk.css"
+    "revision": "8a11d9276518decf7c63",
+    "url": "./static/css/main.415b96f3.chunk.css"
   },
   {
     "revision": "0260c1333057b371a610",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/js/2.4cf57019.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "520eb103ef79b60f60e4",
-    "url": "./static/js/main.73c6a25e.chunk.js"
+    "revision": "8a11d9276518decf7c63",
+    "url": "./static/js/main.a13d648c.chunk.js"
   },
   {
     "revision": "b510f3c1e29e7489c0d2",
@@ -888,8 +888,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/media/pr.7477154a.svg"
   },
   {
-    "revision": "a3776430f669f615c0b350d81754db4f",
-    "url": "./static/media/protegosafe_logo_white.a3776430.svg"
+    "revision": "21fc84a48e151bb226e53a837b80c295",
+    "url": "./static/media/protegosafe_logo_white.21fc84a4.svg"
   },
   {
     "revision": "33a2122adcb1d83a3ddac036db450d0d",
@@ -1010,6 +1010,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "abdc56036d300ba07f70226de839e675",
     "url": "./static/media/st.abdc5603.svg"
+  },
+  {
+    "revision": "3cd0c9a0cced84282f3ca2562e1edf17",
+    "url": "./static/media/stopcovid_protegosafe_logo_sygnet.3cd0c9a0.svg"
   },
   {
     "revision": "d0c2cfff17a1a77885cbb51f508836ac",
