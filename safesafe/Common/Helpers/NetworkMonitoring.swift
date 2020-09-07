@@ -21,11 +21,11 @@ final class NetworkMonitoring {
     }
     
     func showInternetAlert(in viewController: UIViewController, action: @escaping (AlertAction) -> ()) {
-        let alert = UIAlertController(title: "Internet", message: "Brak połączenia z internetem.", preferredStyle: .alert)
-        let retryAction = UIAlertAction(title: "Ponów", style: .default) { _ in
+        let alert = UIAlertController(title: "INTERNET_CONNECTION_ALERT_TITLE".localized(), message: "INTERNET_CONNECTION_ALERT_MESSAGE".localized(), preferredStyle: .alert)
+        let retryAction = UIAlertAction(title: "RETRY_BUTTON_TITLE".localized(), style: .default) { _ in
             action(.retry)
         }
-        let cancelAction = UIAlertAction(title: "Anuluj", style: .cancel) { _ in
+        let cancelAction = UIAlertAction(title: "CANCEL_BUTTON_TITLE".localized(), style: .cancel) { _ in
             action(.cancel)
         }
         alert.addAction(retryAction)

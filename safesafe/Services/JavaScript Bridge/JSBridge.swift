@@ -25,6 +25,7 @@ final class JSBridge: NSObject {
         case uploadTemporaryExposureKeys = 43
         case exposureList = 61
         case appVersion = 62
+        case systemLanguage = 63
     }
     
     enum SendMethod: String, CaseIterable {
@@ -167,6 +168,10 @@ extension JSBridge: WKScriptMessageHandler {
         case .setServices:
             currentDataType = bridgeDataType
             servicesPermissions(jsonString: jsonString, type: bridgeDataType)
+            
+        case .systemLanguage:
+            changeLanguage(jsonString: jsonString)
+            
         case .clearData:
             RealmLocalStorage.clearAll()
         default:
@@ -196,6 +201,9 @@ extension JSBridge: WKScriptMessageHandler {
             
         case .appVersion:
             applicationVersionGetBridgeDataResponse(requestID: requestId)
+            
+        case .systemLanguage:
+            systemLanguageGetBridgeDataResponse(requestID: requestId)
             
         default:
             return
@@ -255,10 +263,24 @@ private extension JSBridge {
         
         bridgeDataResponse(type: .appVersion, body: responseData, requestId: requestID)
     }
+    
+    func systemLanguageGetBridgeDataResponse(requestID: String) {
+        let responseModel = SystemLanguageResponse(language: LanguageController.selected.uppercased())
+        
+        guard let responseData = encodeToJSON(responseModel) else { return }
+        
+        bridgeDataResponse(type: .systemLanguage, body: responseData, requestId: requestID)
+    }
 }
 
 // MARK: - onBridgeData handling
 private extension JSBridge {
+    func changeLanguage(jsonString: String?) {
+        guard let model: SystemLanguageResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else  { return }
+        
+        LanguageController.update(languageCode: model.language)
+    }
+    
     func unsubscribeFromTopic(jsonString: String?, type: BridgeDataType) {
         guard let model: SurveyFinishedResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
         

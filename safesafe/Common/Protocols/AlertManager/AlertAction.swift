@@ -9,14 +9,17 @@ import Foundation
 
 enum AlertAction {
     case cancel
+    case ok
     case retry
     
     var title: String {
         switch self {
         case .cancel:
-            return "Anuluj"
+            return "ALERT_CANCEL_BUTTON_TITLE".localized()
+        case .ok:
+            return "ALERT_OK_BUTTON_TITLE".localized()
         case .retry:
-            return "Ponów"
+            return "ALERT_RETRY_BUTTON_TITLE".localized()
         }
     }
 }

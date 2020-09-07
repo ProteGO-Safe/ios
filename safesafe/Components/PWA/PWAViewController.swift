@@ -16,6 +16,9 @@ final class PWAViewController: ViewController<PWAViewModel> {
     
     private enum Constants {
         static let color = UIColor(red:0.18, green:0.45, blue:0.85, alpha:1.00)
+        static let debugButtonSize = 22.0
+        static let debugButtonTopMargin = 10.0
+        static let debugButtonRightMargin = 20.0
     }
     
     private var webKitView: WKWebView?
@@ -48,6 +51,23 @@ final class PWAViewController: ViewController<PWAViewModel> {
             maker.top.equalToSuperview()
         })
     }
+    
+    private func debugViewSetup() {
+        #if !LIVE
+        let debugButton = UIButton()
+        view.addSubview(debugButton)
+        debugButton.translatesAutoresizingMaskIntoConstraints = false
+        debugButton.setImage(#imageLiteral(resourceName: "bug_icon"), for: .normal)
+        debugButton.tintColor = .white
+        debugButton.addTarget(viewModel, action: #selector(PWAViewModel.debugButtonTapped), for: .touchUpInside)
+        debugButton.snp.makeConstraints { maker in
+            guard let superview = debugButton.superview else { return }
+            maker.width.height.equalTo(Constants.debugButtonSize)
+            maker.trailing.equalToSuperview().inset(Constants.debugButtonRightMargin)
+            maker.top.equalTo(superview.snp.topMargin).inset(Constants.debugButtonTopMargin)
+        }
+        #endif
+    }
 }
 
 extension PWAViewController: PWAViewModelDelegate {
@@ -75,6 +95,8 @@ extension PWAViewController: PWAViewModelDelegate {
         completion(webKitView)
         
         self.webKitView = webKitView
+        
+        debugViewSetup()
     }
 
     func reload() {

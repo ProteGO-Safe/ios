@@ -15,14 +15,14 @@ Install _fastlane_ using
 or alternatively using `brew cask install fastlane`
 
 # Available Actions
-### adhocs
-```
-fastlane adhocs
-```
-
 ### uats
 ```
 fastlane uats
+```
+
+### adhocs
+```
+fastlane adhocs
 ```
 
 ### live_appstore
@@ -48,6 +48,11 @@ fastlane stage_adhoc
 ### stage_screencast_adhoc
 ```
 fastlane stage_screencast_adhoc
+```
+
+### live_adhoc
+```
+fastlane live_adhoc
 ```
 
 ### dev_adhoc
