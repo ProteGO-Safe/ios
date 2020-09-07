@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 4.3.0
-- Updated PWA with multi languages support 
+- In code multi languages support (no UI yet)
 - Added validation for diagnosis keys upload
 - Added debug panel for sharing uploaded payloads and logs
 - Removed device check from uploaded payloads
