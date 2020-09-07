@@ -77,7 +77,7 @@ To launch it, type `sh rebuild.sh` in your console.
 
 
 **4.3.0**
-- In code multi languages support (no UI yet)
+- In code multilanguage support (no UI yet)
 - Added validation for diagnosis keys upload
 - Added debug panel for sharing uploaded payloads and logs
 - Removed device check from uploaded payloads
