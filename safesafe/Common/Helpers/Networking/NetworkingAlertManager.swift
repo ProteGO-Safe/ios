@@ -15,6 +15,8 @@ final class NetworkingAlertManager: AlertManager {
             return
         }
         let (title, message) = content(type: type)
+        guard !title.isEmpty && !message.isEmpty else { return }
+        
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: AlertAction.cancel.title, style: .cancel) { _  in
             result(.cancel)
@@ -33,9 +35,11 @@ final class NetworkingAlertManager: AlertManager {
     private func content(type: AlertType) -> (title: String, message: String) {
         switch type {
         case .noInternet:
-            return (title: "Błąd", message: "Brak połączenia z internetem.")
+            return (title: "INTERNET_CONNECTION_ALERT_TITLE".localized(), message: "INTERNET_CONNECTION_ALERT_MESSAGE".localized())
         case .uploadGeneral:
-            return (title: "Błąd", message: "Wystąpił nieoczekiwany błąd.")
+            return (title: "COMMON_ERROR_ALERT_TITLE".localized(), message: "UNKNOWN_ERROR_ALERT_MESSAGE".localized())
+        default:
+            return (title: "", message: "")
         }
     }
     
