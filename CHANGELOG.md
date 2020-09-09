@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.3.1
+- Fix for incorrect date display for entries in Health Journal in PWA
+
 ## 4.3.0
 - In code multilanguage support (no UI yet)
 - Added validation for diagnosis keys upload

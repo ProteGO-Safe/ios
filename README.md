@@ -75,6 +75,8 @@ To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
 
+**4.3.1**
+- Fix for incorrect date display for entries in Health Journal in PWA
 
 **4.3.0**
 - In code multilanguage support (no UI yet)
