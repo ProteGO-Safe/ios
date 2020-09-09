@@ -1,31 +1,31 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "61ddd67776f86597547c82274417d2c2",
+    "revision": "5f3b5940243772c8c00eda81fb53f11f",
     "url": "./index.html"
   },
   {
-    "revision": "0aa6875cae5cb5eca335",
+    "revision": "74255ef8c0da307fe813",
     "url": "./static/css/2.4056c84d.chunk.css"
   },
   {
-    "revision": "f83491d3cb374471c2f6",
-    "url": "./static/css/main.a661b0f8.chunk.css"
+    "revision": "33e9ce46bab7898b7aa7",
+    "url": "./static/css/main.415b96f3.chunk.css"
   },
   {
-    "revision": "0aa6875cae5cb5eca335",
-    "url": "./static/js/2.3a93041e.chunk.js"
+    "revision": "74255ef8c0da307fe813",
+    "url": "./static/js/2.f123e28d.chunk.js"
   },
   {
     "revision": "8c9446f03170a801d92edd9f2dca748d",
-    "url": "./static/js/2.3a93041e.chunk.js.LICENSE.txt"
+    "url": "./static/js/2.f123e28d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "f83491d3cb374471c2f6",
-    "url": "./static/js/main.c8ed933a.chunk.js"
+    "revision": "33e9ce46bab7898b7aa7",
+    "url": "./static/js/main.135cb35a.chunk.js"
   },
   {
-    "revision": "bc5930ccf9738ce88566",
-    "url": "./static/js/runtime-main.71789bde.js"
+    "revision": "b510f3c1e29e7489c0d2",
+    "url": "./static/js/runtime-main.fb776cef.js"
   },
   {
     "revision": "83177134c04b835d8289eb799144548f",
@@ -620,10 +620,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/media/la.3d622932.svg"
   },
   {
-    "revision": "e9ae2c18af58e7860f64f2baf4b9db25",
-    "url": "./static/media/language.e9ae2c18.svg"
-  },
-  {
     "revision": "5e6ca7227e00e4baaaa70a01e6b5ae18",
     "url": "./static/media/lb.5e6ca722.svg"
   },
@@ -892,8 +888,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/media/pr.7477154a.svg"
   },
   {
-    "revision": "a3776430f669f615c0b350d81754db4f",
-    "url": "./static/media/protegosafe_logo_white.a3776430.svg"
+    "revision": "21fc84a48e151bb226e53a837b80c295",
+    "url": "./static/media/protegosafe_logo_white.21fc84a4.svg"
   },
   {
     "revision": "33a2122adcb1d83a3ddac036db450d0d",
@@ -1014,6 +1010,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "abdc56036d300ba07f70226de839e675",
     "url": "./static/media/st.abdc5603.svg"
+  },
+  {
+    "revision": "3cd0c9a0cced84282f3ca2562e1edf17",
+    "url": "./static/media/stopcovid_protegosafe_logo_sygnet.3cd0c9a0.svg"
   },
   {
     "revision": "d0c2cfff17a1a77885cbb51f508836ac",
