@@ -12,8 +12,8 @@ configs:
 
 settings:
   CODE_SIGN_STYLE: Manual
-  MARKETING_VERSION: "4.3.0"
-  CURRENT_PROJECT_VERSION: 455
+  MARKETING_VERSION: "4.3.1"
+  CURRENT_PROJECT_VERSION: 470
 
 schemes:
   safesafe Dev:
