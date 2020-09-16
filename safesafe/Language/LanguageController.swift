@@ -18,7 +18,7 @@ enum LanguageController {
     }
     
     static let `default` = Constants.defaultLanguage
-    static let selected: String = StoredDefaults.standard.get(key: .selectedLanguage) ?? systemLanguage
+    static var selected: String { StoredDefaults.standard.get(key: .selectedLanguage) ?? systemLanguage }
     
     static let systemLanguage = Locale.current.languageCode ?? Constants.defaultLanguage
     
