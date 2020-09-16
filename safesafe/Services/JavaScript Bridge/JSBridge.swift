@@ -364,6 +364,17 @@ private extension JSBridge {
     }
     
     func uploadTemporaryExposureKeys(jsonString: String?) {
+        guard NetworkMonitoring.shared.isInternetAvailable else {
+            NetworkingAlertManager().show(type: .noInternet) { [weak self] action in
+                if case .retry = action {
+                    self?.uploadTemporaryExposureKeys(jsonString: jsonString)
+                } else if case .cancel = action {
+                    self?.send(.other)
+                }
+            }
+            return
+        }
+        
         guard let response: UploadTemporaryExposureKeysResponse = jsonString?.jsonDecode(decoder: jsonDecoder)
             else { return }
         
