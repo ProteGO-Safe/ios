@@ -61,7 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for i in 0..<deviceToken.count {
             token = token + String(format: "%02.2hhx", arguments: [deviceToken[i]])
         }
-        console(token)
         NotificationManager.shared.update(token: deviceToken)
     }
     
