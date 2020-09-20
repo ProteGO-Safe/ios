@@ -11,6 +11,7 @@ import PromiseKit
 
 final class WebCacheCleaner {
     
+    @discardableResult
     class func clean() -> Promise<Void> {
         return Promise { seal in
             let dispatchGroup = DispatchGroup()
@@ -29,4 +30,14 @@ final class WebCacheCleaner {
         }
     }
     
+    class func removeLocalStorage() {
+        do {
+            let dir = try Directory.webkitLocalStorage()
+            let content = try FileManager.default.contentsOfDirectory(atPath: dir.path)
+            for path in content {
+                let fullPath = dir.appendingPathComponent(path)
+                try FileManager.default.removeItem(at: fullPath)
+            }
+        } catch { console(error) }
+    }
 }
