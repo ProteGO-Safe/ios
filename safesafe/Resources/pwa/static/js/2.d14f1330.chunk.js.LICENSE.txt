@@ -16,12 +16,6 @@ object-assign
   http://jedwatson.github.io/classnames
 */
 
-/*!
- * perfect-scrollbar v1.5.0
- * Copyright 2020 Hyunje Jun, MDBootstrap and Contributors
- * Licensed under MIT
- */
-
 /**
  * A better abstraction over CSS.
  *
