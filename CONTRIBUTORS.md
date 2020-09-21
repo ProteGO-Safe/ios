@@ -1,5 +1,4 @@
 ## Lista osób które podpisały [oświadczenie o udzieleniu licencji](DISCLAIMER.pdf) i wprowadziły zmiany w projekcie:
-
 | Imię i nazwisko     | GitHub ID                                               | Komponenty     |
 | ------------------- | ------------------------------------------------------- | -------------- |
 | Jakub Lipiński      | [jakublipinski](https://github.com/jakublipinski)       | backend, specs |
