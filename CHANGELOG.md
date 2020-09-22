@@ -6,6 +6,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.4.0
+- Added translations for English and Ukrainian languages
+- Ability of change language in app runtime
+- Fix for multiple language managing
+- Fix for "no internet" alert on keys upload
+- Fix for disclaimer and contrib file
+- Remove redundant data logging
+
 ## 4.3.1
 - Fix for incorrect date display for entries in Health Journal in PWA
 

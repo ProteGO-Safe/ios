@@ -74,6 +74,14 @@ To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
 
+**4.4.0**
+- Added translations for English and Ukrainian languages
+- Ability of change language in app runtime
+- Fix for multiple language managing
+- Fix for "no internet" alert on keys upload
+- Fix for disclaimer and contrib file
+- Remove redundant data logging
+
 **4.3.1**
 - Fix for incorrect date display for entries in Health Journal in PWA
 
