@@ -381,8 +381,13 @@ private extension JSBridge {
         diagnosisKeysUploadService?.upload(usingAuthCode: response.pin).done {
             self.send(.success)
         }.catch { error in
-            if !(error is InternalError) {
-                self.send(.failure)
+            if let error = error as? InternalError {
+                switch error {
+                case .shareKeysUserCanceled:
+                    self.send(.canceled)
+                default:
+                    self.send(.failure)
+                }
             } else {
                 self.send(.other)
             }

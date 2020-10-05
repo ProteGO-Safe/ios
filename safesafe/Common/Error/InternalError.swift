@@ -54,4 +54,6 @@ enum InternalError: Error {
     // Uplod
     case uploadValidation
     
+    // Get diagnosis keys
+    case shareKeysUserCanceled
 }
