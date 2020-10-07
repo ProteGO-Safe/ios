@@ -146,4 +146,16 @@ extension DebugViewController: DebugViewModelDelegate {
         let preview = DebugTextPreviewViewController(with: text)
         present(preview, animated: true)
     }
+    
+    func showLocalStorageFiles(list: [String]) {
+        let alertController = UIAlertController(title: "Pick storage", message: nil, preferredStyle: .actionSheet)
+        for item in list {
+            let action = UIAlertAction(title: item, style: .default) { [weak self] _ in
+                self?.viewModel.openLocalStorage(with: item)
+            }
+            alertController.addAction(action)
+        }
+        
+        present(alertController, animated: true)
+    }
 }

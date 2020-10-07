@@ -20,6 +20,7 @@ protocol DebugViewModelDelegate: class {
     func sharePayloads(fileURL: URL)
     func shareLogs(fileURL: URL)
     func showTextPreview(text: String)
+    func showLocalStorageFiles(list: [String])
 }
 
 final class DebugViewModel: ViewModelType {
@@ -65,9 +66,27 @@ final class DebugViewModel: ViewModelType {
             guard let url = try? File.logFileURL() else { return }
             delegate?.shareLogs(fileURL: url)
         case .dumpLocalstorage:
-            delegate?.showTextPreview(text: sqliteManager.read())
+            let list = localStorageFiles()
+            guard !list.isEmpty else { return }
+            
+            delegate?.showLocalStorageFiles(list: list)
         default: ()
         }
     }
     
+    func openLocalStorage(with name: String) {
+        delegate?.showTextPreview(text: sqliteManager.read(fileName: name))
+    }
+    
+    private func localStorageFiles() -> [String] {
+        do {
+            let dirURL = try Directory.webkitLocalStorage()
+            let dirContent = try FileManager.default.contentsOfDirectory(atPath: dirURL.path).filter({ $0.hasSuffix("localstorage")})
+            
+            return dirContent
+            
+        } catch { console(error, type: .error) }
+        
+        return []
+    }
 }

@@ -16,9 +16,9 @@ final class SQLiteManager {
         db = openDatabase()
     }
     
-    func openDatabase() -> OpaquePointer? {
+    func openDatabase(fileName: String = "file__0.localstorage") -> OpaquePointer? {
         guard let dbDir = try? Directory.webkitLocalStorage() else { return nil }
-        let dbURL = dbDir.appendingPathComponent("file__0.localstorage")
+        let dbURL = dbDir.appendingPathComponent(fileName)
         var db: OpaquePointer? = nil
         if sqlite3_open(dbURL.path, &db) != SQLITE_OK
         {
@@ -32,7 +32,10 @@ final class SQLiteManager {
         }
     }
     
-    func read() -> String {
+    func read(fileName: String) -> String {
+        sqlite3_close(db)
+        db = openDatabase(fileName: fileName)
+        
         var output = "NO_DATA"
         let queryStatementString = "SELECT * FROM ItemTable;"
         var queryStatement: OpaquePointer? = nil
