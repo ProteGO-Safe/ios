@@ -12,6 +12,7 @@ import Security
 import TrustKit
 
 class CustomSessionDelegate: SessionDelegate {
+    
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         TrustKit.sharedInstance().pinningValidator.handle(challenge, completionHandler: completionHandler)
     }
