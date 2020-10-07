@@ -34,19 +34,15 @@
 "chronic_sick_text1" = "Czy cierpisz na jakąś dolegliwość?";
 "chronic_sick_text2" = "Nie, jestem zdrowy/-a i nie cierpię na przewlekłe choroby";
 "chronic_sick_text3" = "Tak, jestem przewlekle chory/-a";
-
-/*Tu bym dał "dolegliwości", jako, że test jest wielokrotnego wyboru.*/
 "chronic_sick_text4" = "Zaznacz dolegliwość, na którą cierpisz:";
 "smoke_text1" = "Czy palisz papierosy lub inne wyroby tytoniowe?";
 "smoke_text2" = "Tak";
 "smoke_text3" = "Nie";
 "smoke_text4" = "Liczba wypalanych dziennie papierosów";
-
-/*Moim zdaniem to nie będzie eleganckie jak po „Gratulacje” pojawi się informacja, że ktoś jest w grupie wysokiego ryzyka. Może lepiej: Dziękujemy!*/
 "diagnosis_summary_text1" = "Dziękujemy!";
 "diagnosis_summary_text2" = "Dziękujemy za wypełnienie Testu Oceny Ryzyka";
 "diagnosis_summary_text3" = "Na podstawie Twoich odpowiedzi, nasz system sprawdzi teraz do jakiej grupy Cię zakwalifikować.";
-"diagnosis_summary_text4" = "To bardzo ważne, abyś wypełniał/-a testy codziennie. Będziemy Ci o tym przypominać :)";
+"diagnosis_summary_text4" = "To bardzo ważne, abyś wypełniał/-a testy codziennie.";
 "diagnosis_summary_text5" = "Sprawdź wynik";
 "imprint_filler_summary_text1" = "Sprawdź, czy dane są prawidłowe";
 "imprint_filler_summary_text2" = "Zapisz metrykę";
@@ -58,14 +54,12 @@
 "advice_information_text5" = "MÓJ DZIENNIK ZDROWIA";
 "advice_information_text6" = ": zapisuj w aplikacji objawy i temperaturę ciała.";
 "advice_information_text7" = "Ważne";
-"advice_information_text8" = "Jeśli u Ciebie lub Twoich bliskich wystąpią objawy zakażenia koronawirusem, zadzwoń na darmową, całodobową infolinię";
+"advice_information_text8" = "Jeśli u Ciebie lub Twoich bliskich wystąpią objawy zakażenia koronawirusem, zadzwoń na infolinię (połączenie z infolinią jest płatne zgodnie z taryfą operatora, infolinia czynna jest przez całą dobę)";
 "advice_information_text9" = "222 500 115";
 "advice_information_text10" = "lub do lokalnej placówki służby zdrowia.";
 "advice_information_text11" = "ikonka";
 "advice_information_text12" = "Porady";
 "explainer_container_text1" = "Nowość w aplikacji:";
-
-/*Pamiętam, że ludzie zwracali uwagę, że mają kontakt z zarażonym człowiekiem, a nie koronawirusem. Imo jest ok, ale wrzucam do przekminy.*/
 "explainer_container_text2" = " powiadomienia o możliwym kontakcie z koronawirusem.";
 "explainer_container_text3" = "Dbaj o siebie! Regularnie sprawdzaj, czy jesteś w grupie ryzyka";
 "explainer_container_text4" = "Uzupełniaj ";
@@ -100,8 +94,6 @@
 "form_text2" = "Objawy";
 "form_text3" = "Miejsca i kontakty";
 "form_text4" = "Podaj aktualną temperaturę ciała";
-
-/*Trochę boli brak feminatywów, może warto to przeredagować*/
 "form_text5" = "Z kim się spotkałem/am, gdzie byłem/am";
 "form_text6" = "wpisz";
 "form_text7" = "Ból mięśni";
@@ -125,17 +117,15 @@
 "country_text1" = "Zaznacz kraje, które odwiedziłeś w ciągu ostatnich 14 dni.";
 "country_text2" = "brak wyników";
 "country_text3" = "Zacznij wpisywać...";
-"summary_text4" = "To bardzo ważne, abyś wypełniał/-a testy regularnie. Będziemy Ci o tym przypominać :)";
+"summary_text4" = "To bardzo ważne, abyś wypełniał/-a testy regularnie.";
 "faq_page_text1" = "Pytania i odpowiedzi";
 "faq_page_text2" = "Szukaj wśród pytań";
 "first_diagnosis_asking_text1" = "Chcesz dowiedzieć się więcej?";
 "first_diagnosis_asking_text2" = "Kliknij poniżej i wykonaj test oceny ryzyka.";
-"first_diagnosis_asking_text3" = "Pamiętaj! Wyniki wywiadu służą wyłącznie celom informacyjnym. Niemogą być interpretowane, ani traktowane jako porada, konsultacja lub diagnoza lekarska.";
+"first_diagnosis_asking_text3" = "Pamiętaj! Wyniki wywiadu służą wyłącznie celom informacyjnym. Nie mogą być interpretowane, ani traktowane jako porada, konsultacja lub diagnoza lekarska.";
 "first_diagnosis_asking_text4" = "Wykonaj test oceny ryzyka";
 "first_diagnosis_asking_text5" = "pomiń test oceny ryzyka";
 "exposure_notification_info_text1" = "Monitorowanie ryzyka: włączone";
-
-/*j.w. -> Pamiętam, że ludzie zwracali uwagę, że mają kontakt z zarażonym człowiekiem, a nie koronawirusem. Imo jest ok, ale wrzucam do przekminy.*/
 "exposure_notification_warning_text1" = "Powiadamianie o możliwym kontakcie z koronawirusem jest wyłączone";
 "exposure_notification_warning_text2" = "Kliknij, aby włączyć monitorowanie ryzyka";
 "home_more_information_text1" = "Więcej informacji";
@@ -147,8 +137,6 @@
 "smile_no_data_text1" = "Brakuje informacji do analizy Twojego ryzyka zakażenia koronawirusem.";
 "smile_no_data_text2" = "Wypełnij test oceny ryzyka lub zaczekaj na informacje o kontaktach z zakażonymi.";
 "call_doctor_text1" = "Jak najszybciej zadzwoń do swojego lekarza rodzinnego (POZ) i powiedz mu jakie masz objawy. Lekarz przeprowadzi z tobą wywiad medyczny i w razie potrzeby zaprosi cię na wizytę lekarską.";
-
-/*Proponowana wersja: Lista placówek POZ, które udzielają teleporad, a także innych placówek, w tym otwartych poradni specjalistycznych, gabinetów ginekologicznych i stomatologicznych, znajduje się na*/
 "call_doctor_text2" = "Lista placówek POZ, które udzielają teleporad, a także innych placówek, w tym otwartych poradni specjalistycznych, gabinetów ginekologicznych i stomatologicznych, znajduje się na";
 "call_doctor_text3" = "stronie internetowej NFZ";
 "call_doctor_text4" = "Podczas teleporady możesz otrzymać:";
@@ -200,8 +188,6 @@
 "isolation_ambulance_text10" = "999";
 "isolation_ambulance_text11" = "lub";
 "isolation_ambulance_text12" = "112";
-
-/*to celowa interpunkcja?*/
 "isolation_ambulance_text13" = ". Koniecznie uprzedź, że może chodzić o pacjenta z koronawirusem.";
 "isolation_ambulance_text14" = "Jeśli masz maseczkę, zakładaj ją za każdym razem, gdy ktoś z zewnątrz ma wejść do pomieszczenia lub pojazdu, w którym przebywasz. Załóż ją również, gdy wchodzisz do placówek medycznych. Osoby w pobliżu również powinny założyć maseczkę, szczególnie jeżeli ty nie możesz jej założyć (np. gdy nasila ona trudności w oddychaniu).";
 "isolation_ambulance_text15" = "Zobacz jak bezpiecznie zakładać i zdejmować maskę";
@@ -216,11 +202,7 @@
 "isolation_ambulance_text24" = "Noś maseczkę ochronną";
 "isolation_ambulance_text25" = "Ściśle przestrzegaj zasad higieny";
 "isolation_ambulance_text26" = "znajdujących się na stronie Głównego Inspektoratu Sanitarnego.";
-
-/*Poinformuj o chorobie czy objawach choroby? Nie znam kontekstu*/
 "triage_info_border_text1" = "Bardzo źle się czujesz? Nie czekaj. Zadzwoń na numer alarmowy 112 lub 999. Poinformuj o swojej chorobie.";
-
-/*Proponowana wersja: Pamiętaj, by regularnie dezynfekować lub myć ręce wodą z mydłem oraz zachować dystans społeczny.*/
 "triage_info_border_text2" = "Pamiętaj, by regularnie dezynfekować lub myć ręce wodą z mydłem oraz zachować dystans społeczny.";
 "triage_info_border_text3" = "Regularnie obserwuj swój stan zdrowia, mierz temperaturę dwa razy dziennie i zapisuj ją w Dzienniku Zdrowia.";
 "triage_info_border_text4" = "W przypadku pojawienia się objawów takich jak: gorączka, kaszel lub duszność, skontaktuj się telefonicznie ze swoim lekarzem lub skorzystaj z darmowej teleporady z pracownikiem medycznym.";
@@ -244,12 +226,8 @@
 "chronic_sick_values_text14" = "stosowanie leków obniżających odporność (immunosupresyjnych)";
 "chronic_sick_values_text15" = "proszę wpisać jakie";
 "chronic_sick_values_text16" = "choroby onkologiczne";
-
-/*tu coś nie pasuje z interpunkcją, ale znów: nie znam kontekstu*/
 "chronic_sick_values_text17" = "proszę wpisać jakie, podać w latach z dokładnością do 0.25 roku";
 "chronic_sick_values_text18" = "nietolerancje / alergie / nadwrażliwość na leki";
-
-/*j.w. tu coś nie pasuje z interpuncją, ale znów: nie znam kontekstu*/
 "chronic_sick_values_text19" = "proszę wpisać jakie, podać w latach z dokładnością do <=1 , <3, <5, <10, <15 lub więcej niż 15 lat";
 "chronic_sick_values_text20" = "nietolerancje / alergie - pokarmowe";
 "chronic_sick_values_text21" = "proszę wpisać jakie";
@@ -282,8 +260,6 @@
 "isolation_call_text23" = "Zgłoś się bezpośrednio do oddziału zakaźnego lub oddziału obserwacyjno-zakaźnego";
 "isolation_call_text24" = "Noś maseczkę ochronną";
 "isolation_call_text25" = "Ściśle przestrzegaj zasad higieny";
-
-/*nie brakuje tutaj „znajdujących się” ...na stronie Głównego Inspektoratu Sanitarnego. (?) Wcześniej jest Ściśle przestrzegaj zasad higieny...*/
 "isolation_call_text26" = "znajdujących się na stronie Głównego Inspektoratu Sanitarnego.";
 "no_risk_text1" = "Regularnie myj ręce mydłem i wodą, lub dezynfekuj je środkiem na bazie alkoholu (min. 60%). Mycie rąk powinno trwać 30 sekund. Zapoznaj się z";
 "no_risk_text2" = "instrukcją mycia rąk";
@@ -394,7 +370,7 @@
 "how_it_works_text18" = "* Komunikacja z użytkownikiem – wysyłanie zweryfikowanych wiadomościod WHO i Ministerstwa Zdrowia. To od naszej postawy zależy, jak szybko pokonamy koronawirusa i wrócimy do normalnego życia. Korzystaj z naszej aplikacji, stosuj się do wytycznych! Prowadzenie dziennika zdrowia jest bardzo proste i nie zajmuje wiele czasu. Zacznij od dziś – zadbaj o siebie i swoich bliskich.";
 "i_am_sick_text1" = "Samoobserwacja - pozostań w domu i monitoruj stan zdrowia";
 "i_am_sick_text2" = "Zostań w domu";
-"i_am_sick_text3" = "i monitoruj stan swojego zdrowia. Zadzwoń na darmową, całodobową infolinię";
+"i_am_sick_text3" = "i monitoruj stan swojego zdrowia. Zadzwoń na infolinię (połączenie z infolinią jest płatne zgodnie z taryfą operatora, infolinia czynna jest przez całą dobę)";
 "i_am_sick_text4" = "222 500 115";
 "i_am_sick_text5" = " lub do lokalnej placówki służby zdrowia. Ważne! Nie idź tam.";
 "i_am_sick_text6" = "Do minimum";
@@ -407,7 +383,7 @@
 "i_am_sick_text13" = "Ściśle przestrzegaj ";
 "i_am_sick_text14" = "zasad higieny";
 "i_am_sick_text15" = ", podczas kaszlu i kichania - zasłaniaj usta i nos. Często i dokładnie myj ręce.";
-"i_am_sick_text16" = "Jeżeli pojawią się nowe objawy infekcji lub nasilą się dotychczasowe, ponów kontakt z darmową, całodobową infolinią";
+"i_am_sick_text16" = "Jeżeli pojawią się nowe objawy infekcji lub nasilą się dotychczasowe, ponów kontakt z infolinią (połączenie z infolinią jest płatne zgodnie z taryfą operatora, infolinia czynna jest przez całą dobę)";
 "i_am_sick_text17" = "222 500 115";
 "i_am_sick_text18" = "lub";
 "i_am_sick_text19" = "zadzwoń (nie idź!) ";
@@ -422,8 +398,6 @@
 "information_text1" = "Test oceny ryzyka zakażenia koronawirusem";
 "information_text2" = "Jedną z głównych funkcji tej aplikacji jest test oceny ryzyka zakażenia koronawirusem. Przygotowaliśmy go zgodnie z wytycznymi Światowej Organizacji Zdrowia (WHO).";
 "information_text3" = "Ważne";
-
-/*Dziwna interpunkcja, IMO dwukropek powinien być po "Ważne" w poprzednim punkcie*/
 "information_text4" = "Test:";
 "information_text5" = "nie jest diagnozą.";
 "information_text6" = " Tę mogą postawić wyłącznie lekarz i test medyczny na obecność wirusa.";
@@ -445,7 +419,7 @@
 "numbers_text1" = "Szukaj pomocy w Twojej okolicy";
 "numbers_text2" = "Zadzwoń na infolinię - 222500115";
 "numbers_text3" = "Pokaż adresy szpitali zakaźnych";
-"numbers_text4" = "Połączenie z infolinią jest bezpłatne, infolinia czynna jest przez całą dobę.";
+"numbers_text4" = "Połączenie z infolinią jest płatne zgodnie z taryfą operatora, infolinia czynna jest przez całą dobę.";
 "more_information_text4" = "Jak działa?";
 "more_information_text5" = "Aplikacja składa się z dwóch modułów. Pierwszy z nich to moduł umożliwiający samokontrolę stanu zdrowia. To swoisty „dziennik”, który na bieżąco pozwala weryfikować, czy i w jakiej grupie ryzyka zakażenia jesteśmy. To rozwiązanie oparte o wytyczne Światowej Organizacji Zdrowia (WHO).";
 "more_information_text6" = "Drugi moduł – to skanowanie Twojego otoczenia i komunikowanie wprzypadku ryzyka kontaktu z wirusem.";
@@ -453,8 +427,6 @@
 "more_information_text8" = "Informacje o napotkanych urządzeniach nie zawierają żadnych danych o ich właścicielach, są anonimowe i zakodowane, a do tego przechowywane tylko w telefonie, przez dwa tygodnie. Później są usuwane.";
 "more_information_text9" = "Do czego przydaje się historia takich spotkań? W momencie, kiedy któryś z użytkowników, z którego telefonem spotkał się Twój telefon, zachoruje – dostaniesz odpowiednią informację. Nie dowiesz się, kto zachorował. Dowiesz się za to, jak się zachować i co zrobić, by zadbać o swoje zdrowie.";
 "more_information_text10" = "Prywatność użytkowników aplikacji jest naszym priorytetem. STOP COVID - ProteGO Safe zbudowaliśmy zgodnie z m.in. wytycznymi Komisji Europejskiej.";
-
-/*tu nie wiem co jest otwarte, prace?*/
 "more_information_text11" = "Aplikacja STOP COVID - ProteGO Safe nie śledzi użytkowników. Od początku jej tworzenia, prace nad aplikacją są w pełni otwarte i transparentne. Zdajemy sobie sprawę, że aby spełniła ona swoją rolę, musi zyskać zaufanie użytkowników.";
 "more_information_text12" = "Aplikacja jest w pełni bezpieczna, bezpłatna i dobrowolna.";
 "more_information_text13" = "Jak pokazują badania skuteczna izolacji zakażonych oraz wykorzystanie aplikacji typu exposure notification (tego typu aplikacją jest STOP COVID - ProteGO Safe) o 44% mogą zredukować ryzyko rozprzestrzeniania się koronawirusa. Jest jednak jeden warunek - z aplikacji musi korzystać jak najwięcej osób.";
@@ -477,7 +449,7 @@
 "privacy_policy_content_text6" = "Informacje przetwarzane przez STOP COVID - ProteGO Safe nie umożliwiają Twojej identyfikacji.";
 "privacy_policy_content_text7" = "Nie będziemy mieli dostępu do danych osobowych, które wprowadzisz do aplikacji STOP COVID - ProteGO Safe. Nie będziemy podejmowali aktywnych działań, aby Cię zidentyfikować. Nie będziemy także analizowali w jaki sposób korzystasz z STOP COVID - ProteGO Safe.";
 "privacy_policy_content_text8" = "Informacje wprowadzone do STOP COVID - ProteGO Safe związane z Triażem (samooceną ryzyka zarażenia COVID- 19 - Moduł Triażu) są analizowane w ramach STOP COVID - ProteGO Safe bez opuszczania Twojego urządzenia.";
-"privacy_policy_content_text9" = "Funkcjonalność analizowania narażenia na zarażenie COVID-19 w związku zkontaktem z innymi Użytkownikami Aplikacji (Moduł Analityczny) jest dobrowolna. Masz możliwość analizowania potencjalnego narażenia";
+"privacy_policy_content_text9" = "Funkcjonalność analizowania narażenia na zarażenie COVID-19 w związku z kontaktem z innymi Użytkownikami Aplikacji (Moduł Analityczny) jest dobrowolna. Masz możliwość analizowania potencjalnego narażenia";
 "privacy_policy_content_text10" = "Jeśli Twój test";
 "privacy_policy_content_text11" = "będzie miał wynik pozytywny zadzwoni do Ciebie konsultant Centrum Kontaktu, który poinformuje o pozytywnym wyniku testu. Następnie konsultant Centrum Kontaktu zapyta Cię, czy masz zainstalowaną aplikację STOP COVID - ProteGO Safe. Jeśli tak będzie, konsultant Centrum Kontaktu zaproponuje Ci powiadomienie innych Użytkowników o tym, że przebywali w pobliżu Urządzenia Osoby Chorej na";
 "privacy_policy_content_text12" = "w ciągu ostatnich 14 dni, poprzez podyktowanie Ci Kodu PIN. Kod PIN ma na celu potwierdzenie, że Twoje Urządzenie, to Urządzenie Osoby Chorej na";
@@ -566,7 +538,7 @@
 "privacy_policy_content_text79" = "Informacja o instalacji, ostatnim korzystaniu i usunięciu Aplikacji;";
 "privacy_policy_content_text80" = "Lokalizacja, w której znajdował się Użytkownik podczas instalacji Aplikacji (określenie miasta lub kraju);";
 "privacy_policy_content_text81" = "Modele Urządzeń Użytkowników;";
-"privacy_policy_content_text82" = "Dane przechowywane wyłącznie lokalnie na Urządzeniach, niezależnie od systemu operacyjnego Urządzenia. Dane te nie są przekazywane poza Urządzenie Użytkownikaw, szczególności nie Przetwarza ich GIS ani MC:";
+"privacy_policy_content_text82" = "Dane przechowywane wyłącznie lokalnie na Urządzeniach, niezależnie od systemu operacyjnego Urządzenia. Dane te nie są przekazywane poza Urządzenie Użytkownika w, szczególności nie Przetwarza ich GIS ani MC:";
 "privacy_policy_content_text83" = "ID Użytkownika,";
 "privacy_policy_content_text84" = "Historia wpisów do Dziennika Zdrowia,";
 "privacy_policy_content_text85" = "Historia wpisów do Modułu Triażu,";
@@ -715,7 +687,7 @@
 "regulations_content_text50" = "oraz udzielenia zgody na lokalizację (w zakresie modułu Bluetooth, STOP COVID - ProteGO Safe nie wykorzystuje danych GPS), a dla Urządzeń z systemem operacyjnym iOS: zaznaczenia opcji Rejestrowanie narażenia na";
 "regulations_content_text51" = ". W celu skutecznego korzystania z pełnej funkcjonalności Modułu Analitycznego należy pozostawić uruchomioną Aplikację w tle. Aplikacja uruchomiona w tle będzie skanować otoczenie w poszukiwaniu Urządzeń innych Użytkowników Aplikacji, jak również sama będzie podlegać skanowaniu przez inne Urządzenia. Urządzenie Użytkownika Aplikacji zapisuje historię spotykanych Urządzeń, na których jest zainstalowana Aplikacja. Informacje te (historia spotykanych Urządzeń) pozostają na Urządzeniach Użytkowników przez 14 dni.";
 "regulations_content_text52" = "Konsultant Centrum Kontaktu przekazując telefonicznie informację o zarażeniu";
-"regulations_content_text53" = "Po otrzymaniu przez Urządzenie Użytkownika Aplikacji Klucza Diagnostycznego Moduł Analityczny dokonuje analizy porównując Klucz Diagnostyczny z danymi historycznymi dotyczącymi spotkań innych Urządzeńz zainstalowaną Aplikacją zapisanymi lokalnie na Urządzeniu Użytkownikaw celu oceny ryzyka narażenia na zarażenie";
+"regulations_content_text53" = "Po otrzymaniu przez Urządzenie Użytkownika Aplikacji Klucza Diagnostycznego Moduł Analityczny dokonuje analizy porównując Klucz Diagnostyczny z danymi historycznymi dotyczącymi spotkań innych Urządzeń z zainstalowaną Aplikacją zapisanymi lokalnie na Urządzeniu Użytkownika w celu oceny ryzyka narażenia na zarażenie";
 "regulations_content_text54" = ". Jeśli analiza prawdopodobieństwa zarażenia";
 "regulations_content_text55" = "wykaże wysokie lub średnie ryzyko narażenia na zakażenie";
 "regulations_content_text56" = "status Użytkownika w Aplikacji zmieni się odpowiednio. ";
@@ -741,7 +713,7 @@
 "regulations_content_text76" = "Użytkownik może zaprzestać korzystania z STOP COVID - ProteGO Safe ze skutkiem natychmiastowym i bez wskazywania przyczyn poprzez usunięcie STOP COVID - ProteGO Safe ze swojego Urządzenia.";
 "regulations_content_text77" = "GIS może zaprzestać dostarczania oraz wspierania i aktualizowania STOP COVID - ProteGO Safe ze skutkiem natychmiastowym poprzez przesłanie Użytkownikowi stosownego oświadczenia za pośrednictwem Aplikacji lub poprzez inne dostępne środki komunikacji.";
 "regulations_content_text78" = "Siła Wyższa";
-"regulations_content_text79" = "Podmioty, o których mowa w § 2 pkt. 1 i 2 nie będą ponosić odpowiedzialności za niewypełnienie swoich zobowiązań z tytułu niniejszego Regulaminu w czasie, w każdym przypadku gdy ich wypełnienie jest opóźnione lub niemożliwe z powodu okoliczności lub wydarzeń będących poza kontrolą Podmiotów, o których mowa w § 2 pkt. 1 i 2, co uniemożliwia lub znacząco utrudnia Podmiotom, o których mowa w § 2 pkt. 1 i 2 działanie zgodne z Regulaminem, takich jak między innymi: pożar, powódź, nałożenie embargo, strajk, zamieszki, niemożność zabezpieczenia materiałów i infrastruktury, awaria lub przerwanie pracy maszyn, w każdym przypadku z przyczyn leżących poza kontrolą Podmiotów, o których mowa w § 2 pkt. 1 i 2. Jeżeli takie opóźnienie trwać będzie dłużej niż 30 (trzydzieści) dni, Podmioty, októrych mowa w § 2 pkt. 1 i 2 będą miały prawo zaprzestać dostarczania oraz wspierania i aktualizowania STOP COVID - ProteGO Safe w trybie natychmiastowym.";
+"regulations_content_text79" = "Podmioty, o których mowa w § 2 pkt. 1 i 2 nie będą ponosić odpowiedzialności za niewypełnienie swoich zobowiązań z tytułu niniejszego Regulaminu w czasie, w każdym przypadku gdy ich wypełnienie jest opóźnione lub niemożliwe z powodu okoliczności lub wydarzeń będących poza kontrolą Podmiotów, o których mowa w § 2 pkt. 1 i 2, co uniemożliwia lub znacząco utrudnia Podmiotom, o których mowa w § 2 pkt. 1 i 2 działanie zgodne z Regulaminem, takich jak między innymi: pożar, powódź, nałożenie embargo, strajk, zamieszki, niemożność zabezpieczenia materiałów i infrastruktury, awaria lub przerwanie pracy maszyn, w każdym przypadku z przyczyn leżących poza kontrolą Podmiotów, o których mowa w § 2 pkt. 1 i 2. Jeżeli takie opóźnienie trwać będzie dłużej niż 30 (trzydzieści) dni, Podmioty, o których mowa w § 2 pkt. 1 i 2 będą miały prawo zaprzestać dostarczania oraz wspierania i aktualizowania STOP COVID - ProteGO Safe w trybie natychmiastowym.";
 "regulations_content_text80" = "Ochrona Prywatności Użytkowników";
 "regulations_content_text81" = "Szczegółowe zasady dotyczące prywatności Użytkowników STOP COVID - ProteGO Safe i innych osób korzystających z STOP COVID - ProteGO Safe lub wszelkich form kontaktu opisane są w Polityce Prywatności.";
 "regulations_content_text82" = "Postanowienia końcowe";
@@ -880,8 +852,6 @@
 "country_name_cf" = "Republika Środkowoafrykańska";
 "country_name_cg" = "Kongo";
 "country_name_ch" = "Szwajcaria";
-
-/*Sugeruję bardziej czytelną dla użytkownika PL nazwę*/
 "country_name_ci" = "Wybrzeże Kości Słoniowej";
 "country_name_ck" = "Wyspy Cooka";
 "country_name_cl" = "Chile";
@@ -1189,8 +1159,6 @@
 "upload_temporary_exposure_keys_empty_error" = "Aktualnie aplikacja nie posiada żadnych danych do udostępnienia. Skontaktuj się z Centrum Kontaktu aby zgłosić problem.";
 "upload_temporary_exposure_keys_limit_exceed_error" = "Aplikacja posiada zbyt dużą ilość danych do udostępnienia. Skontaktuj się z Centrum Kontaktu aby zgłosić problem.";
 "upload_temporary_exposure_keys_day_limit_exceed_error" = "Zbyt duża ilość kluczy wysłanych jednego dnia. Skontaktuj się z Centrum Kontaktu aby zgłosić problem";
-
-/*ADDED LOCALLY*/
 "ALERT_CANCEL_BUTTON_TITLE" = "Anuluj";
 "ALERT_OK_BUTTON_TITLE" = "Ok";
 "ALERT_RETRY_BUTTON_TITLE" = "Ponów";
@@ -1207,3 +1175,51 @@
 "privacy_policy_content_text124" = "-> Usuń dziennik narażeń;";
 "privacy_policy_content_text129" = "-> Usuń losowe identyfikatory;";
 "test_android_upload" = "Test android upload";
+"diagnosis_explanation1" = "Osłabienie układu odpornościowego może być spowodowane wieloma czynnikami, np. leczeniem nowotworów, przeszczepem szpiku kostnego lub narządów, źle kontrolowanym zakażeniem HIV / AIDS, przedłużonym stosowaniem leków immunosupresyjnych, takich jak kortykosteroidy lub leki stosowane w reumatoidalnym zapaleniu stawów, oraz niektórymi chorobami wrodzonymi.";
+"diagnosis_explanation2" = "Osoba jest uważana za otyłą, gdy jej wskaźnik masy ciała (BMI) przekracza 30.";
+"diagnosis_explanation3" = "Gorączka to podwyższona temperatura ciała powyżej 37,5 ° C lub 99,5 ° F. Wybierz ten objaw, nawet jeśli nie mierzyłeś swojej temperatury, ale poczułeś, że gorączkujesz, jesteś rozpalony lub zarumieniony.";
+"diagnosis_explanation4" = "Problemy z oddychaniem i nabraniem do płuc odpowiedniej ilości powietrza. Często towarzyszy im ucisk w klatce piersiowej, brak tchu i uczucie duszenia się.";
+"diagnosis_explanation5" = "Stan zdrowia szybko się pogarsza: Czujesz się znacznie gorzej niż poprzednio, np. godzinę temu. Twoje objawy nie ustępują mimo twoich starań.";
+"diagnosis_explanation6" = "Przyspieszony oddech: Powyżej 20 oddechów w ciągu jednej minuty.";
+"diagnosis_explanation7" = "Przewlekłe choroby płuc to zaburzenia, które wpływają na płuca i inne części układu oddechowego. Zaburzenia te obejmują: przewlekłą obturacyjną chorobę płuc (POChP), umiarkowaną i ciężką astmę oraz inne choroby płuc.";
+"diagnosis_explanation8" = "Długotrwała choroba wątroby spowodowana alkoholizmem, infekcjami, przewlekłym zapaleniem lub chorobami wrodzonymi, prowadząca do utraty funkcji, marskości wątroby i innych powikłań.";
+"diagnosis_explanation9" = "Przewlekła choroba nerek to postępująca utrata zdolności nerek do filtrowania krwi. Rozwija się powoli, powodując gromadzenie szkodliwych produktów przemiany materii w twoim organizmie.";
+"diagnosis_explanation10" = "To choroby serca i naczyń. Należą do nich np. niewydolność serca, choroba wieńcowa, ciężkie nadciśnienie oraz inne choroby serca. Zaznacz tą odpowiedź także, jeśli kiedykolwiek miałeś zawał serca lub udar mózgu.";
+"diagnosis_explanation11" = "Osoba z \"prawdopodobnym\" rozpoznaniem to osoba z objawami, podejrzewana przez lekarzy o COVID-19, u której jednak nie wykonano testu potwierdzającego zakażenie lub wynik był niejednoznaczny. Osoba z \"potwierdzonym\" rozpoznaniem to osoba z zakażeniem potwierdzonym testem, z objawami choroby lub bez.";
+"faq_page_text3" = "Szanowni Państwo, sekcja Pytań i Odpowiedzi jest aktualizowana na podstronie językowej serwisu gov.pl. Podstrona z informacjami otworzy się po kliknięciu w poniższy link. Wszystkie informacje z tej sekcji znajdują się na tej podstronie.";
+"store_description" = "Oficjalna, polska aplikacja służąca do śledzenia kontaktu z koronawirusem, wydana przez Ministerstwo Cyfryzacji przy współpracy z Głównym Inspektoratem Sanitarnym. Aplikacja przewidziana do użytku na terenie Polski.\n\nSTOP COVID - ProteGO Safe to aplikacja na telefon, która pomaga w walce z koronawirusem.\n\nJak działa? Dzięki STOP COVID - ProteGO Safe telefon zapamięta kogo spotkaliście. Co ważne, nikomu tych informacji nie przekazuje. Za to poinformuje Was o kontakcie z osobą zakażoną i podpowie, co zrobić w takiej sytuacji. To szansa na szybszą reakcję i pomoc.\n\nPobierz, zainstaluj i korzystaj z aplikacji STOP COVID - ProteGO Safe. Zachęć do tego także rodzinę i znajomych. Wszystko w Twoich rękach.\n\nAplikacja jest bezpieczna i anonimowa. STOP COVID - ProteGO Safe dba o bezpieczeństwo Twoich danych i prywatność. Nie zbiera żadnych danych. Nigdzie nie przekazuje jakichkolwiek informacji na Twój temat. Nie śledzi Twojej lokalizacji, nie ma dostępu do jakichkolwiek plików czy informacji, które trzymasz w telefonie.\n\nWAŻNE:\n- otrzymanie powiadomienia nie jest jednoznaczne z obowiązkiem odbycia kwarantanny domowej,\n- otrzymanie powiadomienia nie oznacza, że jesteś chory lub że chorzy są Twoi bliscy,\n- nikt nie dowie się, że miałeś kontakt z osobą zakażoną (Ty też nie dowiesz się, kto – z kim miałeś kontakt – zachorował, a chory nie wie do kogo wysyła powiadomienie),\n- nie dostaniesz takiego powiadomienia jeśli kontakt z chorym był krótki, przypadkowy – trwał poniżej 15 minut, a odległość pomiędzy Waszymi urządzeniami była większa niż 2 metry,\n- aplikacja nie informuje, że właśnie teraz masz kontakt z chorym! Nie dostaniesz powiadomienia, że stojąca obok Ciebie w kolejce osoba ma koronawirusa. Powiadomienia są wysyłane po uzyskaniu przez chorego pozytywnego wyniku testu – w takim przypadku osoba jest na kwarantannie, nie stoi obok Ciebie w kolejce.\n\nSTOP COVID - ProteGO Safe nie tylko powiadamia o możliwym kontakcie z koronawirusem, ale daje też możliwość wypełniania testów oceny ryzyka zachorowania i prowadzenia dziennika zdrowia.\n\nTest oceny ryzyka to prosta ankieta stworzona przez lekarzy. Po uzupełnieniu testu, system sprawdza (na podstawie wytycznych Światowej Organizacji Zdrowia i Głównego Inspektoratu Sanitarnego) do jakiej grupy ryzyka kwalifikują się Twoje odpowiedzi. Otrzymasz też rekomendację zachowań. Dzięki temu dowiesz się, co robić dalej i gdzie - w razie potrzeby - szukać pomocy.\n\nSTOP COVID - ProteGO Safe umożliwia także prowadzenie dziennika zdrowia, czyli regularnego zapisywania informacji o tym, jak się czujesz i w jakiej jesteś kondycji.\n\nDzięki temu, w razie wystąpienia niepokojących objawów, możesz zareagować.\n\nDziennik zdrowia to także - jeśli zajdzie taka potrzeba - narzędzie pomocne dla lekarzy. Ułatwia przekazanie personelowi medycznemu informacji o rozwoju objawów, współistniejących schorzeniach, czy przyjmowanych lekach. Dzięki temu zyskasz szansę na szybszą diagnozę oraz wybór odpowiedniego schematu leczenia.\n\nProwadzenie dziennika zdrowia jest bardzo proste i nie zajmuje wiele czasu.\n\nW STOP COVID - ProteGO Safe znajdziesz też wiarygodne, oficjalne i aktualne informacje na temat aktualnej sytuacji związanej z pandemią koronawirusa. Dowiesz się, jak zachować środki ostrożności i jak postępować w przypadku podejrzenia infekcji u siebie lub swoich bliskich.\n\nPublikowane informacje to komunikaty potwierdzone przez Ministerstwo Zdrowia lub Główny Inspektorat Sanitarny. To także informacje opracowane na podstawie danych Europejskiego Centrum ds. Zapobiegania i Kontroli Chorób (ECDC) oraz Światowej Organizacji Zdrowia (WHO).\n\nGdzie znajdziesz więcej informacji? www.gov.pl/protegosafe\n\nWsparcie techniczne protego@mc.gov.pl\n\nPokonajmy razem koronawirusa!";
+"store_keywords" = "STOP COVID - ProteGO Safe, koronawirus, zdrowie, ocena ryzyka, medycyna, bezpieczeństwo, COVID-19";
+"bottom_navigation_important_info" = "Ważne informacje";
+"important_info_title_1" = "Jak działa aplikacja?";
+"important_info_description_1" = "Przewodnik po funkcjach i ochronie danych w aplikacji";
+"important_info_title_2" = "Zgłoś błąd";
+"important_info_description_2" = "Znalazłeś/-łaś błąd w aplikacji? Pomóż ją ulepszyć";
+"important_info_title_3" = "Aktualne obostrzenia";
+"important_info_description_3" = "Aktualne zasady i obostrzenia m. in. w powiatach";
+"important_info_title_4" = "Dla podróżujących";
+"important_info_description_4" = "Aktualne zasady i obostrzenia przy przekraczaniu granic";
+"important_info_title_5" = "COVID-19, pytania i odpowiedzi";
+"important_info_title_6" = "Źle się czuję!";
+"important_info_description_6" = "Co robić? Z kim się kontaktować?";
+"call_the_hotline_title" = "Zadzwoń na infolinię";
+"call_the_hotline_description" = "Infolinia jest czynna całą dobę, a koszt połączenia zgodny z taryfą operatora";
+"i_am_sick_main_title" = "Czuję się źle! Co robić?";
+"i_am_sick_description_remember" = "Pamiętaj! Nie idź tam.";
+"i_am_sick_button_label" = "Lista szpitali zakaźnych";
+"i_am_sick_button_info" = "Kliknij i przejdź na gov.pl";
+"i_am_sick_title_1" = "Przede wszystkim zostań w domu";
+"i_am_sick_description_1_1" = "Jeśli czujesz taką potrzebę, zadzwoń na całodobową infolinię";
+"i_am_sick_description_1_2" = "lub do lokalnej placówki służby zdrowia.";
+"i_am_sick_title_2" = "Ogranicz kontakty z ludźmi";
+"i_am_sick_description_2" = "Ograniczając kontakt pomagasz chronić bliskich i współpracowników. Przerywasz też ciąg zarażeń –spowalniając rozwój epidemii.";
+"i_am_sick_title_3" = "Monitoruj stan zdrowia";
+"i_am_sick_description_3_1" = "Pomocne narzędzie znajdziesz w zakładce";
+"i_am_sick_description_3_2" = "Mój dziennik zdrowia.";
+"i_am_sick_description_3_3" = "Spisane objawy i temperatura pomogą Tobie i lekarzowi przyspieszyć wywiad medyczny.";
+"i_am_sick_title_4" = "Przestrzegaj zasad higieny";
+"i_am_sick_description_4" = "Podczas kaszlu i kichania - zasłaniaj usta i nos. Często i dokładnie myj ręce.";
+"i_am_sick_title_5" = "Jeśli Twoje objawy się nasilą";
+"i_am_sick_description_5_1" = "Jeśli objawy się nasilą, lub pojawią się nowe – ponownie zadzwoń na całodobową infolinię";
+"i_am_sick_description_5_2" = "lub do lokalnej placówki służby zdrowia.";
+"important_info_button_info" = "Kliknij i przejdź na gov.pl";
+"upload_data_text4" = "Aby kontynuować musisz wyrazić zgodę na udostępnienie losowych identyfikatorów.";
