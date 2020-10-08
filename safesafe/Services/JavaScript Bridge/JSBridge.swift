@@ -175,6 +175,7 @@ extension JSBridge: WKScriptMessageHandler {
         case .clearData:
             StoredDefaults.standard.delete(key: .selectedLanguage)
             RealmLocalStorage.clearAll()
+            
         default:
             console("Not managed yet", type: .warning)
         }

@@ -31,4 +31,5 @@ final class StoredDefaults {
     func delete(key: Key) {
         UserDefaults.standard.removeObject(forKey: key.name)
     }
+    
 }
