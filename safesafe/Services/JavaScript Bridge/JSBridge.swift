@@ -440,18 +440,21 @@ private extension JSBridge {
         guard let response: UploadTemporaryExposureKeysResponse = jsonString?.jsonDecode(decoder: jsonDecoder)
             else { return }
         
-        diagnosisKeysUploadService?.upload(usingAuthCode: response.pin).done {
-            self.send(.success)
-        }.catch { error in
+        diagnosisKeysUploadService?.upload(usingAuthCode: response.pin)
+            .done {
+                self.send(.success)
+        }
+        .catch { error in
+            console(error)
             if let error = error as? InternalError {
                 switch error {
                 case .shareKeysUserCanceled:
                     self.send(.canceled)
                 default:
-                    self.send(.failure)
+                    self.send(.other)
                 }
             } else {
-                self.send(.other)
+                self.send(.failure)
             }
             
         }
