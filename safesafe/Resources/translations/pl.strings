@@ -1162,6 +1162,9 @@
 "ALERT_CANCEL_BUTTON_TITLE" = "Anuluj";
 "ALERT_OK_BUTTON_TITLE" = "Ok";
 "ALERT_RETRY_BUTTON_TITLE" = "Ponów";
+"ALERT_SETTINGS_BUTTON_TITLE" = "Ustawienia";
+"NOTIFICATIONS_ALERT_TITLE" = "Powiadomienia";
+"NOTIFICATIONS_ALERT_MESSAGE" = "Powiadomienia są wyłączone. W celu włączenia powiadomień przejdź do ustawień";
 "UPLOAD_VALIDATION_KEYS_AT_LEAST_MESSAGE" = "Aktualnie aplikacja nie posiada żadnych danych do udostępnienia. Skontaktuj się z Centrum Kontaktu aby zgłosić problem.";
 "UPLOAD_VALIDATION_KEYS_MAX_LEAST_MESSAGE" = "Aplikacja posiada zbyt dużą ilość danych do udostępnienia. Skontaktuj się z Centrum Kontaktu aby zgłosić problem.";
 "UPLOAD_VALIDATION_KEYS_PER_DAY_MAX_LEAST_MESSAGE" = "Zbyt duża ilość kluczy wysłanych jednego dnia. Skontaktuj się z Centrum Kontaktu aby zgłosić problem.";
@@ -1223,3 +1226,4 @@
 "i_am_sick_description_5_2" = "lub do lokalnej placówki służby zdrowia.";
 "important_info_button_info" = "Kliknij i przejdź na gov.pl";
 "upload_data_text4" = "Aby kontynuować musisz wyrazić zgodę na udostępnienie losowych identyfikatorów.";
+"DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE" = "Zmiana statusu obserwowanych powiatów";

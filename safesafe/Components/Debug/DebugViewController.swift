@@ -138,8 +138,21 @@ extension DebugViewController: DebugViewModelDelegate {
     }
     
     func shareLogs(fileURL: URL) {
-        let activityController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
-        present(activityController, animated: true)
+        let alertController = UIAlertController(title: "Pick Action", message: nil, preferredStyle: .actionSheet)
+        let preview = UIAlertAction(title: "Preview", style: .default) { [weak self] _ in
+            guard let data = try? Data(contentsOf: fileURL), let text = String(bytes: data, encoding: .utf8) else { return }
+            self?.showTextPreview(text: text)
+        }
+        let share = UIAlertAction(title: "Share", style: .default) { [weak self] _ in
+            let activityController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
+            self?.present(activityController, animated: true)
+        }
+        
+        alertController.addAction(preview)
+        alertController.addAction(share)
+        
+        present(alertController, animated: true)
+        
     }
     
     func showTextPreview(text: String) {

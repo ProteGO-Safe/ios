@@ -10,7 +10,7 @@ import FirebaseRemoteConfig
 final class DependencyContainer {
     
     @available(iOS 13.5, *)
-    lazy var backgroundTaskService = BackgroundTasksService(exposureService: exposureService)
+    lazy var backgroundTaskService = BackgroundTasksService(exposureService: exposureService, districtsService: districtsService)
     
     lazy var deviceCheckService = DeviceCheckService()
     
@@ -38,6 +38,10 @@ final class DependencyContainer {
     @available(iOS 13.5, *)
     lazy var exposureSummaryService: ExposureSummaryServiceProtocol = ExposureSummaryService(
         storageService: realmLocalStorage
+    )
+    
+    lazy var districtsService: DistrictService = DistrictService(
+        with:  MoyaProvider<DistrictsTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
     )
     
     lazy var jailbreakService: JailbreakServiceProtocol = JailbreakService()

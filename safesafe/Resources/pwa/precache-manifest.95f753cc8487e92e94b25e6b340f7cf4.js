@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e53b1c58a73b096fe9937009147196c1",
+    "revision": "b135927ab861f36336bd1a12bfc25b20",
     "url": "./index.html"
   },
   {
-    "revision": "287d218d75a1553ee6ca",
+    "revision": "3ce72d740f74904f4b35",
     "url": "./static/css/2.be51859f.chunk.css"
   },
   {
-    "revision": "769ee95db08c3e4b1029",
-    "url": "./static/css/main.d900b721.chunk.css"
+    "revision": "aa895a0680946d755545",
+    "url": "./static/css/main.52f2244f.chunk.css"
   },
   {
-    "revision": "287d218d75a1553ee6ca",
-    "url": "./static/js/2.d14f1330.chunk.js"
+    "revision": "3ce72d740f74904f4b35",
+    "url": "./static/js/2.6aaa0f6f.chunk.js"
   },
   {
     "revision": "f2262367eaa98bc5410c9ed32fbe280f",
-    "url": "./static/js/2.d14f1330.chunk.js.LICENSE.txt"
+    "url": "./static/js/2.6aaa0f6f.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "769ee95db08c3e4b1029",
-    "url": "./static/js/main.3bb33d24.chunk.js"
+    "revision": "aa895a0680946d755545",
+    "url": "./static/js/main.94c8dd8c.chunk.js"
   },
   {
     "revision": "b510f3c1e29e7489c0d2",
@@ -60,20 +60,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/media/OpenSans-Regular.6fde2eb6.woff"
   },
   {
-    "revision": "c3c8508dfccf8c952d2a91c9df7ecce8",
-    "url": "./static/media/SafeSafe-dolne-menu-FAQ-white.c3c8508d.svg"
+    "revision": "7106bb83a0e767e12659de9cfba3926d",
+    "url": "./static/media/OpenSans-SemiBold.7106bb83.woff2"
+  },
+  {
+    "revision": "fe241c6c4f5a190e821b7c03e337d756",
+    "url": "./static/media/OpenSans-SemiBold.fe241c6c.woff"
   },
   {
     "revision": "f2c37e8488c0422a7380253048041b89",
     "url": "./static/media/SafeSafe-dolne-menu-Home-white.f2c37e84.svg"
   },
   {
-    "revision": "bd90a667766659f9106e433c7814781a",
-    "url": "./static/media/SafeSafe-dolne-menu-Info-white.bd90a667.svg"
+    "revision": "9e7a28b9790520becee90abc3532bbfc",
+    "url": "./static/media/SafeSafe-dolne-menu-More-white.9e7a28b9.svg"
   },
   {
-    "revision": "687ad993c2bf309e0d591de3c9d5387b",
-    "url": "./static/media/SafeSafe-dolne-menu-More-white.687ad993.svg"
+    "revision": "8f1a758287dddbba9d5d900d8c5015eb",
+    "url": "./static/media/SafeSafe-dolne-menu-important-info.8f1a7582.svg"
   },
   {
     "revision": "2f0263e0853b6f2c798368f73ac87cde",
@@ -248,6 +252,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/media/calendar.ec94f424.svg"
   },
   {
+    "revision": "e450dce147e5a0cd1da91b737039680e",
+    "url": "./static/media/call-hotline.e450dce1.svg"
+  },
+  {
     "revision": "eaf9c22471a60304940d9acce3f1314d",
     "url": "./static/media/cd.eaf9c224.svg"
   },
@@ -286,6 +294,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "2b7529e8fa20c7c1516d7ce6ecbff8f7",
     "url": "./static/media/close-modal.2b7529e8.svg"
+  },
+  {
+    "revision": "5ae5eba985cc91bd9be3220f13c94b9b",
+    "url": "./static/media/close.5ae5eba9.svg"
   },
   {
     "revision": "4982702b39b79a43c96ead01f9cc6510",
@@ -504,6 +516,26 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/media/hu.70eee4dd.svg"
   },
   {
+    "revision": "9c2eba8e858bfb7d5e1b20e562b027b0",
+    "url": "./static/media/i-am-sick-icon-1.9c2eba8e.svg"
+  },
+  {
+    "revision": "d1959224a1955253f4c8c96f5c7004af",
+    "url": "./static/media/i-am-sick-icon-2.d1959224.svg"
+  },
+  {
+    "revision": "96d3c38edcf7572f85fa1b71e4c3b421",
+    "url": "./static/media/i-am-sick-icon-3.96d3c38e.svg"
+  },
+  {
+    "revision": "f6f06573e9e6a523c059762fd0a8c929",
+    "url": "./static/media/i-am-sick-icon-4.f6f06573.svg"
+  },
+  {
+    "revision": "fa556bf60108235be0a10ddfffd775c8",
+    "url": "./static/media/i-am-sick-icon-5.fa556bf6.svg"
+  },
+  {
     "revision": "beb05eebe0db71912588936142609f38",
     "url": "./static/media/icon-contact.beb05eeb.svg"
   },
@@ -522,6 +554,30 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "3e276e7d8bcbc157eebf3c34bec19fe5",
     "url": "./static/media/im.3e276e7d.svg"
+  },
+  {
+    "revision": "0e0c2bc87df5dde6b80d3d1403d2af1c",
+    "url": "./static/media/important-info-1.0e0c2bc8.svg"
+  },
+  {
+    "revision": "c4ba04849eb33746b6edc5fd0883f8c8",
+    "url": "./static/media/important-info-2.c4ba0484.svg"
+  },
+  {
+    "revision": "16dddaad8521592f48210b044df0e407",
+    "url": "./static/media/important-info-3.16dddaad.svg"
+  },
+  {
+    "revision": "336fdbe03500d9831f27d1e41da7e24f",
+    "url": "./static/media/important-info-4.336fdbe0.svg"
+  },
+  {
+    "revision": "07081b0b729cd44bb28517700b8a5cf4",
+    "url": "./static/media/important-info-5.07081b0b.svg"
+  },
+  {
+    "revision": "c8a275d25fe8685e84b22fd82a9731cc",
+    "url": "./static/media/important-info-6.c8a275d2.svg"
   },
   {
     "revision": "7fdfdb85c2cbf35c4d8a8e30e27cbc92",
@@ -692,10 +748,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/media/menu-boczne-dziennik_BLUE.57fb6c83.svg"
   },
   {
-    "revision": "8ea8d057f9ec8de4091cd349ae453ce4",
-    "url": "./static/media/menu-boczne-jak-to-dziala_BLUE.8ea8d057.svg"
-  },
-  {
     "revision": "1e1348212798dca75aba72bee0965f95",
     "url": "./static/media/menu-boczne-kwestionariusz_BLUE.1e134821.svg"
   },
@@ -704,24 +756,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/media/menu-boczne-moje-dane_BLUE.7c299515.svg"
   },
   {
-    "revision": "c59f29dfabdf4909350c85b42eec47ee",
-    "url": "./static/media/menu-boczne-numery-alarm_BLUE.c59f29df.svg"
-  },
-  {
     "revision": "7682179c84578358106fe1b54daaf250",
     "url": "./static/media/menu-boczne-polityka-prywatnosci_BLUE.7682179c.svg"
   },
   {
     "revision": "6741ae7783ae7d72ac630be1c085aac3",
     "url": "./static/media/menu-boczne-ustawienia_BLUE.6741ae77.svg"
-  },
-  {
-    "revision": "06c4e08efbb3b8a6eeccea5c1b89b19f",
-    "url": "./static/media/menu-boczne-zglos-blad_BLUE.06c4e08e.svg"
-  },
-  {
-    "revision": "e85d9c052c0ac12d77a1ed6be900e918",
-    "url": "./static/media/menu-boczne-zle-sie-czuje_BLUE.e85d9c05.svg"
   },
   {
     "revision": "ab73662ef077b51ce49e1f890479f219",
@@ -1022,6 +1062,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "abdc56036d300ba07f70226de839e675",
     "url": "./static/media/st.abdc5603.svg"
+  },
+  {
+    "revision": "c34a62eeb449c58a9000825a9d5fd839",
+    "url": "./static/media/star-outline.c34a62ee.svg"
+  },
+  {
+    "revision": "60204e7a68703a92ab271596de72224c",
+    "url": "./static/media/star-solid.60204e7a.svg"
   },
   {
     "revision": "3cd0c9a0cced84282f3ca2562e1edf17",

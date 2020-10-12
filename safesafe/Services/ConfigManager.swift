@@ -35,6 +35,10 @@ final class ConfigManager {
         static let enGatBaseURL = "EN_GAT_BASE_URL" // String
         static let enUdkBaseURL = "EN_UDK_BASE_URL" // String
         static let enStorageURL = "EN_STORAGE_URL" // String
+        
+        // Districts
+        static let districts = "DISTRICTS"
+        static let districtsBaseURL = "BASE_URL"
      }
     
     private let settings: [String: Any]
@@ -90,6 +94,14 @@ extension ConfigManager {
         return dictionary
     }
     
+    private var districtsSettings: [String: Any] {
+        guard let dictionary = settings[Key.districts] as? [String: Any] else {
+            Fatal.execute("Can't read \(Key.districts) from plist")
+        }
+        
+        return dictionary
+    }
+    
     var enGatBaseURL: String {
         return value(for: Key.enGatBaseURL, dictionary: enSettings)
     }
@@ -102,4 +114,7 @@ extension ConfigManager {
         return value(for: Key.enStorageURL, dictionary: enSettings)
     }
     
+    var districtsBaseURL: String {
+        return value(for: Key.districtsBaseURL, dictionary: districtsSettings)
+    }
 }

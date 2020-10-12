@@ -7,6 +7,7 @@
 
 import BackgroundTasks
 import UIKit.UIDevice
+import PromiseKit
 
 protocol BackgroundTasksServiceProtocol {
     
@@ -21,11 +22,13 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
     
     private let backgroundTaskID = Bundle.main.bundleIdentifier! + ".backgroundAnalysis.exposure-notification"
     private let exposureService: ExposureServiceProtocol
+    private let districtsService: DistrictService
     
     // MARK: - Life Cycle
     
-    init(exposureService: ExposureServiceProtocol) {
+    init(exposureService: ExposureServiceProtocol, districtsService: DistrictService) {
         self.exposureService = exposureService
+        self.districtsService = districtsService
     }
     
     // MARK: - Public methods
@@ -46,25 +49,58 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
     // MARK: - Private methods
     
     func registerExposureTask() {
+        console("📗 register time \(Date())")
         BGTaskScheduler.shared.register(forTaskWithIdentifier: backgroundTaskID, using: .main) { [weak self] task in
-            guard self?.exposureService.isExposureNotificationAuthorized == true else {
+            guard let self = self else {
                 task.setTaskCompleted(success: true)
                 return
             }
+            
+            guard self.exposureService.isExposureNotificationAuthorized == true else {
+                self.districtsService
+                    .perform()
+                    .done { response in
+                        console("🗺 Fetch districts completed (guard) - changes in observed: \(response.changedObserved.count)")
+//                        guard let timestamp = response.changedObserved.first?.updatedAt else { return }
+                        
+                        NotificationManager.shared.showDistrictStatusLocalNotification(
+                            with: "DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE (\(response.changedObserved.count))",
+                            timestamp: 1
+                        )
+                }
+                .ensure {
+                    task.setTaskCompleted(success: true)
+                }
+                .catch { console($0, type: .error) }
+                return
+            }
+            
             task.expirationHandler = {
                 console("Task timed out", type: .warning)
             }
             
-            self?.exposureService
-                .detectExposures()
-                .done { exposures in
+            when(resolved:
+                self.exposureService.detectExposures().asVoid(),
+                 self.districtsService.perform()
+                    .done({ response in
+                        console("🗺 Fetch districts completed - changes in observed: \(response.changedObserved.count)")
+                        //guard let timestamp = response.changedObserved.first?.updatedAt else { return }
+                        
+                        NotificationManager.shared.showDistrictStatusLocalNotification(
+                            with: "DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE (\(response.changedObserved.count))",
+                            timestamp: 1
+                        )
+                    })
+                    .asVoid())
+                .done { _ in
                     task.setTaskCompleted(success: true)
                 }.catch {
                     console($0)
                     task.setTaskCompleted(success: true)
                 }.finally {
-                    self?.scheduleExposureTask()
+                    self.scheduleExposureTask()
                 }
+
         }
     }
 }

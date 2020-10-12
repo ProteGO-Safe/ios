@@ -59,6 +59,7 @@ final class AppCoordinator: CoordinatorType {
             guard UIDevice.current.model == "iPhone" else { return }
             dependencyContainer.backgroundTaskService.scheduleExposureTask()
         }
+        
     }
     
     private func updateReminder() {
@@ -117,6 +118,8 @@ final class AppCoordinator: CoordinatorType {
             with: factory.makeExposureNotificationJSBridge(with: viewController),
             diagnosisKeysUploadService: dependencyContainer.diagnosisKeysUploadService
         )
+        
+        dependencyContainer.jsBridge.register(districtService: dependencyContainer.districtsService)
     }
     
     @objc

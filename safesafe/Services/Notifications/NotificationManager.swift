@@ -13,19 +13,27 @@ import FirebaseMessaging
 import PromiseKit
 
 protocol NotificationManagerProtocol {
-    func registerForRemoteNotifications() -> Guarantee<Bool>
+    func registerForNotifications(remote: Bool) -> Guarantee<Bool>
     func currentStatus() -> Guarantee<UNAuthorizationStatus>
     func clearBadgeNumber()
     func update(token: Data)
     func unsubscribeFromDailyTopic(timestamp: TimeInterval)
     func stringifyUserInfo() -> String?
     func clearUserInfo()
+    func showDistrictStatusLocalNotification(with info: String, timestamp: Int)
+}
+
+extension NotificationManagerProtocol {
+    func registerForNotifications(remote: Bool = true) -> Guarantee<Bool> {
+        return registerForNotifications(remote: remote)
+    }
 }
 
 final class NotificationManager: NSObject {
     
     enum Constants {
         static let dailyTopicDateFormat = "ddMMyyyy"
+        static let districtNotificationIdentifier = "DistrictNotificationID"
     }
     
     static let shared = NotificationManager()
@@ -111,7 +119,7 @@ extension NotificationManager: NotificationManagerProtocol {
         }
     }
     
-    func registerForRemoteNotifications() -> Guarantee<Bool> {
+    func registerForNotifications(remote: Bool = true) -> Guarantee<Bool> {
         return Guarantee { fulfill in
             let didRegister = StoredDefaults.standard.get(key: .didAuthorizeAPN) ?? false
             guard !didRegister else {
@@ -125,14 +133,38 @@ extension NotificationManager: NotificationManagerProtocol {
                     return
                 }
                 
-                DispatchQueue.main.async {
-                    UIApplication.shared.registerForRemoteNotifications()
+                if remote {
+                    DispatchQueue.main.async {
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }
+                    
+                    StoredDefaults.standard.set(value: true, key: .didAuthorizeAPN)
                 }
                 
-                StoredDefaults.standard.set(value: true, key: .didAuthorizeAPN)
                 fulfill(true)
             }
         }
+    }
+
+    func showDistrictStatusLocalNotification(with info: String, timestamp: Int) {
+        let lastTimestamp: Int = StoredDefaults.standard.get(key: .districtStatusNotificationTimestamp) ?? .zero
+        guard lastTimestamp < timestamp else { return }
+        
+        let content = UNMutableNotificationContent()
+        content.sound = UNNotificationSound.default
+        content.body = info
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let request = UNNotificationRequest(identifier: Constants.districtNotificationIdentifier, content: content, trigger: trigger)
+        
+        console("🚀 schedule notification")
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                console("😡 Local notification error \(error)", type: .error)
+            }
+        }
+        
+        StoredDefaults.standard.set(value: timestamp, key: .districtStatusNotificationTimestamp)
     }
     
     func update(token: Data) {
@@ -239,4 +271,5 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
 extension StoredDefaults.Key {
     static let didSubscribeFCMTopics = StoredDefaults.Key("didSubscribeFCMTopics")
     static let didAuthorizeAPN = StoredDefaults.Key("didAuthorizeAPN")
+    static let districtStatusNotificationTimestamp = StoredDefaults.Key("districtStatusNotificationTimestamp")
 }
