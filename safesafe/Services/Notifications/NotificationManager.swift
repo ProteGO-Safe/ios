@@ -13,6 +13,7 @@ import FirebaseMessaging
 import PromiseKit
 
 protocol NotificationManagerProtocol {
+    func registerAPNSIfNeeded()
     func registerForNotifications(remote: Bool) -> Guarantee<Bool>
     func currentStatus() -> Guarantee<UNAuthorizationStatus>
     func clearBadgeNumber()
@@ -216,6 +217,21 @@ extension NotificationManager: NotificationManagerProtocol {
         }
         
         return String(data: jsonData, encoding: .utf8)
+    }
+    
+    func registerAPNSIfNeeded() {
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            switch settings.authorizationStatus {
+            case .authorized:
+                guard StoredDefaults.standard.get(key: .didAuthorizeAPN) == nil else { return }
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+                
+                StoredDefaults.standard.set(value: true, key: .didAuthorizeAPN)
+            default: ()
+            }
+        }
     }
     
     private func subscribeTopics() {
