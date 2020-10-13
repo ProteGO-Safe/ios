@@ -226,7 +226,7 @@ extension JSBridge: WKScriptMessageHandler {
             subscribedDistricts(requestID: requestId)
             
         case .districtAction:
-            manageDistrictObserved(jsonString: jsonString, type: bridgeDataType)
+            manageDistrictObserved(jsonString: jsonString, requestId: requestId)
             
         default:
             return
@@ -325,18 +325,25 @@ private extension JSBridge {
         }
         .catch { console($0, type: .error) }
     }
+    
+    func manageDistrictObserved(jsonString: String?, requestId: String) {
+        guard let model: DistrictObservedManageModel = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
+        
+        districtService?.manageObserved(model: model)
+        districtService?.perform(shouldFetchAPIData: false)
+                   .done { [weak self] response in
+                       guard let json = response.allDistrictsJSON else { return }
+                       
+                       self?.bridgeDataResponse(type: .allDistricts, body: json, requestId: requestId)
+               }
+               .catch { console($0, type: .error) }
+        
+        managePushNotificationAuthorization()
+    }
 }
 
 // MARK: - onBridgeData handling
 private extension JSBridge {
-    func manageDistrictObserved(jsonString: String?, type: BridgeDataType) {
-        guard let model: DistrictObservedManageModel = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
-        
-        districtService?.manageObserved(model: model)
-        
-        managePushNotificationAuthorization()
-    }
-    
     func changeLanguage(jsonString: String?) {
         guard let model: SystemLanguageResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else  { return }
         

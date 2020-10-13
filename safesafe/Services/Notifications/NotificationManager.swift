@@ -154,7 +154,7 @@ extension NotificationManager: NotificationManagerProtocol {
         content.sound = UNNotificationSound.default
         content.body = info
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
         let request = UNNotificationRequest(identifier: Constants.districtNotificationIdentifier, content: content, trigger: trigger)
         
         console("🚀 schedule notification")
@@ -256,12 +256,15 @@ extension NotificationManager: NotificationManagerProtocol {
 
 extension NotificationManager: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        guard notification.request.identifier != Constants.districtNotificationIdentifier else { return }
+        
         userInfo = notification.request.content.userInfo
 
         completionHandler([.alert])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        guard response.notification.request.identifier != Constants.districtNotificationIdentifier else { return }
         
         userInfo = response.notification.request.content.userInfo
         completionHandler()

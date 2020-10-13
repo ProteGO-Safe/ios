@@ -51,7 +51,9 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
     func registerExposureTask() {
         console("📗 register time \(Date())")
         BGTaskScheduler.shared.register(forTaskWithIdentifier: backgroundTaskID, using: .main) { [weak self] task in
+            console("🐝 Start BG task")
             guard let self = self else {
+                console("😢 self is nil")
                 task.setTaskCompleted(success: true)
                 return
             }
@@ -61,11 +63,11 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
                     .perform()
                     .done { response in
                         console("🗺 Fetch districts completed (guard) - changes in observed: \(response.changedObserved.count)")
-//                        guard let timestamp = response.changedObserved.first?.updatedAt else { return }
+                        guard let timestamp = response.changedObserved.first?.updatedAt else { return }
                         
                         NotificationManager.shared.showDistrictStatusLocalNotification(
                             with: "DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE (\(response.changedObserved.count))",
-                            timestamp: 1
+                            timestamp: timestamp
                         )
                 }
                 .ensure {
@@ -84,11 +86,11 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
                  self.districtsService.perform()
                     .done({ response in
                         console("🗺 Fetch districts completed - changes in observed: \(response.changedObserved.count)")
-                        //guard let timestamp = response.changedObserved.first?.updatedAt else { return }
+                        guard let timestamp = response.changedObserved.first?.updatedAt else { return }
                         
                         NotificationManager.shared.showDistrictStatusLocalNotification(
                             with: "DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE (\(response.changedObserved.count))",
-                            timestamp: 1
+                            timestamp: timestamp
                         )
                     })
                     .asVoid())
