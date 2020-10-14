@@ -13,4 +13,5 @@ enum AlertType {
     case keysAtLeast
     case keysMax
     case keysPerDayMax
+    case pushNotificationSettings
 }

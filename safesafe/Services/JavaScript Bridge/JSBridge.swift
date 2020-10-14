@@ -26,6 +26,10 @@ final class JSBridge: NSObject {
         case exposureList = 61
         case appVersion = 62
         case systemLanguage = 63
+        case allDistricts = 70
+        case districtsAPIFetch = 71
+        case districtAction = 72
+        case subscribedDistricts = 73
     }
     
     enum SendMethod: String, CaseIterable {
@@ -52,6 +56,7 @@ final class JSBridge: NSObject {
     private let serviceStatusManager: ServiceStatusManagerProtocol
     private var exposureNotificationBridge: ExposureNotificationJSProtocol?
     private var diagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol?
+    private var districtService: DistrictService?
     
     private var isServicSetting: Bool = false
     private var currentDataType: BridgeDataType?
@@ -92,6 +97,10 @@ final class JSBridge: NSObject {
         self.diagnosisKeysUploadService = diagnosisKeysUploadService
     }
     
+    func register(districtService: DistrictService) {
+        self.districtService = districtService
+    }
+    
     func bridgeDataResponse(type: BridgeDataType, body: String, requestId: String, completion: ((Any?, Error?) -> ())? = nil) {
         DispatchQueue.main.async {
             guard let webView = self.webView else {
@@ -99,7 +108,6 @@ final class JSBridge: NSObject {
                 return
             }
             let method = "\(SendMethod.bridgeDataResponse.rawValue)('\(body)','\(type.rawValue)','\(requestId)')"
-            console(method)
             webView.evaluateJavaScript(method, completionHandler: completion)
         }
     }
@@ -191,6 +199,7 @@ extension JSBridge: WKScriptMessageHandler {
                 return
         }
         
+        let jsonString = requestData[Key.data] as? String
         switch bridgeDataType {
         case .notification:
             notificationGetBridgeDataResponse(requestID: requestId)
@@ -206,6 +215,18 @@ extension JSBridge: WKScriptMessageHandler {
             
         case .systemLanguage:
             systemLanguageGetBridgeDataResponse(requestID: requestId)
+        
+        case .allDistricts:
+            districtsList(requestID: requestId, dataType: bridgeDataType)
+            
+        case .districtsAPIFetch:
+            districsAPIFetch(requestID: requestId, dataType: bridgeDataType)
+            
+        case .subscribedDistricts:
+            subscribedDistricts(requestID: requestId, dataType: bridgeDataType)
+            
+        case .districtAction:
+            manageDistrictObserved(jsonString: jsonString, requestId: requestId, dataType: bridgeDataType)
             
         default:
             return
@@ -272,6 +293,54 @@ private extension JSBridge {
         guard let responseData = encodeToJSON(responseModel) else { return }
         
         bridgeDataResponse(type: .systemLanguage, body: responseData, requestId: requestID)
+    }
+    
+    func districtsList(requestID: String, dataType: BridgeDataType) {
+        districtService?.hasDistricts()
+            .then { districtsAvailable -> Promise<DistrictService.Response> in
+                guard let service = self.districtService else { return .init(error: InternalError.deinitialized) }
+                return service.perform(shouldFetchAPIData: !districtsAvailable)
+        }.done { [weak self] response in
+            guard let json = response.allDistrictsJSON else { return }
+            self?.bridgeDataResponse(type: dataType, body: json, requestId: requestID)
+        }
+        .catch { console($0, type: .error) }
+    }
+    
+    func districsAPIFetch(requestID: String, dataType: BridgeDataType) {
+        districtService?.perform()
+            .done { [weak self] response in
+                guard let json = response.allDistrictsJSON else { return }
+                
+                self?.bridgeDataResponse(type: dataType, body: json, requestId: requestID)
+        }
+        .catch { console($0, type: .error) }
+        
+    }
+    
+    func subscribedDistricts(requestID: String, dataType: BridgeDataType) {
+        districtService?.perform(shouldFetchAPIData: false)
+            .done { [weak self] response in
+                guard let json = response.observedJSON else { return }
+                
+                self?.bridgeDataResponse(type: dataType, body: json, requestId: requestID)
+        }
+        .catch { console($0, type: .error) }
+    }
+    
+    func manageDistrictObserved(jsonString: String?, requestId: String, dataType: BridgeDataType) {
+        guard let model: DistrictObservedManageModel = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
+        
+        districtService?.manageObserved(model: model)
+        districtService?.perform(shouldFetchAPIData: false)
+                   .done { [weak self] response in
+                       guard let json = response.observedJSON else { return }
+                       
+                       self?.bridgeDataResponse(type: dataType, body: json, requestId: requestId)
+               }
+               .catch { console($0, type: .error) }
+        
+        managePushNotificationAuthorization()
     }
 }
 
@@ -425,6 +494,27 @@ private extension JSBridge {
 }
 
 private extension JSBridge {
+    func managePushNotificationAuthorization() {
+        NotificationManager.shared
+        .currentStatus()
+            .done { status in
+                switch status {
+                case .notDetermined:
+                    _ = NotificationManager.shared.registerForNotifications(remote: false)
+                case .denied:
+                    NotificationsAlertManager().show(type: .pushNotificationSettings) { action in
+                        if action == .settings {
+                            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+                            
+                            if UIApplication.shared.canOpenURL(settingsUrl) {
+                                UIApplication.shared.open(settingsUrl, completionHandler: nil)
+                            }
+                        }
+                    }
+                default: ()
+                }
+        }
+    }
     
     func registerForAppLifecycleNotifications() {
         NotificationCenter.default.addObserver(
