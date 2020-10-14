@@ -16,6 +16,8 @@ final class DistrictService {
         let allDistrictsJSON: String?
         let observedJSON: String?
         let changedObserved: [DistrictStorageModel]
+        let allChanged: [DistrictStorageModel]
+        let observed: [ObservedDistrictStorageModel]
     }
     
     private struct InternalResponse {
@@ -44,10 +46,16 @@ final class DistrictService {
             self.observedJSON(internalresponse: internalResponse).map { (allDistrictsJSON, $0, internalResponse) }
         }
         .then { allDistrictsJSON, observedJSON, internalResponse in
-            self.changedObserved(internalResponse: internalResponse).map { (allDistrictsJSON, observedJSON, $0) }
+            self.changedObserved(internalResponse: internalResponse).map { (allDistrictsJSON, observedJSON, internalResponse.allChanged, internalResponse.observed, $0) }
         }
-        .then { allDistrictsJSON, observedJSON, changedObserved -> Promise<Response> in
-            return .value(Response(allDistrictsJSON: allDistrictsJSON, observedJSON: observedJSON, changedObserved: changedObserved))
+        .then { allDistrictsJSON, observedJSON, allChanged, observed, changedObserved -> Promise<Response> in
+            return .value(Response(
+                allDistrictsJSON: allDistrictsJSON,
+                observedJSON: observedJSON,
+                changedObserved: changedObserved,
+                allChanged: allChanged,
+                observed: observed)
+            )
         }
         .recover { _ -> Promise<Response> in
             return self.allDistrictsJSONFailure()
@@ -80,6 +88,16 @@ final class DistrictService {
             else { return }
         
         localStorage?.remove(observed)
+    }
+    
+    func hasDistricts() -> Promise<Bool> {
+        return Promise { seal in
+            guard let districts: [DistrictStorageModel] = localStorage?.fetch() else {
+                return seal.fulfill(false)
+            }
+            
+            return seal.fulfill(!districts.isEmpty)
+        }
     }
     
     private func fetchObserved() -> Promise<[ObservedDistrictStorageModel]> {
@@ -207,7 +225,13 @@ extension DistrictService {
     private func allDistrictsJSONFailure() -> Promise<Response> {
         return Promise { seal in
             let responseModel = DistrictsPWAResponseModel(result: .failed, updated: .zero, voivodeships: [])
-            seal.fulfill(.init(allDistrictsJSON: encodeToJSON(responseModel), observedJSON: nil, changedObserved: []))
+            seal.fulfill(.init(
+                allDistrictsJSON: encodeToJSON(responseModel),
+                observedJSON: nil,
+                changedObserved: [],
+                allChanged: [],
+                observed: []
+                ))
         }
     }
     

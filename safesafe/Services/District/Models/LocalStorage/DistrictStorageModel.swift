@@ -20,9 +20,18 @@ final class DistrictStorageModel: Object, LocalStorable {
     @objc dynamic var order: Int = .zero
     @objc dynamic var voivodeship: VoivodeshipStorageModel?
     
-    var stateChanged: Bool {
-        lastState != state
-        
+    var stateChanged: Bool {  lastState != state }
+    var localizedZoneName: String {
+        switch state {
+        case 0:
+            return "DISTRICT_ZONE_NEUTRAL".localized()
+        case 1:
+            return "DISTRICT_ZONE_YELLOW".localized()
+        case 2:
+            return "DISTRICT_ZONE_RED".localized()
+        default:
+            return .empty
+        }
     }
     
     override class func primaryKey() -> String? { "id" }

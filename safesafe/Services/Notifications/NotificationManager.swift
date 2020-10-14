@@ -21,7 +21,7 @@ protocol NotificationManagerProtocol {
     func unsubscribeFromDailyTopic(timestamp: TimeInterval)
     func stringifyUserInfo() -> String?
     func clearUserInfo()
-    func showDistrictStatusLocalNotification(with info: String, timestamp: Int)
+    func showDistrictStatusLocalNotification(with changed: [DistrictStorageModel], observed: [ObservedDistrictStorageModel], timestamp: Int)
 }
 
 extension NotificationManagerProtocol {
@@ -147,23 +147,31 @@ extension NotificationManager: NotificationManagerProtocol {
         }
     }
 
-    func showDistrictStatusLocalNotification(with info: String, timestamp: Int) {
+    func showDistrictStatusLocalNotification(with changed: [DistrictStorageModel], observed: [ObservedDistrictStorageModel], timestamp: Int) {
         let lastTimestamp: Int = StoredDefaults.standard.get(key: .districtStatusNotificationTimestamp) ?? .zero
         guard lastTimestamp < timestamp else { return }
         
-        let content = UNMutableNotificationContent()
-        content.sound = UNNotificationSound.default
-        content.body = info
+        let observedIds = observed.map { $0.districtId }
+        let changedObserved: [DistrictStorageModel] = changed.filter { observedIds.contains($0.id) }
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
-        let request = UNNotificationRequest(identifier: Constants.districtNotificationIdentifier, content: content, trigger: trigger)
-        
-        console("🚀 schedule notification")
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                console("😡 Local notification error \(error)", type: .error)
+        var body = ""
+        if observed.isEmpty {
+            body = "DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE_OBSERVE_DISABLED".localized()
+        } else {
+            if changedObserved.isEmpty {
+                body = "DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE_NO_OBSERVED".localized()
+            } else if changedObserved.count == 1 {
+                body = "DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE_OBSERVED_SINGLE".localized()
+                body.append(" \(ditrictsList(changedObserved))")
+            } else {
+                body = String(format: "DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE_OBSERVED_MULTI".localized(), changedObserved.count)
+                body.append(" \(ditrictsList(changedObserved))")
             }
         }
+        
+        guard !body.isEmpty else { return }
+        
+        showLocalNotification(title: "DISTRICT_STATUS_CHANGE_NOTIFICATION_TITLE".localized(), body: body)
         
         StoredDefaults.standard.set(value: timestamp, key: .districtStatusNotificationTimestamp)
     }
@@ -233,6 +241,37 @@ extension NotificationManager: NotificationManagerProtocol {
             }
         }
     }
+    
+    private func showLocalNotification(title: String?, body: String) {
+        let content = UNMutableNotificationContent()
+        content.sound = UNNotificationSound.default
+        if let title = title {
+            content.title = title
+        }
+        content.body = body
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+        let request = UNNotificationRequest(identifier: Constants.districtNotificationIdentifier, content: content, trigger: trigger)
+        
+        console("🚀 schedule notification")
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                console("😡 Local notification error \(error)", type: .error)
+            }
+        }
+    }
+    
+    private func ditrictsList(_ changedObservedDistricts: [DistrictStorageModel]) -> String {
+        var data: [String] = []
+        
+        for district in changedObservedDistricts {
+            let districtName = "\(String(format: "DISTRICT_NAME_PREFIXED", district.name)) - \(district.localizedZoneName)"
+            data.append(districtName)
+        }
+        
+        return data.joined(separator: "; ")
+    }
+    
     
     private func subscribeTopics() {
         let didSubscribedFCMTopics: Bool = StoredDefaults.standard.get(key: .didSubscribeFCMTopics) ?? false

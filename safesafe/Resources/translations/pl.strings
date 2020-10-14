@@ -1164,7 +1164,8 @@
 "ALERT_RETRY_BUTTON_TITLE" = "Ponów";
 "ALERT_SETTINGS_BUTTON_TITLE" = "Ustawienia";
 "NOTIFICATIONS_ALERT_TITLE" = "Powiadomienia";
-"NOTIFICATIONS_ALERT_MESSAGE" = "Powiadomienia są wyłączone. W celu włączenia powiadomień przejdź do ustawień";
+"NOTIFICATIONS_ALERT_MESSAGE" = "Aby w pełni wykorzystać funkcję obserwowania statusu wybranych powiatów należy w ustawieniach włączyć powiadomienia";
+"ALERT_NEVER_BUTTON_TITLE" = "Nie pokazuj więcej";
 "UPLOAD_VALIDATION_KEYS_AT_LEAST_MESSAGE" = "Aktualnie aplikacja nie posiada żadnych danych do udostępnienia. Skontaktuj się z Centrum Kontaktu aby zgłosić problem.";
 "UPLOAD_VALIDATION_KEYS_MAX_LEAST_MESSAGE" = "Aplikacja posiada zbyt dużą ilość danych do udostępnienia. Skontaktuj się z Centrum Kontaktu aby zgłosić problem.";
 "UPLOAD_VALIDATION_KEYS_PER_DAY_MAX_LEAST_MESSAGE" = "Zbyt duża ilość kluczy wysłanych jednego dnia. Skontaktuj się z Centrum Kontaktu aby zgłosić problem.";
@@ -1226,4 +1227,13 @@
 "i_am_sick_description_5_2" = "lub do lokalnej placówki służby zdrowia.";
 "important_info_button_info" = "Kliknij i przejdź na gov.pl";
 "upload_data_text4" = "Aby kontynuować musisz wyrazić zgodę na udostępnienie losowych identyfikatorów.";
-"DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE" = "Zmiana statusu obserwowanych powiatów";
+
+"DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE_OBSERVE_DISABLED" = "Nastąpiły zmiany w zasadach bezpieczeństwa. Bądź na bieżąco: wybierz powiaty i otrzymuj powiadomienia o aktualnym podziale na strefy.";
+"DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE_NO_OBSERVED" = "Nastąpiły zmiany bezpieczeństwa w powiatach, których nie obserwujesz. Pełna lista powiatów z podziałem na strefy dostępna jest w aplikacji i na gov.pl.";
+"DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE_OBSERVED_SINGLE" = "W 1 powiecie, który obserwujesz wprowadzono zmiany:";
+"DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE_OBSERVED_MULTI"  = "W %d powiatach, które obserwujesz wprowadzono zmiany:";
+"DISTRICT_STATUS_CHANGE_NOTIFICATION_TITLE" = "Zmiany obostrzeń w powiatach";
+"DISTRICT_ZONE_RED" = "strefa czerwona"; // 2
+"DISTRICT_ZONE_YELLOW" = "strefa żółta"; // 1
+"DISTRICT_ZONE_NEUTRAL" = "strefa neutralna"; // 0
+"DISTRICT_NAME_PREFIXED" = "powiat %@";

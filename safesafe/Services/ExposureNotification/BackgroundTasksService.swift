@@ -66,7 +66,8 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
                         guard let timestamp = response.changedObserved.first?.updatedAt else { return }
                         
                         NotificationManager.shared.showDistrictStatusLocalNotification(
-                            with: "DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE (\(response.changedObserved.count))",
+                            with: response.allChanged,
+                            observed: response.observed,
                             timestamp: timestamp
                         )
                 }
@@ -89,7 +90,8 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
                         guard let timestamp = response.changedObserved.first?.updatedAt else { return }
                         
                         NotificationManager.shared.showDistrictStatusLocalNotification(
-                            with: "DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE (\(response.changedObserved.count))",
+                            with: response.allChanged,
+                            observed: response.observed,
                             timestamp: timestamp
                         )
                     })

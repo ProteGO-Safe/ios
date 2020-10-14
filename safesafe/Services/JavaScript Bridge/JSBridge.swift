@@ -217,16 +217,16 @@ extension JSBridge: WKScriptMessageHandler {
             systemLanguageGetBridgeDataResponse(requestID: requestId)
         
         case .allDistricts:
-            districtsList(requestID: requestId)
+            districtsList(requestID: requestId, dataType: bridgeDataType)
             
         case .districtsAPIFetch:
-            districsAPIFetch(requestID: requestId)
+            districsAPIFetch(requestID: requestId, dataType: bridgeDataType)
             
         case .subscribedDistricts:
-            subscribedDistricts(requestID: requestId)
+            subscribedDistricts(requestID: requestId, dataType: bridgeDataType)
             
         case .districtAction:
-            manageDistrictObserved(jsonString: jsonString, requestId: requestId)
+            manageDistrictObserved(jsonString: jsonString, requestId: requestId, dataType: bridgeDataType)
             
         default:
             return
@@ -295,46 +295,48 @@ private extension JSBridge {
         bridgeDataResponse(type: .systemLanguage, body: responseData, requestId: requestID)
     }
     
-    func districtsList(requestID: String) {
-        districtService?.perform(shouldFetchAPIData: false)
-            .done { [weak self] response in
-                guard let json = response.allDistrictsJSON else { return }
-                
-                self?.bridgeDataResponse(type: .allDistricts, body: json, requestId: requestID)
+    func districtsList(requestID: String, dataType: BridgeDataType) {
+        districtService?.hasDistricts()
+            .then { districtsAvailable -> Promise<DistrictService.Response> in
+                guard let service = self.districtService else { return .init(error: InternalError.deinitialized) }
+                return service.perform(shouldFetchAPIData: !districtsAvailable)
+        }.done { [weak self] response in
+            guard let json = response.allDistrictsJSON else { return }
+            self?.bridgeDataResponse(type: dataType, body: json, requestId: requestID)
         }
         .catch { console($0, type: .error) }
     }
     
-    func districsAPIFetch(requestID: String) {
+    func districsAPIFetch(requestID: String, dataType: BridgeDataType) {
         districtService?.perform()
             .done { [weak self] response in
                 guard let json = response.allDistrictsJSON else { return }
                 
-                self?.bridgeDataResponse(type: .districtsAPIFetch, body: json, requestId: requestID)
+                self?.bridgeDataResponse(type: dataType, body: json, requestId: requestID)
         }
         .catch { console($0, type: .error) }
         
     }
     
-    func subscribedDistricts(requestID: String) {
+    func subscribedDistricts(requestID: String, dataType: BridgeDataType) {
         districtService?.perform(shouldFetchAPIData: false)
             .done { [weak self] response in
                 guard let json = response.observedJSON else { return }
                 
-                self?.bridgeDataResponse(type: .subscribedDistricts, body: json, requestId: requestID)
+                self?.bridgeDataResponse(type: dataType, body: json, requestId: requestID)
         }
         .catch { console($0, type: .error) }
     }
     
-    func manageDistrictObserved(jsonString: String?, requestId: String) {
+    func manageDistrictObserved(jsonString: String?, requestId: String, dataType: BridgeDataType) {
         guard let model: DistrictObservedManageModel = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
         
         districtService?.manageObserved(model: model)
         districtService?.perform(shouldFetchAPIData: false)
                    .done { [weak self] response in
-                       guard let json = response.allDistrictsJSON else { return }
+                       guard let json = response.observedJSON else { return }
                        
-                       self?.bridgeDataResponse(type: .allDistricts, body: json, requestId: requestId)
+                       self?.bridgeDataResponse(type: dataType, body: json, requestId: requestId)
                }
                .catch { console($0, type: .error) }
         
