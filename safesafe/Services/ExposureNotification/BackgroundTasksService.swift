@@ -63,13 +63,7 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
                     .perform()
                     .done { response in
                         console("🗺 Fetch districts completed (guard) - changes in observed: \(response.changedObserved.count)")
-                        guard let timestamp = response.changedObserved.first?.updatedAt else { return }
-                        
-                        NotificationManager.shared.showDistrictStatusLocalNotification(
-                            with: response.allChanged,
-                            observed: response.observed,
-                            timestamp: timestamp
-                        )
+                        self.manageDistrictsNotification(response)
                 }
                 .ensure {
                     task.setTaskCompleted(success: true)
@@ -87,13 +81,7 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
                  self.districtsService.perform()
                     .done({ response in
                         console("🗺 Fetch districts completed - changes in observed: \(response.changedObserved.count)")
-                        guard let timestamp = response.changedObserved.first?.updatedAt else { return }
-                        
-                        NotificationManager.shared.showDistrictStatusLocalNotification(
-                            with: response.allChanged,
-                            observed: response.observed,
-                            timestamp: timestamp
-                        )
+                        self.manageDistrictsNotification(response)
                     })
                     .asVoid())
                 .done { _ in
@@ -106,5 +94,16 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
                 }
 
         }
+    }
+    
+    private func manageDistrictsNotification(_ response: DistrictService.Response) {
+        guard let timestamp = response.changedObserved.first?.updatedAt else { return }
+        
+        NotificationManager.shared.showDistrictStatusLocalNotification(
+            with: response.allChanged,
+            observed: response.observed,
+            timestamp: timestamp,
+            delay: 3
+        )
     }
 }

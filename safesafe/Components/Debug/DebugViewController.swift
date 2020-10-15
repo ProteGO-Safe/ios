@@ -82,6 +82,7 @@ final class DebugViewController: ViewController<DebugViewModel> {
         stackButton(DebugViewModel.Texts.shareUploadedPayloadsTitle, action: .uploadedPayloadsShare)
         stackButton(DebugViewModel.Texts.shareLogsTitle, action: .logsShare)
         stackButton(DebugViewModel.Texts.dumpLocalStorageTitl, action: .dumpLocalstorage)
+        stackButton(DebugViewModel.Texts.downloadDistrictsTitle, action: .downloadDistricts)
     }
     
     private func stackButton(_ title: String, action: DebugAction) {
