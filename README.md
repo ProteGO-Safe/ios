@@ -75,6 +75,14 @@ To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
 
+**4.5.0**
+- Manage user diagnosis keys share rejection 
+- Prevents url requests caching
+- Added webkit local storage dump for debug panel in stage builds
+- Translations update
+- Fix for language reset on data erase
+- Added PWA to .gitignore file according to download it on CI/CD
+
 **4.4.0**
 - Added translations for English and Ukrainian languages
 - Ability of change language in app runtime
