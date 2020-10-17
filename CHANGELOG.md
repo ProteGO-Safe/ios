@@ -6,6 +6,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.5.0
+- Manage user diagnosis keys share rejection 
+- Prevents url requests caching
+- Added webkit local storage dump for debug panel in stage builds
+- Translations update
+- Fix for language reset on data erase
+- Added PWA to .gitignore file according to download it on CI/CD
+
+## 4.4.0
+- Added translations for English and Ukrainian languages
+- Ability of change language in app runtime
+- Fix for multiple language managing
+- Fix for "no internet" alert on keys upload
+- Fix for disclaimer and contrib file
+- Remove redundant data logging
+
 ## 4.3.1
 - Fix for incorrect date display for entries in Health Journal in PWA
 

@@ -17,14 +17,14 @@ final class DependencyContainer {
     @available(iOS 13.5, *)
     lazy var diagnosisKeysDownloadService = DiagnosisKeysDownloadService(
         with: remoteConfiguration,
-        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>(session: CustomSession.defaultSession())
+        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
     )
     
     @available(iOS 13.5, *)
     lazy var diagnosisKeysUploadService = DiagnosisKeysUploadService(
         with: exposureService,
         deviceCheckService: deviceCheckService,
-        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>(session: CustomSession.defaultSession())
+        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
     )
     
     @available(iOS 13.5, *)

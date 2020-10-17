@@ -1,5 +1,3 @@
-
-/*W projekcie "STOP COVID - ProteGO Safe" to nazwa własna. Nie powinniśmy tego rozdzielać ale nie wiem czy to będzie wtedy po angielsku poprawnie*/
 "general_notification_channel_name" = "STOP COVID - ProteGO Safe messages";
 "no_internet_connection_msg" = "Please check your Internet connection";
 "not_secure_connection_msg" = "Your connection is not secure";
@@ -17,8 +15,6 @@
 "start_screen_button" = "Start";
 "bottom_navigation_home" = "Home";
 "bottom_navigation_advice" = "Advice";
-
-/*Można też zastosować ogólnie przyjęty skrót "Q&A", ale nie każdy będzie w stanie go łatwo odszyfrować.*/
 "bottom_navigation_faq" = "Questions and answers";
 "bottom_navigation_more" = "More";
 "call_helpline" = "Call the helpline";
@@ -43,12 +39,10 @@
 "smoke_text2" = "Yes";
 "smoke_text3" = "No";
 "smoke_text4" = "Number of cigarettes smoked per day";
-
-/*Moim zdaniem to nie będzie eleganckie jak po „Gratulacje” pojawi się informacja, że ktoś jest w grupie wysokiego ryzyka. Może lepiej: Dziękujemy!*/
 "diagnosis_summary_text1" = "Thank you!";
 "diagnosis_summary_text2" = "Thank you for completing the Risk Assessment Test";
 "diagnosis_summary_text3" = "Based on your answers, our system will now assign you to the relevant group.";
-"diagnosis_summary_text4" = "It is very important that you complete the tests on a daily basis. We will remind you about it :)";
+"diagnosis_summary_text4" = "It is very important that you complete the tests on a daily basis.";
 "diagnosis_summary_text5" = "Check your result";
 "imprint_filler_summary_text1" = "Check that the data is correct";
 "imprint_filler_summary_text2" = "Save the metric";
@@ -60,18 +54,15 @@
 "advice_information_text5" = "MY HEALTH DIARY";
 "advice_information_text6" = ": record your symptoms and body temperature in the app.";
 "advice_information_text7" = "Important";
-"advice_information_text8" = "If you or your loved ones develop symptoms of coronavirus infection, call the free, 24-hour helpline";
+"advice_information_text8" = "If you or your loved ones develop symptoms of coronavirus infection, call  helpline (calling to the helpline is charged according to operator rates, the helpline is available 24 hours a day)";
 "advice_information_text9" = "222 500 115";
 "advice_information_text10" = "or your local health care facility.";
 "advice_information_text11" = "icon";
 "advice_information_text12" = "Advice";
 "explainer_container_text1" = "New in the app:";
-
-/*Pamiętam, że ludzie zwracali uwagę, że mają kontakt z zarażonym człowiekiem, a nie koronawirusem. Imo jest ok, ale wrzucam do przekminy.*/
-/*Fuzzy*/
 "explainer_container_text2" = " notifications about possible contact with the coronavirus.";
 "explainer_container_text3" = "Take care of yourself! Check regularly whether you belong to the risk group";
-"explainer_container_text4" = "Update";
+"explainer_container_text4" = "Update ";
 "explainer_container_text5" = "Health Diary";
 "explainer_container_text6" = "All crucial information in one place";
 "make_diagnosis_button_text1" = "Perform the Risk Assessment TEST";
@@ -94,7 +85,7 @@
 "daily_data_text2" = "Metric";
 "data_text1" = "Date of entry:";
 "data_text2" = "Temperature";
-"data_text3" = "Running nose";
+"data_text3" = "Runny nose";
 "data_text4" = "Cough";
 "data_text5" = "Shivering";
 "data_text6" = "Aching muscles";
@@ -103,14 +94,12 @@
 "form_text2" = "Symptoms";
 "form_text3" = "Places and contacts";
 "form_text4" = "Enter your current body temperature\n";
-
-/*Trochę boli brak feminatywów, może warto to przeredagować*/
 "form_text5" = "With whom I have met, where I have been";
 "form_text6" = "enter";
 "form_text7" = "Aching muscles";
 "form_text8" = "Shivering";
 "form_text9" = "Cough";
-"form_text10" = "Running nose";
+"form_text10" = "Runny nose";
 "form_text11" = "None";
 "form_text12" = "Mild";
 "form_text13" = "Moderate";
@@ -128,7 +117,7 @@
 "country_text1" = "Tick the countries you have visited in the last 14 days.";
 "country_text2" = "no results";
 "country_text3" = "Start typing...";
-"summary_text4" = "It is very important that you complete the tests regularly. We will remind you about it :)";
+"summary_text4" = "It is very important that you complete the tests regularly.";
 "faq_page_text1" = "Questions and answers";
 "faq_page_text2" = "Search among questions";
 "first_diagnosis_asking_text1" = "Do you want to learn more?";
@@ -137,9 +126,6 @@
 "first_diagnosis_asking_text4" = "Perform the risk assessment test";
 "first_diagnosis_asking_text5" = "skip the risk assessment test";
 "exposure_notification_info_text1" = "Risk Monitoring: enabled";
-
-/*j.w. -> Pamiętam, że ludzie zwracali uwagę, że mają kontakt z zarażonym człowiekiem, a nie koronawirusem. Imo jest ok, ale wrzucam do przekminy.*/
-/*Fuzzy*/
 "exposure_notification_warning_text1" = "Notification of possible contact with the coronavirus is disabled";
 "exposure_notification_warning_text2" = "Click to enable risk monitoring";
 "home_more_information_text1" = "More information";
@@ -151,8 +137,6 @@
 "smile_no_data_text1" = "There is not enough information to analyse your risk of coronavirus infection.";
 "smile_no_data_text2" = "Complete the risk assessment test or wait for information about contacts with infected persons.";
 "call_doctor_text1" = "Call your GP as soon as possible and tell him/her about your symptoms. Your GP will conduct a medical interview and invite you to a medical appointment if necessary.";
-
-/*Proponowana wersja: Lista placówek POZ, które udzielają teleporad, a także innych placówek, w tym otwartych poradni specjalistycznych, gabinetów ginekologicznych i stomatologicznych, znajduje się na*/
 "call_doctor_text2" = "The list of primary health care facilities that provide teleconsultation, as well as other facilities, including open specialist clinics, gynaecological and dental offices, is available on";
 "call_doctor_text3" = "the website of the National Health Fund (NFZ)";
 "call_doctor_text4" = "Within teleconsultation, you can obtain:";
@@ -186,7 +170,7 @@
 "call_doctor_text32" = "Follow basic hygiene rules provided";
 "call_doctor_text33" = "on the website of the Chief Sanitary Inspectorate.";
 "call_doctor_text34" = "Monitor your health condition. If it is alarming or worsening - react.";
-"upload_historical_data_text1" = "PIN";
+"upload_historical_data_text1" = "The PIN has been entered incorrectly {{amount}} times. Wait {{seconds}} and try again.";
 "upload_historical_data_text4" = "hour";
 "upload_historical_data_text5" = "hour";
 "upload_historical_data_text6" = "minute";
@@ -204,8 +188,6 @@
 "isolation_ambulance_text10" = "999";
 "isolation_ambulance_text11" = "or";
 "isolation_ambulance_text12" = "112";
-
-/*to celowa interpunkcja?*/
 "isolation_ambulance_text13" = ". Be sure to mention that it may be about a patient with coronavirus.";
 "isolation_ambulance_text14" = "If you have a mask, wear it every time someone from outside enters the room or vehicle in which you are present. Also put it on when you enter medical facilities. People who are near you should also wear a mask, especially if you cannot put it on yourself (e.g. when it increases breathing difficulties).";
 "isolation_ambulance_text15" = "See how to safely put on and take off your mask";
@@ -220,11 +202,7 @@
 "isolation_ambulance_text24" = "Wear a protective mask";
 "isolation_ambulance_text25" = "Strictly follow the rules of hygiene";
 "isolation_ambulance_text26" = "provided on the website of the Chief Sanitary Inspectorate.";
-
-/*Poinformuj o chorobie czy objawach choroby? Nie znam kontekstu*/
 "triage_info_border_text1" = "You're feeling very bad? Don’t wait. Call the emergency number 112 or 999. Inform about your disease.";
-
-/*Proponowana wersja: Pamiętaj, by regularnie dezynfekować lub myć ręce wodą z mydłem oraz zachować dystans społeczny.*/
 "triage_info_border_text2" = "Remember to disinfect or wash your hands with soap and water regularly and keep the social distance.";
 "triage_info_border_text3" = "Monitor your health regularly, take your temperature twice a day and record it in your Health Diary.";
 "triage_info_border_text4" = "If you develop symptoms such as: fever, cough or shortness of breath, call your doctor or use the free teleconsultation provided by a healthcare professional.";
@@ -248,12 +226,8 @@
 "chronic_sick_values_text14" = "the use of drugs that reduce immunity (immunosuppressants)";
 "chronic_sick_values_text15" = "please specify";
 "chronic_sick_values_text16" = "oncological diseases";
-
-/*tu coś nie pasuje z interpunkcją, ale znów: nie znam kontekstu*/
 "chronic_sick_values_text17" = "please specify in years with an accuracy of 0.25 year";
 "chronic_sick_values_text18" = "drug intolerances / allergies / drug hypersensitivity";
-
-/*j.w. tu coś nie pasuje z interpuncją, ale znów: nie znam kontekstu*/
 "chronic_sick_values_text19" = "please specify in years with an accuracy of <=1, 3, 5, 10, 15 or more than 15 years";
 "chronic_sick_values_text20" = "food intolerances / allergies";
 "chronic_sick_values_text21" = "please specify";
@@ -286,8 +260,6 @@
 "isolation_call_text23" = "Report directly to the infectious diseases department or the observation and infectious diseases department";
 "isolation_call_text24" = "Wear a protective mask";
 "isolation_call_text25" = "Strictly follow the rules of hygiene";
-
-/*nie brakuje tutaj „znajdujących się” ...na stronie Głównego Inspektoratu Sanitarnego. (?) Wcześniej jest Ściśle przestrzegaj zasad higieny...*/
 "isolation_call_text26" = "provided on the website of the Chief Sanitary Inspectorate.";
 "no_risk_text1" = "Wash your hands regularly with soap and water, or disinfect them with an alcohol-based agent (minimum60%). Washing your hands should take 30 seconds. Please familiarise with";
 "no_risk_text2" = "the hand washing instructions";
@@ -398,11 +370,11 @@
 "how_it_works_text18" = "* Communication with the user – sending verified messages from WHO and the Ministry of Health. How quickly we defeat the coronavirus and return to normal life depends on our attitude. Use our application, follow the guidelines! Keeping a health diary is very simple and doesn't take long. Start today – take care of yourself and your loved ones.";
 "i_am_sick_text1" = "Self-observation - stay at home and monitor your health condition";
 "i_am_sick_text2" = "Stay at home";
-"i_am_sick_text3" = "and monitor your health condition. Call the free, 24-hour helpline";
+"i_am_sick_text3" = "and monitor your health condition. Call the helpline (calling to the helpline is charged according to operator rates, the helpline is available 24 hours a day)";
 "i_am_sick_text4" = "222 500 115";
 "i_am_sick_text5" = " or your local health care facility. Important note! Don't go there.";
 "i_am_sick_text6" = "Limit your";
-"i_am_sick_text7" = "contact with others \n";
+"i_am_sick_text7" = " contact with others \n";
 "i_am_sick_text8" = "to the minimum.";
 "i_am_sick_text9" = "At least once a day ";
 "i_am_sick_text10" = "update";
@@ -411,10 +383,10 @@
 "i_am_sick_text13" = "Strictly follow ";
 "i_am_sick_text14" = "the rules of hygiene";
 "i_am_sick_text15" = ", cover your mouth and nose when coughing and sneezing. Wash hands regularly and thoroughly.";
-"i_am_sick_text16" = "If you encounter new symptoms of infection or worsening of existing ones, please contact the free, 24-hour helpline again";
+"i_am_sick_text16" = "If you encounter new symptoms of infection or worsening of existing ones, please contact helpline again (calling to the helpline is charged according to operator rates, the helpline is available 24 hours a day)";
 "i_am_sick_text17" = "222 500 115";
 "i_am_sick_text18" = "or";
-"i_am_sick_text19" = "call";
+"i_am_sick_text19" = "call ";
 "i_am_sick_text20" = "your local health care facility (don't go there!).";
 "notification_onboarding_information_text1" = "Your consent to receiving notifications is required in order for the application to function properly. Click below and help STOP COVID - ProteGO Safe protect the health of us all.";
 "notification_onboarding_information_text2" = "Don't notify me of the dangers";
@@ -425,8 +397,6 @@
 "exposure_onboarding_information_text4" = "More information";
 "information_text1" = "Coronavirus infection risk assessment test";
 "information_text2" = "One of the main features of this application is the coronavirus infection risk assessment test. We have prepared it in accordance with the guidelines of the World Health Organization (WHO).";
-
-/*Dodałem "note", żeby brzmiało bardziej nagłówkowo.*/
 "information_text3" = "Important note";
 "information_text4" = "Test:";
 "information_text5" = "is not a diagnosis.";
@@ -449,7 +419,7 @@
 "numbers_text1" = "Seek help in your area";
 "numbers_text2" = "Call the helpline - 222500115";
 "numbers_text3" = "Show addresses of infectious diseases hospitals";
-"numbers_text4" = "Calling to the helpline is free of charge, the helpline is available 24 hours a day.";
+"numbers_text4" = "Calling to the helpline is charged according to operator rates, the helpline is available 24 hours a day.";
 "more_information_text4" = "How does it work?";
 "more_information_text5" = "The application consists of two modules. The first module is designed for self-monitoring of health condition. It's a kind of \"diary\" that allows you to verify on an ongoing basis whether and in what risk group you are. This solution is based on the guidelines of the World Health Organization (WHO).";
 "more_information_text6" = "The second module is scanning your surroundings and will notify you in case of risk of contact with the virus.";
@@ -457,9 +427,6 @@
 "more_information_text8" = "Information about the devices encountered doesn't contain any data about their owners, it is anonymous, encrypted, and is stored on the phone for two weeks only. Then it is deleted.";
 "more_information_text9" = "Why is the history of such meetings useful? When one of the users, whose phone has been met by your phone, gets sick – you will receive appropriate information. You won't be notified who got sick. Instead, you will learn how to behave and what to do to take care of your health.";
 "more_information_text10" = "The privacy of the app users is our top priority. We have built STOP COVID - ProteGO Safe in accordance with, among others, the European Commission guidelines.";
-
-/*tu nie wiem co jest otwarte, prace?*/
-/*Fuzzy*/
 "more_information_text11" = "The STOP COVID - ProteGO Safe application doesn't track users. Work on the app is fully open and transparent from the very beginning. We are aware that in order to fulfil its role, it must gain the trust of users.";
 "more_information_text12" = "The application is completely safe, free of charge and voluntary.";
 "more_information_text13" = "Research shows that effective isolation of the infected persons and the use of exposure notification applications (such as STOP COVID - ProteGO Safe) can reduce the risk of spreading the coronavirus by 44%. However, there is one condition - the application must be used by as many people as possible.";
@@ -486,7 +453,7 @@
 "privacy_policy_content_text10" = "If your test";
 "privacy_policy_content_text11" = "will give positive result, a Contact Centre consultant will call you to inform you about the positive result of the test. Then the Contact Centre consultant will ask you if you have the STOP COVID - ProteGO Safe application installed. If this is the case, the Contact Centre consultant will offer you to notify other Users that they have stayed near the Device of a Person Tested Positive";
 "privacy_policy_content_text12" = "within the last 14 days, by providing you a PIN Code. The PIN Code confirms that your Device is a Device of a Person Tested Positive";
-"privacy_policy_content_text13" = "This confirmation is anonymous, and neither we nor other Users will be able to distinguish individual Devices and assign specific Users to them. After entering the PIN Code, the process of sending the anonymous Diagnostic Key to the STOP COVID - ProteGO Safe server, and then to the Devices of other Users, will be initiated in order to analyse the risk of COVID-19 infection. Entering the PIN Code to the Device is voluntary.";
+"privacy_policy_content_text13" = ". This confirmation is anonymous, and neither we nor other Users will be able to distinguish individual Devices and assign specific Users to them. After entering the PIN Code, the process of sending the anonymous Diagnostic Key to the STOP COVID - ProteGO Safe server, and then to the Devices of other Users, will be initiated in order to analyse the risk of COVID-19 infection. Entering the PIN Code to the Device is voluntary.";
 "privacy_policy_content_text14" = "The Diagnostic Key sent from your Device to the STOP COVID - ProteGO Safe Server will not contain any data enabling identification or information about the Devices you have had contact with. It is up to you to decide whether you want to mark your Device as a Device of a Person Tested Positive, which will initiate the sending of an anonymous Diagnostic Key to the STOP COVID - ProteGO Safe Server, and then to other Application Users. Each Application, after receiving the Diagnostic Key, performs an automatic analysis of meetings by appropriate comparison of the received Diagnostic Key with the history of meetings of Devices with the installed Application from the last 14 days. The analysis is performed independently on the Device of each User, it takes into account in particular the Users' distance (signal strength) and the time of staying in the vicinity of an infected person and as a result the status of the current risk group may be changed.";
 "privacy_policy_content_text15" = "General provisions";
 "privacy_policy_content_text16" = "This Privacy Policy sets out the rules for the collection, processing and protection of Users' Personal Data in connection with the use of the STOP COVID - ProteGO Safe application. Neither the Chief Sanitary Inspector (GIS) nor the Ministry of Digital Affairs (MC) identifies STOP COVID - ProteGO Safe Users.";
@@ -589,8 +556,6 @@
 "privacy_policy_content_text97" = "date of contact of the Users' Devices.";
 "privacy_policy_content_text98" = "Data transferred to other Devices via the STOP COVID - ProteGO Safe Server:";
 "privacy_policy_content_text99" = "Diagnostic Key - contains key information, rollingPeriod, rollingStartNumber, and transmissionRisk (exact information";
-
-/*Jeżeli to miałoby być powiązane z powyższym segment "(dokładne informacje tutaj)" to dodałbym "can be found" : "(exact information can be found here)"*/
 "privacy_policy_content_text100" = "can be found here";
 "privacy_policy_content_text101" = "region of the Application's operation (Poland);";
 "privacy_policy_content_text102" = "information that the Diagnostic Key is related to the STOP COVID - ProteGO Safe application;";
@@ -624,8 +589,6 @@
 "privacy_policy_content_text131" = "after the User's confirmation, all data related to the Analytical Module will be irretrievably deleted.";
 "privacy_policy_content_text132" = "For any questions and requests related to Users' rights, please contact us at:";
 "privacy_policy_content_text133" = "protego@mc.gov.pl";
-
-/*Tutaj zostawiam nazwę i adres instytucji po polsku, zakładając, że mają posłużyć do zaadresowania korespondencji.*/
 "privacy_policy_content_text134" = "The User has the right to lodge a complaint with the President of the Personal Data Protection Office if they consider that the Processing of their Personal Data violates the provisions of the GDPR or generally applicable provisions. The complaint can be sent in writing to the following address: Prezes Urzędu Ochrony Danych Osobowych, ul. Stawki 2,00-193 Warszawa or electronically via the ePUAP portal.";
 "privacy_policy_content_text135" = "Final provisions";
 "privacy_policy_content_text136" = "STOP COVID - ProteGO Safe may contain links to other websites. Such websites operate independently of GIS and are not supervised by it in any way. These websites sites may have their own privacy policies, which we recommend that the User should familiarise with.";
@@ -763,8 +726,6 @@
 "regulations_content_text89" = "and";
 "regulations_content_text90" = "ensure that they apply the highest security standards to protect Users' privacy.";
 "regulations_content_text91" = "and reminds about safe behaviours and daily hygiene habits.";
-
-/*Tutaj trochę intuicyjnie na początku, bo nie wiem, gdzie jest pierwsza część tego zdania.*/
 "regulations_content_text92" = " the Person Tested Positive, will ask if such person is a STOP COVID - ProteGO Safe User. If the Person Tested Positive is a STOP COVID - ProteGO Safe User, the Contact Centre consultant will propose to enter the PIN Code to STOP COVID - ProteGO Safe in order to anonymously confirm that the Device belongs to a Person Tested Positive and initiate the process of transmitting the message about exposure to infection to other Application Users (by sending the Diagnostic Key). Entering the PIN Code initiates the process of sending the Diagnostic Key to the STOP COVID - ProteGO Safe Server, which then transmits the Diagnostic Key to Application Users' Devices.";
 "risk_test_text1" = "We have prepared for you a new test for today";
 "risk_test_text2" = "Perform the Risk Assessment TEST";
@@ -792,7 +753,7 @@
 "upload_in_progress_text1" = "thank you for thinking about others. You are a responsible and supportive person. Information about the risk of contact with the coronavirus will be sent to the devices of people whom you have met.";
 "upload_in_progress_text2" = "We care about your privacy and the security of your data. Providing this information is fully anonymous. There is no way anyone can identify you. For more information, please refer to the";
 "upload_in_progress_text3" = "Privacy Policy";
-"ban-pin-tries_text1" = "Your PIN is incorrect or has expired. Please check the correctness of PIN Code and try again.";
+"ban-pin-tries_text1" = "Your PIN is incorrect or has expired. Please check the correctness of PIN Code and try again. Attempt {{amount}} out of {{limit}}";
 "user_data_text1" = "Please find below the information you have provided. The Application stores them only in the memory of your phone. You can edit or delete them at any time. If you're using the Coronavirus Exposure Alert feature, you'll also find a place to enter your PIN here.";
 "user_data_text2" = "Manage data";
 "user_data_text3" = "Update your Health Metric";
@@ -825,8 +786,6 @@
 "smile_container_text1" = "Thank you for thinking about others! It’s a responsible and supportive decision. The information you provide about the risk of contact will be sent to the devices of people who may have had contact with you.";
 "smile_container_text2" = "The notification module about possible contact with the coronavirus";
 "smile_container_text3" = "has analysed your data. Your result is:";
-
-/*Tłumaczenie z założeniem, że chodzi o datę "test z [DATA]".*/
 "smile_container_text4" = "we have analysed your answers. The result of test from";
 "smile_container_text5" = " assigns you to the following group:";
 "upload_success_text1" = "Thank you";
@@ -1161,7 +1120,7 @@
 "seriouses_text7" = "Fever between 37.5° C and 38° C (99.5° F and 100.4° F)";
 "seriouses_text8" = "Fever between 38° C and 40° C (100.4° F and 104° F)";
 "seriouses_text9" = "A country with transmission of the virus in society";
-"language" = "Polish (PL)";
+"language" = "English (EN)";
 "start_screen_info" = "You can change it later";
 "start_screen_label" = "Choose language:";
 "start_screen_subtitle" = "Let's defeat the coronavirus together!";
@@ -1200,8 +1159,6 @@
 "upload_temporary_exposure_keys_empty_error" = "Currently, the application does not have any data to share. Please contact the Contact Centre to report the problem.";
 "upload_temporary_exposure_keys_limit_exceed_error" = "The application has too much data to share. Please contact the Contact Centre to report the problem.";
 "upload_temporary_exposure_keys_day_limit_exceed_error" = "Too many keys sent in one day. Please contact the Contact Centre to report the problem";
-
-/*ADDED LOCALLY*/
 "ALERT_CANCEL_BUTTON_TITLE" = "Cancel";
 "ALERT_OK_BUTTON_TITLE" = "OK";
 "ALERT_RETRY_BUTTON_TITLE" = "Retry";
@@ -1218,3 +1175,51 @@
 "privacy_policy_content_text124" = "-> Delete Exposure Log;";
 "privacy_policy_content_text129" = "-> Delete random identifiers;";
 "test_android_upload" = "Test android upload";
+"diagnosis_explanation1" = "The weakening of the immune system can be caused by a number of factors, including cancer treatment, bone marrow or organ transplantation, poorly controlled HIV infection / AIDS, prolonged use of immunosuppressants such as corticosteroids or drugs for rheumatoid arthritis, as well as some congenital diseases.";
+"diagnosis_explanation2" = "A person is considered obese when their body mass index (BMI) is above 30.";
+"diagnosis_explanation3" = "A fever means body temperature above 37.5° C or 99.5° F. Choose this symptom even if you haven’t taken your temperature but you feel feverish, inflamed or flushed.";
+"diagnosis_explanation4" = "Problems with breathing and getting enough air into the lungs. They are often accompanied by tightness in the chest, shortness of breath and a feeling of suffocation.";
+"diagnosis_explanation5" = "Your health condition is worsening rapidly: You feel much worse than before, e.g. an hour ago. Your symptoms persist despite your efforts.";
+"diagnosis_explanation6" = "Rapid breathing: More than 20 breaths in one minute.";
+"diagnosis_explanation7" = "Chronic lung diseases are disorders that affect the lungs and other parts of the respiratory system. These disorders include: chronic obstructive pulmonary disease (COPD), moderate to severe asthma, and other lung diseases.";
+"diagnosis_explanation8" = "Long-term liver disease caused by alcoholism, infections, chronic inflammation, or congenital diseases, leading to loss of liver function, cirrhosis, and other complications.";
+"diagnosis_explanation9" = "Chronic kidney disease is a progressive loss of the kidneys’ ability to filter blood. It develops slowly, causing harmful waste products to accumulate in your body.";
+"diagnosis_explanation10" = "These are heart and vascular diseases. They include, for example, heart failure, coronary artery disease, severe hypertension and other heart diseases. Please tick this answer also if you have ever had a heart attack or stroke.";
+"diagnosis_explanation11" = "A person with a “probable” diagnosis is a symptomatic individual who is suspected by medical professionals to have COVID-19 but who hasn't been tested for confirmation of whose result is inconclusive. A person with a “confirmed” diagnosis is one who has an infection that is confirmed by a test, with or without symptoms of the disease.";
+"faq_page_text3" = "Dear Users, the Questions and Answers section is updated on the language subpage of the gov.pl website. The information subpage will open when you click on the link below. All information from this section is located on that subpage.";
+"store_description" = "The official Polish application for tracking contact with the coronavirus, issued by the Ministry of Digital Affairs in cooperation with the Chief Sanitary Inspectorate. The application is intended for use in Poland.\n\nSTOP COVID - ProteGO Safe is a smartphone application that supports the fight against coronavirus.\n\nHow does it work? Thanks to STOP COVID - ProteGO Safe, the phone will remember who you have met. Importantly, it doesn't share this information with anyone. Instead, it will inform you about contact with an infected person and tell you what to do in such a situation. This gives you chance for faster reaction and help.\n\nDownload, install and use the STOP COVID - ProteGO Safe application. Encourage your family and friends to do so too. It’s in your hands.\n\nThe application is safe and anonymous. STOP COVID - ProteGO Safe cares about the security of your data and privacy. It doesn't collect any data. It doesn't share any information about you anywhere. It doesn't track your location; can't access any files or information you keep on your phone.\n\nIMPORTANT:\n- the receipt of a notification doesn't constitute an obligation to undergo home quarantine,\n- the receipt of a notification doesn't mean that you are sick or that your loved ones are sick,\n- no one will find out that you have had contact with an infected person (you won't know which person among the ones you have had contact with got sick either, and the infected person doesn't know to whom their notification is being sent),\n- you won't receive such notification if the contact with the sick person was short, accidental - it lasted less than 15 minutes and the distance between your devices was greater than 2 meters,\n- the application doesn't inform you that you are in contact with a sick person at the given moment! You will not be notified that the person standing next to you has coronavirus. Notifications are sent after the given user has obtained a positive test result - in such a case the person is sent to quarantine, so shall not be standing next to you in the queue.\n\nSTOP COVID - ProteGO Safe not only notifies you of possible contact with the coronavirus but also gives you the opportunity to complete disease risk assessment tests and keep a health diary.\n\nThe Risk Assessment Test is a simple survey created by doctors. After you complete the test, the system checks (based on the guidelines of the World Health Organization and the Chief Sanitary Inspectorate) to which risk group you shall be assigned by your answers. You will also receive a behaviour recommendation. It will tell you what to do next and where to seek help if needed.\n\nSTOP COVID - ProteGO Safe also allows you to keep a health diary, i.e. regularly record information about how you feel and what health condition you are in.\n\nThanks to this, you can react in the event of alarming symptoms.\n\nThe health diary is also - if necessary - a helpful tool for doctors. It makes it easier to provide medical staff with information about the development of symptoms, coexisting diseases or medicines you take. Thanks to this, you will gain a chance for a faster diagnosis and choosing the right treatment regimen.\n\nKeeping a health diary is very simple and doesn't take long.\n\nIn STOP COVID - ProteGO Safe you will also find reliable, official and up-to-date information on the current situation related to the coronavirus pandemic. You will learn how to take precautions and what to do in case of suspected infection in yourself or your loved ones.\n\nPublished information includes announcements confirmed by the Ministry of Health or the Chief Sanitary Inspectorate. It is also based on data from the European Centre for Disease Prevention and Control (ECDC) and the World Health Organization (WHO).\n\nWhere can you find more information? www.gov.pl/protegosafe\n\nTechnical support protego@mc.gov.pl\n\nLet's defeat the coronavirus together!\n";
+"store_keywords" = "STOP COVID - ProteGO Safe, coronavirus, health, risk assessment, medicine, safety, COVID-19";
+"bottom_navigation_important_info" = "Important information";
+"important_info_title_1" = "How does the application work?";
+"important_info_description_1" = "Guide to functions and data protection in the application";
+"important_info_title_2" = "Report an errror";
+"important_info_description_2" = "You've found an error in the application? Help us remove it";
+"important_info_title_3" = "Current restrictions";
+"important_info_description_3" = "Current rules and restrictions, e.g. in poviats";
+"important_info_title_4" = "Travel restrictions";
+"important_info_description_4" = "Current rules and restrictions on crossing borders";
+"important_info_title_5" = "COVID-19, questions & answers";
+"important_info_title_6" = "I feel unwell!";
+"important_info_description_6" = "What should I do? Who to contact?";
+"call_the_hotline_title" = "Call the helpline";
+"call_the_hotline_description" = "The helpline is open 24 hours a day, calling to the helpline is charged according to operator rates";
+"i_am_sick_main_title" = "I feel unwell! What should I do? ";
+"i_am_sick_description_remember" = "Remember! Don't go there.";
+"i_am_sick_button_label" = "List of infectious diseases hospitals";
+"i_am_sick_button_info" = "Click and go to gov.pl";
+"i_am_sick_title_1" = "First of all, stay at home";
+"i_am_sick_description_1_1" = "If you feel the need, call the 24-hour helpline";
+"i_am_sick_description_1_2" = "or your local health care facility";
+"i_am_sick_title_2" = "Limit your contact with others";
+"i_am_sick_description_2" = "By limiting contact, you help to protect your loved ones and colleagues. You also break the chain of infection and thus slow down the spread of the epidemic.";
+"i_am_sick_title_3" = "Monitor your health condition";
+"i_am_sick_description_3_1" = "You can find a useful tool in the tab";
+"i_am_sick_description_3_2" = "My Health Diary";
+"i_am_sick_description_3_3" = "Recording symptoms and temperature will help you and your doctor to speed up the medical interview.";
+"i_am_sick_title_4" = "Observe hygiene rules";
+"i_am_sick_description_4" = "Cover your mouth and nose when coughing and sneezing. Wash your hands frequently and thoroughly.";
+"i_am_sick_title_5" = "If your symptoms intensify";
+"i_am_sick_description_5_1" = "If your symptoms worsen or you encounter new ones, call once again the 24-hour helpline";
+"i_am_sick_description_5_2" = "or your local health care facility.";
+"important_info_button_info" = "Click and go to gov.pl";
+"upload_data_text4" = "In order to continue, you have to agree for making random identifiers available. ";
