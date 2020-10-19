@@ -46,6 +46,7 @@ final class DistrictService {
     ) {
         self.provider = provider
         self.localStorage = localStorage
+        console("Local storage instance: \(String(describing: localStorage))")
     }
     
     func perform(shouldFetchAPIData: Bool = true) -> Promise<DistrictService.Response> {
@@ -165,13 +166,16 @@ final class DistrictService {
     }
     
     private func fetch() -> Promise<DistrictResponseModel> {
+        console("📲 download districts")
         return Promise { seal in
             self.provider.request(.fetch) { result in
                 switch result {
                 case let .success(response):
                     do {
+                        console("💚 download success")
                         seal.fulfill(try response.map(DistrictResponseModel.self))
                     } catch {
+                        console("💔 Districts map - failure")
                         seal.reject(error)
                     }
                 case let .failure(error):
@@ -183,6 +187,9 @@ final class DistrictService {
     
     private func store(response: DistrictResponseModel) -> Promise<Void> {
         console("✅ store time \(Date())")
+        console("voivodeships count: \(response.voivodeships.count)")
+        console("update: \(response.updated)")
+        console("Local storage instance: \(String(describing: localStorage))")
         return Promise { seal in
             localStorage?.beginWrite()
             
@@ -206,8 +213,10 @@ final class DistrictService {
             
             do {
                 try localStorage?.commitWrite()
+                console("✅ realm commit - success")
                 seal.fulfill(())
             } catch {
+                console("❌ can't commit changes to realm")
                 seal.reject(error)
             }
         }
@@ -216,7 +225,10 @@ final class DistrictService {
     
     private func getAll() -> Promise<[VoivodeshipStorageModel]> {
         return Promise { seal in
-            seal.fulfill(localStorage?.fetch() ?? [])
+            let allDistricts: [VoivodeshipStorageModel] = localStorage?.fetch() ?? []
+            console("🔱 fetch all vovoidships count: \(allDistricts)")
+            console("Local storage instance: \(String(describing: localStorage))")
+            seal.fulfill(allDistricts)
         }
     }
     

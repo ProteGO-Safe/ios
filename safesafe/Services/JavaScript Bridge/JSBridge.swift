@@ -296,22 +296,25 @@ private extension JSBridge {
     }
     
     func districtsList(requestID: String, dataType: BridgeDataType) {
+        console("💥 START districtsList")
         districtService?.hasDistricts()
             .then { districtsAvailable -> Promise<DistrictService.Response> in
                 guard let service = self.districtService else { return .init(error: InternalError.deinitialized) }
                 return service.perform(shouldFetchAPIData: !districtsAvailable)
         }.done { [weak self] response in
             guard let json = response.allDistrictsJSON else { return }
+            console("💥 SENT districtsList")
             self?.bridgeDataResponse(type: dataType, body: json, requestId: requestID)
         }
         .catch { console($0, type: .error) }
     }
     
     func districsAPIFetch(requestID: String, dataType: BridgeDataType) {
+        console("💥 START districsAPIFetch")
         districtService?.perform()
             .done { [weak self] response in
                 guard let json = response.allDistrictsJSON else { return }
-                
+                console("💥 SENT districsAPIFetch")
                 self?.bridgeDataResponse(type: dataType, body: json, requestId: requestID)
         }
         .catch { console($0, type: .error) }
