@@ -71,7 +71,7 @@ final class DistrictService {
                 observed: observed)
             )
         }
-        .recover { _ -> Promise<Response> in
+        .recover { error -> Promise<Response> in
             return self.allDistrictsJSONFailure()
         }
         
