@@ -81,6 +81,7 @@ final class DebugViewController: ViewController<DebugViewModel> {
     private func setupStackedItems() {
         stackButton(DebugViewModel.Texts.shareUploadedPayloadsTitle, action: .uploadedPayloadsShare)
         stackButton(DebugViewModel.Texts.shareLogsTitle, action: .logsShare)
+        stackButton(DebugViewModel.Texts.dumpLocalStorageTitl, action: .dumpLocalstorage)
     }
     
     private func stackButton(_ title: String, action: DebugAction) {
@@ -139,5 +140,22 @@ extension DebugViewController: DebugViewModelDelegate {
     func shareLogs(fileURL: URL) {
         let activityController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
         present(activityController, animated: true)
+    }
+    
+    func showTextPreview(text: String) {
+        let preview = DebugTextPreviewViewController(with: text)
+        present(preview, animated: true)
+    }
+    
+    func showLocalStorageFiles(list: [String]) {
+        let alertController = UIAlertController(title: "Pick storage", message: nil, preferredStyle: .actionSheet)
+        for item in list {
+            let action = UIAlertAction(title: item, style: .default) { [weak self] _ in
+                self?.viewModel.openLocalStorage(with: item)
+            }
+            alertController.addAction(action)
+        }
+        
+        present(alertController, animated: true)
     }
 }

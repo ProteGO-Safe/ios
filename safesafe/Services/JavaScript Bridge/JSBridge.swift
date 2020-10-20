@@ -173,7 +173,9 @@ extension JSBridge: WKScriptMessageHandler {
             changeLanguage(jsonString: jsonString)
             
         case .clearData:
+            StoredDefaults.standard.delete(key: .selectedLanguage)
             RealmLocalStorage.clearAll()
+            
         default:
             console("Not managed yet", type: .warning)
         }
@@ -378,13 +380,21 @@ private extension JSBridge {
         guard let response: UploadTemporaryExposureKeysResponse = jsonString?.jsonDecode(decoder: jsonDecoder)
             else { return }
         
-        diagnosisKeysUploadService?.upload(usingAuthCode: response.pin).done {
-            self.send(.success)
-        }.catch { error in
-            if !(error is InternalError) {
-                self.send(.failure)
+        diagnosisKeysUploadService?.upload(usingAuthCode: response.pin)
+            .done {
+                self.send(.success)
+        }
+        .catch { error in
+            console(error)
+            if let error = error as? InternalError {
+                switch error {
+                case .shareKeysUserCanceled:
+                    self.send(.canceled)
+                default:
+                    self.send(.other)
+                }
             } else {
-                self.send(.other)
+                self.send(.failure)
             }
             
         }

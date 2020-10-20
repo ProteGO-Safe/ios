@@ -105,8 +105,13 @@ final class ExposureService: ExposureServiceProtocol {
     func getDiagnosisKeys() -> Promise<[ENTemporaryExposureKey]> {
         Promise { [weak self] seal in
             let completion: ENGetDiagnosisKeysHandler = { exposureKeys, error in
-                if let error = error {
-                    seal.reject(error)
+                if let error = error as? ENError {
+                    switch error.code {
+                    case .notAuthorized:
+                        seal.reject(InternalError.shareKeysUserCanceled)
+                    default:
+                        seal.reject(error)
+                    }
                 } else {
                     seal.fulfill(exposureKeys ?? [])
                 }

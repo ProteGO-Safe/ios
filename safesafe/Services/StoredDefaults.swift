@@ -27,4 +27,9 @@ final class StoredDefaults {
     func get<T: Any>(key: Key) -> T? {
         return UserDefaults.standard.value(forKey: key.name) as? T
     }
+    
+    func delete(key: Key) {
+        UserDefaults.standard.removeObject(forKey: key.name)
+    }
+    
 }
