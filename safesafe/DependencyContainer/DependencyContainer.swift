@@ -68,4 +68,7 @@ final class DependencyContainer {
         }
     }()
     
+    init() {
+        RealmLocalStorage.setupEncryption()
+    }
 }

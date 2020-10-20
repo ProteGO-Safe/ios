@@ -180,20 +180,36 @@ final class RealmLocalStorage: LocalStorageProtocol {
 
 extension RealmLocalStorage {
     static func setupEncryption() {
-        guard KeychainService.shared.getData(for: .realmEncryption) == nil else { return }
-        
-        var keyData = Data(count: 64)
-        _ = keyData.withUnsafeMutableBytes {
-            SecRandomCopyBytes(kSecRandomDefault, 62, $0.baseAddress!)
+        guard KeychainService.shared.getData(for: .realmEncryption) == nil else {
+            console("🔑🔑🔑 Got old DB encryption key")
+            return
         }
         
+        console("🔑🔑🔑 Generate [start] new DB encryption key")
+        var keyData = Data(count: 64)
+        _ = keyData.withUnsafeMutableBytes {
+            SecRandomCopyBytes(kSecRandomDefault, 64, $0.baseAddress!)
+        }
+    
+        console("🔑🔑🔑 Generate [finished] new DB encryption key, data length: \(keyData.count)")
         KeychainService.shared.set(data: keyData, for: .realmEncryption)
     }
     
     static func defaultConfiguration() throws -> Realm.Configuration {
         guard let encryptionKey = KeychainService.shared.getData(for: .realmEncryption) else {
+            console("☠️🔑 Can't use keychain encryption key, return default configuration maybe?")
             throw InternalError.keychainKeyNotExists
         }
+        
+        if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
+            let fileDir = fileURL.deletingLastPathComponent().path
+            try? FileManager.default.setAttributes(
+                [FileAttributeKey.protectionKey: FileProtectionType.completeUntilFirstUserAuthentication],
+                ofItemAtPath: fileDir
+            )
+        }
+        
+        console("🔑🔑🔑 Instantiate Realm config with encryption key, length: \(encryptionKey.count)")
         return Realm.Configuration(encryptionKey: encryptionKey)
     }
 }

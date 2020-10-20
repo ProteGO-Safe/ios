@@ -28,8 +28,7 @@ final class AppCoordinator: CoordinatorType {
     
     init?(appWindow: UIWindow?, dependencyContainer: DependencyContainer) {
         self.dependencyContainer = dependencyContainer
-        RealmLocalStorage.setupEncryption()
-        
+
         guard let window = appWindow else {
             Fatal.execute("Window doesn't exists")
         }
