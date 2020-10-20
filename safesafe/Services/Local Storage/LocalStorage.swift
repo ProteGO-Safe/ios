@@ -55,6 +55,7 @@ final class RealmLocalStorage: LocalStorageProtocol {
         do {
             self.realm = try realm ?? Realm(configuration: RealmLocalStorage.defaultConfiguration())
         } catch {
+            console(error, type: .error)
             return nil
         }
     }
@@ -190,14 +191,10 @@ extension RealmLocalStorage {
     }
     
     static func defaultConfiguration() throws -> Realm.Configuration {
-        #if !LIVE
-        return .defaultConfiguration
-        #else
         guard let encryptionKey = KeychainService.shared.getData(for: .realmEncryption) else {
             throw InternalError.keychainKeyNotExists
         }
         return Realm.Configuration(encryptionKey: encryptionKey)
-        #endif
     }
 }
 
