@@ -57,6 +57,9 @@ final class AppCoordinator: CoordinatorType {
             dependencyContainer.backgroundTaskService.scheduleExposureTask()
         }
         
+        dependencyContainer.deviceCheckService.generatePayload().done { string in
+            console(string)
+        }.catch { console($0, type: .error) }
     }
     
     private func updateReminder() {

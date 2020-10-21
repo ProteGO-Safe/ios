@@ -30,6 +30,7 @@ final class JSBridge: NSObject {
         case districtsAPIFetch = 71
         case districtAction = 72
         case subscribedDistricts = 73
+        case generateHighRiskUUID = 80
     }
     
     enum SendMethod: String, CaseIterable {
@@ -56,7 +57,9 @@ final class JSBridge: NSObject {
     private let serviceStatusManager: ServiceStatusManagerProtocol
     private var exposureNotificationBridge: ExposureNotificationJSProtocol?
     private var diagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol?
+    
     private var districtService: DistrictService?
+    private var freeTestService: FreeTestService?
     
     private var isServicSetting: Bool = false
     private var currentDataType: BridgeDataType?
@@ -99,6 +102,10 @@ final class JSBridge: NSObject {
     
     func register(districtService: DistrictService) {
         self.districtService = districtService
+    }
+    
+    func register(freeTestService: FreeTestService) {
+        self.freeTestService = freeTestService
     }
     
     func bridgeDataResponse(type: BridgeDataType, body: String, requestId: String, completion: ((Any?, Error?) -> ())? = nil) {
@@ -183,6 +190,9 @@ extension JSBridge: WKScriptMessageHandler {
         case .clearData:
             StoredDefaults.standard.delete(key: .selectedLanguage)
             RealmLocalStorage.clearAll()
+        
+        case .generateHighRiskUUID:
+            generateHighRiskUUID()
             
         default:
             console("Not managed yet", type: .warning)
@@ -349,6 +359,10 @@ private extension JSBridge {
 
 // MARK: - onBridgeData handling
 private extension JSBridge {
+    func generateHighRiskUUID() {
+        freeTestService?.generateGUID()
+    }
+    
     func changeLanguage(jsonString: String?) {
         guard let model: SystemLanguageResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else  { return }
         

@@ -90,14 +90,6 @@ final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
         }
     }
     
-    private func getPayload(keys: [ENTemporaryExposureKey]) -> Promise<String> {
-        return self.deviceCheckService.generatePayload(
-            bundleID: TemporaryExposureKeys.Default.appPackageName,
-            exposureKeys: keys.map({ $0.keyData }),
-            regions: TemporaryExposureKeys.Default.regions
-        )
-    }
-    
     // MARK: - Auth
     
     private func getToken(usingAuthCode authCode: String) -> Promise<String> {
