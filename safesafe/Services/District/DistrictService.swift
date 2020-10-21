@@ -10,11 +10,22 @@ import Moya
 import PromiseKit
 import Realm
 
+protocol DebugDistrictServicesProtocol: class {
+    func forceFetchDistricts(_ showNotification: Bool, delay: TimeInterval, completed: (() -> Void)?)
+}
+
+extension DebugDistrictServicesProtocol {
+    func foceFetchDistricts(_ showNotification: Bool = true, delay: TimeInterval = 15, completed: (() -> Void)? = nil) {
+        forceFetchDistricts(showNotification, delay: delay, completed: completed)
+    }
+}
+
 final class DistrictService {
     
     struct Response {
         let allDistrictsJSON: String?
         let observedJSON: String?
+        let all: [VoivodeshipStorageModel]
         let changedObserved: [DistrictStorageModel]
         let allChanged: [DistrictStorageModel]
         let observed: [ObservedDistrictStorageModel]
@@ -35,6 +46,7 @@ final class DistrictService {
     ) {
         self.provider = provider
         self.localStorage = localStorage
+        console("Local storage instance: \(String(describing: localStorage))")
     }
     
     func perform(shouldFetchAPIData: Bool = true) -> Promise<DistrictService.Response> {
@@ -46,18 +58,21 @@ final class DistrictService {
             self.observedJSON(internalresponse: internalResponse).map { (allDistrictsJSON, $0, internalResponse) }
         }
         .then { allDistrictsJSON, observedJSON, internalResponse in
-            self.changedObserved(internalResponse: internalResponse).map { (allDistrictsJSON, observedJSON, internalResponse.allChanged, internalResponse.observed, $0) }
+            self.changedObserved(internalResponse: internalResponse).map {
+                (allDistrictsJSON, observedJSON, internalResponse.all, internalResponse.allChanged, internalResponse.observed, $0)
+            }
         }
-        .then { allDistrictsJSON, observedJSON, allChanged, observed, changedObserved -> Promise<Response> in
+        .then { allDistrictsJSON, observedJSON, all, allChanged, observed, changedObserved -> Promise<Response> in
             return .value(Response(
                 allDistrictsJSON: allDistrictsJSON,
                 observedJSON: observedJSON,
+                all: all,
                 changedObserved: changedObserved,
                 allChanged: allChanged,
                 observed: observed)
             )
         }
-        .recover { _ -> Promise<Response> in
+        .recover { error -> Promise<Response> in
             return self.allDistrictsJSONFailure()
         }
         
@@ -151,13 +166,16 @@ final class DistrictService {
     }
     
     private func fetch() -> Promise<DistrictResponseModel> {
+        console("📲 download districts")
         return Promise { seal in
             self.provider.request(.fetch) { result in
                 switch result {
                 case let .success(response):
                     do {
+                        console("💚 download success")
                         seal.fulfill(try response.map(DistrictResponseModel.self))
                     } catch {
+                        console("💔 Districts map - failure")
                         seal.reject(error)
                     }
                 case let .failure(error):
@@ -169,6 +187,9 @@ final class DistrictService {
     
     private func store(response: DistrictResponseModel) -> Promise<Void> {
         console("✅ store time \(Date())")
+        console("voivodeships count: \(response.voivodeships.count)")
+        console("update: \(response.updated)")
+        console("Local storage instance: \(String(describing: localStorage))")
         return Promise { seal in
             localStorage?.beginWrite()
             
@@ -192,8 +213,10 @@ final class DistrictService {
             
             do {
                 try localStorage?.commitWrite()
+                console("✅ realm commit - success")
                 seal.fulfill(())
             } catch {
+                console("❌ can't commit changes to realm")
                 seal.reject(error)
             }
         }
@@ -202,7 +225,10 @@ final class DistrictService {
     
     private func getAll() -> Promise<[VoivodeshipStorageModel]> {
         return Promise { seal in
-            seal.fulfill(localStorage?.fetch() ?? [])
+            let allDistricts: [VoivodeshipStorageModel] = localStorage?.fetch() ?? []
+            console("🔱 fetch all vovoidships count: \(allDistricts)")
+            console("Local storage instance: \(String(describing: localStorage))")
+            seal.fulfill(allDistricts)
         }
     }
     
@@ -228,6 +254,7 @@ extension DistrictService {
             seal.fulfill(.init(
                 allDistrictsJSON: encodeToJSON(responseModel),
                 observedJSON: nil,
+                all: [],
                 changedObserved: [],
                 allChanged: [],
                 observed: []
@@ -289,5 +316,23 @@ extension DistrictService {
             console(error)
             return nil
         }
+    }
+}
+
+extension DistrictService: DebugDistrictServicesProtocol {
+    func forceFetchDistricts(_ showNotification: Bool = true, delay: TimeInterval = 15, completed: (() -> Void)? = nil) {
+        perform()
+            .done { response in
+                completed?()
+                guard let timestamp = response.all.first?.updatedAt else { return }
+                
+                NotificationManager.shared.showDistrictStatusLocalNotification(
+                    with: response.allChanged,
+                    observed: response.observed,
+                    timestamp: timestamp,
+                    delay: delay
+                )
+        }
+        .catch { console($0, type: .error) }
     }
 }

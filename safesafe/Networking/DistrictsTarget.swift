@@ -33,7 +33,7 @@ extension DistrictsTarget: TargetType {
     var task: Task {
         switch self {
         case .fetch:
-            return .requestPlain
+            return .requestParameters(parameters: ["randomSeed": "\(arc4random())"], encoding: URLEncoding.default)
         }
     }
     

@@ -21,7 +21,7 @@ protocol NotificationManagerProtocol {
     func unsubscribeFromDailyTopic(timestamp: TimeInterval)
     func stringifyUserInfo() -> String?
     func clearUserInfo()
-    func showDistrictStatusLocalNotification(with changed: [DistrictStorageModel], observed: [ObservedDistrictStorageModel], timestamp: Int)
+    func showDistrictStatusLocalNotification(with changed: [DistrictStorageModel], observed: [ObservedDistrictStorageModel], timestamp: Int, delay: TimeInterval)
 }
 
 extension NotificationManagerProtocol {
@@ -147,7 +147,7 @@ extension NotificationManager: NotificationManagerProtocol {
         }
     }
 
-    func showDistrictStatusLocalNotification(with changed: [DistrictStorageModel], observed: [ObservedDistrictStorageModel], timestamp: Int) {
+    func showDistrictStatusLocalNotification(with changed: [DistrictStorageModel], observed: [ObservedDistrictStorageModel], timestamp: Int, delay: TimeInterval) {
         let lastTimestamp: Int = StoredDefaults.standard.get(key: .districtStatusNotificationTimestamp) ?? .zero
         guard lastTimestamp < timestamp else { return }
         
@@ -156,22 +156,25 @@ extension NotificationManager: NotificationManagerProtocol {
         
         var body = ""
         if observed.isEmpty {
+            console("📪 prepare local notification: Observed districts empty")
             body = "DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE_OBSERVE_DISABLED".localized()
         } else {
             if changedObserved.isEmpty {
+                console("📪 prepare local notification: No changes in observed")
                 body = "DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE_NO_OBSERVED".localized()
             } else if changedObserved.count == 1 {
+                console("📪 prepare local notification: 1 change in observed")
                 body = "DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE_OBSERVED_SINGLE".localized()
                 body.append(" \(ditrictsList(changedObserved))")
             } else {
+                console("📪 prepare local notification: Multi change in observed")
                 body = String(format: "DISTRICT_STATUS_CHANGE_NOTIFICATION_MESSAGE_OBSERVED_MULTI".localized(), changedObserved.count)
                 body.append(" \(ditrictsList(changedObserved))")
             }
         }
         
         guard !body.isEmpty else { return }
-        
-        showLocalNotification(title: "DISTRICT_STATUS_CHANGE_NOTIFICATION_TITLE".localized(), body: body)
+        showLocalNotification(title: "DISTRICT_STATUS_CHANGE_NOTIFICATION_TITLE".localized(), body: body, delay: delay)
         
         StoredDefaults.standard.set(value: timestamp, key: .districtStatusNotificationTimestamp)
     }
@@ -242,7 +245,7 @@ extension NotificationManager: NotificationManagerProtocol {
         }
     }
     
-    private func showLocalNotification(title: String?, body: String) {
+    private func showLocalNotification(title: String?, body: String, delay: TimeInterval) {
         let content = UNMutableNotificationContent()
         content.sound = UNNotificationSound.default
         if let title = title {
@@ -250,10 +253,10 @@ extension NotificationManager: NotificationManagerProtocol {
         }
         content.body = body
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: delay, repeats: false)
         let request = UNNotificationRequest(identifier: Constants.districtNotificationIdentifier, content: content, trigger: trigger)
         
-        console("🚀 schedule notification")
+        console("🚀 schedule notification with delay: \(delay)")
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
                 console("😡 Local notification error \(error)", type: .error)
@@ -265,7 +268,7 @@ extension NotificationManager: NotificationManagerProtocol {
         var data: [String] = []
         
         for district in changedObservedDistricts {
-            let districtName = "\(String(format: "DISTRICT_NAME_PREFIXED", district.name)) - \(district.localizedZoneName)"
+            let districtName = "\(String(format: "DISTRICT_NAME_PREFIXED".localized(), district.name)) - \(district.localizedZoneName)"
             data.append(districtName)
         }
         
