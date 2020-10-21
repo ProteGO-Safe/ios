@@ -17,7 +17,8 @@ final class DependencyContainer {
     @available(iOS 13.5, *)
     lazy var diagnosisKeysDownloadService = DiagnosisKeysDownloadService(
         with: remoteConfiguration,
-        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
+        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()]),
+        localStorage: realmLocalStorage
     )
     
     @available(iOS 13.5, *)
