@@ -9,14 +9,6 @@ import RealmSwift
 
 class DeviceGUIDModel: Object, LocalStorable {
     
-    enum State: Int {
-        case unverified = 0
-        case verified = 1
-        case signedForTest = 2
-        case utilized = 3
-        case unknown = 999
-    }
-    
     static let identifier: Int = 22102020
     
     @objc dynamic var id: Int = DeviceGUIDModel.identifier
@@ -25,8 +17,8 @@ class DeviceGUIDModel: Object, LocalStorable {
     
     override class func primaryKey() -> String? { "id" }
     
-    var stateEnum: State {
-        guard let state = State(rawValue: self.state) else { return .unknown }
+    var stateEnum: FreeTestSubscriptionState {
+        guard let state = FreeTestSubscriptionState(rawValue: self.state) else { return .unknown }
         
         return state
     }

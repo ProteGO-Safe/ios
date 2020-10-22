@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import PromiseKit
 
 class FreeTestService {
     
     private let localStorage: RealmLocalStorage?
     private let deviceCheckService: DeviceCheckServiceProtocol
+    
+    private var jsOnSubscriptionInfoClosure: ((FreeTestSubscriptionInfoResponse) -> ())?
     
     init(
         with localStorage: RealmLocalStorage?,
@@ -18,6 +21,22 @@ class FreeTestService {
         
         self.localStorage = localStorage
         self.deviceCheckService = deviceCheckService
+    }
+    
+    func uploadPIN(pin: FreeTestUploadPinRequest) -> Promise<FreeTestPinUploadResponse> {
+        return Promise { seal in
+            fatalError("Not implemented yet")
+        }
+    }
+    
+    func subscriptionInfo() -> Promise<FreeTestSubscriptionInfoResponse> {
+        return Promise { seal in
+            fatalError("Not implemented yet")
+        }
+    }
+    
+    func jsOnSubsriptionInfo(_ closure: @escaping (FreeTestSubscriptionInfoResponse) -> ()) {
+        jsOnSubscriptionInfoClosure = closure
     }
     
     func generateGUID() {
@@ -41,7 +60,7 @@ class FreeTestService {
         try? localStorage?.commitWrite()
     }
     
-    func updateGUID(state: DeviceGUIDModel.State) {
+    func updateGUID(state: FreeTestSubscriptionState) {
          guard let model = getGUID() else { return }
         
         localStorage?.beginWrite()
@@ -51,7 +70,7 @@ class FreeTestService {
         try? localStorage?.commitWrite()
     }
     
-    func guidState() -> DeviceGUIDModel.State? {
+    func guidState() -> FreeTestSubscriptionState? {
         getGUID()?.stateEnum
     }
     

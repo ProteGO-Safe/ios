@@ -23,14 +23,18 @@ final class JSBridge: NSObject {
         case setServices = 52
         case clearData = 37
         case uploadTemporaryExposureKeys = 43
+        
         case exposureList = 61
         case appVersion = 62
         case systemLanguage = 63
+        
         case allDistricts = 70
         case districtsAPIFetch = 71
         case districtAction = 72
         case subscribedDistricts = 73
-        case generateHighRiskUUID = 80
+        
+        case freeTestPinUpload = 80
+        case freeTestSubscriptionInfo = 81
     }
     
     enum SendMethod: String, CaseIterable {
@@ -106,6 +110,7 @@ final class JSBridge: NSObject {
     
     func register(freeTestService: FreeTestService) {
         self.freeTestService = freeTestService
+        registerFreeTestObservers()
     }
     
     func bridgeDataResponse(type: BridgeDataType, body: String, requestId: String, completion: ((Any?, Error?) -> ())? = nil) {
@@ -190,9 +195,6 @@ extension JSBridge: WKScriptMessageHandler {
         case .clearData:
             StoredDefaults.standard.delete(key: .selectedLanguage)
             RealmLocalStorage.clearAll()
-        
-        case .generateHighRiskUUID:
-            generateHighRiskUUID()
             
         default:
             console("Not managed yet", type: .warning)
@@ -237,6 +239,12 @@ extension JSBridge: WKScriptMessageHandler {
             
         case .districtAction:
             manageDistrictObserved(jsonString: jsonString, requestId: requestId, dataType: bridgeDataType)
+            
+        case .freeTestPinUpload:
+            freeTestPinUpload(jsonString: jsonString, requestID: requestId, dataType: bridgeDataType)
+        
+        case .freeTestSubscriptionInfo:
+            freeTestSubscriptionInfo(jsonString: jsonString, requestID: requestId, dataType: bridgeDataType)
             
         default:
             return
@@ -355,13 +363,46 @@ private extension JSBridge {
         
         managePushNotificationAuthorization()
     }
+    
+    func freeTestPinUpload(jsonString: String?, requestID: String, dataType: BridgeDataType) {
+        guard let request: FreeTestUploadPinRequest = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
+        
+        freeTestService?.uploadPIN(pin: request)
+            .done { [weak self] response in
+                guard let jsonString = self?.encodeToJSON(response) else { return }
+                
+                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+        }
+        .catch {[weak self] error in
+            guard let internalError = error as? InternalError else {
+                console(error, type: .error)
+                return
+            }
+            
+            switch internalError {
+            case .freeTestPinUploadFailed:
+                let response = FreeTestPinUploadResponse(result: .failed)
+                guard let jsonString = self?.encodeToJSON(response) else { return }
+                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+            default: ()
+            }
+        }
+    }
+    
+    func freeTestSubscriptionInfo(jsonString: String?, requestID: String, dataType: BridgeDataType) {
+        freeTestService?.subscriptionInfo()
+            .done { [weak self] response in
+                 guard let jsonString = self?.encodeToJSON(response) else { return }
+                
+                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+                
+        }
+        .catch { console($0, type: .error) }
+    }
 }
 
 // MARK: - onBridgeData handling
 private extension JSBridge {
-    func generateHighRiskUUID() {
-        freeTestService?.generateGUID()
-    }
     
     func changeLanguage(jsonString: String?) {
         guard let model: SystemLanguageResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else  { return }
@@ -530,6 +571,14 @@ private extension JSBridge {
                     }
                 default: ()
                 }
+        }
+    }
+    
+    func registerFreeTestObservers() {
+        freeTestService?.jsOnSubsriptionInfo { [weak self] response in
+            guard let data = response.jsonString else { return }
+            
+            self?.onBridgeData(type: .freeTestSubscriptionInfo, body: data)
         }
     }
     
