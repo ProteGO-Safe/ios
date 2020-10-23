@@ -632,12 +632,6 @@ private extension JSBridge {
     }
     
     @objc func applicationWillEnterForeground(notification: Notification) {
-        freeTestService?.uploadPIN(jsRequest: .init(pin: "ABCDEF"))
-            .done { _ in
-                
-        }.catch{ error in
-            console(error)
-        }
         sendAppStateJSON(type: .serviceStatus)
         guard let data = ApplicationLifecycleResponse(appicationState: .willEnterForeground).jsonString else {
             return

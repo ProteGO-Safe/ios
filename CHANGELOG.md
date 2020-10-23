@@ -6,6 +6,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.7.0
+- Omit package analysis on very first app run
+- Added js contract for high risk free covid test
+- Added simulate exposure risk to debug panel
+
+## 4.6.0
+- Added restricted districts feature
+- Added subscribing for notification for restricted districts
+- Small fixes for JS contract
+- Added ability to test districts changes notification to debug panel
+- Translations update
+- Fix for manage max exposure notifications key amount per day
+- Remove debug logging from iOS < 13.5
+
 ## 4.5.0
 - Manage user diagnosis keys share rejection 
 - Prevents url requests caching
