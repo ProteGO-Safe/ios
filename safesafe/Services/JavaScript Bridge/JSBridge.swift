@@ -35,6 +35,7 @@ final class JSBridge: NSObject {
         
         case freeTestPinUpload = 80
         case freeTestSubscriptionInfo = 81
+        case freeTestPinCodeFetch = 82
     }
     
     enum SendMethod: String, CaseIterable {
@@ -251,6 +252,9 @@ extension JSBridge: WKScriptMessageHandler {
         case .freeTestSubscriptionInfo:
             freeTestSubscriptionInfo(jsonString: jsonString, requestID: requestId, dataType: bridgeDataType)
             
+        case .freeTestPinCodeFetch:
+            freeTestPinCodeFetch(requestID: requestId, dataType: bridgeDataType)
+            
         default:
             return
         }
@@ -415,6 +419,18 @@ private extension JSBridge {
                 
         }
         .catch { console($0, type: .error) }
+    }
+    
+    func freeTestPinCodeFetch(requestID: String, dataType: BridgeDataType) {
+        freeTestService?.getPinCode()
+            .done { [weak self] response in
+                guard let jsonString = self?.encodeToJSON(response) else { return }
+                
+                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+        }
+        .catch {
+            console($0, type: .error)
+        }
     }
 }
 

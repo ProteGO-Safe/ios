@@ -107,6 +107,14 @@ class FreeTestService {
         try? localStorage?.commitWrite()
     }
     
+    func getPinCode() -> Promise<FreeTestPinCodeResponse> {
+        Promise { seal in
+            guard let model = getGUID() else { return }
+            
+            seal.fulfill(FreeTestPinCodeResponse(code: model.pinCode))
+        }
+    }
+    
     func guidState() -> FreeTestSubscriptionState? {
         getGUID()?.stateEnum
     }
@@ -114,6 +122,7 @@ class FreeTestService {
     func getGUID() -> DeviceGUIDModel? {
         localStorage?.fetch(primaryKey: DeviceGUIDModel.identifier)
     }
+    
     
     private func hasUUID() -> Bool {
         getGUID() != nil
@@ -156,6 +165,10 @@ class FreeTestService {
         guid.state = response.status
         guid.update = Int(Date().timeIntervalSince1970)
         
+        if guid.stateEnum == .signedForTest {
+            guid.pinCode = nil
+        }
+        
         do {
             try localStorage?.commitWrite()
         } catch {
@@ -165,6 +178,23 @@ class FreeTestService {
         if shouldInformJS {
             jsOnSubscriptionInfoClosure?(FreeTestSubscriptionInfoResponse(with: guid))
         }
+    }
+    
+    private func updatePin(code: String) {
+        guard let guid = getGUID() else { return }
+        
+        localStorage?.beginWrite()
+        
+        guid.update = Int(Date().timeIntervalSince1970)
+        guid.pinCode = code
+        localStorage?.append(guid, policy: .all)
+        
+        do {
+            try localStorage?.commitWrite()
+        } catch {
+            console(error, type: .error)
+        }
+        
     }
 }
 
@@ -184,6 +214,7 @@ private extension FreeTestService {
         .then { response -> Promise<FreeTestCreateSubscriptionResponseModel> in
             do {
                 let responseModel = try response.map(FreeTestCreateSubscriptionResponseModel.self)
+                self.updatePin(code: request.code)
                 return .value(responseModel)
             } catch {
                 throw error

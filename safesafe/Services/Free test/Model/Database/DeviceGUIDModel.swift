@@ -16,6 +16,7 @@ class DeviceGUIDModel: Object, LocalStorable {
     @objc dynamic var state: Int = .zero
     @objc dynamic var update: Int = .zero
     @objc dynamic var token: String?
+    @objc dynamic var pinCode: String?
     
     override class func primaryKey() -> String? { "id" }
     
