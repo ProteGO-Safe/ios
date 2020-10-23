@@ -56,7 +56,6 @@ final class AppCoordinator: CoordinatorType {
             guard UIDevice.current.model == "iPhone" else { return }
             dependencyContainer.backgroundTaskService.scheduleExposureTask()
         }
-        
     }
     
     private func updateReminder() {
@@ -117,6 +116,7 @@ final class AppCoordinator: CoordinatorType {
         }
         
         dependencyContainer.jsBridge.register(districtService: dependencyContainer.districtsService)
+        dependencyContainer.jsBridge.register(freeTestService: dependencyContainer.freeTestService)
     }
     
     @objc

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ExposureSummaryServiceProtocol {
+protocol ExposureSummaryServiceProtocol: class {
     
     func getExposureSummary() -> ExposureSummary
     
@@ -23,11 +23,16 @@ final class ExposureSummaryService: ExposureSummaryServiceProtocol {
     // MARK: - Properties
     
     private let storageService: LocalStorageProtocol?
+    private let freeTestService: FreeTestService
     
     // MARK: - Lice Cycle
     
-    init(storageService: LocalStorageProtocol?) {
+    init(
+        storageService: LocalStorageProtocol?,
+        freeTestService: FreeTestService) {
+        
         self.storageService = storageService
+        self.freeTestService = freeTestService
     }
     
     // MARK: - Public methods
@@ -42,7 +47,13 @@ final class ExposureSummaryService: ExposureSummaryServiceProtocol {
             return ExposureSummary(riskLevel: .none)
         }
         
-        return ExposureSummary(fromFullRangeScore: highestRisk)
+        let summary = ExposureSummary(fromFullRangeScore: highestRisk)
+        
+        if summary.riskLevel != .high {
+            freeTestService.deleteGUID()
+        }
+        
+        return summary
     }
     
     // MARK: - Private methods
