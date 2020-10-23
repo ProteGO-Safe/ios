@@ -56,10 +56,6 @@ final class AppCoordinator: CoordinatorType {
             guard UIDevice.current.model == "iPhone" else { return }
             dependencyContainer.backgroundTaskService.scheduleExposureTask()
         }
-        
-        dependencyContainer.deviceCheckService.generatePayload().done { string in
-            console(string)
-        }.catch { console($0, type: .error) }
     }
     
     private func updateReminder() {
@@ -120,6 +116,7 @@ final class AppCoordinator: CoordinatorType {
         }
         
         dependencyContainer.jsBridge.register(districtService: dependencyContainer.districtsService)
+        dependencyContainer.jsBridge.register(freeTestService: dependencyContainer.freeTestService)
     }
     
     @objc

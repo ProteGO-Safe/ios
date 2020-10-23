@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ExposureSummaryServiceProtocol {
+protocol ExposureSummaryServiceProtocol: class {
     
     func getExposureSummary() -> ExposureSummary
     

@@ -16,4 +16,12 @@ struct FreeTestSubscriptionInfoResponse: Codable, JSONRepresentable {
         let status: FreeTestSubscriptionState
         let updated: Int
     }
+    
+    init(with guid: DeviceGUIDModel) {
+        self.subscription = .init(
+            guid: guid.uuid,
+            status: guid.stateEnum,
+            updated: guid.update
+        )
+    }
 }

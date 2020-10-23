@@ -14,6 +14,8 @@ class DeviceGUIDModel: Object, LocalStorable {
     @objc dynamic var id: Int = DeviceGUIDModel.identifier
     @objc dynamic var uuid: String = .empty
     @objc dynamic var state: Int = .zero
+    @objc dynamic var update: Int = .zero
+    @objc dynamic var token: String?
     
     override class func primaryKey() -> String? { "id" }
     

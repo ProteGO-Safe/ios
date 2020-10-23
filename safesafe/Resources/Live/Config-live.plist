@@ -16,6 +16,11 @@
 		<key>BASE_URL</key>
 		<string>https://cdn.safesafe.app</string>
 	</dict>
+	<key>FREE_TEST</key>
+	<dict>
+		<key>BASE_URL</key>
+		<string>https://mb.safesafe.app</string>
+	</dict>
 	<key>PWA</key>
 	<dict>
 		<key>SCHEME</key>

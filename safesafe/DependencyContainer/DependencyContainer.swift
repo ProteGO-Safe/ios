@@ -48,7 +48,9 @@ final class DependencyContainer {
     
     lazy var freeTestService: FreeTestService = FreeTestService(
         with: realmLocalStorage,
-        deviceCheckService: deviceCheckService
+        deviceCheckService: deviceCheckService,
+        apiProvider: MoyaProvider<FreeTestTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()]),
+        configuration: remoteConfiguration
     )
     
     lazy var jailbreakService: JailbreakServiceProtocol = JailbreakService()
