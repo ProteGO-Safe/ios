@@ -113,13 +113,18 @@ final class JSBridge: NSObject {
         registerFreeTestObservers()
     }
     
-    func bridgeDataResponse(type: BridgeDataType, body: String, requestId: String, completion: ((Any?, Error?) -> ())? = nil) {
+    func bridgeDataResponse(type: BridgeDataType, body: String?, requestId: String, completion: ((Any?, Error?) -> ())? = nil) {
         DispatchQueue.main.async {
             guard let webView = self.webView else {
                 console("WebView not registered. Please use `register(webView: WKWebView)` before use this method", type: .warning)
                 return
             }
-            let method = "\(SendMethod.bridgeDataResponse.rawValue)('\(body)','\(type.rawValue)','\(requestId)')"
+            var method: String
+            if let body = body {
+                method = "\(SendMethod.bridgeDataResponse.rawValue)('\(body)','\(type.rawValue)','\(requestId)')"
+            } else {
+                method = "\(SendMethod.bridgeDataResponse.rawValue)('','\(type.rawValue)','\(requestId)')"
+            }
             webView.evaluateJavaScript(method, completionHandler: completion)
         }
     }
@@ -250,6 +255,10 @@ extension JSBridge: WKScriptMessageHandler {
             return
         }
     }
+    
+    func debugSendExposureList() {
+        sendExposureList(shouldDownload: false)
+    }
 }
 
 // MARK: - getBridgeData handling
@@ -367,7 +376,7 @@ private extension JSBridge {
     func freeTestPinUpload(jsonString: String?, requestID: String, dataType: BridgeDataType) {
         guard let request: FreeTestUploadPinRequest = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
         
-        freeTestService?.uploadPIN(pin: request)
+        freeTestService?.uploadPIN(jsRequest: request)
             .done { [weak self] response in
                 guard let jsonString = self?.encodeToJSON(response) else { return }
                 
@@ -379,20 +388,28 @@ private extension JSBridge {
                 return
             }
             
+            var response: FreeTestPinUploadResponse?
             switch internalError {
             case .freeTestPinUploadFailed:
-                let response = FreeTestPinUploadResponse(result: .failed)
-                guard let jsonString = self?.encodeToJSON(response) else { return }
-                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+                response = FreeTestPinUploadResponse(result: .failed)
+            case .noInternet:
+                response = FreeTestPinUploadResponse(result: .canceled)
             default: ()
             }
+            
+            guard let strongResponse = response, let jsonString = self?.encodeToJSON(strongResponse) else { return }
+            
+            self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
         }
     }
     
     func freeTestSubscriptionInfo(jsonString: String?, requestID: String, dataType: BridgeDataType) {
         freeTestService?.subscriptionInfo()
             .done { [weak self] response in
-                 guard let jsonString = self?.encodeToJSON(response) else { return }
+                 guard let jsonString = self?.encodeToJSON(response) else {
+                    self?.bridgeDataResponse(type: dataType, body: nil, requestId: requestID)
+                    return
+                }
                 
                 self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
                 
@@ -477,8 +494,8 @@ private extension JSBridge {
         }
     }
     
-    func sendExposureList() {
-        exposureNotificationBridge?.getExposureSummary()
+    func sendExposureList(shouldDownload: Bool = true) {
+        exposureNotificationBridge?.getExposureSummary(shouldDownload: shouldDownload)
             .done { [weak self] summary in
                 if let body = self?.encodeToJSON(summary) {
                     self?.onBridgeData(type: .exposureList, body: body) { _, error in
@@ -599,6 +616,12 @@ private extension JSBridge {
     }
     
     @objc func applicationWillEnterForeground(notification: Notification) {
+        freeTestService?.uploadPIN(jsRequest: .init(pin: "ABCDEF"))
+            .done { _ in
+                
+        }.catch{ error in
+            console(error)
+        }
         sendAppStateJSON(type: .serviceStatus)
         guard let data = ApplicationLifecycleResponse(appicationState: .willEnterForeground).jsonString else {
             return
