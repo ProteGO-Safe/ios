@@ -14,6 +14,7 @@ enum DebugAction {
     case uploadedPayloadsPreview
     case logsShare
     case dumpLocalstorage
+    case downloadDistricts
 }
 
 protocol DebugViewModelDelegate: class {
@@ -26,6 +27,7 @@ protocol DebugViewModelDelegate: class {
 final class DebugViewModel: ViewModelType {
     weak var delegate: DebugViewModelDelegate?
     private lazy var sqliteManager = SQLiteManager()
+    private weak var districtService: DebugDistrictServicesProtocol?
     
     enum Texts {
         static let title = "Debug"
@@ -35,6 +37,7 @@ final class DebugViewModel: ViewModelType {
         static let noLogsTitle = "Nothing logged yet"
         static let shareLogsTitle = "Share Logs"
         static let dumpLocalStorageTitl = "Dump Local Storage"
+        static let downloadDistrictsTitle = "Download districts"
     }
     
     var numberOfPayloads: Int {
@@ -57,6 +60,10 @@ final class DebugViewModel: ViewModelType {
         return false
     }
     
+    init(districtService: DebugDistrictServicesProtocol) {
+        self.districtService = districtService
+    }
+    
     func manage(debugAction: DebugAction) {
         switch debugAction {
         case .uploadedPayloadsShare:
@@ -70,6 +77,8 @@ final class DebugViewModel: ViewModelType {
             guard !list.isEmpty else { return }
             
             delegate?.showLocalStorageFiles(list: list)
+        case .downloadDistricts:
+            districtService?.foceFetchDistricts()
         default: ()
         }
     }

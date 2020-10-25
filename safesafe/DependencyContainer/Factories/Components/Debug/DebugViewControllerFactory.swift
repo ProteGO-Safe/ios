@@ -13,7 +13,7 @@ protocol DebugViewControllerFactory {
 
 extension DependencyContainer: DebugViewControllerFactory {
     func makeDebugViewController() -> DebugViewController {
-        let viewModel = DebugViewModel()
+        let viewModel = DebugViewModel(districtService: districtsService)
         return DebugViewController(viewModel: viewModel)
     }
 }

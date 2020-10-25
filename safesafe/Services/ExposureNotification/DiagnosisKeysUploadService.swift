@@ -139,15 +139,10 @@ final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
     }
     
     private func validateKeysPerDayMax(_ keys: [ENTemporaryExposureKey]) -> Promise<[ENTemporaryExposureKey]> {
-        let todayKeys = keys.filter {
-            let timestamp = UInt32($0.rollingStartNumber) * Constants.rollingIterationSeconds
-            let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
-            
-            return Calendar.current.isDateInToday(date)
-        }
-        
-        console("keys count: \(todayKeys.count)")
-        if todayKeys.count > Validation.keysPerDayMax {
+        let rollingPeriods = keys.map { ($0.rollingStartNumber, 1) }
+        let rollingPeriodsCount = Dictionary(rollingPeriods, uniquingKeysWith: +)
+  
+        if rollingPeriodsCount.filter ({ $1 > Validation.keysPerDayMax }).count > .zero {
             UploadValidationAlertManager().show(type: .keysPerDayMax) { _ in }
             return .init(error: InternalError.uploadValidation)
         }

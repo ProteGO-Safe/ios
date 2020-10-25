@@ -11,6 +11,11 @@
 		<key>EN_UDK_BASE_URL</key>
 		<string>https://udk.safesafe.app/</string>
 	</dict>
+	<key>DISTRICTS</key>
+	<dict>
+		<key>BASE_URL</key>
+		<string>https://cdn.safesafe.app</string>
+	</dict>
 	<key>PWA</key>
 	<dict>
 		<key>SCHEME</key>

@@ -28,8 +28,7 @@ final class AppCoordinator: CoordinatorType {
     
     init?(appWindow: UIWindow?, dependencyContainer: DependencyContainer) {
         self.dependencyContainer = dependencyContainer
-        RealmLocalStorage.setupEncryption()
-        
+
         guard let window = appWindow else {
             Fatal.execute("Window doesn't exists")
         }
@@ -49,16 +48,15 @@ final class AppCoordinator: CoordinatorType {
         window.makeKeyAndVisible()
         
         updateReminder()
+        configureJSBridge(with: rootViewController)
         
-        if #available(iOS 13.5, *) {
-            configureJSBridge(with: rootViewController)
-        }
         
         if #available(iOS 13.5, *) {
             // Don't register bg task on iPad devices that are not supported by EN
             guard UIDevice.current.model == "iPhone" else { return }
             dependencyContainer.backgroundTaskService.scheduleExposureTask()
         }
+        
     }
     
     private func updateReminder() {
@@ -109,14 +107,16 @@ final class AppCoordinator: CoordinatorType {
         self.noInternetAlert = noInternetAlert
     }
     
-    @available(iOS 13.5, *)
     private func configureJSBridge(with viewController: UIViewController) {
-        let factory: ExposureNotificationJSBridgeFactory = dependencyContainer
+        if #available(iOS 13.5, *) {
+            let factory: ExposureNotificationJSBridgeFactory = dependencyContainer
+            dependencyContainer.jsBridge.registerExposureNotification(
+                with: factory.makeExposureNotificationJSBridge(with: viewController),
+                diagnosisKeysUploadService: dependencyContainer.diagnosisKeysUploadService
+            )
+        }
         
-        dependencyContainer.jsBridge.registerExposureNotification(
-            with: factory.makeExposureNotificationJSBridge(with: viewController),
-            diagnosisKeysUploadService: dependencyContainer.diagnosisKeysUploadService
-        )
+        dependencyContainer.jsBridge.register(districtService: dependencyContainer.districtsService)
     }
     
     @objc

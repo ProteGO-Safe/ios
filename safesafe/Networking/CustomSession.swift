@@ -13,6 +13,7 @@ class CustomSession {
     final class func defaultSession() -> Session {
         let configuration = URLSessionConfiguration.default
         configuration.headers = .default
+        configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
         configuration.urlCache = .init(memoryCapacity: .zero, diskCapacity: .zero, diskPath: nil)
 
         return Session(configuration: configuration, delegate: CustomSessionDelegate(), startRequestsImmediately: false)

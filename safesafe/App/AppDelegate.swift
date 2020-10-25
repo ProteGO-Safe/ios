@@ -66,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         NotificationManager.shared.clearBadgeNumber()
+        NotificationManager.shared.registerAPNSIfNeeded()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
