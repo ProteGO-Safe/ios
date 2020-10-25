@@ -42,7 +42,9 @@ final class PWAViewModel: ViewModelType {
     
     // MARK: - Life Cycle
     
-    init(with jsBridge: JSBridge, migrationManager: MigrationProtocol = LocalStorageMigration()) {
+    init(
+        with jsBridge: JSBridge,
+        migrationManager: MigrationProtocol = LocalStorageMigration()) {
         self.jsBridge = jsBridge
         self.migrationManager = migrationManager
     }

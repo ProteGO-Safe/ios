@@ -10,48 +10,79 @@ import RealmSwift
 
 protocol LocalStorable: Object {}
 
+enum LocalStorageUpdatePolicy {
+    case error
+    case all
+    case modified
+}
+
 protocol LocalStorageProtocol {
-    func append<T: LocalStorable>(_ object: T, completion: ((Result<Void, Error>) -> ())?)
-    func append<T: LocalStorable>(_ objects: [T], completion: ((Result<Void, Error>) -> ())?)
+    func append<T: LocalStorable>(_ object: T, policy: LocalStorageUpdatePolicy, completion: ((Result<Void, Error>) -> ())?)
+    func append<T: LocalStorable>(_ objects: [T], policy: LocalStorageUpdatePolicy, completion: ((Result<Void, Error>) -> ())?)
     func fetch<T: LocalStorable>() -> Array<T>
+    func fetch<T: LocalStorable>(primaryKey: String) -> T?
     func remove<T: LocalStorable>(_ object: T, completion: ((Result<Void, Error>) -> ())?)
     func remove<T: LocalStorable>(_ objects: [T], completion: ((Result<Void, Error>) -> ())?)
     static func clearAll()
+    
+    // Optional
+    func beginWrite()
+    func commitWrite() throws
 }
 
 extension LocalStorageProtocol {
     static func setupEncryption() {}
     
-    func append<T: LocalStorable>(_ objects: [T], completion: ((Result<Void, Error>) -> ())? = nil) {
-        append(objects, completion: completion)
+    func append<T: LocalStorable>(_ objects: [T], policy: LocalStorageUpdatePolicy = .error, completion: ((Result<Void, Error>) -> ())? = nil) {
+        append(objects, policy: policy, completion: completion)
     }
     
-    func append<T: LocalStorable>(_ object: T, completion: ((Result<Void, Error>) -> ())? = nil) {
-        append(object, completion: completion)
+    func append<T: LocalStorable>(_ object: T, policy: LocalStorageUpdatePolicy = .error, completion: ((Result<Void, Error>) -> ())? = nil) {
+        append(object, policy: policy, completion: completion)
     }
+    
+    // Optional
+    func beginWrite() {}
+    func commitWrite() throws {}
 }
 
 final class RealmLocalStorage: LocalStorageProtocol {
     
     private let realm: Realm
+    private var isContextOpen = false
     
     required init?(_ realm: Realm? = nil) {
         do {
             self.realm = try realm ?? Realm(configuration: RealmLocalStorage.defaultConfiguration())
         } catch {
+            console(error, type: .error)
             return nil
         }
     }
     
-    func append<T: LocalStorable>(_ object: T, completion: ((Result<Void, Error>) -> ())? = nil) {
+    func beginWrite() {
+        realm.beginWrite()
+        isContextOpen = true
+    }
+    
+    func commitWrite() throws {
+        isContextOpen = false
+        try realm.commitWrite()
+    }
+    
+    func append<T: LocalStorable>(_ object: T, policy: LocalStorageUpdatePolicy, completion: ((Result<Void, Error>) -> ())? = nil) {
         guard let object = object as? Object else {
             completion?(.failure(InternalError.invalidDataType))
             return
         }
-        
+
         do {
-            try realm.write {
-                realm.add(object)
+            if isContextOpen {
+                realm.add(object, update: realmPolicy(policy))
+            } else {
+                try realm.write {
+                    realm.add(object, update: realmPolicy(policy))
+                }
             }
             completion?(.success)
         } catch {
@@ -59,15 +90,19 @@ final class RealmLocalStorage: LocalStorageProtocol {
         }
     }
     
-    func append<T: LocalStorable>(_ objects: [T], completion: ((Result<Void, Error>) -> ())? = nil) {
+    func append<T: LocalStorable>(_ objects: [T], policy: LocalStorageUpdatePolicy, completion: ((Result<Void, Error>) -> ())? = nil) {
         guard let objects = objects as? [Object] else {
             completion?(.failure(InternalError.invalidDataType))
             return
         }
         
         do {
-            try realm.write {
-                realm.add(objects)
+            if isContextOpen {
+                realm.add(objects, update: realmPolicy(policy))
+            } else {
+                try realm.write {
+                    realm.add(objects, update: realmPolicy(policy))
+                }
             }
             completion?(.success)
         } catch {
@@ -82,10 +117,22 @@ final class RealmLocalStorage: LocalStorageProtocol {
         return realm.objects(type).compactMap { $0 as? T }
     }
     
+    func fetch<T: LocalStorable, KeyType>(primaryKey: KeyType) -> T? {
+        guard let type = T.self as? Object.Type else {
+            fatalError()
+        }
+        
+        return realm.object(ofType: type, forPrimaryKey: primaryKey) as? T
+    }
+    
     func remove<T: LocalStorable>(_ object: T, completion: ((Result<Void, Error>) -> ())? = nil) {
         do {
-            try realm.write {
+            if isContextOpen {
                 realm.delete(object)
+            } else {
+                try realm.write {
+                    realm.delete(object)
+                }
             }
             completion?(.success)
         } catch {
@@ -95,12 +142,27 @@ final class RealmLocalStorage: LocalStorageProtocol {
     
     func remove<T: LocalStorable>(_ objects: [T], completion: ((Result<Void, Error>) -> ())? = nil) {
         do {
-            try realm.write {
+            if isContextOpen {
                 realm.delete(objects)
+            } else {
+                try realm.write {
+                    realm.delete(objects)
+                }
             }
             completion?(.success)
         } catch {
             completion?(.failure(error))
+        }
+    }
+    
+    private func realmPolicy(_ policy: LocalStorageUpdatePolicy) -> Realm.UpdatePolicy {
+        switch policy {
+        case .error:
+            return .error
+        case .all:
+            return .all
+        case .modified:
+            return .modified
         }
     }
     
@@ -118,20 +180,36 @@ final class RealmLocalStorage: LocalStorageProtocol {
 
 extension RealmLocalStorage {
     static func setupEncryption() {
-        guard KeychainService.shared.getData(for: .realmEncryption) == nil else { return }
-        
-        var keyData = Data(count: 64)
-        _ = keyData.withUnsafeMutableBytes {
-            SecRandomCopyBytes(kSecRandomDefault, 62, $0.baseAddress!)
+        guard KeychainService.shared.getData(for: .realmEncryption) == nil else {
+            console("🔑🔑🔑 Got old DB encryption key")
+            return
         }
         
+        console("🔑🔑🔑 Generate [start] new DB encryption key")
+        var keyData = Data(count: 64)
+        _ = keyData.withUnsafeMutableBytes {
+            SecRandomCopyBytes(kSecRandomDefault, 64, $0.baseAddress!)
+        }
+    
+        console("🔑🔑🔑 Generate [finished] new DB encryption key, data length: \(keyData.count)")
         KeychainService.shared.set(data: keyData, for: .realmEncryption)
     }
     
     static func defaultConfiguration() throws -> Realm.Configuration {
         guard let encryptionKey = KeychainService.shared.getData(for: .realmEncryption) else {
+            console("☠️🔑 Can't use keychain encryption key, return default configuration maybe?")
             throw InternalError.keychainKeyNotExists
         }
+        
+        if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
+            let fileDir = fileURL.deletingLastPathComponent().path
+            try? FileManager.default.setAttributes(
+                [FileAttributeKey.protectionKey: FileProtectionType.completeUntilFirstUserAuthentication],
+                ofItemAtPath: fileDir
+            )
+        }
+        
+        console("🔑🔑🔑 Instantiate Realm config with encryption key, length: \(encryptionKey.count)")
         return Realm.Configuration(encryptionKey: encryptionKey)
     }
 }

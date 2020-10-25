@@ -27,12 +27,12 @@ public final class Logger {
         }
     }
     
-    private static var dateFormatter: DateFormatter {
+    private static var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd_HH:mm:ss.SSS"
         
         return formatter
-    }
+    }()
     
     public static func log(_ value: Any?, type: LogType, file: String, function: String, line: Int, fullPath: Bool = false) {
         #if !LIVE
@@ -52,13 +52,11 @@ public final class Logger {
     }
     
     private static func fileLog(_ message: String) {
-        DispatchQueue.global(qos: .background).async {
-            let datePrefix = "{\(Self.dateFormatter.string(from: Date()))}"
-            let line = "\(datePrefix) \(message)"
-            if #available(iOS 13.0, *) {
+        if #available(iOS 13.5, *) {
+            DispatchQueue.global(qos: .background).async {
+                let datePrefix = "{\(Logger.dateFormatter.string(from: Date()))}"
+                let line = "\(datePrefix) \(message)"
                 File.logToFile(line)
-            } else {
-                // Not implemented on earlier versions yet
             }
         }
     }
