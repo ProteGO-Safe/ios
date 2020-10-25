@@ -75,6 +75,15 @@ To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
 
+**4.6.0**
+- Added restricted districts feature
+- Added subscribing for notification for restricted districts
+- Small fixes for JS contract
+- Added ability to test districts changes notification to debug panel
+- Translations update
+- Fix for manage max exposure notifications key amount per day
+- Remove debug logging from iOS < 13.5
+
 **4.5.0**
 - Manage user diagnosis keys share rejection 
 - Prevents url requests caching
