@@ -13,10 +13,12 @@ final class RenewableRequest<Target: Moya.TargetType> {
     private var (pendingPromise, seal) = Promise<Moya.Response>.pending()
     private let provider: MoyaProvider<Target>
     private let alertManager: AlertManager
+    private let notRenewableErrorCodes: [Int]
     
-    init(provider: MoyaProvider<Target>, alertManager: AlertManager) {
+    init(provider: MoyaProvider<Target>, alertManager: AlertManager, notRenewableErrorCodes: [Int] = []) {
         self.provider = provider
         self.alertManager = alertManager
+        self.notRenewableErrorCodes = notRenewableErrorCodes
     }
     
     func make(target: Target) -> Promise<Moya.Response> {
@@ -49,7 +51,7 @@ final class RenewableRequest<Target: Moya.TargetType> {
         _ = semaphore.wait(timeout: .now() + 20)
         
         if case .failure(let error) = syncResult {
-            guard let responseCode = error.response?.statusCode, responseCode != 404 else {
+            guard let responseCode = error.response?.statusCode, (responseCode != 404 && !notRenewableErrorCodes.contains(responseCode)) else {
                 seal.reject(error)
                 return
             }

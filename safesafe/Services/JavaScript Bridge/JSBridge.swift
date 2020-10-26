@@ -389,6 +389,9 @@ private extension JSBridge {
         .catch {[weak self] error in
             guard let internalError = error as? InternalError else {
                 console(error, type: .error)
+                let response = FreeTestPinUploadResponse(result: .failed)
+                guard let jsonString = self?.encodeToJSON(response) else { return }
+                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
                 return
             }
             

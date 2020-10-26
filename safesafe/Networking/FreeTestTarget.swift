@@ -52,5 +52,7 @@ extension FreeTestTarget: TargetType {
         }
     }
     
-    
+    var validationType: ValidationType {
+        return .successCodes
+    }
 }

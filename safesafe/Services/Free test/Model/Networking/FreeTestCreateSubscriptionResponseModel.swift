@@ -8,5 +8,5 @@
 import Foundation
 
 struct FreeTestCreateSubscriptionResponseModel: Codable {
-    let accessToken: String
+    let token: String
 }

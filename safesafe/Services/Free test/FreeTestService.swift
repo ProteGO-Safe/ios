@@ -14,7 +14,7 @@ class FreeTestService {
     private let localStorage: RealmLocalStorage?
     private let deviceCheckService: DeviceCheckServiceProtocol
     private let apiProvider: MoyaProvider<FreeTestTarget>
-    private let configuration: SubscriptionRemoteConfigProtocol
+    private let configuration: RemoteConfigProtocol
     private let renewableRequest: RenewableRequest<FreeTestTarget>
     
     private var jsOnSubscriptionInfoClosure: ((FreeTestSubscriptionInfoResponse) -> ())?
@@ -23,12 +23,12 @@ class FreeTestService {
         with localStorage: RealmLocalStorage?,
         deviceCheckService: DeviceCheckServiceProtocol,
         apiProvider: MoyaProvider<FreeTestTarget>,
-        configuration: SubscriptionRemoteConfigProtocol) {
+        configuration: RemoteConfigProtocol) {
         
         self.localStorage = localStorage
         self.deviceCheckService = deviceCheckService
         self.apiProvider = apiProvider
-        self.renewableRequest = .init(provider: apiProvider, alertManager: NetworkingAlertManager())
+        self.renewableRequest = .init(provider: apiProvider, alertManager: NetworkingAlertManager(), notRenewableErrorCodes: [400])
         self.configuration = configuration
     }
     
@@ -76,6 +76,7 @@ class FreeTestService {
                 
                 let model = DeviceGUIDModel()
                 model.uuid = UUID().uuidString
+                localStorage?.append(model, policy: .all)
                 
                 do {
                     try localStorage?.commitWrite()
@@ -103,6 +104,7 @@ class FreeTestService {
         localStorage?.beginWrite()
         
         model.state = state.rawValue
+        localStorage?.append(model, policy: .all)
         
         try? localStorage?.commitWrite()
     }
@@ -129,9 +131,9 @@ class FreeTestService {
     }
     
     private func fetchAPISubscriptionInfo(guid: DeviceGUIDModel) {
-        configuration.subscriptionConfiguration()
+        configuration.configuration()
             .then { config in
-                self.deviceCheckService.generatePayload().map { (config, $0) }
+                self.deviceCheckService.generatePayload().map { (config.subscription, $0) }
         }
         .done { [weak self] config, deviceCheckToken in
             let nowTimestamp = Int(Date().timeIntervalSince1970)
@@ -168,7 +170,7 @@ class FreeTestService {
         if guid.stateEnum == .signedForTest {
             guid.pinCode = nil
         }
-        
+        localStorage?.append(guid, policy: .all)
         do {
             try localStorage?.commitWrite()
         } catch {
@@ -180,13 +182,15 @@ class FreeTestService {
         }
     }
     
-    private func updatePin(code: String) {
+    private func onSubscriptionCreateUpdate(pinCode: String, token: String) {
         guard let guid = getGUID() else { return }
         
         localStorage?.beginWrite()
         
         guid.update = Int(Date().timeIntervalSince1970)
-        guid.pinCode = code
+        guid.pinCode = pinCode
+        guid.token = token
+        guid.state = 1
         localStorage?.append(guid, policy: .all)
         
         do {
@@ -214,7 +218,7 @@ private extension FreeTestService {
         .then { response -> Promise<FreeTestCreateSubscriptionResponseModel> in
             do {
                 let responseModel = try response.map(FreeTestCreateSubscriptionResponseModel.self)
-                self.updatePin(code: request.code)
+                self.onSubscriptionCreateUpdate(pinCode: request.code, token: responseModel.token)
                 return .value(responseModel)
             } catch {
                 throw error

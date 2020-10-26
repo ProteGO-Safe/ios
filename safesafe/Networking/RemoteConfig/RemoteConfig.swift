@@ -13,10 +13,6 @@ protocol RemoteConfigProtocol {
     func configuration() -> Promise<RemoteConfigurationResponse>
 }
 
-protocol SubscriptionRemoteConfigProtocol {
-    func subscriptionConfiguration() -> Promise<SubscriptionConfiguration>
-}
-
 final class RemoteConfiguration: RemoteConfigProtocol {
     
     private enum Key: String {
@@ -87,14 +83,5 @@ final class RemoteConfiguration: RemoteConfigProtocol {
         }
         let data = try JSONSerialization.data(withJSONObject: jsonValue, options: [])
         return try decoder.decode(T.self, from: data)
-    }
-}
-
-extension RemoteConfiguration: SubscriptionRemoteConfigProtocol {
-    func subscriptionConfiguration() -> Promise<SubscriptionConfiguration> {
-        fetchConfiguration()
-            .then { config -> Promise<SubscriptionConfiguration> in
-                .value(config.subscription)
-        }
     }
 }
