@@ -48,10 +48,10 @@ class FreeTestService {
         }
     }
     
-    func subscriptionInfo() -> Promise<FreeTestSubscriptionInfoResponse?> {
+    func subscriptionInfo() -> Promise<FreeTestSubscriptionInfoResponse> {
         return Promise { [weak self] seal in
             guard let guid = getGUID() else {
-                seal.fulfill(nil)
+                seal.fulfill(.empty)
                 return
             }
                     

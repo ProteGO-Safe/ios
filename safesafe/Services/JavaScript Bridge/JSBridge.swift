@@ -414,7 +414,6 @@ private extension JSBridge {
         freeTestService?.subscriptionInfo()
             .done { [weak self] response in
                  guard let jsonString = self?.encodeToJSON(response) else {
-                    self?.bridgeDataResponse(type: dataType, body: nil, requestId: requestID)
                     return
                 }
                 

@@ -9,12 +9,18 @@ import Foundation
 
 struct FreeTestSubscriptionInfoResponse: Codable, JSONRepresentable {
     
-    let subscription: Subscription
+    static let empty = FreeTestSubscriptionInfoResponse()
+    
+    let subscription: Subscription?
     
     struct Subscription: Codable {
         let guid: String
         let status: FreeTestSubscriptionState
         let updated: Int
+    }
+    
+    init () {
+        self.subscription = nil
     }
     
     init(with guid: DeviceGUIDModel) {
