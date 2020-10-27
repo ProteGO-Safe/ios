@@ -44,6 +44,7 @@ final class ExposureSummaryService: ExposureSummaryServiceProtocol {
             .first?
             .risk
         else {
+            freeTestService.deleteGUID()
             return ExposureSummary(riskLevel: .none)
         }
         

@@ -133,7 +133,7 @@ final class ExposureService: ExposureServiceProtocol {
             )}
             .then { configuration, keys -> Promise<ENExposureDetectionSummary> in
                 if keys.isEmpty {
-                    throw PromiseCancel()
+                    throw InternalError.detectExposuresNoKeys
                 } else {
                     return self.detectExposures(for: configuration, keys: keys)
                 }

@@ -77,10 +77,8 @@ final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
         if shouldDownload {
             return Promise { seal in
                 exposureService.detectExposures()
-                    .done { _ in
+                    .ensure {
                         seal.fulfill(self.exposureSummaryService.getExposureSummary())
-                }.catch {
-                    seal.reject($0)
                 }
             }
         } else {
