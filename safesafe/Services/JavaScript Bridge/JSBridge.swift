@@ -27,6 +27,7 @@ final class JSBridge: NSObject {
         case exposureList = 61
         case appVersion = 62
         case systemLanguage = 63
+        case clearExposureRisk = 66
         
         case allDistricts = 70
         case districtsAPIFetch = 71
@@ -255,6 +256,9 @@ extension JSBridge: WKScriptMessageHandler {
         case .freeTestPinCodeFetch:
             freeTestPinCodeFetch(requestID: requestId, dataType: bridgeDataType)
             
+        case .clearExposureRisk:
+            clearExposureRisk(requestID: requestId, dataType: bridgeDataType)
+            
         default:
             return
         }
@@ -429,6 +433,18 @@ private extension JSBridge {
                 guard let jsonString = self?.encodeToJSON(response) else { return }
                 
                 self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+        }
+        .catch {
+            console($0, type: .error)
+        }
+    }
+    
+    func clearExposureRisk(requestID: String, dataType: BridgeDataType) {
+        exposureNotificationBridge?.clearExposureRisk()
+            .done { [weak self] summary in
+                if let body = self?.encodeToJSON(summary) {
+                    self?.bridgeDataResponse(type: dataType, body: body, requestId: requestID)
+                }
         }
         .catch {
             console($0, type: .error)
