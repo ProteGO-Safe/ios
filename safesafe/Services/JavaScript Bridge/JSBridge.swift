@@ -23,13 +23,19 @@ final class JSBridge: NSObject {
         case setServices = 52
         case clearData = 37
         case uploadTemporaryExposureKeys = 43
+        
         case exposureList = 61
         case appVersion = 62
         case systemLanguage = 63
+        
         case allDistricts = 70
         case districtsAPIFetch = 71
         case districtAction = 72
         case subscribedDistricts = 73
+        
+        case freeTestPinUpload = 80
+        case freeTestSubscriptionInfo = 81
+        case freeTestPinCodeFetch = 82
     }
     
     enum SendMethod: String, CaseIterable {
@@ -56,7 +62,9 @@ final class JSBridge: NSObject {
     private let serviceStatusManager: ServiceStatusManagerProtocol
     private var exposureNotificationBridge: ExposureNotificationJSProtocol?
     private var diagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol?
+    
     private var districtService: DistrictService?
+    private var freeTestService: FreeTestService?
     
     private var isServicSetting: Bool = false
     private var currentDataType: BridgeDataType?
@@ -101,13 +109,23 @@ final class JSBridge: NSObject {
         self.districtService = districtService
     }
     
-    func bridgeDataResponse(type: BridgeDataType, body: String, requestId: String, completion: ((Any?, Error?) -> ())? = nil) {
+    func register(freeTestService: FreeTestService) {
+        self.freeTestService = freeTestService
+        registerFreeTestObservers()
+    }
+    
+    func bridgeDataResponse(type: BridgeDataType, body: String?, requestId: String, completion: ((Any?, Error?) -> ())? = nil) {
         DispatchQueue.main.async {
             guard let webView = self.webView else {
                 console("WebView not registered. Please use `register(webView: WKWebView)` before use this method", type: .warning)
                 return
             }
-            let method = "\(SendMethod.bridgeDataResponse.rawValue)('\(body)','\(type.rawValue)','\(requestId)')"
+            var method: String
+            if let body = body {
+                method = "\(SendMethod.bridgeDataResponse.rawValue)('\(body)','\(type.rawValue)','\(requestId)')"
+            } else {
+                method = "\(SendMethod.bridgeDataResponse.rawValue)('','\(type.rawValue)','\(requestId)')"
+            }
             webView.evaluateJavaScript(method, completionHandler: completion)
         }
     }
@@ -228,9 +246,22 @@ extension JSBridge: WKScriptMessageHandler {
         case .districtAction:
             manageDistrictObserved(jsonString: jsonString, requestId: requestId, dataType: bridgeDataType)
             
+        case .freeTestPinUpload:
+            freeTestPinUpload(jsonString: jsonString, requestID: requestId, dataType: bridgeDataType)
+        
+        case .freeTestSubscriptionInfo:
+            freeTestSubscriptionInfo(jsonString: jsonString, requestID: requestId, dataType: bridgeDataType)
+            
+        case .freeTestPinCodeFetch:
+            freeTestPinCodeFetch(requestID: requestId, dataType: bridgeDataType)
+            
         default:
             return
         }
+    }
+    
+    func debugSendExposureList() {
+        sendExposureList(shouldDownload: false)
     }
 }
 
@@ -345,10 +376,69 @@ private extension JSBridge {
         
         managePushNotificationAuthorization()
     }
+    
+    func freeTestPinUpload(jsonString: String?, requestID: String, dataType: BridgeDataType) {
+        guard let request: FreeTestUploadPinRequest = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
+        
+        freeTestService?.uploadPIN(jsRequest: request)
+            .done { [weak self] response in
+                guard let jsonString = self?.encodeToJSON(response) else { return }
+                
+                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+        }
+        .catch {[weak self] error in
+            guard let internalError = error as? InternalError else {
+                console(error, type: .error)
+                let response = FreeTestPinUploadResponse(result: .failed)
+                guard let jsonString = self?.encodeToJSON(response) else { return }
+                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+                return
+            }
+            
+            var response: FreeTestPinUploadResponse?
+            switch internalError {
+            case .freeTestPinUploadFailed:
+                response = FreeTestPinUploadResponse(result: .failed)
+            case .noInternet:
+                response = FreeTestPinUploadResponse(result: .canceled)
+            default: ()
+            }
+            
+            guard let strongResponse = response, let jsonString = self?.encodeToJSON(strongResponse) else { return }
+            
+            self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+        }
+    }
+    
+    func freeTestSubscriptionInfo(jsonString: String?, requestID: String, dataType: BridgeDataType) {
+        freeTestService?.subscriptionInfo()
+            .done { [weak self] response in
+                 guard let jsonString = self?.encodeToJSON(response) else {
+                    return
+                }
+                
+                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+                
+        }
+        .catch { console($0, type: .error) }
+    }
+    
+    func freeTestPinCodeFetch(requestID: String, dataType: BridgeDataType) {
+        freeTestService?.getPinCode()
+            .done { [weak self] response in
+                guard let jsonString = self?.encodeToJSON(response) else { return }
+                
+                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+        }
+        .catch {
+            console($0, type: .error)
+        }
+    }
 }
 
 // MARK: - onBridgeData handling
 private extension JSBridge {
+    
     func changeLanguage(jsonString: String?) {
         guard let model: SystemLanguageResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else  { return }
         
@@ -422,8 +512,8 @@ private extension JSBridge {
         }
     }
     
-    func sendExposureList() {
-        exposureNotificationBridge?.getExposureSummary()
+    func sendExposureList(shouldDownload: Bool = true) {
+        exposureNotificationBridge?.getExposureSummary(shouldDownload: shouldDownload)
             .done { [weak self] summary in
                 if let body = self?.encodeToJSON(summary) {
                     self?.onBridgeData(type: .exposureList, body: body) { _, error in
@@ -516,6 +606,14 @@ private extension JSBridge {
                     }
                 default: ()
                 }
+        }
+    }
+    
+    func registerFreeTestObservers() {
+        freeTestService?.jsOnSubsriptionInfo { [weak self] response in
+            guard let data = response.jsonString else { return }
+            
+            self?.onBridgeData(type: .freeTestSubscriptionInfo, body: data)
         }
     }
     

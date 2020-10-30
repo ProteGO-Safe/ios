@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.7.0
+- Omit package analysis on very first app run
+- Added ability for sign-in for covid-19 test
+- Added js contract for high risk and covid-19 test
+- Added simulate exposure risk to debug panel
+
 ## 4.6.0
 - Added restricted districts feature
 - Added subscribing for notification for restricted districts

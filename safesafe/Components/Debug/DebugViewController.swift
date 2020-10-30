@@ -83,6 +83,10 @@ final class DebugViewController: ViewController<DebugViewModel> {
         stackButton(DebugViewModel.Texts.shareLogsTitle, action: .logsShare)
         stackButton(DebugViewModel.Texts.dumpLocalStorageTitl, action: .dumpLocalstorage)
         stackButton(DebugViewModel.Texts.downloadDistrictsTitle, action: .downloadDistricts)
+        if #available(iOS 13.5, *) {
+            stackButton(DebugViewModel.Texts.simulateExposureRiskTitle, action: .simulateExposureRisk)
+            stackButton(DebugViewModel.Texts.deleteSimulatedExposuresTitle, action: .deleteSimulatedExposures)
+        }
     }
     
     private func stackButton(_ title: String, action: DebugAction) {
@@ -169,6 +173,25 @@ extension DebugViewController: DebugViewModelDelegate {
             }
             alertController.addAction(action)
         }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
+    }
+    
+    func showSimulatedRisksSheet(list: [RiskLevel : String]) {
+        let alertController = UIAlertController(title: "Simulate risk", message: nil, preferredStyle: .actionSheet)
+        
+        for (risk, title) in list {
+            let action = UIAlertAction(title: title , style: .default) { [weak self] _ in
+                self?.viewModel.simulateExposureRisk(riskLevel: risk)
+            }
+            alertController.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+        alertController.addAction(cancelAction)
         
         present(alertController, animated: true)
     }

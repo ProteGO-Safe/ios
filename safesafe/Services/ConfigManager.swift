@@ -39,6 +39,11 @@ final class ConfigManager {
         // Districts
         static let districts = "DISTRICTS"
         static let districtsBaseURL = "BASE_URL"
+        
+        // Free COVID Test
+        static let freeTest = "FREE_TEST"
+        static let freetTestBaseURL = "BASE_URL"
+        
      }
     
     private let settings: [String: Any]
@@ -102,6 +107,14 @@ extension ConfigManager {
         return dictionary
     }
     
+    private var freeTestSettings: [String: Any] {
+        guard let dictionary = settings[Key.freeTest] as? [String: Any] else {
+            Fatal.execute("Can't read \(Key.freeTest) from plist")
+        }
+        
+        return dictionary
+    }
+    
     var enGatBaseURL: String {
         return value(for: Key.enGatBaseURL, dictionary: enSettings)
     }
@@ -116,5 +129,9 @@ extension ConfigManager {
     
     var districtsBaseURL: String {
         return value(for: Key.districtsBaseURL, dictionary: districtsSettings)
+    }
+    
+    var freeTestBaseURL: String {
+        return value(for: Key.freetTestBaseURL, dictionary: freeTestSettings)
     }
 }
