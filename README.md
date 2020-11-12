@@ -75,6 +75,10 @@ To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
 
+**4.7.1**
+- Bump iOS version availability for some log methods
+- Clear exposure risk info on demand
+
 **4.7.0**
 - Omit package analysis on very first app run
 - Added ability for sign-in for covid-19 test
