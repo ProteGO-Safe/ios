@@ -549,16 +549,18 @@ private extension JSBridge {
                 if case .retry = action {
                     self?.uploadTemporaryExposureKeys(jsonString: jsonString)
                 } else if case .cancel = action {
-                    self?.send(.other)
+                    self?.send(.canceled)
                 }
             }
             return
         }
         
-        guard let response: UploadTemporaryExposureKeysResponse = jsonString?.jsonDecode(decoder: jsonDecoder)
-            else { return }
+        guard let response: UploadTemporaryExposureKeysResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else {
+            send(.canceled)
+            return
+        }
         
-        diagnosisKeysUploadService?.upload(usingAuthCode: response.pin)
+        diagnosisKeysUploadService?.upload(usingResponse: response)
             .done {
                 self.send(.success)
         }
@@ -567,9 +569,9 @@ private extension JSBridge {
             if let error = error as? InternalError {
                 switch error {
                 case .shareKeysUserCanceled:
-                    self.send(.canceled)
+                    self.send(.accessDenied)
                 default:
-                    self.send(.other)
+                    self.send(.canceled)
                 }
             } else {
                 self.send(.failure)

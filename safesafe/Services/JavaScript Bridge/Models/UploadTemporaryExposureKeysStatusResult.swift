@@ -8,8 +8,9 @@ import Foundation
 enum UploadTemporaryExposureKeysStatus: Int, Encodable {
     case success = 1
     case failure = 2
-    case other = 3
-    case canceled = 5
+    case canceled = 3
+    case noInternet = 4
+    case accessDenied = 5
 }
 
 struct UploadTemporaryExposureKeysStatusResult: Encodable {
