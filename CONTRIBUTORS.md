@@ -1,5 +1,4 @@
 ## Lista osób które podpisały [oświadczenie o udzieleniu licencji](DISCLAIMER.pdf) i wprowadziły zmiany w projekcie:
-
 | Imię i nazwisko     | GitHub ID                                               | Komponenty     |
 | ------------------- | ------------------------------------------------------- | -------------- |
 | Jakub Lipiński      | [jakublipinski](https://github.com/jakublipinski)       | backend, specs |
@@ -31,3 +30,5 @@
 | Oleksandr Katrych   | [OKatrych](https://github.com/OKatrych)                 | android        |
 | Wojciech Brydak     | [wbrydak](https://github.com/wbrydak)                   | specs          |
 | Damian Klimas       | [D4mK](https://github.com/D4mK)                         | specs, legal   |
+| Kamil Gałuszka      | [galuszkak](https://github.com/galuszkak)               | android, web   |
+| Piotr Konieczny     | [piotr-cz](https://github.com/piotr-cz)                 | web            |
