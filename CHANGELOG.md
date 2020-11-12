@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.7.1
+- Bump iOS version availability for some log methods
+- Clear exposure risk info on demand
+
 ## 4.7.0
 - Omit package analysis on very first app run
 - Added ability for sign-in for covid-19 test

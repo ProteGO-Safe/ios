@@ -10,7 +10,7 @@ import Foundation
 protocol ExposureSummaryServiceProtocol: class {
     
     func getExposureSummary() -> ExposureSummary
-    
+    func clearExposureSummary() -> ExposureSummary
 }
 
 final class ExposureSummaryService: ExposureSummaryServiceProtocol {
@@ -55,6 +55,24 @@ final class ExposureSummaryService: ExposureSummaryServiceProtocol {
         }
         
         return summary
+    }
+    
+    func clearExposureSummary() -> ExposureSummary {
+        guard let allExposures: [Exposure] = storageService?.fetch() else {
+            return getExposureSummary()
+        }
+        
+        storageService?.beginWrite()
+        
+        storageService?.remove(allExposures, completion: nil)
+        
+        do {
+            try storageService?.commitWrite()
+            return getExposureSummary()
+        } catch {
+            console(error, type: .error)
+            return getExposureSummary()
+        }
     }
     
     // MARK: - Private methods

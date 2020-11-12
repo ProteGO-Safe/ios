@@ -27,7 +27,7 @@ final class File {
         }
     }
     
-    @available(iOS 13.0, *)
+    @available(iOS 13.4, *)
     static func append(data: Data, to fileName: String, in directory: URL) {
         let fileURL = directory.appendingPathComponent(fileName)
         if FileManager.default.fileExists(atPath: fileURL.path) {
@@ -54,7 +54,7 @@ extension File {
         return nil
     }
     
-    @available(iOS 13.0, *)
+    @available(iOS 13.5, *)
     static func logToFile(_ message: String) {
         guard let data = message.appending("\n").data(using: .utf8) else { return }
         do {

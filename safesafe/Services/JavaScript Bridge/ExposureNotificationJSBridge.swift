@@ -13,6 +13,7 @@ protocol ExposureNotificationJSProtocol: class {
     
     func enableService(enable: Bool) -> Promise<Void>
     func getExposureSummary(shouldDownload: Bool) -> Promise<ExposureSummary>
+    func clearExposureRisk() -> Promise<ExposureSummary>
 }
 
 extension ExposureNotificationJSProtocol {
@@ -83,6 +84,12 @@ final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
             }
         } else {
             return .value(exposureSummaryService.getExposureSummary())
+        }
+    }
+    
+    func clearExposureRisk() -> Promise<ExposureSummary> {
+        Promise { seal in
+            seal.fulfill(self.exposureSummaryService.clearExposureSummary())
         }
     }
     
