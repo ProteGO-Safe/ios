@@ -37,6 +37,8 @@ final class AppCoordinator: CoordinatorType {
     }
     
     func start() {
+        moveDafaultsToAppGroup()
+        
         #if !STAGE_SCREENCAST
         setupScreenRecording()
         #endif
@@ -56,6 +58,11 @@ final class AppCoordinator: CoordinatorType {
             guard UIDevice.current.model == "iPhone" else { return }
             dependencyContainer.backgroundTaskService.scheduleExposureTask()
         }
+    }
+    
+    private func moveDafaultsToAppGroup() {
+        StoredDefaults.standard.set(value: LanguageController.Constants.defaultLanguage, key: .defaultLanguage, useAppGroup: true)
+        StoredDefaults.standard.set(value: LanguageController.selected, key: .selectedLanguage, useAppGroup: true)
     }
     
     private func updateReminder() {
