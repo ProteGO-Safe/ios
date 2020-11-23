@@ -463,7 +463,11 @@ private extension JSBridge {
     func requestAppreview(jsonString: String?) {
         guard let model: AppReviewResponse = jsonString?.jsonDecode(decoder: jsonDecoder), model.appReview else  { return }
         
+        #if STAGE_SCREENCAST || STAGE
+        AppReviewMockAlertManager().show(type: .appReviewMock, result: {_ in })
+        #else
         SKStoreReviewController.requestReview()
+        #endif
     }
     
     func changeLanguage(jsonString: String?) {
