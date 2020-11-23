@@ -9,6 +9,7 @@
 import WebKit
 import PromiseKit
 import Network
+import StoreKit
 
 final class JSBridge: NSObject {
     
@@ -28,6 +29,7 @@ final class JSBridge: NSObject {
         case appVersion = 62
         case systemLanguage = 63
         case clearExposureRisk = 66
+        case requestAppReview = 68
         
         case allDistricts = 70
         case districtsAPIFetch = 71
@@ -202,6 +204,9 @@ extension JSBridge: WKScriptMessageHandler {
         case .clearData:
             StoredDefaults.standard.delete(key: .selectedLanguage)
             RealmLocalStorage.clearAll()
+            
+        case .requestAppReview:
+            requestAppreview(jsonString: jsonString)
             
         default:
             console("Not managed yet", type: .warning)
@@ -454,6 +459,12 @@ private extension JSBridge {
 
 // MARK: - onBridgeData handling
 private extension JSBridge {
+    
+    func requestAppreview(jsonString: String?) {
+        guard let model: AppReviewResponse = jsonString?.jsonDecode(decoder: jsonDecoder), model.appReview else  { return }
+        
+        SKStoreReviewController.requestReview()
+    }
     
     func changeLanguage(jsonString: String?) {
         guard let model: SystemLanguageResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else  { return }
