@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## 4.8.0
 - Added ability for manual delete exposure risk info
 
+## 4.7.1
+- Bump iOS version availability for some log methods
+- Clear exposure risk info on demand
 
 ## 4.7.0
 - Omit package analysis on very first app run
