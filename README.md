@@ -74,17 +74,24 @@ To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
 
+**4.8.0**
+
+- Added ability for manual delete exposure risk info
+
 **4.7.1**
+
 - Bump iOS version availability for some log methods
 - Clear exposure risk info on demand
 
 **4.7.0**
+
 - Omit package analysis on very first app run
 - Added ability for sign-in for covid-19 test
 - Added js contract for high risk and covid-19 test
 - Added simulate exposure risk to debug panel
 
 **4.6.0**
+
 - Added restricted districts feature
 - Added subscribing for notification for restricted districts
 - Small fixes for JS contract
@@ -94,6 +101,7 @@ To launch it, type `sh rebuild.sh` in your console.
 - Remove debug logging from iOS < 13.5
 
 **4.5.0**
+
 - Manage user diagnosis keys share rejection 
 - Prevents url requests caching
 - Added webkit local storage dump for debug panel in stage builds
@@ -102,6 +110,7 @@ To launch it, type `sh rebuild.sh` in your console.
 - Added PWA to .gitignore file according to download it on CI/CD
 
 **4.4.0**
+
 - Added translations for English and Ukrainian languages
 - Ability of change language in app runtime
 - Fix for multiple language managing
@@ -110,9 +119,11 @@ To launch it, type `sh rebuild.sh` in your console.
 - Remove redundant data logging
 
 **4.3.1**
+
 - Fix for incorrect date display for entries in Health Journal in PWA
 
 **4.3.0**
+
 - In code multilanguage support (no UI yet)
 - Added validation for diagnosis keys upload
 - Added debug panel for sharing uploaded payloads and logs

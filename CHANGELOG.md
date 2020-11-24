@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.8.0
+- Added ability for manual delete exposure risk info
+
 ## 4.7.1
 - Bump iOS version availability for some log methods
 - Clear exposure risk info on demand
@@ -51,37 +54,31 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Removed device check from uploaded payloads
 
 ## 4.2.4
-
 - Changed telephone number and email
 - Changed text copy on an onboarding view
 - Removed some tips
 - Added properties ENDeveloperRegion and ENAPIVersion to Info.plist for iOS 14
 
 ## 4.2.3
-
 - Passing app version to PWA
 - Updated certificates for pinning
 - Updated Privacy Policy URL in appstore
 
-## 4.2.2s
-
+## 4.2.2
 - Fix for disabling of screen recording
 - Replaced all fatalError and assertionFailure due to storing full user paths in binary file
 
 ## 4.2.1
-
 - Manage large Diagnosis Keys batches
 - Refactored keys upload process
 - Bug fixes
 
 ## 4.2.0
-
 - Removed online PWA
 - Added PWA as a part of app code (offline)
 - Bug fixes
 
 ## 4.1.1
-
 - Added Exposure Notification API
 - Added Background Download Task For Exposure Notification
 - Added Support For Exposure Notification Incompatible Devices
@@ -94,7 +91,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## 3.0.2
-
 - Manage project settings with yml config files - XcodeGen added
 - Debug console added for Stage and Dev configs
 - Moved anonymous signIn to Firebase on app start
@@ -107,10 +103,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## 3.0.1
-
 - Added OpenTrace module for collecting BLE contacts
 
 
 ## 2.0.1
-
 - Basic version with PWA, and notifications

@@ -8,4 +8,5 @@ import Foundation
 @available(iOS 13.5, *)
 struct TemporaryExposureKeysData: Encodable {
     let data: TemporaryExposureKeys
+    let isInteroperabilityEnabled: Bool
 }
