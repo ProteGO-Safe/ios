@@ -9,7 +9,7 @@ import ExposureNotification
 
 protocol DiagnosisKeysUploadServiceProtocol {
     
-    func upload(usingAuthCode authCode: String) -> Promise<Void>
+    func upload(usingResponse jsResponse: UploadTemporaryExposureKeysResponse) -> Promise<Void>
     
 }
 
@@ -21,7 +21,7 @@ enum UploadError: Error {
 
 @available(iOS 13.5, *)
 final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
-        
+    
     private enum Constants {
         static let dayIntervalSeconds: UInt32 = 86400
         static let keyExpirationDays: UInt32 = 14
@@ -54,7 +54,7 @@ final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
     
     // MARK: - Exposure Keys
     
-    func upload(usingAuthCode authCode: String) -> Promise<Void> {
+    func upload(usingResponse jsResponse: UploadTemporaryExposureKeysResponse) -> Promise<Void> {
         var diagnosisKeys: [ENTemporaryExposureKey] = []
         return getDiagnosisKeys()
             .then (validateKeysAtLeast)
@@ -62,21 +62,25 @@ final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
             .then(validateKeysPerDayMax)
             .then { keys -> Promise<String> in
                 diagnosisKeys = keys
-                return self.getToken(usingAuthCode: authCode)
-        }
-        .then { token -> Promise<Moya.Response> in
-            let data = TemporaryExposureKeys(
-                temporaryExposureKeys: diagnosisKeys.map({ TemporaryExposureKey($0) }),
-                verificationPayload: token            )
-            let keysData = TemporaryExposureKeysData(data: data)
-            
-            #if !LIVE
-            File.saveUploadedPayload(keysData)
-            #endif
-            
-            return self.renewableRequest.make(target: .post(keysData))
-        }
-        .asVoid()
+                return self.getToken(usingAuthCode: jsResponse.pin)
+            }
+            .then { token -> Promise<Moya.Response> in
+                let data = TemporaryExposureKeys(
+                    temporaryExposureKeys: diagnosisKeys.map({ TemporaryExposureKey($0) }),
+                    verificationPayload: token
+                )
+                let keysData = TemporaryExposureKeysData(
+                    data: data,
+                    isInteroperabilityEnabled: jsResponse.isInteroperabilityEnabled
+                )
+                
+                #if !LIVE
+                File.saveUploadedPayload(keysData)
+                #endif
+                
+                return self.renewableRequest.make(target: .post(keysData))
+            }
+            .asVoid()
     }
     
     private func getDiagnosisKeys(filtered: Bool = true) -> Promise<[ENTemporaryExposureKey]> {
@@ -88,14 +92,6 @@ final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
             return exposureManager
                 .getDiagnosisKeys()
         }
-    }
-    
-    private func getPayload(keys: [ENTemporaryExposureKey]) -> Promise<String> {
-        return self.deviceCheckService.generatePayload(
-            bundleID: TemporaryExposureKeys.Default.appPackageName,
-            exposureKeys: keys.map({ $0.keyData }),
-            regions: TemporaryExposureKeys.Default.regions
-        )
     }
     
     // MARK: - Auth
@@ -110,7 +106,7 @@ final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
                 } catch {
                     throw error
                 }
-        }
+            }
     }
     
     private func discardOldKeys(key: ENTemporaryExposureKey) -> Bool {
@@ -141,7 +137,7 @@ final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
     private func validateKeysPerDayMax(_ keys: [ENTemporaryExposureKey]) -> Promise<[ENTemporaryExposureKey]> {
         let rollingPeriods = keys.map { ($0.rollingStartNumber, 1) }
         let rollingPeriodsCount = Dictionary(rollingPeriods, uniquingKeysWith: +)
-  
+        
         if rollingPeriodsCount.filter ({ $1 > Validation.keysPerDayMax }).count > .zero {
             UploadValidationAlertManager().show(type: .keysPerDayMax) { _ in }
             return .init(error: InternalError.uploadValidation)

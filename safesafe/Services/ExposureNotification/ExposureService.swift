@@ -131,8 +131,13 @@ final class ExposureService: ExposureServiceProtocol {
                 makeExposureConfiguration(),
                 diagnosisKeysService.download()
             )}
-            .then { configuration, keys in
-                self.detectExposures(for: configuration, keys: keys)
+            .then { configuration, keys -> Promise<ENExposureDetectionSummary> in
+                if keys.isEmpty {
+                    throw InternalError.detectExposuresNoKeys
+                } else {
+                    return self.detectExposures(for: configuration, keys: keys)
+                }
+                
             }
             .done { summary in
                 self.getExposureInfo(from: summary)

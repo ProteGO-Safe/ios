@@ -16,7 +16,7 @@ enum LocalStorageUpdatePolicy {
     case modified
 }
 
-protocol LocalStorageProtocol {
+protocol LocalStorageProtocol: class {
     func append<T: LocalStorable>(_ object: T, policy: LocalStorageUpdatePolicy, completion: ((Result<Void, Error>) -> ())?)
     func append<T: LocalStorable>(_ objects: [T], policy: LocalStorageUpdatePolicy, completion: ((Result<Void, Error>) -> ())?)
     func fetch<T: LocalStorable>() -> Array<T>

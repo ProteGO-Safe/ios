@@ -12,46 +12,31 @@ protocol DiagnosisKeysDownloadServiceProtocol {
     
     func download() -> Promise<[URL]>
     func deleteFiles()
-    static func setupStartTimestampIfNeeded()
 }
 
 
 @available(iOS 13.5, *)
 final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
-    
-    private enum Constants {
-        #if LIVE || LIVE_DEBUG
-        static let initialTimestamp = 1591660800
-        #elseif STAGE || STAGE_SCREENCAST
-        static let initialTimestamp = 1591272000
-        #else
-        static let initialTimestamp = 0
-        #endif
-    }
 
     // MARK: - Properties
     
     private let remoteConfig: RemoteConfigProtocol
     private let fileManager: FileManager
     private let exposureKeysProvider: MoyaProvider<ExposureKeysTarget>
+    private let localStorage: RealmLocalStorage?
     
     // MARK: - Life Cycle
     
     init(
         with remoteConfig: RemoteConfigProtocol,
         fileManager: FileManager = FileManager.default,
-        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>
+        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>,
+        localStorage: RealmLocalStorage?
     ) {
         self.remoteConfig = remoteConfig
         self.fileManager = fileManager
         self.exposureKeysProvider = exposureKeysProvider
-    }
-    
-    static func setupStartTimestampIfNeeded() {
-        let downloadTimestamp = StoredDefaults.standard.get(key: .diagnosisKeysDownloadTimestamp) ?? 0
-        if downloadTimestamp == 0 {
-            StoredDefaults.standard.set(value: Constants.initialTimestamp, key: .diagnosisKeysDownloadTimestamp)
-        }
+        self.localStorage = localStorage
     }
     
     static func extractTimestamp(name: String) -> String? {
@@ -77,7 +62,7 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                 exposureKeysProvider.request(.download(fileName: name, destination: downloadDestination)) { result in
                     switch result {
                     case .success:
-                        guard let directoryName = Self.extractTimestamp(name: name) else {
+                        guard let _ = Self.extractTimestamp(name: name) else {
                             fileURLResults.append(.failure(InternalError.extractingDirectoryName))
                             return
                         }
@@ -154,7 +139,7 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
     }
     
     private func filter(keyFileNames: [Substring]) -> [String] {
-        let downloadTimestamp = StoredDefaults.standard.get(key: .diagnosisKeysDownloadTimestamp) ?? 0
+        let downloadTimestamp = lastTimestamp
         
         var names = keyFileNames
             .map { String($0.replacingOccurrences(of: "/", with: "")) }
@@ -207,9 +192,14 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                         return
                     }
                     
+                    let timestamps = self.translateNamesToTimestamps(names: filesList)
+                    if let lastCDNTimestamp = timestamps.last, self.lastTimestamp == .zero {
+                        self.update(lastTimestamp: lastCDNTimestamp)
+                    }
+                    
                     let itemNames = self.filter(keyFileNames: filesList)
                     
-                    self.downloadFiles(withNames: itemNames, keysDirectoryURL: keysDirectoryURL).done { urls in
+                    self.downloadFiles(withNames: itemNames, keysDirectoryURL: keysDirectoryURL).done { [weak self] urls in
                         let timestamps =  urls.map { $0.lastPathComponent }
                             .compactMap { $0.split(separator: "-").first }
                             .map { String($0) }
@@ -217,7 +207,7 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                             .sorted()
                         
                         if let lastTimestamp = timestamps.last {
-                            StoredDefaults.standard.set(value: lastTimestamp, key: .diagnosisKeysDownloadTimestamp)
+                            self?.update(lastTimestamp: lastTimestamp)
                         }
     
                         seal.fulfill(urls)
@@ -239,8 +229,39 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
             console(error)
         }
     }
+    
+    private func translateNamesToTimestamps(names: [String.SubSequence]) -> [Int] {
+        names.map { String($0).trimmingCharacters(in: .init(["/"])) }
+            .compactMap { $0.split(separator: "-").first }
+            .compactMap { Int($0) }.sorted()
+    }
 }
 
-extension StoredDefaults.Key {
-    static let diagnosisKeysDownloadTimestamp = StoredDefaults.Key("diagnosisKeysDownloadTimestamp")
+@available(iOS 13.5, *)
+private extension DiagnosisKeysDownloadService {
+    var infoModel: DiagnosisKeysDownloadInfoModel? {
+        if let model: DiagnosisKeysDownloadInfoModel = localStorage?.fetch(primaryKey: DiagnosisKeysDownloadInfoModel.identifier) {
+            return model
+        }
+        
+        let model = DiagnosisKeysDownloadInfoModel()
+        localStorage?.append(model, policy: .all)
+        
+        return model
+    }
+    
+    var lastTimestamp: Int {
+        infoModel?.lastPackageTimestamp ?? .zero
+    }
+    
+    func update(lastTimestamp: Int) {
+        guard let infoModel = infoModel else { return }
+        localStorage?.beginWrite()
+        
+        infoModel.lastPackageTimestamp = lastTimestamp
+        localStorage?.append(infoModel, policy: .all)
+        
+        try? localStorage?.commitWrite()
+    }
 }
+

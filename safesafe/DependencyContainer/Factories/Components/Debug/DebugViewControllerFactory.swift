@@ -13,7 +13,15 @@ protocol DebugViewControllerFactory {
 
 extension DependencyContainer: DebugViewControllerFactory {
     func makeDebugViewController() -> DebugViewController {
-        let viewModel = DebugViewModel(districtService: districtsService)
+        let viewModel = DebugViewModel(
+            districtService: districtsService,
+            localStorage: realmLocalStorage)
+        
+        viewModel.onSimulateExposureRiskChange { [weak self] in
+            if #available(iOS 13.5, *) {
+                self?.jsBridge.debugSendExposureList()
+            }
+        }
         return DebugViewController(viewModel: viewModel)
     }
 }

@@ -12,8 +12,14 @@ import ExposureNotification
 protocol ExposureNotificationJSProtocol: class {
     
     func enableService(enable: Bool) -> Promise<Void>
-    func getExposureSummary() -> Promise<ExposureSummary>
+    func getExposureSummary(shouldDownload: Bool) -> Promise<ExposureSummary>
+    func clearExposureRisk() -> Promise<ExposureSummary>
+}
 
+extension ExposureNotificationJSProtocol {
+    func getExposureSummary(shouldDownload: Bool = true) -> Promise<ExposureSummary> {
+       getExposureSummary(shouldDownload: shouldDownload)
+    }
 }
 
 @available(iOS 13.5, *)
@@ -66,17 +72,24 @@ final class ExposureNotificationJSBridge: ExposureNotificationJSProtocol {
         }
     }
     
-    func getExposureSummary() -> Promise<ExposureSummary> {
+    func getExposureSummary(shouldDownload: Bool = true) -> Promise<ExposureSummary> {
         guard UIDevice.current.model == "iPhone" else { return .init(error: PMKError.cancelled) }
         
-        return Promise { seal in
-            firstly {
-                when(fulfilled: [exposureService.detectExposures()])
-            }.done { _ in
-                seal.fulfill(self.exposureSummaryService.getExposureSummary())
-            }.catch {
-                seal.reject($0)
+        if shouldDownload {
+            return Promise { seal in
+                exposureService.detectExposures()
+                    .ensure {
+                        seal.fulfill(self.exposureSummaryService.getExposureSummary())
+                }
             }
+        } else {
+            return .value(exposureSummaryService.getExposureSummary())
+        }
+    }
+    
+    func clearExposureRisk() -> Promise<ExposureSummary> {
+        Promise { seal in
+            seal.fulfill(self.exposureSummaryService.clearExposureSummary())
         }
     }
     

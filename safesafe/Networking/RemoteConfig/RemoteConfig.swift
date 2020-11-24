@@ -18,8 +18,9 @@ final class RemoteConfiguration: RemoteConfigProtocol {
     private enum Key: String {
         case diagnosisKeyConfig = "diagnosisKeyDownloadConfiguration"
         case exposureConfiguration = "exposureConfiguration"
+        case updateSubscriptionConfiguration = "updateSubscriptionConfiguration"
     }
-        
+    
     private let decoder = JSONDecoder()
     private let settings: RemoteConfigSettings?
     
@@ -47,35 +48,36 @@ final class RemoteConfiguration: RemoteConfigProtocol {
             RemoteConfig.remoteConfig().configSettings = settings
         }
         return Promise { seal in
-                   RemoteConfig.remoteConfig().fetchAndActivate { [weak self] status, error in
-                       guard let self = self else {
-                           seal.reject(InternalError.deinitialized)
-                           return
-                       }
-                       
-                       if let error = error {
-                           seal.reject(error)
-                       } else {
-                           switch status {
-                           case .successFetchedFromRemote, .successUsingPreFetchedData:
-                               do {
-                                   let diagnosis: DiagnosisKeyDownloadConfiguration = try self.decodeConfiguartion(key: .diagnosisKeyConfig)
-                                   let exposure: ExposureConfiguration = try self.decodeConfiguartion(key: .exposureConfiguration)
-                                   seal.fulfill(RemoteConfigurationResponse(diagnosis: diagnosis, exposure: exposure))
-                               } catch {
-                                   seal.reject(error)
-                               }
-                           case .error:
-                               seal.reject(InternalError.remoteActivate)
-                           @unknown default:
-                               seal.reject(InternalError.remoteUnknownStatus)
-                           }
-                       }
-                   }
-               }
+            RemoteConfig.remoteConfig().fetchAndActivate { [weak self] status, error in
+                guard let self = self else {
+                    seal.reject(InternalError.deinitialized)
+                    return
+                }
+                
+                if let error = error {
+                    seal.reject(error)
+                } else {
+                    switch status {
+                    case .successFetchedFromRemote, .successUsingPreFetchedData:
+                        do {
+                            let diagnosis: DiagnosisKeyDownloadConfiguration = try self.decodeConfiguartion(key: .diagnosisKeyConfig)
+                            let exposure: ExposureConfiguration = try self.decodeConfiguartion(key: .exposureConfiguration)
+                            let subscription: SubscriptionConfiguration = try self.decodeConfiguartion(key: .updateSubscriptionConfiguration)
+                            seal.fulfill(RemoteConfigurationResponse(diagnosis: diagnosis, exposure: exposure, subscription: subscription))
+                        } catch {
+                            seal.reject(error)
+                        }
+                    case .error:
+                        seal.reject(InternalError.remoteActivate)
+                    @unknown default:
+                        seal.reject(InternalError.remoteUnknownStatus)
+                    }
+                }
+            }
+        }
     }
     
-  private func decodeConfiguartion<T: Decodable>(key: Key) throws -> T {
+    private func decodeConfiguartion<T: Decodable>(key: Key) throws -> T {
         guard let jsonValue = RemoteConfig.remoteConfig()[key.rawValue].jsonValue else {
             throw InternalError.remoteConfigNotExistingKey
         }

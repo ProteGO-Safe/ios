@@ -56,4 +56,10 @@ enum InternalError: Error {
     
     // Get diagnosis keys
     case shareKeysUserCanceled
+    
+    // Detect exposure
+    case detectExposuresNoKeys
+    
+    // Free test
+    case freeTestPinUploadFailed
 }

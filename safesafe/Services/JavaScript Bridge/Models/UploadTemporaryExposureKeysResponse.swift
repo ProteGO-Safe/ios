@@ -10,5 +10,5 @@ import Foundation
 struct UploadTemporaryExposureKeysResponse: Codable {
     
     let pin: String
-    
+    let isInteroperabilityEnabled: Bool
 }

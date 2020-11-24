@@ -19,5 +19,4 @@ struct TemporaryExposureKeys: Encodable {
     let platform = Default.platform
     let appPackageName = Default.appPackageName
     let verificationPayload: String
-    
 }

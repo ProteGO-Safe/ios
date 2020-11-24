@@ -7,10 +7,10 @@
 
 import Foundation
 
-protocol ExposureSummaryServiceProtocol {
+protocol ExposureSummaryServiceProtocol: class {
     
     func getExposureSummary() -> ExposureSummary
-    
+    func clearExposureSummary() -> ExposureSummary
 }
 
 final class ExposureSummaryService: ExposureSummaryServiceProtocol {
@@ -23,11 +23,16 @@ final class ExposureSummaryService: ExposureSummaryServiceProtocol {
     // MARK: - Properties
     
     private let storageService: LocalStorageProtocol?
+    private let freeTestService: FreeTestService
     
     // MARK: - Lice Cycle
     
-    init(storageService: LocalStorageProtocol?) {
+    init(
+        storageService: LocalStorageProtocol?,
+        freeTestService: FreeTestService) {
+        
         self.storageService = storageService
+        self.freeTestService = freeTestService
     }
     
     // MARK: - Public methods
@@ -39,10 +44,35 @@ final class ExposureSummaryService: ExposureSummaryServiceProtocol {
             .first?
             .risk
         else {
+            freeTestService.deleteGUID()
             return ExposureSummary(riskLevel: .none)
         }
         
-        return ExposureSummary(fromFullRangeScore: highestRisk)
+        let summary = ExposureSummary(fromFullRangeScore: highestRisk)
+        
+        if summary.riskLevel != .high {
+            freeTestService.deleteGUID()
+        }
+        
+        return summary
+    }
+    
+    func clearExposureSummary() -> ExposureSummary {
+        guard let allExposures: [Exposure] = storageService?.fetch() else {
+            return getExposureSummary()
+        }
+        
+        storageService?.beginWrite()
+        
+        storageService?.remove(allExposures, completion: nil)
+        
+        do {
+            try storageService?.commitWrite()
+            return getExposureSummary()
+        } catch {
+            console(error, type: .error)
+            return getExposureSummary()
+        }
     }
     
     // MARK: - Private methods

@@ -17,7 +17,8 @@ final class DependencyContainer {
     @available(iOS 13.5, *)
     lazy var diagnosisKeysDownloadService = DiagnosisKeysDownloadService(
         with: remoteConfiguration,
-        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
+        exposureKeysProvider: MoyaProvider<ExposureKeysTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()]),
+        localStorage: realmLocalStorage
     )
     
     @available(iOS 13.5, *)
@@ -37,11 +38,19 @@ final class DependencyContainer {
     
     @available(iOS 13.5, *)
     lazy var exposureSummaryService: ExposureSummaryServiceProtocol = ExposureSummaryService(
-        storageService: realmLocalStorage
+        storageService: realmLocalStorage,
+        freeTestService: freeTestService
     )
     
     lazy var districtsService: DistrictService = DistrictService(
         with:  MoyaProvider<DistrictsTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
+    )
+    
+    lazy var freeTestService: FreeTestService = FreeTestService(
+        with: realmLocalStorage,
+        deviceCheckService: deviceCheckService,
+        apiProvider: MoyaProvider<FreeTestTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()]),
+        configuration: remoteConfiguration
     )
     
     lazy var jailbreakService: JailbreakServiceProtocol = JailbreakService()
