@@ -76,15 +76,18 @@ To launch it, type `sh rebuild.sh` in your console.
 ## ChangeLog
 
 **4.8.0**
+
 - Added ability for manual delete exposure risk info
 
 **4.7.0**
+
 - Omit package analysis on very first app run
 - Added ability for sign-in for covid-19 test
 - Added js contract for high risk and covid-19 test
 - Added simulate exposure risk to debug panel
 
 **4.6.0**
+
 - Added restricted districts feature
 - Added subscribing for notification for restricted districts
 - Small fixes for JS contract
@@ -94,6 +97,7 @@ To launch it, type `sh rebuild.sh` in your console.
 - Remove debug logging from iOS < 13.5
 
 **4.5.0**
+
 - Manage user diagnosis keys share rejection 
 - Prevents url requests caching
 - Added webkit local storage dump for debug panel in stage builds
@@ -102,6 +106,7 @@ To launch it, type `sh rebuild.sh` in your console.
 - Added PWA to .gitignore file according to download it on CI/CD
 
 **4.4.0**
+
 - Added translations for English and Ukrainian languages
 - Ability of change language in app runtime
 - Fix for multiple language managing
@@ -110,40 +115,48 @@ To launch it, type `sh rebuild.sh` in your console.
 - Remove redundant data logging
 
 **4.3.1**
+
 - Fix for incorrect date display for entries in Health Journal in PWA
 
 **4.3.0**
+
 - In code multilanguage support (no UI yet)
 - Added validation for diagnosis keys upload
 - Added debug panel for sharing uploaded payloads and logs
 - Removed device check from uploaded payloads
 
 **4.2.4**
+
 - Changed telephone number and email
 - Changed text copy on an onboarding view
 - Removed some tips
 - Added properties ENDeveloperRegion and ENAPIVersion to Info.plist for iOS 14
 
 **4.2.3**
+
 - Passing app version to PWA
 - Updated certificates for pinning
 - Updated Privacy Policy URL in appstore
 
 **4.2.2**
+
 - Fix for disabling of screen recording
 - Replaced all fatalError and assertionFailure due to storing full user paths in binary file
 
 **4.2.1**
+
 - Manage large Diagnosis Keys batches
 - Refactored keys upload process
 - Bug fixes
 
 **4.2.0**
+
 - Removed online PWA
 - Added PWA as a part of app code (offline)
 - Bug fixes
 
 **4.1.1**
+
 - Added Exposure Notification API
 - Added Background Download Task For Exposure Notification
 - Added Support For Exposure Notification Incompatible Devices
@@ -156,6 +169,7 @@ To launch it, type `sh rebuild.sh` in your console.
 
 
 **3.0.2**
+
 - Manage project settings with yml config files - XcodeGen added
 - Debug console added for Stage and Dev configs
 - Moved anonymous signIn to Firebase on app start
@@ -168,8 +182,10 @@ To launch it, type `sh rebuild.sh` in your console.
 
 
 **3.0.1**
+
 - Added OpenTrace module for collecting BLE contacts
 
 
 **2.0.1**
+
 - Basic version with PWA, and notifications
