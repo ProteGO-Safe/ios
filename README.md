@@ -75,6 +75,9 @@ To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
 
+**4.8.0**
+- Added ability for manual delete exposure risk info
+
 **4.7.0**
 - Omit package analysis on very first app run
 - Added ability for sign-in for covid-19 test
@@ -116,37 +119,31 @@ To launch it, type `sh rebuild.sh` in your console.
 - Removed device check from uploaded payloads
 
 **4.2.4**
-
 - Changed telephone number and email
 - Changed text copy on an onboarding view
 - Removed some tips
 - Added properties ENDeveloperRegion and ENAPIVersion to Info.plist for iOS 14
 
 **4.2.3**
-
 - Passing app version to PWA
 - Updated certificates for pinning
 - Updated Privacy Policy URL in appstore
 
 **4.2.2**
-
 - Fix for disabling of screen recording
 - Replaced all fatalError and assertionFailure due to storing full user paths in binary file
 
 **4.2.1**
-
 - Manage large Diagnosis Keys batches
 - Refactored keys upload process
 - Bug fixes
 
 **4.2.0**
-
 - Removed online PWA
 - Added PWA as a part of app code (offline)
 - Bug fixes
 
 **4.1.1**
-
 - Added Exposure Notification API
 - Added Background Download Task For Exposure Notification
 - Added Support For Exposure Notification Incompatible Devices
@@ -159,7 +156,6 @@ To launch it, type `sh rebuild.sh` in your console.
 
 
 **3.0.2**
-
 - Manage project settings with yml config files - XcodeGen added
 - Debug console added for Stage and Dev configs
 - Moved anonymous signIn to Firebase on app start
@@ -172,10 +168,8 @@ To launch it, type `sh rebuild.sh` in your console.
 
 
 **3.0.1**
-
 - Added OpenTrace module for collecting BLE contacts
 
 
 **2.0.1**
-
 - Basic version with PWA, and notifications
