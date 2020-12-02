@@ -25,3 +25,9 @@ end
 target 'safesafe' do
   pods_definition
 end
+
+post_install do |installer|
+  installer.pods_project.build_configurations.each do |config|
+      config.build_settings['CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER'] = 'NO'
+    end
+end
