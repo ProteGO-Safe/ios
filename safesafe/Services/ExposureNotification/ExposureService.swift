@@ -162,9 +162,11 @@ final class ExposureService: ExposureServiceProtocol {
             console("🔑 Keys count: \(Int(keys.count/2))")
             exposureManager.detectExposures(configuration: configuration, diagnosisKeyURLs: keys) { [weak self] summary, error in
                 guard let summary = summary, error == nil else {
+                    console(error, type: .error)
                     seal.reject(error!)
                     return
                 }
+                console("📈 \(summary)", type: .regular)
                 seal.fulfill(summary)
                 self?.diagnosisKeysService.deleteFiles()
             }
