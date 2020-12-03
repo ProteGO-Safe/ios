@@ -321,6 +321,8 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
         completionHandler([.alert])
     }
     
+    // Here we are when user taped notification
+    //
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         guard response.notification.request.identifier != Constants.districtNotificationIdentifier else { return }
         
