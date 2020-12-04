@@ -14,16 +14,19 @@ class NotificationService: UNNotificationServiceExtension {
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
         let parser = NotificationUserInfoParser()
-        let localizedList = parser.parseLocalized(userInfo: request.content.userInfo)
         
         guard
             let selectedLanguageISO: String = StoredDefaults.standard.get(key: .selectedLanguage, useAppGroup: true),
-            let selectedModel = localizedList.first(where: { $0.laguageISO.lowercased() == selectedLanguageISO.lowercased() }),
+            let selectedModel = parser.selectedLanguageData(lang: selectedLanguageISO, userInfo: request.content.userInfo),
             let bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         else {
             return
         }
            
+        let routeRaw: String? = parser.routeData(userInfo: request.content.userInfo)
+        let dictionary = parser.parseNotification(title: selectedModel.title, content: selectedModel.content, route: routeRaw)
+        parser.addStoredNotification(data: dictionary)
+        
         bestAttemptContent.title = selectedModel.title
         bestAttemptContent.body = selectedModel.content
         

@@ -192,10 +192,10 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                         return
                     }
                     
-//                    let timestamps = self.translateNamesToTimestamps(names: filesList)
-//                    if let lastCDNTimestamp = timestamps.last, self.lastTimestamp == .zero {
-//                        self.update(lastTimestamp: lastCDNTimestamp)
-//                    }
+                    let timestamps = self.translateNamesToTimestamps(names: filesList)
+                    if let lastCDNTimestamp = timestamps.last, self.lastTimestamp == .zero {
+                        self.update(lastTimestamp: lastCDNTimestamp)
+                    }
                     
                     let itemNames = self.filter(keyFileNames: filesList)
                     
