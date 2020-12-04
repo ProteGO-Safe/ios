@@ -8,11 +8,15 @@
 
 import Foundation
 
-final class StoredDefaults {
+public final class StoredDefaults {
+    
+    private enum Constants {
+        static let appGroupIdentifier = "group.pl.gov.mc.protegosafe"
+    }
     
     static let standard = StoredDefaults()
     
-    struct Key {
+    public struct Key {
         let name: String
         
         init(_ name: String) {
@@ -20,16 +24,24 @@ final class StoredDefaults {
         }
     }
     
-    func set(value: Any, key: Key) {
-        UserDefaults.standard.set(value, forKey: key.name)
+    
+    func set(value: Any, key: Key, useAppGroup: Bool = false) {
+        defaults(useAppGroup).set(value, forKey: key.name)
     }
     
-    func get<T: Any>(key: Key) -> T? {
-        return UserDefaults.standard.value(forKey: key.name) as? T
+    func get<T: Any>(key: Key, useAppGroup: Bool = false) -> T? {
+        defaults(useAppGroup).value(forKey: key.name) as? T
     }
     
-    func delete(key: Key) {
-        UserDefaults.standard.removeObject(forKey: key.name)
+    func delete(key: Key, useAppGroup: Bool = false) {
+       defaults(useAppGroup).removeObject(forKey: key.name)
     }
     
+    private func defaults(_ useAppGroup: Bool = false) -> UserDefaults {
+        if useAppGroup, let appGroupDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) {
+           return appGroupDefaults
+        }
+        
+        return .standard
+    }
 }

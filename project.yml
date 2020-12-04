@@ -41,6 +41,18 @@ schemes:
       config: Live
 
 targets:
+  PushMutableContent:
+    TARGETED_DEVICE_FAMILY: 1,2
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "12.1"
+    configFiles:
+      StageDebug: safesafe/Resources/Extensions/apns-mutablecontent.xcconfig
+    sources:
+      - path: PushMutableContent
+        name: "PushMutableContent"
+      - path: safesafe/Services/StoredDefaults.swift
+      - path: safesafe/Language/LanguageController.swift
   safesafe:
     type: application
     platform: iOS
@@ -76,6 +88,10 @@ targets:
         type: folder
       - path: safesafe/Resources/translations
         type: folder
+    dependencies:
+      - target: PushMutableContent
+        codesign: true
+        embed: true
     preBuildScripts:
       - name: CopyGooglePlist
         path: Scripts/CopyGooglePlist.sh
