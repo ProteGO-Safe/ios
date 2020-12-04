@@ -55,8 +55,13 @@ targets:
       - path: PushMutableContent
         name: "PushMutableContent"
       - path: safesafe/Common/Helpers/Notifications
+        group: safesafe/Common/Helpers
       - path: safesafe/Services/StoredDefaults.swift
+        group: safesafe/Services
       - path: safesafe/Language/LanguageController.swift
+        group: safesafe/Language
+      - path: safesafe/Resources/Extensions
+        group: safesafe/Resources
   safesafe:
     type: application
     platform: iOS

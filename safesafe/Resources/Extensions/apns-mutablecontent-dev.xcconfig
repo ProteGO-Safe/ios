@@ -3,3 +3,4 @@ PRODUCT_BUNDLE_IDENTIFIER = pl.gov.mc.protegosafe.apns-mutablecontent
 DEVELOPMENT_TEAM = 85GAG994R5
 CODE_SIGN_ENTITLEMENTS = PushMutableContent/PushMutableContent-dev.entitlements
 PROVISIONING_PROFILE_SPECIFIER = protegosafe-live-dev-apns-mutablecontent
+CODE_SIGN_IDENTITY = Apple Development: Lukasz Szyszkowski (TN56RQ2WFW)
