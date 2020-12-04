@@ -47,10 +47,14 @@ targets:
     platform: iOS
     deploymentTarget: "12.1"
     configFiles:
-      StageDebug: safesafe/Resources/Extensions/apns-mutablecontent.xcconfig
+      Stage: safesafe/Resources/Extensions/apns-stage-mutablecontent.xcconfig
+      StageDebug: safesafe/Resources/Extensions/apns-stage-mutablecontent-dev.xcconfig
+      Live: safesafe/Resources/Extensions/apns-mutablecontent.xcconfig
+      LiveDebug: safesafe/Resources/Extensions/apns-mutablecontent-dev.xcconfig
     sources:
       - path: PushMutableContent
         name: "PushMutableContent"
+      - path: safesafe/Common/Helpers/Notifications
       - path: safesafe/Services/StoredDefaults.swift
       - path: safesafe/Language/LanguageController.swift
   safesafe:
