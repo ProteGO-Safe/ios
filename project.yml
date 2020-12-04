@@ -10,10 +10,6 @@ configs:
   Live: release
   LiveAdhoc: release #That's a build with Live PWA URL but with debug console
 
-settings:
-  CODE_SIGN_STYLE: Manual
-  MARKETING_VERSION: "4.9.0"
-  CURRENT_PROJECT_VERSION: 745
 schemes:
   safesafe Dev:
     build:
@@ -42,7 +38,11 @@ schemes:
 
 targets:
   PushMutableContent:
-    TARGETED_DEVICE_FAMILY: 1,2
+    settings:
+      CODE_SIGN_STYLE: Manual
+      MARKETING_VERSION: "4.9.0"
+      CURRENT_PROJECT_VERSION: 745
+      TARGETED_DEVICE_FAMILY: 1,2
     type: app-extension
     platform: iOS
     deploymentTarget: "12.1"
@@ -67,6 +67,9 @@ targets:
     platform: iOS
     deploymentTarget: "12.1"
     settings:
+        CODE_SIGN_STYLE: Manual
+        MARKETING_VERSION: "4.9.0"
+        CURRENT_PROJECT_VERSION: 745
         TARGETED_DEVICE_FAMILY: 1
         SWIFT_OBJC_BRIDGING_HEADER: $(PROJECT_DIR)/safesafe/App/safesafe-Bridging-Header.h
     configFiles:
