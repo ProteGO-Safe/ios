@@ -20,6 +20,7 @@ final class AppCoordinator: CoordinatorType {
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIScreen.capturedDidChangeNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     required init() {
@@ -34,6 +35,7 @@ final class AppCoordinator: CoordinatorType {
         }
         
         self.window = window
+        setupAppLifecycleNotifications()
     }
     
     func start() {
@@ -42,6 +44,7 @@ final class AppCoordinator: CoordinatorType {
         #if !STAGE_SCREENCAST
         setupScreenRecording()
         #endif
+    
         clearData.clear()
         
         let rootViewController = makeRootViewController()
@@ -58,6 +61,15 @@ final class AppCoordinator: CoordinatorType {
             guard UIDevice.current.model == "iPhone" else { return }
             dependencyContainer.backgroundTaskService.scheduleExposureTask()
         }
+    }
+    
+    private func setupAppLifecycleNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applicationWillEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
     }
     
     private func moveDafaultsToAppGroup() {
@@ -126,8 +138,26 @@ final class AppCoordinator: CoordinatorType {
         dependencyContainer.jsBridge.register(freeTestService: dependencyContainer.freeTestService)
     }
     
-    @objc
-    private func screenCaptureDidChange(notification: Notification) {
+    @objc private func applicationWillEnterForeground(notification: Notification) {
+        
+        let all = dependencyContainer.notificationHistoryWorker.fetchAllNotifications()
+        console(all)
+        
+        let storedData = dependencyContainer.notificationPayloadParser.getStoredNotifications()
+        dependencyContainer.notificationHistoryWorker.parseSharedContainerNotifications(
+            data: storedData,
+            keys: NotificationUserInfoParser.Key.self
+        )
+        .done { success in
+            console("Did finish parsing shared notifications, success: \(success)")
+            if success {
+                self.dependencyContainer.notificationPayloadParser.clearStoredNotifications()
+            }
+        }
+        .catch { console($0, type: .error) }
+    }
+    
+    @objc private func screenCaptureDidChange(notification: Notification) {
         let isMirrored = UIScreen.screens.first(where: { $0.mirrored == UIScreen.main }).map ({ _ in true }) ?? false
         guard !isMirrored else  { return }
         
