@@ -310,10 +310,28 @@ extension NotificationManager: NotificationManagerProtocol {
         
     }
     
+    private func parseSharedNotifications() {
+        let notificationPayloadParser = NotificationUserInfoParser()
+        let storedData = notificationPayloadParser.getStoredNotifications()
+        let notificationHistoryWorker = NotificationHistoryWorker(storage: RealmLocalStorage())
+        notificationHistoryWorker.parseSharedContainerNotifications(
+            data: storedData,
+            keys: NotificationUserInfoParser.Key.self
+        )
+        .done { success in
+            console("Did finish parsing shared notifications, success: \(success)")
+            if success {
+                notificationPayloadParser.clearStoredNotifications()
+            }
+        }
+        .catch { console($0, type: .error) }
+    }
+    
 }
 
 extension NotificationManager: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        parseSharedNotifications()
         guard notification.request.identifier != Constants.districtNotificationIdentifier else { return }
         
         userInfo = notification.request.content.userInfo

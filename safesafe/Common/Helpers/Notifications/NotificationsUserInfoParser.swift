@@ -9,7 +9,7 @@ import Foundation
 
 final class NotificationUserInfoParser {
     
-    private enum Key: String {
+    enum Key: String {
         case route
         case localizedNotifications
         case title
