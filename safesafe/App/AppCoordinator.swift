@@ -139,10 +139,6 @@ final class AppCoordinator: CoordinatorType {
     }
     
     @objc private func applicationWillEnterForeground(notification: Notification) {
-        
-        let all = dependencyContainer.notificationHistoryWorker.fetchAllNotifications()
-        console(all)
-        
         let storedData = dependencyContainer.notificationPayloadParser.getStoredNotifications()
         dependencyContainer.notificationHistoryWorker.parseSharedContainerNotifications(
             data: storedData,
