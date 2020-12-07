@@ -37,8 +37,9 @@ final class PWAViewModel: ViewModelType {
     
     private let jsBridge: JSBridge
     private let migrationManager: MigrationProtocol
+    private var isDebugViewVisible = false
     weak var delegate: PWAViewModelDelegate?
-    var debugTapClosure: (() -> Void)?
+    var debugShowClosure: (() -> Void)?
     
     // MARK: - Life Cycle
     
@@ -63,7 +64,6 @@ final class PWAViewModel: ViewModelType {
         return true
     }
     
-    
     /// Open url in external browser (safari) if url host is not from PWA domain
     /// defined in Config.plist
     /// - Parameter url: WebKit navigation URL
@@ -75,6 +75,10 @@ final class PWAViewModel: ViewModelType {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
         
         return true
+    }
+    
+    func didCloseDebugView() {
+        isDebugViewVisible = false
     }
      
 }
@@ -107,12 +111,14 @@ extension StoredDefaults.Key {
 // Debug
 extension PWAViewModel {
     
-    func debugTapped(_ closure: @escaping (() -> Void)) {
-        debugTapClosure = closure
+    func registerDebug(_ closure: @escaping (() -> Void)) {
+        debugShowClosure = closure
     }
-    
-    @objc
-    func debugButtonTapped(sender: UIButton) {
-        debugTapClosure?()
+
+    func showDebug() {
+        guard !isDebugViewVisible else { return }
+        
+        isDebugViewVisible = true
+        debugShowClosure?()
     }
 }

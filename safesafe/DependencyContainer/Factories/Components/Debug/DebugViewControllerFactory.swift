@@ -8,11 +8,11 @@
 import Foundation
 
 protocol DebugViewControllerFactory {
-    func makeDebugViewController() -> DebugViewController
+    func makeDebugViewController(closeCallback: @escaping () -> Void) -> DebugViewController
 }
 
 extension DependencyContainer: DebugViewControllerFactory {
-    func makeDebugViewController() -> DebugViewController {
+    func makeDebugViewController(closeCallback: @escaping () -> Void) -> DebugViewController {
         let viewModel = DebugViewModel(
             districtService: districtsService,
             localStorage: realmLocalStorage)
@@ -22,6 +22,10 @@ extension DependencyContainer: DebugViewControllerFactory {
                 self?.jsBridge.debugSendExposureList()
             }
         }
-        return DebugViewController(viewModel: viewModel)
+        
+        let viewController = DebugViewController(viewModel: viewModel)
+        viewController.closeCallback = closeCallback
+        
+        return viewController
     }
 }
