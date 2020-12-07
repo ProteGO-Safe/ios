@@ -134,6 +134,8 @@ final class AppCoordinator: CoordinatorType {
             )
         }
         
+        DeepLinkingWorker.shared.delegate = dependencyContainer.jsBridge
+        
         dependencyContainer.jsBridge.register(districtService: dependencyContainer.districtsService)
         dependencyContainer.jsBridge.register(freeTestService: dependencyContainer.freeTestService)
         dependencyContainer.jsBridge.register(historicalDataWorker: dependencyContainer.historicalDataWorker)

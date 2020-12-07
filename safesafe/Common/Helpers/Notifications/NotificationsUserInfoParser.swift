@@ -16,6 +16,7 @@ final class NotificationUserInfoParser {
         case content
         case languageISO
         case id
+        case uuid
         case timestamp
     }
     
@@ -50,15 +51,23 @@ final class NotificationUserInfoParser {
         parseLocalized(userInfo: userInfo).first(where: { $0.laguageISO.lowercased() == lang.lowercased() })
     }
     
-    func routeData(userInfo: [AnyHashable: Any]?) -> RouteModel? {
+    func routeData(userInfo: [AnyHashable: Any]?, appendInfo: [String: RouteModel.Value] = [:]) -> RouteModel? {
         let decoder = JSONDecoder()
         guard
             let routeRaw: String = routeData(userInfo: userInfo),
             let data = routeRaw.data(using: .utf8),
-            let model = try? decoder.decode(RouteModel.self, from: data)
+            var model = try? decoder.decode(RouteModel.self, from: data)
         else {
             return nil
         }
+        
+        var params = model.params
+        
+        for info in appendInfo {
+            params[info.key] = info.value
+        }
+        
+        model.params = params
         
         return model
     }
