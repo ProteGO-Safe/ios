@@ -8,6 +8,13 @@
 import Foundation
 import ZIPFoundation
 
+enum AnalyzeDay: String, Hashable {
+    case tenDaysAgo
+    case twoDaysAgo
+    case yesterday
+    case today
+}
+
 enum DebugAction {
     case none
     case uploadedPayloadsShare
@@ -17,6 +24,8 @@ enum DebugAction {
     case downloadDistricts
     case simulateExposureRisk
     case deleteSimulatedExposures
+    case simulateRiskCheck
+    case deleteSimulatedRiskCheck
 }
 
 protocol DebugViewModelDelegate: class {
@@ -25,6 +34,7 @@ protocol DebugViewModelDelegate: class {
     func showTextPreview(text: String)
     func showLocalStorageFiles(list: [String])
     func showSimulatedRisksSheet(list: [RiskLevel: String])
+    func showAnalyzeDaysSheet(list: [AnalyzeDay: String])
 }
 
 final class DebugViewModel: ViewModelType {
@@ -45,6 +55,8 @@ final class DebugViewModel: ViewModelType {
         static let downloadDistrictsTitle = "Download districts"
         static let simulateExposureRiskTitle = "Simulate exposure risk"
         static let deleteSimulatedExposuresTitle = "Delete simulated exposures"
+        static let simulateRiskCheckTitle = "Simulate risk check"
+        static let deleteSimulatedRiskCheck = "Delete simulated risk check"
     }
     
     var numberOfPayloads: Int {
@@ -95,12 +107,46 @@ final class DebugViewModel: ViewModelType {
             delegate?.showSimulatedRisksSheet(list: [.low: "Low risk", .medium: "Medium risk", .high: "High risk"])
         case .deleteSimulatedExposures:
             deleteSimulatedExposures()
+        case .simulateRiskCheck:
+            delegate?.showAnalyzeDaysSheet(list: [.tenDaysAgo: "10 days ago", .twoDaysAgo: "2 days ago", .yesterday: "yesterday", .today: "now"])
+        case .deleteSimulatedRiskCheck:
+            deleteSimulatedRiskCheck()
         default: ()
         }
     }
     
     func openLocalStorage(with name: String) {
         delegate?.showTextPreview(text: sqliteManager.read(fileName: name))
+    }
+    
+    func simulateRiskCheck(day: AnalyzeDay) {
+        guard let date = date(for: day) else { return }
+        
+        let matchedKeyCountRandom = (0...10).randomElement() ?? .zero
+        let keysCountRandom = (10...10_000).randomElement() ?? 10
+        
+        localStorage?.beginWrite()
+        
+        let riskModel = ExposureHistoryAnalyzeCheck(matchedKeyCount: matchedKeyCountRandom, keysCount: keysCountRandom)
+        riskModel.date = date
+        riskModel.id = "debug_\(UUID().uuidString)"
+        
+        localStorage?.append(riskModel)
+       
+        try? localStorage?.commitWrite()
+    }
+    
+    func deleteSimulatedRiskCheck() {
+        guard let riskChecks: [ExposureHistoryAnalyzeCheck] = localStorage?.fetch() else { return }
+        let debugRiskChecks = riskChecks.filter { $0.id.hasPrefix("debug_") }
+        
+        localStorage?.beginWrite()
+        
+        for riskCheck in debugRiskChecks {
+            localStorage?.remove(riskCheck, completion: nil)
+        }
+        
+        try? localStorage?.commitWrite()
     }
     
     func simulateExposureRisk(riskLevel: RiskLevel) {
@@ -124,6 +170,12 @@ final class DebugViewModel: ViewModelType {
         exposure.risk = risk
         
         localStorage?.append(exposure)
+        
+        let matchedKeyCountRandom = (0...10).randomElement() ?? .zero
+        let exposureHistoryModel = ExposureHistoryRiskCheck(matchedKeyCount: matchedKeyCountRandom, riskLevelFull: risk)
+        exposureHistoryModel.date = date
+        exposureHistoryModel.id = "debug_\(UUID().uuidString)"
+        localStorage?.append(exposureHistoryModel)
         
         try? localStorage?.commitWrite()
         
@@ -159,5 +211,19 @@ final class DebugViewModel: ViewModelType {
         } catch { console(error, type: .error) }
         
         return []
+    }
+    
+    private func date(for analyzeDay: AnalyzeDay) -> Date? {
+        switch analyzeDay {
+        
+        case .tenDaysAgo:
+            return Calendar.current.date(byAdding: .day, value: -10, to: Date())
+        case .twoDaysAgo:
+            return Calendar.current.date(byAdding: .day, value: -2, to: Date())
+        case .yesterday:
+            return Calendar.current.date(byAdding: .day, value: -1, to: Date())
+        case .today:
+            return Date()
+        }
     }
 }
