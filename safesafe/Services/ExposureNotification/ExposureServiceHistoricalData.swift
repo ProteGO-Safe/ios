@@ -11,7 +11,7 @@ import PromiseKit
 protocol ExposureServiceHistoricalDataProtocol {
     func getHistoricalRiskCheck() -> Promise<[ExposureHistoryRiskCheck]>
     func getHistoricalAnalyzeCheck() -> Promise<[ExposureHistoryAnalyzeCheck]>
-    func clearHistoricalData() -> Promise<Void>
+    func clearHistoricalData(riskIds: [String], analyzeIds: [String]) -> Promise<Void>
 }
 
 
@@ -37,10 +37,10 @@ final class ExposureServiceHistoricalData: ExposureServiceHistoricalDataProtocol
         }
     }
     
-    func clearHistoricalData() -> Promise<Void> {
+    func clearHistoricalData(riskIds: [String], analyzeIds: [String]) -> Promise<Void> {
         Promise { seal in
-            let analyzeChecks: [ExposureHistoryAnalyzeCheck] = (storageService?.fetch() ?? [])
-            let riskChecks: [ExposureHistoryRiskCheck] = (storageService?.fetch() ?? [])
+            let analyzeChecks: [ExposureHistoryAnalyzeCheck] = (storageService?.fetch() ?? []).filter { analyzeIds.contains($0.id) }
+            let riskChecks: [ExposureHistoryRiskCheck] = (storageService?.fetch() ?? []).filter { riskIds.contains($0.id) }
             
             storageService?.remove(analyzeChecks, completion: nil)
             storageService?.remove(riskChecks, completion: nil)

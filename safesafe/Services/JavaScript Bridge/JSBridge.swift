@@ -39,6 +39,9 @@ final class JSBridge: NSObject {
         case freeTestPinUpload = 80
         case freeTestSubscriptionInfo = 81
         case freeTestPinCodeFetch = 82
+        
+        case historicalData = 90
+        case historicalDataRemove = 91
     }
     
     enum SendMethod: String, CaseIterable {
@@ -65,6 +68,7 @@ final class JSBridge: NSObject {
     private let serviceStatusManager: ServiceStatusManagerProtocol
     private var exposureNotificationBridge: ExposureNotificationJSProtocol?
     private var diagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol?
+    private var historicalDataWorker: HistoricalDataWorkerType?
     
     private var districtService: DistrictService?
     private var freeTestService: FreeTestService?
@@ -115,6 +119,10 @@ final class JSBridge: NSObject {
     func register(freeTestService: FreeTestService) {
         self.freeTestService = freeTestService
         registerFreeTestObservers()
+    }
+    
+    func register(historicalDataWorker: HistoricalDataWorkerType) {
+        self.historicalDataWorker = historicalDataWorker
     }
     
     func bridgeDataResponse(type: BridgeDataType, body: String?, requestId: String, completion: ((Any?, Error?) -> ())? = nil) {
@@ -208,6 +216,9 @@ extension JSBridge: WKScriptMessageHandler {
         case .requestAppReview:
             requestAppreview(jsonString: jsonString)
             
+        case .historicalDataRemove:
+            removeHistoricalData(jsonString: jsonString)
+            
         default:
             console("Not managed yet", type: .warning)
         }
@@ -263,6 +274,9 @@ extension JSBridge: WKScriptMessageHandler {
             
         case .clearExposureRisk:
             clearExposureRisk(requestID: requestId, dataType: bridgeDataType)
+            
+        case .historicalData:
+            historicalData(requestID: requestId, dataType: bridgeDataType)
             
         default:
             return
@@ -455,10 +469,31 @@ private extension JSBridge {
             console($0, type: .error)
         }
     }
+    
+    func historicalData(requestID: String, dataType: BridgeDataType) {
+        historicalDataWorker?.getData()
+            .done { [weak self] data in
+                guard let jsonString = self?.encodeToJSON(data) else { return }
+                
+                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+            }
+            .catch { console($0, type: .error) }
+    }
 }
 
 // MARK: - onBridgeData handling
 private extension JSBridge {
+    
+    func removeHistoricalData(jsonString: String?) {
+        guard let request: DeleteHistoricalDataRequest = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
+        
+        historicalDataWorker?.clearData(request: request)
+            .done { _ in
+                console("Historical data removed")
+            }
+            .catch { console($0, type: .error) }
+    
+    }
     
     func requestAppreview(jsonString: String?) {
         guard let model: AppReviewResponse = jsonString?.jsonDecode(decoder: jsonDecoder), model.appReview else  { return }
