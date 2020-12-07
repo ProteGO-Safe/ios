@@ -104,6 +104,7 @@ PODS:
     - Realm (= 5.0.3)
   - Siren (5.4.5)
   - SnapKit (5.0.1)
+  - SwiftProtobuf (1.14.0)
   - TrustKit (1.6.5)
   - ZIPFoundation (0.9.11)
 
@@ -115,10 +116,11 @@ DEPENDENCIES:
   - Firebase/RemoteConfig
   - KeychainAccess (~> 4.2.0)
   - Moya (~> 14.0)
-  - PromiseKit (~> 6.8)
+  - PromiseKit (~> 6.13)
   - RealmSwift (~> 5.0.0)
   - Siren (~> 5.4.0)
   - SnapKit (= 5.0.1)
+  - SwiftProtobuf (~> 1.0)
   - TrustKit (~> 1.6.5)
   - ZIPFoundation (~> 0.9)
 
@@ -148,6 +150,7 @@ SPEC REPOS:
     - RealmSwift
     - Siren
     - SnapKit
+    - SwiftProtobuf
     - TrustKit
     - ZIPFoundation
 
@@ -176,9 +179,10 @@ SPEC CHECKSUMS:
   RealmSwift: 493c9f089cd3893b3959007973c0e4f640906ba0
   Siren: 4c6f4863ea5b7f2d0e58b576663fefd8f6ef417f
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftProtobuf: ed465ed18402f998fd117f631da27e0168e6b59c
   TrustKit: 073855e3adecd317417bda4ac9e9ac54a2e3b9f2
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: d1c80a4045d79b8d80cabecad10195eab4b83e49
+PODFILE CHECKSUM: 779fe596c92aaa178911e4fb4980414eb2b9ab2e
 
 COCOAPODS: 1.9.1

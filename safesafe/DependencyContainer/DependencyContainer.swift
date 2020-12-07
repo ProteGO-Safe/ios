@@ -53,11 +53,18 @@ final class DependencyContainer {
         configuration: remoteConfiguration
     )
     
+    lazy var historicalDataWorker: HistoricalDataWorkerType = HistoricalDataWorker(
+        notificationsHistoryWorker: notificationHistoryWorker,
+        exposureHistoricalDataService: exposureHistoricalService
+    )
+    
     lazy var notificationPayloadParser = NotificationUserInfoParser()
     lazy var notificationHistoryWorker: NotificationHistoryWorkerType = NotificationHistoryWorker(storage: realmLocalStorage)
+    lazy var exposureHistoricalService: ExposureServiceHistoricalDataProtocol = ExposureServiceHistoricalData(storageService: realmLocalStorage)
     lazy var jailbreakService: JailbreakServiceProtocol = JailbreakService()
     lazy var jsBridge = JSBridge(with: serviceStatusManager)
     lazy var realmLocalStorage = RealmLocalStorage()
+    
     lazy var remoteConfigSetting: RemoteConfigSettings = {
         let settings = RemoteConfigSettings()
         settings.fetchTimeout = 10

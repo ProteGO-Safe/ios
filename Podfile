@@ -10,13 +10,14 @@ def pods_definition
   pod 'Firebase/Messaging'
   pod 'Firebase/Auth'
   pod 'Firebase/RemoteConfig'
-  pod 'PromiseKit', '~> 6.8'
+  pod 'PromiseKit', '~> 6.13'
   pod 'Moya', '~> 14.0'
   pod 'ZIPFoundation', '~> 0.9'
   pod 'KeychainAccess', '~> 4.2.0'
   pod 'TrustKit', '~> 1.6.5'
   pod 'Siren', '~> 5.4.0'
   pod 'RealmSwift', '~> 5.0.0'
+  pod 'SwiftProtobuf', '~> 1.0'
   
   pod 'DBDebugToolkit', :configurations => ['Dev', 'DevDist', 'Stage', 'StageDebug', 'StageScreencast', 'LiveDebug', 'LiveAdhoc']
 
