@@ -16,7 +16,7 @@ struct HistoricalData: Encodable {
 
 protocol HistoricalDataWorkerType {
     func getData() -> Promise<HistoricalData>
-    func clearData() -> Promise<Void>
+    func clearData(request: DeleteHistoricalDataRequest) -> Promise<Void>
 }
 
 
@@ -54,11 +54,11 @@ final class HistoricalDataWorker: HistoricalDataWorkerType {
         
     }
     
-    func clearData() -> Promise<Void> {
+    func clearData(request: DeleteHistoricalDataRequest) -> Promise<Void> {
         notificationsHistoryWorker
-            .clearHistory()
+            .clearHistory(with: request.notifications )
             .then {
-                self.exposureHistoricalDataService.clearHistoricalData()
+                self.exposureHistoricalDataService.clearHistoricalData(riskIds: request.exposures, analyzeIds: request.riskChecks)
             }
     }
 }
