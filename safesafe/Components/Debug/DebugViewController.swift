@@ -87,6 +87,8 @@ final class DebugViewController: ViewController<DebugViewModel> {
         if #available(iOS 13.5, *) {
             stackButton(DebugViewModel.Texts.simulateExposureRiskTitle, action: .simulateExposureRisk)
             stackButton(DebugViewModel.Texts.deleteSimulatedExposuresTitle, action: .deleteSimulatedExposures)
+            stackButton(DebugViewModel.Texts.simulateRiskCheckTitle, action: .simulateRiskCheck)
+            stackButton(DebugViewModel.Texts.deleteSimulatedRiskCheck, action: .deleteSimulatedRiskCheck)
         }
     }
     
@@ -182,11 +184,27 @@ extension DebugViewController: DebugViewModelDelegate {
     }
     
     func showSimulatedRisksSheet(list: [RiskLevel : String]) {
-        let alertController = UIAlertController(title: "Simulate risk", message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "Simulate Exposure Risk", message: nil, preferredStyle: .actionSheet)
         
         for (risk, title) in list {
             let action = UIAlertAction(title: title , style: .default) { [weak self] _ in
                 self?.viewModel.simulateExposureRisk(riskLevel: risk)
+            }
+            alertController.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
+    }
+    
+    func showAnalyzeDaysSheet(list: [AnalyzeDay : String]) {
+        let alertController = UIAlertController(title: "Simulate Risk Check", message: nil, preferredStyle: .actionSheet)
+        
+        for (day, title) in list {
+            let action = UIAlertAction(title: title , style: .default) { [weak self] _ in
+                self?.viewModel.simulateRiskCheck(day: day)
             }
             alertController.addAction(action)
         }
