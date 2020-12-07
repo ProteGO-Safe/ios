@@ -37,6 +37,7 @@ final class NotificationManager: NSObject {
     
     static let shared = NotificationManager()
     
+    private let notificationsWorker = NotificationHistoryWorker(storage: RealmLocalStorage())
     private let dispatchGroupQueue = DispatchQueue(label: "disptach.protegosafe.group")
     private let dipspatchQueue = DispatchQueue(label: "dispatch.protegosafe.main")
     private let group = DispatchGroup()
@@ -232,6 +233,10 @@ extension NotificationManager: NotificationManagerProtocol {
             content.title = title
         }
         content.body = body
+        
+        notificationsWorker.appendLocalNotification(title: content.title, content: content.body)
+            .done{ success in console("Add local notification to historical data with success: \(success)")}
+            .catch { console($0, type: .error) }
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: delay, repeats: false)
         let request = UNNotificationRequest(identifier: Constants.districtNotificationIdentifier, content: content, trigger: trigger)
