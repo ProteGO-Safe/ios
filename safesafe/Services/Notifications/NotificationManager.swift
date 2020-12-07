@@ -233,8 +233,12 @@ extension NotificationManager: NotificationManagerProtocol {
             content.title = title
         }
         content.body = body
+    
+        let messageID = UUID().uuidString
+        let userInfo: [String: Any] = [NotificationUserInfoParser.Key.uuid.rawValue: messageID]
+        content.userInfo = userInfo
         
-        notificationsWorker.appendLocalNotification(title: content.title, content: content.body)
+        notificationsWorker.appendLocalNotification(title: content.title, content: content.body, messageID: messageID)
             .done{ success in console("Add local notification to historical data with success: \(success)")}
             .catch { console($0, type: .error) }
         
@@ -242,6 +246,7 @@ extension NotificationManager: NotificationManagerProtocol {
         let request = UNNotificationRequest(identifier: Constants.districtNotificationIdentifier, content: content, trigger: trigger)
         
         console("🚀 schedule notification with delay: \(delay)")
+        
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
                 console("😡 Local notification error \(error)", type: .error)
@@ -334,12 +339,12 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
         
         
         let userInfo = response.notification.request.content.userInfo
+        guard let messageUUID = userInfo[NotificationUserInfoParser.Key.uuid.rawValue] as? String else { return }
         
         if response.notification.request.identifier == Constants.districtNotificationIdentifier {
-            DeepLinkingWorker.shared.navigate(to: .currentRestrictions, messageId: nil)
+            DeepLinkingWorker.shared.navigate(to: .currentRestrictions, messageId: messageUUID)
         } else {
             let parser = NotificationUserInfoParser()
-            guard let messageUUID = userInfo[NotificationUserInfoParser.Key.uuid.rawValue] as? String else { return }
             
             let info: [String: RouteModel.Value] = [NotificationUserInfoParser.Key.uuid.rawValue: .string(messageUUID)]
             if let routeModel: RouteModel = parser.routeData(userInfo: userInfo, appendInfo: info),

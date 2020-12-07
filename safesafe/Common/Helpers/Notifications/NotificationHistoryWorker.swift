@@ -10,7 +10,7 @@ import PromiseKit
 
 protocol NotificationHistoryWorkerType {
     func parseSharedContainerNotifications(data: [[String: Any]], keys: NotificationUserInfoParser.Key.Type) -> Promise<Bool>
-    func appendLocalNotification(title: String, content: String) -> Promise<Bool>
+    func appendLocalNotification(title: String, content: String, messageID: String) -> Promise<Bool>
     func fetchAllNotifications() -> Promise<[PushNotificationHistoryModel]>
     func clearHistory(with ids: [String]) -> Promise<Void>
 }
@@ -46,7 +46,7 @@ final class NotificationHistoryWorker: NotificationHistoryWorkerType {
         }
     }
     
-    func appendLocalNotification(title: String, content: String) -> Promise<Bool> {
+    func appendLocalNotification(title: String, content: String, messageID: String) -> Promise<Bool> {
         guard let storage = storage else {
             return .init(error: InternalError.nilValue)
         }
@@ -55,7 +55,7 @@ final class NotificationHistoryWorker: NotificationHistoryWorkerType {
             storage.beginWrite()
             
             let model = PushNotificationHistoryModel()
-            model.id = UUID().uuidString
+            model.id = messageID
             model.timestamp = Int(Date().timeIntervalSince1970)
             model.title = title
             model.content = content
