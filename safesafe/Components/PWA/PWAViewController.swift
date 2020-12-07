@@ -22,7 +22,9 @@ final class PWAViewController: ViewController<PWAViewModel> {
     }
     
     private var webKitView: WKWebView?
-    
+    override var canBecomeFirstResponder: Bool {
+        get { true }
+    }
     var onAppear: (() -> Void)?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -39,6 +41,11 @@ final class PWAViewController: ViewController<PWAViewModel> {
         onAppear?()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        becomeFirstResponder()
+    }
+    
     override func start() {
         viewModel.delegate = self
     }
@@ -52,19 +59,10 @@ final class PWAViewController: ViewController<PWAViewModel> {
         })
     }
     
-    private func debugViewSetup() {
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         #if !LIVE
-        let debugButton = UIButton()
-        view.addSubview(debugButton)
-        debugButton.translatesAutoresizingMaskIntoConstraints = false
-        debugButton.setImage(#imageLiteral(resourceName: "bug_icon"), for: .normal)
-        debugButton.tintColor = .white
-        debugButton.addTarget(viewModel, action: #selector(PWAViewModel.debugButtonTapped), for: .touchUpInside)
-        debugButton.snp.makeConstraints { maker in
-            guard let superview = debugButton.superview else { return }
-            maker.width.height.equalTo(Constants.debugButtonSize)
-            maker.trailing.equalToSuperview().inset(Constants.debugButtonRightMargin)
-            maker.top.equalTo(superview.snp.topMargin).inset(Constants.debugButtonTopMargin)
+        if motion == .motionShake {
+            viewModel.showDebug()
         }
         #endif
     }
@@ -95,8 +93,6 @@ extension PWAViewController: PWAViewModelDelegate {
         completion(webKitView)
         
         self.webKitView = webKitView
-        
-        debugViewSetup()
     }
 
     func reload() {

@@ -24,6 +24,7 @@ final class DebugViewController: ViewController<DebugViewModel> {
     private let closeButton = UIButton()
     private let titleLabel = UILabel()
     private let mainStackView = UIStackView()
+    var closeCallback: (() -> Void)?
     
     override func start() {
         viewModel.delegate = self
@@ -132,7 +133,7 @@ final class DebugViewController: ViewController<DebugViewModel> {
     
     @objc
     private func closeButtonTap(sender: UIButton) {
-        dismiss(animated: true)
+        dismiss(animated: true, completion: closeCallback)
     }
 }
 
