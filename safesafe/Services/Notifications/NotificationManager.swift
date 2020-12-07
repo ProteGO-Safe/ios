@@ -19,8 +19,6 @@ protocol NotificationManagerProtocol {
     func clearBadgeNumber()
     func update(token: Data)
     func unsubscribeFromDailyTopic(timestamp: TimeInterval)
-    func stringifyUserInfo() -> String?
-    func clearUserInfo()
     func showDistrictStatusLocalNotification(with changed: [DistrictStorageModel], observed: [ObservedDistrictStorageModel], timestamp: Int, delay: TimeInterval)
 }
 
@@ -102,9 +100,7 @@ final class NotificationManager: NSObject {
             return topics
         }
     }
-    
-    private var userInfo: [AnyHashable : Any]?
-    
+        
     override private init() {
         super.init()
         UNUserNotificationCenter.current().delegate = self
@@ -214,22 +210,6 @@ extension NotificationManager: NotificationManagerProtocol {
         }
     }
     
-    func clearUserInfo() {
-        userInfo = nil
-    }
-    
-    func stringifyUserInfo() -> String? {
-        guard let userInfo = userInfo else {
-            return nil
-        }
-        
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: userInfo, options: []) else {
-            return nil
-        }
-        
-        return String(data: jsonData, encoding: .utf8)
-    }
-    
     func registerAPNSIfNeeded() {
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             switch settings.authorizationStatus {
@@ -330,21 +310,45 @@ extension NotificationManager: NotificationManagerProtocol {
 }
 
 extension NotificationManager: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        parseSharedNotifications()
-        guard notification.request.identifier != Constants.districtNotificationIdentifier else { return }
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
-        userInfo = notification.request.content.userInfo
-
+        parseSharedNotifications()
+        
         completionHandler([.alert])
     }
     
     // Here we are when user taped notification
     //
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        guard response.notification.request.identifier != Constants.districtNotificationIdentifier else { return }
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void) {
         
-        userInfo = response.notification.request.content.userInfo
+        
+        let userInfo = response.notification.request.content.userInfo
+        
+        if response.notification.request.identifier == Constants.districtNotificationIdentifier {
+            DeepLinkingWorker.shared.navigate(to: .currentRestrictions, messageId: nil)
+        } else {
+            let parser = NotificationUserInfoParser()
+            guard let messageUUID = userInfo[NotificationUserInfoParser.Key.uuid.rawValue] as? String else { return }
+            
+            let info: [String: RouteModel.Value] = [NotificationUserInfoParser.Key.uuid.rawValue: .string(messageUUID)]
+            if let routeModel: RouteModel = parser.routeData(userInfo: userInfo, appendInfo: info),
+               let jsonString = routeModel.asJSONString() {
+                
+                DeepLinkingWorker.shared.navigate(jsonString)
+            } else {
+                // navigate to history view
+                DeepLinkingWorker.shared.navigate(to: .notificationsHistory, messageId: messageUUID)
+            }
+            
+            
+        }
+        
         completionHandler()
     }
 }

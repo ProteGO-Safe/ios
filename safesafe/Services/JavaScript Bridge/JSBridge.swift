@@ -17,7 +17,6 @@ final class JSBridge: NSObject {
     
     enum BridgeDataType: Int {
         case dailyTopicUnsubscribe = 1
-        case notification = 2
         case applicationLifecycle = 11
         case notificationsPermission = 35
         case serviceStatus = 51
@@ -30,6 +29,7 @@ final class JSBridge: NSObject {
         case systemLanguage = 63
         case clearExposureRisk = 66
         case requestAppReview = 68
+        case route = 69
         
         case allDistricts = 70
         case districtsAPIFetch = 71
@@ -236,8 +236,6 @@ extension JSBridge: WKScriptMessageHandler {
         
         let jsonString = requestData[Key.data] as? String
         switch bridgeDataType {
-        case .notification:
-            notificationGetBridgeDataResponse(requestID: requestId)
             
         case .serviceStatus:
             serviceStatusGetBridgeDataResponse(requestID: requestId)
@@ -290,19 +288,6 @@ extension JSBridge: WKScriptMessageHandler {
 
 // MARK: - getBridgeData handling
 private extension JSBridge {
-    
-    func notificationGetBridgeDataResponse(requestID: String) {
-        guard let jsonData = NotificationManager.shared.stringifyUserInfo() else {
-            return
-        }
-        
-        bridgeDataResponse(type: .notification, body: jsonData, requestId: requestID) { _, error in
-            NotificationManager.shared.clearUserInfo()
-            if let error = error {
-                console(error, type: .error)
-            }
-        }
-    }
     
     func serviceStatusGetBridgeDataResponse(requestID: String) {
         serviceStatusManager.serviceStatusJson(delay: .zero)
@@ -714,5 +699,11 @@ private extension JSBridge {
             return
         }
         onBridgeData(type: .applicationLifecycle, body: data)
+    }
+}
+
+extension JSBridge: DeepLinkingDelegate {
+    func runRoute(routeString: String) {
+        onBridgeData(type: .route, body: routeString)
     }
 }

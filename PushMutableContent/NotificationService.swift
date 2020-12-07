@@ -22,11 +22,14 @@ class NotificationService: UNNotificationServiceExtension {
         else {
             return
         }
-           
+        
         let routeRaw: String? = parser.routeData(userInfo: request.content.userInfo)
         let dictionary = parser.parseNotification(title: selectedModel.title, content: selectedModel.content, route: routeRaw)
         parser.addStoredNotification(data: dictionary)
         
+        var modifiedUserInfo = request.content.userInfo
+        modifiedUserInfo[NotificationUserInfoParser.Key.uuid.rawValue] = dictionary[NotificationUserInfoParser.Key.id.rawValue] as? String
+        bestAttemptContent.userInfo = modifiedUserInfo
         bestAttemptContent.title = selectedModel.title
         bestAttemptContent.body = selectedModel.content
         
