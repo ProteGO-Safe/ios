@@ -9,6 +9,14 @@ import Foundation
 import RealmSwift
 
  final class PushNotificationHistoryModel: Object, LocalStorable {
+    
+    struct EncodableModel: Encodable {
+        let id: String
+        let timestamp: Int
+        let title: String
+        let content: String
+    }
+    
     @objc dynamic var id: String = .empty
     @objc dynamic var timestamp: Int = .zero
     @objc dynamic var title: String = .empty
@@ -34,5 +42,9 @@ import RealmSwift
         self.title = title
         self.content = content
         self.route = object[keys.route.rawValue] as? String
+    }
+    
+    func asEncodable() -> EncodableModel {
+        .init(id: id, timestamp: timestamp, title: title, content: content)
     }
 }

@@ -61,7 +61,7 @@ final class NotificationManager: NSObject {
             case .general:
                 #if DEV
                 return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
-                #elseif STAGE || STAGE_SCREENCAST
+                #elseif STAGE || STAGE_SCREENCAST || STAGE_DEBUG
                 return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
                 #elseif LIVE_ADHOC
                 return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
@@ -88,7 +88,7 @@ final class NotificationManager: NSObject {
                 let formatted = dateFormatter.string(from: date)
                 #if DEV
                 topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
-                #elseif STAGE || STAGE_SCREENCAST
+                #elseif STAGE || STAGE_SCREENCAST || STAGE_DEBUG
                 topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
                 #elseif LIVE_ADHOC
                 topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
@@ -197,7 +197,7 @@ extension NotificationManager: NotificationManagerProtocol {
         
         #if DEV
         let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
-        #elseif STAGE || STAGE_SCREENCAST
+        #elseif STAGE || STAGE_SCREENCAST || STAGE_DEBUG
         let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
         #elseif LIVE_ADHOC
         let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"

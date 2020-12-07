@@ -18,7 +18,6 @@ protocol ExposureServiceProtocol: class {
     func setExposureNotificationEnabled(_ setEnabled: Bool) -> Promise<Void>
     func getDiagnosisKeys() -> Promise<[ENTemporaryExposureKey]>
     func detectExposures() -> Promise<[Exposure]>
-    
 }
 
 @available(iOS 13.5, *)
@@ -131,19 +130,20 @@ final class ExposureService: ExposureServiceProtocol {
                 makeExposureConfiguration(),
                 diagnosisKeysService.download()
             )}
-            .then { configuration, keys -> Promise<ENExposureDetectionSummary> in
+            .then { configuration, keys -> Promise<(summary: ENExposureDetectionSummary, keysCount: Int)> in
                 if keys.isEmpty {
                     throw InternalError.detectExposuresNoKeys
                 } else {
                     return self.detectExposures(for: configuration, keys: keys)
                 }
-                
             }
-            .done { summary in
-                self.getExposureInfo(from: summary)
-                    .done {
-                        self.storageService?.append($0)
-                        seal.fulfill($0)
+            .done { summary, numberOfKeys in
+                self.getExposureInfo(from: summary, numberOfKeys: numberOfKeys)
+                    .done { exposures, riskChecks, analyzeCheck in
+                        self.storageService?.append(exposures)
+                        self.storageService?.append(analyzeCheck)
+                        self.storageService?.append(riskChecks)
+                        seal.fulfill(exposures)
                     }
                     .catch {
                         seal.reject($0)
@@ -157,25 +157,51 @@ final class ExposureService: ExposureServiceProtocol {
     
     // MARK: - Private methods
     
-    private func detectExposures(for configuration: ENExposureConfiguration, keys: [URL]) -> Promise<ENExposureDetectionSummary> {
+    private func countKeys(keys url: [URL]) -> Promise<(keysCount:Int, urls: [URL])> {
         Promise { seal in
-            console("🔑 Keys count: \(Int(keys.count/2))")
-            exposureManager.detectExposures(configuration: configuration, diagnosisKeyURLs: keys) { [weak self] summary, error in
-                guard let summary = summary, error == nil else {
-                    console(error, type: .error)
-                    seal.reject(error!)
-                    return
-                }
-                console("📈 \(summary)", type: .regular)
-                seal.fulfill(summary)
-                self?.diagnosisKeysService.deleteFiles()
-            }
+            let protobufWorker = ProtobufWorker()
+            seal.fulfill((keysCount: protobufWorker.countAllKeys(urls: url), urls: url))
         }
     }
     
-    private func getExposureInfo(from summary: ENExposureDetectionSummary) -> Promise<[Exposure]> {
+    private func detectExposures(
+        for configuration: ENExposureConfiguration,
+        keys: [URL]
+    ) -> Promise<(summary: ENExposureDetectionSummary, keysCount: Int)> {
+        
+        return countKeys(keys: keys)
+            .then { keysCount, urls -> Promise<(summary: ENExposureDetectionSummary, keysCount: Int)> in
+                return Promise { [weak self] seal in
+                    
+                    self?.exposureManager.detectExposures(
+                        configuration: configuration,
+                        diagnosisKeyURLs: keys
+                    ) { [weak self] summary, error in
+                        
+                        guard let summary = summary, error == nil else {
+                            console(error, type: .error)
+                            seal.reject(error!)
+                            return
+                        }
+                        console("📈 \(summary)", type: .regular)
+                        seal.fulfill((summary: summary, keysCount: keysCount))
+                        self?.diagnosisKeysService.deleteFiles()
+                    }
+                    
+                }
+            }
+    }
+    
+    
+    private func getExposureInfo(
+        from summary: ENExposureDetectionSummary,
+        numberOfKeys: Int
+    ) -> Promise<(exposures: [Exposure], riskChecks: [ExposureHistoryRiskCheck], analyzeCheck: ExposureHistoryAnalyzeCheck)> {
+        
         Promise { seal in
+            
             let userExplanation = "EXPOSURE_INFO_EXPLANATION".localized()
+            let esposureRisk = ExposureHistoryAnalyzeCheck(matchedKeyCount: Int(summary.matchedKeyCount), keysCount: numberOfKeys)
             
             exposureManager.getExposureInfo(summary: summary, userExplanation: userExplanation) { exposureInfo, error in
                 guard let info = exposureInfo, error == nil else {
@@ -183,19 +209,29 @@ final class ExposureService: ExposureServiceProtocol {
                     return
                 }
                 
-                let exposures = info.compactMap { info -> Exposure? in
-                    guard let risk = info.metadata?[Constants.exposureInfoFullRangeRiskKey] as? Int else {
-                        return nil
+                var exposures: [Exposure] = []
+                let riskChecks: [ExposureHistoryRiskCheck]
+                if info.isEmpty {
+                    riskChecks = [.init(matchedKeyCount: Int(summary.matchedKeyCount), riskLevelFull: .zero)]
+                } else {
+                    riskChecks = info.compactMap { info -> ExposureHistoryRiskCheck? in
+                        guard let risk = info.metadata?[Constants.exposureInfoFullRangeRiskKey] as? Int else {
+                            return nil
+                        }
+                        
+                        return .init(matchedKeyCount: Int(summary.matchedKeyCount), riskLevelFull: risk)
                     }
                     
-                    return Exposure(
-                        risk: risk,
-                        duration: info.duration * 60,
-                        date: info.date
-                    )
+                    exposures = info.compactMap { info -> Exposure? in
+                        guard let risk = info.metadata?[Constants.exposureInfoFullRangeRiskKey] as? Int else {
+                            return nil
+                        }
+                        
+                        return .init(risk: risk, duration: info.duration * 60, date: info.date)
+                    }
                 }
                 
-                seal.fulfill(exposures)
+                seal.fulfill((exposures: exposures, riskChecks: riskChecks, analyzeCheck: esposureRisk))
             }
         }
     }
