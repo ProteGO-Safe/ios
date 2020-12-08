@@ -59,5 +59,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         HiderController.shared.show(windowScene: window?.windowScene)
     }
 
+    @available(iOS 13.0, *)
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        guard let url = userActivity.webpageURL else {  return }
+        DeepLinkingWorker.shared.navigate(with: url)
+    }
+    
+    @available(iOS 13.0, *)
+    func scene(_ scene: UIScene, willContinueUserActivityWithType userActivityType: String) {
+        
+    }
 }
 
