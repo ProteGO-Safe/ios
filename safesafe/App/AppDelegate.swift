@@ -36,6 +36,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         StoredDefaults.standard.set(value: true, key: .isFirstRun)
         
+        if let url = launchOptions?[UIApplication.LaunchOptionsKey.url] as? URL { //Deeplink
+            DeepLinkingWorker.shared.navigate(with: url)
+        } else if let activityDictionary = launchOptions?[UIApplication.LaunchOptionsKey.userActivityDictionary] as? [AnyHashable: Any] { //Universal link
+            for key in activityDictionary.keys {
+                if let userActivity = activityDictionary[key] as? NSUserActivity {
+                    if let url = userActivity.webpageURL {
+                        DeepLinkingWorker.shared.navigate(with: url)
+                    }
+                }
+            }
+        }
+        
         return true
     }
     

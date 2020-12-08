@@ -22,6 +22,7 @@ enum DeepLinkingScreens: String {
 
 protocol DeepLinkingWorkerType {
     var delegate: DeepLinkingDelegate? { get set }
+    func didLoadWebView()
     func navigate(_ data: String)
     func navigate(to screen: DeepLinkingScreens, messageId: String?)
     func navigate(with url: URL)
@@ -35,11 +36,14 @@ final class DeepLinkingWorker: DeepLinkingWorkerType {
     static let shared = DeepLinkingWorker()
 
     weak var delegate: DeepLinkingDelegate?
+    private var isWebViewloaded = false
+    private var pendingRoutes: [String] = []
     
     private init() {}
     
     func navigate(_ data: String) {
-        delegate?.runRoute(routeString: data)
+        pendingRoutes.append(data)
+        execute()
     }
     
     func navigate(to screen: DeepLinkingScreens, messageId: String?) {
@@ -53,10 +57,12 @@ final class DeepLinkingWorker: DeepLinkingWorkerType {
         
         guard let jsonString = serialize(routeData: routeData) else { return }
         
-        delegate?.runRoute(routeString: jsonString)
+        pendingRoutes.append(jsonString)
+        execute()
     }
     
     func navigate(with url: URL) {
+        console("🚕 🛵 Navigate to --> \(url.absoluteURL)")
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return }
         
         let paths = components.path.split(separator: "/")
@@ -71,7 +77,20 @@ final class DeepLinkingWorker: DeepLinkingWorkerType {
         
         guard let jsonString = serialize(routeData: routeData) else { return }
         
-        delegate?.runRoute(routeString: jsonString)
+        pendingRoutes.append(jsonString)
+        execute()
+    }
+    
+    func didLoadWebView() {
+        isWebViewloaded = true
+        execute()
+    }
+    
+    private func execute() {
+        guard isWebViewloaded, let lastRoute = pendingRoutes.last else { return }
+
+        delegate?.runRoute(routeString: lastRoute)
+        pendingRoutes.removeAll()
     }
     
     private func routeParams(with queryItems: [URLQueryItem]) -> [String: Any] {

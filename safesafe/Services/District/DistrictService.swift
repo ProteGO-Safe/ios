@@ -226,8 +226,7 @@ final class DistrictService {
     private func getAll() -> Promise<[VoivodeshipStorageModel]> {
         return Promise { seal in
             let allDistricts: [VoivodeshipStorageModel] = localStorage?.fetch() ?? []
-            console("🔱 fetch all vovoidships count: \(allDistricts)")
-            console("Local storage instance: \(String(describing: localStorage))")
+            console("🔱 fetch all vovoidships count: \(allDistricts.count)")
             seal.fulfill(allDistricts)
         }
     }

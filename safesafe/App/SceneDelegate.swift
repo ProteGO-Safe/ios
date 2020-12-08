@@ -24,6 +24,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        guard
+            let userActivity = connectionOptions.userActivities.first,
+            userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+            let incomingURL = userActivity.webpageURL
+        else {
+            return
+        }
+        
+        DeepLinkingWorker.shared.navigate(with: incomingURL)
     }
     
     @available(iOS 13.0, *)
