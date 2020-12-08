@@ -24,6 +24,7 @@ protocol DeepLinkingWorkerType {
     var delegate: DeepLinkingDelegate? { get set }
     func navigate(_ data: String)
     func navigate(to screen: DeepLinkingScreens, messageId: String?)
+    func navigate(with url: URL)
 }
 
 protocol DeepLinkingDelegate: class {
@@ -50,13 +51,47 @@ final class DeepLinkingWorker: DeepLinkingWorkerType {
             routeData["params"] = routeParams
         }
         
+        guard let jsonString = serialize(routeData: routeData) else { return }
+        
+        delegate?.runRoute(routeString: jsonString)
+    }
+    
+    func navigate(with url: URL) {
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return }
+        
+        let paths = components.path.split(separator: "/")
+        
+        guard let path = paths.first, paths.count == 1 else { return }
+        
+        var routeData: [String: Any] = ["name": path]
+        
+        if let queryItems = components.queryItems {
+            routeData["params"] = routeParams(with: queryItems)
+        }
+        
+        guard let jsonString = serialize(routeData: routeData) else { return }
+        
+        delegate?.runRoute(routeString: jsonString)
+    }
+    
+    private func routeParams(with queryItems: [URLQueryItem]) -> [String: Any] {
+        var params: [String: Any] = [:]
+        
+        for item in queryItems {
+            params[item.name] = item.value
+        }
+        
+        return params
+    }
+    
+    private func serialize(routeData: [String: Any]) -> String? {
         guard
             let data = try? JSONSerialization.data(withJSONObject: routeData, options: .fragmentsAllowed),
             let jsonString = String(data: data, encoding: .utf8)
         else {
-            return
+            return nil
         }
         
-        delegate?.runRoute(routeString: jsonString)
+        return jsonString
     }
 }
