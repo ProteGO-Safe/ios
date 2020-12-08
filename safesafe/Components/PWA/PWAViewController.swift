@@ -83,9 +83,7 @@ extension PWAViewController: PWAViewModelDelegate {
         let webKitView = WKWebView(frame: .zero, configuration: configuration)
         webKitView.allowsBackForwardNavigationGestures = false
         webKitView.allowsLinkPreview = false
-        if #available(iOS 11.0, *) {
-            webKitView.scrollView.contentInsetAdjustmentBehavior = .never
-        }
+        webKitView.scrollView.contentInsetAdjustmentBehavior = .never
         webKitView.scrollView.bounces = false
         webKitView.navigationDelegate = self
         
@@ -94,13 +92,17 @@ extension PWAViewController: PWAViewModelDelegate {
         
         self.webKitView = webKitView
     }
-
+    
     func reload() {
         webKitView?.reload()
     }
 }
 
 extension PWAViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        viewModel.didLoadWebView()
+    }
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if viewModel.manageNativeActions(with: navigationAction.request.url) || viewModel.openExternallyIfNeeded(url: navigationAction.request.url) {
             decisionHandler(.cancel)

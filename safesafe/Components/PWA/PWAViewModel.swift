@@ -80,6 +80,10 @@ final class PWAViewModel: ViewModelType {
     func didCloseDebugView() {
         isDebugViewVisible = false
     }
+    
+    func didLoadWebView() {
+        DeepLinkingWorker.shared.didLoadWebView()
+    }
      
 }
 
