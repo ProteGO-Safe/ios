@@ -67,7 +67,7 @@ final class NotificationManager: NSObject {
                 #endif
             case .generalLocalized:
                 #if LIVE
-                return [Topic.generalLocalized]
+                return [Topic.generalLocalizedPrefix]
                 #else
                 return ["\(Topic.generalLocalizedPrefix)\(Topic.devSuffix)"]
                 #endif
