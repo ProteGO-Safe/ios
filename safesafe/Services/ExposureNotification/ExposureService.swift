@@ -116,7 +116,7 @@ final class ExposureService: ExposureServiceProtocol {
                 }
             }
             
-            #if DEV
+            #if STAGE_DEBUG || DEV
             self?.exposureManager.getTestDiagnosisKeys(completionHandler: completion)
             #else
             self?.exposureManager.getDiagnosisKeys(completionHandler: completion)

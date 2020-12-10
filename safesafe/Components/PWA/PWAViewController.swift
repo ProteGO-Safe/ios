@@ -22,9 +22,6 @@ final class PWAViewController: ViewController<PWAViewModel> {
     }
     
     private var webKitView: WKWebView?
-    override var canBecomeFirstResponder: Bool {
-        get { true }
-    }
     var onAppear: (() -> Void)?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

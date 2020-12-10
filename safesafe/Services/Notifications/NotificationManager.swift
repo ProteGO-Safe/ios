@@ -50,24 +50,26 @@ final class NotificationManager: NSObject {
         static let devSuffix = "-dev"
         static let dailyPrefix = "daily_"
         static let generalPrefix = "general"
+        static let generalLocalizedPrefix = "general-localized"
         static let daysNum = 50
         
         case general
+        case generalLocalized
         case daily(startDate: Date)
         
         var toString: [String] {
             switch self {
             case .general:
-                #if DEV
-                return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
-                #elseif STAGE || STAGE_SCREENCAST || STAGE_DEBUG
-                return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
-                #elseif LIVE_ADHOC
-                return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
-                #elseif LIVE_DEBUG
-                return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
-                #elseif LIVE
+                #if LIVE
                 return [Topic.generalPrefix]
+                #else
+                return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
+                #endif
+            case .generalLocalized:
+                #if LIVE
+                return [Topic.generalLocalized]
+                #else
+                return ["\(Topic.generalLocalized)\(Topic.devSuffix)"]
                 #endif
             case let .daily(startDate):
                 return dailyTopics(startDate: startDate)
@@ -85,16 +87,10 @@ final class NotificationManager: NSObject {
                     continue
                 }
                 let formatted = dateFormatter.string(from: date)
-                #if DEV
-                topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
-                #elseif STAGE || STAGE_SCREENCAST || STAGE_DEBUG
-                topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
-                #elseif LIVE_ADHOC
-                topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
-                #elseif LIVE_DEBUG
-                topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
-                #elseif LIVE
+                #if LIVE
                 topics.append("\(Topic.dailyPrefix)\(formatted)")
+                #else
+                topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
                 #endif
             }
             
@@ -192,16 +188,10 @@ extension NotificationManager: NotificationManagerProtocol {
         
         let formatted = dateFormatter.string(from: date)
         
-        #if DEV
-        let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
-        #elseif STAGE || STAGE_SCREENCAST || STAGE_DEBUG
-        let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
-        #elseif LIVE_ADHOC
-        let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
-        #elseif LIVE_DEBUG
-        let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
-        #elseif LIVE
+        #if LIVE
         let topic = "\(Topic.dailyPrefix)\(formatted)"
+        #else
+        let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
         #endif
         
         Messaging.messaging().unsubscribe(fromTopic: topic) { error in
@@ -267,13 +257,15 @@ extension NotificationManager: NotificationManagerProtocol {
     
     
     private func subscribeTopics() {
+        Messaging.messaging().unsubscribe(fromTopic: Topic.general.toString[0])
+        Messaging.messaging().subscribe(toTopic: Topic.generalLocalized.toString[0])
+        
         let didSubscribedFCMTopics: Bool = StoredDefaults.standard.get(key: .didSubscribeFCMTopics) ?? false
         guard !didSubscribedFCMTopics else {
             return
         }
         
         var allTopics: [String] = []
-        allTopics.append(contentsOf: Topic.general.toString)
         allTopics.append(contentsOf: Topic.daily(startDate: Date()).toString)
         
         dipspatchQueue.async { [weak self] in
