@@ -40,6 +40,7 @@ final class AppCoordinator: CoordinatorType {
     
     func start() {
         moveDafaultsToAppGroup()
+        NotificationManager.shared.register(dependencyContainer: dependencyContainer)
         
         #if !STAGE_SCREENCAST
         setupScreenRecording()
@@ -54,7 +55,6 @@ final class AppCoordinator: CoordinatorType {
         
         updateReminder()
         configureJSBridge(with: rootViewController)
-        
         
         if #available(iOS 13.5, *) {
             // Don't register bg task on iPad devices that are not supported by EN

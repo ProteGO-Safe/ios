@@ -13,6 +13,7 @@ import FirebaseMessaging
 import PromiseKit
 
 protocol NotificationManagerProtocol {
+    func register(dependencyContainer: DependencyContainer)
     func registerAPNSIfNeeded()
     func registerForNotifications(remote: Bool) -> Guarantee<Bool>
     func currentStatus() -> Guarantee<UNAuthorizationStatus>
@@ -37,7 +38,7 @@ final class NotificationManager: NSObject {
     
     static let shared = NotificationManager()
     
-    private let notificationsWorker = NotificationHistoryWorker(storage: RealmLocalStorage())
+    private var notificationsWorker: NotificationHistoryWorkerType?
     private let dispatchGroupQueue = DispatchQueue(label: "disptach.protegosafe.group")
     private let dipspatchQueue = DispatchQueue(label: "dispatch.protegosafe.main")
     private let group = DispatchGroup()
@@ -105,6 +106,10 @@ final class NotificationManager: NSObject {
 }
 
 extension NotificationManager: NotificationManagerProtocol {
+    func register(dependencyContainer: DependencyContainer) {
+        self.notificationsWorker = dependencyContainer.notificationHistoryWorker
+    }
+    
     func currentStatus() -> Guarantee<UNAuthorizationStatus> {
         return Guarantee { fulfill in
             UNUserNotificationCenter.current().getNotificationSettings { settings in
@@ -228,7 +233,7 @@ extension NotificationManager: NotificationManagerProtocol {
         let userInfo: [String: Any] = [NotificationUserInfoParser.Key.uuid.rawValue: messageID]
         content.userInfo = userInfo
         
-        notificationsWorker.appendLocalNotification(title: content.title, content: content.body, messageID: messageID)
+        notificationsWorker?.appendLocalNotification(title: content.title, content: content.body, messageID: messageID)
             .done{ success in console("Add local notification to historical data with success: \(success)")}
             .catch { console($0, type: .error) }
         

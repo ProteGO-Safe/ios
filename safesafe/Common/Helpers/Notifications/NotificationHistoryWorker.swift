@@ -59,6 +59,7 @@ final class NotificationHistoryWorker: NotificationHistoryWorkerType {
             model.timestamp = Int(Date().timeIntervalSince1970)
             model.title = title
             model.content = content
+            storage.append(model)
             
             do {
                 try storage.commitWrite()

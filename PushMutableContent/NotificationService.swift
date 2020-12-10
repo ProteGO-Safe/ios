@@ -15,11 +15,18 @@ class NotificationService: UNNotificationServiceExtension {
         self.contentHandler = contentHandler
         let parser = NotificationUserInfoParser()
         
+        guard let bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent) else { return }
+        
         guard
             let selectedLanguageISO: String = StoredDefaults.standard.get(key: .selectedLanguage, useAppGroup: true),
-            let selectedModel = parser.selectedLanguageData(lang: selectedLanguageISO, userInfo: request.content.userInfo),
-            let bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
+            let selectedModel = parser.selectedLanguageData(lang: selectedLanguageISO, userInfo: request.content.userInfo)
         else {
+            // Save default content if translations doesn't exist
+            //
+            let routeRaw: String? = parser.routeData(userInfo: request.content.userInfo)
+            let dictionary = parser.parseNotification(title: bestAttemptContent.title, content: bestAttemptContent.body, route: routeRaw)
+            parser.addStoredNotification(data: dictionary)
+            contentHandler(bestAttemptContent)
             return
         }
         
