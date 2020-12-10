@@ -69,7 +69,7 @@ final class NotificationManager: NSObject {
                 #if LIVE
                 return [Topic.generalLocalized]
                 #else
-                return ["\(Topic.generalLocalized)\(Topic.devSuffix)"]
+                return ["\(Topic.generalLocalizedPrefix)\(Topic.devSuffix)"]
                 #endif
             case let .daily(startDate):
                 return dailyTopics(startDate: startDate)
