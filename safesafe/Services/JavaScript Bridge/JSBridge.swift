@@ -42,6 +42,8 @@ final class JSBridge: NSObject {
         
         case historicalData = 90
         case historicalDataRemove = 91
+        
+        case dashboardStats = 102
     }
     
     enum SendMethod: String, CaseIterable {
@@ -69,6 +71,7 @@ final class JSBridge: NSObject {
     private var exposureNotificationBridge: ExposureNotificationJSProtocol?
     private var diagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol?
     private var historicalDataWorker: HistoricalDataWorkerType?
+    private var dashboardWorker: DashboardWorkerType?
     
     private var districtService: DistrictService?
     private var freeTestService: FreeTestService?
@@ -123,6 +126,11 @@ final class JSBridge: NSObject {
     
     func register(historicalDataWorker: HistoricalDataWorkerType) {
         self.historicalDataWorker = historicalDataWorker
+    }
+    
+    func register(dashboardWorker: DashboardWorkerType) {
+        self.dashboardWorker = dashboardWorker
+        self.dashboardWorker?.delegate = self
     }
     
     func bridgeDataResponse(type: BridgeDataType, body: String?, requestId: String, completion: ((Any?, Error?) -> ())? = nil) {
@@ -275,6 +283,9 @@ extension JSBridge: WKScriptMessageHandler {
             
         case .historicalData:
             historicalData(requestID: requestId, dataType: bridgeDataType)
+            
+        case .dashboardStats:
+            dashboardStats(requestID: requestId, dataType: bridgeDataType)
             
         default:
             return
@@ -460,6 +471,14 @@ private extension JSBridge {
             .done { [weak self] data in
                 guard let jsonString = self?.encodeToJSON(data) else { return }
                 
+                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+            }
+            .catch { console($0, type: .error) }
+    }
+    
+    func dashboardStats(requestID: String, dataType: BridgeDataType) {
+        dashboardWorker?.fetchData()
+            .done { [weak self] jsonString in
                 self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
             }
             .catch { console($0, type: .error) }
@@ -705,5 +724,11 @@ private extension JSBridge {
 extension JSBridge: DeepLinkingDelegate {
     func runRoute(routeString: String) {
         onBridgeData(type: .route, body: routeString)
+    }
+}
+
+extension JSBridge: DashboardWorkerDelegate {
+    func onData(jsonString: String) {
+        onBridgeData(type: .dashboardStats, body: jsonString)
     }
 }

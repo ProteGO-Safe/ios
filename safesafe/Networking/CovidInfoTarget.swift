@@ -7,11 +7,11 @@
 
 import Moya
 
-enum DistrictsTarget {
+enum CovidInfoTarget {
     case fetch
 }
 
-extension DistrictsTarget: TargetType {
+extension CovidInfoTarget: TargetType {
     var baseURL: URL { URL(string: ConfigManager.default.districtsBaseURL)! }
     
     var path: String {

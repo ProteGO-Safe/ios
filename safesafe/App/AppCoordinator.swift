@@ -139,6 +139,7 @@ final class AppCoordinator: CoordinatorType {
         dependencyContainer.jsBridge.register(districtService: dependencyContainer.districtsService)
         dependencyContainer.jsBridge.register(freeTestService: dependencyContainer.freeTestService)
         dependencyContainer.jsBridge.register(historicalDataWorker: dependencyContainer.historicalDataWorker)
+        dependencyContainer.jsBridge.register(dashboardWorker: dependencyContainer.dashboardWorker)
     }
     
     @objc private func applicationWillEnterForeground(notification: Notification) {
