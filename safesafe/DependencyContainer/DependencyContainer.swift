@@ -10,7 +10,11 @@ import FirebaseRemoteConfig
 final class DependencyContainer {
     
     @available(iOS 13.5, *)
-    lazy var backgroundTaskService = BackgroundTasksService(exposureService: exposureService, districtsService: districtsService)
+    lazy var backgroundTaskService = BackgroundTasksService(
+        exposureService: exposureService,
+        districtsService: districtsService,
+        dashboardWorker: dashboardWorker
+    )
     
     lazy var deviceCheckService = DeviceCheckService()
     
@@ -43,7 +47,11 @@ final class DependencyContainer {
     )
     
     lazy var districtsService: DistrictService = DistrictService(
-        with:  MoyaProvider<DistrictsTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
+        with:  MoyaProvider<CovidInfoTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
+    )
+    
+    lazy var dashboardWorker: DashboardWorkerType = DashboardWorker(
+        with: MoyaProvider<CovidInfoTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
     )
     
     lazy var freeTestService: FreeTestService = FreeTestService(

@@ -42,6 +42,11 @@ final class JSBridge: NSObject {
         
         case historicalData = 90
         case historicalDataRemove = 91
+        
+        case covidStatsSubscription = 100
+        case setCovidStatsSubscription = 101
+        case dashboardStats = 102
+        case agregatedStats = 103
     }
     
     enum SendMethod: String, CaseIterable {
@@ -69,6 +74,7 @@ final class JSBridge: NSObject {
     private var exposureNotificationBridge: ExposureNotificationJSProtocol?
     private var diagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol?
     private var historicalDataWorker: HistoricalDataWorkerType?
+    private var dashboardWorker: DashboardWorkerType?
     
     private var districtService: DistrictService?
     private var freeTestService: FreeTestService?
@@ -123,6 +129,11 @@ final class JSBridge: NSObject {
     
     func register(historicalDataWorker: HistoricalDataWorkerType) {
         self.historicalDataWorker = historicalDataWorker
+    }
+    
+    func register(dashboardWorker: DashboardWorkerType) {
+        self.dashboardWorker = dashboardWorker
+        self.dashboardWorker?.delegate = self
     }
     
     func bridgeDataResponse(type: BridgeDataType, body: String?, requestId: String, completion: ((Any?, Error?) -> ())? = nil) {
@@ -275,6 +286,15 @@ extension JSBridge: WKScriptMessageHandler {
             
         case .historicalData:
             historicalData(requestID: requestId, dataType: bridgeDataType)
+            
+        case .dashboardStats:
+            dashboardStats(requestID: requestId, dataType: bridgeDataType)
+            
+        case .covidStatsSubscription:
+            covidStatsSubscription(requestID: requestId, dataType: bridgeDataType)
+        
+        case .agregatedStats:
+            agregatedStats(requestID: requestId, dataType: bridgeDataType)
             
         default:
             return
@@ -464,10 +484,49 @@ private extension JSBridge {
             }
             .catch { console($0, type: .error) }
     }
+    
+    func dashboardStats(requestID: String, dataType: BridgeDataType) {
+        dashboardWorker?.fetchData()
+            .done { [weak self] jsonString in
+                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+            }
+            .catch { console($0, type: .error) }
+    }
+    
+    func covidStatsSubscription(requestID: String, dataType: BridgeDataType) {
+        let covidStatsSubscription = StoredDefaults.standard.get(key: .didUserSubscribeForCovidStatsTopic) ?? false
+        
+        guard
+            let jsonString = CovidStatsResponse(isCovidStatsNotificationEnabled: covidStatsSubscription).jsonString
+        else {
+            return
+        }
+        
+        bridgeDataResponse(type: .covidStatsSubscription, body: jsonString, requestId: requestID)
+    }
+    
+    func agregatedStats(requestID: String, dataType: BridgeDataType) {
+        historicalDataWorker?
+            .getAgregatedExposureData()
+            .done { [weak self] model in
+                guard let model = model, let jsonString = ExposureHistoryRiskCheckAgregatedResponse(with: model).jsonString else {
+                    return
+                }
+                
+                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+            }
+            .catch { console($0, type: .error) }
+    }
 }
 
 // MARK: - onBridgeData handling
 private extension JSBridge {
+    
+    func setCovidStatsSubscription(jsonString: String?) {
+        guard let request: CovidStatsRequest = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
+
+        NotificationManager.shared.manageUserCovidStatsTopic(subscribe: request.isCovidStatsNotificationEnabled)
+    }
     
     func removeHistoricalData(jsonString: String?) {
         guard let request: DeleteHistoricalDataRequest = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
@@ -705,5 +764,11 @@ private extension JSBridge {
 extension JSBridge: DeepLinkingDelegate {
     func runRoute(routeString: String) {
         onBridgeData(type: .route, body: routeString)
+    }
+}
+
+extension JSBridge: DashboardWorkerDelegate {
+    func onData(jsonString: String) {
+        onBridgeData(type: .dashboardStats, body: jsonString)
     }
 }

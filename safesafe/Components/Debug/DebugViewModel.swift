@@ -134,16 +134,27 @@ final class DebugViewModel: ViewModelType {
         localStorage?.append(riskModel)
        
         try? localStorage?.commitWrite()
+        
+        ExposureHistoryRiskCheckAgregated.update(with: riskModel, debug: true)
     }
     
     func deleteSimulatedRiskCheck() {
-        guard let riskChecks: [ExposureHistoryAnalyzeCheck] = localStorage?.fetch() else { return }
+        guard
+            let riskChecks: [ExposureHistoryAnalyzeCheck] = localStorage?.fetch(),
+            let agregatedDayCheck: [ExposureHistoryDayCheck] = localStorage?.fetch()
+        else { return }
+        
         let debugRiskChecks = riskChecks.filter { $0.id.hasPrefix("debug_") }
+        let debugDayChecks = agregatedDayCheck.filter { $0.id.hasPrefix("debug_") }
         
         localStorage?.beginWrite()
         
         for riskCheck in debugRiskChecks {
             localStorage?.remove(riskCheck, completion: nil)
+        }
+        
+        for dayCheck in debugDayChecks {
+            localStorage?.remove(dayCheck, completion: nil)
         }
         
         try? localStorage?.commitWrite()

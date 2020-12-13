@@ -140,6 +140,7 @@ final class ExposureService: ExposureServiceProtocol {
             .done { summary, numberOfKeys in
                 self.getExposureInfo(from: summary, numberOfKeys: numberOfKeys)
                     .done { exposures, riskChecks, analyzeCheck in
+                        ExposureHistoryRiskCheckAgregated.update(with: analyzeCheck)
                         self.storageService?.append(exposures)
                         self.storageService?.append(analyzeCheck)
                         self.storageService?.append(riskChecks)

@@ -18,6 +18,7 @@ final class NotificationUserInfoParser {
         case id
         case uuid
         case timestamp
+        case covidStats
     }
     
     func parseLocalized(userInfo: [AnyHashable: Any]?) -> [LocalizedNotificationModel] {
@@ -83,12 +84,12 @@ final class NotificationUserInfoParser {
         return routeRaw
     }
     
-    func clearStoredNotifications() {
-        StoredDefaults.standard.delete(key: .storedNotifications, useAppGroup: true)
+    func clearSharedData(for key: StoredDefaults.Key) {
+        StoredDefaults.standard.delete(key: key, useAppGroup: true)
     }
     
-    func getStoredNotifications() -> [[String: Any]] {
-        let data: Any? = StoredDefaults.standard.get(key: .storedNotifications, useAppGroup: true)
+    func getSharedData(for key: StoredDefaults.Key) -> [[String: Any]] {
+        let data: Any? = StoredDefaults.standard.get(key: key, useAppGroup: true)
         if let data = data as? Data {
             return (try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [[String: Any]]) ?? []
         }
@@ -96,15 +97,15 @@ final class NotificationUserInfoParser {
         return []
     }
     
-    func addStoredNotification(data: [String: Any]) {
-        var storedNotifications = getStoredNotifications()
+    func addSharedData(data: [String: Any], for key: StoredDefaults.Key) {
+        var storedNotifications = getSharedData(for: key)
         storedNotifications.append(data)
         
         guard let data = try? NSKeyedArchiver.archivedData(withRootObject: storedNotifications, requiringSecureCoding: false) else {
             return
         }
         
-        StoredDefaults.standard.set(value: data, key: .storedNotifications, useAppGroup: true)
+        StoredDefaults.standard.set(value: data, key: key, useAppGroup: true)
     }
     
     func parseNotification(title: String, content: String, route: String?) -> [String: Any] {
@@ -121,8 +122,33 @@ final class NotificationUserInfoParser {
         
         return dict
     }
+    
+    func covidStatsData(userInfo: [AnyHashable: Any]?) -> String? {
+        guard
+            let userInfoJSON = userInfo as? [String: Any],
+            let routeRaw = userInfoJSON[Key.covidStats.rawValue] as? String
+        else {
+            return nil
+        }
+        
+        return routeRaw
+    }
+    
+    func parseCovidStats(userInfo: [AnyHashable: Any]) -> PushNotificationCovidStatsModel? {
+        let decoder = JSONDecoder()
+        guard
+            let covidStatsRaw: String = covidStatsData(userInfo: userInfo),
+            let data = covidStatsRaw.data(using: .utf8),
+            let model = try? decoder.decode(PushNotificationCovidStatsModel.self, from: data)
+        else {
+            return nil
+        }
+        
+        return model
+    }
 }
 
 extension StoredDefaults.Key {
-    static let storedNotifications = StoredDefaults.Key("storedNotifications")
+    static let sharedNotifications = StoredDefaults.Key("storedNotifications")
+    static let sharedCovidStats = StoredDefaults.Key("sharedCovidStats")
 }

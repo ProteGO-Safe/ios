@@ -36,3 +36,5 @@
 "ALERT_NEVER_BUTTON_TITLE" = "Не показувати більше";
 "ALERT_SETTINGS_BUTTON_TITLE" = "Налаштування";
 "JAILBREAK_ALERT_BUTTON_TITLE" = "Я розумію";
+// 4.9.0
+"DECLINE_COVID_STATS_NOTIFICATIONS_BUTTON_TITLE" = "Nie pokazuj więcej";
