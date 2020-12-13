@@ -192,15 +192,11 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                         return
                     }
                     
-                    #if !STAGE_DEBUG
                     let timestamps = self.translateNamesToTimestamps(names: filesList)
                     if let lastCDNTimestamp = timestamps.last, self.lastTimestamp == .zero {
                         self.update(lastTimestamp: lastCDNTimestamp)
                     }
-                    #else
-                    self.update(lastTimestamp: .zero)
-                    #endif
-                    
+                 
                     let itemNames = self.filter(keyFileNames: filesList)
                     
                     self.downloadFiles(withNames: itemNames, keysDirectoryURL: keysDirectoryURL).done { [weak self] urls in
@@ -210,11 +206,9 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                             .compactMap(Int.init)
                             .sorted()
                         
-                        #if !STAGE_DEBUG
                         if let lastTimestamp = timestamps.last {
                             self?.update(lastTimestamp: lastTimestamp)
                         }
-                        #endif
     
                         seal.fulfill(urls)
                     }.catch {

@@ -29,7 +29,22 @@ final class DashboardStatsModel: Object, LocalStorable {
         update(with: model)
     }
     
+    convenience init(model: PushNotificationCovidStatsModel) {
+        self.init()
+        update(with: model)
+    }
+    
     func update(with model: DashboardStatsAPIResponse) {
+        self.updated = model.updated
+        self.currentCases = model.newCases
+        self.totalCases = model.totalCases
+        self.currentDeaths = model.newDeaths
+        self.totalDeaths = model.totalDeaths
+        self.currentRecovered = model.newRecovered
+        self.totalDeaths = model.totalRecovered
+    }
+    
+    func update(with model: PushNotificationCovidStatsModel) {
         self.updated = model.updated
         self.currentCases = model.newCases
         self.totalCases = model.totalCases

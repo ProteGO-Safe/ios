@@ -11,6 +11,7 @@ import PromiseKit
 protocol ExposureServiceHistoricalDataProtocol {
     func getHistoricalRiskCheck() -> Promise<[ExposureHistoryRiskCheck]>
     func getHistoricalAnalyzeCheck() -> Promise<[ExposureHistoryAnalyzeCheck]>
+    func getAgregatedData() -> Promise<ExposureHistoryRiskCheckAgregated?>
     func clearHistoricalData(riskIds: [String], analyzeIds: [String]) -> Promise<Void>
 }
 
@@ -34,6 +35,13 @@ final class ExposureServiceHistoricalData: ExposureServiceHistoricalDataProtocol
         Promise { seal in
             let analyzeChecks: [ExposureHistoryAnalyzeCheck] = (storageService?.fetch() ?? []).sorted { $0.date < $1.date }
             seal.fulfill(analyzeChecks)
+        }
+    }
+    
+    func getAgregatedData() -> Promise<ExposureHistoryRiskCheckAgregated?> {
+        Promise { seal in
+            let model: ExposureHistoryRiskCheckAgregated? = storageService?.fetch(primaryKey: ExposureHistoryRiskCheckAgregated.identifier)
+            seal.fulfill(model)
         }
     }
     

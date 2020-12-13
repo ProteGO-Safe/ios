@@ -143,18 +143,8 @@ final class AppCoordinator: CoordinatorType {
     }
     
     @objc private func applicationWillEnterForeground(notification: Notification) {
-        let storedData = dependencyContainer.notificationPayloadParser.getStoredNotifications()
-        dependencyContainer.notificationHistoryWorker.parseSharedContainerNotifications(
-            data: storedData,
-            keys: NotificationUserInfoParser.Key.self
-        )
-        .done { success in
-            console("Did finish parsing shared notifications, success: \(success)")
-            if success {
-                self.dependencyContainer.notificationPayloadParser.clearStoredNotifications()
-            }
-        }
-        .catch { console($0, type: .error) }
+        NotificationManager.shared.parseSharedNotifications()
+        NotificationManager.shared.parseSharedCovidStats()
     }
     
     @objc private func screenCaptureDidChange(notification: Notification) {

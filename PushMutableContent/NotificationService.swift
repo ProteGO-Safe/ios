@@ -15,6 +15,10 @@ class NotificationService: UNNotificationServiceExtension {
         self.contentHandler = contentHandler
         let parser = NotificationUserInfoParser()
         
+        if let covidStatsDictionary = parser.parseCovidStats(userInfo: request.content.userInfo)?.dictionary {
+            parser.addSharedData(data: covidStatsDictionary, for: .sharedCovidStats)
+        }
+        
         guard let bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent) else { return }
         
         guard
@@ -25,14 +29,14 @@ class NotificationService: UNNotificationServiceExtension {
             //
             let routeRaw: String? = parser.routeData(userInfo: request.content.userInfo)
             let dictionary = parser.parseNotification(title: bestAttemptContent.title, content: bestAttemptContent.body, route: routeRaw)
-            parser.addStoredNotification(data: dictionary)
+            parser.addSharedData(data: dictionary, for: .sharedNotifications)
             contentHandler(bestAttemptContent)
             return
         }
         
         let routeRaw: String? = parser.routeData(userInfo: request.content.userInfo)
         let dictionary = parser.parseNotification(title: selectedModel.title, content: selectedModel.content, route: routeRaw)
-        parser.addStoredNotification(data: dictionary)
+        parser.addSharedData(data: dictionary, for: .sharedNotifications)
         
         var modifiedUserInfo = request.content.userInfo
         modifiedUserInfo[NotificationUserInfoParser.Key.uuid.rawValue] = dictionary[NotificationUserInfoParser.Key.id.rawValue] as? String

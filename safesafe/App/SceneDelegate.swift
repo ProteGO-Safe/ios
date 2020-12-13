@@ -48,9 +48,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         NotificationManager.shared.clearBadgeNumber()
         NotificationManager.shared.registerAPNSIfNeeded()
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-        
+        NotificationManager.shared.registerNotificationCategories()
     }
 
     @available(iOS 13.0, *)

@@ -43,7 +43,10 @@ final class JSBridge: NSObject {
         case historicalData = 90
         case historicalDataRemove = 91
         
+        case covidStatsSubscription = 100
+        case setCovidStatsSubscription = 101
         case dashboardStats = 102
+        case agregatedStats = 103
     }
     
     enum SendMethod: String, CaseIterable {
@@ -287,6 +290,12 @@ extension JSBridge: WKScriptMessageHandler {
         case .dashboardStats:
             dashboardStats(requestID: requestId, dataType: bridgeDataType)
             
+        case .covidStatsSubscription:
+            covidStatsSubscription(requestID: requestId, dataType: bridgeDataType)
+        
+        case .agregatedStats:
+            agregatedStats(requestID: requestId, dataType: bridgeDataType)
+            
         default:
             return
         }
@@ -483,10 +492,41 @@ private extension JSBridge {
             }
             .catch { console($0, type: .error) }
     }
+    
+    func covidStatsSubscription(requestID: String, dataType: BridgeDataType) {
+        let covidStatsSubscription = StoredDefaults.standard.get(key: .didUserSubscribeForCovidStatsTopic) ?? false
+        
+        guard
+            let jsonString = CovidStatsResponse(isCovidStatsNotificationEnabled: covidStatsSubscription).jsonString
+        else {
+            return
+        }
+        
+        bridgeDataResponse(type: .covidStatsSubscription, body: jsonString, requestId: requestID)
+    }
+    
+    func agregatedStats(requestID: String, dataType: BridgeDataType) {
+        historicalDataWorker?
+            .getAgregatedExposureData()
+            .done { [weak self] model in
+                guard let model = model, let jsonString = ExposureHistoryRiskCheckAgregatedResponse(with: model).jsonString else {
+                    return
+                }
+                
+                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+            }
+            .catch { console($0, type: .error) }
+    }
 }
 
 // MARK: - onBridgeData handling
 private extension JSBridge {
+    
+    func setCovidStatsSubscription(jsonString: String?) {
+        guard let request: CovidStatsRequest = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
+
+        NotificationManager.shared.manageUserCovidStatsTopic(subscribe: request.isCovidStatsNotificationEnabled)
+    }
     
     func removeHistoricalData(jsonString: String?) {
         guard let request: DeleteHistoricalDataRequest = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }

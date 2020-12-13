@@ -16,6 +16,7 @@ protocol DashboardWorkerDelegate: class {
 protocol DashboardWorkerType {
     var delegate: DashboardWorkerDelegate? { get set }
     @discardableResult func fetchData(shouldDelegateResult: Bool) -> Promise<String>
+    @discardableResult func parseSharedContainerCovidStats(objects: [[String : Any]]) -> Promise<Void>
 }
 
 extension DashboardWorkerType {
@@ -70,6 +71,20 @@ final class DashboardWorker: DashboardWorkerType {
         }
     }
     
+    func parseSharedContainerCovidStats(objects: [[String : Any]]) -> Promise<Void> {
+        let decoder = JSONDecoder()
+        
+        guard
+            let jsonData = try? JSONSerialization.data(withJSONObject: objects, options: .fragmentsAllowed),
+            let items = try? decoder.decode([PushNotificationCovidStatsModel].self, from: jsonData),
+            let recentlyUpdatedModel = items.sorted(by: { $0.updated > $1.updated }).first
+        else {
+            return .init(error: InternalError.nilValue)
+        }
+        
+        return updateData(response: recentlyUpdatedModel).asVoid()
+    }
+    
     private func downloadData() -> Promise<DashboardStatsAPIResponse> {
         return Promise { seal in
             provider.request(.fetch) { result in
@@ -89,6 +104,30 @@ final class DashboardWorker: DashboardWorkerType {
     }
     
     private func updateData(response: DashboardStatsAPIResponse) -> Promise<DashboardStatsModel> {
+        Promise { seal in
+            localStorage?.beginWrite()
+            
+            let model: DashboardStatsModel
+            if let dbModel: DashboardStatsModel = localStorage?.fetch(primaryKey: DashboardStatsModel.identifier) {
+                model = dbModel
+                model.update(with: response)
+            } else {
+                model = DashboardStatsModel(model: response)
+            }
+            model.lastFetch = Int(Date().timeIntervalSince1970)
+            
+            localStorage?.append(model, policy: .all)
+            
+            do {
+                try localStorage?.commitWrite()
+                seal.fulfill(model)
+            } catch {
+                seal.reject(error)
+            }
+        }
+    }
+    
+    private func updateData(response: PushNotificationCovidStatsModel) -> Promise<DashboardStatsModel> {
         Promise { seal in
             localStorage?.beginWrite()
             
