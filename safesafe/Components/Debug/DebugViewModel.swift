@@ -135,7 +135,7 @@ final class DebugViewModel: ViewModelType {
        
         try? localStorage?.commitWrite()
         
-        ExposureHistoryRiskCheckAgregated.update(with: riskModel, debug: true)
+        ExposureHistoryRiskCheckAgregated.update(with: riskModel, debug: true, storage: localStorage)
     }
     
     func deleteSimulatedRiskCheck() {

@@ -8,7 +8,7 @@
 import Foundation
 
 struct DashboardStatsResponse: Codable, JSONRepresentable {
-    let covidStats: CovidStats
+    let covidStats: CovidStats?
     
     struct CovidStats: Codable {
         let updated: Int

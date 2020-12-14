@@ -60,10 +60,10 @@ final class NotificationManager: NSObject {
     
     enum Topic {
         static let devSuffix = "-dev"
-        static let dailyPrefix = "daily_"
+        static let dailyPrefix = "daily-localized_"
         static let generalPrefix = "general"
         static let generalLocalizedPrefix = "general-localized"
-        static let covidStatsPrefix = "covid_stats"
+        static let covidStatsPrefix = "covid-stats-ios"
         static let daysNum = 50
         
         case general
@@ -344,7 +344,7 @@ extension NotificationManager: NotificationManagerProtocol {
         Messaging.messaging().unsubscribe(fromTopic: Topic.general.toString[0])
         Messaging.messaging().subscribe(toTopic: Topic.generalLocalized.toString[0])
         
-        let didSubscribedFCMTopics: Bool = StoredDefaults.standard.get(key: .didSubscribeFCMTopics) ?? false
+        let didSubscribedFCMTopics: Bool = StoredDefaults.standard.get(key: .didSubscribeLocalizedFCMTopics) ?? false
         guard !didSubscribedFCMTopics else {
             return
         }
@@ -370,7 +370,7 @@ extension NotificationManager: NotificationManagerProtocol {
             }
             
             DispatchQueue.main.async {
-                StoredDefaults.standard.set(value: true, key: .didSubscribeFCMTopics)
+                StoredDefaults.standard.set(value: true, key: .didSubscribeLocalizedFCMTopics)
             }
         }
         
@@ -456,7 +456,7 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
 }
 
 extension StoredDefaults.Key {
-    static let didSubscribeFCMTopics = StoredDefaults.Key("didSubscribeFCMTopics")
+    static let didSubscribeLocalizedFCMTopics = StoredDefaults.Key("didSubscribeLocalizedFCMTopics")
     static let didAuthorizeAPN = StoredDefaults.Key("didAuthorizeAPN")
     static let districtStatusNotificationTimestamp = StoredDefaults.Key("districtStatusNotificationTimestamp")
     static let didRegisterCovidStatsNotificationCategory = StoredDefaults.Key("didRegisterCovidStatsNotificationCategory")

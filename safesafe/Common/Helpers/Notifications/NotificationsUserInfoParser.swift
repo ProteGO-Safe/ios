@@ -11,6 +11,7 @@ final class NotificationUserInfoParser {
     
     enum Key: String {
         case route
+        case notification
         case localizedNotifications
         case title
         case content
@@ -25,10 +26,10 @@ final class NotificationUserInfoParser {
         var localizedList: [LocalizedNotificationModel] = []
         guard
             let userInfoJSON = userInfo as? [String: Any],
-            let localizedNotificationsRaw = userInfoJSON[Key.localizedNotifications.rawValue] as? String,
+            let localizedNotificationsRaw = userInfoJSON[Key.notification.rawValue] as? String,
             let localizedNotificationsData = localizedNotificationsRaw.data(using: .utf8),
             let json = try? JSONSerialization.jsonObject(with: localizedNotificationsData, options: .allowFragments),
-            let objects = json as? [[String: Any]]
+            let objects = (json as? [String: Any])?[Key.localizedNotifications.rawValue] as? [[String: Any]]
         else {
             return localizedList
         }

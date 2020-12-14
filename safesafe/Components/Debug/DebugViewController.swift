@@ -208,7 +208,7 @@ extension DebugViewController: DebugViewModelDelegate {
             }
             alertController.addAction(action)
         }
-        
+            
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         alertController.addAction(cancelAction)
         

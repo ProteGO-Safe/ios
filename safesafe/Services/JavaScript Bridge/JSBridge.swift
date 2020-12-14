@@ -230,6 +230,9 @@ extension JSBridge: WKScriptMessageHandler {
         case .historicalDataRemove:
             removeHistoricalData(jsonString: jsonString)
             
+        case .setCovidStatsSubscription:
+            setCovidStatsSubscription(jsonString: jsonString)
+            
         default:
             console("Not managed yet", type: .warning)
         }
@@ -509,7 +512,7 @@ private extension JSBridge {
         historicalDataWorker?
             .getAgregatedExposureData()
             .done { [weak self] model in
-                guard let model = model, let jsonString = ExposureHistoryRiskCheckAgregatedResponse(with: model).jsonString else {
+                guard let jsonString = ExposureHistoryRiskCheckAgregatedResponse(with: model).jsonString else {
                     return
                 }
                 

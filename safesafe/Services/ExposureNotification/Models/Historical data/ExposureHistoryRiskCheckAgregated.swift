@@ -13,6 +13,8 @@ final class ExposureHistoryDayCheck: Object, LocalStorable {
     @objc dynamic var date = Date()
     @objc dynamic var keysCount: Int = .zero
     @objc dynamic var agregator: ExposureHistoryRiskCheckAgregated?
+    
+    override class func primaryKey() -> String? { "id" }
 }
 
 final class ExposureHistoryRiskCheckAgregated: Object, LocalStorable {
@@ -28,9 +30,9 @@ final class ExposureHistoryRiskCheckAgregated: Object, LocalStorable {
     
     override class func primaryKey() -> String? { "id" }
     
-    static func update(with analyzeModel: ExposureHistoryAnalyzeCheck, debug: Bool = false) {
-        let localStorage = RealmLocalStorage()
-        localStorage?.beginWrite()
+    static func update(with analyzeModel: ExposureHistoryAnalyzeCheck, debug: Bool = false, storage: LocalStorageProtocol? = nil) {
+        let localStorage = storage ?? RealmLocalStorage()
+        var daysCheck: [ExposureHistoryDayCheck] = localStorage?.fetch() ?? []
         
         let agregator:ExposureHistoryRiskCheckAgregated
         if let dbModel: ExposureHistoryRiskCheckAgregated = localStorage?.fetch().first {
@@ -38,8 +40,6 @@ final class ExposureHistoryRiskCheckAgregated: Object, LocalStorable {
         } else {
             agregator = ExposureHistoryRiskCheckAgregated()
         }
-        
-        var daysCheck: [ExposureHistoryDayCheck] = Array(agregator.days)
         
         let day = ExposureHistoryDayCheck()
         if debug {
@@ -51,30 +51,39 @@ final class ExposureHistoryRiskCheckAgregated: Object, LocalStorable {
         
         daysCheck.append(day)
         
+        localStorage?.append(daysCheck, policy: .all, completion: nil)
+        
+        localStorage?.beginWrite()
+        
         agregator.lastRiskCheckTimestamp = Int(analyzeModel.date.timeIntervalSince1970)
         agregator.todayKeysCount = analyzeModel.keysCount
         agregator.totalKeysCount += analyzeModel.keysCount
-        agregator.last7daysKeysCount = sanitizedLast7DaysKeys(days: daysCheck, storage: localStorage)
+        agregator.last7daysKeysCount = last7DaysKeys(days: daysCheck)
         
-        localStorage?.append(day)
         localStorage?.append(agregator, policy: .all)
         
-        do {
-            try localStorage?.commitWrite()
-        } catch {
-            console(error, type: .error)
-        }
+        try? localStorage?.commitWrite()
+        
+        removeOldKeys(storage: storage)
     }
     
-    private static func sanitizedLast7DaysKeys(days: [ExposureHistoryDayCheck], storage: RealmLocalStorage?) -> Int {
+    private static func last7DaysKeys(days: [ExposureHistoryDayCheck]) -> Int {
         let now = Date()
         guard let sevenDaysBackDate = Calendar.current.date(byAdding: .day, value: -7, to: now) else { return .zero }
         let range = Calendar.current.startOfDay(for: sevenDaysBackDate)..<now
         let lastSevenDaysKeys = days.filter { range.contains($0.date) }.map { $0.keysCount }.reduce(Int.zero, +)
-        let toRemove = Array(days.filter { $0.date < sevenDaysBackDate })
-        
-        storage?.remove(toRemove, completion: nil)
         
         return lastSevenDaysKeys
+    }
+    
+    private static func removeOldKeys(storage: LocalStorageProtocol?) {
+        let now = Date()
+        guard
+            let days: [ExposureHistoryDayCheck] = storage?.fetch(),
+            let sevenDaysBackDate = Calendar.current.date(byAdding: .day, value: -7, to: now)
+        else { return }
+        
+        let toRemove = Array(days.filter { $0.date < sevenDaysBackDate })
+        storage?.remove(toRemove, completion: nil)
     }
 }

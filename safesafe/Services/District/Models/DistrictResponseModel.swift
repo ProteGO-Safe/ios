@@ -8,7 +8,13 @@
 import Foundation
 
 struct DistrictResponseModel: Codable {
-    let updated: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case voivodeshipsUpdated = "voivodeships_updated"
+        case voivodeships
+    }
+    
+    let voivodeshipsUpdated: Int
     let voivodeships: [Voivodeship]
     
     struct Voivodeship: Codable {
