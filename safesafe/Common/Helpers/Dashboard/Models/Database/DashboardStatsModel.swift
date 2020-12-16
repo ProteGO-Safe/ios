@@ -15,12 +15,12 @@ final class DashboardStatsModel: Object, LocalStorable {
     @objc dynamic var id: String = DashboardStatsModel.identifier
     @objc dynamic var lastFetch: Int = .zero
     @objc dynamic var updated: Int = .zero
-    @objc dynamic var currentCases: Int = .zero
-    @objc dynamic var totalCases: Int = .zero
-    @objc dynamic var currentDeaths: Int = .zero
-    @objc dynamic var totalDeaths: Int = .zero
-    @objc dynamic var currentRecovered: Int = .zero
-    @objc dynamic var totalRecovered: Int = .zero
+    let currentCases = RealmOptional<Int>()
+    let totalCases = RealmOptional<Int>()
+    let currentDeaths = RealmOptional<Int>()
+    let totalDeaths = RealmOptional<Int>()
+    let currentRecovered = RealmOptional<Int>()
+    let totalRecovered = RealmOptional<Int>()
     
     override class func primaryKey() -> String? { "id" }
     
@@ -36,21 +36,21 @@ final class DashboardStatsModel: Object, LocalStorable {
     
     func update(with model: DashboardStatsAPIResponse) {
         self.updated = model.updated
-        self.currentCases = model.newCases
-        self.totalCases = model.totalCases
-        self.currentDeaths = model.newDeaths
-        self.totalDeaths = model.totalDeaths
-        self.currentRecovered = model.newRecovered
-        self.totalDeaths = model.totalRecovered
+        self.currentCases.value = model.newCases
+        self.totalCases.value = model.totalCases
+        self.currentDeaths.value = model.newDeaths
+        self.totalDeaths.value = model.totalDeaths
+        self.currentRecovered.value = model.newRecovered
+        self.totalDeaths.value = model.totalRecovered
     }
     
     func update(with model: PushNotificationCovidStatsModel) {
         self.updated = model.updated
-        self.currentCases = model.newCases
-        self.totalCases = model.totalCases
-        self.currentDeaths = model.newDeaths
-        self.totalDeaths = model.totalDeaths
-        self.currentRecovered = model.newRecovered
-        self.totalDeaths = model.totalRecovered
+        self.currentCases.value = model.newCases
+        self.totalCases.value = model.totalCases
+        self.currentDeaths.value = model.newDeaths
+        self.totalDeaths.value = model.totalDeaths
+        self.currentRecovered.value = model.newRecovered
+        self.totalDeaths.value = model.totalRecovered
     }
 }

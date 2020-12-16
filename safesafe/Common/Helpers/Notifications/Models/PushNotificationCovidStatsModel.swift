@@ -9,12 +9,12 @@ import Foundation
 
 struct PushNotificationCovidStatsModel: Codable {
     let updated: Int
-    let newCases: Int
-    let totalCases: Int
-    let newDeaths: Int
-    let totalDeaths: Int
-    let newRecovered: Int
-    let totalRecovered: Int
+    let newCases: Int?
+    let totalCases: Int?
+    let newDeaths: Int?
+    let totalDeaths: Int?
+    let newRecovered: Int?
+    let totalRecovered: Int?
     
     var dictionary: [String: Any]? {
         guard let data = try? JSONEncoder().encode(self) else { return nil }
