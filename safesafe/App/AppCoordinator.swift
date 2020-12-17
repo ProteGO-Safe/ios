@@ -127,6 +127,8 @@ final class AppCoordinator: CoordinatorType {
     
     private func configureJSBridge(with viewController: UIViewController) {
         if #available(iOS 13.5, *) {
+            dependencyContainer.exposureServiceDebug.register(exposureService: dependencyContainer.exposureService)
+            
             let factory: ExposureNotificationJSBridgeFactory = dependencyContainer
             dependencyContainer.jsBridge.registerExposureNotification(
                 with: factory.makeExposureNotificationJSBridge(with: viewController),

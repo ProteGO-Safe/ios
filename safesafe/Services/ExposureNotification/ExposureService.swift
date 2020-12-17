@@ -8,6 +8,10 @@
 import ExposureNotification
 import PromiseKit
 
+protocol ExposureServiceDebugProtocol: class {
+    func detectExposures() -> Promise<Void>
+}
+
 @available(iOS 13.5, *)
 protocol ExposureServiceProtocol: class {
     
@@ -302,5 +306,44 @@ extension ExposureService: ExposureNotificationStatusProtocol {
             .then { _ -> Promise<ENStatus> in
                 self.activateManager()
         }.map { $0 != .bluetoothOff }
+    }
+}
+
+final class ExposureServiceDebug: ExposureServiceDebugProtocol {
+    
+    @available(iOS 13.5, *)
+    static weak var exposureService: ExposureServiceProtocol?
+    
+    @available(iOS 13.5, *)
+    func register(exposureService: ExposureServiceProtocol) {
+        Self.exposureService = exposureService
+    }
+    
+    func detectExposures() -> Promise<Void> {
+        if #available(iOS 13.5, *) {
+            guard let service = Self.exposureService else {
+                return .value(())
+            }
+            resetLastDownloadTimestamp()
+            return service.detectExposures().asVoid()
+        } else {
+            return .value(())
+        }
+    }
+    
+    private func resetLastDownloadTimestamp() {
+        let storage = RealmLocalStorage()
+        storage?.beginWrite()
+        
+        var model: DiagnosisKeysDownloadInfoModel? = storage?.fetch(primaryKey: DiagnosisKeysDownloadInfoModel.identifier)
+        if model != nil {
+            model?.lastPackageTimestamp = 1
+        } else {
+            model = DiagnosisKeysDownloadInfoModel()
+            model?.lastPackageTimestamp = 1
+        }
+        
+        storage?.append(model!, policy: .all)
+        try? storage?.commitWrite()
     }
 }

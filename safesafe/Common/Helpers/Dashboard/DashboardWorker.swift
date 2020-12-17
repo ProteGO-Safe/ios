@@ -107,12 +107,20 @@ final class DashboardWorker: DashboardWorkerType {
         Promise { seal in
             localStorage?.beginWrite()
             
+            let shouldUpdate = shouldUpdateModel(with: response)
+            
             let model: DashboardStatsModel
             if let dbModel: DashboardStatsModel = localStorage?.fetch(primaryKey: DashboardStatsModel.identifier) {
                 model = dbModel
-                model.update(with: response)
+                if shouldUpdate {
+                    model.update(with: response)
+                }
             } else {
-                model = DashboardStatsModel(model: response)
+                if shouldUpdate {
+                    model = DashboardStatsModel(model: response)
+                } else {
+                    model = DashboardStatsModel()
+                }
             }
             model.lastFetch = Int(Date().timeIntervalSince1970)
             
@@ -131,12 +139,20 @@ final class DashboardWorker: DashboardWorkerType {
         Promise { seal in
             localStorage?.beginWrite()
             
+            let shouldUpdate = shouldUpdateModel(with: response)
+            
             let model: DashboardStatsModel
             if let dbModel: DashboardStatsModel = localStorage?.fetch(primaryKey: DashboardStatsModel.identifier) {
                 model = dbModel
-                model.update(with: response)
+                if shouldUpdate {
+                    model.update(with: response)
+                }
             } else {
-                model = DashboardStatsModel(model: response)
+                if shouldUpdate {
+                    model = DashboardStatsModel(model: response)
+                } else {
+                    model = DashboardStatsModel()
+                }
             }
             model.lastFetch = Int(Date().timeIntervalSince1970)
             
@@ -168,6 +184,22 @@ final class DashboardWorker: DashboardWorkerType {
         }
         
         return .value(jsonString)
+    }
+    
+    private func shouldUpdateModel(with response: DashboardStatsAPIResponse) -> Bool {
+        let recovered = response.newRecovered != nil && response.totalRecovered != nil
+        let cases = response.newCases != nil && response.totalCases != nil
+        let deaths = response.newDeaths != nil && response.totalDeaths != nil
+        
+        return recovered || cases || deaths
+    }
+    
+    private func shouldUpdateModel(with response: PushNotificationCovidStatsModel) -> Bool {
+        let recovered = response.newRecovered != nil && response.totalRecovered != nil
+        let cases = response.newCases != nil && response.totalCases != nil
+        let deaths = response.newDeaths != nil && response.totalDeaths != nil
+        
+        return recovered || cases || deaths
     }
     
     private func shouldDownload() -> Bool {

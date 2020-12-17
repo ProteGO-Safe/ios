@@ -17,6 +17,7 @@ final class DependencyContainer {
     )
     
     lazy var deviceCheckService = DeviceCheckService()
+    lazy var exposureServiceDebug = ExposureServiceDebug()
     
     @available(iOS 13.5, *)
     lazy var diagnosisKeysDownloadService = DiagnosisKeysDownloadService(

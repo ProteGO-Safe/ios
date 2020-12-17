@@ -15,7 +15,9 @@ extension DependencyContainer: DebugViewControllerFactory {
     func makeDebugViewController(closeCallback: @escaping () -> Void) -> DebugViewController {
         let viewModel = DebugViewModel(
             districtService: districtsService,
-            localStorage: realmLocalStorage)
+            localStorage: realmLocalStorage,
+            exposureService: exposureServiceDebug
+        )
         
         viewModel.onSimulateExposureRiskChange { [weak self] in
             if #available(iOS 13.5, *) {

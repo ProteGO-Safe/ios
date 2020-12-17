@@ -24,6 +24,7 @@ final class DebugViewController: ViewController<DebugViewModel> {
     private let closeButton = UIButton()
     private let titleLabel = UILabel()
     private let mainStackView = UIStackView()
+    private let indicator = UIActivityIndicatorView()
     var closeCallback: (() -> Void)?
     
     override func start() {
@@ -85,6 +86,7 @@ final class DebugViewController: ViewController<DebugViewModel> {
         stackButton(DebugViewModel.Texts.dumpLocalStorageTitl, action: .dumpLocalstorage)
         stackButton(DebugViewModel.Texts.downloadDistrictsTitle, action: .downloadDistricts)
         if #available(iOS 13.5, *) {
+            stackButton(DebugViewModel.Texts.downloadCDNKeys, action: .downloadCDNKeys)
             stackButton(DebugViewModel.Texts.simulateExposureRiskTitle, action: .simulateExposureRisk)
             stackButton(DebugViewModel.Texts.deleteSimulatedExposuresTitle, action: .deleteSimulatedExposures)
             stackButton(DebugViewModel.Texts.simulateRiskCheckTitle, action: .simulateRiskCheck)
@@ -213,5 +215,23 @@ extension DebugViewController: DebugViewModelDelegate {
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true)
+    }
+    
+    func showIndicator(show: Bool) {
+        guard let keyWindow = UIWindow.key else { return }
+        if show, indicator.superview == nil {
+            view.isUserInteractionEnabled = false
+            view.subviews.forEach { $0.alpha = 0.5 }
+            indicator.startAnimating()
+            keyWindow.addSubview(indicator)
+            indicator.snp.makeConstraints {
+                $0.centerX.centerY.equalToSuperview()
+            }
+        } else {
+            view.isUserInteractionEnabled = true
+            view.subviews.forEach { $0.alpha = 1.0 }
+            indicator.removeFromSuperview()
+            indicator.snp.removeConstraints()
+        }
     }
 }
