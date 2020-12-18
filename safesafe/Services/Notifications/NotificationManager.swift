@@ -16,7 +16,7 @@ protocol NotificationManagerProtocol {
     func parseSharedCovidStats()
     func parseSharedNotifications()
     func subscribeForCovidStatsTopicByDefault()
-    func manageUserCovidStatsTopic(subscribe: Bool)
+    func manageUserCovidStatsTopic(subscribe: Bool, completion: @escaping ((Bool) -> ()))
     func registerNotificationCategories()
     func register(dependencyContainer: DependencyContainer)
     func registerAPNSIfNeeded()
@@ -221,21 +221,25 @@ extension NotificationManager: NotificationManagerProtocol {
         }
     }
     
-    func manageUserCovidStatsTopic(subscribe: Bool) {
+    func manageUserCovidStatsTopic(subscribe: Bool, completion: @escaping ((Bool) -> ())) {
         if subscribe {
             Messaging.messaging().subscribe(toTopic: Topic.covidStats.toString.first!) { error in
                 if let error = error {
                     console(error, type: .error)
+                    completion(false)
                 } else {
                     StoredDefaults.standard.set(value: true, key: .didUserSubscribeForCovidStatsTopic)
+                    completion(true)
                 }
             }
         } else {
             Messaging.messaging().unsubscribe(fromTopic: Topic.covidStats.toString.first!) { error in
                 if let error = error {
                     console(error, type: .error)
+                    completion(false)
                 } else {
                     StoredDefaults.standard.set(value: false, key: .didUserSubscribeForCovidStatsTopic)
+                    completion(true)
                 }
             }
         }
@@ -426,7 +430,7 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
         
         switch response.actionIdentifier {
         case Constants.NotificationCategory.declineCovidStatsNotificationActionId:
-            manageUserCovidStatsTopic(subscribe: false)
+            manageUserCovidStatsTopic(subscribe: false) { _ in }
         default: ()
         }
         

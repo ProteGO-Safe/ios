@@ -229,10 +229,7 @@ extension JSBridge: WKScriptMessageHandler {
             
         case .historicalDataRemove:
             removeHistoricalData(jsonString: jsonString)
-            
-        case .setCovidStatsSubscription:
-            setCovidStatsSubscription(jsonString: jsonString)
-            
+                        
         default:
             console("Not managed yet", type: .warning)
         }
@@ -298,6 +295,9 @@ extension JSBridge: WKScriptMessageHandler {
         
         case .agregatedStats:
             agregatedStats(requestID: requestId, dataType: bridgeDataType)
+    
+        case .setCovidStatsSubscription:
+            setCovidStatsSubscription(jsonString: jsonString, requestID: requestId, dataType: bridgeDataType)
             
         default:
             return
@@ -520,16 +520,24 @@ private extension JSBridge {
             }
             .catch { console($0, type: .error) }
     }
+    
+    func setCovidStatsSubscription(jsonString: String?, requestID: String, dataType: BridgeDataType) {
+        guard let request: CovidStatsRequest = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
+
+        NotificationManager.shared.manageUserCovidStatsTopic(subscribe: request.isCovidStatsNotificationEnabled) { [weak self] success in
+            let currentState: Bool = StoredDefaults.standard.get(key: .didUserSubscribeForCovidStatsTopic) ?? StoredDefaults.standard.get(key: .didSubscribeForCovidStatsTopicByDefault) ?? false
+            guard let jsonString = CovidStatsResponse(isCovidStatsNotificationEnabled: currentState).jsonString else {
+                return
+            }
+            self?.bridgeDataResponse(type: .setCovidStatsSubscription, body: jsonString, requestId: requestID)
+        }
+        
+        
+    }
 }
 
 // MARK: - onBridgeData handling
 private extension JSBridge {
-    
-    func setCovidStatsSubscription(jsonString: String?) {
-        guard let request: CovidStatsRequest = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
-
-        NotificationManager.shared.manageUserCovidStatsTopic(subscribe: request.isCovidStatsNotificationEnabled)
-    }
     
     func removeHistoricalData(jsonString: String?) {
         guard let request: DeleteHistoricalDataRequest = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
