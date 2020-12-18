@@ -41,7 +41,7 @@ final class DashboardStatsModel: Object, LocalStorable {
         self.currentDeaths.value = model.newDeaths
         self.totalDeaths.value = model.totalDeaths
         self.currentRecovered.value = model.newRecovered
-        self.totalDeaths.value = model.totalRecovered
+        self.totalRecovered.value = model.totalRecovered
     }
     
     func update(with model: PushNotificationCovidStatsModel) {
@@ -51,6 +51,6 @@ final class DashboardStatsModel: Object, LocalStorable {
         self.currentDeaths.value = model.newDeaths
         self.totalDeaths.value = model.totalDeaths
         self.currentRecovered.value = model.newRecovered
-        self.totalDeaths.value = model.totalRecovered
+        self.totalRecovered.value = model.totalRecovered
     }
 }
