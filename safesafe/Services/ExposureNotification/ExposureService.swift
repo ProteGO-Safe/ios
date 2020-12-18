@@ -143,11 +143,13 @@ final class ExposureService: ExposureServiceProtocol {
             }
             .done { summary, numberOfKeys in
                 self.getExposureInfo(from: summary, numberOfKeys: numberOfKeys)
-                    .done { exposures, riskChecks, analyzeCheck in
+                    .done { exposures, riskCheck, analyzeCheck in
                         ExposureHistoryRiskCheckAgregated.update(with: analyzeCheck)
                         self.storageService?.append(exposures)
                         self.storageService?.append(analyzeCheck)
-                        self.storageService?.append(riskChecks)
+                        if let riskCheck = riskCheck {
+                            self.storageService?.append(riskCheck)
+                        }
                         seal.fulfill(exposures)
                     }
                     .catch {
@@ -201,7 +203,7 @@ final class ExposureService: ExposureServiceProtocol {
     private func getExposureInfo(
         from summary: ENExposureDetectionSummary,
         numberOfKeys: Int
-    ) -> Promise<(exposures: [Exposure], riskChecks: [ExposureHistoryRiskCheck], analyzeCheck: ExposureHistoryAnalyzeCheck)> {
+    ) -> Promise<(exposures: [Exposure], riskCheck: ExposureHistoryRiskCheck?, analyzeCheck: ExposureHistoryAnalyzeCheck)> {
         
         Promise { seal in
             
@@ -236,7 +238,9 @@ final class ExposureService: ExposureServiceProtocol {
                     }
                 }
                 
-                seal.fulfill((exposures: exposures, riskChecks: riskChecks, analyzeCheck: esposureRisk))
+                let highestRisk = riskChecks.sorted { $0.riskLevelFull > $1.riskLevelFull }.first
+                
+                seal.fulfill((exposures: exposures, riskCheck: highestRisk, analyzeCheck: esposureRisk))
             }
         }
     }
