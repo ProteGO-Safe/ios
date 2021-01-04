@@ -66,7 +66,7 @@ final class DiagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol {
             }
             .then { token -> Promise<Moya.Response> in
                 let data = TemporaryExposureKeys(
-                    temporaryExposureKeys: diagnosisKeys.map({ TemporaryExposureKey($0) }),
+                    temporaryExposureKeys: diagnosisKeys.map({ TemporaryExposureSingleKey($0) }),
                     verificationPayload: token
                 )
                 let keysData = TemporaryExposureKeysData(

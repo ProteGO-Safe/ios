@@ -102,7 +102,7 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>ENDeveloperRegion</key>
-	<string>PL</string>
+	<string>TEST_PL_1</string>
 	<key>ENAPIVersion</key>
 	<string>1</string>
 </dict>

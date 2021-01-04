@@ -22,7 +22,6 @@ final class PWAViewController: ViewController<PWAViewModel> {
     }
     
     private var webKitView: WKWebView?
-    
     var onAppear: (() -> Void)?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -39,6 +38,11 @@ final class PWAViewController: ViewController<PWAViewModel> {
         onAppear?()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        becomeFirstResponder()
+    }
+    
     override func start() {
         viewModel.delegate = self
     }
@@ -52,19 +56,10 @@ final class PWAViewController: ViewController<PWAViewModel> {
         })
     }
     
-    private func debugViewSetup() {
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         #if !LIVE
-        let debugButton = UIButton()
-        view.addSubview(debugButton)
-        debugButton.translatesAutoresizingMaskIntoConstraints = false
-        debugButton.setImage(#imageLiteral(resourceName: "bug_icon"), for: .normal)
-        debugButton.tintColor = .white
-        debugButton.addTarget(viewModel, action: #selector(PWAViewModel.debugButtonTapped), for: .touchUpInside)
-        debugButton.snp.makeConstraints { maker in
-            guard let superview = debugButton.superview else { return }
-            maker.width.height.equalTo(Constants.debugButtonSize)
-            maker.trailing.equalToSuperview().inset(Constants.debugButtonRightMargin)
-            maker.top.equalTo(superview.snp.topMargin).inset(Constants.debugButtonTopMargin)
+        if motion == .motionShake {
+            viewModel.showDebug()
         }
         #endif
     }
@@ -85,9 +80,7 @@ extension PWAViewController: PWAViewModelDelegate {
         let webKitView = WKWebView(frame: .zero, configuration: configuration)
         webKitView.allowsBackForwardNavigationGestures = false
         webKitView.allowsLinkPreview = false
-        if #available(iOS 11.0, *) {
-            webKitView.scrollView.contentInsetAdjustmentBehavior = .never
-        }
+        webKitView.scrollView.contentInsetAdjustmentBehavior = .never
         webKitView.scrollView.bounces = false
         webKitView.navigationDelegate = self
         
@@ -95,16 +88,18 @@ extension PWAViewController: PWAViewModelDelegate {
         completion(webKitView)
         
         self.webKitView = webKitView
-        
-        debugViewSetup()
     }
-
+    
     func reload() {
         webKitView?.reload()
     }
 }
 
 extension PWAViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        viewModel.didLoadWebView()
+    }
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if viewModel.manageNativeActions(with: navigationAction.request.url) || viewModel.openExternallyIfNeeded(url: navigationAction.request.url) {
             decisionHandler(.cancel)

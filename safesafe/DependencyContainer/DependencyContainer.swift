@@ -10,9 +10,14 @@ import FirebaseRemoteConfig
 final class DependencyContainer {
     
     @available(iOS 13.5, *)
-    lazy var backgroundTaskService = BackgroundTasksService(exposureService: exposureService, districtsService: districtsService)
+    lazy var backgroundTaskService = BackgroundTasksService(
+        exposureService: exposureService,
+        districtsService: districtsService,
+        dashboardWorker: dashboardWorker
+    )
     
     lazy var deviceCheckService = DeviceCheckService()
+    lazy var exposureServiceDebug = ExposureServiceDebug()
     
     @available(iOS 13.5, *)
     lazy var diagnosisKeysDownloadService = DiagnosisKeysDownloadService(
@@ -43,7 +48,11 @@ final class DependencyContainer {
     )
     
     lazy var districtsService: DistrictService = DistrictService(
-        with:  MoyaProvider<DistrictsTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
+        with:  MoyaProvider<CovidInfoTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
+    )
+    
+    lazy var dashboardWorker: DashboardWorkerType = DashboardWorker(
+        with: MoyaProvider<CovidInfoTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
     )
     
     lazy var freeTestService: FreeTestService = FreeTestService(
@@ -53,9 +62,18 @@ final class DependencyContainer {
         configuration: remoteConfiguration
     )
     
+    lazy var historicalDataWorker: HistoricalDataWorkerType = HistoricalDataWorker(
+        notificationsHistoryWorker: notificationHistoryWorker,
+        exposureHistoricalDataService: exposureHistoricalService
+    )
+    
+    lazy var notificationPayloadParser = NotificationUserInfoParser()
+    lazy var notificationHistoryWorker: NotificationHistoryWorkerType = NotificationHistoryWorker(storage: realmLocalStorage)
+    lazy var exposureHistoricalService: ExposureServiceHistoricalDataProtocol = ExposureServiceHistoricalData(storageService: realmLocalStorage)
     lazy var jailbreakService: JailbreakServiceProtocol = JailbreakService()
     lazy var jsBridge = JSBridge(with: serviceStatusManager)
     lazy var realmLocalStorage = RealmLocalStorage()
+    
     lazy var remoteConfigSetting: RemoteConfigSettings = {
         let settings = RemoteConfigSettings()
         settings.fetchTimeout = 10

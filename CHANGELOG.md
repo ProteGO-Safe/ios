@@ -6,6 +6,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.9.0
+- Added COVID daily stats
+- Added subscription for COVID daily stats push notifications
+- Added ability to unsubscribe from daily COVID stats push notification
+- Added localized push notifications
+- Added push notifications history
+- Added deep linking for push notifications
+- Added Universal Links for deep linking
+- Added local notifications (aka Districts Info) to notifications history
+- Removed passing push notification payload to UI (aka PWA)
+- Added Exposure Notificaticarion stats (keys count, analyze history, risk check)
+- Added Simulate Risk CHeck to Debug Panel
+- Added fetching CDN keys to Debug Panel
+- Changed the way of triggering to show Debug Panel in Stage builds (use shake gesture)
+
 ## 4.8.0
 - Added ability for manual delete exposure risk info
 

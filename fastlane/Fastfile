@@ -112,9 +112,10 @@ private_lane :build_appstore do |options|
 		export_options: {
 			method: "app-store",
 			provisioningProfiles: {
-				"se.sigmaconnectivity.protegosafe" => "protegosafe-appstore",
 				"pl.gov.mc.protegosafe" => "protegosafe-appstore",
-				"pl.gov.mc.protegosafe-staging" => "protegosafe-staging-appstore"
+				"pl.gov.mc.protegosafe-staging" => "protegosafe-staging-appstore",
+				"pl.gov.mc.protegosafe-staging.apns-mutablecontent" => "protegosafe-staging-apns-mutablecontent",
+				"pl.gov.mc.protegosafe.apns-mutablecontent" => "protegosafe-live-apns-mutablecontent"
 			}
 		}
 	)

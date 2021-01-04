@@ -1,0 +1,6 @@
+INFOPLIST_FILE = PushMutableContent/Info.plist
+PRODUCT_BUNDLE_IDENTIFIER = pl.gov.mc.protegosafe.apns-mutablecontent
+DEVELOPMENT_TEAM = 85GAG994R5
+CODE_SIGN_ENTITLEMENTS = PushMutableContent/PushMutableContent.entitlements
+PROVISIONING_PROFILE_SPECIFIER = protegosafe-live-apns-mutablecontent
+CODE_SIGN_IDENTITY = Apple Distribution: Ministerstwo Cyfryzacji (85GAG994R5)

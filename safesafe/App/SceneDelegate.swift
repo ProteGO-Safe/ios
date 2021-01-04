@@ -24,6 +24,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        guard
+            let userActivity = connectionOptions.userActivities.first,
+            userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+            let incomingURL = userActivity.webpageURL
+        else {
+            return
+        }
+        
+        DeepLinkingWorker.shared.navigate(with: incomingURL)
     }
     
     @available(iOS 13.0, *)
@@ -38,9 +48,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         NotificationManager.shared.clearBadgeNumber()
         NotificationManager.shared.registerAPNSIfNeeded()
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-        
+        NotificationManager.shared.registerNotificationCategories()
     }
 
     @available(iOS 13.0, *)
@@ -59,5 +67,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         HiderController.shared.show(windowScene: window?.windowScene)
     }
 
+    @available(iOS 13.0, *)
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        guard let url = userActivity.webpageURL else {  return }
+        DeepLinkingWorker.shared.navigate(with: url)
+    }
+    
+    @available(iOS 13.0, *)
+    func scene(_ scene: UIScene, willContinueUserActivityWithType userActivityType: String) {
+        
+    }
 }
 

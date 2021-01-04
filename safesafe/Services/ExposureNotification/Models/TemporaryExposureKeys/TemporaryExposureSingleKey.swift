@@ -6,7 +6,7 @@
 import ExposureNotification
 
 @available(iOS 13.5, *)
-struct TemporaryExposureKey: Encodable {
+struct TemporaryExposureSingleKey: Encodable {
     
     let key: Data
     let rollingPeriod: ENIntervalNumber

@@ -196,7 +196,7 @@ final class DiagnosisKeysDownloadService: DiagnosisKeysDownloadServiceProtocol {
                     if let lastCDNTimestamp = timestamps.last, self.lastTimestamp == .zero {
                         self.update(lastTimestamp: lastCDNTimestamp)
                     }
-                    
+                 
                     let itemNames = self.filter(keyFileNames: filesList)
                     
                     self.downloadFiles(withNames: itemNames, keysDirectoryURL: keysDirectoryURL).done { [weak self] urls in

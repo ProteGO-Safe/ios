@@ -34,16 +34,19 @@ class FreeTestService {
     
     func uploadPIN(jsRequest: FreeTestUploadPinRequest) -> Promise<FreeTestPinUploadResponse> {
         deviceCheckService.generatePayload()
-            .then { deviceCheckToken in
+            .then { deviceCheckToken -> Promise<(String, DeviceGUIDModel)> in
+                console("📗 Device Check Token (1/3)\n:\(deviceCheckToken)")
                 return self.generateGUIDIfNeeded().map { (deviceCheckToken, $0) }
         }
         .then { deviceCheckToken, guidModel -> Promise<FreeTestCreateSubscriptionResponseModel> in
+            console("📗 Generate GUID (2/3)\n:\(guidModel)")
             let headers = FreeTestRequestHeader(deviceCheckToken: deviceCheckToken)
             let request = FreeTestCreateSubscriptionRequestModel(code: jsRequest.pin, guid: guidModel.uuid)
             
             return self.createSubscription(headers: headers, request: request)
         }
         .then { apiResponse -> Promise<FreeTestPinUploadResponse> in
+            console("📗 API Response (3/3)\n:\(apiResponse)")
             return .value(.init(result: .success))
         }
     }
@@ -210,6 +213,9 @@ private extension FreeTestService {
         return renewableRequest.make(target: target)
             .recover { error -> Promise<Response> in
                 if (error as? InternalError) == nil {
+                    if let moyaError = error as? MoyaError, case let .underlying(error) = moyaError {
+                        console(error.0, type: .error)
+                    }
                     throw InternalError.freeTestPinUploadFailed
                 } else {
                     throw error

@@ -36,6 +36,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         StoredDefaults.standard.set(value: true, key: .isFirstRun)
         
+        if let url = launchOptions?[UIApplication.LaunchOptionsKey.url] as? URL { //Deeplink
+            DeepLinkingWorker.shared.navigate(with: url)
+        } else if let activityDictionary = launchOptions?[UIApplication.LaunchOptionsKey.userActivityDictionary] as? [AnyHashable: Any] { //Universal link
+            for key in activityDictionary.keys {
+                if let userActivity = activityDictionary[key] as? NSUserActivity {
+                    if let url = userActivity.webpageURL {
+                        DeepLinkingWorker.shared.navigate(with: url)
+                    }
+                }
+            }
+        }
+        
         return true
     }
     
@@ -66,6 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         NotificationManager.shared.clearBadgeNumber()
         NotificationManager.shared.registerAPNSIfNeeded()
+        NotificationManager.shared.registerNotificationCategories()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -74,6 +87,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         HiderController.shared.hide()
+    }
+    
+    func application(
+        _ application: UIApplication,
+        continue userActivity: NSUserActivity,
+        restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
+    ) -> Bool {
+        guard let url = userActivity.webpageURL else {  return false }
+        DeepLinkingWorker.shared.navigate(with: url)
+        
+        return true
     }
 }
 

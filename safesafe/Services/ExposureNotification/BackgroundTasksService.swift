@@ -23,12 +23,18 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
     private let backgroundTaskID = Bundle.main.bundleIdentifier! + ".backgroundAnalysis.exposure-notification"
     private let exposureService: ExposureServiceProtocol
     private let districtsService: DistrictService
+    private let dashboardWorker: DashboardWorkerType
     
     // MARK: - Life Cycle
     
-    init(exposureService: ExposureServiceProtocol, districtsService: DistrictService) {
+    init(
+        exposureService: ExposureServiceProtocol,
+        districtsService: DistrictService,
+        dashboardWorker: DashboardWorkerType
+    ) {
         self.exposureService = exposureService
         self.districtsService = districtsService
+        self.dashboardWorker = dashboardWorker
     }
     
     // MARK: - Public methods
@@ -57,6 +63,8 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
                 task.setTaskCompleted(success: true)
                 return
             }
+            
+            self.dashboardWorker.fetchData(shouldDelegateResult: true)
             
             guard self.exposureService.isExposureNotificationAuthorized == true else {
                 self.districtsService

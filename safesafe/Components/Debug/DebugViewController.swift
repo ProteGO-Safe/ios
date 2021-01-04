@@ -24,6 +24,8 @@ final class DebugViewController: ViewController<DebugViewModel> {
     private let closeButton = UIButton()
     private let titleLabel = UILabel()
     private let mainStackView = UIStackView()
+    private let indicator = UIActivityIndicatorView()
+    var closeCallback: (() -> Void)?
     
     override func start() {
         viewModel.delegate = self
@@ -84,8 +86,11 @@ final class DebugViewController: ViewController<DebugViewModel> {
         stackButton(DebugViewModel.Texts.dumpLocalStorageTitl, action: .dumpLocalstorage)
         stackButton(DebugViewModel.Texts.downloadDistrictsTitle, action: .downloadDistricts)
         if #available(iOS 13.5, *) {
+            stackButton(DebugViewModel.Texts.downloadCDNKeys, action: .downloadCDNKeys)
             stackButton(DebugViewModel.Texts.simulateExposureRiskTitle, action: .simulateExposureRisk)
             stackButton(DebugViewModel.Texts.deleteSimulatedExposuresTitle, action: .deleteSimulatedExposures)
+            stackButton(DebugViewModel.Texts.simulateRiskCheckTitle, action: .simulateRiskCheck)
+            stackButton(DebugViewModel.Texts.deleteSimulatedRiskCheck, action: .deleteSimulatedRiskCheck)
         }
     }
     
@@ -132,7 +137,7 @@ final class DebugViewController: ViewController<DebugViewModel> {
     
     @objc
     private func closeButtonTap(sender: UIButton) {
-        dismiss(animated: true)
+        dismiss(animated: true, completion: closeCallback)
     }
 }
 
@@ -181,7 +186,7 @@ extension DebugViewController: DebugViewModelDelegate {
     }
     
     func showSimulatedRisksSheet(list: [RiskLevel : String]) {
-        let alertController = UIAlertController(title: "Simulate risk", message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "Simulate Exposure Risk", message: nil, preferredStyle: .actionSheet)
         
         for (risk, title) in list {
             let action = UIAlertAction(title: title , style: .default) { [weak self] _ in
@@ -194,5 +199,39 @@ extension DebugViewController: DebugViewModelDelegate {
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true)
+    }
+    
+    func showAnalyzeDaysSheet(list: [AnalyzeDay : String]) {
+        let alertController = UIAlertController(title: "Simulate Risk Check", message: nil, preferredStyle: .actionSheet)
+        
+        for (day, title) in list {
+            let action = UIAlertAction(title: title , style: .default) { [weak self] _ in
+                self?.viewModel.simulateRiskCheck(day: day)
+            }
+            alertController.addAction(action)
+        }
+            
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
+    }
+    
+    func showIndicator(show: Bool) {
+        guard let keyWindow = UIWindow.key else { return }
+        if show, indicator.superview == nil {
+            view.isUserInteractionEnabled = false
+            view.subviews.forEach { $0.alpha = 0.5 }
+            indicator.startAnimating()
+            keyWindow.addSubview(indicator)
+            indicator.snp.makeConstraints {
+                $0.centerX.centerY.equalToSuperview()
+            }
+        } else {
+            view.isUserInteractionEnabled = true
+            view.subviews.forEach { $0.alpha = 1.0 }
+            indicator.removeFromSuperview()
+            indicator.snp.removeConstraints()
+        }
     }
 }
