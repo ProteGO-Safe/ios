@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.9.1
+- Added Vaccination stats to dashboard
+
 ## 4.9.0
 - Added COVID daily stats
 - Added subscription for COVID daily stats push notifications

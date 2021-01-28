@@ -74,6 +74,8 @@ For convenience, there's a `rebuild.sh` script which performs actions mentioned 
 To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
+**4.9.1**
+- Added Vaccination stats to dashboard
 
 **4.9.0**
 - Added COVID daily stats

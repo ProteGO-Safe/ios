@@ -210,7 +210,9 @@ extension RealmLocalStorage {
         }
         
         console("🔑🔑🔑 Instantiate Realm config with encryption key, length: \(encryptionKey.count)")
-        return Realm.Configuration(encryptionKey: encryptionKey)
+        return Realm.Configuration(encryptionKey: encryptionKey, schemaVersion: 1, migrationBlock: { _, oldSchemaVersion in
+            if (oldSchemaVersion < 1) {}
+        })
     }
 }
 

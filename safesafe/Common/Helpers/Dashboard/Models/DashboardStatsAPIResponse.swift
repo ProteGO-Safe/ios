@@ -15,4 +15,10 @@ struct DashboardStatsAPIResponse: Codable {
     let totalDeaths: Int?
     let newRecovered: Int?
     let totalRecovered: Int?
+    let newVaccinations: Int
+    let totalVaccinations: Int
+    let newVaccinationsDose1: Int
+    let totalVaccinationsDose1: Int
+    let newVaccinationsDose2: Int
+    let totalVaccinationsDose2: Int
 }
