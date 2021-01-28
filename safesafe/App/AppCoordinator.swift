@@ -20,6 +20,7 @@ final class AppCoordinator: CoordinatorType {
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIScreen.capturedDidChangeNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     required init() {
@@ -34,12 +35,17 @@ final class AppCoordinator: CoordinatorType {
         }
         
         self.window = window
+        setupAppLifecycleNotifications()
     }
     
     func start() {
+        moveDafaultsToAppGroup()
+        NotificationManager.shared.register(dependencyContainer: dependencyContainer)
+        
         #if !STAGE_SCREENCAST
         setupScreenRecording()
         #endif
+    
         clearData.clear()
         
         let rootViewController = makeRootViewController()
@@ -50,12 +56,25 @@ final class AppCoordinator: CoordinatorType {
         updateReminder()
         configureJSBridge(with: rootViewController)
         
-        
         if #available(iOS 13.5, *) {
             // Don't register bg task on iPad devices that are not supported by EN
             guard UIDevice.current.model == "iPhone" else { return }
             dependencyContainer.backgroundTaskService.scheduleExposureTask()
         }
+    }
+    
+    private func setupAppLifecycleNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applicationWillEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
+    }
+    
+    private func moveDafaultsToAppGroup() {
+        StoredDefaults.standard.set(value: LanguageController.Constants.defaultLanguage, key: .defaultLanguage, useAppGroup: true)
+        StoredDefaults.standard.set(value: LanguageController.selected, key: .selectedLanguage, useAppGroup: true)
     }
     
     private func updateReminder() {
@@ -108,6 +127,8 @@ final class AppCoordinator: CoordinatorType {
     
     private func configureJSBridge(with viewController: UIViewController) {
         if #available(iOS 13.5, *) {
+            dependencyContainer.exposureServiceDebug.register(exposureService: dependencyContainer.exposureService)
+            
             let factory: ExposureNotificationJSBridgeFactory = dependencyContainer
             dependencyContainer.jsBridge.registerExposureNotification(
                 with: factory.makeExposureNotificationJSBridge(with: viewController),
@@ -115,12 +136,20 @@ final class AppCoordinator: CoordinatorType {
             )
         }
         
+        DeepLinkingWorker.shared.delegate = dependencyContainer.jsBridge
+        
         dependencyContainer.jsBridge.register(districtService: dependencyContainer.districtsService)
         dependencyContainer.jsBridge.register(freeTestService: dependencyContainer.freeTestService)
+        dependencyContainer.jsBridge.register(historicalDataWorker: dependencyContainer.historicalDataWorker)
+        dependencyContainer.jsBridge.register(dashboardWorker: dependencyContainer.dashboardWorker)
     }
     
-    @objc
-    private func screenCaptureDidChange(notification: Notification) {
+    @objc private func applicationWillEnterForeground(notification: Notification) {
+        NotificationManager.shared.parseSharedNotifications()
+        NotificationManager.shared.parseSharedCovidStats()
+    }
+    
+    @objc private func screenCaptureDidChange(notification: Notification) {
         let isMirrored = UIScreen.screens.first(where: { $0.mirrored == UIScreen.main }).map ({ _ in true }) ?? false
         guard !isMirrored else  { return }
         

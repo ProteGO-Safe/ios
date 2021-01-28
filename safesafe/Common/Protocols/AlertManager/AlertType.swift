@@ -14,4 +14,5 @@ enum AlertType {
     case keysMax
     case keysPerDayMax
     case pushNotificationSettings
+    case appReviewMock
 }

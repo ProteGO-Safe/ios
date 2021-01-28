@@ -26,19 +26,7 @@ extension ExposureSummary {
  
     /// Creates `ExposureSummary` based on values of `totalRiskScoreFullRange` from range 0-4096
     init(fromFullRangeScore score: Int) {
-        switch score {
-        case 1...1499:
-            self.riskLevel = .low
-            
-        case 1500...2999:
-            self.riskLevel = .medium
-            
-        case 3000...:
-            self.riskLevel = .high
-            
-        default:
-            self.riskLevel = .none
-        }
+        self.riskLevel = .init(fromFullRangeScore: score)
     }
     
 }

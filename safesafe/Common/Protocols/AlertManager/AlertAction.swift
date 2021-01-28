@@ -12,6 +12,7 @@ enum AlertAction {
     case ok
     case retry
     case settings
+    case more
     
     var title: String {
         switch self {
@@ -23,6 +24,8 @@ enum AlertAction {
             return "ALERT_RETRY_BUTTON_TITLE".localized()
         case .settings:
             return "ALERT_SETTINGS_BUTTON_TITLE".localized()
+        case .more:
+            return "More"
         }
     }
 }

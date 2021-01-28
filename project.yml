@@ -10,10 +10,6 @@ configs:
   Live: release
   LiveAdhoc: release #That's a build with Live PWA URL but with debug console
 
-settings:
-  CODE_SIGN_STYLE: Manual
-  MARKETING_VERSION: "4.8.0"
-  CURRENT_PROJECT_VERSION: 745
 schemes:
   safesafe Dev:
     build:
@@ -41,11 +37,46 @@ schemes:
       config: Live
 
 targets:
+  # Target for Mutable Push Notifications Extension
+  #
+  PushMutableContent:
+    settings:
+      CODE_SIGN_STYLE: Manual
+      MARKETING_VERSION: "4.9.0"
+      CURRENT_PROJECT_VERSION: 745
+      TARGETED_DEVICE_FAMILY: 1,2
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "12.1"
+    configFiles:
+      Stage: safesafe/Resources/Extensions/apns-stage-mutablecontent.xcconfig
+      StageDebug: safesafe/Resources/Extensions/apns-stage-mutablecontent-dev.xcconfig
+      Live: safesafe/Resources/Extensions/apns-mutablecontent.xcconfig
+      LiveDebug: safesafe/Resources/Extensions/apns-mutablecontent-dev.xcconfig
+    sources:
+      - path: PushMutableContent
+        name: "PushMutableContent"
+      - path: safesafe/Common/Helpers/Notifications
+        group: safesafe/Common/Helpers
+        excludes: 
+          - NotificationHistoryWorker.swift
+          - Models/PushNotificationHistoryModel.swift
+      - path: safesafe/Services/StoredDefaults.swift
+        group: safesafe/Services
+      - path: safesafe/Language/LanguageController.swift
+        group: safesafe/Language
+      - path: safesafe/Resources/Extensions
+        group: safesafe/Resources
+  # Main app target
+  #
   safesafe:
     type: application
     platform: iOS
     deploymentTarget: "12.1"
     settings:
+        CODE_SIGN_STYLE: Manual
+        MARKETING_VERSION: "4.9.0"
+        CURRENT_PROJECT_VERSION: 745
         TARGETED_DEVICE_FAMILY: 1
         SWIFT_OBJC_BRIDGING_HEADER: $(PROJECT_DIR)/safesafe/App/safesafe-Bridging-Header.h
     configFiles:
@@ -76,6 +107,10 @@ targets:
         type: folder
       - path: safesafe/Resources/translations
         type: folder
+    dependencies:
+      - target: PushMutableContent
+        codesign: true
+        embed: true
     preBuildScripts:
       - name: CopyGooglePlist
         path: Scripts/CopyGooglePlist.sh

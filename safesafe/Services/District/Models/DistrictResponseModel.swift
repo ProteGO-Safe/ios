@@ -8,7 +8,8 @@
 import Foundation
 
 struct DistrictResponseModel: Codable {
-    let updated: Int
+    
+    let voivodeshipsUpdated: Int
     let voivodeships: [Voivodeship]
     
     struct Voivodeship: Codable {

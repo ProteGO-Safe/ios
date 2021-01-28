@@ -55,6 +55,7 @@ final class RenewableRequest<Target: Moya.TargetType> {
                 seal.reject(error)
                 return
             }
+            
             alertManager.show(type: .uploadGeneral) { [weak self] action in
                 if case .cancel = action {
                     self?.seal.reject(InternalError.cantMakeRequest)

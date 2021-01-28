@@ -14,7 +14,7 @@ struct TemporaryExposureKeys: Encodable {
         static let appPackageName = Bundle.main.bundleIdentifier!
     }
     
-    let temporaryExposureKeys: [TemporaryExposureKey]
+    let temporaryExposureKeys: [TemporaryExposureSingleKey]
     let regions = Default.regions
     let platform = Default.platform
     let appPackageName = Default.appPackageName

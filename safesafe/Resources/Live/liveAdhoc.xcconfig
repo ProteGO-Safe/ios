@@ -7,3 +7,4 @@ DEVELOPMENT_TEAM = 85GAG994R5
 CODE_SIGN_ENTITLEMENTS = safesafe/Resources/safesafe Release.entitlements
 PROVISIONING_PROFILE_SPECIFIER = protegosafe-adhoc
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS -D LIVE_ADHOC
+CODE_SIGN_IDENTITY = Apple Distribution: Ministerstwo Cyfryzacji (85GAG994R5)

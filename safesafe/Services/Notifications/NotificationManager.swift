@@ -13,14 +13,18 @@ import FirebaseMessaging
 import PromiseKit
 
 protocol NotificationManagerProtocol {
+    func parseSharedCovidStats()
+    func parseSharedNotifications()
+    func subscribeForCovidStatsTopicByDefault()
+    func manageUserCovidStatsTopic(subscribe: Bool, completion: @escaping ((Bool) -> ()))
+    func registerNotificationCategories()
+    func register(dependencyContainer: DependencyContainer)
     func registerAPNSIfNeeded()
     func registerForNotifications(remote: Bool) -> Guarantee<Bool>
     func currentStatus() -> Guarantee<UNAuthorizationStatus>
     func clearBadgeNumber()
     func update(token: Data)
     func unsubscribeFromDailyTopic(timestamp: TimeInterval)
-    func stringifyUserInfo() -> String?
-    func clearUserInfo()
     func showDistrictStatusLocalNotification(with changed: [DistrictStorageModel], observed: [ObservedDistrictStorageModel], timestamp: Int, delay: TimeInterval)
 }
 
@@ -31,14 +35,21 @@ extension NotificationManagerProtocol {
 }
 
 final class NotificationManager: NSObject {
-    
+
     enum Constants {
         static let dailyTopicDateFormat = "ddMMyyyy"
         static let districtNotificationIdentifier = "DistrictNotificationID"
+        
+        enum NotificationCategory {
+            static let declineCovidStatsNotificationActionId = "declineCovidStatsNotificationActionId"
+            static let covidStatsCategoryId = "covidStatsCategoryId"
+        }
     }
-    
+
     static let shared = NotificationManager()
     
+    private var notificationsWorker: NotificationHistoryWorkerType?
+    private var dashboardWorker: DashboardWorkerType?
     private let dispatchGroupQueue = DispatchQueue(label: "disptach.protegosafe.group")
     private let dipspatchQueue = DispatchQueue(label: "dispatch.protegosafe.main")
     private let group = DispatchGroup()
@@ -49,26 +60,36 @@ final class NotificationManager: NSObject {
     
     enum Topic {
         static let devSuffix = "-dev"
-        static let dailyPrefix = "daily_"
+        static let dailyPrefix = "daily-localized_"
         static let generalPrefix = "general"
+        static let generalLocalizedPrefix = "general-localized"
+        static let covidStatsPrefix = "covid-stats-ios"
         static let daysNum = 50
         
         case general
+        case generalLocalized
+        case covidStats
         case daily(startDate: Date)
         
         var toString: [String] {
             switch self {
             case .general:
-                #if DEV
-                return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
-                #elseif STAGE || STAGE_SCREENCAST
-                return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
-                #elseif LIVE_ADHOC
-                return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
-                #elseif LIVE_DEBUG
-                return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
-                #elseif LIVE
+                #if LIVE
                 return [Topic.generalPrefix]
+                #else
+                return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
+                #endif
+            case .generalLocalized:
+                #if LIVE
+                return [Topic.generalLocalizedPrefix]
+                #else
+                return ["\(Topic.generalLocalizedPrefix)\(Topic.devSuffix)"]
+                #endif
+            case .covidStats:
+                #if LIVE
+                return [Topic.covidStatsPrefix]
+                #else
+                return ["\(Topic.covidStatsPrefix)\(Topic.devSuffix)"]
                 #endif
             case let .daily(startDate):
                 return dailyTopics(startDate: startDate)
@@ -86,25 +107,17 @@ final class NotificationManager: NSObject {
                     continue
                 }
                 let formatted = dateFormatter.string(from: date)
-                #if DEV
-                topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
-                #elseif STAGE || STAGE_SCREENCAST
-                topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
-                #elseif LIVE_ADHOC
-                topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
-                #elseif LIVE_DEBUG
-                topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
-                #elseif LIVE
+                #if LIVE
                 topics.append("\(Topic.dailyPrefix)\(formatted)")
+                #else
+                topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
                 #endif
             }
             
             return topics
         }
     }
-    
-    private var userInfo: [AnyHashable : Any]?
-    
+        
     override private init() {
         super.init()
         UNUserNotificationCenter.current().delegate = self
@@ -112,6 +125,11 @@ final class NotificationManager: NSObject {
 }
 
 extension NotificationManager: NotificationManagerProtocol {
+    func register(dependencyContainer: DependencyContainer) {
+        self.notificationsWorker = dependencyContainer.notificationHistoryWorker
+        self.dashboardWorker = dependencyContainer.dashboardWorker
+    }
+    
     func currentStatus() -> Guarantee<UNAuthorizationStatus> {
         return Guarantee { fulfill in
             UNUserNotificationCenter.current().getNotificationSettings { settings in
@@ -181,11 +199,50 @@ extension NotificationManager: NotificationManagerProtocol {
     
     func update(token: Data) {
         Messaging.messaging().apnsToken = token
+        subscribeForCovidStatsTopicByDefault()
         subscribeTopics()
     }
     
     func clearBadgeNumber() {
         UIApplication.shared.applicationIconBadgeNumber = .zero
+    }
+    
+    func subscribeForCovidStatsTopicByDefault() {
+        let didSubscribeForCovidStatsTopic = StoredDefaults.standard.get(key: .didSubscribeForCovidStatsTopicByDefault) ?? false
+        if !didSubscribeForCovidStatsTopic {
+            Messaging.messaging().subscribe(toTopic: Topic.covidStats.toString.first!) { error in
+                if let error = error {
+                    console(error, type: .error)
+                } else {
+                    StoredDefaults.standard.set(value: true, key: .didSubscribeForCovidStatsTopicByDefault)
+                    StoredDefaults.standard.set(value: true, key: .didUserSubscribeForCovidStatsTopic)
+                }
+            }
+        }
+    }
+    
+    func manageUserCovidStatsTopic(subscribe: Bool, completion: @escaping ((Bool) -> ())) {
+        if subscribe {
+            Messaging.messaging().subscribe(toTopic: Topic.covidStats.toString.first!) { error in
+                if let error = error {
+                    console(error, type: .error)
+                    completion(false)
+                } else {
+                    StoredDefaults.standard.set(value: true, key: .didUserSubscribeForCovidStatsTopic)
+                    completion(true)
+                }
+            }
+        } else {
+            Messaging.messaging().unsubscribe(fromTopic: Topic.covidStats.toString.first!) { error in
+                if let error = error {
+                    console(error, type: .error)
+                    completion(false)
+                } else {
+                    StoredDefaults.standard.set(value: false, key: .didUserSubscribeForCovidStatsTopic)
+                    completion(true)
+                }
+            }
+        }
     }
     
     func unsubscribeFromDailyTopic(timestamp: TimeInterval) {
@@ -195,16 +252,10 @@ extension NotificationManager: NotificationManagerProtocol {
         
         let formatted = dateFormatter.string(from: date)
         
-        #if DEV
-        let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
-        #elseif STAGE || STAGE_SCREENCAST
-        let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
-        #elseif LIVE_ADHOC
-        let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
-        #elseif LIVE_DEBUG
-        let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
-        #elseif LIVE
+        #if LIVE
         let topic = "\(Topic.dailyPrefix)\(formatted)"
+        #else
+        let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
         #endif
         
         Messaging.messaging().unsubscribe(fromTopic: topic) { error in
@@ -212,22 +263,6 @@ extension NotificationManager: NotificationManagerProtocol {
                 console(error, type: .error)
             }
         }
-    }
-    
-    func clearUserInfo() {
-        userInfo = nil
-    }
-    
-    func stringifyUserInfo() -> String? {
-        guard let userInfo = userInfo else {
-            return nil
-        }
-        
-        guard let jsonData = try? JSONSerialization.data(withJSONObject: userInfo, options: []) else {
-            return nil
-        }
-        
-        return String(data: jsonData, encoding: .utf8)
     }
     
     func registerAPNSIfNeeded() {
@@ -252,15 +287,48 @@ extension NotificationManager: NotificationManagerProtocol {
             content.title = title
         }
         content.body = body
+    
+        let messageID = UUID().uuidString
+        let userInfo: [String: Any] = [NotificationUserInfoParser.Key.uuid.rawValue: messageID]
+        content.userInfo = userInfo
+        
+        notificationsWorker?.appendLocalNotification(title: content.title, content: content.body, messageID: messageID)
+            .done{ success in console("Add local notification to historical data with success: \(success)")}
+            .catch { console($0, type: .error) }
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: delay, repeats: false)
         let request = UNNotificationRequest(identifier: Constants.districtNotificationIdentifier, content: content, trigger: trigger)
         
         console("🚀 schedule notification with delay: \(delay)")
+        
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
                 console("😡 Local notification error \(error)", type: .error)
             }
+        }
+    }
+    
+    func registerNotificationCategories() {
+        let didRegisterCovidStats: Bool = StoredDefaults.standard.get(key: .didRegisterCovidStatsNotificationCategory) ?? false
+        
+        if !didRegisterCovidStats {
+            let declineCovidStatsNotifications = UNNotificationAction(
+                identifier: Constants.NotificationCategory.declineCovidStatsNotificationActionId,
+                title: "DECLINE_COVID_STATS_NOTIFICATIONS_BUTTON_TITLE".localized(),
+                options: UNNotificationActionOptions(rawValue: 0))
+            
+            let covidStatsCategory =
+                UNNotificationCategory(
+                    identifier: Constants.NotificationCategory.covidStatsCategoryId,
+                    actions: [declineCovidStatsNotifications],
+                    intentIdentifiers: [],
+                    hiddenPreviewsBodyPlaceholder: "",
+                    options: .customDismissAction)
+            
+            let notificationCenter = UNUserNotificationCenter.current()
+            notificationCenter.setNotificationCategories([covidStatsCategory])
+            
+            StoredDefaults.standard.set(value: true, key: .didRegisterCovidStatsNotificationCategory)
         }
     }
     
@@ -277,13 +345,15 @@ extension NotificationManager: NotificationManagerProtocol {
     
     
     private func subscribeTopics() {
-        let didSubscribedFCMTopics: Bool = StoredDefaults.standard.get(key: .didSubscribeFCMTopics) ?? false
+        Messaging.messaging().unsubscribe(fromTopic: Topic.general.toString[0])
+        Messaging.messaging().subscribe(toTopic: Topic.generalLocalized.toString[0])
+        
+        let didSubscribedFCMTopics: Bool = StoredDefaults.standard.get(key: .didSubscribeLocalizedFCMTopics) ?? false
         guard !didSubscribedFCMTopics else {
             return
         }
         
         var allTopics: [String] = []
-        allTopics.append(contentsOf: Topic.general.toString)
         allTopics.append(contentsOf: Topic.daily(startDate: Date()).toString)
         
         dipspatchQueue.async { [weak self] in
@@ -304,33 +374,96 @@ extension NotificationManager: NotificationManagerProtocol {
             }
             
             DispatchQueue.main.async {
-                StoredDefaults.standard.set(value: true, key: .didSubscribeFCMTopics)
+                StoredDefaults.standard.set(value: true, key: .didSubscribeLocalizedFCMTopics)
             }
         }
         
     }
     
+    func parseSharedNotifications() {
+        let notificationPayloadParser = NotificationUserInfoParser()
+        let storedData = notificationPayloadParser.getSharedData(for: .sharedNotifications)
+        let notificationHistoryWorker = NotificationHistoryWorker(storage: RealmLocalStorage())
+        notificationHistoryWorker.parseSharedContainerNotifications(
+            data: storedData,
+            keys: NotificationUserInfoParser.Key.self
+        )
+        .done { success in
+            console("Did finish parsing shared notifications, success: \(success)")
+            if success {
+                notificationPayloadParser.clearSharedData(for: .sharedNotifications)
+            }
+        }
+        .catch { console($0, type: .error) }
+    }
+    
+    func parseSharedCovidStats() {
+        let notificationPayloadParser = NotificationUserInfoParser()
+        let storedData = notificationPayloadParser.getSharedData(for: .sharedCovidStats)
+        dashboardWorker?.parseSharedContainerCovidStats(objects: storedData)
+            .done {
+                notificationPayloadParser.clearSharedData(for: .sharedCovidStats)
+            }
+            .catch { console($0, type: .error) }
+    }
+    
 }
 
 extension NotificationManager: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        guard notification.request.identifier != Constants.districtNotificationIdentifier else { return }
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
-        userInfo = notification.request.content.userInfo
-
+        parseSharedNotifications()
+        parseSharedCovidStats()
+        
         completionHandler([.alert])
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        guard response.notification.request.identifier != Constants.districtNotificationIdentifier else { return }
+    // Here we are when user taped notification
+    //
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void) {
         
-        userInfo = response.notification.request.content.userInfo
+        switch response.actionIdentifier {
+        case Constants.NotificationCategory.declineCovidStatsNotificationActionId:
+            manageUserCovidStatsTopic(subscribe: false) { _ in }
+        default: ()
+        }
+        
+        let userInfo = response.notification.request.content.userInfo
+        guard let messageUUID = userInfo[NotificationUserInfoParser.Key.uuid.rawValue] as? String else { return }
+        
+        if response.notification.request.identifier == Constants.districtNotificationIdentifier {
+            DeepLinkingWorker.shared.navigate(to: .currentRestrictions, messageId: messageUUID)
+        } else {
+            let parser = NotificationUserInfoParser()
+            
+            let info: [String: RouteModel.Value] = [NotificationUserInfoParser.Key.uuid.rawValue: .string(messageUUID)]
+            if let routeModel: RouteModel = parser.routeData(userInfo: userInfo, appendInfo: info),
+               let jsonString = routeModel.asJSONString() {
+                
+                DeepLinkingWorker.shared.navigate(jsonString)
+            } else {
+                // navigate to history view
+                DeepLinkingWorker.shared.navigate(to: .notificationsHistory, messageId: messageUUID)
+            }
+            
+            
+        }
+        
         completionHandler()
     }
 }
 
 extension StoredDefaults.Key {
-    static let didSubscribeFCMTopics = StoredDefaults.Key("didSubscribeFCMTopics")
+    static let didSubscribeLocalizedFCMTopics = StoredDefaults.Key("didSubscribeLocalizedFCMTopics")
     static let didAuthorizeAPN = StoredDefaults.Key("didAuthorizeAPN")
     static let districtStatusNotificationTimestamp = StoredDefaults.Key("districtStatusNotificationTimestamp")
+    static let didRegisterCovidStatsNotificationCategory = StoredDefaults.Key("didRegisterCovidStatsNotificationCategory")
+    static let didSubscribeForCovidStatsTopicByDefault = StoredDefaults.Key("didSubscribeCovidStatsTopicByDefault")
+    static let didUserSubscribeForCovidStatsTopic = StoredDefaults.Key("didUserSubscribeForCovidStatsTopic")
 }

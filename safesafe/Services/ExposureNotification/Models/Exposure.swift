@@ -20,7 +20,7 @@ final class Exposure: Object, LocalStorable {
     
     /// Date of exposure
     @objc dynamic var date: Date = Date()
-    
+        
     convenience init(
         risk: Int,
         duration: Double,
