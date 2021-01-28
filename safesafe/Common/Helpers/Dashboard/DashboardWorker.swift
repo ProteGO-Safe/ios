@@ -31,8 +31,8 @@ final class DashboardWorker: DashboardWorkerType {
         enum Download {
             // Discussion: downloading data from CDN is available only if DashboardStatsModel.updated timestamp is older than requestGap
             // then time intervals between next requests are not shorter than requestDebounce value
-            static let requestGap: Int = 20 * 60 * 60
-            static let requestDebounce: Int = 5 * 60
+            static let requestGap: Int = 20 * 60 * 60 // 20h
+            static let requestDebounce: Int = 5 * 60 // 5min
         }
     }
     
