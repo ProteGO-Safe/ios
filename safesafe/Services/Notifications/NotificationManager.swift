@@ -60,6 +60,7 @@ final class NotificationManager: NSObject {
     
     enum Topic {
         static let devSuffix = "-dev"
+        static let stageSuffix = "-stage"
         static let dailyPrefix = "daily-localized_"
         static let generalPrefix = "general"
         static let generalLocalizedPrefix = "general-localized"
@@ -77,19 +78,28 @@ final class NotificationManager: NSObject {
                 #if LIVE
                 return [Topic.generalPrefix]
                 #else
-                return ["\(Topic.generalPrefix)\(Topic.devSuffix)"]
+                return [
+                    "\(Topic.generalPrefix)\(Topic.devSuffix)",
+                    "\(Topic.generalPrefix)\(Topic.stageSuffix)"
+                ]
                 #endif
             case .generalLocalized:
                 #if LIVE
                 return [Topic.generalLocalizedPrefix]
                 #else
-                return ["\(Topic.generalLocalizedPrefix)\(Topic.devSuffix)"]
+                return [
+                    "\(Topic.generalLocalizedPrefix)\(Topic.devSuffix)",
+                    "\(Topic.generalLocalizedPrefix)\(Topic.stageSuffix)"
+                ]
                 #endif
             case .covidStats:
                 #if LIVE
                 return [Topic.covidStatsPrefix]
                 #else
-                return ["\(Topic.covidStatsPrefix)\(Topic.devSuffix)"]
+                return [
+                    "\(Topic.covidStatsPrefix)\(Topic.devSuffix)",
+                    "\(Topic.covidStatsPrefix)\(Topic.stageSuffix)"
+                ]
                 #endif
             case let .daily(startDate):
                 return dailyTopics(startDate: startDate)
@@ -111,6 +121,7 @@ final class NotificationManager: NSObject {
                 topics.append("\(Topic.dailyPrefix)\(formatted)")
                 #else
                 topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)")
+                topics.append("\(Topic.dailyPrefix)\(formatted)\(Topic.stageSuffix)")
                 #endif
             }
             
@@ -210,12 +221,14 @@ extension NotificationManager: NotificationManagerProtocol {
     func subscribeForCovidStatsTopicByDefault() {
         let didSubscribeForCovidStatsTopic = StoredDefaults.standard.get(key: .didSubscribeForCovidStatsTopicByDefault) ?? false
         if !didSubscribeForCovidStatsTopic {
-            Messaging.messaging().subscribe(toTopic: Topic.covidStats.toString.first!) { error in
-                if let error = error {
-                    console(error, type: .error)
-                } else {
-                    StoredDefaults.standard.set(value: true, key: .didSubscribeForCovidStatsTopicByDefault)
-                    StoredDefaults.standard.set(value: true, key: .didUserSubscribeForCovidStatsTopic)
+            for topic in Topic.covidStats.toString {
+                Messaging.messaging().subscribe(toTopic: topic) { error in
+                    if let error = error {
+                        console(error, type: .error)
+                    } else {
+                        StoredDefaults.standard.set(value: true, key: .didSubscribeForCovidStatsTopicByDefault)
+                        StoredDefaults.standard.set(value: true, key: .didUserSubscribeForCovidStatsTopic)
+                    }
                 }
             }
         }
@@ -223,23 +236,27 @@ extension NotificationManager: NotificationManagerProtocol {
     
     func manageUserCovidStatsTopic(subscribe: Bool, completion: @escaping ((Bool) -> ())) {
         if subscribe {
-            Messaging.messaging().subscribe(toTopic: Topic.covidStats.toString.first!) { error in
-                if let error = error {
-                    console(error, type: .error)
-                    completion(false)
-                } else {
-                    StoredDefaults.standard.set(value: true, key: .didUserSubscribeForCovidStatsTopic)
-                    completion(true)
+            for topic in Topic.covidStats.toString {
+                Messaging.messaging().subscribe(toTopic: topic) { error in
+                    if let error = error {
+                        console(error, type: .error)
+                        completion(false)
+                    } else {
+                        StoredDefaults.standard.set(value: true, key: .didUserSubscribeForCovidStatsTopic)
+                        completion(true)
+                    }
                 }
             }
         } else {
-            Messaging.messaging().unsubscribe(fromTopic: Topic.covidStats.toString.first!) { error in
-                if let error = error {
-                    console(error, type: .error)
-                    completion(false)
-                } else {
-                    StoredDefaults.standard.set(value: false, key: .didUserSubscribeForCovidStatsTopic)
-                    completion(true)
+            for topic in Topic.covidStats.toString {
+                Messaging.messaging().unsubscribe(fromTopic: topic) { error in
+                    if let error = error {
+                        console(error, type: .error)
+                        completion(false)
+                    } else {
+                        StoredDefaults.standard.set(value: false, key: .didUserSubscribeForCovidStatsTopic)
+                        completion(true)
+                    }
                 }
             }
         }
@@ -253,14 +270,19 @@ extension NotificationManager: NotificationManagerProtocol {
         let formatted = dateFormatter.string(from: date)
         
         #if LIVE
-        let topic = "\(Topic.dailyPrefix)\(formatted)"
+        let topics = ["\(Topic.dailyPrefix)\(formatted)"]
         #else
-        let topic = "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)"
+        let topics = [
+            "\(Topic.dailyPrefix)\(formatted)\(Topic.devSuffix)",
+            "\(Topic.dailyPrefix)\(formatted)\(Topic.stageSuffix)"
+        ]
         #endif
-        
-        Messaging.messaging().unsubscribe(fromTopic: topic) { error in
-            if let error = error {
-                console(error, type: .error)
+
+        for topic in topics {
+            Messaging.messaging().unsubscribe(fromTopic: topic) { error in
+                if let error = error {
+                    console(error, type: .error)
+                }
             }
         }
     }
@@ -345,10 +367,11 @@ extension NotificationManager: NotificationManagerProtocol {
     
     
     private func subscribeTopics() {
-        Messaging.messaging().unsubscribe(fromTopic: Topic.general.toString[0])
-        Messaging.messaging().subscribe(toTopic: Topic.generalLocalized.toString[0])
+        Topic.general.toString.forEach(Messaging.messaging().unsubscribe(fromTopic:))
+        Topic.generalLocalized.toString.forEach(Messaging.messaging().subscribe(toTopic:))
         
         let didSubscribedFCMTopics: Bool = StoredDefaults.standard.get(key: .didSubscribeLocalizedFCMTopics) ?? false
+
         guard !didSubscribedFCMTopics else {
             return
         }
