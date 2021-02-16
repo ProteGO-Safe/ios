@@ -73,12 +73,16 @@ final class DashboardWorker: DashboardWorkerType {
     
     func parseSharedContainerCovidStats(objects: [[String : Any]]) -> Promise<Void> {
         let decoder = JSONDecoder()
-        
-        guard
-            let jsonData = try? JSONSerialization.data(withJSONObject: objects, options: .fragmentsAllowed),
-            let items = try? decoder.decode([PushNotificationCovidStatsModel].self, from: jsonData),
-            let recentlyUpdatedModel = items.sorted(by: { $0.updated > $1.updated }).first
-        else {
+        let items = objects.compactMap { object -> PushNotificationCovidStatsModel? in
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: object, options: .fragmentsAllowed),
+                  let item = try? decoder.decode(PushNotificationCovidStatsModel.self, from: jsonData) else {
+                console("Wrong covidStats object: \(object)", type: .error)
+                return nil
+            }
+            return item
+        }
+
+        guard let recentlyUpdatedModel = items.sorted(by: { $0.updated > $1.updated }).first else {
             return .init(error: InternalError.nilValue)
         }
         
