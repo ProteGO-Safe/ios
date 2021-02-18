@@ -32,7 +32,7 @@ extension JSBridge {
             .catch { console($0, type: .error) }
     }
 
-    /// Calling up a dialogue that enables the rate app pop-up.
+    /// Call rate app alert.
     /// - Parameter jsonString: Json passed by PWA to work with native code.
     /// - JsonString example:
     /// ```
@@ -51,7 +51,7 @@ extension JSBridge {
         #endif
     }
 
-    /// Setting the language.
+    /// Set application language.
     /// - Parameter jsonString: Json passed by PWA to work with native code.
     /// - JsonString example:
     /// ```
@@ -83,11 +83,16 @@ extension JSBridge {
         NotificationManager.shared.unsubscribeFromDailyTopic(timestamp: model.timestamp)
     }
 
-    //
-    /// <#Description#>
+    /// Request about service permissions.
     /// - Parameters:
-    ///   - jsonString: <#jsonString description#>
-    ///   - dataType: <#dataType description#>
+    ///   - jsonString: Json passed by PWA to work with native code.
+    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    /// - JsonString example:
+    /// ```
+    /// {
+    ///     ?????
+    /// }
+    /// ```
     func servicesPermissions(jsonString: String?, dataType: BridgeDataType) {
         isServicSetting = true
         guard let model: EnableServicesResponse = jsonString?.jsonDecode(decoder: jsonDecoder)
@@ -113,10 +118,16 @@ extension JSBridge {
         }
     }
 
-    /// <#Description#>
+    /// Request about notification permission.
     /// - Parameters:
-    ///   - jsonString: <#jsonString description#>
-    ///   - type: <#type description#>
+    ///   - jsonString: Json passed by PWA to work with native code.
+    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    /// - JsonString example:
+    /// ```
+    /// {
+    ///     ?????
+    /// }
+    /// ```
     func notificationsPermission(jsonString: String?, type: BridgeDataType) {
         Permissions.instance.state(for: .notifications)
             .then { state -> Promise<Permissions.State> in
@@ -214,7 +225,7 @@ extension JSBridge {
             }
     }
 
-    func send(_ status: UploadTemporaryExposureKeysStatus) {
+    private func send(_ status: UploadTemporaryExposureKeysStatus) {
         guard let result = self.encodeToJSON(UploadTemporaryExposureKeysStatusResult(result: status))
         else { return }
 
@@ -222,6 +233,8 @@ extension JSBridge {
     }
 
 
+    /// Lifecycle change notification.
+    /// - Parameter type: The type by which we recognize what action the PWA application expects from the native code.
     func sendAppStateJSON(type: BridgeDataType) {
         serviceStatusManager.serviceStatusJson(delay: .zero)
             .done { json in
