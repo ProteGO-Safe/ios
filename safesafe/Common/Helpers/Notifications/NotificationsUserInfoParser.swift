@@ -127,12 +127,12 @@ final class NotificationUserInfoParser {
     func covidStatsData(userInfo: [AnyHashable: Any]?) -> String? {
         guard
             let userInfoJSON = userInfo as? [String: Any],
-            let routeRaw = userInfoJSON[Key.covidStats.rawValue] as? String
+            let covidStatsRaw = userInfoJSON[Key.covidStats.rawValue] as? String
         else {
             return nil
         }
         
-        return routeRaw
+        return covidStatsRaw
     }
     
     func parseCovidStats(userInfo: [AnyHashable: Any]) -> PushNotificationCovidStatsModel? {

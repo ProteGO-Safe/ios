@@ -21,6 +21,12 @@ final class DashboardStatsModel: Object, LocalStorable {
     let totalDeaths = RealmOptional<Int>()
     let currentRecovered = RealmOptional<Int>()
     let totalRecovered = RealmOptional<Int>()
+    let currentVaccinations = RealmOptional<Int>()
+    let totalVaccinations = RealmOptional<Int>()
+    let currentVaccinationsDose1 = RealmOptional<Int>()
+    let totalVaccinationsDose1 = RealmOptional<Int>()
+    let currentVaccinationsDose2 = RealmOptional<Int>()
+    let totalVaccinationsDose2 = RealmOptional<Int>()
     
     override class func primaryKey() -> String? { "id" }
     
@@ -42,6 +48,12 @@ final class DashboardStatsModel: Object, LocalStorable {
         self.totalDeaths.value = model.totalDeaths
         self.currentRecovered.value = model.newRecovered
         self.totalRecovered.value = model.totalRecovered
+        self.currentVaccinations.value = model.newVaccinations
+        self.totalVaccinations.value = model.totalVaccinations
+        self.currentVaccinationsDose1.value = model.newVaccinationsDose1
+        self.totalVaccinationsDose1.value = model.totalVaccinationsDose1
+        self.currentVaccinationsDose2.value = model.newVaccinationsDose2
+        self.totalVaccinationsDose2.value = model.totalVaccinationsDose2
     }
     
     func update(with model: PushNotificationCovidStatsModel) {
@@ -52,5 +64,11 @@ final class DashboardStatsModel: Object, LocalStorable {
         self.totalDeaths.value = model.totalDeaths
         self.currentRecovered.value = model.newRecovered
         self.totalRecovered.value = model.totalRecovered
+        self.currentVaccinations.value = model.newVaccinations
+        self.totalVaccinations.value = model.totalVaccinations
+        self.currentVaccinationsDose1.value = model.newVaccinationsDose1
+        self.totalVaccinationsDose1.value = model.totalVaccinationsDose1
+        self.currentVaccinationsDose2.value = model.newVaccinationsDose2
+        self.totalVaccinationsDose2.value = model.totalVaccinationsDose2
     }
 }

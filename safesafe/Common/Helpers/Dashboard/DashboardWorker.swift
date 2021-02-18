@@ -31,8 +31,8 @@ final class DashboardWorker: DashboardWorkerType {
         enum Download {
             // Discussion: downloading data from CDN is available only if DashboardStatsModel.updated timestamp is older than requestGap
             // then time intervals between next requests are not shorter than requestDebounce value
-            static let requestGap: Int = 20 * 60 * 60
-            static let requestDebounce: Int = 5 * 60
+            static let requestGap: Int = 20 * 60 * 60 // 20h
+            static let requestDebounce: Int = 5 * 60 // 5min
         }
     }
     
@@ -73,12 +73,16 @@ final class DashboardWorker: DashboardWorkerType {
     
     func parseSharedContainerCovidStats(objects: [[String : Any]]) -> Promise<Void> {
         let decoder = JSONDecoder()
-        
-        guard
-            let jsonData = try? JSONSerialization.data(withJSONObject: objects, options: .fragmentsAllowed),
-            let items = try? decoder.decode([PushNotificationCovidStatsModel].self, from: jsonData),
-            let recentlyUpdatedModel = items.sorted(by: { $0.updated > $1.updated }).first
-        else {
+        let items = objects.compactMap { object -> PushNotificationCovidStatsModel? in
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: object, options: .fragmentsAllowed),
+                  let item = try? decoder.decode(PushNotificationCovidStatsModel.self, from: jsonData) else {
+                console("Wrong covidStats object: \(object)", type: .error)
+                return nil
+            }
+            return item
+        }
+
+        guard let recentlyUpdatedModel = items.sorted(by: { $0.updated > $1.updated }).first else {
             return .init(error: InternalError.nilValue)
         }
         

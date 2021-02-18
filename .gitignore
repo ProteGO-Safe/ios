@@ -60,6 +60,7 @@ playground.xcworkspace
 # Package.pins
 # Package.resolved
 .build/
+.idea/
 # Add this line if you want to avoid checking in Xcode SPM integration.
 # .swiftpm/xcode
 
