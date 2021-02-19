@@ -11,7 +11,6 @@ struct DashboardStatsResponse: Codable, JSONRepresentable {
     let covidStats: CovidStats?
     
     struct CovidStats: Codable {
-        let updated: Int
         let newCases: Int?
         let totalCases: Int?
         let newDeaths: Int?
@@ -27,7 +26,6 @@ struct DashboardStatsResponse: Codable, JSONRepresentable {
         let totalVaccinationsDose2: Int?
         
         init(with model: DashboardStatsModel) {
-            self.updated = model.updated
             self.newCases = model.currentCases.value
             self.totalCases = model.totalCases.value
             self.newDeaths = model.currentDeaths.value

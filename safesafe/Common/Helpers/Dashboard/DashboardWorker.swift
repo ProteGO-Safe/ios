@@ -39,11 +39,11 @@ final class DashboardWorker: DashboardWorkerType {
     weak var delegate: DashboardWorkerDelegate?
     private var dashboardStatsModel: DashboardStatsModel? { localStorage?.fetch().first }
     
-    private let provider: MoyaProvider<CovidInfoTarget>
+    private let provider: MoyaProvider<DashboardTarget>
     private let localStorage: RealmLocalStorage?
     
     init(
-        with provider: MoyaProvider<CovidInfoTarget>,
+        with provider: MoyaProvider<DashboardTarget>,
         localStorage: RealmLocalStorage? = RealmLocalStorage()
     ) {
         self.provider = provider
@@ -51,6 +51,7 @@ final class DashboardWorker: DashboardWorkerType {
     }
     
     func fetchData(shouldDelegateResult: Bool = false) -> Promise<String> {
+        // should Download <- new timestampLogic
         if shouldDownload() {
             return downloadData()
                 .then(updateData)
@@ -209,7 +210,6 @@ final class DashboardWorker: DashboardWorkerType {
     private func shouldDownload() -> Bool {
         let nowTimestamp = Int(Date().timeIntervalSince1970)
         guard let model = dashboardStatsModel else { return true }
-        guard nowTimestamp - model.updated > Constants.Download.requestGap else { return false }
         guard nowTimestamp - model.lastFetch > Constants.Download.requestDebounce else {
             update(lastFetch: Int(Date().timeIntervalSince1970))
             return false

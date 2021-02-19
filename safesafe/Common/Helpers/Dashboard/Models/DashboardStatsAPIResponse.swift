@@ -8,7 +8,6 @@
 import Foundation
 
 struct DashboardStatsAPIResponse: Codable {
-    let updated: Int
     let newCases: Int?
     let totalCases: Int?
     let newDeaths: Int?
@@ -21,4 +20,9 @@ struct DashboardStatsAPIResponse: Codable {
     let totalVaccinationsDose1: Int
     let newVaccinationsDose2: Int
     let totalVaccinationsDose2: Int
+    let newTests: Int
+    let newDeathsWithoutComorbidities: Int
+    let newDeathsWithComorbidities: Int
+    let newUndesirableReaction: Int
+    let totalUndesirableReaction: Int
 }

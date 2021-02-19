@@ -48,11 +48,11 @@ final class DependencyContainer {
     )
     
     lazy var districtsService: DistrictService = DistrictService(
-        with:  MoyaProvider<CovidInfoTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
+        with:  MoyaProvider<DetailsTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
     )
     
     lazy var dashboardWorker: DashboardWorkerType = DashboardWorker(
-        with: MoyaProvider<CovidInfoTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
+        with: MoyaProvider<DashboardTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
     )
     
     lazy var freeTestService: FreeTestService = FreeTestService(

@@ -37,11 +37,11 @@ final class DistrictService {
         let observed: [ObservedDistrictStorageModel]
     }
     
-    private let provider: MoyaProvider<CovidInfoTarget>
+    private let provider: MoyaProvider<DetailsTarget>
     private let localStorage: RealmLocalStorage?
     
     init(
-        with provider: MoyaProvider<CovidInfoTarget>,
+        with provider: MoyaProvider<DetailsTarget>,
         localStorage: RealmLocalStorage? = RealmLocalStorage()
     ) {
         self.provider = provider

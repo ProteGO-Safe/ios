@@ -14,7 +14,6 @@ final class DashboardStatsModel: Object, LocalStorable {
     
     @objc dynamic var id: String = DashboardStatsModel.identifier
     @objc dynamic var lastFetch: Int = .zero
-    @objc dynamic var updated: Int = .zero
     let currentCases = RealmOptional<Int>()
     let totalCases = RealmOptional<Int>()
     let currentDeaths = RealmOptional<Int>()
@@ -41,7 +40,6 @@ final class DashboardStatsModel: Object, LocalStorable {
     }
     
     func update(with model: DashboardStatsAPIResponse) {
-        self.updated = model.updated
         self.currentCases.value = model.newCases
         self.totalCases.value = model.totalCases
         self.currentDeaths.value = model.newDeaths
@@ -57,7 +55,6 @@ final class DashboardStatsModel: Object, LocalStorable {
     }
     
     func update(with model: PushNotificationCovidStatsModel) {
-        self.updated = model.updated
         self.currentCases.value = model.newCases
         self.totalCases.value = model.totalCases
         self.currentDeaths.value = model.newDeaths
