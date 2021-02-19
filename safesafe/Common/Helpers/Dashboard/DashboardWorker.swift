@@ -26,48 +26,50 @@ extension DashboardWorkerType {
 }
 
 final class DashboardWorker: DashboardWorkerType {
-    
-    private enum Constants {
-        enum Download {
-            // Discussion: downloading data from CDN is available only if DashboardStatsModel.updated timestamp is older than requestGap
-            // then time intervals between next requests are not shorter than requestDebounce value
-            static let requestGap: Int = 20 * 60 * 60 // 20h
-            static let requestDebounce: Int = 5 * 60 // 5min
-        }
-    }
-    
+
     weak var delegate: DashboardWorkerDelegate?
-    private var dashboardStatsModel: DashboardStatsModel? { localStorage?.fetch().first }
-    
-    private let provider: MoyaProvider<DashboardTarget>
+    private let dashboardProvider: MoyaProvider<DashboardTarget>
+    private let timestampsProvider: MoyaProvider<TimestampsTarget>
     private let localStorage: RealmLocalStorage?
+    private let fileStorage: FileStorageType
     
     init(
-        with provider: MoyaProvider<DashboardTarget>,
-        localStorage: RealmLocalStorage? = RealmLocalStorage()
+        dashboardProvider: MoyaProvider<DashboardTarget>,
+        timestampsProvider: MoyaProvider<TimestampsTarget>,
+        localStorage: RealmLocalStorage? = RealmLocalStorage(),
+        fileStorage: FileStorageType = FileStorage()
     ) {
-        self.provider = provider
+        self.dashboardProvider = dashboardProvider
+        self.timestampsProvider = timestampsProvider
         self.localStorage = localStorage
+        self.fileStorage = fileStorage
     }
     
     func fetchData(shouldDelegateResult: Bool = false) -> Promise<String> {
-        // should Download <- new timestampLogic
-        if shouldDownload() {
-            return downloadData()
-                .then(updateData)
-                .then(toString)
-                .then {
-                    self.delegateResultIfNeeded(shouldDelegateResult: shouldDelegateResult, jsonString: $0)
-                }
-            
-        } else {
-            guard let model = dashboardStatsModel else {
-                return .init(error: InternalError.nilValue)
-            }
-            
-            return toString(from: model)
-                .then {
-                    self.delegateResultIfNeeded(shouldDelegateResult: shouldDelegateResult, jsonString: $0)
+        shouldDownload()
+            .then { should -> Promise<String>  in
+                if should {
+                    return self.downloadData()
+                        .then(self.updateData)
+                        .then(self.toString)
+                        .then {
+                            self.delegateResultIfNeeded(shouldDelegateResult: shouldDelegateResult, jsonString: $0)
+                        }
+                } else {
+                    switch self.fileStorage.read(from: .dashboard) {
+                    case .success(let data):
+                        let decoder = JSONDecoder()
+                        if let dashboard = try? decoder.decode(DashboardStatsAPIResponse.self, from: data) {
+                            return self.toString(from: DashboardStatsModel.init(model: dashboard))
+                                .then {
+                                    self.delegateResultIfNeeded(shouldDelegateResult: shouldDelegateResult, jsonString: $0)
+                                }
+                        } else {
+                            return .init(error: InternalError.nilValue)
+                        }
+                    case .failure(let error):
+                        return .init(error: error)
+                    }
                 }
         }
     }
@@ -90,17 +92,12 @@ final class DashboardWorker: DashboardWorkerType {
         return updateData(response: recentlyUpdatedModel).asVoid()
     }
     
-    private func downloadData() -> Promise<DashboardStatsAPIResponse> {
+    private func downloadData() -> Promise<Data> {
         return Promise { seal in
-            provider.request(.fetch) { result in
+            dashboardProvider.request(.fetch) { result in
                 switch result {
                 case let .success(response):
-                    do {
-                        let model = try response.map(DashboardStatsAPIResponse.self, atKeyPath: "covidStats")
-                        seal.fulfill(model)
-                    } catch {
-                        seal.reject(error)
-                    }
+                    seal.fulfill(response.data)
                 case let .failure(error):
                     seal.reject(error)
                 }
@@ -108,33 +105,18 @@ final class DashboardWorker: DashboardWorkerType {
         }
     }
     
-    private func updateData(response: DashboardStatsAPIResponse) -> Promise<DashboardStatsModel> {
+    private func updateData(responseData: Data) -> Promise<DashboardStatsModel> {
         Promise { seal in
-            localStorage?.beginWrite()
-            
-            let shouldUpdate = shouldUpdateModel(with: response)
-            
-            let model: DashboardStatsModel
-            if let dbModel: DashboardStatsModel = localStorage?.fetch(primaryKey: DashboardStatsModel.identifier) {
-                model = dbModel
-                if shouldUpdate {
-                    model.update(with: response)
+            switch self.fileStorage.write(to: .dashboard, content: responseData) {
+            case .success:
+                let decoder = JSONDecoder()
+                do {
+                    let model = try decoder.decode(DashboardStatsAPIResponse.self, from: responseData)
+                    seal.fulfill(.init(model: model))
+                } catch let error {
+                    seal.reject(error)
                 }
-            } else {
-                if shouldUpdate {
-                    model = DashboardStatsModel(model: response)
-                } else {
-                    model = DashboardStatsModel()
-                }
-            }
-            model.lastFetch = Int(Date().timeIntervalSince1970)
-            
-            localStorage?.append(model, policy: .all)
-            
-            do {
-                try localStorage?.commitWrite()
-                seal.fulfill(model)
-            } catch {
+            case .failure(let error):
                 seal.reject(error)
             }
         }
@@ -206,17 +188,79 @@ final class DashboardWorker: DashboardWorkerType {
         
         return recovered || cases || deaths
     }
-    
-    private func shouldDownload() -> Bool {
-        let nowTimestamp = Int(Date().timeIntervalSince1970)
-        guard let model = dashboardStatsModel else { return true }
-        guard nowTimestamp - model.lastFetch > Constants.Download.requestDebounce else {
-            update(lastFetch: Int(Date().timeIntervalSince1970))
-            return false
-        }
-        
-        return true
+
+    struct TimestampsResponse: Decodable {
+        let nextUpdate: Int
+        let dashboardUpdated: Int
+        let detailsUpdated: Int
     }
+
+    private func shouldDownload() -> Promise<Bool> {
+        return Promise { seal in
+            switch fileStorage.read(from: .timestamps) {
+            case .success(let data):
+                let decoder = JSONDecoder()
+                guard let timestamps = try? decoder.decode(TimestampsResponse.self, from: data) else {
+                    console("Can't parse timestamps data")
+                    seal.fulfill(true)
+                    return
+                }
+                if timestamps.nextUpdate < Int(Date().timeIntervalSince1970) {
+                    self.downloadTimestamps()
+                        .then(self.writeTimestampsToFile(data:))
+                        .pipe { (result) in
+                            switch result {
+                            case .fulfilled(let shouldDownload):
+                                seal.fulfill(shouldDownload)
+                            case .rejected(let error):
+                                seal.reject(error)
+                            }
+                        }
+                } else {
+                    seal.fulfill(false)
+                }
+            case .failure(let error):
+                console(error)
+                self.downloadTimestamps()
+                    .then(self.writeTimestampsToFile(data:))
+                    .pipe { (result) in
+                        switch result {
+                        case .fulfilled(let shouldDownload):
+                            seal.fulfill(shouldDownload)
+                        case .rejected(let error):
+                            seal.reject(error)
+                        }
+                    }
+            }
+        }
+    }
+
+
+
+    private func downloadTimestamps() -> Promise<Data> {
+        Promise { seal in
+            timestampsProvider.request(.fetch) { result in
+                switch result {
+                case .success(let response):
+                    seal.fulfill(response.data)
+                case .failure(let error):
+                    seal.reject(error)
+                }
+            }
+        }
+    }
+
+    private func writeTimestampsToFile(data: Data) -> Promise<Bool> {
+        Promise { seal in
+            switch self.fileStorage.write(to: .timestamps, content: data) {
+            case .success:
+                seal.fulfill(true)
+            case .failure(let error):
+                seal.reject(error)
+            }
+        }
+    }
+
     
     private func update(lastFetch: Int) {
         localStorage?.beginWrite()

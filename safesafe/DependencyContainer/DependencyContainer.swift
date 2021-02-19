@@ -52,7 +52,14 @@ final class DependencyContainer {
     )
     
     lazy var dashboardWorker: DashboardWorkerType = DashboardWorker(
-        with: MoyaProvider<DashboardTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
+        dashboardProvider: MoyaProvider<DashboardTarget>(
+            session: CustomSession.defaultSession(),
+            plugins: [CachePolicyPlugin()]
+        ),
+        timestampsProvider: MoyaProvider<TimestampsTarget>(
+            session: CustomSession.defaultSession(),
+            plugins: [CachePolicyPlugin()]
+        )
     )
     
     lazy var freeTestService: FreeTestService = FreeTestService(
