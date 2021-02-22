@@ -18,6 +18,7 @@ final class DependencyContainer {
     
     lazy var deviceCheckService = DeviceCheckService()
     lazy var exposureServiceDebug = ExposureServiceDebug()
+    lazy var fileStorage = FileStorage()
     
     @available(iOS 13.5, *)
     lazy var diagnosisKeysDownloadService = DiagnosisKeysDownloadService(
@@ -56,7 +57,7 @@ final class DependencyContainer {
             session: CustomSession.defaultSession(),
             plugins: [CachePolicyPlugin()]
         ),
-        fileStorage: FileStorage()
+        fileStorage: fileStorage
     )
     
     lazy var dashboardWorker: DashboardWorkerType = DashboardWorker(
@@ -64,7 +65,8 @@ final class DependencyContainer {
             session: CustomSession.defaultSession(),
             plugins: [CachePolicyPlugin()]
         ),
-        timestampsWorker: timestampsWorker
+        timestampsWorker: timestampsWorker,
+        fileStorage: fileStorage
     )
 
     lazy var detailsWorker: DetailsWorkerType = DetailsWorker(
@@ -73,7 +75,7 @@ final class DependencyContainer {
             plugins: [CachePolicyPlugin()]
         ),
         timestampsWorker: timestampsWorker,
-        fileStorage: FileStorage()
+        fileStorage: fileStorage
     )
 
     lazy var freeTestService: FreeTestService = FreeTestService(

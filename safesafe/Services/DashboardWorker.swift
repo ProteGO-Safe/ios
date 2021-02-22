@@ -27,28 +27,36 @@ extension DashboardWorkerType {
 
 final class DashboardWorker: DashboardWorkerType {
 
+    //MARK: - Properties
+
     weak var delegate: DashboardWorkerDelegate?
     private let dashboardProvider: MoyaProvider<DashboardTarget>
     private let timestampsWorker: TimestampsWorkerType
-    private let localStorage: RealmLocalStorage?
     private let fileStorage: FileStorageType
-    private let decoder = JSONDecoder()
+    private let decoder:JSONDecoder
+    private let getCurrentDate: () -> Date
+
+    //MARK: - Initialization
 
     init(
         dashboardProvider: MoyaProvider<DashboardTarget>,
         timestampsWorker: TimestampsWorkerType,
-        localStorage: RealmLocalStorage? = RealmLocalStorage(),
-        fileStorage: FileStorageType = FileStorage()
+        fileStorage: FileStorageType,
+        decoder: JSONDecoder = JSONDecoder(),
+        getCurrentDate: @escaping () -> Date = Date.init
     ) {
         self.dashboardProvider = dashboardProvider
         self.timestampsWorker = timestampsWorker
-        self.localStorage = localStorage
         self.fileStorage = fileStorage
+        self.decoder = decoder
+        self.getCurrentDate = getCurrentDate
     }
-    
+
+    //MARK: - DashboardWorkerType
+
     func fetchData(shouldDelegateResult: Bool = false) -> Promise<String> {
         timestampsWorker.fetchTimestamps()
-            .map { $0.dashboardUpdated < Int(Date().timeIntervalSince1970) }
+            .map { $0.dashboardUpdated < Int(self.getCurrentDate().timeIntervalSince1970) }
             .then(getDashboardData(shouldDownload:))
             .then(toString)
             .then { jsonString in
@@ -60,23 +68,27 @@ final class DashboardWorker: DashboardWorkerType {
     }
     
     func parseSharedContainerCovidStats(objects: [[String : Any]]) -> Promise<Void> {
-        let decoder = JSONDecoder()
-        let items = objects.compactMap { object -> PushNotificationCovidStatsModel? in
+        let items = objects.compactMap { object -> (DashboardStatsAPIResponse, Data)? in
             guard let jsonData = try? JSONSerialization.data(withJSONObject: object, options: .fragmentsAllowed),
-                  let item = try? decoder.decode(PushNotificationCovidStatsModel.self, from: jsonData) else {
+                  let item = try? decoder.decode(DashboardStatsAPIResponse.self, from: jsonData) else {
                 console("Wrong covidStats object: \(object)", type: .error)
                 return nil
             }
-            return item
+            return (item, jsonData)
         }
+        .sorted(by: { $0.0.updated > $1.0.updated})
+        .map { $0.1 }
 
-        guard let recentlyUpdatedModel = items.sorted(by: { $0.updated > $1.updated }).first else {
+        guard let firstItem = items.first else {
             return .init(error: InternalError.nilValue)
         }
         
-        return updateData(response: recentlyUpdatedModel).asVoid()
+        return updateLocalData(responseData: firstItem)
+            .asVoid()
     }
-    
+
+    //MARK: - Private methods
+
     private func downloadDashboardData() -> Promise<Data> {
         dashboardProvider.request(.fetch)
             .map { $0.data }
@@ -87,38 +99,6 @@ final class DashboardWorker: DashboardWorkerType {
             .write(to: .dashboard, content: responseData)
             .map { responseData }
             .toPromise()
-    }
-    
-    private func updateData(response: PushNotificationCovidStatsModel) -> Promise<DashboardStatsModel> {
-        Promise { seal in
-            localStorage?.beginWrite()
-            
-            let shouldUpdate = shouldUpdateModel(with: response)
-            
-            let model: DashboardStatsModel
-            if let dbModel: DashboardStatsModel = localStorage?.fetch(primaryKey: DashboardStatsModel.identifier) {
-                model = dbModel
-                if shouldUpdate {
-                    model.update(with: response)
-                }
-            } else {
-                if shouldUpdate {
-                    model = DashboardStatsModel(model: response)
-                } else {
-                    model = DashboardStatsModel()
-                }
-            }
-            model.lastFetch = Int(Date().timeIntervalSince1970)
-            
-            localStorage?.append(model, policy: .all)
-            
-            do {
-                try localStorage?.commitWrite()
-                seal.fulfill(model)
-            } catch {
-                seal.reject(error)
-            }
-        }
     }
     
     private func toString(from data: Data) -> Promise<String> {
@@ -138,22 +118,6 @@ final class DashboardWorker: DashboardWorkerType {
         
         return .value(jsonString)
     }
-    
-    private func shouldUpdateModel(with response: DashboardStatsAPIResponse) -> Bool {
-        let recovered = response.newRecovered != nil && response.totalRecovered != nil
-        let cases = response.newCases != nil && response.totalCases != nil
-        let deaths = response.newDeaths != nil && response.totalDeaths != nil
-        
-        return recovered || cases || deaths
-    }
-    
-    private func shouldUpdateModel(with response: PushNotificationCovidStatsModel) -> Bool {
-        let recovered = response.newRecovered != nil && response.totalRecovered != nil
-        let cases = response.newCases != nil && response.totalCases != nil
-        let deaths = response.newDeaths != nil && response.totalDeaths != nil
-        
-        return recovered || cases || deaths
-    }
 
     private func getDashboardData(shouldDownload: Bool) -> Promise<Data> {
         if shouldDownload {
@@ -163,27 +127,6 @@ final class DashboardWorker: DashboardWorkerType {
             return self.fileStorage
                 .read(from: .dashboard)
                 .toPromise()
-        }
-    }
-    
-    private func update(lastFetch: Int) {
-        localStorage?.beginWrite()
-        
-        let model: DashboardStatsModel
-        if let dbModel: DashboardStatsModel = localStorage?.fetch(primaryKey: DashboardStatsModel.identifier) {
-            model = dbModel
-        } else {
-            model = DashboardStatsModel()
-        }
-        
-        model.lastFetch = lastFetch
-        
-        localStorage?.append(model, policy: .modified)
-        
-        do {
-            try localStorage?.commitWrite()
-        } catch {
-            console(error, type: .error)
         }
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 
 struct DashboardStatsAPIResponse: Codable {
+    let updated: Int
     let newCases: Int?
     let totalCases: Int?
     let newDeaths: Int?
@@ -25,4 +26,13 @@ struct DashboardStatsAPIResponse: Codable {
     let newDeathsWithComorbidities: Int
     let newUndesirableReaction: Int
     let totalUndesirableReaction: Int
+
+    var dictionary: [String: Any]? {
+        guard let data = try? JSONEncoder().encode(self) else {
+            return nil
+        }
+        return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)).flatMap {
+            $0 as? [String: Any]
+        }
+    }
 }

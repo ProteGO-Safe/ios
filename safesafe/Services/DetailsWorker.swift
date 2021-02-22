@@ -17,10 +17,11 @@ final class DetailsWorker: DetailsWorkerType {
 
     //MARK: - Properties
 
-    private let decoder: JSONDecoder
     private let detailsProvider: MoyaProvider<DetailsTarget>
     private let timestampsWorker: TimestampsWorkerType
     private let fileStorage: FileStorageType
+    private let decoder: JSONDecoder
+    private let getCurrentDate: () -> Date
 
     //MARK: - Initialization
 
@@ -28,19 +29,21 @@ final class DetailsWorker: DetailsWorkerType {
         detailsProvider: MoyaProvider<DetailsTarget>,
         timestampsWorker: TimestampsWorkerType,
         fileStorage: FileStorageType,
-        decoder: JSONDecoder = JSONDecoder()
+        decoder: JSONDecoder = JSONDecoder(),
+        getCurrentDate: @escaping () -> Date = Date.init
     ) {
         self.detailsProvider = detailsProvider
         self.timestampsWorker = timestampsWorker
         self.fileStorage = fileStorage
         self.decoder = decoder
+        self.getCurrentDate = getCurrentDate
     }
 
     //MARK: - DetailsWorkerType
 
     @discardableResult func fetchData() -> Promise<String> {
         timestampsWorker.fetchTimestamps()
-            .map { $0.detailsUpdated < Int(Date().timeIntervalSince1970) }
+            .map { $0.detailsUpdated < Int(self.getCurrentDate().timeIntervalSince1970) }
             .then(getData(shouldDownload:))
             .then(toString)
     }

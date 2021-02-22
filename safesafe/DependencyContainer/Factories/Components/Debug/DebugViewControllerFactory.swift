@@ -17,7 +17,7 @@ extension DependencyContainer: DebugViewControllerFactory {
             districtService: districtsService,
             localStorage: realmLocalStorage,
             exposureService: exposureServiceDebug,
-            fileStorage: FileStorage()
+            fileStorage: fileStorage
         )
         
         viewModel.onSimulateExposureRiskChange { [weak self] in

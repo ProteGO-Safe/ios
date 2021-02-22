@@ -17,20 +17,23 @@ final class TimestampsWorker: TimestampsWorkerType {
 
     //MARK: - Properties
 
-    private let decoder: JSONDecoder
     private let timestampsProvider: MoyaProvider<TimestampsTarget>
     private let fileStorage: FileStorageType
+    private let decoder: JSONDecoder
+    private let getCurrentDate: () -> Date
 
     //MARK: - Initialization
 
     init(
         timestampsProvider: MoyaProvider<TimestampsTarget>,
         fileStorage: FileStorageType,
-        decoder: JSONDecoder = JSONDecoder()
+        decoder: JSONDecoder = JSONDecoder(),
+        getCurrentDate: @escaping () -> Date = Date.init
     ) {
         self.timestampsProvider = timestampsProvider
         self.fileStorage = fileStorage
         self.decoder = decoder
+        self.getCurrentDate = getCurrentDate
     }
 
     //MARK: - TimestampsWorkerType
@@ -40,7 +43,7 @@ final class TimestampsWorker: TimestampsWorkerType {
             .toPromise()
             .then { data -> Promise<TimestampsResponse> in
                 guard let timestamps = try? self.decoder.decode(TimestampsResponse.self, from: data),
-                      timestamps.nextUpdate > Int(Date().timeIntervalSince1970) else {
+                      timestamps.nextUpdate > Int(self.getCurrentDate().timeIntervalSince1970) else {
                     return self.downloadAndSaveTimestamps()
                 }
                 return .init(error: InternalError.nilValue)
