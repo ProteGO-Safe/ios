@@ -37,14 +37,5 @@ extension DashboardTarget: TargetType {
         }
     }
 
-    /*
-     var task: Task {
-     switch self {
-     case .fetch:
-     return .requestParameters(parameters: ["randomSeed": "\(arc4random())"], encoding: URLEncoding.default)
-     }
-     }
-     */
-
     var headers: [String : String]? { nil }
 }
