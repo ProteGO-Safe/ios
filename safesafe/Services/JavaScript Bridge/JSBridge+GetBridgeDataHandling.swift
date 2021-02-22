@@ -253,10 +253,11 @@ extension JSBridge {
     ///   - requestID: A unique key by which the PWA can recognize responses from the native application.
     ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
     func dashboardStats(requestID: String, dataType: BridgeDataType) {
-        dashboardWorker?.fetchDashboardData()
+        dashboardWorker?.fetchData()
             .done { [weak self] jsonString in
                 self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
             }
+            .then(self.detailsWorker!.fetchData)
             .catch { console($0, type: .error) }
     }
 

@@ -15,14 +15,13 @@ protocol DashboardWorkerDelegate: AnyObject {
 
 protocol DashboardWorkerType: AnyObject {
     var delegate: DashboardWorkerDelegate? { get set }
-    @discardableResult func fetchDashboardData(shouldDelegateResult: Bool) -> Promise<String>
-    @discardableResult func fetchDetailsData(shouldDelegateResult: Bool) -> Promise<String>
+    @discardableResult func fetchData(shouldDelegateResult: Bool) -> Promise<String>
     @discardableResult func parseSharedContainerCovidStats(objects: [[String : Any]]) -> Promise<Void>
 }
 
 extension DashboardWorkerType {
-    func fetchDashboardData(shouldDelegateResult: Bool = false) -> Promise<String> {
-        return fetchDashboardData(shouldDelegateResult: shouldDelegateResult)
+    func fetchData(shouldDelegateResult: Bool = false) -> Promise<String> {
+        return fetchData(shouldDelegateResult: shouldDelegateResult)
     }
 }
 
@@ -30,44 +29,27 @@ final class DashboardWorker: DashboardWorkerType {
 
     weak var delegate: DashboardWorkerDelegate?
     private let dashboardProvider: MoyaProvider<DashboardTarget>
-    private let timestampsProvider: MoyaProvider<TimestampsTarget>
-    private let detailsProvider: MoyaProvider<DetailsTarget>
+    private let timestampsWorker: TimestampsWorkerType
     private let localStorage: RealmLocalStorage?
     private let fileStorage: FileStorageType
     private let decoder = JSONDecoder()
 
-    
     init(
         dashboardProvider: MoyaProvider<DashboardTarget>,
-        timestampsProvider: MoyaProvider<TimestampsTarget>,
-        detailsProvider: MoyaProvider<DetailsTarget>,
+        timestampsWorker: TimestampsWorkerType,
         localStorage: RealmLocalStorage? = RealmLocalStorage(),
         fileStorage: FileStorageType = FileStorage()
     ) {
         self.dashboardProvider = dashboardProvider
-        self.timestampsProvider = timestampsProvider
-        self.detailsProvider = detailsProvider
+        self.timestampsWorker = timestampsWorker
         self.localStorage = localStorage
         self.fileStorage = fileStorage
     }
     
-    func fetchDashboardData(shouldDelegateResult: Bool = false) -> Promise<String> {
-        fetchTimestamps()
+    func fetchData(shouldDelegateResult: Bool = false) -> Promise<String> {
+        timestampsWorker.fetchTimestamps()
             .map { $0.dashboardUpdated < Int(Date().timeIntervalSince1970) }
             .then(getDashboardData(shouldDownload:))
-            .then(toString)
-            .then { jsonString in
-                self.delegateResultIfNeeded(
-                    shouldDelegateResult: shouldDelegateResult,
-                    jsonString: jsonString
-                )
-            }
-    }
-
-    func fetchDetailsData(shouldDelegateResult: Bool) -> Promise<String> {
-        fetchTimestamps()
-            .map { $0.detailsUpdated < Int(Date().timeIntervalSince1970) }
-            .then(getDetailsData(shouldDownload:))
             .then(toString)
             .then { jsonString in
                 self.delegateResultIfNeeded(
@@ -94,20 +76,15 @@ final class DashboardWorker: DashboardWorkerType {
         
         return updateData(response: recentlyUpdatedModel).asVoid()
     }
-
-    private func downloadDetailsData() -> Promise<Data> {
-        detailsProvider.request(.fetch)
-            .map { $0.data }
-    }
     
     private func downloadDashboardData() -> Promise<Data> {
         dashboardProvider.request(.fetch)
             .map { $0.data }
     }
     
-    private func updateLocal(data type: FileStorage.Key, responseData: Data) -> Promise<Data> {
+    private func updateLocalData(responseData: Data) -> Promise<Data> {
         self.fileStorage
-            .write(to: type, content: responseData)
+            .write(to: .dashboard, content: responseData)
             .map { responseData }
             .toPromise()
     }
@@ -178,69 +155,16 @@ final class DashboardWorker: DashboardWorkerType {
         return recovered || cases || deaths
     }
 
-    private func fetchTimestamps() -> Promise<TimestampsResponse> {
-        fileStorage.read(from: .timestamps)
-            .toPromise()
-            .then { data -> Promise<TimestampsResponse> in
-                guard let timestamps = try? self.decoder.decode(TimestampsResponse.self, from: data),
-                      timestamps.nextUpdate > Int(Date().timeIntervalSince1970) else {
-                    return self.downloadAndSaveTimestamps()
-                }
-                return .init(error: InternalError.nilValue)
-            }
-            .recover { error -> Promise<TimestampsResponse> in
-                console(error)
-                return self.downloadAndSaveTimestamps()
-            }
-    }
-
     private func getDashboardData(shouldDownload: Bool) -> Promise<Data> {
         if shouldDownload {
             return self.downloadDashboardData()
-                .then { self.updateLocal(data: .dashboard, responseData: $0) }
+                .then(self.updateLocalData(responseData:))
         } else {
             return self.fileStorage
                 .read(from: .dashboard)
                 .toPromise()
         }
     }
-
-    private func getDetailsData(shouldDownload: Bool) -> Promise<Data> {
-        if shouldDownload {
-            return self.downloadDetailsData()
-                .then { self.updateLocal(data: .details, responseData: $0) }
-        } else {
-            return self.fileStorage
-                .read(from: .details)
-                .toPromise()
-        }
-    }
-
-    private func downloadAndSaveTimestamps() -> Promise<TimestampsResponse> {
-        self.downloadTimestamps()
-            .then(self.writeTimestampsToFile(data:))
-            .then(self.decodeTimestamps(data:))
-    }
-
-    private func decodeTimestamps(data: Data) -> Promise<TimestampsResponse> {
-        guard let timestamps = try? self.decoder.decode(TimestampsResponse.self, from: data) else {
-            console("Can't decode timestamps")
-            return .init(error: InternalError.nilValue)
-        }
-        return .value(timestamps)
-    }
-
-    private func downloadTimestamps() -> Promise<Data> {
-        timestampsProvider.request(.fetch)
-            .map { $0.data }
-    }
-
-    private func writeTimestampsToFile(data: Data) -> Promise<Data> {
-        fileStorage.write(to: .timestamps, content: data)
-            .map { data }
-            .toPromise()
-    }
-
     
     private func update(lastFetch: Int) {
         localStorage?.beginWrite()

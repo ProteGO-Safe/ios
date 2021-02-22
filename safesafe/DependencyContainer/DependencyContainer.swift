@@ -50,18 +50,32 @@ final class DependencyContainer {
     lazy var districtsService: DistrictService = DistrictService(
         with:  MoyaProvider<DetailsTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
     )
+
+    lazy var timestampsWorker: TimestampsWorkerType = TimestampsWorker(
+        timestampsProvider: MoyaProvider<TimestampsTarget>(
+            session: CustomSession.defaultSession(),
+            plugins: [CachePolicyPlugin()]
+        ),
+        fileStorage: FileStorage()
+    )
     
     lazy var dashboardWorker: DashboardWorkerType = DashboardWorker(
         dashboardProvider: MoyaProvider<DashboardTarget>(
             session: CustomSession.defaultSession(),
             plugins: [CachePolicyPlugin()]
         ),
-        timestampsProvider: MoyaProvider<TimestampsTarget>(
+        timestampsWorker: timestampsWorker
+    )
+
+    lazy var detailsWorker: DetailsWorkerType = DetailsWorker(
+        detailsProvider: MoyaProvider<DetailsTarget>(
             session: CustomSession.defaultSession(),
             plugins: [CachePolicyPlugin()]
-        )
+        ),
+        timestampsWorker: timestampsWorker,
+        fileStorage: FileStorage()
     )
-    
+
     lazy var freeTestService: FreeTestService = FreeTestService(
         with: realmLocalStorage,
         deviceCheckService: deviceCheckService,

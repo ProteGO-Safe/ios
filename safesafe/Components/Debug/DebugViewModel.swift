@@ -20,6 +20,7 @@ enum DebugAction {
     case uploadedPayloadsShare
     case uploadedPayloadsPreview
     case logsShare
+    case showFiles
     case dumpLocalstorage
     case downloadDistricts
     case downloadCDNKeys
@@ -32,6 +33,7 @@ enum DebugAction {
 protocol DebugViewModelDelegate: class {
     func sharePayloads(fileURL: URL)
     func shareLogs(fileURL: URL)
+    func shareFiles(files: [FileStorage.Key: String?])
     func showTextPreview(text: String)
     func showLocalStorageFiles(list: [String])
     func showSimulatedRisksSheet(list: [RiskLevel: String])
@@ -44,6 +46,7 @@ final class DebugViewModel: ViewModelType {
     private lazy var sqliteManager = SQLiteManager()
     private weak var districtService: DebugDistrictServicesProtocol?
     private weak var localStorage: LocalStorageProtocol?
+    private let fileStorage: FileStorage
     private weak var exposureServiceDebug: ExposureServiceDebug?
     private var onSimulateExposureRiskChangeClosure: (() -> Void)?
         
@@ -54,6 +57,7 @@ final class DebugViewModel: ViewModelType {
         static let shareUploadedPayloadsTitle = "Share Uploaded Payloads"
         static let noLogsTitle = "Nothing logged yet"
         static let shareLogsTitle = "Share Logs"
+        static let showFiles = "Show saved files"
         static let dumpLocalStorageTitl = "Dump Local Storage"
         static let downloadDistrictsTitle = "Download districts"
         static let downloadCDNKeys = "Download CDN Keys"
@@ -86,12 +90,14 @@ final class DebugViewModel: ViewModelType {
     init(
         districtService: DebugDistrictServicesProtocol,
         localStorage: LocalStorageProtocol?,
-        exposureService: ExposureServiceDebug?
+        exposureService: ExposureServiceDebug?,
+        fileStorage: FileStorage
     ) {
         
         self.districtService = districtService
         self.localStorage = localStorage
         self.exposureServiceDebug = exposureService
+        self.fileStorage = fileStorage
     }
     
     func manage(debugAction: DebugAction) {
@@ -102,6 +108,30 @@ final class DebugViewModel: ViewModelType {
         case .logsShare:
             guard let url = try? File.logFileURL() else { return }
             delegate?.shareLogs(fileURL: url)
+        case .showFiles:
+            var timestampsFile: String?
+            var dashboardFile: String?
+            var detailsFile: String?
+
+            if case .success(let data) = fileStorage.read(from: .timestamps) {
+                timestampsFile = String(data: data, encoding: .utf8)
+            }
+
+            if case .success(let data) = fileStorage.read(from: .dashboard) {
+                dashboardFile = String(data: data, encoding: .utf8)
+            }
+
+            if case .success(let data) = fileStorage.read(from: .details) {
+                detailsFile = String(data: data, encoding: .utf8)
+            }
+
+            delegate?.shareFiles(
+                files: [
+                    FileStorage.Key.timestamps: timestampsFile,
+                    FileStorage.Key.dashboard: dashboardFile,
+                    FileStorage.Key.details: detailsFile
+                ]
+            )
         case .dumpLocalstorage:
             let list = localStorageFiles()
             guard !list.isEmpty else { return }

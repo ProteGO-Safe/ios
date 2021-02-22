@@ -83,6 +83,7 @@ final class DebugViewController: ViewController<DebugViewModel> {
     private func setupStackedItems() {
         stackButton(DebugViewModel.Texts.shareUploadedPayloadsTitle, action: .uploadedPayloadsShare)
         stackButton(DebugViewModel.Texts.shareLogsTitle, action: .logsShare)
+        stackButton(DebugViewModel.Texts.showFiles, action: .showFiles)
         stackButton(DebugViewModel.Texts.dumpLocalStorageTitl, action: .dumpLocalstorage)
         stackButton(DebugViewModel.Texts.downloadDistrictsTitle, action: .downloadDistricts)
         if #available(iOS 13.5, *) {
@@ -233,5 +234,16 @@ extension DebugViewController: DebugViewModelDelegate {
             indicator.removeFromSuperview()
             indicator.snp.removeConstraints()
         }
+    }
+
+    func shareFiles(files: [FileStorage.Key : String?]) {
+        let alertController = UIAlertController(title: "Wich file to present?", message: nil, preferredStyle: .actionSheet)
+        files.forEach { (key, fileString) in
+            let preview = UIAlertAction(title: key.rawValue.uppercased(), style: .default) { [weak self] _ in
+                self?.showTextPreview(text: fileString ?? "Empty")
+            }
+            alertController.addAction(preview)
+        }
+        present(alertController, animated: true)
     }
 }
