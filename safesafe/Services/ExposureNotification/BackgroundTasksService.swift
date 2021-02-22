@@ -64,7 +64,7 @@ final class BackgroundTasksService: BackgroundTasksServiceProtocol {
                 return
             }
             
-            self.dashboardWorker.fetchData(shouldDelegateResult: true)
+            self.dashboardWorker.fetchDashboardData(shouldDelegateResult: true)
             
             guard self.exposureService.isExposureNotificationAuthorized == true else {
                 self.districtsService
