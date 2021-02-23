@@ -89,6 +89,17 @@ final class DashboardWorker: DashboardWorkerType {
 
     //MARK: - Private methods
 
+    private func getDashboardData(shouldDownload: Bool) -> Promise<Data> {
+        if shouldDownload {
+            return self.downloadDashboardData()
+                .then(self.updateLocalData(responseData:))
+        } else {
+            return self.fileStorage
+                .read(from: .dashboard)
+                .toPromise()
+        }
+    }
+
     private func downloadDashboardData() -> Promise<Data> {
         dashboardProvider.request(.fetch)
             .map { $0.data }
@@ -117,16 +128,5 @@ final class DashboardWorker: DashboardWorkerType {
         }
         
         return .value(jsonString)
-    }
-
-    private func getDashboardData(shouldDownload: Bool) -> Promise<Data> {
-        if shouldDownload {
-            return self.downloadDashboardData()
-                .then(self.updateLocalData(responseData:))
-        } else {
-            return self.fileStorage
-                .read(from: .dashboard)
-                .toPromise()
-        }
     }
 }

@@ -159,6 +159,5 @@ final class AppCoordinator: CoordinatorType {
         } else {
             UIScreen.main.isCaptured ? HiderController.shared.show() : HiderController.shared.hide()
         }
-        
     }
 }
