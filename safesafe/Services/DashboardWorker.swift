@@ -30,7 +30,7 @@ final class DashboardWorker: DashboardWorkerType {
     //MARK: - Properties
 
     weak var delegate: DashboardWorkerDelegate?
-    private let dashboardProvider: MoyaProvider<DashboardTarget>
+    private let dashboardProvider: MoyaProvider<InfoTarget>
     private let timestampsWorker: TimestampsWorkerType
     private let fileStorage: FileStorageType
     private let decoder:JSONDecoder
@@ -39,7 +39,7 @@ final class DashboardWorker: DashboardWorkerType {
     //MARK: - Initialization
 
     init(
-        dashboardProvider: MoyaProvider<DashboardTarget>,
+        dashboardProvider: MoyaProvider<InfoTarget>,
         timestampsWorker: TimestampsWorkerType,
         fileStorage: FileStorageType,
         decoder: JSONDecoder = JSONDecoder(),
@@ -101,7 +101,7 @@ final class DashboardWorker: DashboardWorkerType {
     }
 
     private func downloadDashboardData() -> Promise<Data> {
-        dashboardProvider.request(.fetch)
+        dashboardProvider.request(.fetchDashboard)
             .map { $0.data }
     }
     

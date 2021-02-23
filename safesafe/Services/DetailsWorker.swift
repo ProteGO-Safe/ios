@@ -17,7 +17,7 @@ final class DetailsWorker: DetailsWorkerType {
 
     //MARK: - Properties
 
-    private let detailsProvider: MoyaProvider<DetailsTarget>
+    private let detailsProvider: MoyaProvider<InfoTarget>
     private let timestampsWorker: TimestampsWorkerType
     private let fileStorage: FileStorageType
     private let decoder: JSONDecoder
@@ -26,7 +26,7 @@ final class DetailsWorker: DetailsWorkerType {
     //MARK: - Initialization
 
     init(
-        detailsProvider: MoyaProvider<DetailsTarget>,
+        detailsProvider: MoyaProvider<InfoTarget>,
         timestampsWorker: TimestampsWorkerType,
         fileStorage: FileStorageType,
         decoder: JSONDecoder = JSONDecoder(),
@@ -52,7 +52,7 @@ final class DetailsWorker: DetailsWorkerType {
 
     private func getData(shouldDownload: Bool) -> Promise<Data> {
         if shouldDownload {
-            return detailsProvider.request(.fetch)
+            return detailsProvider.request(.fetchDetails)
                 .map { $0.data }
                 .then(updateLocalData(responseData:))
         } else {

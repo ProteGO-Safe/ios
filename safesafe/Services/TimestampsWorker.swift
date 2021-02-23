@@ -17,7 +17,7 @@ final class TimestampsWorker: TimestampsWorkerType {
 
     //MARK: - Properties
 
-    private let timestampsProvider: MoyaProvider<TimestampsTarget>
+    private let timestampsProvider: MoyaProvider<InfoTarget>
     private let fileStorage: FileStorageType
     private let decoder: JSONDecoder
     private let getCurrentDate: () -> Date
@@ -25,7 +25,7 @@ final class TimestampsWorker: TimestampsWorkerType {
     //MARK: - Initialization
 
     init(
-        timestampsProvider: MoyaProvider<TimestampsTarget>,
+        timestampsProvider: MoyaProvider<InfoTarget>,
         fileStorage: FileStorageType,
         decoder: JSONDecoder = JSONDecoder(),
         getCurrentDate: @escaping () -> Date = Date.init
@@ -49,7 +49,7 @@ final class TimestampsWorker: TimestampsWorkerType {
                 return .init(error: InternalError.nilValue)
             }
             .recover { error -> Promise<TimestampsResponse> in
-                console(error)
+                console("Don't have saved timestamps or error: \(error)")
                 return self.downloadAndSaveTimestamps()
             }
     }
@@ -63,7 +63,7 @@ final class TimestampsWorker: TimestampsWorkerType {
     }
 
     private func downloadTimestamps() -> Promise<Data> {
-        timestampsProvider.request(.fetch)
+        timestampsProvider.request(.fetchTimestamps)
             .map { $0.data }
     }
 
