@@ -211,7 +211,7 @@ extension RealmLocalStorage {
             schemaVersion: 2,
             migrationBlock: { migration , oldSchemaVersion in
                 if (oldSchemaVersion < 2) {
-                    migration.deleteData(forType: "dashboardStatsIdentifier")
+                    migration.deleteData(forType: "DashboardStatsModel")
                 }
             }
         )
