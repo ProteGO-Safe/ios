@@ -66,7 +66,7 @@ extension JSBridge {
     /// Download the state of all districts.
     /// - Parameters:
     ///   - requestID: A unique key by which the PWA can recognize responses from the native application.
-    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
     func districtsList(requestID: String, dataType: BridgeDataType) {
         console("💥 START districtsList")
         districtService?.hasDistricts()
@@ -84,7 +84,7 @@ extension JSBridge {
     /// Force the download of a list contains all districts from CDN.
     /// - Parameters:
     ///   - requestID: A unique key by which the PWA can recognize responses from the native application.
-    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
     func districsAPIFetch(requestID: String, dataType: BridgeDataType) {
         console("💥 START districsAPIFetch")
         districtService?.perform()
@@ -100,7 +100,7 @@ extension JSBridge {
     /// Download the watch list of districts.
     /// - Parameters:
     ///   - requestID: A unique key by which the PWA can recognize responses from the native application.
-    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
     func subscribedDistricts(requestID: String, dataType: BridgeDataType) {
         districtService?.perform(shouldFetchAPIData: false)
             .done { [weak self] response in
@@ -115,7 +115,7 @@ extension JSBridge {
     /// - Parameters:
     ///   - jsonString: Json passed by PWA to work with native code.
     ///   - requestID: A unique key by which the PWA can recognize responses from the native application.
-    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
     /// - JsonString example:
     /// ```
     /// {
@@ -147,7 +147,7 @@ extension JSBridge {
     /// - Parameters:
     ///   - jsonString: Json passed by PWA to work with native code.
     ///   - requestID: A unique key by which the PWA can recognize responses from the native application.
-    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
     /// - JsonString example:
     /// ```
     /// {
@@ -210,7 +210,7 @@ extension JSBridge {
     ///     999 - unknown
     /// ```
     ///   - requestID: A unique key by which the PWA can recognize responses from the native application.
-    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
     func freeTestSubscriptionInfo(jsonString: String?, requestID: String, dataType: BridgeDataType) {
         freeTestService?.subscriptionInfo()
             .done { [weak self] response in
@@ -225,7 +225,7 @@ extension JSBridge {
     /// Force the download PIN for test.
     /// - Parameters:
     ///   - requestID: A unique key by which the PWA can recognize responses from the native application.
-    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
     func freeTestPinCodeFetch(requestID: String, dataType: BridgeDataType) {
         freeTestService?.getPinCode()
             .done { [weak self] response in
@@ -238,10 +238,10 @@ extension JSBridge {
             }
     }
 
-    /// Revocation of the risk of Exposure Notification. The user may cancel the risk in the application (e.g. by declaring that a test has been performed that indicated a negative result).
+    /// Revocation of the risk of Exposure Notification. The user may cancel the risk in the application (e.g. by declaring that a test has been performed with a negative result).
     /// - Parameters:
     ///   - requestID: A unique key by which the PWA can recognize responses from the native application.
-    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
     func clearExposureRisk(requestID: String, dataType: BridgeDataType) {
         exposureNotificationBridge?.clearExposureRisk()
             .done { [weak self] summary in
@@ -255,7 +255,7 @@ extension JSBridge {
     /// Download notification list with pagination.
     /// - Parameters:
     ///   - requestID: A unique key by which the PWA can recognize responses from the native application.
-    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
     func historicalData(requestID: String, dataType: BridgeDataType) {
         historicalDataWorker?.getData()
             .done { [weak self] data in
@@ -269,7 +269,7 @@ extension JSBridge {
     /// Download COVID-19 statistics.
     /// - Parameters:
     ///   - requestID: A unique key by which the PWA can recognize responses from the native application.
-    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
     func dashboardStats(requestID: String, dataType: BridgeDataType) {
         dashboardWorker?.fetchData()
             .done { [weak self] jsonString in
@@ -281,7 +281,7 @@ extension JSBridge {
     /// Gets notifications status.
     /// - Parameters:
     ///   - requestID: A unique key by which the PWA can recognize responses from the native application.
-    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
     func covidStatsSubscription(requestID: String, dataType: BridgeDataType) {
         let covidStatsSubscription = StoredDefaults.standard.get(key: .didUserSubscribeForCovidStatsTopic) ?? false
 
@@ -294,7 +294,7 @@ extension JSBridge {
     /// Download aggregate Exposure Notification statistics.
     /// - Parameters:
     ///   - requestID: A unique key by which the PWA can recognize responses from the native application.
-    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
     func agregatedStats(requestID: String, dataType: BridgeDataType) {
         historicalDataWorker?.getAgregatedExposureData()
             .done { [weak self] model in
@@ -310,7 +310,7 @@ extension JSBridge {
     /// - Parameters:
     ///   - jsonString: Json passed by PWA to work with native code.
     ///   - requestID: A unique key by which the PWA can recognize responses from the native application.
-    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
     /// - JsonString example:
     /// ```
     /// {
