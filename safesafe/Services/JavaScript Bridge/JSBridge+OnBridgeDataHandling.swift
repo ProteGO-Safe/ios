@@ -90,7 +90,9 @@ extension JSBridge {
     /// - JsonString example:
     /// ```
     /// {
-    ///     ?????
+    ///     "exposureNotificationStatus": 1 // 1 - on, 2 - off, 3 - restricted
+    ///     "isBtOn": true
+    ///     "isNotificationEnabled": false
     /// }
     /// ```
     func servicesPermissions(jsonString: String?, dataType: BridgeDataType) {
@@ -125,7 +127,9 @@ extension JSBridge {
     /// - JsonString example:
     /// ```
     /// {
-    ///     ?????
+    ///     "exposureNotificationStatus": 1 // 1 - on, 2 - off, 3 - restricted
+    ///     "isBtOn": true
+    ///     "isNotificationEnabled": false
     /// }
     /// ```
     func notificationsPermission(jsonString: String?, type: BridgeDataType) {
@@ -186,7 +190,7 @@ extension JSBridge {
     /// - JsonString example:
     /// ```
     /// {
-    ///     ????
+    ///     "result": 1 // 1 - success, 2 - failure, 3 - cancelled, 4 - noIntenet, 5 - accessDenied
     /// }
     /// ```
     func uploadTemporaryExposureKeys(jsonString: String?) {
