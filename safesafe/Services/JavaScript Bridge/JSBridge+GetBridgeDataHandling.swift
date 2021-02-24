@@ -190,7 +190,25 @@ extension JSBridge {
 
     /// Gets subscription status.
     /// - Parameters:
-    ///   - jsonString: ?????
+    ///   - jsonString: Json passed by PWA to work with native code.
+    /// - JsonString example:
+    /// ```
+    /// {
+    ///     "subscription":  {
+    ///        "guid": "EAD80292-8AF1-4D6D-AD66-170CDDF8C432",
+    ///        "status": 1,
+    ///        "updated": 1614159202
+    ///     }
+    /// }
+    /// ```
+    /// - status:
+    /// ```
+    ///     0 - unverified
+    ///     1 - verified
+    ///     2 - signedForTest
+    ///     3 - utilized
+    ///     999 - unknown
+    /// ```
     ///   - requestID: A unique key by which the PWA can recognize responses from the native application.
     ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
     func freeTestSubscriptionInfo(jsonString: String?, requestID: String, dataType: BridgeDataType) {

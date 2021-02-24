@@ -73,7 +73,7 @@ extension JSBridge {
     /// - JsonString example:
     /// ```
     /// {
-    ///     ?????
+    ///     "timestamp": 1614159198
     /// }
     /// ```
     func unsubscribeFromTopic(jsonString: String?, dataType: BridgeDataType) {
