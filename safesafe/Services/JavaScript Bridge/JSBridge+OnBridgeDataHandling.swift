@@ -90,10 +90,16 @@ extension JSBridge {
     /// - JsonString example:
     /// ```
     /// {
-    ///     "exposureNotificationStatus": 1 // 1 - on, 2 - off, 3 - restricted
+    ///     "exposureNotificationStatus": 1
     ///     "isBtOn": true
     ///     "isNotificationEnabled": false
     /// }
+    /// ```
+    /// - exposureNotificationStatus:
+    /// ```
+    ///     1 - on
+    ///     2 - off
+    ///     3 - restricted
     /// ```
     func servicesPermissions(jsonString: String?, dataType: BridgeDataType) {
         isServicSetting = true
@@ -127,10 +133,16 @@ extension JSBridge {
     /// - JsonString example:
     /// ```
     /// {
-    ///     "exposureNotificationStatus": 1 // 1 - on, 2 - off, 3 - restricted
+    ///     "exposureNotificationStatus": 1
     ///     "isBtOn": true
     ///     "isNotificationEnabled": false
     /// }
+    /// ```
+    /// - exposureNotificationStatus:
+    /// ```
+    ///     1 - on
+    ///     2 - off
+    ///     3 - restricted
     /// ```
     func notificationsPermission(jsonString: String?, type: BridgeDataType) {
         Permissions.instance.state(for: .notifications)
@@ -168,8 +180,8 @@ extension JSBridge {
             }
     }
 
-    /// <#Description#>
-    /// - Parameter shouldDownload: <#shouldDownload description#>
+    /// Notification about calculated exposure notification risk.
+    /// - Parameter shouldDownload: Whether the method should download the data.
     func sendExposureList(shouldDownload: Bool = true) {
         exposureNotificationBridge?.getExposureSummary(shouldDownload: shouldDownload)
             .done { [weak self] summary in
@@ -190,8 +202,16 @@ extension JSBridge {
     /// - JsonString example:
     /// ```
     /// {
-    ///     "result": 1 // 1 - success, 2 - failure, 3 - cancelled, 4 - noIntenet, 5 - accessDenied
+    ///     "result": 1
     /// }
+    /// ```
+    /// - result:
+    /// ```
+    ///     1 - success
+    ///     2 - failure
+    ///     3 - cancelled
+    ///     4 - noInternet
+    ///     5 - accessDenied
     /// ```
     func uploadTemporaryExposureKeys(jsonString: String?) {
         guard NetworkMonitoring.shared.isInternetAvailable else {
