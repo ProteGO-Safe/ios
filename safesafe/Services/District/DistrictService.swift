@@ -15,7 +15,11 @@ protocol DebugDistrictServicesProtocol: class {
 }
 
 extension DebugDistrictServicesProtocol {
-    func foceFetchDistricts(_ showNotification: Bool = true, delay: TimeInterval = 15, completed: (() -> Void)? = nil) {
+    func foceFetchDistricts(
+        _ showNotification: Bool = true,
+        delay: TimeInterval = 15,
+        completed: (() -> Void)? = nil
+    ) {
         forceFetchDistricts(showNotification, delay: delay, completed: completed)
     }
 }
@@ -39,13 +43,16 @@ final class DistrictService {
     
     private let provider: MoyaProvider<InfoTarget>
     private let localStorage: RealmLocalStorage?
+    private let fileStorage: FileStorageType
     
     init(
         with provider: MoyaProvider<InfoTarget>,
-        localStorage: RealmLocalStorage? = RealmLocalStorage()
+        localStorage: RealmLocalStorage?,
+        fileStorage: FileStorageType
     ) {
         self.provider = provider
         self.localStorage = localStorage
+        self.fileStorage = fileStorage
         console("Local storage instance: \(String(describing: localStorage))")
     }
     
@@ -166,56 +173,23 @@ final class DistrictService {
         }
     }
     
-    private func fetch() -> Promise<DistrictResponseModel> {
+    private func fetch() -> Promise<Data> {
         console("📲 download districts")
         return provider.request(.fetchDistricts)
-            .map { try $0.map(DistrictResponseModel.self) }
+            .map { $0.data }
     }
     
-    private func store(response: DistrictResponseModel) -> Promise<Void> {
+    private func store(responseData: Data) -> Promise<Void> {
         console("✅ store time \(Date())")
-        console("voivodeships count: \(response.voivodeships.count)")
-        console("update: \(response.voivodeshipsUpdated)")
-        console("Local storage instance: \(String(describing: localStorage))")
-        return Promise { seal in
-            localStorage?.beginWrite()
-            
-            for (index, voivodeship) in response.voivodeships.enumerated() {
-                let voivodeshipObject = VoivodeshipStorageModel(with: voivodeship, index: index, updatedAt: response.voivodeshipsUpdated)
-                localStorage?.append(voivodeshipObject, policy: .all)
-                
-                for (districtIndex, district) in voivodeship.districts.enumerated() {
-                    let existingDistrictObject: DistrictStorageModel? = localStorage?.fetch(primaryKey: district.id)
-                    let districtObject = DistrictStorageModel(
-                        with: district,
-                        currentModel: existingDistrictObject,
-                        voivodeship: voivodeshipObject,
-                        index: districtIndex,
-                        updatedAt: response.voivodeshipsUpdated
-                    )
-                    
-                    localStorage?.append(districtObject, policy: .all)
-                }
-            }
-            
-            do {
-                try localStorage?.commitWrite()
-                console("✅ realm commit - success")
-                seal.fulfill(())
-            } catch {
-                console("❌ can't commit changes to realm")
-                seal.reject(error)
-            }
-        }
-        
+        return fileStorage.write(to: .districts, content: responseData)
+            .toPromise()
     }
     
-    private func getAll() -> Promise<[VoivodeshipStorageModel]> {
-        return Promise { seal in
-            let allDistricts: [VoivodeshipStorageModel] = localStorage?.fetch() ?? []
-            console("🔱 fetch all vovoidships count: \(allDistricts.count)")
-            seal.fulfill(allDistricts)
-        }
+    private func getAll() -> Promise<[DistrictResponseModel.Voivodeship]> {
+        fileStorage.read(from: .districts)
+            .toPromise()
+            .then(self.decodeFromJSON(data:))
+            .map { $0.voivodeships }
     }
     
     private func clearDistrictsIfNeeded(response: DistrictResponseModel) -> Promise<DistrictResponseModel> {
@@ -315,6 +289,15 @@ extension DistrictService {
             console(error)
             return nil
         }
+    }
+
+    private func decodeFromJSON(data: Data) -> Promise<DistrictResponseModel> {
+        let decoder = JSONDecoder()
+        guard let vivodeships = try? decoder.decode(DistrictResponseModel.self, from: data) else {
+            console("Can't decode districts")
+            return .init(error: InternalError.nilValue)
+        }
+        return .value(vivodeships)
     }
 }
 

@@ -54,7 +54,12 @@ final class DependencyContainer {
     )
     
     lazy var districtsService: DistrictService = DistrictService(
-        with:  MoyaProvider<InfoTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
+        with:  MoyaProvider<InfoTarget>(
+            session: CustomSession.defaultSession(),
+            plugins: [CachePolicyPlugin()]
+        ),
+        localStorage: realmLocalStorage,
+        fileStorage: fileStorage
     )
 
     lazy var timestampsWorker: TimestampsWorkerType = TimestampsWorker(

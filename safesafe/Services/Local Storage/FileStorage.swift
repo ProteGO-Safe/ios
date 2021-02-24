@@ -17,6 +17,7 @@ final class FileStorage: FileStorageType {
         case timestamps
         case dashboard
         case details
+        case districts
     }
 
     enum FileError: Error {
