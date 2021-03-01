@@ -148,7 +148,8 @@ extension NotificationManager: NotificationManagerProtocol {
             }
         }
     }
-    
+
+    @discardableResult
     func registerForNotifications(remote: Bool = true) -> Guarantee<Bool> {
         return Guarantee { fulfill in
             let didRegister = StoredDefaults.standard.get(key: .didAuthorizeAPN) ?? false
