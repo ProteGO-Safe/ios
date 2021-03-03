@@ -11,7 +11,7 @@ import StoreKit
 
 extension JSBridge {
 
-    /// Informing native about downloading new historical items (native will delete old data on his side).
+    /// Informing native about downloading new historical items (native will delete the old data on its side).
     /// - Parameter jsonString: Json passed by PWA to work with native code.
     /// - JsonString example:
     /// ```
@@ -69,11 +69,11 @@ extension JSBridge {
     /// Unsubscribe from push notifications selected topic.
     /// - Parameters:
     ///   - jsonString: Json passed by PWA to work with native code.
-    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
     /// - JsonString example:
     /// ```
     /// {
-    ///     ?????
+    ///     "timestamp": 1614159198
     /// }
     /// ```
     func unsubscribeFromTopic(jsonString: String?, dataType: BridgeDataType) {
@@ -83,15 +83,23 @@ extension JSBridge {
         NotificationManager.shared.unsubscribeFromDailyTopic(timestamp: model.timestamp)
     }
 
-    /// Request about service permissions.
+    /// Request service permissions.
     /// - Parameters:
     ///   - jsonString: Json passed by PWA to work with native code.
-    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
     /// - JsonString example:
     /// ```
     /// {
-    ///     ?????
+    ///     "exposureNotificationStatus": 1
+    ///     "isBtOn": true
+    ///     "isNotificationEnabled": false
     /// }
+    /// ```
+    /// - exposureNotificationStatus:
+    /// ```
+    ///     1 - on
+    ///     2 - off
+    ///     3 - restricted
     /// ```
     func servicesPermissions(jsonString: String?, dataType: BridgeDataType) {
         isServicSetting = true
@@ -118,15 +126,23 @@ extension JSBridge {
         }
     }
 
-    /// Request about notification permission.
+    /// Request notification permission.
     /// - Parameters:
     ///   - jsonString: Json passed by PWA to work with native code.
-    ///   - dataType: The type by which we recognize what action the PWA application expects from the native code.
+    ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
     /// - JsonString example:
     /// ```
     /// {
-    ///     ?????
+    ///     "exposureNotificationStatus": 1
+    ///     "isBtOn": true
+    ///     "isNotificationEnabled": false
     /// }
+    /// ```
+    /// - exposureNotificationStatus:
+    /// ```
+    ///     1 - on
+    ///     2 - off
+    ///     3 - restricted
     /// ```
     func notificationsPermission(jsonString: String?, type: BridgeDataType) {
         Permissions.instance.state(for: .notifications)
@@ -164,8 +180,8 @@ extension JSBridge {
             }
     }
 
-    /// <#Description#>
-    /// - Parameter shouldDownload: <#shouldDownload description#>
+    /// Notification about calculated exposure notification risk.
+    /// - Parameter shouldDownload: Whether the method should download the data.
     func sendExposureList(shouldDownload: Bool = true) {
         exposureNotificationBridge?.getExposureSummary(shouldDownload: shouldDownload)
             .done { [weak self] summary in
@@ -186,8 +202,16 @@ extension JSBridge {
     /// - JsonString example:
     /// ```
     /// {
-    ///     ????
+    ///     "result": 1
     /// }
+    /// ```
+    /// - result:
+    /// ```
+    ///     1 - success
+    ///     2 - failure
+    ///     3 - cancelled
+    ///     4 - noInternet
+    ///     5 - accessDenied
     /// ```
     func uploadTemporaryExposureKeys(jsonString: String?) {
         guard NetworkMonitoring.shared.isInternetAvailable else {
@@ -234,7 +258,7 @@ extension JSBridge {
 
 
     /// Lifecycle change notification.
-    /// - Parameter type: The type by which we recognize what action the PWA application expects from the native code.
+    /// - Parameter type: The type by which the native app recognizes what action the PWA expects from it.
     func sendAppStateJSON(type: BridgeDataType) {
         serviceStatusManager.serviceStatusJson(delay: .zero)
             .done { json in
