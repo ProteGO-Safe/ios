@@ -279,6 +279,14 @@ extension JSBridge {
             .catch { console($0, type: .error) }
     }
 
+    func detailsStats(requestID: String, dataType: BridgeDataType) {
+        detailsWorker?.fetchData()
+            .done { [weak self] jsonString in
+                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+            }
+            .catch { console($0, type: .error) }
+    }
+
     /// Gets notifications status.
     /// - Parameters:
     ///   - requestID: A unique key by which the PWA can recognize responses from the native application.

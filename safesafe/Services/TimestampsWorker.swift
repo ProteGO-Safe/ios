@@ -43,10 +43,11 @@ final class TimestampsWorker: TimestampsWorkerType {
             .toPromise()
             .then { data -> Promise<TimestampsResponse> in
                 guard let timestamps = try? self.decoder.decode(TimestampsResponse.self, from: data),
-                      timestamps.nextUpdate > Int(self.getCurrentDate().timeIntervalSince1970) else {
+                      timestamps.nextUpdate > Int(self.getCurrentDate().timeIntervalSince1970)
+                else {
                     return self.downloadAndSaveTimestamps()
                 }
-                return .init(error: InternalError.nilValue)
+                return .value(timestamps)
             }
             .recover { error -> Promise<TimestampsResponse> in
                 console("Don't have saved timestamps or error: \(error)")

@@ -254,6 +254,9 @@ extension JSBridge: WKScriptMessageHandler {
     
         case .setCovidStatsSubscription:
             setCovidStatsSubscription(jsonString: jsonString, requestID: requestId, dataType: bridgeDataType)
+
+        case .detailsStats:
+            detailsStats(requestID: requestId, dataType: bridgeDataType)
             
         default:
             console("Not managed yet", type: .warning)

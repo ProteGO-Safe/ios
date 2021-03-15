@@ -40,5 +40,7 @@ extension JSBridge {
         case setCovidStatsSubscription = 101
         case dashboardStats = 102
         case agregatedStats = 103
+
+        case detailsStats = 104
     }
 }
