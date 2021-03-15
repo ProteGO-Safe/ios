@@ -275,7 +275,7 @@ extension JSBridge {
             .done { [weak self] jsonString in
                 self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
             }
-            .then(self.detailsWorker!.fetchData)
+            .then(self.detailsWorker?.fetchData ?? {.value("")} )
             .catch { console($0, type: .error) }
     }
 
