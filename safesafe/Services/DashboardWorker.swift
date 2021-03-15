@@ -91,18 +91,22 @@ final class DashboardWorker: DashboardWorkerType {
 
     private func getDashboardData(shouldDownload: Bool) -> Promise<Data> {
         if shouldDownload {
-            return self.downloadDashboardData()
-                .then(self.updateLocalData(responseData:))
+            return self.downloadAndCacheData()
         } else {
             return self.fileStorage
                 .read(from: .dashboard)
                 .toPromise()
+                .recover { [unowned self] error -> Promise<Data> in
+                    console(error)
+                    return self.downloadAndCacheData()
+                }
         }
     }
 
-    private func downloadDashboardData() -> Promise<Data> {
+    private func downloadAndCacheData() -> Promise<Data> {
         dashboardProvider.request(.fetchDashboard)
             .map { $0.data }
+            .then(self.updateLocalData(responseData:))
     }
     
     private func updateLocalData(responseData: Data) -> Promise<Data> {

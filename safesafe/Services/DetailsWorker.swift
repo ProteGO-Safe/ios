@@ -52,14 +52,22 @@ final class DetailsWorker: DetailsWorkerType {
 
     private func getData(shouldDownload: Bool) -> Promise<Data> {
         if shouldDownload {
-            return detailsProvider.request(.fetchDetails)
-                .map { $0.data }
-                .then(updateLocalData(responseData:))
+            return downloadAndCacheData()
         } else {
             return self.fileStorage
                 .read(from: .details)
                 .toPromise()
+                .recover { [unowned self] error -> Promise<Data> in
+                    console(error)
+                    return self.downloadAndCacheData()
+                }
         }
+    }
+
+    private func downloadAndCacheData() -> Promise<Data> {
+        detailsProvider.request(.fetchDetails)
+            .map { $0.data }
+            .then(updateLocalData(responseData:))
     }
 
     private func updateLocalData(responseData: Data) -> Promise<Data> {
