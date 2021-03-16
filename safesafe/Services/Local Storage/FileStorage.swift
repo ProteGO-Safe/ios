@@ -32,7 +32,7 @@ final class FileStorage: FileStorageType {
     }
 
     func write(to fileName: Key, content: Data) -> Result<Void, FileError> {
-        switch getJSONFileUrl(for: fileName) {
+        switch getFileUrl(for: fileName) {
         case .success(let fileUrl):
             do {
                 try content.write(to: fileUrl, options: .noFileProtection)
@@ -46,7 +46,7 @@ final class FileStorage: FileStorageType {
     }
 
     func read(from fileName: Key) -> Result<Data, FileError> {
-        switch getJSONFileUrl(for: fileName) {
+        switch getFileUrl(for: fileName) {
         case .success(let url):
             do {
                 let content = try Data(contentsOf: url)
@@ -59,7 +59,7 @@ final class FileStorage: FileStorageType {
         }
     }
 
-    private func getJSONFileUrl(for key: Key) -> Result<URL, FileError> {
+    private func getFileUrl(for key: Key, pathExtension: String = "json") -> Result<URL, FileError> {
         let fileName = key.rawValue
         guard let documentDirectoryURL = try? fileManager.url(
                 for: .cachesDirectory,
@@ -71,7 +71,7 @@ final class FileStorage: FileStorageType {
         return .success(
             documentDirectoryURL
                 .appendingPathComponent(fileName)
-                .appendingPathExtension("json")
+                .appendingPathExtension(pathExtension)
         )
     }
 }
