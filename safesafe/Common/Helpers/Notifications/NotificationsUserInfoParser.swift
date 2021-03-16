@@ -135,12 +135,12 @@ final class NotificationUserInfoParser {
         return covidStatsRaw
     }
     
-    func parseCovidStats(userInfo: [AnyHashable: Any]) -> PushNotificationCovidStatsModel? {
+    func parseCovidStats(userInfo: [AnyHashable: Any]) -> DashboardStatsAPIResponse? {
         let decoder = JSONDecoder()
         guard
             let covidStatsRaw: String = covidStatsData(userInfo: userInfo),
             let data = covidStatsRaw.data(using: .utf8),
-            let model = try? decoder.decode(PushNotificationCovidStatsModel.self, from: data)
+            let model = try? decoder.decode(DashboardStatsAPIResponse.self, from: data)
         else {
             return nil
         }

@@ -70,12 +70,12 @@ final class RealmLocalStorage: LocalStorageProtocol {
         try realm.commitWrite()
     }
     
-    func append<T: LocalStorable>(_ object: T, policy: LocalStorageUpdatePolicy, completion: ((Result<Void, Error>) -> ())? = nil) {
-        guard let object = object as? Object else {
-            completion?(.failure(InternalError.invalidDataType))
-            return
-        }
-
+    func append<T: LocalStorable>(
+        _ object: T,
+        policy: LocalStorageUpdatePolicy,
+        completion: ((Result<Void, Error>) -> ())? = nil
+    ) {
+        let object = object as Object
         do {
             if isContextOpen {
                 realm.add(object, update: realmPolicy(policy))
@@ -90,12 +90,13 @@ final class RealmLocalStorage: LocalStorageProtocol {
         }
     }
     
-    func append<T: LocalStorable>(_ objects: [T], policy: LocalStorageUpdatePolicy, completion: ((Result<Void, Error>) -> ())? = nil) {
-        guard let objects = objects as? [Object] else {
-            completion?(.failure(InternalError.invalidDataType))
-            return
-        }
-        
+    func append<T: LocalStorable>(
+        _ objects: [T],
+        policy: LocalStorageUpdatePolicy,
+        completion: ((Result<Void, Error>) -> ())? = nil
+    ) {
+        let objects = objects as [Object]
+
         do {
             if isContextOpen {
                 realm.add(objects, update: realmPolicy(policy))
@@ -111,17 +112,12 @@ final class RealmLocalStorage: LocalStorageProtocol {
     }
     
     func fetch<T: LocalStorable>() -> Array<T> {
-        guard let type = T.self as? Object.Type else {
-            fatalError()
-        }
+        let type = T.self as Object.Type
         return realm.objects(type).compactMap { $0 as? T }
     }
     
     func fetch<T: LocalStorable, KeyType>(primaryKey: KeyType) -> T? {
-        guard let type = T.self as? Object.Type else {
-            fatalError()
-        }
-        
+        let type = T.self as Object.Type
         return realm.object(ofType: type, forPrimaryKey: primaryKey) as? T
     }
     
@@ -210,9 +206,15 @@ extension RealmLocalStorage {
         }
         
         console("🔑🔑🔑 Instantiate Realm config with encryption key, length: \(encryptionKey.count)")
-        return Realm.Configuration(encryptionKey: encryptionKey, schemaVersion: 1, migrationBlock: { _, oldSchemaVersion in
-            if (oldSchemaVersion < 1) {}
-        })
+        return Realm.Configuration(
+            encryptionKey: encryptionKey,
+            schemaVersion: 2,
+            migrationBlock: { migration , oldSchemaVersion in
+                if (oldSchemaVersion < 2) {
+                    migration.deleteData(forType: "DashboardStatsModel")
+                }
+            }
+        )
     }
 }
 

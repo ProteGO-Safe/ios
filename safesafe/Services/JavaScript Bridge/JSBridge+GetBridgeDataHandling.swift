@@ -266,12 +266,30 @@ extension JSBridge {
             .catch { console($0, type: .error) }
     }
 
-    /// Download COVID-19 statistics.
+    /// Get dashboard statistic from local cache or if not possible get from web
     /// - Parameters:
     ///   - requestID: A unique key by which the PWA can recognize responses from the native application.
     ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
     func dashboardStats(requestID: String, dataType: BridgeDataType) {
         dashboardWorker?.fetchData()
+            .done { [weak self] jsonString in
+                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
+            }
+            .then { [weak self] _ -> Promise<String> in
+                guard let dashboardWorker = self?.dashboardWorker else {
+                    throw InternalError.nilValue
+                }
+                return dashboardWorker.fetchData()
+            }
+            .catch { console($0, type: .error) }
+    }
+
+    /// Get details statistic from local cache or if not possible get from web
+    /// - Parameters:
+    ///   - requestID: A unique key by which the PWA can recognize responses from the native application.
+    ///   - dataType: The type by which the native app recognizes what action the PWA expects from it.
+    func detailsStats(requestID: String, dataType: BridgeDataType) {
+        detailsWorker?.fetchData()
             .done { [weak self] jsonString in
                 self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
             }
