@@ -35,10 +35,9 @@ final class ConfigManager {
         static let enGatBaseURL = "EN_GAT_BASE_URL" // String
         static let enUdkBaseURL = "EN_UDK_BASE_URL" // String
         static let enStorageURL = "EN_STORAGE_URL" // String
-        
-        // Districts
-        static let districts = "DISTRICTS"
-        static let districtsBaseURL = "BASE_URL"
+
+        // Base Url
+        static let baseURL = "BASE_URL"
         
         // Free COVID Test
         static let freeTest = "FREE_TEST"
@@ -88,20 +87,12 @@ extension ConfigManager {
     }
 }
 
-// Exposure Notification
 extension ConfigManager {
-    
+
+    // Exposure Notification
     private var enSettings: [String: Any] {
         guard let dictionary = settings[Key.exposureNotification] as? [String: Any] else {
             Fatal.execute("Can't read \(Key.exposureNotification) from plist")
-        }
-        
-        return dictionary
-    }
-    
-    private var districtsSettings: [String: Any] {
-        guard let dictionary = settings[Key.districts] as? [String: Any] else {
-            Fatal.execute("Can't read \(Key.districts) from plist")
         }
         
         return dictionary
@@ -126,9 +117,12 @@ extension ConfigManager {
     var enStorageURL: String {
         return value(for: Key.enStorageURL, dictionary: enSettings)
     }
-    
-    var districtsBaseURL: String {
-        return value(for: Key.districtsBaseURL, dictionary: districtsSettings)
+
+    var baseURL: String {
+        guard let baseURL = settings[Key.baseURL] as? String else {
+            Fatal.execute("Can't read \(Key.baseURL) from plist")
+        }
+        return baseURL
     }
     
     var freeTestBaseURL: String {

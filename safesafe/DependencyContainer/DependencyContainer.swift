@@ -18,6 +18,7 @@ final class DependencyContainer {
     
     lazy var deviceCheckService = DeviceCheckService()
     lazy var exposureServiceDebug = ExposureServiceDebug()
+    lazy var fileStorage = FileStorage()
     
     @available(iOS 13.5, *)
     lazy var diagnosisKeysDownloadService = DiagnosisKeysDownloadService(
@@ -46,15 +47,33 @@ final class DependencyContainer {
         storageService: realmLocalStorage,
         freeTestService: freeTestService
     )
+
+    lazy var infoProvider: MoyaProvider<InfoTarget> = MoyaProvider<InfoTarget>(
+        session: CustomSession.defaultSession(),
+        plugins: [CachePolicyPlugin()]
+    )
     
     lazy var districtsService: DistrictService = DistrictService(
-        with:  MoyaProvider<CovidInfoTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
+        with:  MoyaProvider<InfoTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
+    )
+
+    lazy var timestampsWorker: TimestampsWorkerType = TimestampsWorker(
+        timestampsProvider: infoProvider,
+        fileStorage: fileStorage
     )
     
     lazy var dashboardWorker: DashboardWorkerType = DashboardWorker(
-        with: MoyaProvider<CovidInfoTarget>(session: CustomSession.defaultSession(), plugins: [CachePolicyPlugin()])
+        dashboardProvider: infoProvider,
+        timestampsWorker: timestampsWorker,
+        fileStorage: fileStorage
     )
-    
+
+    lazy var detailsWorker: DetailsWorkerType = DetailsWorker(
+        detailsProvider: infoProvider,
+        timestampsWorker: timestampsWorker,
+        fileStorage: fileStorage
+    )
+
     lazy var freeTestService: FreeTestService = FreeTestService(
         with: realmLocalStorage,
         deviceCheckService: deviceCheckService,

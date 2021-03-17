@@ -20,6 +20,7 @@ final class JSBridge: NSObject {
     var diagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol?
     var historicalDataWorker: HistoricalDataWorkerType?
     var dashboardWorker: DashboardWorkerType?
+    var detailsWorker: DetailsWorkerType?
     
     var districtService: DistrictService?
     var freeTestService: FreeTestService?
@@ -79,6 +80,10 @@ final class JSBridge: NSObject {
     func register(dashboardWorker: DashboardWorkerType) {
         self.dashboardWorker = dashboardWorker
         self.dashboardWorker?.delegate = self
+    }
+
+    func register(detailsWorker: DetailsWorkerType) {
+        self.detailsWorker = detailsWorker
     }
     
     func bridgeDataResponse(
@@ -249,6 +254,9 @@ extension JSBridge: WKScriptMessageHandler {
     
         case .setCovidStatsSubscription:
             setCovidStatsSubscription(jsonString: jsonString, requestID: requestId, dataType: bridgeDataType)
+
+        case .detailsStats:
+            detailsStats(requestID: requestId, dataType: bridgeDataType)
             
         default:
             console("Not managed yet", type: .warning)

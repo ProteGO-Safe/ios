@@ -21,4 +21,18 @@ struct DashboardStatsAPIResponse: Codable {
     let totalVaccinationsDose1: Int
     let newVaccinationsDose2: Int
     let totalVaccinationsDose2: Int
+    let newTests: Int
+    let newDeathsWithoutComorbidities: Int
+    let newDeathsWithComorbidities: Int
+    let newUndesirableReaction: Int
+    let totalUndesirableReaction: Int
+
+    var dictionary: [String: Any]? {
+        guard let data = try? JSONEncoder().encode(self) else {
+            return nil
+        }
+        return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)).flatMap {
+            $0 as? [String: Any]
+        }
+    }
 }
