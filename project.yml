@@ -67,6 +67,8 @@ targets:
         group: safesafe/Language
       - path: safesafe/Resources/Extensions
         group: safesafe/Resources
+      - path: safesafe/Models/DashboardStatsAPIResponse.swift
+        group: safesafe/Models
   # Main app target
   #
   safesafe:
