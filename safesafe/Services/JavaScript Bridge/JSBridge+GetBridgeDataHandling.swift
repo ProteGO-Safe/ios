@@ -276,10 +276,10 @@ extension JSBridge {
                 self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
             }
             .then { [weak self] _ -> Promise<String> in
-                guard let dashboardWorker = self?.dashboardWorker else {
+                guard let detailsWorker = self?.detailsWorker else {
                     throw InternalError.nilValue
                 }
-                return dashboardWorker.fetchData()
+                return detailsWorker.fetchData()
             }
             .catch { console($0, type: .error) }
     }

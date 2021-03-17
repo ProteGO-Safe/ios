@@ -175,13 +175,13 @@ final class DistrictService {
     private func store(response: DistrictResponseModel) -> Promise<Void> {
         console("✅ store time \(Date())")
         console("voivodeships count: \(response.voivodeships.count)")
-        console("update: \(response.voivodeshipsUpdated)")
+        console("update: \(response.updated)")
         console("Local storage instance: \(String(describing: localStorage))")
         return Promise { seal in
             localStorage?.beginWrite()
             
             for (index, voivodeship) in response.voivodeships.enumerated() {
-                let voivodeshipObject = VoivodeshipStorageModel(with: voivodeship, index: index, updatedAt: response.voivodeshipsUpdated)
+                let voivodeshipObject = VoivodeshipStorageModel(with: voivodeship, index: index, updatedAt: response.updated)
                 localStorage?.append(voivodeshipObject, policy: .all)
                 
                 for (districtIndex, district) in voivodeship.districts.enumerated() {
@@ -191,7 +191,7 @@ final class DistrictService {
                         currentModel: existingDistrictObject,
                         voivodeship: voivodeshipObject,
                         index: districtIndex,
-                        updatedAt: response.voivodeshipsUpdated
+                        updatedAt: response.updated
                     )
                     
                     localStorage?.append(districtObject, policy: .all)
