@@ -8,13 +8,13 @@
 import Foundation
 
 struct ExposureHistoryRiskCheckAgregatedResponse: Codable, JSONRepresentable {
-    let enStats: Stats?
+    let riskCheck: Stats?
     
     init(with model: ExposureHistoryRiskCheckAgregated?) {
         if let model = model {
-            self.enStats = .init(with: model)
+            self.riskCheck = .init(with: model)
         } else {
-            self.enStats = nil
+            self.riskCheck = nil
         }
     }
     
