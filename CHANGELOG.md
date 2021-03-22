@@ -6,6 +6,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.10.0
+- Added new file storage method
+- Split current JSON data to multiple smaller data files to prevent over downloading unwanted data
+- Enhanced view of the app home screen, which now includes more detailed statistics on vaccination and infections
+- New screen with detailed statistics and graphs on vaccination (number of people vaccinated, doses, adverse reactions) and infections (number of people infected, recovered, deaths, causes of death and tests)
+- Added information on vaccination and registration rules with redirection to registration, vaccination request and helpline
+
 ## 4.9.1
 - Added Vaccination stats to dashboard
 
