@@ -9,86 +9,32 @@
 import WebKit
 import PromiseKit
 import Network
-import StoreKit
 
 final class JSBridge: NSObject {
     
-    // MARK: - Constants
-    
-    enum BridgeDataType: Int {
-        case dailyTopicUnsubscribe = 1
-        case applicationLifecycle = 11
-        case notificationsPermission = 35
-        case serviceStatus = 51
-        case setServices = 52
-        case clearData = 37
-        case uploadTemporaryExposureKeys = 43
-        
-        case exposureList = 61
-        case appVersion = 62
-        case systemLanguage = 63
-        case clearExposureRisk = 66
-        case requestAppReview = 68
-        case route = 69
-        
-        case allDistricts = 70
-        case districtsAPIFetch = 71
-        case districtAction = 72
-        case subscribedDistricts = 73
-        
-        case freeTestPinUpload = 80
-        case freeTestSubscriptionInfo = 81
-        case freeTestPinCodeFetch = 82
-        
-        case historicalData = 90
-        case historicalDataRemove = 91
-        
-        case covidStatsSubscription = 100
-        case setCovidStatsSubscription = 101
-        case dashboardStats = 102
-        case agregatedStats = 103
-    }
-    
-    enum SendMethod: String, CaseIterable {
-        case bridgeDataResponse = "bridgeDataResponse"
-        case onBridgeData = "onBridgeData"
-    }
-    
-    private enum ReceivedMethod: String, CaseIterable {
-        case setBridgeData = "setBridgeData"
-        case bridgeDataRequest = "bridgeDataRequest"
-        case getBridgeData = "getBridgeData"
-    }
-    
-    private enum Key {
-        static let timestamp = "timestamp"
-        static let data = "data"
-        static let requestId = "requestId"
-        static let type = "type"
-    }
-    
     // MARK: - Properties
     
-    private let jsonDecoder = JSONDecoder()
-    private let serviceStatusManager: ServiceStatusManagerProtocol
-    private var exposureNotificationBridge: ExposureNotificationJSProtocol?
-    private var diagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol?
-    private var historicalDataWorker: HistoricalDataWorkerType?
-    private var dashboardWorker: DashboardWorkerType?
+    let jsonDecoder = JSONDecoder()
+    let serviceStatusManager: ServiceStatusManagerProtocol
+    var exposureNotificationBridge: ExposureNotificationJSProtocol?
+    var diagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol?
+    var historicalDataWorker: HistoricalDataWorkerType?
+    var dashboardWorker: DashboardWorkerType?
+    var detailsWorker: DetailsWorkerType?
     
-    private var districtService: DistrictService?
-    private var freeTestService: FreeTestService?
+    var districtService: DistrictService?
+    var freeTestService: FreeTestService?
     
-    private var isServicSetting: Bool = false
-    private var currentDataType: BridgeDataType?
-    private var notificationPayload: String?
+    var isServicSetting: Bool = false
+    var currentDataType: BridgeDataType?
+    var notificationPayload: String?
     
-    private weak var webView: WKWebView?
+    weak var webView: WKWebView?
     private var controller: WKUserContentController?
     
     var contentController: WKUserContentController {
         let controller = self.controller ?? WKUserContentController()
-        for method in ReceivedMethod.allCases {
+        for method in Constans.ReceivedMethod.allCases {
             controller.add(self, name: method.rawValue)
         }
         
@@ -135,18 +81,30 @@ final class JSBridge: NSObject {
         self.dashboardWorker = dashboardWorker
         self.dashboardWorker?.delegate = self
     }
+
+    func register(detailsWorker: DetailsWorkerType) {
+        self.detailsWorker = detailsWorker
+    }
     
-    func bridgeDataResponse(type: BridgeDataType, body: String?, requestId: String, completion: ((Any?, Error?) -> ())? = nil) {
+    func bridgeDataResponse(
+        type: BridgeDataType,
+        body: String?,
+        requestId: String,
+        completion: ((Any?, Error?) -> ())? = nil
+    ) {
         DispatchQueue.main.async {
             guard let webView = self.webView else {
-                console("WebView not registered. Please use `register(webView: WKWebView)` before use this method", type: .warning)
+                console(
+                    "WebView not registered. Please use `register(webView: WKWebView)` before use this method",
+                    type: .warning
+                )
                 return
             }
             var method: String
             if let body = body {
-                method = "\(SendMethod.bridgeDataResponse.rawValue)('\(body)','\(type.rawValue)','\(requestId)')"
+                method = "\(Constans.SendMethod.bridgeDataResponse.rawValue)('\(body)','\(type.rawValue)','\(requestId)')"
             } else {
-                method = "\(SendMethod.bridgeDataResponse.rawValue)('','\(type.rawValue)','\(requestId)')"
+                method = "\(Constans.SendMethod.bridgeDataResponse.rawValue)('','\(type.rawValue)','\(requestId)')"
             }
             webView.evaluateJavaScript(method, completionHandler: completion)
         }
@@ -155,15 +113,18 @@ final class JSBridge: NSObject {
     func onBridgeData(type: BridgeDataType, body: String, completion: ((Any?, Error?) -> ())? = nil) {
         DispatchQueue.main.async {
             guard let webView = self.webView else {
-                console("WebView not registered. Please use `register(webView: WKWebView)` before use this method", type: .warning)
+                console(
+                    "WebView not registered. Please use `register(webView: WKWebView)` before use this method",
+                    type: .warning
+                )
                 return
             }
-            let method = "\(SendMethod.onBridgeData.rawValue)(\(type.rawValue),'\(body)')"
+            let method = "\(Constans.SendMethod.onBridgeData.rawValue)(\(type.rawValue),'\(body)')"
             webView.evaluateJavaScript(method, completionHandler: completion)
         }
     }
     
-    private func encodeToJSON<T>(_ encodable: T) -> String? where T: Encodable {
+    func encodeToJSON<T>(_ encodable: T) -> String? where T: Encodable {
         do {
             let data = try JSONEncoder().encode(encodable)
             return String(data: data, encoding: .utf8)
@@ -172,12 +133,11 @@ final class JSBridge: NSObject {
             return nil
         }
     }
-    
 }
 
 extension JSBridge: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        guard let method = ReceivedMethod(rawValue: message.name) else {
+        guard let method = Constans.ReceivedMethod(rawValue: message.name) else {
             console("Not supported method: \(message.name)")
             return
         }
@@ -195,16 +155,14 @@ extension JSBridge: WKScriptMessageHandler {
     private func setBridgeDataManage(body: Any) {
         guard
             let object = body as? [String: Any],
-            let type = object[Key.type] as? Int,
+            let type = object[Constans.Key.type] as? Int,
             let bridgeDataType = BridgeDataType(rawValue: type)
-            else {
-                return
-        }
+        else { return }
         
-        let jsonString = object[Key.data] as? String
+        let jsonString = object[Constans.Key.data] as? String
         switch bridgeDataType {
         case .dailyTopicUnsubscribe:
-            unsubscribeFromTopic(jsonString: jsonString, type: bridgeDataType)
+            unsubscribeFromTopic(jsonString: jsonString, dataType: bridgeDataType)
             
         case .notificationsPermission:
             currentDataType = bridgeDataType
@@ -215,7 +173,7 @@ extension JSBridge: WKScriptMessageHandler {
             
         case .setServices:
             currentDataType = bridgeDataType
-            servicesPermissions(jsonString: jsonString, type: bridgeDataType)
+            servicesPermissions(jsonString: jsonString, dataType: bridgeDataType)
             
         case .systemLanguage:
             changeLanguage(jsonString: jsonString)
@@ -238,14 +196,12 @@ extension JSBridge: WKScriptMessageHandler {
     private func getBridgeDataManage(body: Any) {
         guard
             let requestData = body as? [String: Any],
-            let requestId = requestData[Key.requestId] as? String,
-            let type = requestData[Key.type] as? Int,
+            let requestId = requestData[Constans.Key.requestId] as? String,
+            let type = requestData[Constans.Key.type] as? Int,
             let bridgeDataType = BridgeDataType(rawValue: type)
-            else {
-                return
-        }
+        else { return }
         
-        let jsonString = requestData[Key.data] as? String
+        let jsonString = requestData[Constans.Key.data] as? String
         switch bridgeDataType {
             
         case .serviceStatus:
@@ -298,9 +254,12 @@ extension JSBridge: WKScriptMessageHandler {
     
         case .setCovidStatsSubscription:
             setCovidStatsSubscription(jsonString: jsonString, requestID: requestId, dataType: bridgeDataType)
+
+        case .detailsStats:
+            detailsStats(requestID: requestId, dataType: bridgeDataType)
             
         default:
-            return
+            console("Not managed yet", type: .warning)
         }
     }
     
@@ -309,427 +268,30 @@ extension JSBridge: WKScriptMessageHandler {
     }
 }
 
-// MARK: - getBridgeData handling
-private extension JSBridge {
-    
-    func serviceStatusGetBridgeDataResponse(requestID: String) {
-        serviceStatusManager.serviceStatusJson(delay: .zero)
-            .done { [weak self] json in
-                self?.bridgeDataResponse(type: .serviceStatus, body: json, requestId: requestID) { _ ,error in
-                    if let error = error {
-                        console(error, type: .error)
-                    }
-                }
-        }.catch { error in
-            console(error, type: .error)
-        }
-    }
-    
-    func exposureListGetBridgeDataResponse(requestID: String) {
-        exposureNotificationBridge?.getExposureSummary()
-            .done { [weak self] summary in
-                if let body = self?.encodeToJSON(summary) {
-                    self?.bridgeDataResponse(type: .exposureList, body: body, requestId: requestID) { _, error in
-                        if let error = error {
-                            console(error, type: .error)
-                        }
-                    }
-                }
-        }.catch {
-            console($0, type: .error)
-        }
-    }
-    
-    func applicationVersionGetBridgeDataResponse(requestID: String) {
-        guard let version = UIApplication.appVersion  else { return }
-        let responseModel = ApplicationVersionResponse(appVersion: version)
-        
-        guard let responseData = encodeToJSON(responseModel) else { return }
-        
-        bridgeDataResponse(type: .appVersion, body: responseData, requestId: requestID)
-    }
-    
-    func systemLanguageGetBridgeDataResponse(requestID: String) {
-        let responseModel = SystemLanguageResponse(language: LanguageController.selected.uppercased())
-        
-        guard let responseData = encodeToJSON(responseModel) else { return }
-        
-        bridgeDataResponse(type: .systemLanguage, body: responseData, requestId: requestID)
-    }
-    
-    func districtsList(requestID: String, dataType: BridgeDataType) {
-        console("💥 START districtsList")
-        districtService?.hasDistricts()
-            .then { districtsAvailable -> Promise<DistrictService.Response> in
-                guard let service = self.districtService else { return .init(error: InternalError.deinitialized) }
-                return service.perform(shouldFetchAPIData: !districtsAvailable)
-        }.done { [weak self] response in
-            guard let json = response.allDistrictsJSON else { return }
-            console("💥 SENT districtsList")
-            self?.bridgeDataResponse(type: dataType, body: json, requestId: requestID)
-        }
-        .catch { console($0, type: .error) }
-    }
-    
-    func districsAPIFetch(requestID: String, dataType: BridgeDataType) {
-        console("💥 START districsAPIFetch")
-        districtService?.perform()
-            .done { [weak self] response in
-                guard let json = response.allDistrictsJSON else { return }
-                console("💥 SENT districsAPIFetch")
-                self?.bridgeDataResponse(type: dataType, body: json, requestId: requestID)
-        }
-        .catch { console($0, type: .error) }
-        
-    }
-    
-    func subscribedDistricts(requestID: String, dataType: BridgeDataType) {
-        districtService?.perform(shouldFetchAPIData: false)
-            .done { [weak self] response in
-                guard let json = response.observedJSON else { return }
-                
-                self?.bridgeDataResponse(type: dataType, body: json, requestId: requestID)
-        }
-        .catch { console($0, type: .error) }
-    }
-    
-    func manageDistrictObserved(jsonString: String?, requestId: String, dataType: BridgeDataType) {
-        guard let model: DistrictObservedManageModel = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
-        
-        districtService?.manageObserved(model: model)
-        districtService?.perform(shouldFetchAPIData: false)
-                   .done { [weak self] response in
-                       guard let json = response.observedJSON else { return }
-                       
-                       self?.bridgeDataResponse(type: dataType, body: json, requestId: requestId)
-               }
-               .catch { console($0, type: .error) }
-        
-        managePushNotificationAuthorization()
-    }
-    
-    func freeTestPinUpload(jsonString: String?, requestID: String, dataType: BridgeDataType) {
-        guard let request: FreeTestUploadPinRequest = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
-        
-        freeTestService?.uploadPIN(jsRequest: request)
-            .done { [weak self] response in
-                guard let jsonString = self?.encodeToJSON(response) else { return }
-                
-                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
-        }
-        .catch {[weak self] error in
-            guard let internalError = error as? InternalError else {
-                console(error, type: .error)
-                let response = FreeTestPinUploadResponse(result: .failed)
-                guard let jsonString = self?.encodeToJSON(response) else { return }
-                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
-                return
-            }
-            
-            var response: FreeTestPinUploadResponse?
-            switch internalError {
-            case .freeTestPinUploadFailed:
-                response = FreeTestPinUploadResponse(result: .failed)
-            case .noInternet:
-                response = FreeTestPinUploadResponse(result: .canceled)
-            default: ()
-            }
-            
-            guard let strongResponse = response, let jsonString = self?.encodeToJSON(strongResponse) else { return }
-            
-            self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
-        }
-    }
-    
-    func freeTestSubscriptionInfo(jsonString: String?, requestID: String, dataType: BridgeDataType) {
-        freeTestService?.subscriptionInfo()
-            .done { [weak self] response in
-                 guard let jsonString = self?.encodeToJSON(response) else {
-                    return
-                }
-                
-                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
-                
-        }
-        .catch { console($0, type: .error) }
-    }
-    
-    func freeTestPinCodeFetch(requestID: String, dataType: BridgeDataType) {
-        freeTestService?.getPinCode()
-            .done { [weak self] response in
-                guard let jsonString = self?.encodeToJSON(response) else { return }
-                
-                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
-        }
-        .catch {
-            console($0, type: .error)
-        }
-    }
-    
-    func clearExposureRisk(requestID: String, dataType: BridgeDataType) {
-        exposureNotificationBridge?.clearExposureRisk()
-            .done { [weak self] summary in
-                if let body = self?.encodeToJSON(summary) {
-                    self?.bridgeDataResponse(type: dataType, body: body, requestId: requestID)
-                }
-        }
-        .catch {
-            console($0, type: .error)
-        }
-    }
-    
-    func historicalData(requestID: String, dataType: BridgeDataType) {
-        historicalDataWorker?.getData()
-            .done { [weak self] data in
-                guard let jsonString = self?.encodeToJSON(data) else { return }
-                
-                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
-            }
-            .catch { console($0, type: .error) }
-    }
-    
-    func dashboardStats(requestID: String, dataType: BridgeDataType) {
-        dashboardWorker?.fetchData()
-            .done { [weak self] jsonString in
-                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
-            }
-            .catch { console($0, type: .error) }
-    }
-    
-    func covidStatsSubscription(requestID: String, dataType: BridgeDataType) {
-        let covidStatsSubscription = StoredDefaults.standard.get(key: .didUserSubscribeForCovidStatsTopic) ?? false
-        
-        guard
-            let jsonString = CovidStatsResponse(isCovidStatsNotificationEnabled: covidStatsSubscription).jsonString
-        else {
-            return
-        }
-        
-        bridgeDataResponse(type: .covidStatsSubscription, body: jsonString, requestId: requestID)
-    }
-    
-    func agregatedStats(requestID: String, dataType: BridgeDataType) {
-        historicalDataWorker?
-            .getAgregatedExposureData()
-            .done { [weak self] model in
-                guard let jsonString = ExposureHistoryRiskCheckAgregatedResponse(with: model).jsonString else {
-                    return
-                }
-                
-                self?.bridgeDataResponse(type: dataType, body: jsonString, requestId: requestID)
-            }
-            .catch { console($0, type: .error) }
-    }
-    
-    func setCovidStatsSubscription(jsonString: String?, requestID: String, dataType: BridgeDataType) {
-        guard let request: CovidStatsRequest = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
-
-        NotificationManager.shared.manageUserCovidStatsTopic(subscribe: request.isCovidStatsNotificationEnabled) { [weak self] success in
-            let currentState: Bool = StoredDefaults.standard.get(key: .didUserSubscribeForCovidStatsTopic) ?? StoredDefaults.standard.get(key: .didSubscribeForCovidStatsTopicByDefault) ?? false
-            guard let jsonString = CovidStatsResponse(isCovidStatsNotificationEnabled: currentState).jsonString else {
-                return
-            }
-            self?.bridgeDataResponse(type: .setCovidStatsSubscription, body: jsonString, requestId: requestID)
-        }
-        
-        
-    }
-}
-
-// MARK: - onBridgeData handling
-private extension JSBridge {
-    
-    func removeHistoricalData(jsonString: String?) {
-        guard let request: DeleteHistoricalDataRequest = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
-        
-        historicalDataWorker?.clearData(request: request)
-            .done { _ in
-                console("Historical data removed")
-            }
-            .catch { console($0, type: .error) }
-    
-    }
-    
-    func requestAppreview(jsonString: String?) {
-        guard let model: AppReviewResponse = jsonString?.jsonDecode(decoder: jsonDecoder), model.appReview else  { return }
-        
-        #if STAGE_SCREENCAST || STAGE
-        AppReviewMockAlertManager().show(type: .appReviewMock, result: {_ in })
-        #else
-        SKStoreReviewController.requestReview()
-        #endif
-    }
-    
-    func changeLanguage(jsonString: String?) {
-        guard let model: SystemLanguageResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else  { return }
-        
-        LanguageController.update(languageCode: model.language)
-    }
-    
-    func unsubscribeFromTopic(jsonString: String?, type: BridgeDataType) {
-        guard let model: SurveyFinishedResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
-        
-        NotificationManager.shared.unsubscribeFromDailyTopic(timestamp: model.timestamp)
-    }
-    
-    // This one needs refactoring because it's ugly, it works but it's ugly :P
-    //
-    func servicesPermissions(jsonString: String?, type: BridgeDataType) {
-        isServicSetting = true
-        guard let model: EnableServicesResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else { return }
-        
-        // Manage Notifications
-        if model.enableNotification == true {
-            isServicSetting = false
-            notificationsPermission(jsonString: jsonString, type: type)
-            return
-        }
-        
-        // Manage COVID ENA
-        if let enableExposureNotification = model.enableExposureNotificationService {
-            exposureNotificationBridge?.enableService(enable: enableExposureNotification)
-                .done { [weak self] _ in
-                    self?.sendAppStateJSON(type: .serviceStatus)
-                    self?.isServicSetting = false
-            }
-            .catch(policy: .allErrors) { error in
-                console(error, type: .error)
-            }
-        }
-    }
-    
-    func notificationsPermission(jsonString: String?, type: BridgeDataType) {
-        Permissions.instance.state(for: .notifications)
-            .then { state -> Promise<Permissions.State> in
-                switch state {
-                case .neverAsked:
-                    return Permissions.instance.state(for: .notifications, shouldAsk: true)
-                case .authorized:
-                    return Promise.value(state)
-                case .rejected:
-                    guard let rootViewController = self.webView?.window?.rootViewController else {
-                        throw InternalError.nilValue
-                    }
-                    return Permissions.instance.settingsAlert(for: .notifications, on: rootViewController).map { _ in Permissions.State.unknown }
-                default:
-                    return Promise.value(.unknown)
-                }
-        }
-        .done { state in
-            let didAuthorizeAPN = StoredDefaults.standard.get(key: .didAuthorizeAPN) ?? false
-            if state == .authorized && !didAuthorizeAPN {
-                StoredDefaults.standard.set(value: true, key: .didAuthorizeAPN)
-                
-                DispatchQueue.main.async {
-                    UIApplication.shared.registerForRemoteNotifications()
-                }
-            }
-            
-            self.sendAppStateJSON(type: .serviceStatus)
-            self.isServicSetting = false
-        }
-        .catch { error in
-            Assertion.failure(error.localizedDescription)
-        }
-    }
-    
-    func sendExposureList(shouldDownload: Bool = true) {
-        exposureNotificationBridge?.getExposureSummary(shouldDownload: shouldDownload)
-            .done { [weak self] summary in
-                if let body = self?.encodeToJSON(summary) {
-                    self?.onBridgeData(type: .exposureList, body: body) { _, error in
-                        if let error = error {
-                            console(error, type: .error)
-                        }
-                    }
-                }
-            }.catch {
-                console($0, type: .error)
-        }
-    }
-    
-    func uploadTemporaryExposureKeys(jsonString: String?) {
-        guard NetworkMonitoring.shared.isInternetAvailable else {
-            NetworkingAlertManager().show(type: .noInternet) { [weak self] action in
-                if case .retry = action {
-                    self?.uploadTemporaryExposureKeys(jsonString: jsonString)
-                } else if case .cancel = action {
-                    self?.send(.canceled)
-                }
-            }
-            return
-        }
-        
-        guard let response: UploadTemporaryExposureKeysResponse = jsonString?.jsonDecode(decoder: jsonDecoder) else {
-            send(.canceled)
-            return
-        }
-        
-        diagnosisKeysUploadService?.upload(usingResponse: response)
-            .done {
-                self.send(.success)
-        }
-        .catch { error in
-            console(error)
-            if let error = error as? InternalError {
-                switch error {
-                case .shareKeysUserCanceled:
-                    self.send(.accessDenied)
-                default:
-                    self.send(.canceled)
-                }
-            } else {
-                self.send(.failure)
-            }
-            
-        }
-    }
-    
-    func send(_ status: UploadTemporaryExposureKeysStatus) {
-        guard let result = self.encodeToJSON(UploadTemporaryExposureKeysStatusResult(result: status))
-            else { return }
-        
-        self.onBridgeData(type: .uploadTemporaryExposureKeys, body: result)
-    }
-    
-    
-    func sendAppStateJSON(type: BridgeDataType) {
-        serviceStatusManager.serviceStatusJson(delay: .zero)
-            .done { json in
-                console(json)
-                self.onBridgeData(type: type, body: json)
-        }
-        .ensure {
-            self.currentDataType = nil
-        }
-        .catch { error in
-            console(error, type: .error)
-        }
-    }
-    
-}
-
-private extension JSBridge {
+extension JSBridge {
     func managePushNotificationAuthorization() {
         NotificationManager.shared
-        .currentStatus()
+            .currentStatus()
             .done { status in
                 switch status {
                 case .notDetermined:
-                    _ = NotificationManager.shared.registerForNotifications(remote: false)
+                    NotificationManager.shared.registerForNotifications(remote: false)
                 case .denied:
-                    NotificationsAlertManager().show(type: .pushNotificationSettings) { action in
-                        if action == .settings {
-                            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
-                            
-                            if UIApplication.shared.canOpenURL(settingsUrl) {
-                                UIApplication.shared.open(settingsUrl, completionHandler: nil)
-                            }
+                    NotificationsAlertManager().show(
+                        type: .pushNotificationSettings
+                    ) { action in
+                        guard
+                            let settingsUrl = URL(string: UIApplication.openSettingsURLString),
+                            action == .settings
+                        else { return }
+
+                        if UIApplication.shared.canOpenURL(settingsUrl) {
+                            UIApplication.shared.open(settingsUrl, completionHandler: nil)
                         }
                     }
                 default: ()
                 }
-        }
+            }
     }
     
     func registerFreeTestObservers() {
@@ -781,5 +343,27 @@ extension JSBridge: DeepLinkingDelegate {
 extension JSBridge: DashboardWorkerDelegate {
     func onData(jsonString: String) {
         onBridgeData(type: .dashboardStats, body: jsonString)
+    }
+}
+
+extension JSBridge {
+    struct Constans {
+        enum SendMethod: String, CaseIterable {
+            case bridgeDataResponse = "bridgeDataResponse"
+            case onBridgeData = "onBridgeData"
+        }
+
+        enum ReceivedMethod: String, CaseIterable {
+            case setBridgeData = "setBridgeData"
+            case bridgeDataRequest = "bridgeDataRequest"
+            case getBridgeData = "getBridgeData"
+        }
+
+        enum Key {
+            static let timestamp = "timestamp"
+            static let data = "data"
+            static let requestId = "requestId"
+            static let type = "type"
+        }
     }
 }
