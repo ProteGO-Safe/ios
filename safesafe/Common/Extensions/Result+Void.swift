@@ -7,11 +7,24 @@
 //
 
 import Foundation
+import PromiseKit
 
-extension Result where Success == Void {
-    
-    static var success: Result {
+extension Swift.Result where Success == Void {
+    static var success: Swift.Result<Void, Failure> {
         return .success(())
     }
-    
+}
+
+
+extension Swift.Result {
+    func toPromise() -> Promise<Success> {
+        Promise { seal in
+            switch  self {
+            case .success(let success):
+                seal.fulfill(success)
+            case .failure(let error):
+                seal.reject(error)
+            }
+        }
+    }
 }

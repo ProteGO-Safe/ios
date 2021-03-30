@@ -42,8 +42,8 @@ targets:
   PushMutableContent:
     settings:
       CODE_SIGN_STYLE: Manual
-      MARKETING_VERSION: "4.9.1"
-      CURRENT_PROJECT_VERSION: 745
+      MARKETING_VERSION: "4.10.0"
+      CURRENT_PROJECT_VERSION: 746
       TARGETED_DEVICE_FAMILY: 1,2
     type: app-extension
     platform: iOS
@@ -67,6 +67,8 @@ targets:
         group: safesafe/Language
       - path: safesafe/Resources/Extensions
         group: safesafe/Resources
+      - path: safesafe/Models/DashboardStatsAPIResponse.swift
+        group: safesafe/Models
   # Main app target
   #
   safesafe:
@@ -75,8 +77,8 @@ targets:
     deploymentTarget: "12.1"
     settings:
         CODE_SIGN_STYLE: Manual
-        MARKETING_VERSION: "4.9.1"
-        CURRENT_PROJECT_VERSION: 745
+        MARKETING_VERSION: "4.10.0"
+        CURRENT_PROJECT_VERSION: 746
         TARGETED_DEVICE_FAMILY: 1
         SWIFT_OBJC_BRIDGING_HEADER: $(PROJECT_DIR)/safesafe/App/safesafe-Bridging-Header.h
     configFiles:

@@ -73,6 +73,14 @@ For convenience, there's a `rebuild.sh` script which performs actions mentioned 
 To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
+**4.10.0**
+- Added new file storage method
+- Split current JSON data to multiple smaller data files to prevent over downloading unwanted data
+- Enhanced view of the app home screen, which now includes more detailed statistics on vaccination and infections
+- New screen with detailed statistics and graphs on vaccination (number of people vaccinated, doses, adverse reactions) and infections (number of people infected, recovered, deaths, causes of death and tests)
+- Added information on vaccination and registration rules with redirection to registration, vaccination request and helpline
+
+
 **4.9.1**
 - Added Vaccination stats to dashboard
 
