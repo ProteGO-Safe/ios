@@ -74,6 +74,9 @@ For convenience, there's a `rebuild.sh` script which performs actions mentioned 
 To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
+**4.11.0**
+- Updated UI
+
 **4.10.0**
 - Added new file storage method
 - Split current JSON data to multiple smaller data files to prevent over downloading unwanted data
