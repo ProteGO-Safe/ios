@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.11.0
+- Updated UI
+
 ## 4.10.0
 - Added new file storage method
 - Split current JSON data to multiple smaller data files to prevent over downloading unwanted data
