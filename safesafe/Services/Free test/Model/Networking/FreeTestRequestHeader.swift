@@ -8,19 +8,20 @@
 import Foundation
 
 struct FreeTestRequestHeader: Codable, RequestHeader {
-    
+
+    // MARK: - Properties
+
     enum CodingKeys: String, CodingKey {
-        case deviceCheckToken = "Safety-Token"
         case userAgent = "User-Agent"
         case accessToken = "Authorization"
     }
     
-    let deviceCheckToken: String
     let userAgent = "ios"
     let accessToken: String?
-    
-    init(deviceCheckToken: String,  accessToken: String? = nil) {
-        self.deviceCheckToken = deviceCheckToken
+
+    // MARK: - Initialization
+
+    init(accessToken: String? = nil) {
         if let accessToken = accessToken {
             self.accessToken = "Bearer \(accessToken)"
         } else {
