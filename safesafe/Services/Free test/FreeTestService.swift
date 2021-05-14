@@ -205,11 +205,14 @@ final class FreeTestService {
     }
 }
 
-// Cloud API
-//
+// MARK: - CloudAPI
+
 private extension FreeTestService {
-    func createSubscription(request: FreeTestCreateSubscriptionRequestModel) -> Promise<FreeTestCreateSubscriptionResponseModel> {
-        let target: FreeTestTarget = .createSubscription(header: .init(), request: request)
+    func createSubscription(
+        header: FreeTestRequestHeader = .init(),
+        request: FreeTestCreateSubscriptionRequestModel
+    ) -> Promise<FreeTestCreateSubscriptionResponseModel> {
+        let target: FreeTestTarget = .createSubscription(header: header, request: request)
         return renewableRequest.make(target: target)
             .recover { error -> Promise<Response> in
                 if (error as? InternalError) == nil {
