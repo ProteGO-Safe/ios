@@ -75,6 +75,7 @@ To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
 **4.12.0**
+- Disabled DeviceCheck for lab test 
 - Updated UI
 
 **4.11.0**
