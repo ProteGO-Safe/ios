@@ -74,6 +74,9 @@ For convenience, there's a `rebuild.sh` script which performs actions mentioned 
 To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
+**4.12.0**
+- Updated UI
+
 **4.11.0**
 - Updated UI
 
