@@ -9,8 +9,10 @@ import Foundation
 import PromiseKit
 import Moya
 
-class FreeTestService {
-    
+final class FreeTestService {
+
+    // MARK: - Properties
+
     private let localStorage: RealmLocalStorage?
     private let deviceCheckService: DeviceCheckServiceProtocol
     private let apiProvider: MoyaProvider<FreeTestTarget>
@@ -18,37 +20,35 @@ class FreeTestService {
     private let renewableRequest: RenewableRequest<FreeTestTarget>
     
     private var jsOnSubscriptionInfoClosure: ((FreeTestSubscriptionInfoResponse) -> ())?
-    
+
+    // MARK: - Initialization
+
     init(
         with localStorage: RealmLocalStorage?,
         deviceCheckService: DeviceCheckServiceProtocol,
         apiProvider: MoyaProvider<FreeTestTarget>,
-        configuration: RemoteConfigProtocol) {
-        
+        configuration: RemoteConfigProtocol
+    ) {
         self.localStorage = localStorage
         self.deviceCheckService = deviceCheckService
         self.apiProvider = apiProvider
-        self.renewableRequest = .init(provider: apiProvider, alertManager: NetworkingAlertManager(), notRenewableErrorCodes: [400])
+        self.renewableRequest = .init(
+            provider: apiProvider,
+            alertManager: NetworkingAlertManager(),
+            notRenewableErrorCodes: [400]
+        )
         self.configuration = configuration
     }
     
     func uploadPIN(jsRequest: FreeTestUploadPinRequest) -> Promise<FreeTestPinUploadResponse> {
-        deviceCheckService.generatePayload()
-            .then { deviceCheckToken -> Promise<(String, DeviceGUIDModel)> in
-                console("📗 Device Check Token (1/3)\n:\(deviceCheckToken)")
-                return self.generateGUIDIfNeeded().map { (deviceCheckToken, $0) }
-        }
-        .then { deviceCheckToken, guidModel -> Promise<FreeTestCreateSubscriptionResponseModel> in
-            console("📗 Generate GUID (2/3)\n:\(guidModel)")
-            let headers = FreeTestRequestHeader(deviceCheckToken: deviceCheckToken)
-            let request = FreeTestCreateSubscriptionRequestModel(code: jsRequest.pin, guid: guidModel.uuid)
-            
-            return self.createSubscription(headers: headers, request: request)
-        }
-        .then { apiResponse -> Promise<FreeTestPinUploadResponse> in
-            console("📗 API Response (3/3)\n:\(apiResponse)")
-            return .value(.init(result: .success))
-        }
+        return generateGUIDIfNeeded()
+            .then { guid -> Promise<FreeTestCreateSubscriptionResponseModel> in
+                let request = FreeTestCreateSubscriptionRequestModel(code: jsRequest.pin, guid: guid.uuid)
+                return self.createSubscription(request: request)
+            }.then { apiResponse -> Promise<FreeTestPinUploadResponse> in
+                console("📗 API Response \n:\(apiResponse)")
+                return .value(.init(result: .success))
+            }
     }
     
     func subscriptionInfo() -> Promise<FreeTestSubscriptionInfoResponse> {
@@ -142,7 +142,7 @@ class FreeTestService {
             let nowTimestamp = Int(Date().timeIntervalSince1970)
             guard (nowTimestamp - guid.update) > config.interval else { return }
             
-            let headers = FreeTestRequestHeader(deviceCheckToken: deviceCheckToken, accessToken: guid.token)
+            let headers = FreeTestRequestHeader(accessToken: guid.token)
             let target: FreeTestTarget = .getSubscription(header: headers, request: FreeTestGetSubscriptionRequestModel(guid: guid.uuid))
             self?.apiProvider.request(target) { result in
                 switch result {
@@ -205,11 +205,14 @@ class FreeTestService {
     }
 }
 
-// Cloud API
-//
+// MARK: - CloudAPI
+
 private extension FreeTestService {
-    func createSubscription(headers: FreeTestRequestHeader, request: FreeTestCreateSubscriptionRequestModel) -> Promise<FreeTestCreateSubscriptionResponseModel> {
-        let target: FreeTestTarget = .createSubscription(header: headers, request: request)
+    func createSubscription(
+        header: FreeTestRequestHeader = .init(),
+        request: FreeTestCreateSubscriptionRequestModel
+    ) -> Promise<FreeTestCreateSubscriptionResponseModel> {
+        let target: FreeTestTarget = .createSubscription(header: header, request: request)
         return renewableRequest.make(target: target)
             .recover { error -> Promise<Response> in
                 if (error as? InternalError) == nil {
@@ -230,6 +233,5 @@ private extension FreeTestService {
                 throw error
             }
         }
-        
     }
 }
