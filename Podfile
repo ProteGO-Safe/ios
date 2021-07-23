@@ -19,7 +19,7 @@ def pods_definition
   pod 'RealmSwift', '~> 5.0.0'
   pod 'SwiftProtobuf', '~> 1.0'
   
-  pod 'DBDebugToolkit', :configurations => ['Dev', 'DevDist', 'Stage', 'StageDebug', 'StageScreencast', 'LiveDebug', 'LiveAdhoc']
+  pod 'DBDebugToolkit', :configurations => ['Stage', 'StageDebug', 'LiveDebug']
 
 end
 

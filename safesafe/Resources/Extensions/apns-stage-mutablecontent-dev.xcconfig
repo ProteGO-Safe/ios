@@ -2,5 +2,5 @@ INFOPLIST_FILE = PushMutableContent/Info.plist
 PRODUCT_BUNDLE_IDENTIFIER = pl.gov.mc.protegosafe-staging.apns-mutablecontent
 DEVELOPMENT_TEAM = 85GAG994R5
 CODE_SIGN_ENTITLEMENTS = PushMutableContent/PushMutableContent-dev.entitlements
-PROVISIONING_PROFILE_SPECIFIER = protegosafe-staging-dev-apns-mutablecontent
-CODE_SIGN_IDENTITY = Apple Development: Lukasz Szyszkowski (TN56RQ2WFW)
+PROVISIONING_PROFILE_SPECIFIER = Protego Safe Stage Debug Mutable Content
+CODE_SIGN_IDENTITY = Apple Development: Protego Protego (Y78W4PU766)

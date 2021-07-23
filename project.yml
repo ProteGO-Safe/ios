@@ -1,22 +1,12 @@
 name: safesafe
 
 configs:
-  Dev: debug
-  DevDist: release
   StageDebug: debug
-  StageScreencast: release
   Stage: release
   LiveDebug: debug
   Live: release
-  LiveAdhoc: release #That's a build with Live PWA URL but with debug console
 
 schemes:
-  safesafe Dev:
-    build:
-      targets: 
-        safesafe: all
-    run:
-      config: Dev
 
   safesafe Stage:
     build:
@@ -82,13 +72,9 @@ targets:
         TARGETED_DEVICE_FAMILY: 1
         SWIFT_OBJC_BRIDGING_HEADER: $(PROJECT_DIR)/safesafe/App/safesafe-Bridging-Header.h
     configFiles:
-      Dev: safesafe/Resources/Dev/dev.xcconfig
-      DevDist: safesafe/Resources/Dev/devDist.xcconfig
-      StageScreencast: safesafe/Resources/Stage/stageScreencast.xcconfig
       StageDebug: safesafe/Resources/Stage/stageDebug.xcconfig
       Stage: safesafe/Resources/Stage/stage.xcconfig
       LiveDebug: safesafe/Resources/Live/liveDebug.xcconfig
-      LiveAdhoc: safesafe/Resources/Live/liveAdhoc.xcconfig
       Live: safesafe/Resources/Live/live.xcconfig
     sources: 
       - path: safesafe
@@ -96,13 +82,10 @@ targets:
         excludes:
           - "Resources/translations"
           - "Resources/pwa"
-          - "Resources/Dev/Config-dev.plist"
           - "Resources/Stage/Config-stage.plist"
           - "Resources/Live/Config-live.plist"
-          - "Resources/Dev/GoogleService-Info-Dev.plist"
           - "Resources/Stage/GoogleService-Info-Stage.plist"
           - "Resources/Live/GoogleService-Info-Live.plist"
-          - "Info-dev.plist"
           - "Info-stage.plist"
           - "Info-live.plist"
       - path: safesafe/Resources/pwa
