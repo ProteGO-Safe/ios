@@ -1,10 +1,10 @@
 #include "Pods/Target Support Files/Pods-safesafe/Pods-safesafe.liveadhoc.xcconfig"
 
 INFOPLIST_FILE = safesafe/Info-live.plist
-PRODUCT_BUNDLE_IDENTIFIER = pl.gov.mc.protegosafe
+PRODUCT_BUNDLE_IDENTIFIER = pl.gov.mc.protegosafe-staging
 ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
 DEVELOPMENT_TEAM = 85GAG994R5
 CODE_SIGN_ENTITLEMENTS = safesafe/Resources/safesafe Release.entitlements
-PROVISIONING_PROFILE_SPECIFIER = Protego Safe Live Ad-Hoc
-OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS -D LIVE_ADHOC
+PROVISIONING_PROFILE_SPECIFIER = Protego Safe Stage Ad-Hoc
+OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS -D STAGE_ADHOC
 CODE_SIGN_IDENTITY = Apple Distribution: Ministerstwo Cyfryzacji (85GAG994R5)
