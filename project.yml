@@ -5,6 +5,7 @@ configs:
   Stage: release
   LiveDebug: debug
   Live: release
+  StageAdhoc: release
 
 schemes:
 
@@ -74,6 +75,7 @@ targets:
     configFiles:
       StageDebug: safesafe/Resources/Stage/stageDebug.xcconfig
       Stage: safesafe/Resources/Stage/stage.xcconfig
+      StageAdhoc: safesafe/Resources/Stage/stageAdhoc.xcconfig
       LiveDebug: safesafe/Resources/Live/liveDebug.xcconfig
       Live: safesafe/Resources/Live/live.xcconfig
     sources: 
