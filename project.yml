@@ -42,6 +42,7 @@ targets:
     configFiles:
       Stage: safesafe/Resources/Extensions/apns-stage-mutablecontent.xcconfig
       StageDebug: safesafe/Resources/Extensions/apns-stage-mutablecontent-dev.xcconfig
+      StageAdhoc: safesafe/Resources/Extensions/apns-stage-adhoc-mutablecontent.xcconfig
       Live: safesafe/Resources/Extensions/apns-mutablecontent.xcconfig
       LiveDebug: safesafe/Resources/Extensions/apns-mutablecontent-dev.xcconfig
     sources:
