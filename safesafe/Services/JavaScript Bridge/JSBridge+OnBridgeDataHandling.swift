@@ -272,4 +272,21 @@ extension JSBridge {
                 console(error, type: .error)
             }
     }
+    
+    
+    /// Set sms with query for PIN
+    /// - Parameter jsonString: Json passed by PWA to work with native code.
+    /// - JsonString example:
+    /// ```
+    /// {
+    ///     "number": "+48123123123",
+    ///     "text": "text to send"
+    /// }
+    /// ```
+    func prepareSMSToSend(jsonString: String?) {
+        guard let response: SMSResponse = jsonString?.jsonDecode(decoder: jsonDecoder)
+        else { return }
+        
+        openerService.open(.smsUrl(number: response.number, message: response.text))
+    }
 }

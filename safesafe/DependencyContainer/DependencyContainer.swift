@@ -90,7 +90,8 @@ final class DependencyContainer {
     lazy var notificationHistoryWorker: NotificationHistoryWorkerType = NotificationHistoryWorker(storage: realmLocalStorage)
     lazy var exposureHistoricalService: ExposureServiceHistoricalDataProtocol = ExposureServiceHistoricalData(storageService: realmLocalStorage)
     lazy var jailbreakService: JailbreakServiceProtocol = JailbreakService()
-    lazy var jsBridge = JSBridge(with: serviceStatusManager)
+    lazy var openerService: OpenerServiceType = OpenerService()
+    lazy var jsBridge = JSBridge(serviceStatusManager: serviceStatusManager, openerService: openerService)
     lazy var realmLocalStorage = RealmLocalStorage()
     
     lazy var remoteConfigSetting: RemoteConfigSettings = {

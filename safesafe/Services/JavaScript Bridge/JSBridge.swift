@@ -15,6 +15,7 @@ final class JSBridge: NSObject {
     // MARK: - Properties
     
     let jsonDecoder = JSONDecoder()
+    let openerService: OpenerServiceType
     let serviceStatusManager: ServiceStatusManagerProtocol
     var exposureNotificationBridge: ExposureNotificationJSProtocol?
     var diagnosisKeysUploadService: DiagnosisKeysUploadServiceProtocol?
@@ -45,8 +46,12 @@ final class JSBridge: NSObject {
     
     // MARK: - Lifecycle
     
-    init(with serviceStatusManager: ServiceStatusManagerProtocol) {
+    init(
+        serviceStatusManager: ServiceStatusManagerProtocol,
+        openerService: OpenerServiceType
+    ) {
         self.serviceStatusManager = serviceStatusManager
+        self.openerService = openerService
         super.init()
         registerForAppLifecycleNotifications()
     }
@@ -187,7 +192,10 @@ extension JSBridge: WKScriptMessageHandler {
             
         case .historicalDataRemove:
             removeHistoricalData(jsonString: jsonString)
-                        
+            
+        case .sendSMS:
+            prepareSMSToSend(jsonString: jsonString)
+            
         default:
             console("Not managed yet", type: .warning)
         }
@@ -280,14 +288,8 @@ extension JSBridge {
                     NotificationsAlertManager().show(
                         type: .pushNotificationSettings
                     ) { action in
-                        guard
-                            let settingsUrl = URL(string: UIApplication.openSettingsURLString),
-                            action == .settings
-                        else { return }
-
-                        if UIApplication.shared.canOpenURL(settingsUrl) {
-                            UIApplication.shared.open(settingsUrl, completionHandler: nil)
-                        }
+                        guard action == .settings else { return }
+                        self.openerService.open(.settingsUrl)
                     }
                 default: ()
                 }

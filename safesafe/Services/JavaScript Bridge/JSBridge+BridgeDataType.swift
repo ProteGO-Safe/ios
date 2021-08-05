@@ -42,5 +42,7 @@ extension JSBridge {
         case agregatedStats = 103
 
         case detailsStats = 104
+        
+        case sendSMS = 105
     }
 }
