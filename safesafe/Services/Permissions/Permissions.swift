@@ -15,6 +15,7 @@ final class Permissions {
     
     private let notifications: PermissionType = NotificationsPermission()
     private let exposureNotifiaction: PermissionType = ExposureNotificationPermission()
+    private let openerService: OpenerServiceType = OpenerService()
     
     enum Permission {
         case notifications
@@ -62,14 +63,7 @@ final class Permissions {
                 fulfill(.cancel)
             }
             let settingsAction = UIAlertAction(title: "SETTINGS_TITLE".localized(), style: .default) { _ in
-                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                    return fulfill(.settings)
-                }
-                
-                if UIApplication.shared.canOpenURL(settingsUrl) {
-                    UIApplication.shared.open(settingsUrl, completionHandler: nil)
-                }
-                
+                self.openerService.open(.settingsUrl)
                 fulfill(.settings)
             }
             alert.addAction(cancelAction)
@@ -89,14 +83,7 @@ final class Permissions {
                 seal.fulfill(.skip)
             }
             let settingsAction = UIAlertAction(title: "SETTINGS_TITLE".localized(), style: .default) { _ in
-                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                    return seal.fulfill(.settings)
-                }
-                
-                if UIApplication.shared.canOpenURL(settingsUrl) {
-                    UIApplication.shared.open(settingsUrl, completionHandler: nil)
-                }
-                
+                self.openerService.open(.settingsUrl)
                 seal.fulfill(.settings)
             }
             alert.addAction(cancelAction)
