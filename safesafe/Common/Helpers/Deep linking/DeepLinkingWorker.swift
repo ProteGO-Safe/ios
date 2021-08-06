@@ -28,7 +28,7 @@ protocol DeepLinkingWorkerType {
     func navigate(with url: URL)
 }
 
-protocol DeepLinkingDelegate: class {
+protocol DeepLinkingDelegate: AnyObject {
     func runRoute(routeString: String)
 }
 
@@ -67,7 +67,15 @@ final class DeepLinkingWorker: DeepLinkingWorkerType {
         
         let paths = components.path.split(separator: "/")
         
-        guard let path = paths.first, paths.count == 1 else { return }
+        let path: String
+        
+        if paths.count == 1 {
+            path = String(paths[0])
+        } else if(paths.contains("uploadHistoricalData")) {
+            path = "uploadHistoricalData"
+        } else {
+            return
+        }
         
         var routeData: [String: Any] = ["name": path]
         

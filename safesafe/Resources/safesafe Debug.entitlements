@@ -4,18 +4,24 @@
 <dict>
 	<key>aps-environment</key>
 	<string>development</string>
-	<key>com.apple.developer.exposure-notification-test</key>
-	<true/>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:safesafe.app</string>
+		<string>applinks:*.safesafe.app</string>
+		<string>applinks:www.gov.pl</string>
+		<string>applinks:*www.gov.pl</string>
+		<string>activitycontinuation:www.gov.pl</string>
+		<string>activitycontinuation:*www.gov.pl</string>
+		<string>applinks:gov.pl</string>
+		<string>applinks:*gov.pl</string>
+		<string>activitycontinuation:gov.pl</string>
+		<string>activitycontinuation:*gov.pl</string>
+	</array>
 	<key>com.apple.developer.exposure-notification</key>
 	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
 		<string>group.pl.gov.mc.protegosafe</string>
-	</array>
-	<key>com.apple.developer.associated-domains</key>
-	<array>
-		<string>applinks:safesafe.app</string>
-		<string>applinks:*.safesafe.app</string>
 	</array>
 </dict>
 </plist>
