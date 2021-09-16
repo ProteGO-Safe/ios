@@ -73,6 +73,11 @@ For convenience, there's a `rebuild.sh` script which performs actions mentioned 
 To launch it, type `sh rebuild.sh` in your console.
 
 ## ChangeLog
+**4.13.0**
+- Updated UI
+- Added handling deeplinks
+- Added handling redirect to sms
+
 **4.12.0**
 - Disabled DeviceCheck for lab test 
 - Updated UI

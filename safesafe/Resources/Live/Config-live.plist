@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BASE_URL</key>
+	<string>https://storage.googleapis.com/cdn.safesafe.app/2</string>
 	<key>EXPOSURE_NOTIFICATION</key>
 	<dict>
 		<key>EN_STORAGE_URL</key>
@@ -10,11 +12,6 @@
 		<string>https://gat.safesafe.app/</string>
 		<key>EN_UDK_BASE_URL</key>
 		<string>https://udk.safesafe.app/</string>
-	</dict>
-	<key>DISTRICTS</key>
-	<dict>
-		<key>BASE_URL</key>
-		<string>https://cdn.safesafe.app</string>
 	</dict>
 	<key>FREE_TEST</key>
 	<dict>

@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.13.0
+- Updated UI
+- Added handling deeplinks
+- Added handling redirect to sms
+
 ## 4.12.0
 - Disabled DeviceCheck for lab test 
 - Updated UI

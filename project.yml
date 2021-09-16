@@ -1,22 +1,13 @@
 name: safesafe
 
 configs:
-  Dev: debug
-  DevDist: release
   StageDebug: debug
-  StageScreencast: release
   Stage: release
   LiveDebug: debug
   Live: release
-  LiveAdhoc: release #That's a build with Live PWA URL but with debug console
+  StageAdhoc: release
 
 schemes:
-  safesafe Dev:
-    build:
-      targets: 
-        safesafe: all
-    run:
-      config: Dev
 
   safesafe Stage:
     build:
@@ -42,7 +33,7 @@ targets:
   PushMutableContent:
     settings:
       CODE_SIGN_STYLE: Manual
-      MARKETING_VERSION: "4.12.0"
+      MARKETING_VERSION: "4.13.0"
       CURRENT_PROJECT_VERSION: 746
       TARGETED_DEVICE_FAMILY: 1,2
     type: app-extension
@@ -51,6 +42,7 @@ targets:
     configFiles:
       Stage: safesafe/Resources/Extensions/apns-stage-mutablecontent.xcconfig
       StageDebug: safesafe/Resources/Extensions/apns-stage-mutablecontent-dev.xcconfig
+      StageAdhoc: safesafe/Resources/Extensions/apns-stage-adhoc-mutablecontent.xcconfig
       Live: safesafe/Resources/Extensions/apns-mutablecontent.xcconfig
       LiveDebug: safesafe/Resources/Extensions/apns-mutablecontent-dev.xcconfig
     sources:
@@ -77,18 +69,15 @@ targets:
     deploymentTarget: "12.1"
     settings:
         CODE_SIGN_STYLE: Manual
-        MARKETING_VERSION: "4.12.0"
+        MARKETING_VERSION: "4.13.0"
         CURRENT_PROJECT_VERSION: 746
         TARGETED_DEVICE_FAMILY: 1
         SWIFT_OBJC_BRIDGING_HEADER: $(PROJECT_DIR)/safesafe/App/safesafe-Bridging-Header.h
     configFiles:
-      Dev: safesafe/Resources/Dev/dev.xcconfig
-      DevDist: safesafe/Resources/Dev/devDist.xcconfig
-      StageScreencast: safesafe/Resources/Stage/stageScreencast.xcconfig
       StageDebug: safesafe/Resources/Stage/stageDebug.xcconfig
       Stage: safesafe/Resources/Stage/stage.xcconfig
+      StageAdhoc: safesafe/Resources/Stage/stageAdhoc.xcconfig
       LiveDebug: safesafe/Resources/Live/liveDebug.xcconfig
-      LiveAdhoc: safesafe/Resources/Live/liveAdhoc.xcconfig
       Live: safesafe/Resources/Live/live.xcconfig
     sources: 
       - path: safesafe
@@ -96,13 +85,10 @@ targets:
         excludes:
           - "Resources/translations"
           - "Resources/pwa"
-          - "Resources/Dev/Config-dev.plist"
           - "Resources/Stage/Config-stage.plist"
           - "Resources/Live/Config-live.plist"
-          - "Resources/Dev/GoogleService-Info-Dev.plist"
           - "Resources/Stage/GoogleService-Info-Stage.plist"
           - "Resources/Live/GoogleService-Info-Live.plist"
-          - "Info-dev.plist"
           - "Info-stage.plist"
           - "Info-live.plist"
       - path: safesafe/Resources/pwa
